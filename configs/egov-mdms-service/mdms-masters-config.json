@@ -98,6 +98,12 @@
     }
   },
   "common-masters": {
+    "Ui-Common-Config": {
+     "masterName": "Ui-Common-Config",
+     "moduleDefinition": null,
+     "isStateLevel": true,
+     "uniqueKeys": []
+   },
     "OwnerShipCategory": {
       "masterName": "OwnerShipCategory",
       "moduleDefinition": null,
@@ -628,6 +634,15 @@
       ]
     }
   },
+  "Workflow": {
+   "BusinessService": {
+     "masterName": "BusinessService",
+     "isStateLevel": true,
+     "uniqueKeys": [
+       "$.businessService"
+     ]
+   }
+ },
   "egov-hrms": {
     "EmployeeStatus": {
       "masterName": "EmployeeStatus",
