@@ -23,7 +23,7 @@
               {
                 "stack": [
                   {
-                    "text": "{{logo-header}}",
+                    "text": "{{logo-header}} {{Municipal_Corporation}}",
                     "style": "receipt-logo-header"
                   },
                   {
@@ -72,10 +72,10 @@
         "style": "noc-table",
         "table": {
           "widths": [
-            "*",
-            "*",
-            "*",
-            "*"
+            "25%",
+            "25%",
+            "25%",
+            "25%"
           ],
           "body": [
             [
@@ -97,7 +97,8 @@
                   false,
                   false
                 ],
-                "style": "receipt-table"
+                "style": "receipt-table",
+                "font": "Roboto"
               },
               {
                 "text": "{{consumer_id}}",
@@ -117,7 +118,8 @@
                   true,
                   false
                 ],
-                "style": "receipt-table"
+                "style": "receipt-table",
+                "font": "Roboto"
               }
             ],
             [
@@ -262,9 +264,29 @@
             ],
             [
               {
-                "text": "{{paid_amount}}",
+                "text": "{{total_bill_amount}}",
                 "border": [
                   true,
+                  false,
+                  false,
+                  false
+                ],
+                "style": "receipt-table-value"
+              },
+              {
+                "text": "₹ {{dueAmount}}",
+                "border": [
+                  false,
+                  false,
+                  false,
+                  false
+                ],
+                "style": "receipt-table"
+              },
+              {
+                "text": "{{paid_amount}}",
+                "border": [
+                  false,
                   false,
                   false,
                   false
@@ -276,13 +298,35 @@
                 "border": [
                   false,
                   false,
+                  true,
+                  false
+                ],
+                "style": "receipt-table"
+              }
+            ],
+            [
+              {
+                "text": "{{pending_amount}}",
+                "border": [
+                  true,
+                  false,
+                  false,
+                  false
+                ],
+                "style": "receipt-table-value"
+              },
+              {
+                "text": "₹ {{pendingAmount}}",
+                "border": [
+                  false,
+                  false,
                   false,
                   false
                 ],
                 "style": "receipt-table"
               },
               {
-                "text": "{{pending_amount}}",
+                "text": "{{excess_amount_paid}}",
                 "border": [
                   false,
                   false,
@@ -292,7 +336,7 @@
                 "style": "receipt-table-value"
               },
               {
-                "text": "₹ {{pendingAmount}}",
+                "text": "₹ {{excessAmountPaid}}",
                 "border": [
                   false,
                   false,
@@ -341,7 +385,8 @@
                   true,
                   false
                 ],
-                "style": "receipt-table"
+                "style": "receipt-table",
+                "font": "Roboto"
               }
             ],
             [
@@ -452,11 +497,6 @@
           },
           {
             "text": "{{disclamer_4}}",
-            "bold": false,
-            "style": "pt-disclaimer-value"
-          },
-          {
-            "text": "{{disclamer_5}}",
             "bold": false,
             "style": "pt-disclaimer-value"
           }

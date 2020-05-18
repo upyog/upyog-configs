@@ -1,10 +1,11 @@
 {
   "key": "consolidatedreceipt",
+  "documentType":"CONSOLIDATED_RECEIPT",
   "DataConfigs": {
-    "serviceName": "rainmaker-common",
+    "moduleName": "rainmaker-common",
     "version": "1.0.0",
     "baseKeyPath": "$.Payments.*",
-    "entityIdPath":"$.paymentDetails[0].receiptNumber",
+    "entityIdPath":"$.id",
     "isCommonTableBorderRequired": true,
     "mappings": [
       {
@@ -55,40 +56,55 @@
                 }
               },
               {
+                "variable": "excessAmountPaid", 
+                "value": {
+                  "path": "$.paymentDetails[0].excessAmountPaid"
+                }
+              },
+              {
                 "variable": "fromPeriod", 
                 "value": {
                   "path": "$.paymentDetails[0].bill.billDetails[0].fromPeriod"
-                }
+                },
+                "type": "date"
               },
               {
                 "variable": "toPeriod", 
                 "value": {
                   "path": "$.paymentDetails[0].bill.billDetails[0].toPeriod"
-                }
+                },
+                "type": "date"
               },
               {
                 "variable": "paymentMode", 
                 "value": {
                   "path": "$.paymentMode"
-                }
+                },
+                "localisation":{
+                  "required":true,
+                  "prefix": "COMMON_MASTERS_PAYMENTMODE",
+                  "module": "rainmaker-common"
+               }
               },
               {
                 "variable": "G8ReceiptNo",
                 "value": {
-                  "path": "$.paymentDetails[0].bill.billDetails[0].manualReceiptNumber"
+                  "path": "$.paymentDetails[0].manualReceiptNumber"
                 }
               },
               {
                 "variable": "G8ReceiptDate",
                 "value": {
-                  "path": "$.paymentDetails[0].bill.billDetails[0].manualReceiptDate"
-                }
+                  "path": "$.paymentDetails[0].manualReceiptDate"
+                },
+                "type": "date"
               },
               {
                 "variable": "paymentDate", 
                 "value": {
                   "path": "$.transactionDate"
-                }
+                },
+                "type": "date"
               },
               {
                 "variable": "consumerID", 
@@ -107,18 +123,6 @@
                 "value": {
                   "path": "$.paymentDetails[0].totalDue"
                 }
-              },
-              {
-                "variable": "logo-header",
-                "value": {
-                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT.LOGO.HEADER"
-                },
-                "type": "label",
-                "localisation":{
-                  "required":true,
-                  "prefix": "",
-                  "module":"rainmaker-common"
-               }
               },
               {
                 "variable": "payment_receipt",
@@ -232,6 +236,18 @@
                 "variable": "pending_amount",
                 "value": {
                   "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_PENDING_AMOUNT"
+                },
+                "type": "label",
+                "localisation":{
+                  "required":true,
+                  "prefix": null,
+                  "module":"rainmaker-common"
+               }
+              },
+              {
+                "variable": "excess_amount_paid",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_EXCESS_AMOUNT_PAID"
                 },
                 "type": "label",
                 "localisation":{
@@ -375,7 +391,7 @@
               {
                 "variable": "disclamer_4",
                 "value": {
-                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_DISCLAIMER_FOURTH_LINE"
+                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_DISCLAIMER_4"
                 },
                 "type": "label",
                 "localisation":{
@@ -407,6 +423,30 @@
                   "prefix": null,
                   "module":"rainmaker-common"
                }
+              },
+              {
+                "variable": "Municipal_Corporation",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_MDMS_MUNICIPAL_CORPORATION"
+                },
+                "type": "label",
+                "localisation":{
+                  "required":true,
+                  "prefix": null,
+                  "module":"rainmaker-common"
+               }
+              },
+              {
+                "variable": "total_bill_amount",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_TOTAL_BILL_AMOUNT"
+                },
+                "type": "label",
+                "localisation":{
+                  "required":true,
+                  "prefix": null,
+                  "module":"rainmaker-common"
+               }
               }
             ]
           },
@@ -422,7 +462,7 @@
             "externalAPI": [     
               { 
                   "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
-                  "queryParam": "moduleName=tenant&masterName=tenants&tenantId=pg&filter=%5B?(@.code=='$.tenantId')%5D",
+                  "queryParam": "moduleName=tenant&masterName=tenants&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}')%5D",
                   "apiRequest": null,
                   "responseMapping":[
                     {             
@@ -442,10 +482,19 @@
                       "value":"$.MdmsRes.tenant.tenants[0].emailId"
                     },
                     {
-		               "variable": "logoImage",                        
-		               "value":"$.MdmsRes.tenant.tenants[0].logoId",
-		               "type":"image"      
-	                }
+                      "variable": "logoImage",                        
+                      "value":"$.MdmsRes.tenant.tenants[0].logoId",
+                      "type":"image"      
+                    },
+                    {
+                      "variable": "logo-header",
+                      "value":"$.MdmsRes.tenant.tenants[0].code",
+                      "localisation":{
+                        "required":true,
+                        "prefix": "TENANT_TENANTS",
+                        "module":"rainmaker-common"
+                        }
+                    }
                   ]
               }
             ]
