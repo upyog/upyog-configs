@@ -40,19 +40,34 @@
                                 "variable": "propertyType",
                                 "value": {
                                     "path": "$.property.propertyType"
-                                }
+                                },
+                                "localisation": {
+                                    "required": true,
+                                    "prefix": "WS_PROPTYPE",
+                                    "module": "rainmaker-ws"
+                                  }
                             },
                             {
                                 "variable": "propertyUsageType",
                                 "value": {
                                     "path": "$.property.usageCategory"
-                                }
+                                },
+                                "localisation": {
+                                    "required": true,
+                                    "prefix": "WS_PROPUSGTYPE",
+                                    "module": "rainmaker-ws"
+                                  }
                             },
                             {
                                 "variable": "propertyUsageSubType",
                                 "value": {
-                                    "path": "$.property.usageCategory"
-                                }
+                                    "path": "$.property.propertySubUsageType"
+                                },
+                                "localisation": {
+                                    "required": true,
+                                    "prefix": "WS_PROPSUBUSGTYPE",
+                                    "module": "rainmaker-ws"
+                                  }
                             },
                             {
                                 "variable": "plotSize",
@@ -66,6 +81,17 @@
                                     "path": "$.property.noOfFloors"
                                 }
                             },
+                            {
+                                "variable": "rainwaterHarvestingFacility",
+                                "value": {
+                                  "path": "$.property.rainWaterHarvesting"
+                                },
+                                "localisation": {
+                                  "required": true,
+                                  "prefix": "HARVESTING",
+                                  "module": "rainmaker-common"
+                                }
+                              },
                             {
                                 "variable": "cityName",
                                 "value": {
@@ -116,7 +142,7 @@
                                       "value": "name"
                                     },
                                     {
-                                      "variable": "emailLabel",
+                                      "variable": "ownerEmailId",
                                       "value":"emailId"
                                     },
                                     {
@@ -970,7 +996,7 @@
                         "externalAPI": [
                             {
                                 "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
-                                "queryParam": "moduleName=tenant&masterName=tenants&tenantId=pg&filter=%5B?(@.code=='{$.property.tenantId}')%5D",
+                                "queryParam": "moduleName=tenant&masterName=tenants&tenantId=pb&filter=%5B?(@.code=='{$.property.tenantId}')%5D",
                                 "apiRequest": null,
                                 "responseMapping": [
                                     {
