@@ -33,6 +33,12 @@
                 }
               },
               {
+                "variable": "paymentStatus", 
+                "value": {
+                  "path": "$.paymentStatus"
+                }
+              },
+              {
                 "variable": "receiptNo",
                 "value": {
                   "path": "$.paymentDetails[0].receiptNumber"
@@ -191,6 +197,18 @@
                 }
               },
               {
+                "variable": "payment_status",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_PAYMENT_STATUS"
+                },
+                "type": "label",
+                "localisation":{
+                  "required":true,
+                  "prefix": null,
+                  "module":"rainmaker-common"
+               }
+              },
+              {
                 "variable": "service_type",
                 "value": {
                   "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_SERVICE_TYPE"
@@ -218,6 +236,30 @@
                 "variable": "paid_amount",
                 "value": {
                   "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_PAID_AMOUNT"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-common"
+                }
+              },
+              {
+                "variable": "bill_amount",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_BILL_AMOUNT"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-common"
+                }
+              },
+              {
+                "variable": "advance_amount",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_ADVANCE_AMOUNT"
                 },
                 "type": "label",
                 "localisation": {
@@ -424,7 +466,11 @@
             "derived": [
               {
                 "variable": "pendingAmount",
-                "formula": "{{dueAmount}}-{{paidAmount}}"
+                "formula": "{{paidAmount}}>{{dueAmount}}?0:{{dueAmount}}-{{paidAmount}}"
+              },
+              {
+                "variable": "advanceAmount",
+                "formula": "{{paidAmount}}>{{dueAmount}}?{{paidAmount}}-{{dueAmount}}:0"
               }
             ]
           },
@@ -432,7 +478,7 @@
             "externalAPI": [
               {
                 "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
-                "queryParam": "moduleName=tenant&masterName=tenants&tenantId=in&filter=%5B?(@.code=='{$.tenantId}')%5D",
+                "queryParam": "moduleName=tenant&masterName=tenants&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}')%5D",
                 "apiRequest": null,
                 "responseMapping": [
                   {

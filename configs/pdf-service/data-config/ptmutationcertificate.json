@@ -310,7 +310,7 @@
           "externalAPI": [     
             { 
                 "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
-                "queryParam": "moduleName=tenant&masterName=tenants&tenantId=in&filter=%5B?(@.code=='{$.tenantId}')%5D",
+                "queryParam": "moduleName=tenant&masterName=tenants&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}')%5D",
                 "apiRequest": null,
                 "responseMapping":[
                   {             
@@ -341,7 +341,7 @@
                 ]
             },
             {
-              "path": "http://collection-services:8080/collection-services/payments/_search",
+              "path": "http://collection-services:8080/collection-services/payments/PT.MUTATION/_search",
               "queryParam": "tenantId=$.tenantId,consumerCodes=$.acknowldgementNumber,businessServices=PT.MUTATION",
               "apiRequest": null,
               "responseMapping":[
