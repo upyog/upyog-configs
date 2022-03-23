@@ -80,6 +80,82 @@
     "_comment": " "
   },
   "_comment": "dss-collectionindex new queries ",
+        
+  "_comment" : "DSS-OVERVIEW-REVENUE",
+  
+  "todaysCollection": {
+    "chartName": "DSS_TOTAL_COLLECTION",
+    "queries": [
+      {
+        "module": "PT",
+        "dateRefField": "dataObject.paymentDetails.receiptDate",
+        "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\", \"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\"}",
+        "indexName": "dss-collection_v2",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.paymentDetails.bill.status.keyword\":[\"Cancelled\"]}}],\"must\":[{\"term\":{\"dataObject.paymentDetails.businessService.keyword\":\"PT\"}},{\"range\":{\"dataObject.paymentDetails.receiptDate\":{\"gte\":\"now-24h\",\"lte\":\"now\"}}}]}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}"
+      },
+      {
+        "module": "TL",
+        "dateRefField": "dataObject.paymentDetails.receiptDate",
+        "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\", \"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\"}",
+        "indexName": "dss-collection_v2",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.paymentDetails.bill.status.keyword\":[\"Cancelled\"]}}],\"must\":[{\"term\":{\"dataObject.paymentDetails.businessService.keyword\":\"TL\"}},{\"range\":{\"dataObject.paymentDetails.receiptDate\":{\"gte\":\"now-24h\",\"lte\":\"now\"}}}]}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}"
+      },
+      {
+        "module": "FSM",
+        "dateRefField": "Data.payments.paymentDetails.receiptDate",
+        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"module\" : \"Data.payments.paymentDetails.businessService.keyword\", \"tenantId\" : \"Data.tenantId\", \"district\" : \"Data.tenantData.cityDistrictCode\"}",
+        "indexName": "fsm",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pg.testing\"}}],\"must\":[{\"term\":{\"Data.payments.paymentDetails.businessService.keyword\":\"FSM.TRIP_CHARGES\"}}]}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"Data.payments.paymentDetails.bill.billDetails.amountPaid\"}}}}}}"
+      },
+      {
+        "module": "BPA",
+        "indexName": "dss-collection_v2",
+        "aggrQuery": "{ \"aggs\": { \"AGGR\": { \"filter\": { \"bool\": { \"must\": [ { \"range\": { \"dataObject.paymentDetails.receiptDate\": { \"gte\": \"now-24h\", \"lte\": \"now\" } } }, { \"terms\": { \"dataObject.paymentDetails.businessService.keyword\": [ \"BPA.LOW_RISK_PERMIT_FEE\",\"BPA.NC_APP_FEE\",\"BPA.NC_SAN_FEE\",\"BPA.NC_OC_APP_FEE\" ] } } ], \"must_not\": [ { \"term\": { \"dataObject.tenantId.keyword\": \"pg.testing\" } }, { \"term\": { \"dataObject.paymentStatus.keyword\": \"Cancelled\" } } ] } }, \"aggs\": { \"Total Collection\": { \"sum\": { \"field\": \"dataObject.paymentDetails.totalAmountPaid\" } } } } } }",
+        "requestQueryMap":"{\"wardId\" : \"dataObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\",\"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\" }",
+        "dateRefField": "dataObject.paymentDetails.receiptDate"
+      },
+      {
+        "module": "FIRENOC",
+        "indexName": "dss-collection_v2",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"dataObject.paymentDetails.businessService.keyword\":[\"FIRENOC\"]}},{\"range\":{\"dataObject.paymentDetails.receiptDate\":{\"gte\":\"now-24h\",\"lte\":\"now\"}}}],\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"term\":{\"dataObject.paymentStatus.keyword\":\"Cancelled\"}}]}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}",
+        "requestQueryMap": "{\"wardId\" : \"dataObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\",\"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\" }",
+        "dateRefField": "dataObject.paymentDetails.receiptDate"
+      },
+      {
+        "module": "W&S",
+        "indexName": "dss-collection_v2",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"range\":{\"dataObject.paymentDetails.receiptDate\":{\"gte\":\"now-1d\/d\",\"lte\":\"now\"}}},{\"terms\":{\"dataObject.paymentDetails.businessService.keyword\":[\"WS\",\"WS.ONE_TIME_FEE\",\"SW.ONE_TIME_FEE\",\"SW\"]}}],\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"term\":{\"dataObject.paymentStatus.keyword\":\"Cancelled\"}}]}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}",
+        "requestQueryMap": "{\"wardId\" : \"dataObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\",\"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\" }",
+        "dateRefField": "dataObject.paymentDetails.receiptDate"
+      },
+      {
+        "module": "MCOLLECT",
+        "dateRefField": "dataObject.paymentDetails.receiptDate",
+        "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\", \"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\"}",
+        "indexName": "dss-collection_v2",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"terms\":{\"dataObject.tenantId.keyword\":[\"pg.testing\",\"pg\"]}},{\"terms\":{\"dataObject.bill.status.keyword\":[\"Cancelled\"]}},{\"terms\":{\"dataObject.paymentDetails.businessService.keyword\":[\"PT\",\"TL\",\"WS.ONE_TIME_FEE\",\"SW.ONE_TIME_FEE\",\"FSM.TRIP_CHARGES\",\"PT.MUTATION\",\"SW\",\"BPA.LOW_RISK_PERMIT_FEE\",\"BPA.NC_SAN_FEE\",\"BPA.NC_APP_FEE\",\"BPA.NC_OC_APP_FEE\"]}}],\"must\":[{\"range\":{\"dataObject.paymentDetails.receiptDate\":{\"gte\":\"now-1d\",\"lte\":\"now\"}}}]}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "Amount",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Total Collection"
+    ],
+    "insight": {
+      "chartResponseMap" : "todaysCollection",
+      "action" : "differenceOfNumbers",
+      "upwardIndicator" : "positive",
+      "downwardIndicator" : "negative",
+      "textMessage" : "$indicator$value% than last $insightInterval",
+      "colorCode" : "#228B22",
+      "insightInterval" : "year"
+    },
+    "_comment": " "
+  },
+  
   "totalCollection": {
     "chartName": "DSS_TOTAL_COLLECTION",
     "queries": [
@@ -103,6 +179,34 @@
         "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"module\" : \"Data.payments.paymentDetails.businessService.keyword\", \"tenantId\" : \"Data.fsm.tenantId\"}",
         "indexName": "fsm",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.fsm.tenantId.keyword\":\"pg.testing\"}}],\"must\":[{\"term\":{\"Data.payments.paymentDetails.businessService.keyword\":\"FSM.TRIP_CHARGES\"}}]}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"Data.payments.paymentDetails.bill.billDetails.amountPaid\"}}}}}}"
+      },
+      {
+        "module": "BPA",
+        "indexName": "dss-collection_v2",
+        "aggrQuery": " { \"aggs\": { \"AGGR\": { \"filter\": { \"bool\": { \"must\": [ { \"terms\": { \"dataObject.paymentDetails.businessService.keyword\": [ \"BPA.LOW_RISK_PERMIT_FEE\",\"BPA.NC_APP_FEE\",\"BPA.NC_SAN_FEE\",\"BPA.NC_OC_APP_FEE\" ] } } ], \"must_not\": [ { \"term\": { \"dataObject.tenantId.keyword\": \"pg.testing\" } }, { \"term\": { \"dataObject.paymentStatus.keyword\": \"Cancelled\" } } ] } }, \"aggs\": { \"Total Collection\": { \"sum\": { \"field\": \"dataObject.paymentDetails.totalAmountPaid\" } } } } } } ",
+        "requestQueryMap":"{\"wardId\" : \"dataObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\",\"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\" }",
+        "dateRefField": "dataObject.paymentDetails.receiptDate"
+      },
+      {
+        "module": "FIRENOC",
+        "indexName": "dss-collection_v2",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"dataObject.paymentDetails.businessService.keyword\":[\"FIRENOC\"]}}],\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"term\":{\"dataObject.paymentStatus.keyword\":\"Cancelled\"}}]}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}",
+        "requestQueryMap": "{\"wardId\" : \"dataObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\",\"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\" }",
+        "dateRefField": "dataObject.paymentDetails.receiptDate"
+      },
+      {
+        "module": "W&S",
+        "indexName": "dss-collection_v2",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.paymentDetails.bill.status.keyword\":[\"Cancelled\"]}}],\"must\":[{\"terms\":{\"dataObject.paymentDetails.businessService.keyword\":[\"WS\",\"WS.ONE_TIME_FEE\",\"SW.ONE_TIME_FEE\",\"SW\"]}}]}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}",
+        "requestQueryMap": "{\"wardId\" : \"dataObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\",\"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\" }",
+        "dateRefField": "dataObject.paymentDetails.receiptDate"
+      },
+      {
+        "module": "MCOLLECT",
+        "dateRefField": "dataObject.paymentDetails.receiptDate",
+        "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\", \"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\"}",
+        "indexName": "dss-collection_v2",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"terms\":{\"dataObject.tenantId.keyword\":[\"pg.testing\",\"pg\"]}},{\"terms\":{\"dataObject.bill.status.keyword\":[\"Cancelled\"]}},{\"terms\":{\"dataObject.paymentDetails.businessService.keyword\":[\"PT\",\"TL\",\"WS.ONE_TIME_FEE\",\"SW.ONE_TIME_FEE\",\"FSM.TRIP_CHARGES\",\"PT.MUTATION\",\"SW\",\"BPA.LOW_RISK_PERMIT_FEE\",\"BPA.NC_SAN_FEE\",\"BPA.NC_APP_FEE\",\"BPA.NC_OC_APP_FEE\"]}}]}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -124,31 +228,33 @@
     },
     "_comment": " "
   },
-  "cumulativeCollection": {
-    "chartName": "DSS_TOTAL_CUMULATIVE_COLLECTION",
+  
+  "targetCollection": {
+    "chartName": "DSS_TARGET_COLLECTION",
     "queries": [
       {
         "module": "COMMON",
-        "dateRefField": "dataObject.paymentDetails.receiptDate",
-        "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\r\n  \"module\" : \"dataObject.paymentDetails.businessService.keyword\", \n\"tenantId\" : \"dataObject.tenantId\"}",
-        "indexName": "dss-collection_v2",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.paymentDetails.bill.status.keyword\":[\"Cancelled\"]}}],\"must\":[{\"terms\":{\"dataObject.paymentDetails.businessService.keyword\":[\"PT\",\"TL\"]}}]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"dataObject.paymentDetails.receiptDate\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}}}"
+        "requestQueryMap": "{\"module\" : \"businessService.keyword\", \"tenantId\" : \"tenantIdForMunicipalCorporation.keyword\"}",
+        "dateRefField": "",
+        "indexName": "dss-target_v1",
+        "aggrQuery": "{\"aggs\":{\"Target Collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}"
       }
     ],
-    "chartType": "line",
+    "chartType": "metric",
     "valueType": "amount",
     "action": "",
     "drillChart": "none",
     "documentType": "_doc",
     "aggregationPaths": [
-      "Collections"
+      "Target Collection"
     ],
-    "isCumulative": true,
-    "interval": "month",
+    "isDayUnit": true,
+    "postAggregationTheory" : "repsonseToDifferenceOfDates",
     "insight": {
     },
     "_comment": " "
   },
+  
   "targetAchieved": {
     "chartName": "DSS_TARGET_ACHIEVED",
     "queries": [
@@ -160,13 +266,26 @@
         "aggrQuery": "{\"aggs\":{\"Actual collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}"
       },
       {
-        "module": "COMMON",
-        "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\r\n  \"district\" : \"dataObject.tenantData.city.districtCode\", \"module\" : \"dataObject.paymentDetails.businessService.keyword\", \n\"tenantId\" : \"dataObject.tenantId\"}",
+        "module": "PT",
         "dateRefField": "dataObject.paymentDetails.receiptDate",
+        "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\", \"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\"}",
         "indexName": "dss-collection_v2",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.paymentDetails.bill.status.keyword\":[\"Cancelled\"]}}]}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.paymentDetails.bill.status.keyword\":[\"Cancelled\"]}}],\"must\":[{\"term\":{\"dataObject.paymentDetails.businessService.keyword\":\"PT\"}}]}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}"
+      },
+      {
+        "module": "TL",
+        "dateRefField": "dataObject.paymentDetails.receiptDate",
+        "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\", \"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\"}",
+        "indexName": "dss-collection_v2",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.paymentDetails.bill.status.keyword\":[\"Cancelled\"]}}],\"must\":[{\"term\":{\"dataObject.paymentDetails.businessService.keyword\":\"TL\"}}]}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}"
+      },
+      {
+        "module": "W&S",
+        "indexName": "dss-collection_v2",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.paymentDetails.bill.status.keyword\":[\"Cancelled\"]}}],\"must\":[{\"terms\":{\"dataObject.paymentDetails.businessService.keyword\":[\"WS\",\"WS.ONE_TIME_FEE\",\"SW.ONE_TIME_FEE\",\"SW\"]}}]}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}",
+        "requestQueryMap": "{\"wardId\" : \"dataObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\",\"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\" }",
+        "dateRefField": "dataObject.paymentDetails.receiptDate"
       }
-
     ],
     "chartType": "metric",
     "valueType": "percentage",
@@ -188,66 +307,62 @@
     },
     "_comment": " "
   },
-  "todaysCollection": {
-    "chartName": "DSS_TOTAL_COLLECTION",
-    "queries": [
-      {
-        "module": "PT",
-        "dateRefField": "dataObject.paymentDetails.receiptDate",
-        "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\", \"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\"}",
-        "indexName": "dss-collection_v2",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.paymentDetails.bill.status.keyword\":[\"Cancelled\"]}}],\"must\":[{\"term\":{\"dataObject.paymentDetails.businessService.keyword\":\"PT\"}}]}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}"
-      },
-      {
-        "module": "TL",
-        "dateRefField": "dataObject.paymentDetails.receiptDate",
-        "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\", \"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\"}",
-        "indexName": "dss-collection_v2",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.paymentDetails.bill.status.keyword\":[\"Cancelled\"]}}],\"must\":[{\"term\":{\"dataObject.paymentDetails.businessService.keyword\":\"TL\"}}]}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}"
-      },
-      {
-        "module": "FSM",
-        "dateRefField": "Data.payments.paymentDetails.receiptDate",
-        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"module\" : \"Data.payments.paymentDetails.businessService.keyword\", \"tenantId\" : \"Data.tenantId\", \"district\" : \"Data.tenantData.cityDistrictCode\"}",
-        "indexName": "fsm",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pg.testing\"}}],\"must\":[{\"term\":{\"Data.payments.paymentDetails.businessService.keyword\":\"FSM.TRIP_CHARGES\"}}]}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"Data.payments.paymentDetails.bill.billDetails.amountPaid\"}}}}}}"
-      }
-    ],
-    "chartType": "metric",
-    "valueType": "Amount",
-    "drillChart": "none",
-    "documentType": "_doc",
-    "action": "",
-    "aggregationPaths": [
-      "Total Collection"
-    ],
-    "insight": {
-    },
-    "_comment": " "
-  },
-  "totalCollectionDeptWise": {
-    "chartName": "DSS_TOTAL_CUMULATIVE_COLLECTION:_DEPARTMENT_WISE",
+  
+  "cumulativeCollection": {
+    "chartName": "DSS_TOTAL_CUMULATIVE_COLLECTION",
     "queries": [
       {
         "module": "COMMON",
-        "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\", \"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\"}",
         "dateRefField": "dataObject.paymentDetails.receiptDate",
+        "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\r\n  \"module\" : \"dataObject.paymentDetails.businessService.keyword\", \n\"tenantId\" : \"dataObject.tenantId\"}",
         "indexName": "dss-collection_v2",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.paymentDetails.bill.status.keyword\":[\"Cancelled\"]}}],\"must\":[{\"terms\":{\"dataObject.paymentDetails.businessService.keyword\":[\"PT\",\"TL\"]}}]}},\"aggs\":{\"Business Service\":{\"terms\":{\"field\":\"dataObject.paymentDetails.businessService.keyword\"},\"aggs\":{\"total\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.paymentDetails.bill.status.keyword\":[\"Cancelled\"]}}],\"must\":[{\"terms\":{\"dataObject.paymentDetails.businessService.keyword\":[\"PT\",\"TL\"]}}]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"dataObject.paymentDetails.receiptDate\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}}}"
+      },
+      {
+        "module": "OBPS",
+        "dateRefField": "dataObject.paymentDetails.receiptDate",
+        "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\r\n  \"module\" : \"dataObject.paymentDetails.businessService.keyword\", \n\"tenantId\" : \"dataObject.tenantId\"}",
+        "indexName": "dss-collection_v2",
+        "aggrQuery": "{ \"aggs\": { \"AGGR\": { \"filter\": { \"bool\": { \"must\": [ { \"terms\": { \"dataObject.paymentStatus.keyword\": [ \"DEPOSITED\", \"NEW\" ] } }, { \"terms\": { \"dataObject.paymentDetails.businessService.keyword\": [ \"BPA.LOW_RISK_PERMIT_FEE\",\"BPA.NC_APP_FEE\",\"BPA.NC_SAN_FEE\",\"BPA.NC_OC_APP_FEE\" ] } } ], \"must_not\": [ { \"term\": { \"dataObject.tenantId.keyword\": \"pg.testing\" } }, { \"terms\": { \"dataObject.bill.status.keyword\": [ \"Cancelled\" ] } } ] } }, \"aggs\": { \"Collections\": { \"date_histogram\": { \"field\": \"dataObject.paymentDetails.receiptDate\", \"interval\": \"intervalvalue\" }, \"aggs\": { \"Sum\": { \"sum\": { \"field\": \"dataObject.paymentDetails.totalAmountPaid\" } } } } } } } }"      
+      },
+      {
+        "module": "FIRENOC",
+        "dateRefField": "dataObject.paymentDetails.receiptDate",
+        "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\r\n  \"module\" : \"dataObject.paymentDetails.businessService.keyword\", \n\"tenantId\" : \"dataObject.tenantId\"}",
+        "indexName": "dss-collection_v2",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"dataObject.paymentDetails.businessService.keyword\":[\"FIRENOC\"]}}],\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.bill.status.keyword\":[\"Cancelled\"]}}]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"dataObject.paymentDetails.receiptDate\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}}}"
+      },
+      {
+        "module": "W&S",
+        "dateRefField": "dataObject.paymentDetails.receiptDate",
+        "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\r\n  \"module\" : \"dataObject.paymentDetails.businessService.keyword\", \n\"tenantId\" : \"dataObject.tenantId\"}",
+        "indexName": "dss-collection_v2",
+        "aggrQuery": "{\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"dataObject.paymentDetails.receiptDate\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Water\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.paymentStatus.keyword\":[\"Cancelled\"]}}],\"must\":[{\"terms\":{\"dataObject.paymentStatus.keyword\":[\"DEPOSITED\",\"NEW\"]}},{\"terms\":{\"dataObject.paymentDetails.businessService.keyword\":[\"WS\",\"WS.ONE_TIME_FEE\",\"SW.ONE_TIME_FEE\",\"SW\"]}}]}},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}}}"
+      },
+      {
+        "module": "MCOLLECT",
+        "dateRefField": "dataObject.paymentDetails.receiptDate",
+        "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\r\n  \"module\" : \"dataObject.paymentDetails.businessService.keyword\", \n\"tenantId\" : \"dataObject.tenantId\"}",
+        "indexName": "dss-collection_v2",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"terms\":{\"dataObject.tenantId.keyword\":[\"pg.testing\",\"pg\"]}},{\"terms\":{\"dataObject.bill.status.keyword\":[\"Cancelled\"]}},{\"terms\":{\"dataObject.paymentDetails.businessService.keyword\":[\"PT\",\"TL\",\"WS.ONE_TIME_FEE\",\"SW.ONE_TIME_FEE\",\"FSM.TRIP_CHARGES\",\"PT.MUTATION\",\"SW\",\"BPA.LOW_RISK_PERMIT_FEE\",\"BPA.NC_SAN_FEE\",\"BPA.NC_APP_FEE\",\"BPA.NC_OC_APP_FEE\"]}}]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"dataObject.paymentDetails.receiptDate\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}}}"
       }
+      
     ],
-    "chartType": "pie",
-    "valueType": "Amount",
+    "chartType": "line",
+    "valueType": "amount",
+    "action": "",
     "drillChart": "none",
     "documentType": "_doc",
-    "action": "",
     "aggregationPaths": [
-      "Business Service"
+      "Collections"
     ],
+    "isCumulative": true,
+    "interval": "month",
     "insight": {
     },
     "_comment": " "
   },
+  
   "topPerformingUlbs": {
     "chartName": "DSS_PT_TOP_3_PERFORMING_ULBS",
     "queries": [
@@ -259,12 +374,27 @@
         "aggrQuery": "{\"aggs\":{\"Target Collection\":{\"terms\":{\"field\":\"tenantIdForMunicipalCorporation.keyword\",\"size\":\"200\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
       },
       {
-        "module": "COMMON",
-        "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\r\n  \"module\" : \"dataObject.paymentDetails.businessService.keyword\", \n\"tenantId\" : \"dataObject.tenantId\"}",
+        "module": "PT",
         "dateRefField": "dataObject.paymentDetails.receiptDate",
+        "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\", \"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\"}",
         "indexName": "dss-collection_v2",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.paymentDetails.bill.status.keyword\":[\"Cancelled\"]}}]}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"dataObject.tenantId.keyword\",\"size\":\"200\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.paymentDetails.bill.status.keyword\":[\"Cancelled\"]}}],\"must\":[{\"term\":{\"dataObject.paymentDetails.businessService.keyword\":\"PT\"}}]}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"dataObject.tenantId.keyword\",\"size\":\"200\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}}}"
+      },
+      {
+        "module": "TL",
+        "dateRefField": "dataObject.paymentDetails.receiptDate",
+        "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\", \"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\"}",
+        "indexName": "dss-collection_v2",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.paymentDetails.bill.status.keyword\":[\"Cancelled\"]}}],\"must\":[{\"term\":{\"dataObject.paymentDetails.businessService.keyword\":\"TL\"}}]}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"dataObject.tenantId.keyword\",\"size\":\"200\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}}}"
+      },
+      {
+        "module": "W&S",
+        "indexName": "dss-collection_v2",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.paymentDetails.bill.status.keyword\":[\"Cancelled\"]}}],\"must\":[{\"terms\":{\"dataObject.paymentDetails.businessService.keyword\":[\"WS\",\"WS.ONE_TIME_FEE\",\"SW.ONE_TIME_FEE\",\"SW\"]}}]}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"dataObject.tenantId.keyword\",\"size\":\"200\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}}}",
+        "requestQueryMap": "{\"wardId\" : \"dataObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\",\"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\" }",
+        "dateRefField": "dataObject.paymentDetails.receiptDate"
       }
+      
     ],
     "chartType": "perform",
     "valueType": "percentage",
@@ -281,22 +411,37 @@
     },
     "_comment": " Top Performing Ulbs for target achieved"
   },
+  
   "bottomPerformingUlbs": {
     "chartName": "DSS_PT_BOTTOM_3_PERFORMING_ULBS",
     "queries": [
       {
         "module": "COMMON",
-        "requestQueryMap": "{\"module\" : \"businessService.keyword\",\"tenantId\" : \"tenantIdForMunicipalCorporation\" }",
+        "requestQueryMap": "{\r\n  \"module\" : \"businessService.keyword\", \n\"tenantId\" : \"tenantIdForMunicipalCorporation\"}",
         "dateRefField": "",
         "indexName": "dss-target_v1",
         "aggrQuery": "{\"aggs\":{\"Target Collection\":{\"terms\":{\"field\":\"tenantIdForMunicipalCorporation.keyword\",\"size\":\"200\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
       },
       {
-        "module": "COMMON",
-        "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\", \"tenantId\" : \"dataObject.tenantId\" }",
+        "module": "PT",
         "dateRefField": "dataObject.paymentDetails.receiptDate",
+        "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\", \"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\"}",
         "indexName": "dss-collection_v2",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.paymentDetails.bill.status.keyword\":[\"Cancelled\"]}}]}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"dataObject.tenantId.keyword\",\"size\":\"200\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.paymentDetails.bill.status.keyword\":[\"Cancelled\"]}}],\"must\":[{\"term\":{\"dataObject.paymentDetails.businessService.keyword\":\"PT\"}}]}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"dataObject.tenantId.keyword\",\"size\":\"200\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}}}"
+      },
+      {
+        "module": "TL",
+        "dateRefField": "dataObject.paymentDetails.receiptDate",
+        "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\", \"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\"}",
+        "indexName": "dss-collection_v2",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.paymentDetails.bill.status.keyword\":[\"Cancelled\"]}}],\"must\":[{\"term\":{\"dataObject.paymentDetails.businessService.keyword\":\"TL\"}}]}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"dataObject.tenantId.keyword\",\"size\":\"200\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}}}"
+      },
+      {
+        "module": "W&S",
+        "indexName": "dss-collection_v2",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.paymentDetails.bill.status.keyword\":[\"Cancelled\"]}}],\"must\":[{\"terms\":{\"dataObject.paymentDetails.businessService.keyword\":[\"WS\",\"WS.ONE_TIME_FEE\",\"SW.ONE_TIME_FEE\",\"SW\"]}}]}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"dataObject.tenantId.keyword\",\"size\":\"200\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}}}",
+        "requestQueryMap": "{\"wardId\" : \"dataObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\",\"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\" }",
+        "dateRefField": "dataObject.paymentDetails.receiptDate"
       }
     ],
     "chartType": "perform",
@@ -314,6 +459,64 @@
     },
     "_comment": " Bottom Performing Ulbs for target achieved"
   },
+
+  "totalCollectionDeptWise": {
+    "chartName": "DSS_TOTAL_CUMULATIVE_COLLECTION:_DEPARTMENT_WISE",
+    "queries": [
+      {
+        "module": "COMMON",
+        "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\", \"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\"}",
+        "dateRefField": "dataObject.paymentDetails.receiptDate",
+        "indexName": "dss-collection_v2",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.paymentDetails.bill.status.keyword\":[\"Cancelled\"]}}],\"must\":[{\"terms\":{\"dataObject.paymentDetails.businessService.keyword\":[\"PT\",\"TL\"]}}]}},\"aggs\":{\"Business Service\":{\"terms\":{\"field\":\"dataObject.paymentDetails.businessService.keyword\"},\"aggs\":{\"total\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}}}"
+      },
+      {
+        "module": "BPA",
+        "indexName": "dss-collection_v2",
+        "aggrQuery": " { \"aggs\": { \"AGGR\": { \"filter\": { \"bool\": { \"must\": [ { \"terms\": { \"dataObject.paymentDetails.businessService.keyword\": [ \"BPA.LOW_RISK_PERMIT_FEE\",\"BPA.NC_APP_FEE\",\"BPA.NC_SAN_FEE\",\"BPA.NC_OC_APP_FEE\" ] } } ], \"must_not\": [ { \"term\": { \"dataObject.tenantId.keyword\": \"pg.testing\" } }, { \"term\": { \"dataObject.paymentStatus.keyword\": \"Cancelled\" } } ] } }, \"aggs\": { \"OBPS\": { \"sum\": { \"field\": \"dataObject.paymentDetails.totalAmountPaid\" } } } } } } ",
+        "requestQueryMap":"{\"wardId\" : \"dataObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\",\"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\" }",
+        "dateRefField": "dataObject.paymentDetails.receiptDate"
+      },
+      {
+        "module": "FIRENOC",
+        "indexName": "dss-collection_v2",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"dataObject.paymentDetails.businessService.keyword\":[\"FIRENOC\"]}}],\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"term\":{\"dataObject.paymentStatus.keyword\":\"Cancelled\"}}]}},\"aggs\":{\"FIRENOC\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}",
+        "requestQueryMap": "{\"wardId\" : \"dataObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\",\"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\" }",
+        "dateRefField": "dataObject.paymentDetails.receiptDate"
+      },
+      {
+        "module": "W&S",
+        "indexName": "dss-collection_v2",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.paymentDetails.bill.status.keyword\":[\"Cancelled\"]}}],\"must\":[{\"terms\":{\"dataObject.paymentDetails.businessService.keyword\":[\"WS\",\"WS.ONE_TIME_FEE\",\"SW.ONE_TIME_FEE\",\"SW\"]}}]}},\"aggs\":{\"W&S\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}",
+        "requestQueryMap": "{\"wardId\" : \"dataObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\",\"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\" }",
+        "dateRefField": "dataObject.paymentDetails.receiptDate"
+      },
+      {
+        "module": "MCOLLECT",
+        "dateRefField": "dataObject.paymentDetails.receiptDate",
+        "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\", \"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\"}",
+        "indexName": "dss-collection_v2",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"terms\":{\"dataObject.tenantId.keyword\":[\"pg.testing\",\"pg\"]}},{\"terms\":{\"dataObject.bill.status.keyword\":[\"Cancelled\"]}},{\"terms\":{\"dataObject.paymentDetails.businessService.keyword\":[\"PT\",\"TL\",\"WS.ONE_TIME_FEE\",\"SW.ONE_TIME_FEE\",\"FSM.TRIP_CHARGES\",\"PT.MUTATION\",\"SW\",\"BPA.LOW_RISK_PERMIT_FEE\",\"BPA.NC_SAN_FEE\",\"BPA.NC_APP_FEE\",\"BPA.NC_OC_APP_FEE\"]}}]}},\"aggs\":{\"MCOLLECT\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}"
+      }
+      
+    ],
+    "chartType": "pie",
+    "valueType": "Amount",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Business Service",
+      "OBPS",
+      "FIRENOC",
+      "W&S",
+      "MCOLLECT"
+    ],
+    "insight": {
+    },
+    "_comment": " "
+  },
+    
   "licenseByLicenseType": {
     "chartName": "DSS_TL_LICENSE_BY_TYPE",
     "queries": [
@@ -399,7 +602,35 @@
         "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \r\n  \"district\" : \"Data.tenantData.city.districtCode\", \r\n\"tenantId\" : \"Data.fsm.tenantId\" \r\n}",
         "indexName": "fsm",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.fsm.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Total Application\":{\"value_count\":{\"field\":\"Data.fsm.@timestamp\"}}}}}}"
-      }
+      },
+      {
+        "module": "W&S",
+        "indexName": "water-services",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"terms\":{\"Data.applicationStatus.keyword\":[\"REJECTED\",\"CONNECTION_ACTIVATED\"]}}]}},\"aggs\":{\"Total Application\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
+        "requestQueryMap": "{\"tenantId\" : \"Data.tenantId.keyword\", \"wardId\" : \"Data.ward.name.keyword\"}",
+        "dateRefField": "Data.@timestamp"
+      },
+      {
+        "module": "W&S",
+        "indexName": "sewerage-services",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"terms\":{\"Data.applicationStatus.keyword\":[\"REJECTED\",\"CONNECTION_ACTIVATED\"]}}]}},\"aggs\":{\"Total Application\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
+        "requestQueryMap": "{\"tenantId\" : \"Data.tenantId.keyword\", \"wardId\" : \"Data.ward.name.keyword\"}",
+        "dateRefField": "Data.@timestamp"
+      },
+      {
+        "module": "FIRENOC",
+        "indexName": "firenoc-services",
+        "aggrQuery": "{\"aggs\":{\"FireNOC\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Total Application\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}}",
+        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"tenantId\" : \"Data.tenantId\", \"district\" : \"Data.tenantData.city.districtCode\"}",
+        "dateRefField": "Data.auditDetails.createdTime"
+      },
+      {
+        "module": "OBPS",
+        "indexName": "bpa-index",
+        "aggrQuery": "{ \"aggs\": { \"AGGR\": { \"filter\": { \"bool\": { \"must_not\": [ { \"term\": { \"Data.tenantId.keyword\": \"pg.testing\" } } ], \"must\": [ { \"terms\": { \"Data.businessService.keyword\": [\"BPA\",\"BPA_LOW\"] } } ] } }, \"aggs\": { \"Total Application\": { \"value_count\": { \"field\": \"Data.applicationNo.keyword\" } } } } }} ",
+        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"tenantId\" : \"Data.tenantId\" \r\n}",
+        "dateRefField": "Data.@timestamp"
+      } 
     ],
     "chartType": "metric",
     "valueType": "number",
@@ -420,6 +651,7 @@
     },
     "_comment": " totalApplication is the chartId"
   },
+
   "closedApplication": {
     "chartName": "DSS_CLOSED_APPLICATION",
     "queries": [
@@ -450,7 +682,35 @@
         "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \r\n  \"district\" : \"Data.tenantData.city.districtCode\", \r\n\"tenantId\" : \"Data.fsm.tenantId\" \r\n}",
         "indexName": "fsm",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.fsm.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Applications Closed\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.fsm.status.keyword\":[\"COMPLETED\",\"CITIZEN_FEEDBACK_PENDING\"]}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.fsm.@timestamp\"}}}}}}}}"
-      }
+      },
+      {
+        "module": "W&S",
+        "indexName": "water-services",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.applicationStatus.keyword\":[\"REJECTED\",\"CONNECTION_ACTIVATED\",\"CANCELED\"]}}]}},\"aggs\":{\"Total Application\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
+        "requestQueryMap": "{\"tenantId\" : \"Data.tenantId.keyword\", \"wardId\" : \"Data.ward.name.keyword\"}",
+        "dateRefField": "Data.@timestamp"
+      },
+      {
+        "module": "W&S",
+        "indexName": "sewerage-services",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.applicationStatus.keyword\":[\"REJECTED\",\"CONNECTION_ACTIVATED\",\"CANCELED\"]}}]}},\"aggs\":{\"Total Application\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
+        "requestQueryMap": "{\"tenantId\" : \"Data.tenantId.keyword\", \"wardId\" : \"Data.ward.name.keyword\"}",
+        "dateRefField": "Data.@timestamp"
+      },
+      {
+        "module": "FIRENOC",
+        "indexName": "firenoc-services",
+        "aggrQuery": "{\"aggs\":{\"FireNOC\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.fireNOCDetails.status.keyword\":[\"APPROVED\",\"CANCELED\",\"REJECTED\"]}}],\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Applications Closed\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}}",
+        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"tenantId\" : \"Data.tenantId\", \"district\" : \"Data.tenantData.city.districtCode\"}",
+        "dateRefField": "Data.auditDetails.createdTime"
+      },
+      {
+        "module": "OBPS",
+        "indexName": "bpa-index",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.status.keyword\":[\"APPROVED\",\"CANCELED\",\"REJECTED\"]}},{\"terms\":{\"Data.businessService.keyword\":[\"BPA\",\"BPA_LOW\"]}}]}},\"aggs\":{\"Applications Closed\":{\"value_count\":{\"field\":\"Data.applicationNo.keyword\"}}}}}}",
+        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"tenantId\" : \"Data.tenantId\" \r\n}",
+        "dateRefField": "Data.@timestamp"
+      } 
     ],
     "chartType": "metric",
     "valueType": "number",
@@ -471,6 +731,7 @@
     },
     "_comment": " totalApplication is the chartId"
   },
+
   "citizenRegistered": {
     "chartName": "DSS_CITIZEN_REGISTERED",
     "queries": [
@@ -501,53 +762,7 @@
     },
     "_comment": " totalApplication is the chartId"
   },
-  "totalApplicationDeptWise": {
-    "chartName": "DSS_TOTAL_APPLICATIONS:_DEPARTMENT_WISE",
-    "queries": [
-      {
-        "module": "PT",
-        "dateRefField": "Data.@timestamp",
-        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \r\n  \"district\" : \"Data.tenantData.city.districtCode\", \r\n\"tenantId\" : \"Data.tenantId\" \r\n}",
-        "indexName": "property-services",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Property Tax\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}}"
-      },
-      {
-        "module": "TL",
-        "dateRefField": "Data.@timestamp",
-        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \r\n  \"district\" : \"Data.tenantData.city.districtCode\", \r\n\"tenantId\" : \"Data.tenantId\" \r\n}",
-        "indexName": "tlindex-v1",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tradelicense.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Trade Licence\":{\"value_count\":{\"field\":\"Data.tradelicense.tenantId.keyword\"}}}}}}"
-      },
-      {
-        "module": "PGR",
-        "dateRefField": "Data.@timestamp",
-        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \r\n  \"district\" : \"Data.tenantData.city.districtCode\", \r\n\"tenantId\" : \"Data.service.tenantId.keyword\" \r\n}",
-        "indexName": "pgr-services",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.service.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"PGR\":{\"value_count\":{\"field\":\"Data.service.tenantId.keyword\"}}}}}}"
-      },
-      {
-        "module": "FSM",
-        "dateRefField": "Data.fsm.@timestamp",
-        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \r\n  \"district\" : \"Data.tenantData.city.districtCode\", \r\n\"tenantId\" : \"Data.fsm.tenantId\" \r\n}",
-        "indexName": "fsm",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.fsm.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"FSM\":{\"value_count\":{\"field\":\"Data.fsm.tenantId.keyword\"}}}}}}"
-      }
-    ],
-    "chartType": "pie",
-    "valueType": "number",
-    "action": "",
-    "documentType": "_doc",
-    "drillChart": "none",
-    "aggregationPaths": [
-      "Property Tax",
-      "Trade Licence",
-      "PGR",
-      "FSM"
-    ],
-    "insight": {
-    },
-    "_comment": " totalApplication is the chartId"
-  },
+ 
   "totalApplication&ClosedApplication": {
     "chartName": "DSS_TOTAL_APPLICATION_&_CLOSED_APPLICATION",
     "queries": [
@@ -580,7 +795,35 @@
         "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \r\n  \"district\" : \"Data.tenantData.city.districtCode\", \r\n\"tenantId\" : \"Data.fsm.tenantid.keyword\" \r\n}",
         "indexName": "fsm",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.fsm.tenantid.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Total Application\":{\"date_histogram\":{\"field\":\"Data.fsm.@timestamp\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.fsm.applicationNo.keyword\"}}}},\"Closed Application\":{\"date_histogram\":{\"field\":\"Data.fsm.@timestamp\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Applications Closed\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.status.keyword\":[\"COMPLETED\",\"CITIZEN_FEEDBACK_PENDING\"]}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.fsm.applicationNo.keyword\"}}}}}}}}}}"
-      }
+      },
+      {
+        "module": "W&S",
+        "indexName": "water-services",
+        "aggrQuery": "{\"aggs\":{\"Total Application\":{\"date_histogram\":{\"field\":\"Data.additionalDetails.appCreatedDate\",\"interval\":\"intervalvalue\"},\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"terms\":{\"Data.applicationStatus.keyword\":[\"REJECTED\",\"CONNECTION_ACTIVATED\"]}}]}},\"aggs\":{\"Total Applications\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}},\"Closed Application\":{\"date_histogram\":{\"field\":\"Data.additionalDetails.appCreatedDate\",\"interval\":\"intervalvalue\"},\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.applicationStatus.keyword\":[\"REJECTED\",\"CONNECTION_ACTIVATED\"]}}]}},\"aggs\":{\"Total Applications\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}",
+        "requestQueryMap": "{\"tenantId\" : \"Data.tenantId.keyword\", \"wardId\" : \"Data.ward.name.keyword\"}",
+        "dateRefField": "Data.additionalDetails.appCreatedDate"
+      },
+      {
+        "module": "W&S",
+        "indexName": "sewerage-services",
+        "aggrQuery": "{\"aggs\":{\"Total Application\":{\"date_histogram\":{\"field\":\"Data.additionalDetails.appCreatedDate\",\"interval\":\"intervalvalue\"},\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"terms\":{\"Data.applicationStatus.keyword\":[\"REJECTED\",\"CONNECTION_ACTIVATED\"]}}]}},\"aggs\":{\"Total Applications\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}},\"Closed Application\":{\"date_histogram\":{\"field\":\"Data.additionalDetails.appCreatedDate\",\"interval\":\"intervalvalue\"},\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.applicationStatus.keyword\":[\"REJECTED\",\"CONNECTION_ACTIVATED\"]}}]}},\"aggs\":{\"Total Applications\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}",
+        "requestQueryMap": "{\"tenantId\" : \"Data.tenantId.keyword\", \"wardId\" : \"Data.ward.name.keyword\"}",
+        "dateRefField": "Data.additionalDetails.appCreatedDate"
+      },
+      {
+        "module": "FIRENOC",
+        "indexName": "firenoc-services",
+        "aggrQuery": "{\"aggs\":{\"Total Application\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"intervalvalue\"},\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Total Applications\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"Closed Application\":{\"date_histogram\":{\"field\":\"Data.auditDetails.createdTime\",\"interval\":\"intervalvalue\"},\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.fireNOCDetails.status.keyword\":[\"APPROVED\",\"CANCELED\",\"REJECTED\"]}}],\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Total Applications\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}}}}",
+        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"tenantId\" : \"Data.tenantId\", \"district\" : \"Data.tenantData.city.districtCode\"}",
+        "dateRefField": "Data.auditDetails.createdTime"
+      },
+      {
+        "module": "OBPS",
+        "indexName": "bpa-index",
+        "aggrQuery": "{\"aggs\":{\"Total Application\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"interval\":\"intervalvalue\"},\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pg.testing\"}}],\"must\":[{\"terms\":{\"Data.businessService.keyword\":[\"BPA\",\"BPA_LOW\"]}}]}},\"aggs\":{\"Total Applications\":{\"value_count\":{\"field\":\"Data.applicationNo.keyword\"}}}}}},\"Closed Application\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"interval\":\"intervalvalue\"},\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.status.keyword\":[\"APPROVED\",\"CANCELED\",\"REJECTED\"]}},{\"terms\":{\"Data.businessService.keyword\":[\"BPA\",\"BPA_LOW\"]}}]}},\"aggs\":{\"Applications Closed\":{\"value_count\":{\"field\":\"Data.applicationNo.keyword\"}}}}}}}}",
+        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"tenantId\" : \"Data.tenantId\" \r\n}",
+        "dateRefField": "Data.@timestamp"
+      } 
     ],
     "chartType": "line",
     "valueType": "number",
@@ -597,6 +840,7 @@
     },
     "_comment": " "
   },
+
   "topPerformingUlbsCompletionRate": {
     "chartName": "DSS_PT_TOP_3_PERFORMING_ULBS",
     "queries": [
@@ -645,6 +889,7 @@
     },
     "_comment": " Top Performing Ulbs for Completion rate"
   },
+  
   "bottomPerformingUlbsCompletionRate": {
     "chartName": "DSS_PT_BOTTOM_3_PERFORMING_ULBS",
     "queries": [
@@ -694,33 +939,84 @@
     "_comment": " Bottom Performing Ulbs for Completion rate"
   },
 
-  "_comment": "COMMON COLLECTION CHARTS",
-  "targetCollection": {
-    "chartName": "DSS_TARGET_COLLECTION",
+  "totalApplicationDeptWise": {
+    "chartName": "DSS_TOTAL_APPLICATIONS:_DEPARTMENT_WISE",
     "queries": [
       {
-        "module": "COMMON",
-        "requestQueryMap": "{\"module\" : \"businessService.keyword\", \"tenantId\" : \"tenantIdForMunicipalCorporation.keyword\"}",
-        "dateRefField": "",
-        "indexName": "dss-target_v1",
-        "aggrQuery": "{\"aggs\":{\"Target Collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}"
-      }
+        "module": "PT",
+        "dateRefField": "Data.@timestamp",
+        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \r\n  \"district\" : \"Data.tenantData.city.districtCode\", \r\n\"tenantId\" : \"Data.tenantId\" \r\n}",
+        "indexName": "property-services",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Property Tax\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}}"
+      },
+      {
+        "module": "TL",
+        "dateRefField": "Data.@timestamp",
+        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \r\n  \"district\" : \"Data.tenantData.city.districtCode\", \r\n\"tenantId\" : \"Data.tenantId\" \r\n}",
+        "indexName": "tlindex-v1",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tradelicense.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Trade Licence\":{\"value_count\":{\"field\":\"Data.tradelicense.tenantId.keyword\"}}}}}}"
+      },
+      {
+        "module": "PGR",
+        "dateRefField": "Data.@timestamp",
+        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \r\n  \"district\" : \"Data.tenantData.city.districtCode\", \r\n\"tenantId\" : \"Data.service.tenantId.keyword\" \r\n}",
+        "indexName": "pgr-services",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.service.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"PGR\":{\"value_count\":{\"field\":\"Data.service.tenantId.keyword\"}}}}}}"
+      },
+      {
+        "module": "FSM",
+        "dateRefField": "Data.fsm.@timestamp",
+        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \r\n  \"district\" : \"Data.tenantData.city.districtCode\", \r\n\"tenantId\" : \"Data.fsm.tenantId\" \r\n}",
+        "indexName": "fsm",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.fsm.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"FSM\":{\"value_count\":{\"field\":\"Data.fsm.tenantId.keyword\"}}}}}}"
+      },
+      {
+        "module": "W&S",
+        "indexName": "water-services",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"terms\":{\"Data.applicationStatus.keyword\":[\"REJECTED\",\"CONNECTION_ACTIVATED\"]}}]}},\"aggs\":{\"W&S\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
+        "requestQueryMap": "{\"tenantId\" : \"Data.tenantId.keyword\", \"wardId\" : \"Data.ward.name.keyword\"}",
+        "dateRefField": "Data.@timestamp"
+      },
+      {
+        "module": "W&S",
+        "indexName": "sewerage-services",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"terms\":{\"Data.applicationStatus.keyword\":[\"REJECTED\",\"CONNECTION_ACTIVATED\"]}}]}},\"aggs\":{\"W&S\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
+        "requestQueryMap": "{\"tenantId\" : \"Data.tenantId.keyword\", \"wardId\" : \"Data.ward.name.keyword\"}",
+        "dateRefField": "Data.@timestamp"
+      },
+      {
+        "module": "FIRENOC",
+        "indexName": "firenoc-services",
+        "aggrQuery": "{\"aggs\":{\"FireNOC\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Fire NOC\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}}",
+        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"tenantId\" : \"Data.tenantId\", \"district\" : \"Data.tenantData.city.districtCode\"}",
+        "dateRefField": "Data.auditDetails.createdTime"
+      },
+      {
+        "module": "OBPS",
+        "indexName": "bpa-index",
+        "aggrQuery": "{ \"aggs\": { \"AGGR\": { \"filter\": { \"bool\": { \"must_not\": [ { \"term\": { \"Data.tenantId.keyword\": \"pg.testing\" } } ], \"must\": [ { \"terms\": { \"Data.businessService.keyword\": [\"BPA\",\"BPA_LOW\"] } } ] } }, \"aggs\": { \"OBPS\": { \"value_count\": { \"field\": \"Data.applicationNo.keyword\" } } } } }} ",
+        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"tenantId\" : \"Data.tenantId\" \r\n}",
+        "dateRefField": "Data.@timestamp"
+      } 
     ],
-    "chartType": "metric",
-    "valueType": "amount",
+    "chartType": "pie",
+    "valueType": "number",
     "action": "",
-    "drillChart": "none",
     "documentType": "_doc",
+    "drillChart": "none",
     "aggregationPaths": [
-      "Target Collection"
+      "Property Tax",
+      "Trade Licence",
+      "PGR",
+      "FSM"
     ],
-    "isDayUnit": true,
-    "postAggregationTheory" : "repsonseToDifferenceOfDates",
     "insight": {
     },
-    "_comment": " "
+    "_comment": " totalApplication is the chartId"
   },
-  "collectionByUsageType": {
+
+  "_comment": "COMMON COLLECTION CHARTS",
+   "collectionByUsageType": {
     "chartName": "DSS_PT_COLLECTION_BY_USAGE_TYPE",
     "queries": [
       {
@@ -3895,14 +4191,14 @@
     "chartName": "DSS_WS_ACTIVE_CONNECTIONS",
     "queries": [
       {
-        "module": "WS",
+        "module": "W&S",
         "indexName": "water-services",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.applicationStatus.keyword\":\"REJECTED\"}}],\"must\":[{\"terms\":{\"Data.applicationStatus.keyword\":[\"CONNECTION_ACTIVATED\"]}}]}},\"aggs\":{\"Total Water Connection\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
         "requestQueryMap": "{\"tenantId\" : \"Data.tenantId.keyword\", \"wardId\" : \"Data.ward.name.keyword\"}",
         "dateRefField": "Data.connectionExecutionDate"
       },
       {
-        "module": "WS",
+        "module": "W&S",
         "indexName": "sewerage-services",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.applicationStatus.keyword\":\"REJECTED\"}}],\"must\":[{\"terms\":{\"Data.applicationStatus.keyword\":[\"CONNECTION_ACTIVATED\"]}}]}},\"aggs\":{\"Total Sewerage Connection\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
         "requestQueryMap": "{\"tenantId\" : \"Data.tenantId.keyword\", \"wardId\" : \"Data.ward.name.keyword\"}",
@@ -3918,6 +4214,14 @@
       "Total Water Connection","Total Sewerage Connection"
     ],
     "insight": {
+      "chartResponseMap" : "wstotalConnection",
+      "action" : "differenceOfNumbers",
+      "upwardIndicator" : "positive",
+      "downwardIndicator" : "negative",
+      "textMessage" : "$indicator$value% than last $insightInterval",
+      "colorCode" : "#228B22",
+      "insightInterval" : "year",
+      "isRoundOff": true
     },
     "_comment": " "
   },
@@ -4646,6 +4950,28 @@
     "drillChart": "none",
     "aggregationPaths": [
       "Usage Type"
+    ],
+    "insight": {
+    },
+    "_comment": " "
+  },"fsmCollectionByGender": {
+    "chartName": "DSS_FSM_RESQUEST_BY_GENDER",
+    "queries": [
+      {
+        "module": "FSM",
+        "dateRefField": "Data.fsm.@timestamp",
+        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \"tenantId\" : \"Data.tenantData.code\" ,  \"district\" : \"Data.tenantData.city.districtCode\"}",
+        "indexName": "fsm",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.fsm.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Gender\":{\"terms\":{\"field\":\"Data.fsm.citizen.gender\"},\"aggs\":{\"Assessed Properties\":{\"sum\":{\"field\":\"Data.payments.paymentDetails.bill.billDetails.amountPaid\"}}}}}}}}"
+      }
+    ],
+    "chartType": "pie",
+    "valueType": "amount",
+    "action": "",
+    "documentType": "_doc",
+    "drillChart": "none",
+    "aggregationPaths": [
+      "Gender"
     ],
     "insight": {
     },
@@ -5737,7 +6063,7 @@
         "requestQueryMap": "{\"wardId\" : \"dataObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\",\"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\" }",
 		"dateRefField": "dataObject.paymentDetails.receiptDate",
         "indexName": "dss-collection_v2",
-        "aggrQuery": "{\"aggs\":{\"FireNOC\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.bill.status.keyword\":[\"Cancelled\"]}}],\"must\":[{\"terms\":{\"dataObject.paymentDetails.businessService.keyword\":[\"FIRENOC\"]}}]}},\"aggs\":{\"Total_Collection\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"FireNOC\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.bill.status.keyword\":[\"Cancelled\"]}}],\"must\":[{\"terms\":{\"dataObject.paymentDetails.businessService.keyword\":[\"FIRENOC\"]}}]}},\"aggs\":{\"firenoc_Total_Collection\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}"
       },
       {
         "module": "COMMON",
@@ -5760,7 +6086,7 @@
     "documentType": "_doc",
     "drillChart": "nocServiceReportDrillDown",
     "aggregationPaths": [
-      "Total_Collection",
+      "firenoc_Total_Collection",
       "Total_Applications",
       "Provisional_Fire_Nocs_issued",
       "Actual_Fire_Nocs_issued",
@@ -5771,7 +6097,7 @@
     ],
     "pathDataTypeMapping": [
       {
-        "Total_Collection": "amount"
+        "firenoc_Total_Collection": "amount"
       },
       {
         "Total_Applications": "number"
@@ -5808,7 +6134,7 @@
         "requestQueryMap": "{\"wardId\" : \"dataObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\",\"tenantId\" : \"dataObject.tenantId\", \"ulbId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\" }",
 		    "dateRefField": "dataObject.paymentDetails.receiptDate",
         "indexName": "dss-collection_v2",
-        "aggrQuery": "{\"aggs\":{\"FireNOC\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.bill.status.keyword\":[\"Cancelled\"]}}],\"must\":[{\"terms\":{\"dataObject.paymentDetails.businessService.keyword\":[\"FIRENOC\"]}}]}},\"aggs\":{\"ULBs\":{\"terms\":{\"field\":\"dataObject.tenantId.keyword\",\"size\":1000},\"aggs\":{\"Total_Collection\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"FireNOC\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.bill.status.keyword\":[\"Cancelled\"]}}],\"must\":[{\"terms\":{\"dataObject.paymentDetails.businessService.keyword\":[\"FIRENOC\"]}}]}},\"aggs\":{\"ULBs\":{\"terms\":{\"field\":\"dataObject.tenantId.keyword\",\"size\":1000},\"aggs\":{\"firenoc_Total_Collection\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}}}"
       },
       {
         "module": "COMMON",
@@ -5829,7 +6155,7 @@
     "plotLabel": "ULBs",
     "postAggregationTheory" : "repsonseToDifferenceOfDates",
     "aggregationPaths": [
-      "Total_Collection",
+      "firenoc_Total_Collection",
       "Total_Applications",
       "Provisional_Fire_Nocs_issued",
       "Actual_Fire_Nocs_issued",
@@ -5840,7 +6166,7 @@
     ],
     "pathDataTypeMapping": [
       {
-        "Total_Collection": "amount"
+        "firenoc_Total_Collection": "amount"
       },
       {
         "Total_Applications": "number"
@@ -5878,7 +6204,7 @@
         "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\",\"tenantId\" : \"dataObject.tenantId\", \"ulbId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\" }",
 		"dateRefField": "dataObject.paymentDetails.receiptDate",
         "indexName": "dss-collection_v2",
-        "aggrQuery": "{\"aggs\":{\"FireNOC\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.bill.status.keyword\":[\"Cancelled\"]}}],\"must\":[{\"terms\":{\"dataObject.paymentDetails.businessService.keyword\":[\"FIRENOC\"]}}]}},\"aggs\":{\"Ward \":{\"terms\":{\"field\":\"domainObject.ward.name.keyword\",\"size\":200},\"aggs\":{\"Total_Collection\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"FireNOC\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.bill.status.keyword\":[\"Cancelled\"]}}],\"must\":[{\"terms\":{\"dataObject.paymentDetails.businessService.keyword\":[\"FIRENOC\"]}}]}},\"aggs\":{\"Ward \":{\"terms\":{\"field\":\"domainObject.ward.name.keyword\",\"size\":200},\"aggs\":{\"firenoc_Total_Collection\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}}}"
       },
       {
         "module": "COMMON",
@@ -5899,7 +6225,7 @@
     "action": "",
     "plotLabel": "Ward",
     "aggregationPaths": [
-      "Total_Collection",
+      "firenoc_Total_Collection",
       "Total_Applications",
       "Provisional_Fire_Nocs_issued",
       "Actual_Fire_Nocs_issued",
@@ -5910,7 +6236,7 @@
     ],
     "pathDataTypeMapping": [
       {
-        "Total_Collection": "amount"
+        "firenoc_Total_Collection": "amount"
       },
       {
         "Total_Applications": "number"
@@ -5947,7 +6273,7 @@
         "requestQueryMap": "{\"wardId\" : \"dataObject.ward.name.keyword\", \"tenantId\" : \"dataObject.tenantId.keyword\"}",
         "dateRefField": "dataObject.paymentDetails.receiptDate",
         "indexName": "dss-collection_v2",
-        "aggrQuery": "{\"aggs\":{\"FireNOC\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.bill.status.keyword\":[\"Cancelled\"]}}],\"must\":[{\"terms\":{\"dataObject.paymentDetails.businessService.keyword\":[\"FIRENOC\"]}}]}},\"aggs\":{\"Department\":{\"terms\":{\"field\":\"domainObject.Department.keyword\",\"size\":1000},\"aggs\":{\"Total_Collection\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"FireNOC\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.bill.status.keyword\":[\"Cancelled\"]}}],\"must\":[{\"terms\":{\"dataObject.paymentDetails.businessService.keyword\":[\"FIRENOC\"]}}]}},\"aggs\":{\"Department\":{\"terms\":{\"field\":\"domainObject.Department.keyword\",\"size\":1000},\"aggs\":{\"firenoc_Total_Collection\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}}}"
       },
       {
         "module": "COMMON",
@@ -5966,7 +6292,7 @@
     "documentType": "_doc",
     "plotLabel": "Department",
     "aggregationPaths": [
-      "Total_Collection",
+      "firenoc_Total_Collection",
       "Total_Applications",
       "Provisional_Fire_Nocs_issued",
       "Actual_Fire_Nocs_issued",
@@ -5977,7 +6303,7 @@
     ],
     "pathDataTypeMapping": [
       {
-        "Total_Collection": "amount"
+        "firenoc_Total_Collection": "amount"
       },
       {
         "Total_Applications": "number"
@@ -6802,7 +7128,7 @@
       {
         "module": "BPA",
         "indexName": "dss-collection_v2",
-        "aggrQuery": "{ \"aggs\": { \"AGGR\": { \"filter\": { \"bool\": { \"must\": [ { \"range\": { \"dataObject.paymentDetails.receiptDate\": { \"gte\": \"now-24h\", \"lte\": \"now\" } } }, { \"terms\": { \"dataObject.paymentDetails.businessService.keyword\": [ \"BPA.LOW_RISK_PERMIT_FEE\",\"BPA.NC_APP_FEE\",\"BPA.NC_OC_APP_FEE\" ] } } ], \"must_not\": [ { \"term\": { \"dataObject.tenantId.keyword\": \"pg.testing\" } }, { \"term\": { \"dataObject.paymentStatus.keyword\": \"Cancelled\" } } ] } }, \"aggs\": { \"Today's Collection\": { \"sum\": { \"field\": \"dataObject.paymentDetails.totalAmountPaid\" } } } } } }",
+        "aggrQuery": "{ \"aggs\": { \"AGGR\": { \"filter\": { \"bool\": { \"must\": [ { \"range\": { \"dataObject.paymentDetails.receiptDate\": { \"gte\": \"now-24h\", \"lte\": \"now\" } } }, { \"terms\": { \"dataObject.paymentDetails.businessService.keyword\": [ \"BPA.LOW_RISK_PERMIT_FEE\",\"BPA.NC_APP_FEE\",\"BPA.NC_SAN_FEE\",\"BPA.NC_OC_APP_FEE\" ] } } ], \"must_not\": [ { \"term\": { \"dataObject.tenantId.keyword\": \"pg.testing\" } }, { \"term\": { \"dataObject.paymentStatus.keyword\": \"Cancelled\" } } ] } }, \"aggs\": { \"Today's Collection\": { \"sum\": { \"field\": \"dataObject.paymentDetails.totalAmountPaid\" } } } } } }",
         "requestQueryMap":"{\"wardId\" : \"dataObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\",\"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\" }",
         "dateRefField": ""
       }
@@ -6825,7 +7151,7 @@
       {
         "module": "BPA",
         "indexName": "dss-collection_v2",
-        "aggrQuery": " { \"aggs\": { \"AGGR\": { \"filter\": { \"bool\": { \"must\": [ { \"terms\": { \"dataObject.paymentDetails.businessService.keyword\": [ \"BPA.LOW_RISK_PERMIT_FEE\",\"BPA.NC_APP_FEE\",\"BPA.NC_OC_APP_FEE\" ] } } ], \"must_not\": [ { \"term\": { \"dataObject.tenantId.keyword\": \"pg.testing\" } }, { \"term\": { \"dataObject.paymentStatus.keyword\": \"Cancelled\" } } ] } }, \"aggs\": { \"Total Collection\": { \"sum\": { \"field\": \"dataObject.paymentDetails.totalAmountPaid\" } } } } } } ",
+        "aggrQuery": " { \"aggs\": { \"AGGR\": { \"filter\": { \"bool\": { \"must\": [ { \"terms\": { \"dataObject.paymentDetails.businessService.keyword\": [ \"BPA.LOW_RISK_PERMIT_FEE\",\"BPA.NC_APP_FEE\",\"BPA.NC_SAN_FEE\",\"BPA.NC_OC_APP_FEE\" ] } } ], \"must_not\": [ { \"term\": { \"dataObject.tenantId.keyword\": \"pg.testing\" } }, { \"term\": { \"dataObject.paymentStatus.keyword\": \"Cancelled\" } } ] } }, \"aggs\": { \"Total Collection\": { \"sum\": { \"field\": \"dataObject.paymentDetails.totalAmountPaid\" } } } } } } ",
         "requestQueryMap":"{\"wardId\" : \"dataObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\",\"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\" }",
         "dateRefField": "dataObject.paymentDetails.receiptDate"
       }
@@ -6942,6 +7268,37 @@
       "isRoundOff": true
     },
     "_comment": "Total Permits Issued"
+  },
+  "bpaTotalOCIssued": {
+    "chartName": "DSS_BPA_TOTAL_OC_ISSUED",
+    "queries": [
+      {
+        "module": "OBPS",
+        "indexName": "bpa-index",
+        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"tenantId\" : \"Data.tenantId\" \r\n}",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pg.testing\"}}],\"must\":[{\"term\":{\"Data.status.keyword\":\"APPROVED\"}},{\"terms\":{\"Data.businessService.keyword\":[\"BPA_OC\"]}}]}},\"aggs\":{\"Total OC Issued\":{\"value_count\":{\"field\":\"Data.applicationNo.keyword\"}}}}}}",
+        "dateRefField": "Data.@timestamp"
+      }
+    ],
+    "translateTenantCode": false,
+    "chartType": "metric",
+    "valueType": "number",
+    "action": "",
+    "drillChart": "none",
+    "aggregationPaths": [
+      "Total OC Issued"
+    ],
+    "insight": {
+      "chartResponseMap" : "bpaTotalOCIssued",
+      "action" : "differenceOfNumbers",
+      "upwardIndicator" : "positive",
+      "downwardIndicator" : "negative",
+      "textMessage" : "$indicator$value% than last $insightInterval",
+      "colorCode" : "#228B22",
+      "insightInterval" : "year",
+      "isRoundOff": true
+    },
+    "_comment": "Total OC Issued"
   },
   "bpaTotalLandApplied": {
     "chartName": "DSS_BPA_TOTAL_LAND_APPLIED",
@@ -7107,7 +7464,7 @@
         "dateRefField": "dataObject.paymentDetails.receiptDate",
         "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\r\n  \"module\" : \"dataObject.paymentDetails.businessService.keyword\", \n\"tenantId\" : \"dataObject.tenantId\"}",
         "indexName": "dss-collection_v2",
-        "aggrQuery": "{ \"aggs\": { \"AGGR\": { \"filter\": { \"bool\": { \"must\": [ { \"terms\": { \"dataObject.paymentStatus.keyword\": [ \"DEPOSITED\", \"NEW\" ] } }, { \"terms\": { \"dataObject.paymentDetails.businessService.keyword\": [ \"BPA.LOW_RISK_PERMIT_FEE\",\"BPA.NC_APP_FEE\",\"BPA.NC_OC_APP_FEE\" ] } } ], \"must_not\": [ { \"term\": { \"dataObject.tenantId.keyword\": \"pg.testing\" } }, { \"terms\": { \"dataObject.bill.status.keyword\": [ \"Cancelled\" ] } } ] } }, \"aggs\": { \"BPA Cumulative Collections\": { \"date_histogram\": { \"field\": \"dataObject.paymentDetails.receiptDate\", \"interval\": \"month\" }, \"aggs\": { \"Sum\": { \"sum\": { \"field\": \"dataObject.paymentDetails.totalAmountPaid\" } } } } } } } }"      }
+        "aggrQuery": "{ \"aggs\": { \"AGGR\": { \"filter\": { \"bool\": { \"must\": [ { \"terms\": { \"dataObject.paymentStatus.keyword\": [ \"DEPOSITED\", \"NEW\" ] } }, { \"terms\": { \"dataObject.paymentDetails.businessService.keyword\": [ \"BPA.LOW_RISK_PERMIT_FEE\",\"BPA.NC_APP_FEE\",\"BPA.NC_SAN_FEE\",\"BPA.NC_OC_APP_FEE\" ] } } ], \"must_not\": [ { \"term\": { \"dataObject.tenantId.keyword\": \"pg.testing\" } }, { \"terms\": { \"dataObject.bill.status.keyword\": [ \"Cancelled\" ] } } ] } }, \"aggs\": { \"BPA Cumulative Collections\": { \"date_histogram\": { \"field\": \"dataObject.paymentDetails.receiptDate\", \"interval\": \"month\" }, \"aggs\": { \"Sum\": { \"sum\": { \"field\": \"dataObject.paymentDetails.totalAmountPaid\" } } } } } } } }"      }
     ],
     "translateTenantCode": false,
     "chartType": "line",
@@ -9821,7 +10178,7 @@
         "requestQueryMap": "{\"ward\" : \"ward.keyword\",\"state\":\"state.keyword\"}",
         "dateRefField": "date",
         "indexName": "firenoc-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"FireNOC\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"ulb.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"State\":{\"terms\":{\"field\":\"state.keyword\",\"size\":1000},\"aggs\":{\"Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}},\"Total_Applications\":{\"value_count\":{\"field\":\"todaysApplicationsForApplicationType\"}},\"Provisional_Fire_Nocs_issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"applicationType.keyword\":\"PROVISIONAL\"}}]}},\"aggs\":{\"Provisional_Noc's_Issued\":{\"sum\":{\"field\":\"todaysApplicationsForApplicationType\"}}}},\"Actual_Fire_Nocs_issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"applicationType.keyword\":\"NEW\"}}]}},\"aggs\":{\"Actual_Noc's_Issued\":{\"sum\":{\"field\":\"todaysApplicationsForApplicationType\"}}}},\"Average_days_to_issue_Provisional_NOC\":{\"terms\":{\"field\":\"date\",\"size\":1,\"order\":{\"_key\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"avgDaysToIssueProvisionalNOCForDepartment\"}}}},\"Average_days_to_issue_Actual_NOC\":{\"terms\":{\"field\":\"date\",\"size\":\"1\",\"order\":{\"_key\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"avgDaysToIssueActualNOCForDepartment\"}}}},\"SLA_Compliance(Actual_NOC)\":{\"terms\":{\"field\":\"date\",\"size\":\"1\",\"order\":{\"_key\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"slaComplianceActualForDepartment\"}}}},\"SLA_Compliance(Provisional_NOC)\":{\"terms\":{\"field\":\"date\",\"size\":\"1\",\"order\":{\"_key\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"slaComplianceProvisionalForDepartment\"}}}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"FireNOC\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"ulb.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"State\":{\"terms\":{\"field\":\"state.keyword\",\"size\":1000},\"aggs\":{\"firenoc_Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}},\"Total_Applications\":{\"value_count\":{\"field\":\"todaysApplicationsForApplicationType\"}},\"Provisional_Fire_Nocs_issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"applicationType.keyword\":\"PROVISIONAL\"}}]}},\"aggs\":{\"Provisional_Noc's_Issued\":{\"sum\":{\"field\":\"todaysApplicationsForApplicationType\"}}}},\"Actual_Fire_Nocs_issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"applicationType.keyword\":\"NEW\"}}]}},\"aggs\":{\"Actual_Noc's_Issued\":{\"sum\":{\"field\":\"todaysApplicationsForApplicationType\"}}}},\"Average_days_to_issue_Provisional_NOC\":{\"terms\":{\"field\":\"date\",\"size\":1,\"order\":{\"_key\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"avgDaysToIssueProvisionalNOCForDepartment\"}}}},\"Average_days_to_issue_Actual_NOC\":{\"terms\":{\"field\":\"date\",\"size\":\"1\",\"order\":{\"_key\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"avgDaysToIssueActualNOCForDepartment\"}}}},\"SLA_Compliance(Actual_NOC)\":{\"terms\":{\"field\":\"date\",\"size\":\"1\",\"order\":{\"_key\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"slaComplianceActualForDepartment\"}}}},\"SLA_Compliance(Provisional_NOC)\":{\"terms\":{\"field\":\"date\",\"size\":\"1\",\"order\":{\"_key\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"slaComplianceProvisionalForDepartment\"}}}}}}}}}}"
       }
     ],
     "isMdmsEnabled": false,
@@ -9837,7 +10194,7 @@
     "documentType": "_doc",
     "drillChart": "nssNOCServiceReportDrillDownUlb",
     "aggregationPaths": [
-      "Total_Collection",
+      "firenoc_Total_Collection",
       "Total_Applications",
       "Provisional_Fire_Nocs_issued",
       "Actual_Fire_Nocs_issued",
@@ -9848,7 +10205,7 @@
     ],
     "pathDataTypeMapping": [
       {
-        "Total_Collection": "amount"
+        "firenoc_Total_Collection": "amount"
       },
       {
         "Total_Applications": "number"
@@ -9885,7 +10242,7 @@
         "requestQueryMap": "{\"ward\" : \"ward.keyword\", \"ulb\":\"ulb.keyword\", \"state\":\"state.keyword\"}",
         "dateRefField": "date",
         "indexName": "firenoc-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"FireNOC\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"ulb.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"ULBs\":{\"terms\":{\"field\":\"ulb.keyword\",\"size\":1000},\"aggs\":{\"Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}},\"Total_Applications\":{\"value_count\":{\"field\":\"todaysApplicationsForApplicationType\"}},\"Provisional_Fire_Nocs_issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"applicationType.keyword\":\"PROVISIONAL\"}}]}},\"aggs\":{\"Provisional_Noc's_Issued\":{\"sum\":{\"field\":\"todaysApplicationsForApplicationType\"}}}},\"Actual_Fire_Nocs_issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"applicationType.keyword\":\"ACTUAL\"}}]}},\"aggs\":{\"Actual_Noc's_Issued\":{\"sum\":{\"field\":\"todaysApplicationsForApplicationType\"}}}},\"Average_days_to_issue_Provisional_NOC\":{\"terms\":{\"field\":\"date\",\"size\":1,\"order\":{\"_key\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"avgDaysToIssueProvisionalNOCForDepartment\"}}}},\"Average_days_to_issue_Actual_NOC\":{\"terms\":{\"field\":\"date\",\"size\":\"1\",\"order\":{\"_key\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"avgDaysToIssueActualNOCForDepartment\"}}}},\"SLA_Compliance(Actual_NOC)\":{\"terms\":{\"field\":\"date\",\"size\":\"1\",\"order\":{\"_key\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"slaComplianceActualForDepartment\"}}}},\"SLA_Compliance(Provisional_NOC)\":{\"terms\":{\"field\":\"date\",\"size\":\"1\",\"order\":{\"_key\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"slaComplianceProvisionalForDepartment\"}}}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"FireNOC\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"ulb.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"ULBs\":{\"terms\":{\"field\":\"ulb.keyword\",\"size\":1000},\"aggs\":{\"firenoc_Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}},\"Total_Applications\":{\"value_count\":{\"field\":\"todaysApplicationsForApplicationType\"}},\"Provisional_Fire_Nocs_issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"applicationType.keyword\":\"PROVISIONAL\"}}]}},\"aggs\":{\"Provisional_Noc's_Issued\":{\"sum\":{\"field\":\"todaysApplicationsForApplicationType\"}}}},\"Actual_Fire_Nocs_issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"applicationType.keyword\":\"ACTUAL\"}}]}},\"aggs\":{\"Actual_Noc's_Issued\":{\"sum\":{\"field\":\"todaysApplicationsForApplicationType\"}}}},\"Average_days_to_issue_Provisional_NOC\":{\"terms\":{\"field\":\"date\",\"size\":1,\"order\":{\"_key\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"avgDaysToIssueProvisionalNOCForDepartment\"}}}},\"Average_days_to_issue_Actual_NOC\":{\"terms\":{\"field\":\"date\",\"size\":\"1\",\"order\":{\"_key\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"avgDaysToIssueActualNOCForDepartment\"}}}},\"SLA_Compliance(Actual_NOC)\":{\"terms\":{\"field\":\"date\",\"size\":\"1\",\"order\":{\"_key\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"slaComplianceActualForDepartment\"}}}},\"SLA_Compliance(Provisional_NOC)\":{\"terms\":{\"field\":\"date\",\"size\":\"1\",\"order\":{\"_key\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"slaComplianceProvisionalForDepartment\"}}}}}}}}}}"
       }
     ],
     "isMdmsEnabled": false,
@@ -9901,7 +10258,7 @@
     "documentType": "_doc",
     "drillChart": "nssNOCServiceReportDrillDownWard",
     "aggregationPaths": [
-      "Total_Collection",
+      "firenoc_Total_Collection",
       "Total_Applications",
       "Provisional_Fire_Nocs_issued",
       "Actual_Fire_Nocs_issued",
@@ -9912,7 +10269,7 @@
     ],
     "pathDataTypeMapping": [
       {
-        "Total_Collection": "amount"
+        "firenoc_Total_Collection": "amount"
       },
       {
         "Total_Applications": "number"
@@ -9949,7 +10306,7 @@
         "requestQueryMap": "{\"ward\":\"ward.keyword\", \"state\":\"state.keyword\", \"ulb\":\"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "firenoc-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"FireNOC\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"ulb.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Ward\":{\"terms\":{\"field\":\"ward.keyword\",\"size\":1000},\"aggs\":{\"Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}},\"Total_Applications\":{\"value_count\":{\"field\":\"todaysApplicationsForApplicationType\"}},\"Provisional_Fire_Nocs_issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"applicationType.keyword\":\"PROVISIONAL\"}}]}},\"aggs\":{\"Provisional_Noc's_Issued\":{\"sum\":{\"field\":\"todaysApplicationsForApplicationType\"}}}},\"Actual_Fire_Nocs_issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"applicationType.keyword\":\"ACTUAL\"}}]}},\"aggs\":{\"Actual_Noc's_Issued\":{\"sum\":{\"field\":\"todaysApplicationsForApplicationType\"}}}},\"Average_days_to_issue_Provisional_NOC\":{\"terms\":{\"field\":\"date\",\"size\":1,\"order\":{\"_key\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"avgDaysToIssueProvisionalNOCForDepartment\"}}}},\"Average_days_to_issue_Actual_NOC\":{\"terms\":{\"field\":\"date\",\"size\":\"1\",\"order\":{\"_key\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"avgDaysToIssueActualNOCForDepartment\"}}}},\"SLA_Compliance(Actual_NOC)\":{\"terms\":{\"field\":\"date\",\"size\":\"1\",\"order\":{\"_key\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"slaComplianceActualForDepartment\"}}}},\"SLA_Compliance(Provisional_NOC)\":{\"terms\":{\"field\":\"date\",\"size\":\"1\",\"order\":{\"_key\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"slaComplianceProvisionalForDepartment\"}}}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"FireNOC\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"ulb.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Ward\":{\"terms\":{\"field\":\"ward.keyword\",\"size\":1000},\"aggs\":{\"firenoc_Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}},\"Total_Applications\":{\"value_count\":{\"field\":\"todaysApplicationsForApplicationType\"}},\"Provisional_Fire_Nocs_issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"applicationType.keyword\":\"PROVISIONAL\"}}]}},\"aggs\":{\"Provisional_Noc's_Issued\":{\"sum\":{\"field\":\"todaysApplicationsForApplicationType\"}}}},\"Actual_Fire_Nocs_issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"applicationType.keyword\":\"ACTUAL\"}}]}},\"aggs\":{\"Actual_Noc's_Issued\":{\"sum\":{\"field\":\"todaysApplicationsForApplicationType\"}}}},\"Average_days_to_issue_Provisional_NOC\":{\"terms\":{\"field\":\"date\",\"size\":1,\"order\":{\"_key\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"avgDaysToIssueProvisionalNOCForDepartment\"}}}},\"Average_days_to_issue_Actual_NOC\":{\"terms\":{\"field\":\"date\",\"size\":\"1\",\"order\":{\"_key\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"avgDaysToIssueActualNOCForDepartment\"}}}},\"SLA_Compliance(Actual_NOC)\":{\"terms\":{\"field\":\"date\",\"size\":\"1\",\"order\":{\"_key\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"slaComplianceActualForDepartment\"}}}},\"SLA_Compliance(Provisional_NOC)\":{\"terms\":{\"field\":\"date\",\"size\":\"1\",\"order\":{\"_key\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"slaComplianceProvisionalForDepartment\"}}}}}}}}}}"
       }
     ],
     "isMdmsEnabled": false,
@@ -9962,7 +10319,7 @@
     "documentType": "_doc",
     "drillChart": "none",
     "aggregationPaths": [
-      "Total_Collection",
+      "firenoc_Total_Collection",
       "Total_Applications",
       "Provisional_Fire_Nocs_issued",
       "Actual_Fire_Nocs_issued",
@@ -9973,7 +10330,7 @@
     ],
     "pathDataTypeMapping": [
       {
-        "Total_Collection": "amount"
+        "firenoc_Total_Collection": "amount"
       },
       {
         "Total_Applications": "number"
@@ -10010,7 +10367,7 @@
         "requestQueryMap": "{\"ward\" : \"ward.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "firenoc-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"FireNOC\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Department\":{\"terms\":{\"field\":\"department.keyword\",\"size\":1000},\"aggs\":{\"Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForDepartment\"}},\"Total_Applications\":{\"value_count\":{\"field\":\"todaysApplicationsForDepartment\"}},\"Provisional_Fire_Nocs_issued\":{\"sum\":{\"field\":\"provisionalNOCIssuedForDepartment\"}},\"Actual_Fire_Nocs_issued\":{\"sum\":{\"field\":\"actualNOCIssuedForDepartment\"}},\"Average_days_to_issue_Provisional_NOC\":{\"terms\":{\"field\":\"date\",\"size\":1,\"order\":{\"_key\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"avgDaysToIssueProvisionalNOCForDepartment\"}}}},\"Average_days_to_issue_Actual_NOC\":{\"terms\":{\"field\":\"date\",\"size\":\"1\",\"order\":{\"_key\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"avgDaysToIssueActualNOCForDepartment\"}}}},\"SLA_Compliance(Actual_NOC)\":{\"terms\":{\"field\":\"date\",\"size\":\"1\",\"order\":{\"_key\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"slaComplianceActualForDepartment\"}}}},\"SLA_Compliance(Provisional_NOC)\":{\"terms\":{\"field\":\"date\",\"size\":\"1\",\"order\":{\"_key\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"slaComplianceProvisionalForDepartment\"}}}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"FireNOC\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Department\":{\"terms\":{\"field\":\"department.keyword\",\"size\":1000},\"aggs\":{\"firenoc_Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForDepartment\"}},\"Total_Applications\":{\"value_count\":{\"field\":\"todaysApplicationsForDepartment\"}},\"Provisional_Fire_Nocs_issued\":{\"sum\":{\"field\":\"provisionalNOCIssuedForDepartment\"}},\"Actual_Fire_Nocs_issued\":{\"sum\":{\"field\":\"actualNOCIssuedForDepartment\"}},\"Average_days_to_issue_Provisional_NOC\":{\"terms\":{\"field\":\"date\",\"size\":1,\"order\":{\"_key\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"avgDaysToIssueProvisionalNOCForDepartment\"}}}},\"Average_days_to_issue_Actual_NOC\":{\"terms\":{\"field\":\"date\",\"size\":\"1\",\"order\":{\"_key\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"avgDaysToIssueActualNOCForDepartment\"}}}},\"SLA_Compliance(Actual_NOC)\":{\"terms\":{\"field\":\"date\",\"size\":\"1\",\"order\":{\"_key\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"slaComplianceActualForDepartment\"}}}},\"SLA_Compliance(Provisional_NOC)\":{\"terms\":{\"field\":\"date\",\"size\":\"1\",\"order\":{\"_key\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"slaComplianceProvisionalForDepartment\"}}}}}}}}}}"
       }
     ],
     "isMdmsEnabled": false,
@@ -10023,7 +10380,7 @@
     "documentType": "_doc",
     "drillChart": "none",
     "aggregationPaths": [
-      "Total_Collection",
+      "firenoc_Total_Collection",
       "Total_Applications",
       "Provisional_Fire_Nocs_issued",
       "Actual_Fire_Nocs_issued",
@@ -10034,7 +10391,7 @@
     ],
     "pathDataTypeMapping": [
       {
-        "Total_Collection": "amount"
+        "firenoc_Total_Collection": "amount"
       },
       {
         "Total_Applications": "number"
@@ -10151,7 +10508,7 @@
         "requestQueryMap": "{\"wardId\" : \"dataObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\",\"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\" }",
         "dateRefField": "dataObject.paymentDetails.receiptDate",
         "indexName": "dss-collection_v2",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"dataObject.paymentDetails.businessService.keyword\":[\"BPA.LOW_RISK_PERMIT_FEE\",\"BPA.NC_APP_FEE\",\"BPA.NC_OC_APP_FEE\"]}}],\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.bill.status.keyword\":[\"Cancelled\"]}}]}},\"aggs\":{\"PaymentMode\":{\"terms\":{\"field\":\"dataObject.paymentMode.keyword\"},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"dataObject.paymentDetails.businessService.keyword\":[\"BPA.LOW_RISK_PERMIT_FEE\",\"BPA.NC_APP_FEE\",\"BPA.NC_SAN_FEE\",\"BPA.NC_OC_APP_FEE\"]}}],\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.bill.status.keyword\":[\"Cancelled\"]}}]}},\"aggs\":{\"PaymentMode\":{\"terms\":{\"field\":\"dataObject.paymentMode.keyword\"},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}}}"
       }
     ],
     "chartType": "pie",
@@ -10917,6 +11274,14 @@
         "Connections"
       ],
       "insight": {
+        "chartResponseMap" : "nssWsTotalConnection",
+        "action" : "differenceOfNumbers",
+        "upwardIndicator" : "positive",
+        "downwardIndicator" : "negative",
+        "textMessage" : "$indicator$value% than last $insightInterval",
+        "colorCode" : "#228B22",
+        "insightInterval" : "year",
+        "isRoundOff": true
       },
       "_comment": " "
     },
@@ -12142,6 +12507,14 @@
       "isDayUnit": true,
       "postAggregationTheory" : "repsonseToDifferenceOfDates",
       "insight": {
+        "chartResponseMap" : "tlTargetCollection",
+        "action" : "differenceOfNumbers",
+        "upwardIndicator" : "positive",
+        "downwardIndicator" : "negative",
+        "textMessage" : "$indicator$value% than last $insightInterval",
+        "colorCode" : "#228B22",
+        "insightInterval" : "year",
+        "isRoundOff": true
       },
       "_comment": " "
     },
@@ -13091,8 +13464,8 @@
       "documentType": "_doc",
       "drillChart": "none",
       "aggregationPaths": [
-        "Trade Licence Issued",
-        "Total Application"
+        "Total Application",
+        "Trade Licence Issued"
       ],
       "isCumulative": true,
       "interval": "month",
@@ -13356,7 +13729,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "common-national-dashboard",
-        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"adjust_pure_negative\":true,\"boost\":1}},\"aggs\":{\"states\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"latest\":{\"terms\":{\"field\":\"date\",\"order\":{\"_term\":\"desc\"},\"size\":1},\"aggs\":{\"Status\":{\"terms\":{\"field\":\"status.keyword\"}},\"totalUlbs\":{\"avg\":{\"field\":\"totalUlbCount\"}},\"liveUlbs\":{\"avg\":{\"field\":\"totalLiveUlbsCount\"}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"adjust_pure_negative\":true,\"boost\":1}},\"aggs\":{\"states\":{\"terms\":{\"field\":\"state.keyword\",\"size\": 100},\"aggs\":{\"latest\":{\"terms\":{\"field\":\"date\",\"order\":{\"_term\":\"desc\"},\"size\":1},\"aggs\":{\"Status\":{\"terms\":{\"field\":\"status.keyword\"}},\"totalUlbs\":{\"avg\":{\"field\":\"totalUlbCount\"}},\"liveUlbs\":{\"avg\":{\"field\":\"totalLiveUlbsCount\"}}}}}}}}"
       }
     ],
     "isMdmsEnabled": false,
@@ -13564,7 +13937,7 @@
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
       {
-        "module": "W&S",
+        "module": "WS",
         "dateRefField": "date",
         "requestQueryMap": "{\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
         "indexName": "ws-national-dashboard",
@@ -13998,7 +14371,7 @@
         "dateRefField": "date"
       },
       {
-        "module": "W&S",
+        "module": "WS",
         "indexName": "ws-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"state\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"intermediateAggrULB\":{\"terms\":{\"field\":\"ulb.keyword\"},\"aggs\":{\"intermediateAggrWard\":{\"terms\":{\"field\":\"ward.keyword\"},\"aggs\":{\"days\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"applications\":{\"avg\":{\"field\":\"todaysTotalApplications\"}}}},\"wardapplications\":{\"sum_bucket\":{\"buckets_path\":\"days.applications\"}}}},\"ulbApplications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrWard.wardapplications\"}}}},\"stateApplications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrULB.ulbApplications\"}}}},\"Total Applications\":{\"sum_bucket\":{\"buckets_path\":\"state.stateApplications\"}}}}}}",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
@@ -15496,5 +15869,73 @@
     "insight": {
     },
     "_comment": "OBPS Service Report Ward Drill Down"
+  },
+
+  "wstotalConnectionOverview": {
+    "chartName": "DSS_W&S_ACTIVE_CONNECTIONS",
+    "queries": [
+      {
+        "module": "W&S",
+        "indexName": "water-services",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.applicationStatus.keyword\":\"REJECTED\"}}],\"must\":[{\"terms\":{\"Data.applicationStatus.keyword\":[\"CONNECTION_ACTIVATED\"]}}]}},\"aggs\":{\"Total Water Connection\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
+        "requestQueryMap": "{\"tenantId\" : \"Data.tenantId.keyword\", \"wardId\" : \"Data.ward.name.keyword\"}",
+        "dateRefField": "Data.connectionExecutionDate"
+      },
+      {
+        "module": "W&S",
+        "indexName": "sewerage-services",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.applicationStatus.keyword\":\"REJECTED\"}}],\"must\":[{\"terms\":{\"Data.applicationStatus.keyword\":[\"CONNECTION_ACTIVATED\"]}}]}},\"aggs\":{\"Total Sewerage Connection\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
+        "requestQueryMap": "{\"tenantId\" : \"Data.tenantId.keyword\", \"wardId\" : \"Data.ward.name.keyword\"}",
+        "dateRefField": "Data.connectionExecutionDate"
+      }
+    ],
+    "translateTenantCode": false,
+    "chartType": "metric",
+    "valueType": "number",
+    "action": "additive",
+    "drillChart": "none",
+    "aggregationPaths": [
+      "Total Water Connection","Total Sewerage Connection"
+    ],
+    "insight": {
+      "chartResponseMap" : "wstotalConnectionOverview",
+      "action" : "differenceOfNumbers",
+      "upwardIndicator" : "positive",
+      "downwardIndicator" : "negative",
+      "textMessage" : "$indicator$value% than last $insightInterval",
+      "colorCode" : "#228B22",
+      "insightInterval" : "year",
+      "isRoundOff": true
+      },
+    "_comment": " "
+  },
+  "nocTotalNocsIssued": {
+    "chartName": "DSS_NOC_TOTAL_NOCS_ISSUED",
+    "queries": [
+      {
+        "module": "FIRENOC",
+        "indexName": "firenoc-services",
+        "aggrQuery": "{\"aggs\":{\"FireNOC\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pg.testing\"}}],\"must\":[{\"terms\":{\"Data.fireNOCDetails.status.keyword\":[\"APPROVED\"]}}]}},\"aggs\":{\"Total Nocs Issued\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}}",
+        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"tenantId\" : \"Data.tenantId\", \"district\" : \"Data.tenantData.city.districtCode\"}",
+        "dateRefField": "Data.auditDetails.createdTime"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "action": "",
+    "drillChart": "none",
+    "aggregationPaths": [
+      "Total Nocs Issued"
+    ],
+    "insight": {
+      "chartResponseMap" : "nocTotalNocsIssued",
+      "action" : "differenceOfNumbers",
+      "upwardIndicator" : "positive",
+      "downwardIndicator" : "negative",
+      "textMessage" : "$indicator$value% than last $insightInterval",
+      "colorCode" : "#228B22",
+      "insightInterval" : "year"
+    },
+    "_comment": "FIRE NOC total nocs issued "
   }
 }
