@@ -12,7 +12,7 @@
           "vizArray": [
             {
               "id": 111,
-              "name": "DSS_OVERVIEW",
+              "name": "DSS_STATE_OVERVIEW",
               "vizType": "metric-collection",
               "noUnit": true,
               "isCollapsible": false,
@@ -151,7 +151,7 @@
           "vizArray": [
             {
               "id": 131,
-              "name": "DSS_OVERVIEW",
+              "name": "DSS_STATE_OVERVIEW",
               "dimensions": {
                 "height": 450,
                 "width": 5
@@ -812,6 +812,14 @@
               "label": "DSS_OVERVIEW",
               "charts": [
                 {
+                  "id": "totalProperties",
+                  "name": "DSS_PT_TOTAL_PROPERTIES",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
                   "id": "propertiesAssessed",
                   "name": "DSS_PT_TOTAL_PROPERTIES_ASSESSED",
                   "code": "",
@@ -1197,6 +1205,14 @@
               "label": "NATIONAL_DSS_OVERVIEW",
               "charts": [
                 {
+                  "id": "totalApplicationsv3",
+                  "name": "NATIONAL_DSS_PT_TOTAL_APPLICATIONS",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
                   "id": "totalPropertiesv3",
                   "name": "NATIONAL_DSS_PT_TOTAL_PROPERTIES",
                   "code": "",
@@ -1215,6 +1231,14 @@
                 {
                   "id": "totalAssessmentv3",
                   "name": "NATIONAL_DSS_PT_TOTAL_ASSESSMENTS",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "completionRateV3",
+                  "name": "NATIONAL_DSS_PT_COMPLETION_RATE",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -3842,7 +3866,7 @@
           "vizArray": [
             {
               "id": 211,
-              "name": "DSS_OVERVIEW",
+              "name": "DSS_STATE_WS_OVERVIEW",
               "dimensions": {
                 "height": 350,
                 "width": 5
@@ -4069,7 +4093,7 @@
           "vizArray": [
             {
               "id": 231,
-              "name": "DSS_OVERVIEW",
+              "name": "DSS_STATE_WS_OVERVIEW",
               "dimensions": {
                 "height": 350,
                 "width": 12
@@ -4267,7 +4291,7 @@
           "vizArray": [
             {
               "id": 211,
-              "name": "DSS_OVERVIEW",
+              "name": "DSS_STATE_WS_OVERVIEW",
               "dimensions": {
                 "height": 350,
                 "width": 5
@@ -4494,7 +4518,7 @@
           "vizArray": [
             {
               "id": 231,
-              "name": "DSS_OVERVIEW",
+              "name": "DSS_STATE_WS_OVERVIEW",
               "dimensions": {
                 "height": 350,
                 "width": 12
@@ -5570,13 +5594,13 @@
           "vizArray": [
             {
               "id": 311,
-              "name": "DSS_OVERVIEW",
+              "name": "DSS_MCOLLECT_STATE_OVERVIEW",
               "dimensions": {
                 "height": 350,
                 "width": 5
               },
               "vizType": "metric-collection",
-              "label": "DSS_OVERVIEW",
+              "label": "DSS_MCOLLECT_STATE_OVERVIEW",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
@@ -7160,7 +7184,7 @@
           "vizArray": [
             {
               "id": 211,
-              "name": "NSS_OVERVIEW",
+              "name": "NSS_NATIONAL_WS_OVERVIEW",
               "dimensions": {
                 "height": 350,
                 "width": 5
@@ -7387,7 +7411,7 @@
           "vizArray": [
             {
               "id": 231,
-              "name": "NSS_OVERVIEW",
+              "name": "NSS_NATIONAL_WS_OVERVIEW",
               "dimensions": {
                 "height": 350,
                 "width": 12
@@ -7585,13 +7609,13 @@
           "vizArray": [
             {
               "id": 311,
-              "name": "DSS_OVERVIEW",
+              "name": "DSS_MCOLLECT_NATIONAL_OVERVIEW",
               "dimensions": {
                 "height": 350,
                 "width": 5
               },
               "vizType": "metric-collection",
-              "label": "DSS_OVERVIEW",
+              "label": "DSS_MCOLLECT_NATIONAL_OVERVIEW",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
