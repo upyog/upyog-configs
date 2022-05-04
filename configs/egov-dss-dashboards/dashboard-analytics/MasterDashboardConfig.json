@@ -12,7 +12,7 @@
           "vizArray": [
             {
               "id": 111,
-              "name": "DSS_OVERVIEW",
+              "name": "DSS_STATE_OVERVIEW",
               "vizType": "metric-collection",
               "noUnit": true,
               "isCollapsible": false,
@@ -151,7 +151,7 @@
           "vizArray": [
             {
               "id": 131,
-              "name": "DSS_OVERVIEW",
+              "name": "DSS_STATE_OVERVIEW",
               "dimensions": {
                 "height": 450,
                 "width": 5
@@ -2130,7 +2130,7 @@
               "charts": [
                 {
                   "id": "totalCollection",
-                  "name": "DSS_TOTAL_COLLECTION",
+                  "name": "DSS_PT_TOTAL_COLLECTION",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -2160,7 +2160,7 @@
               "charts": [
                 {
                   "id": "totalCollection",
-                  "name": "DSS_TOTAL_COLLECTION",
+                  "name": "DSS_TL_TOTAL_COLLECTION",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -2168,7 +2168,7 @@
                 },
                 {
                   "id": "dssTotalApplicationOverview",
-                  "name": "DSS_TOTAL_APPLICATION",
+                  "name": "DSS_TL_TOTAL_APPLICATION",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -2198,7 +2198,7 @@
                 },
                 {
                   "id": "slaAchieved",
-                  "name": "DSS_SLA_ACHIEVED",
+                  "name": "DSS_PGR_SLA_ACHIEVED",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -2249,7 +2249,7 @@
               "charts": [
                 {
                   "id": "mcTotalCollection",
-                  "name": "DSS_TOTAL_COLLECTION",
+                  "name": "DSS_MC_TOTAL_COLLECTION",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -2330,6 +2330,36 @@
                     "chartType":"metric",
                     "filter":"",
                     "headers":[]
+                  }
+                ]
+              },
+               {
+                "id": 152,
+                "name": "DSS_BIRTH_DEATH",
+                "vizType": "module",
+                "moduleLevel": "BIRTH-DEATH",
+                "ref": {
+                  "url": "birth-death",
+                  "logoUrl": "",
+                  "type": "internal"
+                },
+                "label": "",
+                "charts": [
+                  {
+                    "id": "dssBNDNetCollection",
+                    "name": "DSS_BND_NET_COLLECTION",
+                    "code": "",
+                    "chartType": "metric",
+                    "filter": "",
+                    "headers": []
+                  },
+                  {
+                  "id": "dssBNDTotalApplication",
+                  "name": "DSS_TOTAL_APPLICATION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
                   }
                 ]
               }
@@ -3836,7 +3866,7 @@
           "vizArray": [
             {
               "id": 211,
-              "name": "DSS_OVERVIEW",
+              "name": "DSS_STATE_WS_OVERVIEW",
               "dimensions": {
                 "height": 350,
                 "width": 5
@@ -4063,7 +4093,7 @@
           "vizArray": [
             {
               "id": 231,
-              "name": "DSS_OVERVIEW",
+              "name": "DSS_STATE_WS_OVERVIEW",
               "dimensions": {
                 "height": 350,
                 "width": 12
@@ -4261,7 +4291,7 @@
           "vizArray": [
             {
               "id": 211,
-              "name": "DSS_OVERVIEW",
+              "name": "DSS_STATE_WS_OVERVIEW",
               "dimensions": {
                 "height": 350,
                 "width": 5
@@ -4488,7 +4518,7 @@
           "vizArray": [
             {
               "id": 231,
-              "name": "DSS_OVERVIEW",
+              "name": "DSS_STATE_WS_OVERVIEW",
               "dimensions": {
                 "height": 350,
                 "width": 12
@@ -5564,13 +5594,13 @@
           "vizArray": [
             {
               "id": 311,
-              "name": "DSS_OVERVIEW",
+              "name": "DSS_MCOLLECT_STATE_OVERVIEW",
               "dimensions": {
                 "height": 350,
                 "width": 5
               },
               "vizType": "metric-collection",
-              "label": "DSS_OVERVIEW",
+              "label": "DSS_MCOLLECT_STATE_OVERVIEW",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
@@ -7154,7 +7184,7 @@
           "vizArray": [
             {
               "id": 211,
-              "name": "NSS_OVERVIEW",
+              "name": "NSS_NATIONAL_WS_OVERVIEW",
               "dimensions": {
                 "height": 350,
                 "width": 5
@@ -7381,7 +7411,7 @@
           "vizArray": [
             {
               "id": 231,
-              "name": "NSS_OVERVIEW",
+              "name": "NSS_NATIONAL_WS_OVERVIEW",
               "dimensions": {
                 "height": 350,
                 "width": 12
@@ -7579,13 +7609,13 @@
           "vizArray": [
             {
               "id": 311,
-              "name": "DSS_OVERVIEW",
+              "name": "DSS_MCOLLECT_NATIONAL_OVERVIEW",
               "dimensions": {
                 "height": 350,
                 "width": 5
               },
               "vizType": "metric-collection",
-              "label": "DSS_OVERVIEW",
+              "label": "DSS_MCOLLECT_NATIONAL_OVERVIEW",
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
@@ -8883,7 +8913,7 @@
         }
       ]
     },
-	  {
+    {
       "name": "DSS_BIRTH_DEATH",
       "id": "birth-death",
       "isActive": "",
