@@ -13738,7 +13738,7 @@
         {
           "module": "COMMON",
           "indexName": "tl-national-dashboard",
-          "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Trade Licence Issued\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"month\"},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"todaysTradeLicensesForStatus\"}}}}}}}}",
+          "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[],\"must\":[{\"match\":{\"status.keyword\":\"APPROVED\"}}]}},\"aggs\":{\"Trade Licence Issued\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"month\"},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"todaysTradeLicensesForStatus\"}}}}}}}}",
           "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
           "dateRefField": "date"
         },
