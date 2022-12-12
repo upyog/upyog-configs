@@ -13535,7 +13535,7 @@
           "requestQueryMap": "{\"state\" : \"state.keyword\", \"regionId\" : \"region.keyword\"}",
           "dateRefField": "date",
           "indexName": "tl-national-dashboard",
-          "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Regions\":{\"terms\":{\"field\":\"region.keyword\"},\"aggs\":{\"TL Tax\":{\"sum\":{\"field\":\"tlTax\"}},\"Adhoc Penalty\":{\"sum\":{\"field\":\"adhocPenalty\"}},\"Adhoc Rebate\":{\"sum\":{\"field\":\"adhocRebate\"}}}}}}}}"
+          "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Regions\":{\"terms\":{\"field\":\"region.keyword\",\"size\":10000},\"aggs\":{\"TL Tax\":{\"sum\":{\"field\":\"tlTax\"}},\"Adhoc Penalty\":{\"sum\":{\"field\":\"adhocPenalty\"}},\"Adhoc Rebate\":{\"sum\":{\"field\":\"adhocRebate\"}}}}}}}}"
         }
       ],
       "filterKeys": [
