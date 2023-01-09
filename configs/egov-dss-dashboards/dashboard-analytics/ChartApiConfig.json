@@ -8763,9 +8763,9 @@
       {
         "module": "PT",
         "indexName": "pt-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Application\":{\"sum\":{\"field\":\"propertiesRegisteredForFinancialYear\"}}}}}}",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Properties\":{\"sum\":{\"field\":\"assessedPropertiesForUsageCategory\"}}}}}}",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "date"
+        "dateRefField": ""
       }
     ],
     "chartType": "metric",
@@ -8774,7 +8774,7 @@
     "documentType": "_doc",
     "drillChart": "none",
     "aggregationPaths": [
-      "Total Application"
+      "Total Properties"
     ],
     "insight": {
       "chartResponseMap" : "totalPropertiesv3",
