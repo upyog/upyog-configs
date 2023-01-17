@@ -170,7 +170,7 @@ ReportDefinitions:
         type: string
         source: uc
       - name: servicecategory
-        label: reports.uc.businessdetails
+        label: reports.uc.servicecategory
         type: string
         source: uc
         total: false
@@ -205,17 +205,17 @@ ReportDefinitions:
         source: uc
         total: true
       - name: transactionorchequenumber
-        label: reports.uc.ddorchequenumber
+        label: reports.uc.transactionorchequenumber
         type: string
         source: uc
         total: false
-      - name: banktxnNo
-        label: report.uc.banktxnNo
+      - name: banktxnno
+        label: report.uc.banktxnno
         type: string
         source: uc
         total: false
       - name: ddchequedate
-        label: reports.uc.ddorchequedate
+        label: reports.uc.ddchequedate
         type: string
         source: uc
         total: false
@@ -230,7 +230,7 @@ ReportDefinitions:
       #   source: uc
       #   total: false
       - name: name
-        label: reports.uc.collectorname
+        label: reports.uc.name
         type: string
         source: uc
         total: false
@@ -239,8 +239,8 @@ ReportDefinitions:
         type: string
         source: uc
         total: false
-      - name: GLCode
-        label: reports.uc.GLCode
+      - name: glcode
+        label: reports.uc.glcode
         type: string
         source: uc
         total: false
@@ -255,12 +255,12 @@ ReportDefinitions:
         source: uc
         total: false
       - name: status
-        label: reports.uc.receiptstatus
+        label: reports.uc.status
         type: string
         source: uc
         total: false
       - name: comments
-        label: reports.uc.comment
+        label: reports.uc.comments
         type: string
         source: uc
         total: false
