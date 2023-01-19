@@ -1648,6 +1648,6 @@ ReportDefinitions:
     source: ws
     isMandatory: false
     searchClause: AND ws.lastmodifiedtime <= $toDate
-  query: SELECT COUNT(applicationno) as total,message.message as status from eg_ws_connection ws LEFT OUTER JOIN message ON split_part(message.code,'_',2) = applicationstatus AND message.locale = 'en_IN' WHERE ws.tenantid LIKE $tenantid
+  query: SELECT COUNT(applicationno) as total,message.message as status from eg_ws_connection ws LEFT OUTER JOIN message ON message.code = applicationstatus AND module='rainmaker-ws' and message.locale = 'en_IN' WHERE ws.tenantid LIKE $tenantid
   groupby: GROUP BY message.message
-  orderby: ORDER BY case message.message when 'Pending for Connection Activation' then 1 when 'Pending for Document Verification' then 2 when 'Approved' then 3 when 'Pending Approval for Connection' then 4 when 'Pending For Citizen Action' then 5 when 'Pending for Approval' then 6 when 'Pending for Field Inspection' then 7 when 'Rejected' then 8 when 'Pending for Payment' then 9 when 'Initiated' then 10 else 11 end
+  orderby: ORDER BY case message.message when 'Pending For Connection Activation' then 1 when 'Pending For Document Verification' then 2 when 'Approved' then 3 when 'Pending For Approval Connection' then 4 when 'Pending For Citizen Action' then 5 when 'Pending for Approval' then 6 when 'Pending For Field Inspection' then 7 when 'Rejected' then 8 when 'Pending For Payment' then 9 when 'Initiated' then 10 else 11 end
