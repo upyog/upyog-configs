@@ -1748,7 +1748,7 @@ ReportDefinitions:
         source: ws
         total: false
       - name: formattedIssuedDate
-        label: report.ws.issueddate
+        label: report.ws.dateeffectivefrom
         type: string
         source: ws
         total: false
@@ -1758,13 +1758,13 @@ ReportDefinitions:
         type: epoch
         source: ws
         isMandatory: false
-        searchClause: AND issueddate >= $fromDate
+        searchClause: AND dateeffectivefrom >= $fromDate
       - name: toDate
         label: reports.ws.toDate
         type: epoch
         source: ws
         isMandatory: false
-        searchClause: AND issueddate <= $toDate
+        searchClause: AND dateeffectivefrom <= $toDate
       - name: ulb
         label: ULB
         type: singlevaluelist
