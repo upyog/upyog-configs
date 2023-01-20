@@ -1711,6 +1711,7 @@ ReportDefinitions:
       Citizen Action' then 5 when 'Pending for Approval' then 6 when 'Pending
       for Field Inspection' then 7 when 'Rejected' then 8 when 'Pending for
       Payment' then 9 when 'Initiated' then 10 else 11 end
+      
   - reportName: StateLevelWater&SewerageReport
     summary: WS Basic Report State Level
     version: 1.0.0
@@ -1782,4 +1783,4 @@ ReportDefinitions:
       ptownr ON ptownr.propertyid=ptunt.propertyid) pto ON pto.propertyid=pt.id
       WHERE ws.applicationstatus in ('CONNECTION_ACTIVATED','APPROVED') and
       ws.status = 'Active'
-    orderby: ORDER BY ws.tenantId asc end
+    orderby: ORDER BY ws.tenantId ASC
