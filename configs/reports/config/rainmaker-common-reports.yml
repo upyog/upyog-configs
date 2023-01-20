@@ -108,7 +108,7 @@ ReportDefinitions:
       - name: paymentMode
         label: reports.common.CollectionRegister.mode
         type: singlevaluelist
-        pattern: list://Cash:Cash,Online:Online,Card:Card,DD:DD,Cheque:Cheque,OFFLINE_RTGS:OFFLINE_RTGS,POSTAL_ORDER:POSTAL_ORDER,OFFLINE_NEFT:OFFLINE_NEFT
+        pattern: list://CASH:CASH,ONLINE:ONLINE,CARD:CARD,DD:DD,CHEQUE:CHEQUE,OFFLINE_RTGS:OFFLINE_RTGS,POSTAL_ORDER:POSTAL_ORDER,OFFLINE_NEFT:OFFLINE_NEFT
         source: common
         isMandatory: false
         searchClause: AND p.paymentmode = $paymentMode
@@ -144,7 +144,7 @@ ReportDefinitions:
       from egcl_payment p inner join egcl_paymentdetail pd on
       p.id=pd.paymentid  left outer join message on
       LOWER(concat('BILLINGSERVICE_BUSINESSSERVICE_',REGEXP_REPLACE(businessservice,'\..*','')))=LOWER(code)  AND
-      module='rainmaker-uc' where businessservice IN (select code from (VALUES
+      module='rainmaker-uc' and locale='en_IN' where businessservice IN (select code from (VALUES
       tbl_businessserviceList) AS serv_list(code,servicename))
     groupby: group by service,collectiontype
     orderby: order by service,collectiontype
