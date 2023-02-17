@@ -2,15 +2,7 @@
   "key": "birth-certificate",
   "config": {
     "defaultStyle": {
-      "font": "Cambay"
-    },
-    "watermark": {
-      "text": "IKM DEMO",
-      "color": "gery",
-      "opacity": 0.1,
-      "content": [
-        "https://ulb-logos.s3.ap-south-1.amazonaws.com/kerala_logo.jpg"
-      ]
+      "font": "Meera"
     },
     "content": [
       {
@@ -26,7 +18,7 @@
               {
                 "stack": [
                   {
-                    "text": "{{keyNo}}",
+                    "text": "{{keyNo}}: {{keyAckNo}}",
                     "style": "appendix-header-serialNo"
                   }
                 ]
@@ -120,13 +112,14 @@
               {
                 "stack": [
                   {
-                    "text": "{{nameOfLb}} : {{tenant}}",
-                    "style": "details-body"
+                    "text": "{{nameOfLbMl}} : {{tenantMl}}",
+                    "style": "details-body-center"
                   },
                   {
-                    "text": "{{nameOfLbMl}} : {{tenantMl}}",
-                    "style": "details-body"
+                    "text": "{{nameOfLb}} : {{tenant}}",
+                    "style": "details-body-center"
                   }
+
                 ]
               }
             ]
@@ -143,14 +136,19 @@
           "body": [
             [
               {
-                "columns": [
+                "stack": [
+                  {
+                    "text": "{{birthCertificateMl}}",
+                    "style": "title-header"
+                  },
                   {
                     "text": "{{birthCertificate}}",
                     "style": "title-header"
                   },
+
                   {
-                    "text": "{{birthCertificateMl}}",
-                    "style": "title-header"
+                    "text": "{{issueUnderSection12}}",
+                    "style": "rule-body_multiLang"
                   }
                 ]
               }
@@ -168,7 +166,7 @@
           "body": [
             [
               {
-                "columns": [
+                "stack": [
                   {
                     "text": "{{issueUnderSection121969}}",
                     "style": "rule-header"
@@ -193,14 +191,14 @@
           "body": [
             [
               {
-                "columns": [
+                "stack": [
                   {
-                    "text": "{{certify}}",
-                    "style": "rule-body_multiLang"
+                    "text": "{{certify}} {{tenant}} {{lbtypecode}}  of Taluk  {{talukcode}}  of District {{distcode}} of State {{statecode}}.",
+                    "style": "rule-header"
                   },
                   {
-                    "text": "{{certifyMl}}",
-                    "style": "rule-body_multiLang"
+                    "text": "താഴെ പറയുന്ന വിവരങ്ങൾ {{statecodeMl}} സംസ്ഥാനത്തിലെ {{distcodeMl}} ജില്ലയിലെ {{talukcodeMl}}താലൂക്കിലെ  {{tenantMl}} {{lbtypecodeMl}} {{certifyMl}}.",
+                    "style": "rule-header"
                   }
                 ]
               }
@@ -220,25 +218,17 @@
               {
                 "columns": [
                   {
-                    "text": "{{childNameMl}}",
-                    "width": "15%",
+                    "text": "{{childName}}",
+                    "width": "49%",
                     "style": "details-body"
                   },
-                  {
-                    "text": " /",
-                    "width": "1%"
-                  },
-                  {
-                    "text": "{{childName}} ",
-                    "width": "19%",
-                    "style": "details-body"
-                  },
+
                   {
                     "text": "  :",
                     "width": "1%"
                   },
                   {
-                    "text": "{{name}}",
+                    "text": "{{name}} / {{nameMl}}",
                     "style": "details-body"
                   }
                 ]
@@ -248,17 +238,8 @@
               {
                 "columns": [
                   {
-                    "text": "{{childSexMl}}",
-                    "width": "15%",
-                    "style": "details-body"
-                  },
-                  {
-                    "text": " /",
-                    "width": "1%"
-                  },
-                  {
-                    "text": "{{childSex}} ",
-                    "width": "19%",
+                    "text": "{{childSex}}",
+                    "width": "49%",
                     "style": "details-body"
                   },
                   {
@@ -266,7 +247,7 @@
                     "width": "1%"
                   },
                   {
-                    "text": "{{name}}",
+                    "text": "{{gender}}",
                     "style": "details-body"
                   }
                 ]
@@ -275,18 +256,10 @@
             [
               {
                 "columns": [
-                  {
-                    "text": "{{dateOfBirthMl}}",
-                    "width": "15%",
-                    "style": "details-body"
-                  },
-                  {
-                    "text": " /",
-                    "width": "1%"
-                  },
+
                   {
                     "text": "{{dateOfBirth}} ",
-                    "width": "19%",
+                    "width": "49%",
                     "style": "details-body"
                   },
                   {
@@ -294,7 +267,7 @@
                     "width": "1%"
                   },
                   {
-                    "text": "{{name}}",
+                    "text": "{{dob}}",
                     "style": "details-body"
                   }
                 ]
@@ -303,18 +276,10 @@
             [
               {
                 "columns": [
+
                   {
-                    "text": "{{placeOfBirthMl}}",
-                    "width": "15%",
-                    "style": "details-body"
-                  },
-                  {
-                    "text": " /",
-                    "width": "1%"
-                  },
-                  {
-                    "text": "{{placeOfBirth}} ",
-                    "width": "19%",
+                    "text": "{{placeOfBirthLabel}} ",
+                    "width": "49%",
                     "style": "details-body"
                   },
                   {
@@ -322,7 +287,7 @@
                     "width": "1%"
                   },
                   {
-                    "text": "{{name}}",
+                    "text": "{{placeDetailsMl}}/{{placeOfBirthEn}}",
                     "style": "details-body"
                   }
                 ]
@@ -331,18 +296,10 @@
             [
               {
                 "columns": [
+
                   {
-                    "text": "{{nameOfMother}}",
-                    "width": "15%",
-                    "style": "details-body"
-                  },
-                  {
-                    "text": " /",
-                    "width": "1%"
-                  },
-                  {
-                    "text": "{{nameOfMotherMl}} ",
-                    "width": "19%",
+                    "text": "{{nameOfMother}} ",
+                    "width": "49%",
                     "style": "details-body"
                   },
                   {
@@ -350,7 +307,7 @@
                     "width": "1%"
                   },
                   {
-                    "text": "{{name}}",
+                    "text": "{{motherNameMl}}/{{motherName}}",
                     "style": "details-body"
                   }
                 ]
@@ -359,18 +316,9 @@
             [
               {
                 "columns": [
-                  {
-                    "text": "{{nameOfFatherMl}}",
-                    "width": "15%",
-                    "style": "details-body"
-                  },
-                  {
-                    "text": " /",
-                    "width": "1%"
-                  },
                   {
                     "text": "{{nameOfFather}} ",
-                    "width": "19%",
+                    "width": "49%",
                     "style": "details-body"
                   },
                   {
@@ -378,7 +326,87 @@
                     "width": "1%"
                   },
                   {
-                    "text": "{{name}}",
+                    "text": "{{fatherNameMl}}/{{fatherName}}",
+                    "style": "details-body"
+                  }
+                ]
+              }
+            ],
+            [
+              {
+                "columns": [
+
+                  {
+                    "text": "{{presentAddressLabelMl}} ",
+                    "width": "49%",
+                    "style": "details-body"
+                  },
+                  {
+                    "text": "  :",
+                    "width": "1%"
+                  },
+                  {
+                    "text": "{{presentAddressMl}}",
+                    "style": "details-body"
+                  }
+                ]
+              }
+            ],
+            [
+              {
+                "columns": [
+
+                  {
+                    "text": "{{presentAddressLabel}} ",
+                    "width": "49%",
+                    "style": "details-body"
+                  },
+                  {
+                    "text": "  :",
+                    "width": "1%"
+                  },
+                  {
+                    "text": "{{presentAddress}}",
+                    "style": "details-body"
+                  }
+                ]
+              }
+            ],
+            [
+              {
+                "columns": [
+
+                  {
+                    "text": "{{permanentAddressLabelMl}} ",
+                    "width": "49%",
+                    "style": "details-body"
+                  },
+                  {
+                    "text": "  :",
+                    "width": "1%"
+                  },
+                  {
+                    "text": "{{registerBirthPermanentMl}}",
+                    "style": "details-body"
+                  }
+                ]
+              }
+            ],
+            [
+              {
+                "columns": [
+
+                  {
+                    "text": "{{permanentAddressLabel}} ",
+                    "width": "49%",
+                    "style": "details-body"
+                  },
+                  {
+                    "text": "  :",
+                    "width": "1%"
+                  },
+                  {
+                    "text": "{{registerBirthPermanent}}",
                     "style": "details-body"
                   }
                 ]
@@ -388,7 +416,7 @@
               {
                 "columns": [
                   {
-                    "text": "{{registrationNoLabel}} / {{registrationNoLabelMl}}: {{registrationNo}}",
+                    "text": "{{registrationNoLabel}}: {{registrationNo}}",
                     "width": "49%",
                     "style": "details-body"
                   },
@@ -397,14 +425,73 @@
                     "width": "1%"
                   },
                   {
-                    "text": "{{registrationDateLabel}} / {{registrationDateLabelMl}} {{registration_date}}",
+                    "text": "{{registrationDateLabel}} {{registrationDate}}",
+                    "style": "details-body"
+                  }
+                ]
+              }
+            ],
+            [
+              {
+                "columns": [
+
+                  {
+                    "text": "{{remarksLabel}} ",
+                    "width": "49%",
+                    "style": "details-body"
+                  },
+                  {
+                    "text": "  :",
+                    "width": "1%"
+                  },
+                  {
+                    "text": "{{remarksMl}}/{{remarks}}",
+                    "style": "details-body"
+                  }
+                ]
+              }
+            ],
+            [
+              {
+                "columns": [
+                  {
+                    "text": "{{dateOfIssue}}: {{registrationDate}}",
+                    "width": "49%",
+                    "style": "details-body"
+                  },
+                  {
+                    "text": " ",
+                    "width": "1%"
+                  },
+                  {
+                    "text": "{{updatedOn}} :{{registrationDate}}",
+                    "style": "details-body"
+                  }
+                ]
+              }
+            ],
+            [
+              {
+                "columns": [
+                  {
+                    "text": "{{addressOfIssuingAuthority}} ",
+                    "width": "49%",
+                    "style": "details-body"
+                  },
+                  {
+                    "text": "  :",
+                    "width": "1%"
+                  },
+                  {
+                    "text": "{{esignOfficerDesign}}  {{lbtypecode}} ",
                     "style": "details-body"
                   }
                 ]
               }
             ]
           ]
-        }
+        },
+        "layout": "noBorders"
       },
       {
         "style": "ws-head",
@@ -421,10 +508,6 @@
                     "width": 100,
                     "height": 100,
                     "style": "qr-code"
-                  },
-                  {
-                    "text": "{{ensureRegistration}}",
-                    "style": "details-body"
                   }
                 ]
               }
@@ -444,20 +527,28 @@
               {
                 "stack": [
                   {
+                    "text": "{{ensureRegistration}}",
+                    "style": "details-body-center"
+                  },
+                  {
+                    "text": "{{ensureRegistrationMl}}",
+                    "style": "details-body-center"
+                  },
+                  {
                     "text": "{{computerGenerated}}",
-                    "style": "details-body"
+                    "style": "details-body-center"
                   },
                   {
                     "text": "{{validDocument}}",
-                    "style": "details-body"
+                    "style": "details-body-center"
                   },
                   {
                     "text": "{{authenticity}}",
-                    "style": "details-body"
+                    "style": "details-body-center"
                   },
                   {
                     "text": "{{ikm}}",
-                    "style": "details-body"
+                    "style": "details-body-center"
                   },
                   {
                     "text": "{{printedInvalid}}",
@@ -482,8 +573,7 @@
         ]
       },
       "appendix-header-body-ml": {
-        "color": "#000099",
-        "fontName": "Meera",
+        "color": "#000000",
         "fontSize": 9,
         "alignment": "center"
       },
@@ -494,7 +584,6 @@
       },
       "main-body-style_ml": {
         "color": "#000000",
-        "fontName": "Meera",
         "fontSize": 8,
         "alignment": "center"
       },
@@ -546,11 +635,12 @@
       },
       "footer": {
         "color": "#000000",
-        "alignment": "center"
+        "alignment": "center",
+        "fontSize": 7
       },
       "footer-red": {
         "color": "#FF0000",
-        "fontSize": 9,
+        "fontSize": 7,
         "alignment": "center",
         "italics": true
       },
@@ -568,7 +658,7 @@
       "title-header": {
         "color": "#000000",
         "bold": true,
-        "fontSize": 12,
+        "fontSize": 9,
         "alignment": "center",
         "margin": [
           0,
@@ -616,7 +706,7 @@
       "rule-header": {
         "color": "#000000",
         "bold": false,
-        "fontSize": 10,
+        "fontSize": 8,
         "fontWeight": 400,
         "margin": [
           0,
@@ -652,32 +742,40 @@
       "rule-body_multiLang": {
         "color": "#000000",
         "bold": false,
-        "fontSize": 11,
+        "fontSize": 8,
         "fontWeight": 400,
-        "margin": [
-          0,
-          0,
-          0,
-          0
-        ]
+        "alignment": "center"
       },
-      "details-bodyRight": {
+      "details-body-bottom": {
         "color": "#000000",
         "bold": false,
-        "fontSize": 9,
-        "alignment": "right"
+        "fontSize": 7,
+        "alignment": "bottom"
       },
-      "details-bodyLeft": {
-        "color": "#000000",
-        "bold": false,
-        "fontSize": 9,
-        "alignment": "left"
-      },
+
       "details-body": {
         "color": "#000000",
         "bold": false,
-        "fontSize": 9,
+        "fontSize": 7,
+        "alignment": "left"
+      },
+      "details-body-center": {
+        "color": "#000000",
+        "bold": false,
+        "fontSize": 7,
         "alignment": "center"
+      },
+      "details-body-center-bottom": {
+        "color": "#000000",
+        "bold": false,
+        "fontSize": 7,
+        "alignment": "center",
+        "margin": [
+          0,
+          0,
+          15,
+          5
+        ]
       },
       "appendix-header-body": {
         "color": "#000000",
@@ -748,6 +846,7 @@
         ]
       },
       "pdf-header-sub-text": {
+
         "color": "#484848",
         "fontSize": 15,
         "letterSpacing": 0.6
