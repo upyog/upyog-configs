@@ -8029,47 +8029,52 @@
   "growthRateTotalRevenueCollection": {
     "chartName": "DSS_GROWTH_RATE_TOTAL_REVENUE_COLLECTION",
     "queries": [
-      {
-        "module": "MASTER",
-        "requestQueryMap": "{\"state\" : \"state.keyword\", \"module\" : \"module.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
-        "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2021-22\"}}]}},\"aggs\":{\"Target Collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
-      },
-      {
-        "module": "MASTER",
-        "requestQueryMap": "{\"state\" : \"state.keyword\", \"module\" : \"module.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
-        "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2022-23\"}}]}},\"aggs\":{\"Target Collection1\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
-      }
-      
+        {
+            "module": "MASTER",
+            "requestQueryMap": "{\"state\" : \"state.keyword\", \"module\" : \"module.keyword\", \"ulb\" : \"ulb.keyword\"}",
+            "dateRefField": "",
+            "indexName": "master-national-dashboard",
+            "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2021-22\"}}]}},\"aggs\":{\"Target Collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
+          },
+          {
+            "module": "MASTER",
+            "requestQueryMap": "{\"state\" : \"state.keyword\", \"module\" : \"module.keyword\", \"ulb\" : \"ulb.keyword\"}",
+            "dateRefField": "",
+            "indexName": "master-national-dashboard",
+            "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2022-23\"}}]}},\"aggs\":{\"Target Collection1\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
+          }
+
     ],
+    "isMdmsEnabled": false,
+    "postAggregationTheory": "",
     "chartType": "metric",
     "valueType": "percentage",
     "drillChart": "none",
     "documentType": "_doc",
-    "action": "percentage",
-    "preActionTheory":{
-      "Actual collection":"repsonseToDifferenceOfDates"
-    },	  
+    "action": "",
     "aggregationPaths": [
-      "Total_Growth_Rate",
-      "Target Collection"
     ],
     "computedFields": [
       {
-        "postAggregationTheory" : "",
+        "postAggregationTheory" : "repsonseToDifferenceOfDates",
         "actionName": "differenceOfNumbers",
-        "fields" : [ "Target Collection1", "Target Collection"],
+        "fields" : ["Target Collection1","Target Collection"],
         "newField" : "Total_Growth_Rate",
         "_comments": "fields are field names picked from its aggregation query to use post aggregation newField value with given new field name  "
-      }
-    ],
+      },
+      {
+         "postAggregationTheory" : "",
+         "actionName": "PercentageComputedField",
+         "fields" : ["Total_Growth_Rate","Target Collection"],
+         "newField" : "Growth_Rate_Achieved",
+         "_comments": "fields are field names picked from its aggregation query to use post aggregation newField value with given new field name  "
+       }
+     ],
     "insight": {
     },
-    "_comment": " "
+    "_comment": ""
   },
+  
   	"targetAchievedv3": {
     "chartName": "NATIONAL_DSS_TARGET_ACHIEVED",
     "queries": [
