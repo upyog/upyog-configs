@@ -8052,11 +8052,14 @@
     "drillChart": "none",
     "documentType": "_doc",
     "action": "",
-    "aggregationPaths": []
+    "aggregationPaths": [
+      "Target Collection1",
+      "Target Collection"
+    ]
     ,
     "computedFields": [
       {
-        "postAggregationTheory" : "repsonseToDifferenceOfDates",
+        "postAggregationTheory" : "",
         "actionName": "AdditiveComputedField",
         "fields" : ["Target Collection1","Target Collection"],
         "newField" : "Total_Growth_Rate",
