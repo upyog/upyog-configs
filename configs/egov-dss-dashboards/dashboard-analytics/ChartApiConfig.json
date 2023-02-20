@@ -8054,22 +8054,15 @@
       "Actual collection":"repsonseToDifferenceOfDates"
     },	  
     "aggregationPaths": [
-      "Target Collection",
-      "Target Collection1"
+      "Total_Growth_Rate",
+      "Target Collection"
     ],
     "computedFields": [
       {
         "postAggregationTheory" : "",
         "actionName": "differenceOfNumbers",
         "fields" : [ "Target Collection1", "Target Collection"],
-        "newField" : "Total Growth Rate",
-        "_comments": "fields are field names picked from its aggregation query to use post aggregation newField value with given new field name  "
-      },  
-      {
-        "postAggregationTheory" : "",
-        "actionName": "PercentageComputedField",
-        "fields" : ["Total Growth Rate", "Target Collection"],
-        "newField" : "Growth Rate Achieved",
+        "newField" : "Total_Growth_Rate",
         "_comments": "fields are field names picked from its aggregation query to use post aggregation newField value with given new field name  "
       }
     ],
