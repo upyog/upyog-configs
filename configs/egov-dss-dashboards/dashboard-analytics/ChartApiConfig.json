@@ -8053,15 +8053,15 @@
     "documentType": "_doc",
     "action": "",
     "aggregationPaths": [
-      "Target Collection1",
+      "Total_Growth_Rate",
       "Target Collection"
     ]
     ,
     "computedFields": [
       {
         "postAggregationTheory" : "",
-        "actionName": "differenceOfNumbers",
-        "fields" : ["Target Collection1","Target Collection"],
+        "actionName": "SubtractiveComputedField",
+        "fields" : ["Target Collection","Target Collection1"],
         "newField" : "Total_Growth_Rate",
         "_comments": "fields are field names picked from its aggregation query to use post aggregation newField value with given new field name  "
       },
