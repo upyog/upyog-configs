@@ -1043,7 +1043,7 @@
                   "filter": "",
                   "headers": []
                 },
-		{
+                {
                   "id": "avgTaxCollectedPerProperty",
                   "name": "NATIONAL_PT_DSS_AVG_TAX_COLLECTION",
                   "code": "",
@@ -2269,6 +2269,36 @@
               ]
             },
             {
+              "id": 328,
+              "name": "DSS_FSM",
+              "vizType": "module",
+              "moduleLevel": "FSM",
+              "ref": {
+                "url": "fsm",
+                "logoUrl": "",
+                "type": "internal"
+              },
+              "label": "",
+              "charts": [
+                {
+                  "id": "totalCollection",
+                  "name": "DSS_FSM_TOTAL_COLLECTION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "dssTotalApplicationOverview",
+                  "name": "DSS_FSM_TOTAL_APPLICATION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            },
+            {
               "id": 329,
               "name": "DSS_MCOLLECT",
               "vizType": "module",
@@ -2388,6 +2418,36 @@
                   {
                   "id": "dssBNDTotalApplication",
                   "name": "DSS_TOTAL_APPLICATION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                  }
+                ]
+              },
+              {
+                "id": 153,
+                "name": "DSS_FINANCE",
+                "vizType": "module",
+                "moduleLevel": "FINANCE",
+                "ref": {
+                  "url": "finance",
+                  "logoUrl": "",
+                  "type": "internal"
+                },
+                "label": "",
+                "charts": [
+                  {
+                    "id": "financeTotalBillsGenerated",
+                    "name": "DSS_FINANCE_TOTAL_BILLS_GENERATED",
+                    "code": "",
+                    "chartType": "metric",
+                    "filter": "",
+                    "headers": []
+                  },
+                  {
+                  "id": "financeTotalPayments",
+                  "name": "DSS_FINANCE_TOTAL_PAYMENTS",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -4838,6 +4898,28 @@
           "vizArray": [
             {
               "id": 321,
+              "name": "DSS_FSM_COLLECTION_BY_USAGE_TYPE",
+            "dimensions": {
+              "height": 250,
+              "width": 3
+            },
+            "vizType": "chart",
+            "label": "",
+            "noUnit": false,
+            "isCollapsible": false,
+            "charts": [
+              {
+                "id": "fsmCollectionByUsageType",
+                "name": "DSS_FSM_COLLECTION_BY_USAGE_TYPE",
+                "code": "",
+                "chartType": "donut",
+                "filter": "",
+                "headers": []
+              }
+            ]
+          },
+		  {
+            "id": 322,
               "name": "DSS_FSM_TOP_ULB_BY_PERFORMANCE",
               "dimensions": {
                 "height": 250,
@@ -4859,7 +4941,7 @@
               ]
             },
             {
-              "id": 322,
+              "id": 323,
               "name": "DSS_FSM_BOTTOM_ULB_BY_PERFORMANCE",
               "dimensions": {
                 "height": 250,
@@ -4887,8 +4969,8 @@
           "name": "DSS_REVENUE",
           "vizArray": [
             {
-              "id": 323,
-              "name": "DSS_FSM_COLLECTION_BY_USAGE_TYPE",
+            "id": 332,
+            "name": "DSS_FSM_RESQUEST_BY_GENDER",
               "dimensions": {
                 "height": 250,
                 "width": 4
@@ -4899,8 +4981,8 @@
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "fsmCollectionByUsageType",
-                  "name": "DSS_FSM_COLLECTION_BY_USAGE_TYPE",
+                    "id": "fsmCollectionByGender",
+                    "name": "DSS_FSM_RESQUEST_BY_GENDER",
                   "code": "",
                   "chartType": "donut",
                   "filter": "",
@@ -4909,8 +4991,8 @@
               ]
             },
             {
-              "id": 332,
-              "name": "DSS_FSM_RESQUEST_BY_GENDER",
+            "id": 333,
+            "name": "DSS_FSM_RESQUEST_BY_PAYMENT_PREFERENCE",
               "dimensions": {
                   "height": 250,
                   "width": 4
@@ -4921,8 +5003,8 @@
               "isCollapsible": false,
               "charts": [
                   {
-                      "id": "fsmCollectionByGender",
-                      "name": "DSS_FSM_RESQUEST_BY_GENDER",
+                    "id": "fsmRequestByPaymentPreference",
+                    "name": "DSS_FSM_RESQUEST_BY_PAYMENT_PREFERENCE",
                       "code": "",
                       "chartType": "donut",
                       "filter": "",
@@ -4960,26 +5042,26 @@
             },
             {
               "id": 326,
-              "name": "DSS_FSM_MONTHLY_WASTE_CAL",
+              "name": "DSS_FSM_TOTAL_REQUESTS_BY_STATUS",
               "dimensions": {
                 "height": 450,
                 "width": 5
               },
               "vizType": "chart",
-              "label": "",
-              "noUnit": true,
               "isCollapsible": false,
+              "label": "",
               "charts": [
                 {
-                  "id": "fsmMonthlyWasteCal",
-                  "name": "Monthly",
+                  "id": "fsmTotalRequestsbyStatus",
+                  "name": "",
                   "code": "",
                   "chartType": "bar",
                   "filter": "",
                   "headers": []
                 }
               ]
-            }
+          }
+        
           ]
         },
         {
@@ -4987,8 +5069,8 @@
           "name": "DSS_REVENUE",
           "vizArray": [
             {
-              "id": 327,
-              "name": "DSS_FSM_TOP_DSO_BY_PERFORMANCE",
+            "id": 326,
+            "name": "DSS_FSM_CUSTOMER_RATINGS",
               "dimensions": {
                 "height": 450,
                 "width": 5
@@ -4999,18 +5081,18 @@
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "fsmTopDsoByPerformance",
+                  "id": "fsmCustomerRatings",
                   "name": "Monthly",
                   "code": "",
-                  "chartType": "horizontalBar",
+                  "chartType": "line",
                   "filter": "",
                   "headers": []
                 }
               ]
             },
             {
-              "id": 329,
-              "name": "DSS_FSM_BOTTOM_DSO_BY_PERFORMANCE",
+            "id": 327,
+            "name": "DSS_FSM_MONTHLY_WASTE_CAL",
               "dimensions": {
                 "height": 450,
                 "width": 5
@@ -5021,10 +5103,10 @@
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "fsmBottomDsoByPerformance",
-                  "name": "Monthly",
-                  "code": "",
-                  "chartType": "horizontalBar",
+                "id": "fsmMonthlyWasteCal",
+                "name": "Monthly",
+                "code": "",
+                "chartType": "bar",
                   "filter": "",
                   "headers": []
                 }
@@ -9543,6 +9625,89 @@
             }
           ]
         }
+      ]
+    },
+    {
+      "name": "DSS_FINANCE_DASHBOARD",
+      "id": "finance",
+      "isActive": "",
+      "style": "linear",
+      "visualizations": [
+        {
+          "row": 1,
+          "name": "DSS_FINANCE",
+          "vizArray": [
+            {
+              "id": 411,
+              "name": "DSS_FINANCE_OVERVIEW",
+              "dimensions": {
+                "height": 200,
+                "width": 12
+              },
+              "vizType": "collection",
+              "label": "DSS_FINANCE_OVERVIEW",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "financeTotalCollection",
+                  "name": "DSS_FINANCE_TOTAL_COLLECTION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "financeTotalBillAmount",
+                  "name": "DSS_FINANCE_TOTAL_BILL_AMOUNT",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "financeTotalPaidAmount",
+                  "name": "DSS_FINANCE_TOTAL_PAID_AMOUNT",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }         
+          ]
+        },
+        {
+          "row": 2,
+          "name": "DSS_FINANCE",
+          "vizArray": [
+          {
+              "id": 423,
+              "name": "DSS_FINANCE_INSIGHTS",
+              "dimensions": {
+                "height": 350,
+                "width": 12
+              },
+              "vizType": "chart",
+              "label": "",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  
+                    "id": "financeInsights",
+                    "name": "DSS_FINANCE_BOUNDARY",
+                    "code": "",
+                    "chartType": "table",
+                    "filter": "",
+                    "headers": [],
+                    "tabName": "Boundary"
+                  
+                }
+              ]
+            }
+          ]
+        } 
       ]
     }
   ]
