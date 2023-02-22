@@ -8079,103 +8079,58 @@
     },
     "_comment": ""
   },
-  "totalRevenueCollectedOnline": {
-    "chartName": "DSS_TOTAL_REVENUE_COLLECTED_ONLINE",
+  "growthRatePT": {
+    "chartName": "DSS_GROWTH_RATE_PT",
     "queries": [
-      {
-        "module": "PT",
-        "dateRefField": "dataObject.paymentDetails.receiptDate",
-        "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\", \"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\"}",
-        "indexName": "pt-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Paytm\"}},{\"term\":{\"paymentChannelType.keyword\":\"Razorpay\"}},{\"term\":{\"paymentChannelType.keyword\":\"PayU\"}},{\"term\":{\"paymentChannelType.keyword\":\"BBPS\"}},{\"term\":{\"paymentChannelType.keyword\":\"Freecharge\"}}]}},\"aggs\":{\"Target CollectionPT\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
-      },
-      {
-        "module": "TL",
-        "dateRefField": "dataObject.paymentDetails.receiptDate",
-        "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\", \"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\"}",
-        "indexName": "tl-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Paytm\"}},{\"term\":{\"paymentChannelType.keyword\":\"Razorpay\"}},{\"term\":{\"paymentChannelType.keyword\":\"PayU\"}},{\"term\":{\"paymentChannelType.keyword\":\"BBPS\"}},{\"term\":{\"paymentChannelType.keyword\":\"Freecharge\"}}]}},\"aggs\":{\"Target CollectionTL\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
-      },
-      {
-        "module": "OBPS",
-        "indexName": "obps-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Paytm\"}},{\"term\":{\"paymentChannelType.keyword\":\"Razorpay\"}},{\"term\":{\"paymentChannelType.keyword\":\"PayU\"}},{\"term\":{\"paymentChannelType.keyword\":\"BBPS\"}},{\"term\":{\"paymentChannelType.keyword\":\"Freecharge\"}}]}},\"aggs\":{\"Target CollectionOBPS\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}",
-        "requestQueryMap":"{\"wardId\" : \"dataObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\",\"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\" }",
-        "dateRefField": "dataObject.paymentDetails.receiptDate"
-      },
-      {
-        "module": "FIRENOC",
-        "indexName": "firenoc-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Paytm\"}},{\"term\":{\"paymentChannelType.keyword\":\"Razorpay\"}},{\"term\":{\"paymentChannelType.keyword\":\"PayU\"}},{\"term\":{\"paymentChannelType.keyword\":\"BBPS\"}},{\"term\":{\"paymentChannelType.keyword\":\"Freecharge\"}}]}},\"aggs\":{\"Target CollectionFN\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}",
-        "requestQueryMap": "{\"wardId\" : \"dataObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\",\"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\" }",
-        "dateRefField": "dataObject.paymentDetails.receiptDate"
-      },
-      {
-        "module": "W&S",
-        "indexName": "ws-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Paytm\"}},{\"term\":{\"paymentChannelType.keyword\":\"Razorpay\"}},{\"term\":{\"paymentChannelType.keyword\":\"PayU\"}},{\"term\":{\"paymentChannelType.keyword\":\"BBPS\"}},{\"term\":{\"paymentChannelType.keyword\":\"Freecharge\"}}]}},\"aggs\":{\"Target CollectionWS\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}",
-        "requestQueryMap": "{\"wardId\" : \"dataObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\",\"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\" }",
-        "dateRefField": "dataObject.paymentDetails.receiptDate"
-      },
-      {
-        "module": "MCOLLECT",
-        "dateRefField": "dataObject.paymentDetails.receiptDate",
-        "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\", \"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\"}",
-        "indexName": "mcollect-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Paytm\"}},{\"term\":{\"paymentChannelType.keyword\":\"Razorpay\"}},{\"term\":{\"paymentChannelType.keyword\":\"PayU\"}},{\"term\":{\"paymentChannelType.keyword\":\"BBPS\"}},{\"term\":{\"paymentChannelType.keyword\":\"Freecharge\"}}]}},\"aggs\":{\"Target CollectionMC\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
-      },
-      {
-        "module": "BND",
-        "dateRefField": "dataObject.paymentDetails.receiptDate",
-        "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\", \"tenantId\" : \"dataObject.tenantId.keyword\"}",
-        "indexName": "birth-cert-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Paytm\"}},{\"term\":{\"paymentChannelType.keyword\":\"Razorpay\"}},{\"term\":{\"paymentChannelType.keyword\":\"PayU\"}},{\"term\":{\"paymentChannelType.keyword\":\"BBPS\"}},{\"term\":{\"paymentChannelType.keyword\":\"Freecharge\"}}]}},\"aggs\":{\"Target CollectionBND\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
-      },
-      {
-        "module": "MASTER",
-        "requestQueryMap": "{\"state\" : \"state.keyword\", \"module\" : \"module.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
-        "indexName": "master-national-dashboard",
-        "aggrQuery":"{\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}"
-      }
+        {
+            "module": "MASTER",
+            "requestQueryMap": "{\"state\" : \"state.keyword\", \"module\" : \"module.keyword\", \"ulb\" : \"ulb.keyword\"}",
+            "dateRefField": "",
+            "indexName": "master-national-dashboard",
+            "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"PT\"}},{\"term\":{\"financialYear.keyword\":\"2021-22\"}}]}},\"aggs\":{\"Target Collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
+          },
+          {
+            "module": "MASTER",
+            "requestQueryMap": "{\"state\" : \"state.keyword\", \"module\" : \"module.keyword\", \"ulb\" : \"ulb.keyword\"}",
+            "dateRefField": "",
+            "indexName": "master-national-dashboard",
+            "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"PT\"}},{\"term\":{\"financialYear.keyword\":\"2022-23\"}}]}},\"aggs\":{\"Target Collection1\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
+          }
 
     ],
+    "isMdmsEnabled": false,
+    "postAggregationTheory": "",
     "chartType": "metric",
-    "valueType": "percentage",
+    "valueType": "",
     "drillChart": "none",
     "documentType": "_doc",
-    "action": "percentageG",	  
+    "action": "percentageG",
     "aggregationPaths": [
-      "Target CollectionPT",
-      "Target CollectionTL",
-      "Target CollectionOBPS",
-      "Target CollectionFN", 
-      "Target CollectionWS", 
-      "Target CollectionMC",
-      "Target CollectionBND",
-      "Total Collection"
-    ],
+	  "Target Collection",
+	  "Target Collection1"
+    ]
+    ,
     "computedFields": [
       {
         "postAggregationTheory" : "",
-        "actionName": "AdditiveComputedField",
-        "fields" : ["Target CollectionPT", "Target CollectionTL", "Target CollectionOBPS", "Target CollectionFN", "Target CollectionWS", "Target CollectionMC","Target CollectionBND"],
-        "newField" : "Total_Online_Collection",
+        "action": "minus",
+        "fields" : ["Target Collection","Target Collection1"],
+        "newField" : "Total_Growth_Rate_PT",
         "_comments": "fields are field names picked from its aggregation query to use post aggregation newField value with given new field name  "
       },
-      {
+	  {
         "postAggregationTheory" : "",
         "action": "percentage",
-        "fields" : ["Total_Online_Collection","Total Collection"],
-        "newField" : "TotalColection_Online",
+        "fields" : ["Total_Growth_Rate_PT","Target Collection"],
+        "newField" : "TotalGrowth_Rate_PT",
         "_comments": "fields are field names picked from its aggregation query to use post aggregation newField value with given new field name  "
       }
-    ],
+     ],
 	 "pathDataTypeMapping": [
       ],
     "insight": {
     },
-    "_comment": " "
+    "_comment": ""
   },
   	"targetAchievedv3": {
     "chartName": "NATIONAL_DSS_TARGET_ACHIEVED",
