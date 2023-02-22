@@ -8140,7 +8140,7 @@
             "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
             "dateRefField": "",
             "indexName": "pt-national-dashboard",
-            "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Paytm\"}},{\"term\":{\"paymentChannelType.keyword\":\"Razorpay\"}},{\"term\":{\"paymentChannelType.keyword\":\"PayU\"}},{\"term\":{\"paymentChannelType.keyword\":\"BBPS\"}},{\"term\":{\"paymentChannelType.keyword\":\"Freecharge\"}}]}},\"aggs\":{\"Target Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
+            "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Paytm\"}},{\"term\":{\"paymentChannelType.keyword\":\"Razorpay\"}},{\"term\":{\"paymentChannelType.keyword\":\"PayU\"}},{\"term\":{\"paymentChannelType.keyword\":\"BBPS\"}},{\"term\":{\"paymentChannelType.keyword\":\"Freecharge\"}}]}},\"aggs\":{\"Target Collection Online\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
           },
           {
             "module": "PT",
@@ -8157,17 +8157,17 @@
     "valueType": "percentage",
     "drillChart": "none",
     "documentType": "_doc",
-    "action": "percentageG",
+    "action": "percentage",
     "aggregationPaths": [
-	  "Target Collection",
+	  "Target Collection Online",
 	  "Total Collection"
     ]
     ,
     "computedFields": [
       {
         "postAggregationTheory" : "",
-        "action": "percentage",
-        "fields" : ["Target Collection","Total Collection"],
+        "action": "PercentageComputedField",
+        "fields" : ["Target Collection Online","Total Collection"],
         "newField" : "Total_PT_Online",
         "_comments": "fields are field names picked from its aggregation query to use post aggregation newField value with given new field name  "
       }
@@ -18220,6 +18220,159 @@
       "isRoundOff": true
     },
     "_comment": "Average tax collected per property"
+  },
+  "shareOnlineTotalRevenueCollection": {
+    "chartName": "DSS_SHARE_ONLINE_REVENUE_COLLECTION",
+    "queries": [
+      {
+        "module": "PT",
+        "dateRefField": "",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "pt-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Paytm\"}},{\"term\":{\"paymentChannelType.keyword\":\"Razorpay\"}},{\"term\":{\"paymentChannelType.keyword\":\"PayU\"}},{\"term\":{\"paymentChannelType.keyword\":\"BBPS\"}},{\"term\":{\"paymentChannelType.keyword\":\"Freecharge\"}}]}},\"aggs\":{\"Target Collection PT\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
+      },
+      {
+        "module": "TL",
+        "dateRefField": "",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "tl-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Paytm\"}},{\"term\":{\"paymentChannelType.keyword\":\"Razorpay\"}},{\"term\":{\"paymentChannelType.keyword\":\"PayU\"}},{\"term\":{\"paymentChannelType.keyword\":\"BBPS\"}},{\"term\":{\"paymentChannelType.keyword\":\"Freecharge\"}}]}},\"aggs\":{\"Target Collection TL\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
+      },
+       {
+        "module": "W&S",
+        "indexName": "ws-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Paytm\"}},{\"term\":{\"paymentChannelType.keyword\":\"Razorpay\"}},{\"term\":{\"paymentChannelType.keyword\":\"PayU\"}},{\"term\":{\"paymentChannelType.keyword\":\"BBPS\"}},{\"term\":{\"paymentChannelType.keyword\":\"Freecharge\"}}]}},\"aggs\":{\"Target Collection W&S\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": ""
+      },
+      {
+        "module": "OBPS",
+        "dateRefField": "",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "obps-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Paytm\"}},{\"term\":{\"paymentChannelType.keyword\":\"Razorpay\"}},{\"term\":{\"paymentChannelType.keyword\":\"PayU\"}},{\"term\":{\"paymentChannelType.keyword\":\"BBPS\"}},{\"term\":{\"paymentChannelType.keyword\":\"Freecharge\"}}]}},\"aggs\":{\"Target Collection OBPS\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
+      },
+      {
+        "module": "FIRENOC",
+        "dateRefField": "",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "firenoc-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Paytm\"}},{\"term\":{\"paymentChannelType.keyword\":\"Razorpay\"}},{\"term\":{\"paymentChannelType.keyword\":\"PayU\"}},{\"term\":{\"paymentChannelType.keyword\":\"BBPS\"}},{\"term\":{\"paymentChannelType.keyword\":\"Freecharge\"}}]}},\"aggs\":{\"Target Collection FIRENOC\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
+      },
+      {
+        "module": "MC",
+        "dateRefField": "",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "mcollect-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Paytm\"}},{\"term\":{\"paymentChannelType.keyword\":\"Razorpay\"}},{\"term\":{\"paymentChannelType.keyword\":\"PayU\"}},{\"term\":{\"paymentChannelType.keyword\":\"BBPS\"}},{\"term\":{\"paymentChannelType.keyword\":\"Freecharge\"}}]}},\"aggs\":{\"Target Collection MC\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
+      },
+      {
+        "module": "BIRTH",
+        "indexName": "birth-cert-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Paytm\"}},{\"term\":{\"paymentChannelType.keyword\":\"Razorpay\"}},{\"term\":{\"paymentChannelType.keyword\":\"PayU\"}},{\"term\":{\"paymentChannelType.keyword\":\"BBPS\"}},{\"term\":{\"paymentChannelType.keyword\":\"Freecharge\"}}]}},\"aggs\":{\"Target Collection BIRTH\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}",
+        "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": ""
+      },
+      {
+        "module": "PT",
+        "dateRefField": "",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "pt-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"Total Collection PT\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}"
+      },
+      {
+        "module": "TL",
+        "dateRefField": "",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "tl-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"Total Collection TL\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}"
+      },
+       {
+        "module": "W&S",
+        "indexName": "ws-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"Total Collection W&S\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": ""
+      },
+      {
+        "module": "OBPS",
+        "dateRefField": "",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "obps-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"Total Collection OBPS\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}"
+      },
+      {
+        "module": "FIRENOC",
+        "dateRefField": "",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "firenoc-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"Total Collection FIRENOC\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}"
+      },
+      {
+        "module": "MC",
+        "dateRefField": "",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "mcollect-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"Total Collection MC\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}"
+      },
+      {
+        "module": "BIRTH",
+        "indexName": "birth-cert-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"Total Collection BIRTH\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}",
+        "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": ""
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "percentage",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "TodaysCollection":true,
+    "aggregationPaths": [
+      "Target Collection PT",
+      "Target Collection TL",
+      "Target Collection W&S",
+      "Target Collection OBPS",
+      "Target Collection FIRENOC",
+      "Target Collection MC",
+      "Target Collection BIRTH",
+      "Total Collection PT" ,
+      "Total Collection TL",
+      "Total Collection W&S",
+      "Total Collection OBPS",
+      "Total Collection FIRENOC",
+      "Total Collection MC",
+      "Total Collection BIRTH"
+
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory" : "",
+        "action": "AdditiveComputedField",
+        "fields" : ["Target Collection PT", "Target Collection TL", "Target Collection W&S", "Target Collection OBPS", "Target Collection FIRENOC", "Target Collection MC", "Target Collection BIRTH"],
+        "newField" : "Total_Online_Revenue",
+        "_comments": "fields are field names picked from its aggregation query to use post aggregation newField value with given new field name  "
+      },
+	  {
+        "postAggregationTheory" : "",
+        "action": "AdditiveComputedField",
+        "fields" : ["Total Collection PT" , "Total Collection TL", "Total Collection W&S", "Total Collection OBPS", "Total Collection FIRENOC", "Total Collection MC", "Total Collection BIRTH"],
+        "newField" : "Total_Revenue",
+        "_comments": "fields are field names picked from its aggregation query to use post aggregation newField value with given new field name  "
+      },
+      {
+        "postAggregationTheory" : "",
+        "action": "PercentageComputedField",
+        "fields" : ["Total_Online_Revenue", "Total_Revenue"],
+        "newField" : "Online_Revenue_Share",
+        "_comments": "fields are field names picked from its aggregation query to use post aggregation newField value with given new field name  "
+      }
+     ],
+    "insight": {
+     
+    },
+    "_comment": " "
   }
 
 
