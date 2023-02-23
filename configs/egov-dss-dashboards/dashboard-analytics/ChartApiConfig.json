@@ -18229,7 +18229,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "pt-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Paytm\"}},{\"term\":{\"paymentChannelType.keyword\":\"Razorpay\"}},{\"term\":{\"paymentChannelType.keyword\":\"PayU\"}},{\"term\":{\"paymentChannelType.keyword\":\"BBPS\"}},{\"term\":{\"paymentChannelType.keyword\":\"Freecharge\"}}]}},\"aggs\":{\"Target Collection PT\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Paytm\"}},{\"term\":{\"paymentChannelType.keyword\":\"Razorpay\"}},{\"term\":{\"paymentChannelType.keyword\":\"PayU\"}},{\"term\":{\"paymentChannelType.keyword\":\"BBPS\"}},{\"term\":{\"paymentChannelType.keyword\":\"Freecharge\"}}]}},\"aggs\":{\"Target Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
       },
       {
         "module": "TL",
@@ -18257,7 +18257,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "firenoc-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"UPI\"}},{\"term\":{\"paymentChannelType.keyword\":\"DEBIT_CARD\"}}]}},\"aggs\":{\"Target Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentMode.keyword\":\"UPI\"}},{\"term\":{\"paymentMode.keyword\":\"DEBIT_CARD\"}}]}},\"aggs\":{\"Target Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
       {
         "module": "MC",
@@ -18278,7 +18278,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "pt-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"Total Collection PT\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}"
+        "aggrQuery": "{\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}"
       },
       {
         "module": "TL",
@@ -18324,16 +18324,34 @@
       }
     ],
     "chartType": "metric",
-    "valueType": "percentage",
+    "valueType": "number",
     "drillChart": "none",
     "documentType": "_doc",
-    "action": "percentage",
-    "TodaysCollection":true,
     "aggregationPaths": [
-      "Target Collection PT",
-      "Total Collection PT"
-
-    ],
+      ],
+	 "computedFields": [
+      {
+        "postAggregationTheory" : "",
+        "action": "AdditiveComputedField",
+        "fields" : ["Target Collection"],
+        "newField" : "Total Online Revenue",
+        "_comments": "fields are field names picked from its aggregation query to use post aggregation newField value with given new field name  "
+      },
+	  {
+        "postAggregationTheory" : "",
+        "action": "AdditiveComputedField",
+        "fields" : ["Total Collection"],
+        "newField" : "Total Revenue",
+        "_comments": "fields are field names picked from its aggregation query to use post aggregation newField value with given new field name  "
+      },
+      {
+        "postAggregationTheory" : "",
+        "action": "PercentageComputedField",
+        "fields" : ["Total Online Revenue", "Total Revenue"],
+        "newField" : "Online Revenue Share",
+        "_comments": "fields are field names picked from its aggregation query to use post aggregation newField value with given new field name  "
+      }
+     ],
     "insight": {
      
     },
