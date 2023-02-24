@@ -18502,24 +18502,25 @@
         "dateRefField": "",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "pt-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"Applications Approved within SLA\":{\"sum\":{\"field\":\"todaysApprovedApplicationwithinSLA\"}}}}"
+        "aggrQuery": "{\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}"
       },
 	  {
         "module": "PT",
         "dateRefField": "",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "pt-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"Total Applications\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}"
+        "aggrQuery": "{\"aggs\":{\"TotalApplications\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}"
       }
     ],
-    "chartType": "metric",
+   "chartType": "metric",
     "valueType": "percentage",
     "drillChart": "none",
     "documentType": "_doc",
-	"action":"percentage",
+    "action": "percentage",
+    "isRoundOff": true,
     "aggregationPaths": [
-	"Applications Approved within SLA",
-	"Total Applications"
+	"ApplicationsApprovedwithinSLA",
+	"TotalApplications"
       ],
     "insight": {
      
