@@ -18493,6 +18493,38 @@
      
     },
     "_comment": " "
+  },
+  "slaComplaincePT": {
+    "chartName": "DSS_SLA_COMPLAINCE_PT",
+    "queries": [
+      {
+        "module": "PT",
+        "dateRefField": "",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "pt-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"Applications Approved within SLA\":{\"sum\":{\"field\":\"todaysApprovedApplicationwithinSLA\"}}}}"
+      },
+	  {
+        "module": "PT",
+        "dateRefField": "",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "pt-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"Total Applications\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "percentage",
+    "drillChart": "none",
+    "documentType": "_doc",
+	"action":"percentage",
+    "aggregationPaths": [
+	"Applications Approved within SLA",
+	"Total Applications"
+      ],
+    "insight": {
+     
+    },
+    "_comment": " "
   }
 
 
