@@ -18241,7 +18241,7 @@
        {
         "module": "WS",
         "indexName": "ws-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Paytm\"}},{\"term\":{\"paymentChannelType.keyword\":\"Razorpay\"}},{\"term\":{\"paymentChannelType.keyword\":\"PayU\"}},{\"term\":{\"paymentChannelType.keyword\":\"BBPS\"}},{\"term\":{\"paymentChannelType.keyword\":\"Freecharge\"}}]}},\"aggs\":{\"Target Collection WS\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Paytm\"}},{\"term\":{\"paymentChannelType.keyword\":\"PAYTM\"}},{\"term\":{\"paymentChannelType.keyword\":\"RAZORPAY\"}},{\"term\":{\"paymentChannelType.keyword\":\"POS\"}},{\"term\":{\"paymentChannelType.keyword\":\"AXIS\"}},{\"term\":{\"paymentChannelType.keyword\":\"EBS payment gateway\"}},{\"term\":{\"paymentChannelType.keyword\":\"Razorpay\"}},{\"term\":{\"paymentChannelType.keyword\":\"PayU\"}},{\"term\":{\"paymentChannelType.keyword\":\"BBPS\"}},{\"term\":{\"paymentChannelType.keyword\":\"Freecharge\"}}]}},\"aggs\":{\"Target Collection WS\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}",
         "requestQueryMap": "{\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
         "dateRefField": ""
       },
@@ -18257,14 +18257,14 @@
         "dateRefField": "",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "firenoc-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentMode.keyword\":\"UPI\"}},{\"term\":{\"paymentMode.keyword\":\"DEBIT_CARD\"}}]}},\"aggs\":{\"Target Collection FIRENOC\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentMode.keyword\":\"ONLINE\"}},{\"term\":{\"paymentMode.keyword\":\"UPI\"}},{\"term\":{\"paymentMode.keyword\":\"DEBIT_CARD\"}}]}},\"aggs\":{\"Target Collection FIRENOC\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
       {
         "module": "MC",
         "dateRefField": "",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "mcollect-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentMode.keyword\":\"UPI\"}},{\"term\":{\"paymentMode.keyword\":\"DEBIT_CARD\"}}]}},\"aggs\":{\"Target Collection MC\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentMode.keyword\":\"ONLINE\"}},{\"term\":{\"paymentMode.keyword\":\"UPI\"}},{\"term\":{\"paymentMode.keyword\":\"QR_CODE\"}},{\"term\":{\"paymentMode.keyword\":\"Paytm Postpaid\"}},{\"term\":{\"paymentMode.keyword\":\"CARD\"}},{\"term\":{\"paymentMode.keyword\":\"NB\"}}]}},\"aggs\":{\"Target Collection MC\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
       {
         "module": "BIRTH",
@@ -18378,7 +18378,7 @@
        {
         "module": "WS",
         "indexName": "ws-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Paytm\"}},{\"term\":{\"paymentChannelType.keyword\":\"Razorpay\"}},{\"term\":{\"paymentChannelType.keyword\":\"PayU\"}},{\"term\":{\"paymentChannelType.keyword\":\"BBPS\"}},{\"term\":{\"paymentChannelType.keyword\":\"Freecharge\"}}]}},\"aggs\":{\"Target Collection WS\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Paytm\"}},{\"term\":{\"paymentChannelType.keyword\":\"PAYTM\"}},{\"term\":{\"paymentChannelType.keyword\":\"RAZORPAY\"}},{\"term\":{\"paymentChannelType.keyword\":\"POS\"}},{\"term\":{\"paymentChannelType.keyword\":\"AXIS\"}},{\"term\":{\"paymentChannelType.keyword\":\"EBS payment gateway\"}},{\"term\":{\"paymentChannelType.keyword\":\"Razorpay\"}},{\"term\":{\"paymentChannelType.keyword\":\"PayU\"}},{\"term\":{\"paymentChannelType.keyword\":\"BBPS\"}},{\"term\":{\"paymentChannelType.keyword\":\"Freecharge\"}}]}},\"aggs\":{\"Target Collection WS\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}",
         "requestQueryMap": "{\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
         "dateRefField": ""
       },
@@ -18394,14 +18394,14 @@
         "dateRefField": "",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "firenoc-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentMode.keyword\":\"UPI\"}},{\"term\":{\"paymentMode.keyword\":\"DEBIT_CARD\"}}]}},\"aggs\":{\"Target Collection FIRENOC\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentMode.keyword\":\"ONLINE\"}},{\"term\":{\"paymentMode.keyword\":\"UPI\"}},{\"term\":{\"paymentMode.keyword\":\"DEBIT_CARD\"}}]}},\"aggs\":{\"Target Collection FIRENOC\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
       {
         "module": "MC",
         "dateRefField": "",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "mcollect-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentMode.keyword\":\"UPI\"}},{\"term\":{\"paymentMode.keyword\":\"DEBIT_CARD\"}}]}},\"aggs\":{\"Target Collection MC\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentMode.keyword\":\"ONLINE\"}},{\"term\":{\"paymentMode.keyword\":\"UPI\"}},{\"term\":{\"paymentMode.keyword\":\"QR_CODE\"}},{\"term\":{\"paymentMode.keyword\":\"Paytm Postpaid\"}},{\"term\":{\"paymentMode.keyword\":\"CARD\"}},{\"term\":{\"paymentMode.keyword\":\"NB\"}}]}},\"aggs\":{\"Target Collection MC\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
       {
         "module": "BIRTH",
