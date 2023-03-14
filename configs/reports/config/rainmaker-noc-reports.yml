@@ -1,2 +1,38 @@
 ---
 ReportDefinitions:
+  - reportName: FireNOCApplicationStatusReport
+    summary: Nummber of applications by there status
+    version: 1.0.0
+    moduleName: rainmaker-noc
+    externalService:
+      - entity: $.messages[*]
+        apiURL: http://egov-localization:8080/localization/messages/v1/_search?locale=en_IN&tenantId=pg&module=rainmaker-noc
+        keyOrder: code,message
+        tableName: tbl_localization
+    sourceColumns:
+      - name: status
+        label: report.nocdtl.status
+        type: string
+        source: nocdtl
+        total: false
+      - name: total
+        label: report.nocdtl.total
+        type: string
+        source: nocdtl
+        total: true
+    searchParams:
+      - name: fromDate
+        label: reports.noc.fromDate
+        type: epoch
+        source: noc
+        isMandatory: false
+        searchClause: AND noc.lastmodifiedtime >= $fromDate
+      - name: toDate
+        label: reports.noc.toDate
+        type: epoch
+        source: noc
+        isMandatory: false
+        searchClause: AND noc.lastmodifiedtime <= $toDate
+    query: SELECT COUNT(applicationnumber) as total, status from eg_fn_firenocdetail
+      nocdtl LEFT OUTER JOIN eg_fn_firenoc noc ON noc.uuid= nocdtl.firenocuuid
+    groupby: GROUP BY status end
