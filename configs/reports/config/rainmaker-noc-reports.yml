@@ -20,19 +20,32 @@ ReportDefinitions:
         type: string
         source: nocdtl
         total: true
+      - name: tenantId
+        label: report.noc.tenantid
+        type: string
+        source: noc
+        total: false
     searchParams:
       - name: fromDate
-        label: reports.noc.fromDate
+        label: reports.nocdtl.fromDate
         type: epoch
-        source: noc
+        source: nocdtl
         isMandatory: false
-        searchClause: AND noc.lastmodifiedtime >= $fromDate
+        searchClause: AND nocdtl.lastmodifiedtime >= $fromDate
       - name: toDate
-        label: reports.noc.toDate
+        label: reports.nocdtl.toDate
         type: epoch
-        source: noc
+        source: nocdtl
         isMandatory: false
-        searchClause: AND noc.lastmodifiedtime <= $toDate
+        searchClause: AND nocdtl.lastmodifiedtime <= $toDate
+      - name: ulb
+        label: ULB
+        type: singlevaluelist
+        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=tenant&masterName=tenants|$.MdmsRes.tenant.tenants.*.code|$.MdmsRes.tenant.tenants.*.name
+        source: noc
+        wrapper: true
+        isMandatory: false
+        searchClause: AND noc.tenantId = $ulb      
     query: SELECT COUNT(applicationnumber) as total, status from eg_fn_firenocdetail
       nocdtl LEFT OUTER JOIN eg_fn_firenoc noc ON noc.uuid= nocdtl.firenocuuid
     groupby: GROUP BY status end
