@@ -11,12 +11,12 @@ ReportDefinitions:
         tableName: tbl_localization
     sourceColumns:
       - name: status
-        label: report.nocdtl.status
+        label: report.noc.status
         type: string        
         source: nocdtl
         total: false
       - name: total
-        label: report.nocdtl.total
+        label: report.noc.total
         type: string
         source: nocdtl
         total: true
@@ -27,13 +27,13 @@ ReportDefinitions:
         total: false
     searchParams:
       - name: fromDate
-        label: reports.nocdtl.fromDate
+        label: reports.noc.fromDate
         type: epoch
         source: nocdtl
         isMandatory: false
         searchClause: AND nocdtl.lastmodifiedtime >= $fromDate
       - name: toDate
-        label: reports.nocdtl.toDate
+        label: reports.noc.toDate
         type: epoch
         source: nocdtl
         isMandatory: false
@@ -46,6 +46,9 @@ ReportDefinitions:
         wrapper: true
         isMandatory: false
         searchClause: AND noc.tenantId = $ulb      
-    query: SELECT COUNT(applicationnumber) as total, status from eg_fn_firenocdetail
+    query: SELECT COUNT(applicationnumber) as total, status ,tenantid from eg_fn_firenocdetail
       nocdtl LEFT OUTER JOIN eg_fn_firenoc noc ON noc.uuid= nocdtl.firenocuuid
     groupby: GROUP BY status
+    orderby: ORDER BY case nocdtl.status when 'PENDINGPAYMENT'
+      then 1 when 'DOCUMENTVERIFY' then 2 when 'REJECTED'
+      then 3 when 'CITIZENACTIONREQUIRED' then 4 when 'PENDINGAPPROVAL' then 5 when 'INITIATED' then 6 when 'APPROVED' then 7 when 'CITIZENACTIONREQUIRED-DV' then 8 when 'FIELDINSPECTION' then 9 when 'CANCELLED' then 10 else 11 end    
