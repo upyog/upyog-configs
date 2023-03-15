@@ -12,8 +12,7 @@ ReportDefinitions:
     sourceColumns:
       - name: status
         label: report.nocdtl.status
-        type: string
-        source: nocdtl
+        type: string        source: nocdtl
         total: false
       - name: total
         label: report.nocdtl.total
@@ -48,4 +47,4 @@ ReportDefinitions:
         searchClause: AND noc.tenantId = $ulb      
     query: SELECT COUNT(applicationnumber) as total, status from eg_fn_firenocdetail
       nocdtl LEFT OUTER JOIN eg_fn_firenoc noc ON noc.uuid= nocdtl.firenocuuid
-    groupby: GROUP BY status end
+    groupby: GROUP BY status
