@@ -18782,8 +18782,8 @@
     },
     "_comment": " "
   },
-  "slaComplainceBD": {
-    "chartName": "DSS_SLA_COMPLAINCE_BD",
+  "slaComplainceBirth": {
+    "chartName": "DSS_SLA_COMPLAINCE_BIRTH",
     "queries": [
       {
         "module": "BIRTH",
@@ -18793,18 +18793,37 @@
         "aggrQuery": "{\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}"
       },
 	  {
-        "module": "DEATH",
-        "dateRefField": "",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "death-cert-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}"
-      },
-	  {
         "module": "BIRTH",
         "dateRefField": "",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "birth-cert-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"TotalApplications\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}"
+      }
+    ],
+   "chartType": "metric",
+    "valueType": "percentage",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "percentage",
+    "isRoundOff": true,
+    "aggregationPaths": [
+	"ApplicationsApprovedwithinSLA",
+	"TotalApplications"
+      ],
+    "insight": {
+     
+    },
+    "_comment": " "
+  },
+  "slaComplainceDeath": {
+    "chartName": "DSS_SLA_COMPLAINCE_DEATH",
+    "queries": [
+	  {
+        "module": "DEATH",
+        "dateRefField": "",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "death-cert-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}"
       },
 	   {
         "module": "DEATH",
