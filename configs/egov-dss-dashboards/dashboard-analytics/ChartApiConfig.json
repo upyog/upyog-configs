@@ -18985,6 +18985,31 @@
     "insight": {
     },
     "_comment": ""
+  },
+  "pgrAverageResolutionTime": {
+    "chartName": "NATIONAL_DSS_PGR_AVERAGE_RESOLUTION_TIME",
+    "queries": [
+      {
+        "module": "PGR",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "pgr-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"AvgTime\":{\"avg\":{\"field\":\"averageSolutionTimeForDepartment\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "AvgTime"
+    ],
+	"isRoundOff": true,
+    "insight": {
+      
+    },
+    "_comment": " "
   }
 
 
