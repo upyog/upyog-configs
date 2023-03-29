@@ -8177,7 +8177,126 @@
     },
     "_comment": ""
   },
-  "growthRatePT": {
+"slaComplainceOverview": {
+  "chartName": "DSS_SLA_COMPLAINCE_OVERVIEW",
+  "queries": [
+    {
+      "module": "PT",
+      "dateRefField": "",
+      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+      "indexName": "pt-national-dashboard",
+      "aggrQuery": "{\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}"
+    },
+  {
+      "module": "PT",
+      "dateRefField": "",
+      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+      "indexName": "pt-national-dashboard",
+      "aggrQuery": "{\"aggs\":{\"TotalApplications\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}"
+    },
+    {
+      "module": "OBPS",
+      "dateRefField": "",
+      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+      "indexName": "obps-national-dashboard",
+      "aggrQuery": "{\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}"
+    },
+  {
+      "module": "OBPS",
+      "dateRefField": "",
+      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+      "indexName": "obps-national-dashboard",
+      "aggrQuery": "{\"aggs\":{\"TotalApplications\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}"
+    },
+    {
+      "module": "WS",
+      "dateRefField": "",
+      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+      "indexName": "ws-national-dashboard",
+      "aggrQuery": "{\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}"
+    },
+  {
+      "module": "WS",
+      "dateRefField": "",
+      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+      "indexName": "ws-national-dashboard",
+      "aggrQuery": "{\"aggs\":{\"TotalApplications\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}"
+    },
+    {
+      "module": "TL",
+      "dateRefField": "",
+      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+      "indexName": "tl-national-dashboard",
+      "aggrQuery": "{\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}"
+    },
+  {
+      "module": "TL",
+      "dateRefField": "",
+      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+      "indexName": "tl-national-dashboard",
+      "aggrQuery": "{\"aggs\":{\"TotalApplications\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}"
+    },
+    {
+      "module": "FIRENOC",
+      "dateRefField": "",
+      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+      "indexName": "firenoc-national-dashboard",
+      "aggrQuery": "{\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}"
+    },
+  {
+      "module": "FIRENOC",
+      "dateRefField": "",
+      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+      "indexName": "firenoc-national-dashboard",
+      "aggrQuery": "{\"aggs\":{\"TotalApplications\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}"
+    },
+    {
+      "module": "BIRTH",
+      "dateRefField": "",
+      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+      "indexName": "birth-cert-national-dashboard",
+      "aggrQuery": "{\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}"
+    },
+  {
+      "module": "BIRTH",
+      "dateRefField": "",
+      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+      "indexName": "birth-cert-national-dashboard",
+      "aggrQuery": "{\"aggs\":{\"TotalApplications\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}"
+    },
+    {
+      "module": "DEATH",
+      "dateRefField": "",
+      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+      "indexName": "death-cert-national-dashboard",
+      "aggrQuery": "{\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}"
+    },
+  {
+      "module": "DEATH",
+      "dateRefField": "",
+      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+      "indexName": "death-cert-national-dashboard",
+      "aggrQuery": "{\"aggs\":{\"TotalApplications\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}"
+    }
+    
+  ],
+ "chartType": "metric",
+  "valueType": "percentage",
+  "drillChart": "none",
+  "documentType": "_doc",
+  "action": "percentage",
+  "isRoundOff": true,
+  "aggregationPaths": [
+"ApplicationsApprovedwithinSLA",
+"TotalApplications"
+    ],
+  "insight": {
+   
+  },
+  "_comment": " "
+}
+
+  ,"growthRatePT": {
     "chartName": "DSS_GROWTH_RATE_PT",
     "queries": [
         {
