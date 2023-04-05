@@ -1,5 +1,5 @@
 serviceMaps:
- serviceName: tradelicense Calculator
+ serviceName: TL Calculator
  mappings:
  - version: 1.0
    name: tl-calculator
@@ -7,8 +7,7 @@ serviceMaps:
    fromTopic: save-tl-billingslab
    isTransaction: true
    queryMaps:
-    - query: INSERT INTO eg_tl_billingSlab(id, tenantid, licensetype, applicationtype, structuretype, tradetype, accessorycategory, type, uom, fromUom, toUom, rate, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, cast(? as double precision), cast(? as double precision), ?, ?, ?, ?, ?);
-
+    - query: INSERT INTO eg_tl_billingSlab(id, tenantid, licensetype, structuretype, tradetype, accessorycategory, type, uom, fromUom, toUom, rate, createdby, createdtime, lastmodifiedby, lastmodifiedtime,applicationtype,enterprisetype) VALUES (?, ?, ?, ?, ?, ?, ?, ?, cast(? as double precision), cast(? as double precision), ?, ?, ?, ?, ?, ?, ?);
       basePath: billingSlab.*
       jsonMaps:
 
@@ -17,8 +16,6 @@ serviceMaps:
        - jsonPath: $.billingSlab.*.tenantId
 
        - jsonPath: $.billingSlab.*.licenseType
-
-       - jsonPath: $.billingSlab.*.applicationType
 
        - jsonPath: $.billingSlab.*.structureType
 
@@ -43,6 +40,10 @@ serviceMaps:
        - jsonPath: $.billingSlab.*.auditDetails.lastModifiedBy
 
        - jsonPath: $.billingSlab.*.auditDetails.lastModifiedTime
+
+       - jsonPath: $.billingSlab.*.applicationType
+
+       - jsonPath: $.billingSlab.*.enterpriseType
        
        
  - version: 1.0
@@ -51,14 +52,12 @@ serviceMaps:
    fromTopic: update-tl-billingslab
    isTransaction: true
    queryMaps:
-    - query: UPDATE eg_tl_billingSlab SET licensetype=?, applicationtype=?, structuretype=?, tradetype=?, accessorycategory=?, type=?, uom=?, fromUom=?, toUom=?, rate=?, lastmodifiedby=?, lastmodifiedtime=? WHERE id=? AND tenantid=?;
+    - query: UPDATE eg_tl_billingSlab SET licensetype=?, structuretype=?, tradetype=?, accessorycategory=?, type=?, uom=?, fromUom=?, toUom=?, rate=?, applicationtype=?, enterprisetype=?, lastmodifiedby=?, lastmodifiedtime=? WHERE id=? AND tenantid=?;
 
       basePath: billingSlab.*
       jsonMaps:
 
        - jsonPath: $.billingSlab.*.licenseType
-
-       - jsonPath: $.billingSlab.*.applicationType
 
        - jsonPath: $.billingSlab.*.structureType
 
@@ -75,6 +74,10 @@ serviceMaps:
        - jsonPath: $.billingSlab.*.toUom
 
        - jsonPath: $.billingSlab.*.rate
+
+       - jsonPath: $.billingSlab.*.applicationType
+
+       - jsonPath: $.billingSlab.*.enterpriseType
 
        - jsonPath: $.billingSlab.*.auditDetails.lastModifiedBy
 

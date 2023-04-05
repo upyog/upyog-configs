@@ -1,0 +1,20 @@
+serviceMaps:
+ serviceName: User Service
+ mappings:
+ - version: 1.0
+   name: Asset
+   description: Persists filemgmt details in create-file table
+   fromTopic: save-filemgmt-servicereq
+   isTransaction: true
+   queryMaps:
+   
+    - query: INSERT INTO filemgmt.create_file(id, file_name, tenantid) VALUES (?,?,?);
+
+      basePath: serviceReq.*
+      jsonMaps:
+
+       - jsonPath: $.serviceReq.*.id
+
+       - jsonPath: $.serviceReq.*.file_name
+       
+       - jsonPath: $.serviceReq.*.tenantid
