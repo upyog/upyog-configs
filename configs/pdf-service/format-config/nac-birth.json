@@ -1,0 +1,84 @@
+{
+  "key": "nac-birth-certificate",
+  "config": {
+    "defaultStyle": {
+      "font": "TimesNewRoman"
+    },
+    "content": [
+      {
+        "style": "ws-head",
+        "table": {
+          "widths": [
+            "20%",
+            "60%",
+            "20%"
+          ],
+          "body": [
+            [
+              {
+                "stack": [
+                  {
+                    "image": "{{logokerala}}",
+                    "width": 70,
+                    "height": 70
+                  }
+                ]
+              },
+              {
+                "stack": [
+                  {
+                    "text": "{{form5}}",
+                    "style": "appendix-header-body"
+                  },
+                  {
+                    "text": "{{rule8}}",
+                    "style": "main-body-style"
+                  },
+                  {
+                    "text": "{{govtOfKerala}}",
+                    "style": "appendix-header-body"
+                  }
+                ]
+              },
+              {
+                "stack": [
+                  {
+                    "image": "{{logobirth}}",
+                    "width": 70,
+                    "height": 70
+                  }
+                ]
+              }
+            ]
+          ]
+        },
+        "layout": "noBorders"
+      }
+
+    ],
+    "styles": {
+      "pdf-header": {
+        "fillColor": "#F2F2F2",
+        "margin": [
+          -70,
+          -41,
+          -81,
+          10
+        ]
+      },
+      "appendix-header-body": {
+        "color": "#000000",
+        "bold": true,
+        "fontSize": 8,
+        "fontWeight": 400,
+        "alignment": "center"
+      },
+      "main-body-style": {
+        "color": "#000000",
+        "fontSize": 8,
+        "alignment": "center"
+      }
+    }
+
+  }
+}

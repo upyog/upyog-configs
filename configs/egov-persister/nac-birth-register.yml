@@ -1,0 +1,64 @@
+serviceMaps:
+  serviceName: nac-birth-services
+  mappings:
+    - version: 1.0
+      description: Persists save nac birth details in register_birth_details  table
+      fromTopic: save-nac-birth-register-topic
+      isTransaction: true
+      queryMaps:
+        - query: INSERT INTO public.eg_birth_nac_registry(id, registrationno, birthdetailsid, applicant_name_en, care_of_applicant_name_en, child_name_en, mother_name_en, dateofbirth, birth_place_en,
+            birth_districtid, birth_stateid, birth_villageid, birth_talukid, createdby, createdtime, lastmodifiedtime, lastmodifiedby, applicationtype, filestoreid, status, additionaldetail,
+            embeddedurl, dateofissue, tenantid, certificateno)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?);
+          basePath: NacBirthCertificate.*
+          jsonMaps:
+            - jsonPath: $.NacBirthCertificate.*.id
+
+            - jsonPath: $.NacBirthCertificate.*.registrationno
+
+            - jsonPath: $.NacBirthCertificate.*.birthdetailsid
+
+            - jsonPath: $.NacBirthCertificate.*.applicant_name_en
+
+            - jsonPath: $.NacBirthCertificate.*.care_of_applicant_name_en
+
+            - jsonPath: $.NacBirthCertificate.*.child_name_en
+
+            - jsonPath: $.NacBirthCertificate.*.mother_name_en
+
+            - jsonPath: $.NacBirthCertificate.*.dateofbirth
+
+            - jsonPath: $.NacBirthCertificate.*.birth_place_en
+
+            - jsonPath: $.NacBirthCertificate.*.birth_districtid
+
+            - jsonPath: $.NacBirthCertificate.*.birth_villageid
+
+            - jsonPath: $.NacBirthCertificate.*.birth_stateid
+
+            - jsonPath: $.NacBirthCertificate.*.birth_talukid
+
+            - jsonPath: $.NacBirthCertificate.*.createdby
+
+            - jsonPath: $.NacBirthCertificate.*.createdtime
+
+            - jsonPath: $.NacBirthCertificate.*.lastmodifiedtime
+
+            - jsonPath: $.NacBirthCertificate.*.lastmodifiedby
+
+            - jsonPath: $.NacBirthCertificate.*.applicationtype
+
+            - jsonPath: $.NacBirthCertificate.*.filestoreid
+
+            - jsonPath: $.NacBirthCertificate.*.status
+
+            - jsonPath: $.NacBirthCertificate.*.additionaldetail
+
+            - jsonPath: $.NacBirthCertificate.*.embeddedurl
+
+            - jsonPath: $.NacBirthCertificate.*.dateofissue
+
+            - jsonPath: $.NacBirthCertificate.*.tenantid
+
+            - jsonPath: $.NacBirthCertificate.*.certificateno
+

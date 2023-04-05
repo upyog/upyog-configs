@@ -1,0 +1,70 @@
+{
+  "key": "nac-birth-certificate",
+  "DataConfigs": {
+    "serviceName": "rainmaker-common",
+    "version": "1.0.0",
+    "baseKeyPath": "$.NacBirthCertificate.*",
+    "entityIdPath": "$.id",
+    "isCommonTableBorderRequired": true,
+    "mappings": [
+      {
+        "topic": "common-pdf-generation-3",
+        "mappings": [
+          {
+            "direct": [
+              {
+                "variable": "logokerala",
+                "url": "https://ulb-logos.s3.ap-south-1.amazonaws.com/kerala_logo.jpg",
+                "type": "image"
+              },
+              {
+                "variable": "logobirth",
+                "url": "https://ulb-logos.s3.ap-south-1.amazonaws.com/birth_death_logo.jpg",
+                "type": "image"
+              },
+              {
+                "variable": "form5",
+                "value": {
+                  "path": "PDF_BIRTH_FORM_NO_5"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-pdf",
+                  "locale": "en_IN"
+                }
+              },
+              {
+                "variable": "rule8",
+                "value": {
+                  "path": "PDF_BIRTH_LAST_RULE_8"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-pdf",
+                  "locale": "en_IN"
+                }
+              },
+              {
+                "variable": "govtOfKerala",
+                "value": {
+                  "path": "PDF_BIRTH_GOVERNMENT_OF_KERALA"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-pdf",
+                  "locale": "en_IN"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
