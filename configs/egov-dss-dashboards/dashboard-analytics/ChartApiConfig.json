@@ -19204,7 +19204,159 @@
       
     },
     "_comment": " "
-  }
+  },
+  
+  
+
+"averageTurnAroundTimePT": {
+  "chartName": "DSS_AVERAGE_TAT_PT",
+  "queries": [
+    {
+      "module": "PT",
+      "indexName": "property-services",
+      "aggrQuery": "{\"aggs\":{\"status\":{\"terms\":{\"field\":\"Data.history.state.applicationStatus.keyword\",\"include\":\"ACTIVE\"},\"aggs\":{\"Sum of created time\":{\"sum\":{\"field\":\"Data.auditDetails.createdTime\"}},\"Sum of modified time\":{\"sum\":{\"field\":\"Data.auditDetails.lastModifiedTime\"}},\"Time difference\":{\"bucket_script\":{\"buckets_path\":{\"createdTime\":\"Sum of created time\",\"modifiedTime\":\"Sum of modified time\"},\"script\":\"Math.round((params.modifiedTime - params.createdTime)/86400000*10)/10.0\"}},\"Total Application\":{\"value_count\":{\"field\":\"Data.propertyId.keyword\"}}}}}}",
+      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+      "dateRefField": "date"
+    }
+  ],
+  "chartType": "metric",
+  "valueType": "number",
+  "action": "division",
+  "documentType": "_doc",
+  "drillChart": "none",
+  "aggregationPaths": [
+    "Time difference",
+    "Total Application"
+  ],
+  
+  "_comment": " Average time for the service completion "
+},
+"averageTurnAroundTimeTL": {
+  "chartName": "DSS_AVERAGE_TAT_TL",
+  "queries": [
+    {
+      "module": "TL",
+      "indexName": "tlindex-v1",
+      "aggrQuery": "{\"aggs\":{\"status\":{\"terms\":{\"field\":\"Data.history.state.applicationStatus.keyword\",\"include\":\"APPROVED\"},\"aggs\":{\"Sum of created time\":{\"sum\":{\"field\":\"Data.tradelicense.auditDetails.createdTime\"}},\"Sum of modified time\":{\"sum\":{\"field\":\"Data.tradelicense.auditDetails.lastModifiedTime\"}},\"Time difference\":{\"bucket_script\":{\"buckets_path\":{\"createdTime\":\"Sum of created time\",\"modifiedTime\":\"Sum of modified time\"},\"script\":\"Math.round((params.modifiedTime - params.createdTime)/86400000*10)/10.0\"}},\"Total Application\":{\"value_count\":{\"field\":\"Data.tradelicense.applicationNumber.keyword\"}}}}}}",
+      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+      "dateRefField": "date"
+    }
+  ],
+  "chartType": "metric",
+  "valueType": "number",
+  "action": "division",
+  "documentType": "_doc",
+  "drillChart": "none",
+  "aggregationPaths": [
+    "Time difference",
+    "Total Application"
+  ],
+  
+  "_comment": " Average time for the service completion "
+},
+"averageTurnAroundTimeW&S": {
+  "chartName": "DSS_AVERAGE_TAT_W&S",
+  "queries": [
+    {
+      "module": "W&S",
+      "indexName": "water-services",
+      "aggrQuery": "{\"aggs\":{\"status\":{\"terms\":{\"field\":\"Data.history.state.applicationStatus.keyword\",\"include\":\"APPROVED\"},\"aggs\":{\"Sum of created time\":{\"sum\":{\"field\":\"Data.auditDetails.createdTime\"}},\"Sum of modified time\":{\"sum\":{\"field\":\"Data.auditDetails.lastModifiedTime\"}},\"Time difference\":{\"bucket_script\":{\"buckets_path\":{\"createdTime\":\"Sum of created time\",\"modifiedTime\":\"Sum of modified time\"},\"script\":\"Math.round((params.modifiedTime - params.createdTime)/86400000*10)/10.0\"}},\"Total Application\":{\"value_count\":{\"field\":\"Data.applicationNo.keyword\"}}}}}}",
+      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+      "dateRefField": "date"
+    },
+    {
+      "module": "W&S",
+      "indexName": "sewerage-services",
+      "aggrQuery": "{\"aggs\":{\"status\":{\"terms\":{\"field\":\"Data.history.state.applicationStatus.keyword\",\"include\":\"APPROVED\"},\"aggs\":{\"Sum of created time\":{\"sum\":{\"field\":\"Data.auditDetails.createdTime\"}},\"Sum of modified time\":{\"sum\":{\"field\":\"Data.auditDetails.lastModifiedTime\"}},\"Time difference\":{\"bucket_script\":{\"buckets_path\":{\"createdTime\":\"Sum of created time\",\"modifiedTime\":\"Sum of modified time\"},\"script\":\"Math.round((params.modifiedTime - params.createdTime)/86400000*10)/10.0\"}},\"Total Application\":{\"value_count\":{\"field\":\"Data.applicationNo.keyword\"}}}}}}",
+      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+      "dateRefField": "date"
+    }
+  ],
+  "chartType": "metric",
+  "valueType": "number",
+  "action": "division",
+  "documentType": "_doc",
+  "drillChart": "none",
+  "aggregationPaths": [
+    "Time difference",
+    "Total Application"
+  ],
+  
+  "_comment": " Average time for the service completion "
+},
+"averageTurnAroundTimeBirth": {
+  "chartName": "DSS_AVERAGE_TAT_BIRTH",
+  "queries": [
+    {
+      "module": "BIRTH-DEATH",
+      "indexName": "birth-cert-v1",
+      "aggrQuery": "{\"aggs\":{\"status\":{\"terms\":{\"field\":\"Data.applicationStatus.keyword\",\"include\":\"ACTIVE\"},\"aggs\":{\"Sum of created time\":{\"sum\":{\"field\":\"Data.auditDetails.createdTime\"}},\"Sum of modified time\":{\"sum\":{\"field\":\"Data.auditDetails.lastModifiedTime\"}},\"Time difference\":{\"bucket_script\":{\"buckets_path\":{\"createdTime\":\"Sum of created time\",\"modifiedTime\":\"Sum of modified time\"},\"script\":\"Math.round((params.modifiedTime - params.createdTime)/86400000*10)/10.0\"}},\"Total Application\":{\"value_count\":{\"field\":\"Data.applicationStatus.keyword\"}}}}}}",
+      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+      "dateRefField": "date"
+    }
+  ],
+  "chartType": "metric",
+  "valueType": "number",
+  "action": "division",
+  "documentType": "_doc",
+  "drillChart": "none",
+  "aggregationPaths": [
+    "Time difference",
+    "Total Application"
+  ],
+  
+  "_comment": " Average time for the service completion "
+},
+"averageTurnAroundTimeDeath": {
+  "chartName": "DSS_AVERAGE_TAT_DEATH",
+  "queries": [
+    {
+      "module": "BIRTH-DEATH",
+      "indexName": "death-cert-v1",
+      "aggrQuery":"{\"aggs\":{\"status\":{\"terms\":{\"field\":\"Data.applicationStatus.keyword\",\"include\":\"ACTIVE\"},\"aggs\":{\"Sum of created time\":{\"sum\":{\"field\":\"Data.auditDetails.createdTime\"}},\"Sum of modified time\":{\"sum\":{\"field\":\"Data.auditDetails.lastModifiedTime\"}},\"Time difference\":{\"bucket_script\":{\"buckets_path\":{\"createdTime\":\"Sum of created time\",\"modifiedTime\":\"Sum of modified time\"},\"script\":\"Math.round((params.modifiedTime - params.createdTime)/86400000*10)/10.0\"}},\"Total Application\":{\"value_count\":{\"field\":\"Data.applicationStatus.keyword\"}}}}}}",
+      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+      "dateRefField": "date"
+    }
+  ],
+  "chartType": "metric",
+  "valueType": "number",
+  "action": "division",
+  "documentType": "_doc",
+  "drillChart": "none",
+  "aggregationPaths": [
+    "Time difference",
+    "Total Application"
+  ],
+  
+  "_comment": " Average time for the service completion "
+},
+"averageTurnAroundTimeFireNOC": {
+  "chartName": "DSS_AVERAGE_TAT_FIRENOC",
+  "queries": [
+    {
+      "module": "FIRENOC",
+      "indexName": "firenoc-services",
+      "aggrQuery": "{\"aggs\":{\"status\":{\"terms\":{\"field\":\"Data.history.state.applicationStatus.keyword\",\"include\":\"APPROVED\"},\"aggs\":{\"Sum of created time\":{\"sum\":{\"field\":\"Data.auditDetails.createdTime\"}},\"Sum of modified time\":{\"sum\":{\"field\":\"Data.auditDetails.lastModifiedTime\"}},\"Time difference\":{\"bucket_script\":{\"buckets_path\":{\"createdTime\":\"Sum of created time\",\"modifiedTime\":\"Sum of modified time\"},\"script\":\"Math.round((params.modifiedTime - params.createdTime)/86400000*10)/10.0\"}},\"Total Application\":{\"value_count\":{\"field\":\"Data.fireNOCDetails.applicationNumber.keyword\"}}}}}}",
+      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+      "dateRefField": "date"
+    }
+  ],
+  "chartType": "metric",
+  "valueType": "number",
+  "action": "division",
+  "documentType": "_doc",
+  "drillChart": "none",
+  "aggregationPaths": [
+    "Time difference",
+    "Total Application"
+  ],
+  
+  "_comment": " Average time for the service completion "
+}
 
 
-} 
+
+
+}
+
+
