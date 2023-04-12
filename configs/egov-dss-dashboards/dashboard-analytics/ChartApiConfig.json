@@ -13138,14 +13138,14 @@
       "chartName": "NATIONAL_DSS_TOP_PERFORMING_STATES",
       "queries": [
         {
-          "module": "COMMON",
+          "module": "TL",
           "requestQueryMap": "{\r\n  \"module\" : \"module.keyword\", \n\"ulb\" : \"ulb.keyword\"}",
           "dateRefField": "",
           "indexName": "master-national-dashboard",
           "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"TL\"}},\"aggs\":{\"Target Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}}}"
         },
         {
-          "module": "COMMON",
+          "module": "TL",
           "dateRefField": "date",
           "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
           "indexName": "tl-national-dashboard",
@@ -13176,14 +13176,14 @@
       "chartName": "NATIONAL_DSS_BOTTOM_PERFORMING_STATES",
       "queries": [
         {
-          "module": "COMMON",
+          "module": "TL",
           "requestQueryMap": "{\r\n  \"module\" : \"module.keyword\", \n\"ulb\" : \"ulb.keyword\"}",
           "dateRefField": "",
           "indexName": "master-national-dashboard",
           "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"TL\"}},\"aggs\":{\"Target Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}}}"
         },
         {
-          "module": "COMMON",
+          "module": "TL",
           "dateRefField": "date",
           "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
           "indexName": "tl-national-dashboard",
