@@ -13058,7 +13058,7 @@
       "chartName": "DSS_TARGET_ACHIEVED",
       "queries": [
         {
-          "module": "COMMON",
+          "module": "MASTER",
           "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
           "dateRefField": "date",
           "indexName": "master-national-dashboard",
@@ -13066,7 +13066,7 @@
           "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"TL\"}},\"aggs\":{\"Target Collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
         },
         {
-          "module": "COMMON",
+          "module": "TL",
           "dateRefField": "date",
           "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
           "indexName": "tl-national-dashboard",
