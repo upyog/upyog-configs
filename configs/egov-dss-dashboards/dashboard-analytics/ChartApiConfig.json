@@ -2239,7 +2239,7 @@
     ],
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "",
+    "drillChart": "licenceTaxHeadsBreakupWard",
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Boundary",
@@ -2667,7 +2667,7 @@
     ],
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "",
+    "drillChart": "xptFyByWard",
     "plotLabel": "Boundary",
     "insight": {
     },
@@ -2757,7 +2757,7 @@
     ],
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "",
+    "drillChart": "xpgrStatusByWard",
     "plotLabel": "Boundary",
     "excludedColumns": ["withinSLA"],
     "computedFields": [
@@ -3388,7 +3388,7 @@
     ],
     "chartType": "table",
     "valueType": "number",
-    "drillChart": "",
+    "drillChart": "pgrStatusWardDrillDown",
     "drillFields": [
       ""
     ],
@@ -4101,7 +4101,7 @@
     ],
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "",
+    "drillChart": "wsFinancialIndicatorWard",
     "documentType": "_doc",
     "action": "",
     "plotLabel": "ULB",
@@ -4297,7 +4297,7 @@
     ],
     "chartType": "xtable",
     "valueType": "amount",
-    "drillChart": "",
+    "drillChart": "wsTaxHeadWard",
     "action": "",
     "plotLabel": "ULB",
     "postAggregationTheory" : "",
@@ -4911,7 +4911,7 @@
     ],
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "",
+    "drillChart": "wsConnectionAgeingWard",
     "action": "",
     "plotLabel": "ULB",
     "isPostResponseHandler": true,
@@ -5664,7 +5664,7 @@
     "chartType": "xtable",
     "valueType": "number",
     "isRoundOff": true,
-    "drillChart": "",
+    "drillChart": "fsmTotalReqByWard",
     "plotLabel": "ULB",
     "excludedColumns": ["ClosedWithInSla"],
     "computedFields": [
@@ -7161,7 +7161,7 @@
       {"key": "tenantId", "column": "ULB"}
     ],
     "chartType": "xtable",
-    "drillChart": "",
+    "drillChart": "mcReportByWard",
     "plotLabel": "ULB",
     "aggregationPaths": [
       "MC_TOTAL_COLLECTION",
@@ -8621,7 +8621,7 @@
     "postAggregationTheory" : "repsonseToDifferenceOfDates",    
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "",
+    "drillChart": "demandCollectionIndexWardRevenuev3",
     "drillFields": [
       "ward",
       ""
@@ -8880,7 +8880,7 @@
     ],
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "",
+    "drillChart": "taxHeadsBreakupWardRevenuev3",
     "drillFields": [
       "ward",
       ""
@@ -9377,7 +9377,7 @@
     ],
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "",
+    "drillChart": "xptFyByWardv3",
     "drillFields": [
       "ward",
       ""
@@ -10096,7 +10096,7 @@
     "valueType": "number",
     "action": "",
     "plotLabel": "ULBs",
-    "drillChart": "",
+    "drillChart": "nssOBPSServiceReportDrillDownWard",
     "aggregationPaths": [
       "Total_Collection",
       "Total_Plans_Scrutinized",
@@ -10871,7 +10871,7 @@
     "isPostResponseHandler": true,
     "postAggregationTheory" : "repsonseToDifferenceOfDates",
     "documentType": "_doc",
-    "drillChart": "",
+    "drillChart": "nssNOCServiceReportDrillDownWard",
     "aggregationPaths": [
       "firenoc_Total_Collection",
       "Total_Applications",
@@ -11542,7 +11542,7 @@
       "postAggregationTheory": "repsonseToDifferenceOfDates",
       "chartType": "xtable",
       "valueType": "number",
-      "drillChart": "",
+      "drillChart": "nssWsFinancialIndicatorWard",
       "documentType": "_doc",
       "action": "",
       "plotLabel": "ULB",
@@ -11743,7 +11743,7 @@
       ],
       "chartType": "table",
       "valueType": "amount",
-      "drillChart": "",
+      "drillChart": "nssWsTaxHeadWard",
       "action": "",
       "plotLabel": "ULB",
       "postAggregationTheory" : "",
@@ -12193,7 +12193,7 @@
         ],
         "chartType": "xtable",
         "valueType": "number",
-        "drillChart": "",
+        "drillChart": "nssWsConnectionAgeingWard",
         "action": "",
         "plotLabel": "ULB",
         "postAggregationTheory" : "",
@@ -12683,7 +12683,7 @@
         {"key": "ulb", "column": "ULB"}
       ],
       "chartType": "xtable",
-      "drillChart": "",
+      "drillChart": "mcReportByWardv3",
       "plotLabel": "ULB",
       "aggregationPaths": [
         
@@ -13080,12 +13080,9 @@
       "documentType": "_doc",
       "action": "percentage",
       "isRoundOff": true,
-      "preActionTheory":{
-        "Target Collection":"repsonseToDifferenceOfDates"
-      },
       "aggregationPaths": [
+	  "Target Collection",
         "Total Collection",
-        "Target Collection"
       ],
       "insight": {
         "chartResponseMap" : "tlTargetAchieved",
@@ -13397,7 +13394,7 @@
       ],
       "chartType": "xtable",
       "valueType": "number",
-      "drillChart": "",
+      "drillChart": "tlReportByWardv3",
       "plotLabel": "ULB",
       "aggregationPathsA": [
         "Approved",
@@ -13676,7 +13673,7 @@
       "postAggregationTheory" : "repsonseToDifferenceOfDates",
       "chartType": "xtable",
       "valueType": "number",
-      "drillChart": "",
+      "drillChart": "licenseIssuedWardRevenuev3",
       "documentType": "_doc",
       "action": "",
       "plotLabel": "ULB",
@@ -13917,7 +13914,7 @@
       ],
       "chartType": "xtable",
       "valueType": "amount",
-      "drillChart": "",
+      "drillChart": "licenceTaxHeadsBreakupWardv3",
       "documentType": "_doc",
       "action": "",
       "plotLabel": "ULB",
@@ -15881,7 +15878,7 @@
     "isPostResponseHandler": true,
     "postAggregationTheory" : "repsonseToDifferenceOfDates",
     "documentType": "_doc",
-    "drillChart": "",
+    "drillChart": "nationalPgrStatusDrillDownWard",
     "isRoundOff":true,
     "aggregationPaths": [
       "Open_Complaints",
@@ -16191,7 +16188,7 @@
     ],
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "",
+    "drillChart": "tlStatusByWard",
     "drillFields": [
       ""
     ],
@@ -16993,7 +16990,7 @@
     "postAggregationTheory" : "repsonseToDifferenceOfDates",
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "",
+    "drillChart": "xBirthDownloadByWard",
     "documentType": "_doc",
     "action": "",
     "plotLabel": "ULB",
@@ -17192,7 +17189,7 @@
     "postAggregationTheory" : "repsonseToDifferenceOfDates",
     "chartType": "table",
     "valueType": "number",
-    "drillChart": "",
+    "drillChart": "xDeathDownloadsByWard",
     "documentType": "_doc",
     "action": "",
     "plotLabel": "Ulb",
@@ -17588,7 +17585,7 @@
     "postAggregationTheory" : "repsonseToDifferenceOfDates",
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "",
+    "drillChart": "xNssBirthDownloadByWard",
     "documentType": "_doc",
     "action": "",
     "plotLabel": "ULB",
@@ -17835,7 +17832,7 @@
     "postAggregationTheory" : "repsonseToDifferenceOfDates",
     "chartType": "xtable",
     "valueType": "number",
-    "drillChart": "",
+    "drillChart": "xNssDeathDownloadByWard",
     "documentType": "_doc",
     "action": "",
     "plotLabel": "ULB",
@@ -19182,159 +19179,7 @@
       
     },
     "_comment": " "
-  },
-  
-  
-
-"averageTurnAroundTimePT": {
-  "chartName": "DSS_AVERAGE_TAT_PT",
-  "queries": [
-    {
-      "module": "PT",
-      "indexName": "property-services",
-      "aggrQuery": "{\"aggs\":{\"status\":{\"terms\":{\"field\":\"Data.history.state.applicationStatus.keyword\",\"include\":\"ACTIVE\"},\"aggs\":{\"Sum of created time\":{\"sum\":{\"field\":\"Data.auditDetails.createdTime\"}},\"Sum of modified time\":{\"sum\":{\"field\":\"Data.auditDetails.lastModifiedTime\"}},\"Time difference\":{\"bucket_script\":{\"buckets_path\":{\"createdTime\":\"Sum of created time\",\"modifiedTime\":\"Sum of modified time\"},\"script\":\"Math.round((params.modifiedTime - params.createdTime)/86400000*10)/10.0\"}},\"Total Application\":{\"value_count\":{\"field\":\"Data.propertyId.keyword\"}}}}}}",
-      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-      "dateRefField": "date"
-    }
-  ],
-  "chartType": "metric",
-  "valueType": "number",
-  "action": "division",
-  "documentType": "_doc",
-  "drillChart": "none",
-  "aggregationPaths": [
-    "Time difference",
-    "Total Application"
-  ],
-  
-  "_comment": " Average time for the service completion "
-},
-"averageTurnAroundTimeTL": {
-  "chartName": "DSS_AVERAGE_TAT_TL",
-  "queries": [
-    {
-      "module": "TL",
-      "indexName": "tlindex-v1",
-      "aggrQuery": "{\"aggs\":{\"status\":{\"terms\":{\"field\":\"Data.history.state.applicationStatus.keyword\",\"include\":\"APPROVED\"},\"aggs\":{\"Sum of created time\":{\"sum\":{\"field\":\"Data.tradelicense.auditDetails.createdTime\"}},\"Sum of modified time\":{\"sum\":{\"field\":\"Data.tradelicense.auditDetails.lastModifiedTime\"}},\"Time difference\":{\"bucket_script\":{\"buckets_path\":{\"createdTime\":\"Sum of created time\",\"modifiedTime\":\"Sum of modified time\"},\"script\":\"Math.round((params.modifiedTime - params.createdTime)/86400000*10)/10.0\"}},\"Total Application\":{\"value_count\":{\"field\":\"Data.tradelicense.applicationNumber.keyword\"}}}}}}",
-      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-      "dateRefField": "date"
-    }
-  ],
-  "chartType": "metric",
-  "valueType": "number",
-  "action": "division",
-  "documentType": "_doc",
-  "drillChart": "none",
-  "aggregationPaths": [
-    "Time difference",
-    "Total Application"
-  ],
-  
-  "_comment": " Average time for the service completion "
-},
-"averageTurnAroundTimeW&S": {
-  "chartName": "DSS_AVERAGE_TAT_W&S",
-  "queries": [
-    {
-      "module": "W&S",
-      "indexName": "water-services",
-      "aggrQuery": "{\"aggs\":{\"status\":{\"terms\":{\"field\":\"Data.history.state.applicationStatus.keyword\",\"include\":\"APPROVED\"},\"aggs\":{\"Sum of created time\":{\"sum\":{\"field\":\"Data.auditDetails.createdTime\"}},\"Sum of modified time\":{\"sum\":{\"field\":\"Data.auditDetails.lastModifiedTime\"}},\"Time difference\":{\"bucket_script\":{\"buckets_path\":{\"createdTime\":\"Sum of created time\",\"modifiedTime\":\"Sum of modified time\"},\"script\":\"Math.round((params.modifiedTime - params.createdTime)/86400000*10)/10.0\"}},\"Total Application\":{\"value_count\":{\"field\":\"Data.applicationNo.keyword\"}}}}}}",
-      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-      "dateRefField": "date"
-    },
-    {
-      "module": "W&S",
-      "indexName": "sewerage-services",
-      "aggrQuery": "{\"aggs\":{\"status\":{\"terms\":{\"field\":\"Data.history.state.applicationStatus.keyword\",\"include\":\"APPROVED\"},\"aggs\":{\"Sum of created time\":{\"sum\":{\"field\":\"Data.auditDetails.createdTime\"}},\"Sum of modified time\":{\"sum\":{\"field\":\"Data.auditDetails.lastModifiedTime\"}},\"Time difference\":{\"bucket_script\":{\"buckets_path\":{\"createdTime\":\"Sum of created time\",\"modifiedTime\":\"Sum of modified time\"},\"script\":\"Math.round((params.modifiedTime - params.createdTime)/86400000*10)/10.0\"}},\"Total Application\":{\"value_count\":{\"field\":\"Data.applicationNo.keyword\"}}}}}}",
-      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-      "dateRefField": "date"
-    }
-  ],
-  "chartType": "metric",
-  "valueType": "number",
-  "action": "division",
-  "documentType": "_doc",
-  "drillChart": "none",
-  "aggregationPaths": [
-    "Time difference",
-    "Total Application"
-  ],
-  
-  "_comment": " Average time for the service completion "
-},
-"averageTurnAroundTimeBirth": {
-  "chartName": "DSS_AVERAGE_TAT_BIRTH",
-  "queries": [
-    {
-      "module": "BIRTH-DEATH",
-      "indexName": "birth-cert-v1",
-      "aggrQuery": "{\"aggs\":{\"status\":{\"terms\":{\"field\":\"Data.applicationStatus.keyword\",\"include\":\"ACTIVE\"},\"aggs\":{\"Sum of created time\":{\"sum\":{\"field\":\"Data.auditDetails.createdTime\"}},\"Sum of modified time\":{\"sum\":{\"field\":\"Data.auditDetails.lastModifiedTime\"}},\"Time difference\":{\"bucket_script\":{\"buckets_path\":{\"createdTime\":\"Sum of created time\",\"modifiedTime\":\"Sum of modified time\"},\"script\":\"Math.round((params.modifiedTime - params.createdTime)/86400000*10)/10.0\"}},\"Total Application\":{\"value_count\":{\"field\":\"Data.applicationStatus.keyword\"}}}}}}",
-      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-      "dateRefField": "date"
-    }
-  ],
-  "chartType": "metric",
-  "valueType": "number",
-  "action": "division",
-  "documentType": "_doc",
-  "drillChart": "none",
-  "aggregationPaths": [
-    "Time difference",
-    "Total Application"
-  ],
-  
-  "_comment": " Average time for the service completion "
-},
-"averageTurnAroundTimeDeath": {
-  "chartName": "DSS_AVERAGE_TAT_DEATH",
-  "queries": [
-    {
-      "module": "BIRTH-DEATH",
-      "indexName": "death-cert-v1",
-      "aggrQuery":"{\"aggs\":{\"status\":{\"terms\":{\"field\":\"Data.applicationStatus.keyword\",\"include\":\"ACTIVE\"},\"aggs\":{\"Sum of created time\":{\"sum\":{\"field\":\"Data.auditDetails.createdTime\"}},\"Sum of modified time\":{\"sum\":{\"field\":\"Data.auditDetails.lastModifiedTime\"}},\"Time difference\":{\"bucket_script\":{\"buckets_path\":{\"createdTime\":\"Sum of created time\",\"modifiedTime\":\"Sum of modified time\"},\"script\":\"Math.round((params.modifiedTime - params.createdTime)/86400000*10)/10.0\"}},\"Total Application\":{\"value_count\":{\"field\":\"Data.applicationStatus.keyword\"}}}}}}",
-      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-      "dateRefField": "date"
-    }
-  ],
-  "chartType": "metric",
-  "valueType": "number",
-  "action": "division",
-  "documentType": "_doc",
-  "drillChart": "none",
-  "aggregationPaths": [
-    "Time difference",
-    "Total Application"
-  ],
-  
-  "_comment": " Average time for the service completion "
-},
-"averageTurnAroundTimeFireNOC": {
-  "chartName": "DSS_AVERAGE_TAT_FIRENOC",
-  "queries": [
-    {
-      "module": "FIRENOC",
-      "indexName": "firenoc-services",
-      "aggrQuery": "{\"aggs\":{\"status\":{\"terms\":{\"field\":\"Data.history.state.applicationStatus.keyword\",\"include\":\"APPROVED\"},\"aggs\":{\"Sum of created time\":{\"sum\":{\"field\":\"Data.auditDetails.createdTime\"}},\"Sum of modified time\":{\"sum\":{\"field\":\"Data.auditDetails.lastModifiedTime\"}},\"Time difference\":{\"bucket_script\":{\"buckets_path\":{\"createdTime\":\"Sum of created time\",\"modifiedTime\":\"Sum of modified time\"},\"script\":\"Math.round((params.modifiedTime - params.createdTime)/86400000*10)/10.0\"}},\"Total Application\":{\"value_count\":{\"field\":\"Data.fireNOCDetails.applicationNumber.keyword\"}}}}}}",
-      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-      "dateRefField": "date"
-    }
-  ],
-  "chartType": "metric",
-  "valueType": "number",
-  "action": "division",
-  "documentType": "_doc",
-  "drillChart": "none",
-  "aggregationPaths": [
-    "Time difference",
-    "Total Application"
-  ],
-  
-  "_comment": " Average time for the service completion "
-}
-
-
+  }
 
 
 }
-
-
