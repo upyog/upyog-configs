@@ -19177,7 +19177,38 @@
       
     },
     "_comment": " "
-  }
-
-
+  },
+  "ptStipulatedDelivery": {
+      "chartName": "DSS_STIPULATED_DELIVERY_PT",
+      "queries": [
+        {
+          "module": "PT",
+          "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
+          "dateRefField": "date",
+          "indexName": "pt-national-dashboard",
+          "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"PT\"}},\"aggs\":{\"Stipulated Delivery \":{\"sum\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
+        }
+      ],
+      "chartType": "metric",
+      "valueType": "amount",
+      "action": "",
+      "drillChart": "none",
+      "documentType": "_doc",
+      "aggregationPaths": [
+        "Target Collection"
+      ],
+      "isDayUnit": true,
+      "postAggregationTheory" : "repsonseToDifferenceOfDates",
+      "insight": {
+        "chartResponseMap" : "ptStipulatedDelivery",
+        "action" : "differenceOfNumbers",
+        "upwardIndicator" : "positive",
+        "downwardIndicator" : "negative",
+        "textMessage" : "$indicator$value% than last $insightInterval",
+        "colorCode" : "#228B22",
+        "insightInterval" : "year",
+        "isRoundOff": true
+      },
+      "_comment": " "
+    }
 }
