@@ -357,6 +357,14 @@
                   "chartType": "metric",
                   "filter": "",
                   "headers": []
+                },
+                {
+                  "id": "dssRejectionRateOverview",
+                  "name": "DSS_REJECTION_RATE_OVERVIEW",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
                 }
               ]
             },
@@ -1091,11 +1099,10 @@
                   "filter": "",
                   "headers": []
                 },
-
 				{
 
-                  "id": "ptStipulatedDelivery",
-                  "name": "DSS_STIPULATED_DELIVERY_PT",
+                  "id": "avgDaysforLicenseIssue",
+                  "name": "DSS_AVG_DAYS_FOR_LICENSE",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -6342,6 +6349,14 @@
                   "chartType": "metric",
                   "filter": "",
                   "headers": []
+                },
+				{
+                  "id": "avgDaysforLicenseIssue",
+                  "name": "DSS_AVG_DAYS_FOR_LICENSE",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
                 }
 			
               ]
@@ -6666,6 +6681,14 @@
 				 {
                   "id": "slaComplainceNOC",
                   "name": "DSS_SLA_COMPLAINCE_NOC",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+				{
+                  "id": "avgDaysforLicenseIssue",
+                  "name": "DSS_AVG_DAYS_FOR_LICENSE",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -7002,6 +7025,14 @@
                 {
                   "id": "nssWsTargetAchieved",
                   "name": "NSS_WS_TARGET_ACHIEVED",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+				{
+                  "id": "avgDaysforLicenseIssue",
+                  "name": "DSS_AVG_DAYS_FOR_LICENSE",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -7743,6 +7774,14 @@
 				{
                   "id": "growthRateNonTaxRevenueCollection",
                   "name": "DSS_GROWTH_RATE_NON_TAX_REVENUE_COLLECTION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+				{
+                  "id": "avgDaysforLicenseIssue",
+                  "name": "DSS_AVG_DAYS_FOR_LICENSE",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -8684,13 +8723,62 @@
             }
           ]
         },
-
         {
           "row": 5,
           "name": "NATIONAL_DSS_SERVICE",
           "vizArray": [
             {
               "id": 511,
+              "name": "NATIONAL_DSS_PGR_TOP_3_PERFORMING_STATES_SLA_ACHIEVEMENT",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "performing-metric",
+              "noUnit": false,
+              "isCollapsible": false,
+              "label": "",
+              "charts": [
+                {
+                  "id": "topPerformingSLAStatesPGR",
+                  "name": "NATIONAL_DSS_PGR_TOP_3_PERFORMING_STATES_SLA_ACHIEVEMENT",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            },
+            {
+              "id": 512,
+              "name": "NATIONAL_DSS_PGR_BOTTOM_3_PERFORMING_STATES_SLA_ACHIEVEMENT",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "performing-metric",
+              "noUnit": false,
+              "isCollapsible": false,
+              "label": "",
+              "charts": [
+                {
+                  "id": "bottomPerformingSLAStatesPGR",
+                  "name": "NATIONAL_DSS_PGR_BOTTOM_3_PERFORMING_STATES_SLA_ACHIEVEMENT",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 6,
+          "name": "NATIONAL_DSS_SERVICE",
+          "vizArray": [
+            {
+              "id": 611,
               "name": "Service Report",
               "dimensions": {
                 "height": 350,
@@ -9044,6 +9132,14 @@
                   "chartType": "metric",
                   "filter": "",
                   "headers": []
+                },
+				{
+                  "id": "avgDaysforLicenseIssue",
+                  "name": "DSS_AVG_DAYS_FOR_LICENSE",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
                 }
               ]
             },
@@ -9183,6 +9279,14 @@
 				{
                   "id": "slaComplainceDeath",
                   "name": "DSS_SLA_COMPLAINCE_DEATH",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+				{
+                  "id": "avgDaysforLicenseIssue",
+                  "name": "DSS_AVG_DAYS_FOR_LICENSE",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
