@@ -8160,98 +8160,98 @@
   "queries": [
     {
       "module": "PT",
-      "dateRefField": "date",
+      "dateRefField": "",
       "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
       "indexName": "pt-national-dashboard",
       "aggrQuery": "{\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}"
     },
   {
       "module": "PT",
-      "dateRefField": "date", 
+      "dateRefField": "",
       "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
       "indexName": "pt-national-dashboard",
       "aggrQuery": "{\"aggs\":{\"TotalApplications\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}"
     },
     {
       "module": "OBPS",
-      "dateRefField": "date",
+      "dateRefField": "",
       "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
       "indexName": "obps-national-dashboard",
       "aggrQuery": "{\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}"
     },
   {
       "module": "OBPS",
-      "dateRefField": "date",
+      "dateRefField": "",
       "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
       "indexName": "obps-national-dashboard",
       "aggrQuery": "{\"aggs\":{\"TotalApplications\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}"
     },
     {
       "module": "WS",
-      "dateRefField": "date",
+      "dateRefField": "",
       "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
       "indexName": "ws-national-dashboard",
       "aggrQuery": "{\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}"
     },
   {
       "module": "WS",
-      "dateRefField": "date",
+      "dateRefField": "",
       "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
       "indexName": "ws-national-dashboard",
       "aggrQuery": "{\"aggs\":{\"TotalApplications\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}"
     },
     {
       "module": "TL",
-      "dateRefField": "date",
+      "dateRefField": "",
       "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
       "indexName": "tl-national-dashboard",
       "aggrQuery": "{\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}"
     },
   {
       "module": "TL",
-      "dateRefField": "date",
+      "dateRefField": "",
       "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
       "indexName": "tl-national-dashboard",
       "aggrQuery": "{\"aggs\":{\"TotalApplications\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}"
     },
     {
       "module": "FIRENOC",
-      "dateRefField": "date",
+      "dateRefField": "",
       "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
       "indexName": "firenoc-national-dashboard",
       "aggrQuery": "{\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}"
     },
   {
       "module": "FIRENOC",
-      "dateRefField": "date",
+      "dateRefField": "",
       "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
       "indexName": "firenoc-national-dashboard",
       "aggrQuery": "{\"aggs\":{\"TotalApplications\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}"
     },
     {
       "module": "BIRTH",
-      "dateRefField": "date",
+      "dateRefField": "",
       "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
       "indexName": "birth-cert-national-dashboard",
       "aggrQuery": "{\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}"
     },
   {
       "module": "BIRTH",
-      "dateRefField": "date",
+      "dateRefField": "",
       "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
       "indexName": "birth-cert-national-dashboard",
       "aggrQuery": "{\"aggs\":{\"TotalApplications\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}"
     },
     {
       "module": "DEATH",
-      "dateRefField": "date",
+      "dateRefField": "",
       "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
       "indexName": "death-cert-national-dashboard",
       "aggrQuery": "{\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}"
     },
   {
       "module": "DEATH",
-      "dateRefField": "date",
+      "dateRefField": "",
       "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
       "indexName": "death-cert-national-dashboard",
       "aggrQuery": "{\"aggs\":{\"TotalApplications\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}"
@@ -14488,7 +14488,7 @@
     "documentType": "_doc",
     "aggregationPaths": [
 	"liveUlbsCount",
-      "TotalCollection",
+      "TotalCollection"
     ],
     "isCumulative": false,
     "interval": "month",
@@ -19234,203 +19234,16 @@
     },
     "_comment": " "
   },
-  
-  "dssRejectionRateOverview": {
-    "chartName": "DSS_REJECTION_RATE_OVERVIEW",
-    "queries": [
-      {
-        "module": "PT",
-        "indexName": "property-services",
-        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \r\n  \"district\" : \"Data.tenantData.city.districtCode\", \r\n\"tenantId\" : \"Data.tenantId\" \r\n}",
-        "aggrQuery": "{\"query\": {\"bool\": {\"must_not\": [{\"term\": {\"Data.tenantId.keyword\": \"pg.testing\"}}]}},\"aggs\": {\"rejectstatus\": {\"filter\": {\"term\": {\"Data.history.state.applicationStatus.keyword\": \"REJECTED\"}},\"aggs\": {\"Rejected Applications\": {\"value_count\": {\"field\": \"Data.tenantId.keyword\"}}}},\"Total_Applications\": {\"value_count\": {\"field\": \"Data.tenantId.keyword\"}}}}",
-        "dateRefField": "Data.@timestamp"
-      },
-      {
-        "module": "TL",
-        "indexName": "tlindex-v1",
-        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \r\n  \"district\" : \"Data.tenantData.city.districtCode\", \r\n\"tenantId\" : \"Data.tradelicense.tenantId.keyword\" \r\n}",
-        "aggrQuery": "{\"query\": {\"bool\": {\"must_not\": [{\"term\": {\"Data.tradelicense.tenantid.keyword\": \"pg.testing\"}}]}},\"aggs\": {\"rejectstatus\": {\"filter\": {\"term\": {\"Data.history.state.applicationStatus.keyword\": \"REJECTED\"}},\"aggs\": {\"Rejected Applications\": {\"value_count\": {\"field\": \"Data.tradelicense.applicationNumber.keyword\"}}}},\"Total_Applications\": {\"value_count\": {\"field\": \"Data.tradelicense.applicationNumber.keyword\"}}}}",
-        "dateRefField": "Data.tradelicense.applicationDate" 
-      },
-      {
-        "module": "FSM",
-        "indexName": "fsm",
-        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \r\n  \"district\" : \"Data.tenantData.city.districtCode\", \r\n\"tenantId\" : \"Data.fsm.tenantId\" \r\n}",
-        "aggrQuery": "{\"query\": {\"bool\": {\"must_not\": [{\"term\": {\"Data.tenantId.keyword\": \"pg.testing\"}}]}},\"aggs\": {\"rejectstatus\": {\"filter\": {\"term\": {\"Data.history.state.applicationStatus.keyword\": \"DSO_REJECTED\"}},\"aggs\": {\"Rejected Applications\": {\"value_count\": {\"field\": \"Data.fsm.applicationNo.keyword\"}}}},\"Total_Applications\": {\"value_count\": {\"field\": \"Data.fsm.applicationNo.keyword\"}}}}",
-        "dateRefField": "Data.fsm.@timestamp"
-      },
-      {
-        "module": "PGR",
-        "indexName": "pgr-services",
-        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \r\n  \"module\" : \"businessService.keyword\", \n\"tenantId\" : \"Data.service.tenantId\"}",
-        "aggrQuery": "{\"query\": {\"bool\": {\"must_not\": [{\"term\": {\"Data.service.tenantId.keyword\": \"pg.testing\"}}]}},\"aggs\": {\"rejectstatus\": {\"filter\": {\"term\": {\"Data.history.state.applicationStatus.keyword\": \"REJECTED\"}},\"aggs\": {\"Rejected Applications\": {\"value_count\": {\"field\": \"Data.service.tenantId.keyword\"}}}},\"Total_Applications\": {\"value_count\": {\"field\": \"Data.service.tenantId.keyword\"}}}}",
-        "dateRefField": "Data.@timestamp"
-      },
-      {
-        "module": "W&S",
-        "indexName": "water-services",
-        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"tenantId\" : \"Data.tenantId.keyword\" \r\n}",
-        "aggrQuery": "{\"query\": {\"bool\": {\"must_not\": [{\"term\": {\"Data.tenantId.keyword\": \"pg.testing\"}}]}},\"aggs\": {\"rejectstatus\": {\"filter\": {\"term\": {\"Data.history.state.applicationStatus.keyword\": \"REJECTED\"}},\"aggs\": {\"Rejected Applications\": {\"value_count\": {\"field\": \"Data.tenantId.keyword\"}}}},\"Total_Applications\": {\"value_count\": {\"field\": \"Data.tenantId.keyword\"}}}}",
-        "dateRefField": "Data.@timestamp"
-      },
-      {
-        "module": "W&S",
-        "indexName": "sewerage-services",
-        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"tenantId\" : \"Data.tenantId.keyword\" \r\n}",
-        "aggrQuery": "{\"query\": {\"bool\": {\"must_not\": [{\"term\": {\"Data.tenantId.keyword\": \"pg.testing\"}}]}},\"aggs\": {\"rejectstatus\": {\"filter\": {\"term\": {\"Data.history.state.applicationStatus.keyword\": \"REJECTED\"}},\"aggs\": {\"Rejected Applications\": {\"value_count\": {\"field\": \"Data.tenantId.keyword\"}}}},\"Total_Applications\": {\"value_count\": {\"field\": \"Data.tenantId.keyword\"}}}}",
-        "dateRefField": "Data.@timestamp"
-      },
-      {
-        "module": "FIRENOC",
-        "indexName": "firenoc-services",
-        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"tenantId\" : \"Data.tenantId\", \"district\" : \"Data.tenantData.city.districtCode\"}",
-        "aggrQuery": "{\"query\": {\"bool\": {\"must_not\": [{\"term\": {\"Data.tenantId.keyword\": \"pg.testing\"}}]}},\"aggs\": {\"rejectstatus\": {\"filter\": {\"term\": {\"Data.history.state.applicationStatus.keyword\": \"REJECTED\"}},\"aggs\": {\"Rejected Applications\": {\"value_count\": {\"field\": \"Data.tenantId.keyword\"}}}},\"Total_Applications\": {\"value_count\": {\"field\": \"Data.tenantId.keyword\"}}}}",
-        "dateRefField": "Data.auditDetails.createdTime"
-      },
-      {
-        "module": "OBPS",
-        "indexName": "bpa-index",
-        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"tenantId\" : \"Data.tenantId\" \r\n}",
-        "aggrQuery": "{\"query\": {\"bool\": {\"must_not\": [{\"term\": {\"Data.tenantId.keyword\": \"pg.testing\"}}]}},\"aggs\": {\"rejectstatus\": {\"filter\": {\"term\": {\"Data.history.state.applicationStatus.keyword\": \"REJECTED\"}},\"aggs\": {\"Rejected Applications\": {\"value_count\": {\"field\": \"Data.tenantId.keyword\"}}}},\"Total_Applications\": {\"value_count\": {\"field\": \"Data.tenantId.keyword\"}}}}",
-        "dateRefField": "Data.@timestamp"
-      },
-      {
-        "module": "BND",
-        "indexName": "birth-cert-v1",
-        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \r\n  \"district\" : \"Data.tenantData.city.districtCode\", \r\n\"tenantId\" : \"Data.tenantId.keyword\" \r\n}", 
-        "aggrQuery": "{\"query\": {\"bool\": {\"must_not\": [{\"term\": {\"Data.tenantId.keyword\": \"pg.testing\"}}]}},\"aggs\": {\"rejectstatus\": {\"filter\": {\"term\": {\"Data.applicationStatus.keyword\": \"REJECTED\"}},\"aggs\": {\"Rejected Applications\": {\"value_count\": {\"field\": \"Data.tenantId.keyword\"}}}},\"Total_Applications\": {\"value_count\": {\"field\": \"Data.tenantId.keyword\"}}}}",
-        "dateRefField": "Data.dateofissue"
-      },
-      {
-       "module": "BND",
-       "indexName": "death-cert-v1",
-       "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \r\n  \"district\" : \"Data.tenantData.city.districtCode\", \r\n\"tenantId\" : \"Data.tenantId.keyword\" \r\n}", 
-       "aggrQuery": "{\"query\": {\"bool\": {\"must_not\": [{\"term\": {\"Data.tenantId.keyword\": \"pg.testing\"}}]}},\"aggs\": {\"rejectstatus\": {\"filter\": {\"term\": {\"Data.applicationStatus.keyword\": \"REJECTED\"}},\"aggs\": {\"Rejected Applications\": {\"value_count\": {\"field\": \"Data.tenantId.keyword\"}}}},\"Total_Applications\": {\"value_count\": {\"field\": \"Data.tenantId.keyword\"}}}}",
-       "dateRefField": "Data.dateofissue"
-      }
-    ],
-    "chartType": "metric",
-    "valueType": "percentage",
-    "drillChart": "none",
-    "documentType": "_doc",
-    "action": "percentage",
-    "aggregationPaths": [
-      "Rejected Applications",
-      "Total Applications"
-    ],
-    "_comment": " Rejection Rate Percentage Overview"
-  },
-"topPerformingSLAStatesPGR": {
-  "chartName": "NATIONAL_DSS_PGR_TOP_3_PERFORMING_STATES_SLA_ACHIEVEMENT",
-  "queries": [
-    {
-      "module": "PGR",
-      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-      "dateRefField": "date",
-      "indexName": "pgr-national-dashboard",
-      "aggrQuery": "{\"aggs\":{\"status\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"ApplicationsapprovedwithinSLA\":{\"sum\":{\"field\":\"todaysResolvedComplaintsForDepartment\"}},\"TotalApplications\":{\"sum\":{\"field\":\"todaysComplaintsForCategory\"}}}}}}"
-    }
-  ],
-  "chartType": "perform",
-  "valueType": "percentage",
-  "drillChart": "none",
-  "documentType": "_doc",
-  "action": "percentage",
-  "plotLabel": "NATIONAL_DSS_SLA_ACHIEVED",
-  "order": "desc",
-  "limit": 3,
-  "isRoundOff": true,
-  "aggregationPaths": [
-    "ApplicationsApprovedwithinSLA",
-    "TotalApplications"
-  ],		
-  "insight": {
-  },
-  "_comment": "Top Performing Ulbs for SLA achieved"
-},
-"bottomPerformingSLAStatesPGR": {
-  "chartName": "NATIONAL_DSS_PGR_BOTTOM_3_PERFORMING_STATES_SLA_ACHIEVEMENT",
-  "queries": [
-    {
-      "module": "PGR",
-      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-      "dateRefField": "date",
-      "indexName": "pgr-national-dashboard",
-      "aggrQuery": "{\"aggs\":{\"status\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"ApplicationsapprovedwithinSLA\":{\"sum\":{\"field\":\"todaysResolvedComplaintsForDepartment\"}},\"TotalApplications\":{\"sum\":{\"field\":\"todaysComplaintsForCategory\"}}}}}}"
-    }
-  ],
-  "chartType": "perform",
-  "valueType": "percentage",
-  "drillChart": "none",
-  "documentType": "_doc",
-  "action": "percentage",
-  "plotLabel": "NATIONAL_DSS_SLA_ACHIEVED",
-  "order": "asc",
-  "limit": 3,
-  "isRoundOff": true,
-  "aggregationPaths": [
-    "ApplicationsApprovedwithinSLA",
-    "TotalApplications"
-  ],
-  		
-  "insight": {
-  },
-  "_comment": "Bottom Performing Ulbs for SLA achieved"
-},
-
-"avgDaysforLicenseIssue": {
-      "chartName": "DSS_AVG_DAYS_FOR_LICENSE",
+  "ptStipulatedDelivery": {
+      "chartName": "DSS_STIPULATED_DELIVERY_PT",
       "queries": [
         {
           "module": "PT",
           "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
           "dateRefField": "date",
           "indexName": "pt-national-dashboard",
-          "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"PT\"}},\"aggs\":{\"Average Days to Issue License\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
-        },
-		{
-          "module": "TL",
-          "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-          "dateRefField": "date",
-          "indexName": "tl-national-dashboard",
-          "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"TL\"}},\"aggs\":{\"Average Days to Issue License\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
-        },
-		{
-          "module": "Birth",
-          "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-          "dateRefField": "date",
-          "indexName": "birth-cert-national-dashboard",
-          "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"BIRTH\"}},\"aggs\":{\"Average Days to Issue License\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
-        },
-		{
-          "module": "Death",
-          "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-          "dateRefField": "date",
-          "indexName": "death-cert-national-dashboard",
-          "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"DEATH\"}},\"aggs\":{\"Average Days to Issue License\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
-        },
-		{
-          "module": "W&S",
-          "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-          "dateRefField": "date",
-          "indexName": "ws-national-dashboard",
-          "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"WS\"}},\"aggs\":{\"Average Days to Issue License\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
-        },
-		{
-          "module": "OBPS",
-          "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-          "dateRefField": "date",
-          "indexName": "obps-national-dashboard",
-          "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"OBPS\"}},\"aggs\":{\"Average Days to Issue License\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
-        },
-		{
-          "module": "FIRENOC",
-          "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-          "dateRefField": "date",
-          "indexName": "firenoc-national-dashboard",
-          "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"FIRENOC\"}},\"aggs\":{\"Average Days to Issue License\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
+          "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"PT\"}},\"aggs\":{\"Stipulated Delivery\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
         }
-		
       ],
       "chartType": "metric",
       "valueType": "number",
@@ -19438,11 +19251,8 @@
       "drillChart": "none",
       "documentType": "_doc",
       "aggregationPaths": [
-        "Average Days to Issue License"
+        "Stipulated Delivery"
       ],
       "_comment": " "
     }
-
-
-
 }
