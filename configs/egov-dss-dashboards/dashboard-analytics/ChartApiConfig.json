@@ -19234,6 +19234,148 @@
     },
     "_comment": " "
   },
+
+
+  
+  "dssRejectionRateOverview": {
+    "chartName": "DSS_REJECTION_RATE_OVERVIEW",
+    "queries": [
+      {
+        "module": "PT",
+        "indexName": "property-services",
+        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \r\n  \"district\" : \"Data.tenantData.city.districtCode\", \r\n\"tenantId\" : \"Data.tenantId\" \r\n}",
+        "aggrQuery": "{\"query\": {\"bool\": {\"must_not\": [{\"term\": {\"Data.tenantId.keyword\": \"pg.testing\"}}]}},\"aggs\": {\"rejectstatus\": {\"filter\": {\"term\": {\"Data.history.state.applicationStatus.keyword\": \"REJECTED\"}},\"aggs\": {\"Rejected Applications\": {\"value_count\": {\"field\": \"Data.tenantId.keyword\"}}}},\"Total_Applications\": {\"value_count\": {\"field\": \"Data.tenantId.keyword\"}}}}",
+        "dateRefField": "Data.@timestamp"
+      },
+      {
+        "module": "TL",
+        "indexName": "tlindex-v1",
+        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \r\n  \"district\" : \"Data.tenantData.city.districtCode\", \r\n\"tenantId\" : \"Data.tradelicense.tenantId.keyword\" \r\n}",
+        "aggrQuery": "{\"query\": {\"bool\": {\"must_not\": [{\"term\": {\"Data.tradelicense.tenantid.keyword\": \"pg.testing\"}}]}},\"aggs\": {\"rejectstatus\": {\"filter\": {\"term\": {\"Data.history.state.applicationStatus.keyword\": \"REJECTED\"}},\"aggs\": {\"Rejected Applications\": {\"value_count\": {\"field\": \"Data.tradelicense.applicationNumber.keyword\"}}}},\"Total_Applications\": {\"value_count\": {\"field\": \"Data.tradelicense.applicationNumber.keyword\"}}}}",
+        "dateRefField": "Data.tradelicense.applicationDate" 
+      },
+      {
+        "module": "FSM",
+        "indexName": "fsm",
+        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \r\n  \"district\" : \"Data.tenantData.city.districtCode\", \r\n\"tenantId\" : \"Data.fsm.tenantId\" \r\n}",
+        "aggrQuery": "{\"query\": {\"bool\": {\"must_not\": [{\"term\": {\"Data.tenantId.keyword\": \"pg.testing\"}}]}},\"aggs\": {\"rejectstatus\": {\"filter\": {\"term\": {\"Data.history.state.applicationStatus.keyword\": \"DSO_REJECTED\"}},\"aggs\": {\"Rejected Applications\": {\"value_count\": {\"field\": \"Data.fsm.applicationNo.keyword\"}}}},\"Total_Applications\": {\"value_count\": {\"field\": \"Data.fsm.applicationNo.keyword\"}}}}",
+        "dateRefField": "Data.fsm.@timestamp"
+      },
+      {
+        "module": "PGR",
+        "indexName": "pgr-services",
+        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \r\n  \"module\" : \"businessService.keyword\", \n\"tenantId\" : \"Data.service.tenantId\"}",
+        "aggrQuery": "{\"query\": {\"bool\": {\"must_not\": [{\"term\": {\"Data.service.tenantId.keyword\": \"pg.testing\"}}]}},\"aggs\": {\"rejectstatus\": {\"filter\": {\"term\": {\"Data.history.state.applicationStatus.keyword\": \"REJECTED\"}},\"aggs\": {\"Rejected Applications\": {\"value_count\": {\"field\": \"Data.service.tenantId.keyword\"}}}},\"Total_Applications\": {\"value_count\": {\"field\": \"Data.service.tenantId.keyword\"}}}}",
+        "dateRefField": "Data.@timestamp"
+      },
+      {
+        "module": "W&S",
+        "indexName": "water-services",
+        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"tenantId\" : \"Data.tenantId.keyword\" \r\n}",
+        "aggrQuery": "{\"query\": {\"bool\": {\"must_not\": [{\"term\": {\"Data.tenantId.keyword\": \"pg.testing\"}}]}},\"aggs\": {\"rejectstatus\": {\"filter\": {\"term\": {\"Data.history.state.applicationStatus.keyword\": \"REJECTED\"}},\"aggs\": {\"Rejected Applications\": {\"value_count\": {\"field\": \"Data.tenantId.keyword\"}}}},\"Total_Applications\": {\"value_count\": {\"field\": \"Data.tenantId.keyword\"}}}}",
+        "dateRefField": "Data.@timestamp"
+      },
+      {
+        "module": "W&S",
+        "indexName": "sewerage-services",
+        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"tenantId\" : \"Data.tenantId.keyword\" \r\n}",
+        "aggrQuery": "{\"query\": {\"bool\": {\"must_not\": [{\"term\": {\"Data.tenantId.keyword\": \"pg.testing\"}}]}},\"aggs\": {\"rejectstatus\": {\"filter\": {\"term\": {\"Data.history.state.applicationStatus.keyword\": \"REJECTED\"}},\"aggs\": {\"Rejected Applications\": {\"value_count\": {\"field\": \"Data.tenantId.keyword\"}}}},\"Total_Applications\": {\"value_count\": {\"field\": \"Data.tenantId.keyword\"}}}}",
+        "dateRefField": "Data.@timestamp"
+      },
+      {
+        "module": "FIRENOC",
+        "indexName": "firenoc-services",
+        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"tenantId\" : \"Data.tenantId\", \"district\" : \"Data.tenantData.city.districtCode\"}",
+        "aggrQuery": "{\"query\": {\"bool\": {\"must_not\": [{\"term\": {\"Data.tenantId.keyword\": \"pg.testing\"}}]}},\"aggs\": {\"rejectstatus\": {\"filter\": {\"term\": {\"Data.history.state.applicationStatus.keyword\": \"REJECTED\"}},\"aggs\": {\"Rejected Applications\": {\"value_count\": {\"field\": \"Data.tenantId.keyword\"}}}},\"Total_Applications\": {\"value_count\": {\"field\": \"Data.tenantId.keyword\"}}}}",
+        "dateRefField": "Data.auditDetails.createdTime"
+      },
+      {
+        "module": "OBPS",
+        "indexName": "bpa-index",
+        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"tenantId\" : \"Data.tenantId\" \r\n}",
+        "aggrQuery": "{\"query\": {\"bool\": {\"must_not\": [{\"term\": {\"Data.tenantId.keyword\": \"pg.testing\"}}]}},\"aggs\": {\"rejectstatus\": {\"filter\": {\"term\": {\"Data.history.state.applicationStatus.keyword\": \"REJECTED\"}},\"aggs\": {\"Rejected Applications\": {\"value_count\": {\"field\": \"Data.tenantId.keyword\"}}}},\"Total_Applications\": {\"value_count\": {\"field\": \"Data.tenantId.keyword\"}}}}",
+        "dateRefField": "Data.@timestamp"
+      },
+      {
+        "module": "BND",
+        "indexName": "birth-cert-v1",
+        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \r\n  \"district\" : \"Data.tenantData.city.districtCode\", \r\n\"tenantId\" : \"Data.tenantId.keyword\" \r\n}", 
+        "aggrQuery": "{\"query\": {\"bool\": {\"must_not\": [{\"term\": {\"Data.tenantId.keyword\": \"pg.testing\"}}]}},\"aggs\": {\"rejectstatus\": {\"filter\": {\"term\": {\"Data.applicationStatus.keyword\": \"REJECTED\"}},\"aggs\": {\"Rejected Applications\": {\"value_count\": {\"field\": \"Data.tenantId.keyword\"}}}},\"Total_Applications\": {\"value_count\": {\"field\": \"Data.tenantId.keyword\"}}}}",
+        "dateRefField": "Data.dateofissue"
+      },
+      {
+       "module": "BND",
+       "indexName": "death-cert-v1",
+       "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \r\n  \"district\" : \"Data.tenantData.city.districtCode\", \r\n\"tenantId\" : \"Data.tenantId.keyword\" \r\n}", 
+       "aggrQuery": "{\"query\": {\"bool\": {\"must_not\": [{\"term\": {\"Data.tenantId.keyword\": \"pg.testing\"}}]}},\"aggs\": {\"rejectstatus\": {\"filter\": {\"term\": {\"Data.applicationStatus.keyword\": \"REJECTED\"}},\"aggs\": {\"Rejected Applications\": {\"value_count\": {\"field\": \"Data.tenantId.keyword\"}}}},\"Total_Applications\": {\"value_count\": {\"field\": \"Data.tenantId.keyword\"}}}}",
+       "dateRefField": "Data.dateofissue"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "percentage",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "percentage",
+    "aggregationPaths": [
+      "Rejected Applications",
+      "Total Applications"
+    ],
+    "_comment": " Rejection Rate Percentage Overview"
+  },
+"topPerformingSLAStatesPGR": {
+  "chartName": "NATIONAL_DSS_PGR_TOP_3_PERFORMING_STATES_SLA_ACHIEVEMENT",
+  "queries": [
+    {
+      "module": "PGR",
+      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+      "dateRefField": "date",
+      "indexName": "pgr-national-dashboard",
+      "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Completed Within SLA\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"todaysResolvedComplaintsForDepartment\"}}}},\"Total Applications\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"todaysComplaintsForCategory\"}}}}}}}}"
+    }
+  ],
+  "chartType": "perform",
+  "valueType": "percentage",
+  "drillChart": "none",
+  "documentType": "_doc",
+  "action": "",
+  "plotLabel": "NATIONAL_DSS_SLA_ACHIEVED",
+  "order": "desc",
+  "limit": 3,
+  "isRoundOff": true,
+  "aggregationPaths": [
+    "Completed Within SLA",
+      "Total Applications"
+  ],		
+    "_comment": "Top Performing States for SLA achieved"
+},
+"bottomPerformingSLAStatesPGR": {
+  "chartName": "NATIONAL_DSS_PGR_BOTTOM_3_PERFORMING_STATES_SLA_ACHIEVEMENT",
+  "queries": [
+    {
+      "module": "PGR",
+      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+      "dateRefField": "date",
+      "indexName": "pgr-national-dashboard",
+      "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Completed Within SLA\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"todaysResolvedComplaintsForDepartment\"}}}},\"Total Applications\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"todaysComplaintsForCategory\"}}}}}}}}"
+    }
+  ],
+  "chartType": "perform",
+  "valueType": "percentage",
+  "drillChart": "none",
+  "documentType": "_doc",
+  "action": "",
+  "plotLabel": "NATIONAL_DSS_SLA_ACHIEVED",
+  "order": "asc",
+  "limit": 3,
+  "isRoundOff": true,
+  "aggregationPaths": [
+    "Completed Within SLA",
+      "Total Applications"
+  ],
+  "_comment": "Bottom Performing States for SLA achieved"
+},
+
+
   "ptStipulatedDelivery": {
       "chartName": "DSS_STIPULATED_DELIVERY_PT",
       "queries": [
