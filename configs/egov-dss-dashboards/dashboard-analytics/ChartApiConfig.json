@@ -19242,11 +19242,11 @@
           "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
           "dateRefField": "date",
           "indexName": "pt-national-dashboard",
-          "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"PT\"}},\"aggs\":{\"Stipulated Deliveryfor \":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
+          "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"PT\"}},\"aggs\":{\"Stipulated Delivery\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
         }
       ],
       "chartType": "metric",
-      "valueType": "amount",
+      "valueType": "number",
       "action": "",
       "drillChart": "none",
       "documentType": "_doc",
