@@ -19329,25 +19329,23 @@
       "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
       "dateRefField": "date",
       "indexName": "pgr-national-dashboard",
-      "aggrQuery": "{\"aggs\":{\"status\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"ApplicationsapprovedwithinSLA\":{\"sum\":{\"field\":\"todaysResolvedComplaintsForDepartment\"}},\"TotalApplications\":{\"sum\":{\"field\":\"todaysComplaintsForCategory\"}}}}}}"
+      "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Completed Within SLA\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"todaysResolvedComplaintsForDepartment\"}}}},\"Total Applications\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"todaysComplaintsForCategory\"}}}}}}}}"
     }
   ],
   "chartType": "perform",
   "valueType": "percentage",
   "drillChart": "none",
   "documentType": "_doc",
-  "action": "percentage",
+  "action": "",
   "plotLabel": "NATIONAL_DSS_SLA_ACHIEVED",
   "order": "desc",
   "limit": 3,
   "isRoundOff": true,
   "aggregationPaths": [
-    "ApplicationsApprovedwithinSLA",
-    "TotalApplications"
+    "Completed Within SLA",
+      "Total Applications"
   ],		
-  "insight": {
-  },
-  "_comment": "Top Performing Ulbs for SLA achieved"
+    "_comment": "Top Performing States for SLA achieved"
 },
 "bottomPerformingSLAStatesPGR": {
   "chartName": "NATIONAL_DSS_PGR_BOTTOM_3_PERFORMING_STATES_SLA_ACHIEVEMENT",
@@ -19357,26 +19355,23 @@
       "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
       "dateRefField": "date",
       "indexName": "pgr-national-dashboard",
-      "aggrQuery": "{\"aggs\":{\"status\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"ApplicationsapprovedwithinSLA\":{\"sum\":{\"field\":\"todaysResolvedComplaintsForDepartment\"}},\"TotalApplications\":{\"sum\":{\"field\":\"todaysComplaintsForCategory\"}}}}}}"
+      "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Completed Within SLA\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"todaysResolvedComplaintsForDepartment\"}}}},\"Total Applications\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"todaysComplaintsForCategory\"}}}}}}}}"
     }
   ],
   "chartType": "perform",
   "valueType": "percentage",
   "drillChart": "none",
   "documentType": "_doc",
-  "action": "percentage",
+  "action": "",
   "plotLabel": "NATIONAL_DSS_SLA_ACHIEVED",
   "order": "asc",
   "limit": 3,
   "isRoundOff": true,
   "aggregationPaths": [
-    "ApplicationsApprovedwithinSLA",
-    "TotalApplications"
+    "Completed Within SLA",
+      "Total Applications"
   ],
-  		
-  "insight": {
-  },
-  "_comment": "Bottom Performing Ulbs for SLA achieved"
+  "_comment": "Bottom Performing States for SLA achieved"
 },
 
 "ptStipulatedDelivery": {
