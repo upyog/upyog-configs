@@ -357,6 +357,14 @@
                   "chartType": "metric",
                   "filter": "",
                   "headers": []
+                },
+                {
+                  "id": "dssRejectionRateOverview",
+                  "name": "DSS_REJECTION_RATE_OVERVIEW",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
                 }
               ]
             },
@@ -9042,13 +9050,62 @@
             }
           ]
         },
-
         {
           "row": 5,
           "name": "NATIONAL_DSS_SERVICE",
           "vizArray": [
             {
               "id": 511,
+              "name": "NATIONAL_DSS_PGR_TOP_3_PERFORMING_STATES_SLA_ACHIEVEMENT",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "performing-metric",
+              "noUnit": false,
+              "isCollapsible": false,
+              "label": "",
+              "charts": [
+                {
+                  "id": "topPerformingSLAStatesPGR",
+                  "name": "NATIONAL_DSS_PGR_TOP_3_PERFORMING_STATES_SLA_ACHIEVEMENT",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            },
+            {
+              "id": 512,
+              "name": "NATIONAL_DSS_PGR_BOTTOM_3_PERFORMING_STATES_SLA_ACHIEVEMENT",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "performing-metric",
+              "noUnit": false,
+              "isCollapsible": false,
+              "label": "",
+              "charts": [
+                {
+                  "id": "bottomPerformingSLAStatesPGR",
+                  "name": "NATIONAL_DSS_PGR_BOTTOM_3_PERFORMING_STATES_SLA_ACHIEVEMENT",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 6,
+          "name": "NATIONAL_DSS_SERVICE",
+          "vizArray": [
+            {
+              "id": 611,
               "name": "Service Report",
               "dimensions": {
                 "height": 350,
