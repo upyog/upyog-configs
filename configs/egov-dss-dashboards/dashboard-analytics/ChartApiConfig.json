@@ -19841,5 +19841,28 @@
         "Stipulated Days for NOC"
       ],
       "_comment": " "
+    },
+	,
+	"StipulatedDaysforPGR": {
+      "chartName": "DSS_STIPULATED_DAYS_FOR_PGR",
+      "queries": [
+        {
+          "module": "PGR",
+          "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
+          "dateRefField": "date",
+          "indexName": "pgr-national-dashboard",
+          "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"PGR\"}},\"aggs\":{\"Stipulated Days for PGR\":{\"avg\":{\"field\":\"StipulatedDays\"}}}}}}"
+        }
+      ],
+      "chartType": "metric",
+      "valueType": "number",
+      "action": "",
+      "drillChart": "none",
+      "documentType": "_doc",
+      "aggregationPaths": [
+        "Stipulated Days for PGR"
+      ],
+      "_comment": " "
     }
+	
 }
