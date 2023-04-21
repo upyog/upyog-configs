@@ -19667,7 +19667,7 @@
 	  {
         "module": "MASTER",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Population \":{\"avg\":{\"field\":\"statePopulation\"}}}}}}",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Population \":{\"avg\":{\"field\":\"populationL\"}}}}}}",
         "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": ""
       }
