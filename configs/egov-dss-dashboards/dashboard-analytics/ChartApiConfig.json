@@ -19595,22 +19595,12 @@
     "valueType": "Amount",
     "drillChart": "none",
     "documentType": "_doc",
-    "action": "",
+    "action": "division",
     "aggregationPaths": [
       "Total Collection",
 	  "State GDP"
     ],
-    "insight": {
-      "chartResponseMap" : "StateGDPwiseTotalRevenueCollection",
-      "action" : "division",
-      "upwardIndicator" : "positive",
-      "downwardIndicator" : "negative",
-      "textMessage" : "$indicator$value% than last $insightInterval",
-      "colorCode" : "#228B22",
-      "insightInterval" : "year",
-      "isRoundOff": true
-    },
-    "_comment": " "
+      "_comment": " "
   },
   "NonTaxRevenuePerHousehold": {
     "chartName": "DSS_NON_TAX_REVENUE_PER_HOUSEHOLD",
@@ -19677,21 +19667,11 @@
     "valueType": "Amount",
     "drillChart": "none",
     "documentType": "_doc",
-    "action": "",
+    "action": "division",
     "aggregationPaths": [
       "Total Collection",
 	  "Total Population"
     ],
-    "insight": {
-      "chartResponseMap" : "NonTaxRevenuePerHousehold",
-      "action" : "division",
-      "upwardIndicator" : "positive",
-      "downwardIndicator" : "negative",
-      "textMessage" : "$indicator$value% than last $insightInterval",
-      "colorCode" : "#228B22",
-      "insightInterval" : "year",
-      "isRoundOff": true
-    },
     "_comment": " "
   },
   
