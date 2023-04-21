@@ -19716,6 +19716,27 @@
       ],
       "_comment": " "
     },
+	"TotalPopulation": {
+      "chartName": "DSS_Population",
+      "queries": [
+        {
+        "module": "MASTER",
+        "indexName": "master-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Population \":{\"avg\":{\"field\":\"populationL\"}}}}}}",
+        "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": ""
+      }
+      ],
+      "chartType": "metric",
+      "valueType": "number",
+      "action": "",
+      "drillChart": "none",
+      "documentType": "_doc",
+      "aggregationPaths": [
+        "Total Population"
+      ],
+      "_comment": " "
+    },
 	"StipulatedDaysforTL": {
       "chartName": "DSS_STIPULATED_DAYS_FOR_TL",
       "queries": [
