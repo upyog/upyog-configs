@@ -1,0 +1,57 @@
+---
+ReportDefinitions:
+  - reportName: ApplicationStatusReport
+    summary: Nummber of applications by there status
+    version: 1.0.0
+    moduleName: rainmaker-noc
+    externalService:
+      - entity: $.messages[*]
+        apiURL: http://egov-localization:8080/localization/messages/v1/_search?locale=en_IN&tenantId=pg&module=rainmaker-noc
+        keyOrder: code,message
+        tableName: tbl_localization
+    sourceColumns:
+      - name: status
+        label: report.noc.status
+        type: string
+        source: nocdtl
+        total: false
+      - name: total
+        label: report.noc.total
+        type: string
+        source: nocdtl
+        total: true
+      - name: tenantId
+        label: report.noc.tenantid
+        type: string
+        source: noc
+        total: false
+    searchParams:
+      - name: fromDate
+        label: reports.noc.fromDate
+        type: epoch
+        source: nocdtl
+        isMandatory: false
+        searchClause: AND nocdtl.lastmodifiedtime >= $fromDate
+      - name: toDate
+        label: reports.noc.toDate
+        type: epoch
+        source: nocdtl
+        isMandatory: false
+        searchClause: AND nocdtl.lastmodifiedtime <= $toDate
+      - name: ulb
+        label: ULB
+        type: singlevaluelist
+        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=tenant&masterName=tenants|$.MdmsRes.tenant.tenants.*.code|$.MdmsRes.tenant.tenants.*.name
+        source: noc
+        wrapper: true
+        isMandatory: false
+        searchClause: AND noc.tenantId = $ulb
+    query: SELECT COUNT(applicationnumber) as total, status , noc.tenantid as
+      tenantId from eg_fn_firenocdetail nocdtl INNER JOIN eg_fn_firenoc noc ON
+      noc.uuid= nocdtl.firenocuuid
+    groupby: GROUP BY noc.tenantId , status
+    orderby: ORDER BY case nocdtl.status when 'PENDINGPAYMENT' then 1 when
+      'DOCUMENTVERIFY' then 2 when 'REJECTED' then 3 when
+      'CITIZENACTIONREQUIRED' then 4 when 'PENDINGAPPROVAL' then 5 when
+      'INITIATED' then 6 when 'APPROVED' then 7 when 'CITIZENACTIONREQUIRED-DV'
+      then 8 when 'FIELDINSPECTION' then 9 when 'CANCELLED' then 10 else 11 end
