@@ -19842,6 +19842,36 @@
         "Stipulated Days for PGR"
       ],
       "_comment": " "
-    }
+    },
+    "StateGDPwisePTRevenueCollection": {
+    "chartName": "DSS_STATE_GDP_PT_REVENUE_COLLECTION",
+    "queries": [
+      {
+        "module": "PT",
+        "dateRefField": "",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "pt-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}"
+      },
+	  {
+        "module": "MASTER",
+        "indexName": "master-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"State GDP\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}",
+        "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": ""
+      }
+      
+    ],
+    "chartType": "metric",
+    "valueType": "Amount",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "division",
+    "aggregationPaths": [
+      "Total Collection",
+	  "State GDP"
+    ],
+      "_comment": " "
+  }
 	
 }
