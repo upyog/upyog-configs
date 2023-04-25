@@ -14478,7 +14478,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "common-national-dashboard",
-        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"adjust_pure_negative\":true,\"boost\":1}},\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"onBoardeUlbsCount\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"month\"},\"aggs\":{\"stateWiseData\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"latest\":{\"terms\":{\"field\":\"date\",\"order\":{\"_term\":\"desc\"},\"size\":1},\"aggs\":{\"stateModuleWiseData\":{\"terms\":{\"field\":\"serviceModuleCode.keyword\"},\"aggs\":{\"totalOnBoarded\":{\"sum\":{\"field\":\"onboardedUlbsCount\"}}}},\"maxOnBoarded\":{\"max_bucket\":{\"buckets_path\":\"stateModuleWiseData.totalOnBoarded\"}}}},\"stateLiveUlbsSummary\":{\"max_bucket\":{\"buckets_path\":\"latest.maxOnBoarded\"}}}},\"onBoardeUlbsCount\":{\"sum_bucket\":{\"buckets_path\":\"stateWiseData.stateLiveUlbsSummary\"}}}},\"liveUlbsCount\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"status.keyword\":\"Live\"}},{\"range\":{\"liveUlbsCountForServiceModuleCode\":{\"gte\":1}}}]}},\"aggs\":{\"test\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"month\"},\"aggs\":{\"stateWiseData\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"latest\":{\"terms\":{\"field\":\"date\",\"order\":{\"_term\":\"desc\"},\"size\":1},\"aggs\":{\"stateModuleWiseData\":{\"terms\":{\"field\":\"serviceModuleCode.keyword\"},\"aggs\":{\"totalLiveUlbsForServiceModuleCount\":{\"sum\":{\"field\":\"liveUlbsCountForServiceModuleCode\"}}}},\"maxUlbsLive\":{\"max_bucket\":{\"buckets_path\":\"stateModuleWiseData.totalLiveUlbsForServiceModuleCount\"}}}},\"stateLiveUlbsSummary\":{\"max_bucket\":{\"buckets_path\":\"latest.maxUlbsLive\"}}}},\"liveUlbsCount\":{\"sum_bucket\":{\"buckets_path\":\"stateWiseData.stateLiveUlbsSummary\"}}}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"adjust_pure_negative\":true,\"boost\":1}},\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"liveUlbsCount\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"status.keyword\":\"Live\"}},{\"range\":{\"liveUlbsCountForServiceModuleCode\":{\"gte\":1}}}]}},\"aggs\":{\"test\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"month\"},\"aggs\":{\"stateWiseData\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"latest\":{\"terms\":{\"field\":\"date\",\"order\":{\"_term\":\"desc\"},\"size\":1},\"aggs\":{\"stateModuleWiseData\":{\"terms\":{\"field\":\"serviceModuleCode.keyword\"},\"aggs\":{\"totalLiveUlbsForServiceModuleCount\":{\"sum\":{\"field\":\"liveUlbsCountForServiceModuleCode\"}}}},\"maxUlbsLive\":{\"max_bucket\":{\"buckets_path\":\"stateModuleWiseData.totalLiveUlbsForServiceModuleCount\"}}}},\"stateLiveUlbsSummary\":{\"max_bucket\":{\"buckets_path\":\"latest.maxUlbsLive\"}}}},\"liveUlbsCount\":{\"sum_bucket\":{\"buckets_path\":\"stateWiseData.stateLiveUlbsSummary\"}}}}}}}}}}"
       }
     ],
     "chartType": "line",
@@ -14487,7 +14487,7 @@
     "drillChart": "none",
     "documentType": "_doc",
     "aggregationPaths": [
-	 "onBoardeUlbsCount",
+	 "TotalCollection",
       "liveUlbsCount"
 	
     ],
