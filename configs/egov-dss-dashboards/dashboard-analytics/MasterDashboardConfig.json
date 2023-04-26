@@ -350,7 +350,7 @@
                   "filter": "",
                   "headers": []
                 },
-				{
+                {
                   "id": "slaComplainceOverview",
                   "name": "DSS_SLA_COMPLAINCE_OVERVIEW",
                   "code": "",
@@ -1082,7 +1082,7 @@
                   "filter": "",
                   "headers": []
                 },
-				{
+                {
                   "id": "growthRatePT",
                   "name": "DSS_GROWTH_RATE_PT",
                   "code": "",
@@ -1127,6 +1127,15 @@
 
                   "id": "StipulatedDaysforPropertyTax",
                   "name": "DSS_STIPULATED_DAYS_FOR_PT",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+        {
+        
+                  "id": "StateGDPwisePTRevenueCollection",
+                  "name": "DSS_STATE_GDP_PT_REVENUE_COLLECTION",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -1908,7 +1917,7 @@
                   "filter": "",
                   "headers": []
                 },
-				{
+				 {
                   "id": "pgrAverageResolutionTime",
                   "name": "NATIONAL_DSS_PGR_AVERAGE_RESOLUTION_TIME",
                   "code": "",
@@ -4976,14 +4985,8 @@
                   "headers": []
                 }
               ]
-            }
-          ]
-        },
-        {
-          "row": 3,
-          "name": "DSS_REVENUE",
-          "vizArray": [
-            {
+            },
+			{
               "id": 323,
               "name": "DSS_FSM_COLLECTION_BY_USAGE_TYPE",
               "dimensions": {
@@ -5121,7 +5124,7 @@
                   "id": "fsmBottomDsoByPerformance",
                   "name": "Monthly",
                   "code": "",
-                  "chartType": "horizontalBar",
+                  "chartType": "bar",
                   "filter": "",
                   "headers": []
                 }
@@ -5130,7 +5133,7 @@
           ]
         },
         {
-          "row": 6,
+          "row": 5,
           "name": "DSS_REVENUE",
           "vizArray": [
             {
@@ -5159,7 +5162,7 @@
           ]
         },
         {
-          "row": 7,
+          "row": 6,
           "name": "DSS_REVENUE",
           "vizArray": [
             {
@@ -6724,6 +6727,7 @@
                   "filter": "",
                   "headers": []
                 }
+			
               ]
             },
             {
@@ -8520,14 +8524,6 @@
                   "headers": []
                 },
                 {
-                  "id": "nurtUnderImpStates",
-                  "name": "NURT_UNDERIMPL_STATES",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
                   "id": "nurtLiveStates",
                   "name": "NURT_LIVE_STATES",
                   "code": "",
@@ -8560,24 +8556,23 @@
                   "headers": []
                 },
                 {
-                  "id": "totalApplicationsOverview",
-                  "name": "NATIONAL_DSS_TOTAL_APPLICATIONS",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
                   "id": "nurtTotalCitzens",
                   "name": "NURT_TOTAL_CITIZENS",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
                   "headers": []
+                },{
+                  "id": "StateGDPwiseTotalRevenueCollection",
+                  "name": "DSS_STATE_GDP_REVENUE_COLLECTION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
                 },
-                {
-                  "id": "nurtSlaAchieved",
-                  "name": "NURT_SLA_ACHIEVED",
+				{
+                  "id": "NonTaxRevenuePerHousehold",
+                  "name": "DSS_NON_TAX_REVENUE_PER_HOUSEHOLD",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -9144,14 +9139,13 @@
             }
           ]
         },
-
         {
           "row": 5,
           "name": "NATIONAL_DSS_SERVICE",
           "vizArray": [
             {
               "id": 511,
-			  "name": "NATIONAL_DSS_PGR_TOP_3_PERFORMING_STATES_SLA_ACHIEVEMENT",
+              "name": "NATIONAL_DSS_PGR_TOP_3_PERFORMING_STATES_SLA_ACHIEVEMENT",
               "dimensions": {
                 "height": 250,
                 "width": 4
