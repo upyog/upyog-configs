@@ -1,0 +1,150 @@
+---
+ReportDefinitions:
+  - reportName: CollectionRegister
+    summary: Collection Register
+    version: 1.0.0
+    moduleName: rainmaker-common
+    externalService:
+      - entity: $.MdmsRes.BillingService.BusinessService[*]
+        apiURL: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=pg&moduleName=BillingService&masterName=BusinessService&filter=%5B?(@.type=='Adhoc')%5D
+        keyOrder: code,businessService
+        tableName: tbl_businessserviceList
+    sourceColumns:
+      - name: service
+        label: reports.common.CollectionRegister.serviceResult
+        type: string
+        source: common
+        total: false
+      - name: collectiontype
+        label: reports.common.CollectionRegister.collectiontype
+        type: string
+        source: common
+        total: false
+      - name: cash_count
+        label: reports.common.CollectionRegister.transactions
+        type: number
+        source: common
+        total: true
+      - name: cash_sum
+        label: reports.common.CollectionRegister.cash
+        type: number
+        source: common
+        total: true
+      - name: cheque_count
+        label: reports.common.CollectionRegister.transactions
+        type: number
+        source: common
+        total: true
+      - name: cheque_sum
+        label: reports.common.CollectionRegister.cheque
+        type: number
+        source: common
+        total: true
+      - name: dd_count
+        label: reports.common.CollectionRegister.transactions
+        type: number
+        source: common
+        total: true
+      - name: dd_sum
+        label: reports.common.CollectionRegister.dd
+        type: number
+        source: common
+        total: true
+      - name: online_count
+        label: reports.common.CollectionRegister.transactions
+        type: number
+        source: common
+        total: true
+      - name: online_sum
+        label: reports.common.CollectionRegister.online
+        type: number
+        source: common
+        total: true
+      - name: card_count
+        label: reports.common.CollectionRegister.transactions
+        type: number
+        source: common
+        total: true
+      - name: card_sum
+        label: reports.common.CollectionRegister.card
+        type: number
+        source: common
+        total: true
+      - name: other_count
+        label: reports.common.CollectionRegister.transactions
+        type: number
+        source: common
+        total: true
+      - name: other_sum
+        label: reports.common.CollectionRegister.other
+        type: number
+        source: common
+        total: true
+      - name: total
+        label: reports.common.CollectionRegister.total
+        type: number
+        source: common
+        total: true
+    searchParams:
+      - name: ulb
+        label: reports.common.CollectionRegister.ulb
+        type: singlevaluelist
+        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=tenant&masterName=tenants|$.MdmsRes.tenant.tenants.*.code|$.MdmsRes.tenant.tenants.*.name
+        source: common
+        wrapper: true
+        isMandatory: true
+        searchClause: AND p.tenantId = $ulb
+      - name: service
+        label: reports.common.CollectionRegister.service
+        type: multivaluelist
+        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=BillingService&masterName=BusinessService&filter=%5B?(@.type=='Adhoc')%5D|$.MdmsRes.BillingService.BusinessService.*.code|$.MdmsRes.BillingService.BusinessService.*.businessService
+        source: common
+        wrapper: true
+        state: true
+        isMandatory: true
+        isLocalisationRequired: true
+        localisationPrefix: BILLINGSERVICE_BUSINESSSERVICE_
+        searchClause: AND REGEXP_REPLACE(businessservice,'\..*','') IN ($service)
+      - name: paymentMode
+        label: reports.common.CollectionRegister.mode
+        type: singlevaluelist
+        pattern: list://CASH:CASH,ONLINE:ONLINE,CARD:CARD,DD:DD,CHEQUE:CHEQUE,OFFLINE_RTGS:OFFLINE_RTGS,POSTAL_ORDER:POSTAL_ORDER,OFFLINE_NEFT:OFFLINE_NEFT
+        source: common
+        isMandatory: false
+        searchClause: AND p.paymentmode = $paymentMode
+      - name: fromDate
+        label: reports.common.CollectionRegister.fromdate
+        type: epoch
+        source: common
+        isMandatory: true
+        searchClause: AND pd.receiptdate >= $fromDate
+      - name: toDate
+        label: reports.common.CollectionRegister.todate
+        type: epoch
+        source: common
+        isMandatory: true
+        searchClause: AND pd.receiptdate <= $toDate
+    query: select COALESCE(message,REGEXP_REPLACE(businessservice,'\..*',''))
+      service,paymentmode as collectiontype,sum(case when paymentmode='CASH'
+      then 1 else 0 end) as cash_count,sum(case when paymentmode='CASH' then
+      p.totalamountpaid else 0 end) as cash_sum,sum(case when
+      paymentmode='CHEQUE' then 1 else 0 end) as cheque_count,sum(case when
+      paymentmode='CHEQUE' then p.totalamountpaid else 0 end) as
+      cheque_sum,sum(case when paymentmode='DD' then 1 else 0 end) as
+      dd_count,sum(case when paymentmode='DD' then p.totalamountpaid else 0 end)
+      as dd_sum,sum(case when paymentmode='ONLINE' then 1 else 0 end) as
+      online_count,sum(case when paymentmode='ONLINE' then p.totalamountpaid
+      else 0 end) as online_sum,sum(case when paymentmode='CARD' then 1 else 0
+      end) as card_count,sum(case when paymentmode='CARD' then p.totalamountpaid
+      else 0 end) as card_sum,sum(case when paymentmode='OFFLINE_RTGS' or
+      paymentmode='POSTAL_ORDER' or paymentmode='OFFLINE_NEFT'  then 1 else 0
+      end) as other_count,sum(case when paymentmode='OFFLINE_RTGS' or
+      paymentmode='POSTAL_ORDER' or paymentmode='OFFLINE_NEFT' then
+      p.totalamountpaid else 0 end) as other_sum,sum(p.totalamountpaid) as total
+      from egcl_payment p inner join egcl_paymentdetail pd on
+      p.id=pd.paymentid  left outer join message on
+      LOWER(concat('BILLINGSERVICE_BUSINESSSERVICE_',REGEXP_REPLACE(businessservice,'\..*','')))=LOWER(code)  AND
+      module='rainmaker-uc' and locale='en_IN' where businessservice IN (select code from (VALUES
+      tbl_businessserviceList) AS serv_list(code,servicename))
+    groupby: group by service,collectiontype
+    orderby: order by service,collectiontype
