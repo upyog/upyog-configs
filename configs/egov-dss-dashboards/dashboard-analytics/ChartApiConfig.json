@@ -19872,6 +19872,29 @@
 	  "State GDP"
     ],
       "_comment": " "
-  }
+  },
+  "OpenApplicationsRatePGR": {
+  "chartName": "DSS_OPEN_PGR_APPLICATIONS_RATE",
+  "queries": [
+    {
+      "module": "PGR",
+      "dateRefField": "date",
+      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+      "indexName": "pgr-national-dashboard",
+      "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"ulb.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Total Complaints\":{\"sum\":{\"field\":\"todaysComplaintsForCategory\"}},\"Open Complaints\":{\"sum\":{\"field\":\"todaysOpenComplaintsForDepartment\"}}}}}}"
+    }
+    
+  ],
+  "chartType": "metric",
+  "valueType": "percentage",
+  "drillChart": "none",
+  "documentType": "_doc",
+  "action": "percentage",
+  "aggregationPaths": [
+    "Open Complaints",
+  "Total Complaints"
+  ],
+    "_comment": ""
+}
 	
 }
