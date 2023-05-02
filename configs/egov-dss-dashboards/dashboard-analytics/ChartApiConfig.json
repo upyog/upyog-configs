@@ -19896,6 +19896,37 @@
   "Total Complaints"
   ],
     "_comment": ""
+},
+"PropertyTaxRevenuePerHousehold": {
+  "chartName": "DSS_PT_TAX_REVENUE_PER_HOUSEHOLD",
+  "queries": [
+    {
+      "module": "PT",
+      "dateRefField": "date",
+      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+      "indexName": "pt-national-dashboard",
+      "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}"
+    },
+  {
+      "module": "PT",
+      "dateRefField": "date",
+      "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
+      "indexName": "pt-national-dashboard",
+      "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Properties\":{\"sum\":{\"field\":\"propertiesRegisteredForFinancialYear\"}}}}}}"
+    }
+    
+  ],
+  "chartType": "metric",
+  "valueType": "Amount",
+  "drillChart": "none",
+  "documentType": "_doc",
+  "isRoundOff":true,
+  "action": "division",
+  "aggregationPaths": [
+    "Total Collection",
+  "Total Properties"
+  ],
+  "_comment": " "
 }
 	
 }
