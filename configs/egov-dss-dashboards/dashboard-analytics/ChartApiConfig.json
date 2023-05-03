@@ -7937,6 +7937,31 @@
     },
     "_comment": " "
   },
+  "todaysLastYearCollectionv3": {
+    "chartName": "NATIONAL_DSS_TODAYS_COLLECTION",
+    "queries": [
+      {
+        "module": "PT",
+        "dateRefField": "",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "pt-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"now-366d/d\",\"lte\":\"now-366d/d\"}}},\"aggs\":{\"TodaysCollection\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "Amount",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "TodaysCollection":true,
+    "aggregationPaths": [
+      "Todays Collection"
+    ],
+    "insight": {
+      
+    },
+    "_comment": " "
+  },
  	
  	"totalCollectionv3": {
     "chartName": "NATIONAL_DSS_TOTAL_COLLECTION",
