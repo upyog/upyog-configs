@@ -7928,6 +7928,7 @@
     "drillChart": "none",
     "documentType": "_doc",
     "action": "",
+    "TodaysCollection":true,
     "aggregationPaths": [
       "Todays Collection"
     ],
@@ -7944,7 +7945,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "pt-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"now-366d/d\",\"lte\":\"now-366d/d\"}}},\"aggs\":{\"TodaysCollection\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"now-366d/d\"}}},\"aggs\":{\"TodaysCollection\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -7952,7 +7953,6 @@
     "drillChart": "none",
     "documentType": "_doc",
     "action": "",
-    "TodaysCollection":true,
     "aggregationPaths": [
       "Todays Collection"
     ],
@@ -8036,54 +8036,54 @@
         "dateRefField": "",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "pt-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2021\",\"lte\":\"31-03-2022\"}}},\"aggs\":{\"TotalCollectionFY1\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"31-03-2023\"}}},\"aggs\":{\"TotalCollectionFY1\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}"
       },
       {
         "module": "TL",
         "dateRefField": "",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "tl-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2021\",\"lte\":\"31-03-2022\"}}},\"aggs\":{\"TotalCollectionFY1\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"31-03-2023\"}}},\"aggs\":{\"TotalCollectionFY1\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}}}}}}"
       },
       {
         "module": "OBPS",
         "dateRefField": "",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "obps-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2021\",\"lte\":\"31-03-2022\"}}},\"aggs\":{\"TotalCollectionFY1\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"31-03-2023\"}}},\"aggs\":{\"TotalCollectionFY1\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
       {
         "module": "FIRENOC",
         "dateRefField": "",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "firenoc-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2021\",\"lte\":\"31-03-2022\"}}},\"aggs\":{\"TotalCollectionFY1\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"31-03-2023\"}}},\"aggs\":{\"TotalCollectionFY1\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
       {
         "module": "MC",
         "dateRefField": "",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "mcollect-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2021\",\"lte\":\"31-03-2022\"}}},\"aggs\":{\"TotalCollectionFY1\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"31-03-2023\"}}},\"aggs\":{\"TotalCollectionFY1\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
       {
         "module": "WS",
         "dateRefField": "",
         "requestQueryMap": "{\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
         "indexName": "ws-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2021\",\"lte\":\"31-03-2022\"}}},\"aggs\":{\"TotalCollectionFY1\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"31-03-2023\"}}},\"aggs\":{\"TotalCollectionFY1\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
     },
     {
         "module": "BIRTH",
         "indexName": "birth-cert-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2021\",\"lte\":\"31-03-2022\"}}},\"aggs\":{\"TotalCollectionFY1\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"31-03-2023\"}}},\"aggs\":{\"TotalCollectionFY1\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}",
         "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": ""
      },
      {
         "module": "DEATH",
         "indexName": "death-cert-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2021\",\"lte\":\"31-03-2022\"}}},\"aggs\":{\"TotalCollectionFY1\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"31-03-2023\"}}},\"aggs\":{\"TotalCollectionFY1\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}",
         "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": ""
       },
@@ -8092,54 +8092,54 @@
         "dateRefField": "",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "pt-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"31-03-2023\"}}},\"aggs\":{\"TotalCollectionFY2\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2023\",\"lte\":\"31-03-2024\"}}},\"aggs\":{\"TotalCollectionFY2\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}"
       },
       {
         "module": "TL",
         "dateRefField": "",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "tl-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"31-03-2023\"}}},\"aggs\":{\"TotalCollectionFY2\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2023\",\"lte\":\"31-03-2024\"}}},\"aggs\":{\"TotalCollectionFY2\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}}}}}}"
       },
       {
         "module": "OBPS",
         "dateRefField": "",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "obps-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"31-03-2023\"}}},\"aggs\":{\"TotalCollectionFY2\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2023\",\"lte\":\"31-03-2024\"}}},\"aggs\":{\"TotalCollectionFY2\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
       {
         "module": "FIRENOC",
         "dateRefField": "",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "firenoc-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"31-03-2023\"}}},\"aggs\":{\"TotalCollectionFY2\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2023\",\"lte\":\"31-03-2024\"}}},\"aggs\":{\"TotalCollectionFY2\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
       {
         "module": "MC",
         "dateRefField": "",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "mcollect-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"31-03-2023\"}}},\"aggs\":{\"TotalCollectionFY2\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2023\",\"lte\":\"31-03-2024\"}}},\"aggs\":{\"TotalCollectionFY2\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
       {
         "module": "WS",
         "dateRefField": "",
         "requestQueryMap": "{\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
         "indexName": "ws-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"31-03-2023\"}}},\"aggs\":{\"TotalCollectionFY2\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2023\",\"lte\":\"31-03-2024\"}}},\"aggs\":{\"TotalCollectionFY2\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
     },
     {
         "module": "BIRTH",
         "indexName": "birth-cert-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"31-03-2023\"}}},\"aggs\":{\"TotalCollectionFY2\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2023\",\"lte\":\"31-03-2024\"}}},\"aggs\":{\"TotalCollectionFY2\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}",
         "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": ""
      },
      {
         "module": "DEATH",
         "indexName": "death-cert-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"31-03-2023\"}}},\"aggs\":{\"TotalCollectionFY2\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2023\",\"lte\":\"31-03-2024\"}}},\"aggs\":{\"TotalCollectionFY2\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}",
         "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": ""
       }
@@ -8306,14 +8306,14 @@
             "requestQueryMap": "{\"state\" : \"state.keyword\", \"module\" : \"module.keyword\", \"ulb\" : \"ulb.keyword\"}",
             "dateRefField": "",
             "indexName": "pt-national-dashboard",
-            "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2021\",\"lte\":\"31-03-2022\"}}},\"aggs\":{\"TotalCollectionFY1\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}"
+            "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"31-03-2023\"}}},\"aggs\":{\"TotalCollectionFY1\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}"
           },
          {
             "module": "PT",
             "requestQueryMap": "{\"state\" : \"state.keyword\", \"module\" : \"module.keyword\", \"ulb\" : \"ulb.keyword\"}",
             "dateRefField": "",
             "indexName": "pt-national-dashboard",
-            "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"31-03-2023\"}}},\"aggs\":{\"TotalCollectionFY2\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}"
+            "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2023\",\"lte\":\"31-03-2024\"}}},\"aggs\":{\"TotalCollectionFY2\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}"
           }
 
     ],
@@ -19031,47 +19031,47 @@
         "dateRefField": "",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "tl-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2021\",\"lte\":\"31-03-2022\"}}},\"aggs\":{\"TotalCollectionFY1\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"31-03-2023\"}}},\"aggs\":{\"TotalCollectionFY1\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}}}}}}"
       },
       {
         "module": "OBPS",
         "dateRefField": "",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "obps-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2021\",\"lte\":\"31-03-2022\"}}},\"aggs\":{\"TotalCollectionFY1\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"31-03-2023\"}}},\"aggs\":{\"TotalCollectionFY1\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
       {
         "module": "FIRENOC",
         "dateRefField": "",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "firenoc-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2021\",\"lte\":\"31-03-2022\"}}},\"aggs\":{\"TotalCollectionFY1\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"31-03-2023\"}}},\"aggs\":{\"TotalCollectionFY1\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
       {
         "module": "MC",
         "dateRefField": "",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "mcollect-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2021\",\"lte\":\"31-03-2022\"}}},\"aggs\":{\"TotalCollectionFY1\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"31-03-2023\"}}},\"aggs\":{\"TotalCollectionFY1\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
       {
         "module": "WS",
         "dateRefField": "",
         "requestQueryMap": "{\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
         "indexName": "ws-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2021\",\"lte\":\"31-03-2022\"}}},\"aggs\":{\"TotalCollectionFY1\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"31-03-2023\"}}},\"aggs\":{\"TotalCollectionFY1\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
     },
     {
         "module": "BIRTH",
         "indexName": "birth-cert-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2021\",\"lte\":\"31-03-2022\"}}},\"aggs\":{\"TotalCollectionFY1\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"31-03-2023\"}}},\"aggs\":{\"TotalCollectionFY1\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}",
         "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": ""
      },
      {
         "module": "DEATH",
         "indexName": "death-cert-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2021\",\"lte\":\"31-03-2022\"}}},\"aggs\":{\"TotalCollectionFY1\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"31-03-2023\"}}},\"aggs\":{\"TotalCollectionFY1\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}",
         "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": ""
       },
@@ -19080,47 +19080,47 @@
         "dateRefField": "",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "tl-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"31-03-2023\"}}},\"aggs\":{\"TotalCollectionFY2\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2023\",\"lte\":\"31-03-2024\"}}},\"aggs\":{\"TotalCollectionFY2\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}}}}}}"
       },
       {
         "module": "OBPS",
         "dateRefField": "",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "obps-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"31-03-2023\"}}},\"aggs\":{\"TotalCollectionFY2\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2023\",\"lte\":\"31-03-2024\"}}},\"aggs\":{\"TotalCollectionFY2\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
       {
         "module": "FIRENOC",
         "dateRefField": "",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "firenoc-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"31-03-2023\"}}},\"aggs\":{\"TotalCollectionFY2\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2023\",\"lte\":\"31-03-2024\"}}},\"aggs\":{\"TotalCollectionFY2\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
       {
         "module": "MC",
         "dateRefField": "",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "mcollect-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"31-03-2023\"}}},\"aggs\":{\"TotalCollectionFY2\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2023\",\"lte\":\"31-03-2024\"}}},\"aggs\":{\"TotalCollectionFY2\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
       {
         "module": "WS",
         "dateRefField": "",
         "requestQueryMap": "{\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
         "indexName": "ws-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"31-03-2023\"}}},\"aggs\":{\"TotalCollectionFY2\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2023\",\"lte\":\"31-03-2024\"}}},\"aggs\":{\"TotalCollectionFY2\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
     },
     {
         "module": "BIRTH",
         "indexName": "birth-cert-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"31-03-2023\"}}},\"aggs\":{\"TotalCollectionFY2\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2023\",\"lte\":\"31-03-2024\"}}},\"aggs\":{\"TotalCollectionFY2\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}",
         "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": ""
      },
      {
         "module": "DEATH",
         "indexName": "death-cert-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"31-03-2023\"}}},\"aggs\":{\"TotalCollectionFY2\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2023\",\"lte\":\"31-03-2024\"}}},\"aggs\":{\"TotalCollectionFY2\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}",
         "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": ""
       }
