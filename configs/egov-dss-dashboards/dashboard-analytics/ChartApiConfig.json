@@ -19951,6 +19951,94 @@
   "Total Properties"
   ],
   "_comment": " "
-}
+},
+"bottomPerformingStatesRevenuePopulation": {
+    "chartName": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_POPULATION",
+    "queries": [
+      {
+        "module": "PT",
+        "dateRefField": "",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "pt-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\": \"state.keyword\"},\"aggs\":{\"Total\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}}}"
+		
+      },
+      {
+        "module": "TL",
+        "dateRefField": "",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "tl-national-dashboard",
+        "aggrQuery":"{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\": \"state.keyword\"},\"aggs\":{\"Total\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}}}}}}}}"
+      },
+      {
+        "module": "OBPS",
+        "dateRefField": "",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "obps-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\": \"state.keyword\"},\"aggs\":{\"Total\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
+      },
+      {
+        "module": "FIRENOC",
+        "dateRefField": "",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "firenoc-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\": \"state.keyword\"},\"aggs\":{\"Total\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
+      },
+      {
+        "module": "MC",
+        "dateRefField": "",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "mcollect-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\": \"state.keyword\"},\"aggs\":{\"Total\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
+      },
+      {
+        "module": "WS",
+        "dateRefField": "",
+        "requestQueryMap": "{\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
+        "indexName": "ws-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\": \"state.keyword\"},\"aggs\":{\"Total\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}"
+    },
+    {
+        "module": "BIRTH",
+        "indexName": "birth-cert-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\": \"state.keyword\"},\"aggs\":{\"Total\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}}}",
+        "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": ""
+     },
+     {
+        "module": "DEATH",
+        "indexName": "death-cert-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\": \"state.keyword\"},\"aggs\":{\"Total\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}}}",
+        "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": ""
+      },
+	   {
+        "module": "MASTER",
+        "requestQueryMap": "{\"state\" : \"state.keyword\", \"module\" : \"module.keyword\", \"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": "date",
+        "indexName": "master-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"size\":\"200\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
+      }
+      
+    ],
+	"chartType": "perform",
+    "valueType": "percentage",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "percentage",
+    "plotLabel": "DSS_TARGET_ACHIEVED",
+    "order": "asc",
+    "limit": 3,
+    "isRoundOff": true,
+    "aggregationPaths": [
+      "Total Collection", "Total Population"
+    ],
+    "preActionTheory":{
+      "Target Collection":"repsonseToDifferenceOfDates"
+    },			
+    "insight": {
+    },
+    "_comment": " Bottom Performing States for Populationwise Revenue"
+  }
 	
 }
