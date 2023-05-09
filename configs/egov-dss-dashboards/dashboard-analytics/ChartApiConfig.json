@@ -12878,6 +12878,31 @@
       "_comment": " "
     },
   
+  "tltodaysLastYearCollectionv3": {
+    "chartName": "NATIONAL_DSS_TODAYS_LAST_YEAR_COLLECTION_TL",
+    "queries": [
+      {
+        "module": "TL",
+        "dateRefField": "",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "tl-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"now-366d/d\"}}},\"aggs\":{\"TodaysCollection\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "Amount",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "TodaysCollection"
+    ],
+    "insight": {
+      
+    },
+    "_comment": " "
+  },
+  
     "tradeLicenseTotalCollectionv2": {
       "chartName": "DSS_TL_TOTAL_COLLECTION",
       "queries": [
