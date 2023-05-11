@@ -168,6 +168,13 @@
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.paymentDetails.bill.status.keyword\":[\"Cancelled\"]}}],\"must\":[{\"term\":{\"dataObject.paymentDetails.businessService.keyword\":\"TL\"}}]}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}"
       },
       {
+        "module": "FSM",
+        "dateRefField": "Data.payments.paymentDetails.receiptDate",
+        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"module\" : \"Data.payments.paymentDetails.businessService.keyword\", \"tenantId\" : \"Data.fsm.tenantId\"}",
+        "indexName": "fsm",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.fsm.tenantId.keyword\":\"pg.testing\"}}],\"must\":[{\"term\":{\"Data.payments.paymentDetails.businessService.keyword\":\"FSM.TRIP_CHARGES\"}}]}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"Data.payments.paymentDetails.bill.billDetails.amountPaid\"}}}}}}"
+      },
+      {
         "module": "OBPS",
         "indexName": "dss-collection_v2",
         "aggrQuery": " { \"aggs\": { \"AGGR\": { \"filter\": { \"bool\": { \"must\": [ { \"terms\": { \"dataObject.paymentDetails.businessService.keyword\": [ \"BPA.LOW_RISK_PERMIT_FEE\",\"BPA.NC_APP_FEE\",\"BPA.NC_SAN_FEE\",\"BPA.NC_OC_APP_FEE\" ] } } ], \"must_not\": [ { \"term\": { \"dataObject.tenantId.keyword\": \"pg.testing\" } }, { \"term\": { \"dataObject.paymentStatus.keyword\": \"Cancelled\" } } ] } }, \"aggs\": { \"Total Collection\": { \"sum\": { \"field\": \"dataObject.paymentDetails.totalAmountPaid\" } } } } } } ",
@@ -218,7 +225,8 @@
       "downwardIndicator" : "negative",
       "textMessage" : "$indicator$value% than last $insightInterval",
       "colorCode" : "#228B22",
-      "insightInterval" : "year"
+      "insightInterval" : "year",
+      "isRoundOff": true
     },
     "_comment": " "
   },
@@ -300,7 +308,8 @@
       "downwardIndicator" : "negative",
       "textMessage" : "$indicator$value% than last $insightInterval",
       "colorCode" : "#228B22",
-      "insightInterval" : "year"
+      "insightInterval" : "year",
+      "isRoundOff": true
     },
     "_comment": " "
   },
@@ -349,6 +358,13 @@
         "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\", \n\"tenantId\" : \"dataObject.tenantId\"}",
         "indexName": "dss-collection_v2",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"terms\":{\"dataObject.tenantId.keyword\":[\"pg.testing\",\"pg\"]}},{\"terms\":{\"dataObject.bill.status.keyword\":[\"Cancelled\"]}},{\"terms\":{\"dataObject.paymentDetails.businessService.keyword\":[\"PT\",\"TL\",\"WS.ONE_TIME_FEE\",\"SW.ONE_TIME_FEE\",\"FSM.TRIP_CHARGES\",\"PT.MUTATION\",\"SW\",\"BPA.LOW_RISK_PERMIT_FEE\",\"BPA.NC_SAN_FEE\",\"BPA.NC_APP_FEE\",\"BPA.NC_OC_APP_FEE\"]}}]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"dataObject.paymentDetails.receiptDate\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}}}"
+      },
+      {
+        "module": "FSM",
+        "dateRefField": "Data.payments.paymentDetails.receiptDate",
+        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \"tenantId\" : \"Data.fsm.tenantId\"}",
+        "indexName": "fsm",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.fsm.tenantId.keyword\":\"pg.testing\"}}],\"must\":[{\"term\":{\"Data.payments.paymentDetails.businessService.keyword\":\"FSM.TRIP_CHARGES\"}}]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"Data.payments.paymentDetails.receiptDate\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Collections\":{\"sum\":{\"field\":\"Data.payments.paymentDetails.bill.billDetails.amountPaid\"}}}}}}}}"
       },
       {
         "module": "BND",
@@ -522,6 +538,13 @@
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"terms\":{\"dataObject.tenantId.keyword\":[\"pg.testing\",\"pg\"]}},{\"terms\":{\"dataObject.bill.status.keyword\":[\"Cancelled\"]}},{\"terms\":{\"dataObject.paymentDetails.businessService.keyword\":[\"PT\",\"TL\",\"WS.ONE_TIME_FEE\",\"SW.ONE_TIME_FEE\",\"FSM.TRIP_CHARGES\",\"PT.MUTATION\",\"SW\",\"BPA.LOW_RISK_PERMIT_FEE\",\"BPA.NC_SAN_FEE\",\"BPA.NC_APP_FEE\",\"BPA.NC_OC_APP_FEE\"]}}]}},\"aggs\":{\"MCOLLECT\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}"
       },
       {
+        "module": "FSM",
+        "dateRefField": "Data.payments.paymentDetails.receiptDate",
+        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"tenantId\" : \"Data.fsm.tenantId\"}",
+        "indexName": "fsm",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.fsm.tenantId.keyword\":\"pg.testing\"}}],\"must\":[{\"term\":{\"Data.payments.paymentDetails.businessService.keyword\":\"FSM.TRIP_CHARGES\"}}]}},\"aggs\":{\"FSM\":{\"sum\":{\"field\":\"Data.payments.paymentDetails.bill.billDetails.amountPaid\"}}}}}}"
+      },
+      {
         "module": "BND",
         "dateRefField": "dataObject.paymentDetails.receiptDate",
         "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\", \"tenantId\" : \"dataObject.tenantId.keyword\"}",
@@ -541,6 +564,7 @@
       "FIRENOC",
       "W&S",
       "MCOLLECT",
+      "FSM",
       "BND"
     ],
     "insight": {
@@ -685,7 +709,8 @@
       "downwardIndicator" : "negative",
       "textMessage" : "$indicator$value% than last $insightInterval",
       "colorCode" : "#228B22",
-      "insightInterval" : "year"
+      "insightInterval" : "year",
+      "isRoundOff": true
     },
     "_comment": " totalApplication is the chartId"
   },
@@ -839,7 +864,8 @@
       "downwardIndicator" : "negative",
       "textMessage" : "$indicator$value% than last $insightInterval",
       "colorCode" : "#228B22",
-      "insightInterval" : "year"
+      "insightInterval" : "year",
+      "isRoundOff": true
     },
     "_comment": " SLA Achieved Percentage "
   },
@@ -1368,7 +1394,8 @@
       "downwardIndicator" : "negative",
       "textMessage" : "$indicator$value% than last $insightInterval",
       "colorCode" : "#228B22",
-      "insightInterval" : "year"
+      "insightInterval" : "year",
+      "isRoundOff": true
     },
     "_comment": " totol properties having assessmentNumber "
   },
@@ -1578,8 +1605,7 @@
     "aggregationPaths": [
       "Total Collection",
       "Transactions",
-      "Assessed Properties",
-      "Target Collection"
+      "Assessed Properties"
     ],
     "pathDataTypeMapping": [
       {
@@ -1590,9 +1616,6 @@
       },
       {
         "Assessed Properties": "number"
-      },
-      {
-        "Target Collection": "amount"
       }
     ],
     "insight": {
@@ -2159,8 +2182,7 @@
     "aggregationPaths": [
       "Total Collection",
       "Transactions",
-      "Total Licence Issued",
-      "Target Collection"
+      "Total Licence Issued"
     ],
     "pathDataTypeMapping": [
       {
@@ -2171,9 +2193,6 @@
       },
       {
         "Total Licence Issued": "number"
-      },
-      {
-        "Target Collection": "amount"
       }
     ],
     "insight": {
@@ -2397,7 +2416,8 @@
       "downwardIndicator" : "negative",
       "textMessage" : "$indicator$value% than last $insightInterval",
       "colorCode" : "#228B22",
-      "insightInterval" : "year"
+      "insightInterval" : "year",
+      "isRoundOff": true
     },
     "_comment": " SLA Achieved Percentage "
   },
@@ -2622,7 +2642,7 @@
         "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"tenantId\" : \"Data.tenantId.keyword\" }",
         "dateRefField": "Data.@timestamp",
         "indexName": "property-assessments",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Fys\":{\"terms\":{\"field\":\"Data.financialYear.keyword\",\"min_doc_count\":0}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Fys\":{\"terms\":{\"field\":\"Data.financialYear.keyword\",\"min_doc_count\":0,\"order\":{\"_term\":\"desc\"}}}}}}}"
       },
       {
         "module": "PT",
@@ -2652,7 +2672,7 @@
         "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"tenantId\" : \"Data.tenantId.keyword\" }",
         "dateRefField": "Data.@timestamp",
         "indexName": "property-assessments",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"ULBS \":{\"terms\":{\"field\":\"Data.tenantId.keyword\"},\"aggs\":{\"Fys\":{\"terms\":{\"field\":\"Data.financialYear.keyword\",\"min_doc_count\":0}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"ULBS \":{\"terms\":{\"field\":\"Data.tenantId.keyword\"},\"aggs\":{\"Fys\":{\"terms\":{\"field\":\"Data.financialYear.keyword\",\"min_doc_count\":0,\"order\":{\"_term\":\"desc\"}}}}}}}}}"
       },
       {
         "module": "PT",
@@ -2681,7 +2701,7 @@
         "requestQueryMap": "{\"tenantId\" : \"Data.tenantId.keyword\" , \"wardId\" : \"Data.ward.name.keyword\"}",
         "dateRefField": "Data.@timestamp",
         "indexName": "property-assessments",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Ward \":{\"terms\":{\"field\":\"Data.ward.name.keyword\"},\"aggs\":{\"Fys\":{\"terms\":{\"field\":\"Data.financialYear.keyword\",\"min_doc_count\":0}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Ward \":{\"terms\":{\"field\":\"Data.ward.name.keyword\"},\"aggs\":{\"Fys\":{\"terms\":{\"field\":\"Data.financialYear.keyword\",\"min_doc_count\":0,\"order\":{\"_term\":\"desc\"}}}}}}}}}"
       },
       {
         "module": "PT",
@@ -3058,7 +3078,8 @@
       "downwardIndicator" : "negative",
       "textMessage" : "$indicator$value% than last $insightInterval",
       "colorCode" : "#228B22",
-      "insightInterval" : "year"
+      "insightInterval" : "year",
+      "isRoundOff": true
     },
     "_comment": " Total Number of Complaints "
   },
@@ -5175,7 +5196,7 @@
       }
     ],
     "chartType": "pie",
-    "valueType": "amount",
+    "valueType": "number",
     "action": "",
     "documentType": "_doc",
     "drillChart": "none",
@@ -5209,6 +5230,60 @@
     },	
     "_comment": " "	
   },
+   "fsmRequestByPaymentPreference": {
+    "chartName": "DSS_FSM_RESQUEST_BY_PAYMENT_PREFERENCE",
+    "queries": [
+      {
+        "module": "FSM",
+        "dateRefField": "Data.fsm.@timestamp",
+        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \"tenantId\" : \"Data.tenantData.code\" ,  \"district\" : \"Data.tenantData.city.districtCode\"}",
+        "indexName": "fsm",
+        "aggrQuery": "{ \"aggs\": {\"AGGR\": {\"filter\": {\"bool\": {\"must_not\": [{\"term\": {\"Data.fsm.tenantId.keyword\": \"pg.testing\"}}]}}, \"aggs\": {\"Payment Preference\": {\"terms\": {\"field\": \"Data.fsm.paymentPreference.keyword\"}}}}}}"
+      }
+    ],
+    "chartType": "pie",
+    "valueType": "number",
+    "action": "",
+    "documentType": "_doc",
+    "drillChart": "none",
+    "aggregationPaths": [
+      "Payment Preference"
+    ],
+    "insight": {
+    },
+    "_comment": " "
+  },
+
+  "fsmTotalRequestsbyStatus": {
+    "chartName": "DSS_FSM_TOTAL_REQUESTS_BY_STATUS",
+    "queries": [
+      {
+        "module": "FSM",
+        "dateRefField": "Data.fsm.@timestamp",
+        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \"tenantId\" : \"Data.tenantData.code\" ,  \"district\" : \"Data.tenantData.city.districtCode\"}",
+        "indexName": "fsm",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.fsm.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Completed\":{\"date_histogram\":{\"field\":\"Data.fsm.@timestamp\",\"interval\":\"intervalvalue\"},\"aggs\":{\"completed\":{\"filter\":{\"terms\":{\"Data.fsm.applicationStatus.keyword\":[\"CITIZEN_FEEDBACK_PENDING\",\"COMPLETED\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.fsm.applicationStatus.keyword\"}}}}}},\"Received\":{\"date_histogram\":{\"field\":\"Data.fsm.@timestamp\",\"interval\":\"intervalvalue\"},\"aggs\":{\"received\":{\"filter\":{\"terms\":{\"Data.fsm.applicationStatus.keyword\":[\"CREATED\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.fsm.applicationStatus.keyword\"}}}}}},\"Pending\":{\"date_histogram\":{\"field\":\"Data.fsm.@timestamp\",\"interval\":\"intervalvalue\"},\"aggs\":{\"pending\":{\"filter\":{\"terms\":{\"Data.fsm.applicationStatus.keyword\":[\"PENDING_APPL_FEE_PAYMENT\",\"DSO_INPROGRESS\",\"PENDING_DSO_APPROVAL\",\"ASSING_DSO\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.fsm.applicationStatus.keyword\"}}}}}},\"Rejected\":{\"date_histogram\":{\"field\":\"Data.fsm.@timestamp\",\"interval\":\"intervalvalue\"},\"aggs\":{\"rejected\":{\"filter\":{\"terms\":{\"Data.fsm.applicationStatus.keyword\":[\"REJECTED\"]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.fsm.applicationStatus.keyword\"}}}}}}}}}}" 
+      
+      }
+    ],
+    "chartType": "line",
+    "valueType": "number",
+    "action": "",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "aggregationPaths": [
+      "Received",
+      "Completed",
+      "Pending",
+      "Rejected"  
+    ],
+    "isCumulative": false,
+    "interval": "month",
+    "insight": {
+    },
+    "_comment": " "
+  },
+
   "fsmTotalCumulativeCollection": {
     "chartName": "DSS_FSM_TOTAL_CUMULATIVE_COLLECTION",
     "queries": [
@@ -5221,7 +5296,7 @@
       }
     ],
     "chartType": "line",
-    "valueType": "amount",
+    "valueType": "number",
     "action": "",
     "drillChart": "none",
     "documentType": "_doc",
@@ -5424,11 +5499,10 @@
         "dateRefField": "Data.vehicleTrip.@timestamp",
         "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \"tenantId\" : \"Data.tenantData.code\" ,  \"district\" : \"Data.tenantData.city.districtCode\"}",
         "indexName": "vehicletrip",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.vehicleTrip.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Capacity Utilization\":{\"date_histogram\":{\"field\":\"Data.vehicleTrip.@timestamp\",\"interval\":\"month\"},\"aggs\":{\"Count\":{\"sum\":{\"script\":{\"source\":\"(doc['Data.vehicleTrip.volumeCarried'].value)/1000.0\"}}}}}}}}}"
-      }
+         "aggrQuery":  "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.vehicleTrip.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Capacity Utilization\":{\"date_histogram\":{\"field\":\"Data.vehicleTrip.@timestamp\",\"interval\":\"intervalvalue\"},\"aggs\":{\"avg_rating\":{\"avg\":{\"field\":\"Data.vehicleTrip.volumeCarried\"}}}}}}}}"}
     ],
     "chartType": "line",
-    "valueType": "amount",
+    "valueType": "number",
     "action": "",
     "isRoundOff": true,
     "documentType": "_doc",
@@ -5450,7 +5524,7 @@
         "dateRefField": "Data.vehicleTrip.@timestamp",
         "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \"tenantId\" : \"Data.tenantData.code\" ,  \"district\" : \"Data.tenantData.city.districtCode\"}",
         "indexName": "vehicletrip",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.vehicleTrip.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Septage Dumped At Plant\":{\"date_histogram\":{\"field\":\"Data.vehicleTrip.@timestamp\",\"interval\":\"month\"},\"aggs\":{\"Count\":{\"sum\":{\"script\":{\"source\":\"(doc['Data.vehicleTrip.volumeCarried'].value)/1000.0\"}}}}},\"Septage Collected\":{\"date_histogram\":{\"field\":\"Data.vehicleTrip.@timestamp\",\"interval\":\"month\"},\"aggs\":{\"Count\":{\"sum\":{\"script\":{\"source\":\"(doc['Data.vehicleTrip.tripDetails.volume'].value)/1000.0\"}}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.vehicleTrip.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Septage Dumped At Plant\":{\"date_histogram\":{\"field\":\"Data.vehicleTrip.@timestamp\",\"interval\":\"month\"},\"aggs\":{\"Count\":{\"sum\":{\"script\":{\"source\":\"(doc['Data.vehicleTrip.volumeCarried'].value)/1000.0\"}}}}},\"Septage Collected\":{\"date_histogram\":{\"field\":\"Data.vehicleTrip.@timestamp\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Count\":{\"sum\":{\"script\":{\"source\":\"(doc['Data.vehicleTrip.tripDetails.volume'].value)/1000.0\"}}}}}}}}}"
       }
     ],
     "chartType": "line",
@@ -5464,6 +5538,33 @@
       "Septage Dumped At Plant"
     ],
     "isCumulative": false,
+    "interval": "month",
+    "insight": {
+    },
+    "_comment": " "
+  },
+  
+   "fsmCustomerRatings": {
+    "chartName": "DSS_FSM_CUSTOMER_RATINGS",
+    "queries": [
+      {
+        "module": "FSM",
+        "dateRefField": "Data.fsm.@timestamp",
+        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \"tenantId\" : \"Data.tenantData.code\" ,  \"district\" : \"Data.tenantData.city.districtCode\"}",
+        "indexName": "fsm",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.fsm.tenantId.keyword\":\"pg.testing\"}}],\"must\":[{\"terms\":{\"Data.fsm.applicationStatus.keyword\":[\"COMPLETED\"]}},{\"term\":{\"Data.history.action.keyword\":\"RATE\"}},{\"exists\":{\"field\":\"Data.history\"}},{\"range\":{\"Data.history.rating\":{\"gte\":1}}}]}},\"aggs\":{\"Customer Rating\":{\"date_histogram\":{\"field\":\"Data.fsm.@timestamp\",\"interval\":\"intervalvalue\"},\"aggs\":{\"avg_rating\":{\"avg\":{\"field\":\"Data.history.rating\"}}}}}}}}"
+      }
+    ],
+    "chartType": "line",
+    "valueType": "number",
+    "action": "",
+    "isRoundOff": true,
+    "documentType": "_doc",
+    "drillChart": "none",
+    "aggregationPaths": [
+      "Customer Rating"
+    ],
+    "isCumulative": true,
     "interval": "month",
     "insight": {
     },
@@ -5785,7 +5886,7 @@
         "dateRefField": "Data.vehicleTrip.@timestamp",
         "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \"tenantId\" : \"Data.tenantData.code\" ,  \"district\" : \"Data.tenantData.city.districtName\"}",
         "indexName": "vehicletrip",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"data.vehicleTrip.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"NoOfTrips\":{\"value_count\":{\"field\":\"Data.vehicleTrip.@timestamp\"}},\"TotalSeptageCollected\":{\"sum\":{\"script\":{\"source\":\"(doc['Data.vehicleTrip.tripDetails.volume'].value)/1000.0\"}}},\"TotalSeptageDumped\":{\"sum\":{\"script\":{\"source\":\"(doc['Data.vehicleTrip.volumeCarried'].value)/1000.0\"}}},\"CapacityUtilization\":{\"sum\":{\"script\":{\"source\":\"(doc['Data.vehicleTrip.volumeCarried'].value)/1000.0\"}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"data.vehicleTrip.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"No_Of_Trips\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.vehicleTrip.businessService.keyword\":\"FSM_VEHICLE_TRIP\"}}]}},\"aggs\":{\"NoOfTrips\":{\"value_count\":{\"field\":\"Data.vehicleTrip.@timestamp\"}}}},\"Total_Septage_Collected\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.vehicleTrip.businessService.keyword\":\"FSM_VEHICLE_TRIP\"}}]}},\"aggs\":{\"TotalSeptageCollected\":{\"sum\":{\"field\":\"Data.vehicleTrip.tripDetails.volume\"}}}},\"Total_Septage_Dumped\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.vehicleTrip.businessService.keyword\":\"FSM_VEHICLE_TRIP\"}}]}},\"aggs\":{\"TotalSeptageDumped\":{\"sum\":{\"field\":\"Data.vehicleTrip.volumeCarried\"}}}},\"Capacity_Utilization\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"Data.vehicleTrip.businessService.keyword\":\"FSM_VEHICLE_TRIP\"}}]}},\"aggs\":{\"CapacityUtilization\":{\"sum\":{\"field\":\"Data.vehicleTrip.volumeCarried\"}}}}}}}}"
       }
     ],
     "isMdmsEnabled": true,
@@ -5822,6 +5923,16 @@
     ],
     "isCumulative": true,
     "interval": "month",
+  "chartSpecificProperty": {
+     "XtableColumnOrder":[
+     "S.N.",
+     "District",
+     "NoOfTrips",
+     "TotalSeptageCollected",
+     "TotalSeptageDumped",
+     "CapacityUtilization"
+     ]
+     },
     "insight": {
     },
     "_comment": " "
@@ -5834,7 +5945,7 @@
         "dateRefField": "Data.vehicleTrip.@timestamp",
         "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \"tenantId\" : \"Data.tenantData.code\" ,  \"district\" : \"Data.tenantData.city.districtName\"}",
         "indexName": "vehicletrip",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"data.vehicleTrip.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"ULBs \":{\"terms\":{\"field\":\"Data.vehicleTrip.tenantId.keyword\",\"size\":1000},\"aggs\":{\"NoOfTrips\":{\"value_count\":{\"field\":\"Data.vehicleTrip.@timestamp\"}},\"TotalSeptageCollected\":{\"sum\":{\"script\":{\"source\":\"(doc['Data.vehicleTrip.tripDetails.volume'].value)/1000.0\"}}},\"TotalSeptageDumped\":{\"sum\":{\"script\":{\"source\":\"(doc['Data.vehicleTrip.volumeCarried'].value)/1000.0\"}}},\"CapacityUtilization\":{\"sum\":{\"script\":{\"source\":\"(doc['Data.vehicleTrip.volumeCarried'].value)/1000.0\"}}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"data.vehicleTrip.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"ULBs \":{\"terms\":{\"field\":\"Data.vehicleTrip.tenantId.keyword\",\"size\":1000},\"aggs\":{\"NoOfTrips\":{\"value_count\":{\"field\":\"Data.vehicleTrip.@timestamp\"}},\"TotalSeptageCollected\":{\"sum\":{\"script\":{\"source\":\"(doc['Data.vehicleTrip.tripDetails.volume'].value)\"}}},\"TotalSeptageDumped\":{\"sum\":{\"script\":{\"source\":\"(doc['Data.vehicleTrip.volumeCarried'].value)\"}}},\"CapacityUtilization\":{\"sum\":{\"script\":{\"source\":\"(doc['Data.vehicleTrip.volumeCarried'].value)\"}}}}}}}}}"
       }
     ],
     "filterKeys": [
@@ -5927,8 +6038,7 @@
     "insight": {
     },
     "_comment": " "
-  },
-
+  },		
   "mcTodaysCollection": {
     "chartName": "DSS_TOTAL_COLLECTION_TODAY",
     "queries": [
@@ -14649,15 +14759,15 @@
         "requestQueryMap": "{\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
         "indexName": "ws-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
-    },
-    {
+      },
+      {
         "module": "BIRTH",
         "indexName": "birth-cert-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}",
         "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": ""
-     },
-     {
+        "dateRefField": "date"
+      },
+      {
         "module": "DEATH",
         "indexName": "death-cert-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}",
@@ -15519,7 +15629,7 @@
       "WS",
       "OBPS",
       "FNOC",
-      "BND"
+       "BND"
     ],
     "insight": {
     },
@@ -16775,7 +16885,8 @@
       "downwardIndicator" : "negative",
       "textMessage" : "$indicator$value% than last $insightInterval",
       "colorCode" : "#228B22",
-      "insightInterval" : "year"
+      "insightInterval" : "year",
+      "isRoundOff": true
     },
     "_comment": "FIRE NOC total nocs issued "
   },
@@ -18252,9 +18363,354 @@
       "downwardIndicator" : "negative",
       "textMessage" : "$indicator$value% than last $insightInterval",
       "colorCode" : "#228B22",
-      "insightInterval" : "year"
+      "insightInterval" : "year",
+      "isRoundOff": true
     },
     "_comment": " "
+  },
+  "financeTotalCollection": {
+    "chartName": "DSS_FINANCE_TOTAL_COLLECTION",
+    "queries": [
+      {
+        "module": "FINANCE",
+        "dateRefField": "",
+        "requestQueryMap": "{\"region\" : \"regionname.keyword\",\"district\" : \"districtname.keyword\", \"tenantId\" : \"ulbname.keyword\"}",
+        "indexName": "financeindex-v1",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[],\"must\":[]}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"totalreceiptvoucheramounts\"}}}}}}"
+      }
+    ],
+    "translateTenantCode": true,
+    "chartType": "metric",
+    "valueType": "amount",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Total Collection"
+    ],
+    "insight": {
+      "chartResponseMap" : "financeTotalCollection",
+      "action" : "differenceOfNumbers",
+      "upwardIndicator" : "positive",
+      "downwardIndicator" : "negative",
+      "textMessage" : "$indicator$value% than last $insightInterval",
+      "colorCode" : "#228B22",
+      "insightInterval" : "month"
+    },
+    "_comment": " "
+  },
+
+  "financeTotalBillAmount": {
+    "chartName": "DSS_FINANCE_TOTAL_BILL_AMOUNT",
+    "queries": [
+      {
+        "module": "FINANCE",
+        "dateRefField": "",
+        "requestQueryMap": "{\"region\" : \"regionname.keyword\",\"district\" : \"districtname.keyword\", \"tenantId\" : \"ulbname.keyword\"}",
+        "indexName": "financeindex-v1",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[],\"must\":[]}},\"aggs\":{\"Total Bill Amount\":{\"sum\":{\"field\":\"totalbillamounts\"}}}}}}"
+      }
+    ],
+    "translateTenantCode": true,
+    "chartType": "metric",
+    "valueType": "amount",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Total Bill Amount"
+    ],
+    "insight": {
+      "chartResponseMap" : "financeTotalBillAmount",
+      "action" : "differenceOfNumbers",
+      "upwardIndicator" : "positive",
+      "downwardIndicator" : "negative",
+      "textMessage" : "$indicator$value% than last $insightInterval",
+      "colorCode" : "#228B22",
+      "insightInterval" : "month"
+    },
+    "_comment": " "
+  },
+
+  "financeTotalPaidAmount": {
+    "chartName": "DSS_FINANCE_TOTAL_PAID_AMOUNT",
+    "queries": [
+      {
+        "module": "FINANCE",
+        "dateRefField": "",
+        "requestQueryMap": "{\"region\" : \"regionname.keyword\",\"district\" : \"districtname.keyword\", \"tenantId\" : \"ulbname.keyword\"}",
+        "indexName": "financeindex-v1",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[],\"must\":[]}},\"aggs\":{\"Total Paid Amount\":{\"sum\":{\"field\":\"totalpaymentamounts\"}}}}}}"
+      }
+    ],
+    "translateTenantCode": true,
+    "chartType": "metric",
+    "valueType": "amount",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Total Paid Amount"
+    ],
+    "insight": {
+      "chartResponseMap" : "financeTotalPaidAmount",
+      "action" : "differenceOfNumbers",
+      "upwardIndicator" : "positive",
+      "downwardIndicator" : "negative",
+      "textMessage" : "$indicator$value% than last $insightInterval",
+      "colorCode" : "#228B22",
+      "insightInterval" : "month"
+    },
+    "_comment": " "
+  },
+
+  "financeTotalBillsGenerated": {
+    "chartName": "DSS_FINANCE_TOTAL_BILLS_GENERATED",
+    "queries": [
+      {
+        "module": "FINANCE",
+        "dateRefField": "",
+        "requestQueryMap": "{\"region\" : \"regionname.keyword\",\"district\" : \"districtname.keyword\", \"tenantId\" : \"ulbname.keyword\"}",
+        "indexName": "financeindex-v1",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[],\"must\":[]}},\"aggs\":{\"Bills Generated\":{\"sum\":{\"field\":\"numberofbills\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Bills Generated"
+    ],
+    "insight": {
+      "chartResponseMap" : "financeTotalBillsGenerated",
+      "action" : "differenceOfNumbers",
+      "upwardIndicator" : "positive",
+      "downwardIndicator" : "negative",
+      "textMessage" : "$indicator$value% than last $insightInterval",
+      "colorCode" : "#228B22",
+      "insightInterval" : "month"
+    },
+    "_comment": " "
+  },
+
+  "financeTotalPayments": {
+    "chartName": "DSS_FINANCE_TOTAL_PAYMENTS",
+    "queries": [
+      {
+        "module": "FINANCE",
+        "dateRefField": "",
+        "requestQueryMap": "{\"region\" : \"regionname.keyword\",\"district\" : \"districtname.keyword\", \"tenantId\" : \"ulbname.keyword\"}",
+        "indexName": "financeindex-v1",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[],\"must\":[]}},\"aggs\":{\"Total Payments\":{\"sum\":{\"field\":\"numberofpayments\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Total Payments"
+    ],
+    "insight": {
+      "chartResponseMap" : "financeTotalPayments",
+      "action" : "differenceOfNumbers",
+      "upwardIndicator" : "positive",
+      "downwardIndicator" : "negative",
+      "textMessage" : "$indicator$value% than last $insightInterval",
+      "colorCode" : "#228B22",
+      "insightInterval" : "month"
+    },
+    "_comment": " "
+  },
+
+  "financeInsights": {
+    "chartName": "DSS_FINANCE_BOUNDARY",
+    "queries": [
+      {
+        "module": "FINANCE",
+        "dateRefField": "",
+        "requestQueryMap": "{\"region\" : \"regionname.keyword\",\"district\" : \"districtname.keyword\", \"tenantId\" : \"ulbname.keyword\"}",
+        "indexName": "financeindex-v1",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"City Name\":{\"terms\":{\"field\":\"ulbname.keyword\"}},\"Total Bills Generated\":{\"sum\":{\"field\":\"numberofbills\"}},\"Total Vouchers Generated\":{\"sum\":{\"field\":\"numberofvouchersforbill\"}},\"Total Billed Amount\":{\"sum\":{\"field\":\"totalbillamounts\"}},\"Bills Paid\":{\"sum\":{\"field\":\"numberofbillspaid\"}},\"Payments Done\":{\"sum\":{\"field\":\"numberofpayments\"}},\"Bill Amount Paid\":{\"sum\":{\"field\":\"billamountpaid\"}},\"Receipt Vouchers Passed\":{\"sum\":{\"field\":\"numberofreceiptvoucher\"}},\"Vendors\":{\"sum\":{\"field\":\"numberofcontractorsuppliers\"}},\"Bank Accounts\":{\"sum\":{\"field\":\"numberofbankaccounts\"}},\"Finance Collection\":{\"sum\":{\"field\":\"totalreceiptvoucheramounts\"}}}}}}"
+      }
+    ],
+    "isMdmsEnabled": true,
+    "translateTenantCode": true,
+    "filterKeys": [
+      {"key": "tenantId", "column": "DDRs"}
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "action": "",
+    "plotLabel": "DDRs",
+    "isPostResponseHandler": true,
+    "postAggregationTheory" : "repsonseToDifferenceOfDates",
+    "documentType": "_doc",
+    "drillChart": "financeInsightsUlbDrilldown",
+    "aggregationPaths": [
+      "Total Bills Generated",
+      "Total Vouchers Generated",
+      "Total Billed Amount",
+      "Bills Paid",
+      "Payments Done",
+      "Bill Amount Paid",
+      "Receipt Vouchers Passed",
+      "Finance Collection",
+      "Vendors",
+      "Bank Accounts"
+    ],
+    "pathDataTypeMapping": [
+      {
+        "Total Bills Generated": "number"
+      },
+      {
+        "Total Vouchers Generated": "number"
+      },
+      {
+        "Total Billed Amount": "amount"
+      },
+      {
+        "Bills Paid": "number"
+      },
+      {
+        "Payments Done": "number"
+      },
+      {
+        "Bill Amount Paid": "amount"
+      },
+      {
+        "Receipt Vouchers Passed": "number"
+      },
+      {
+        "Finance Collection": "amount"
+      },
+      {
+        "Vendors": "number"
+      },
+      {
+        "Bank Accounts": "number"
+      }
+    ],
+    "insight": {},
+    "_comment": ""
+  },
+  
+  "financeInsightsUlbDrilldown": {
+    "chartName": "DSS_FINANCE_BOUNDARY_ULB_DRILLDOWN",
+    "queries": [
+      {
+        "module": "FINANCE",
+        "dateRefField": "",
+        "requestQueryMap": "{\"region\" : \"regionname.keyword\",\"district\" : \"districtname.keyword\", \"tenantId\" : \"ulbname.keyword\"}",
+        "indexName": "financeindex-v1",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"ULBs\":{\"terms\":{\"field\":\"ulbname.keyword\"},\"aggs\":{\"City Name\":{\"terms\":{\"field\":\"ulbname.keyword\"}},\"Total Bills Generated\":{\"sum\":{\"field\":\"numberofbills\"}},\"Total Vouchers Generated\":{\"sum\":{\"field\":\"numberofvouchersforbill\"}},\"Total Billed Amount\":{\"sum\":{\"field\":\"totalbillamounts\"}},\"Bills Paid\":{\"sum\":{\"field\":\"numberofbillspaid\"}},\"Payments Done\":{\"sum\":{\"field\":\"numberofpayments\"}},\"Bill Amount Paid\":{\"sum\":{\"field\":\"billamountpaid\"}},\"Receipt Vouchers Passed\":{\"sum\":{\"field\":\"numberofreceiptvoucher\"}},\"Vendors\":{\"sum\":{\"field\":\"numberofcontractorsuppliers\"}},\"Bank Accounts\":{\"sum\":{\"field\":\"numberofbankaccounts\"}},\"Finance Collection\":{\"sum\":{\"field\":\"totalreceiptvoucheramounts\"}}}}}}}}"
+      }
+    ],
+    "isMdmsEnabled": false,
+    "translateTenantCode": true,
+    "filterKeys": [
+      {"key": "tenantId", "column": "ULBs"}
+    ],
+    "chartType": "table",
+    "valueType": "number",
+    "action": "",
+    "plotLabel": "ULBs",
+    "isPostResponseHandler": true,
+    "postAggregationTheory" : "repsonseToDifferenceOfDates",
+    "documentType": "_doc",
+    "drillChart": "none",
+    "aggregationPaths": [
+      "Total Bills Generated",
+      "Total Vouchers Generated",
+      "Total Billed Amount",
+      "Bills Paid",
+      "Payments Done",
+      "Bill Amount Paid",
+      "Receipt Vouchers Passed",
+      "Finance Collection",
+      "Vendors",
+      "Bank Accounts"
+    ],
+    "pathDataTypeMapping": [
+      {
+        "Total Bills Generated": "number"
+      },
+      {
+        "Total Vouchers Generated": "number"
+      },
+      {
+        "Total Billed Amount": "amount"
+      },
+      {
+        "Bills Paid": "number"
+      },
+      {
+        "Payments Done": "number"
+      },
+      {
+        "Bill Amount Paid": "amount"
+      },
+      {
+        "Receipt Vouchers Passed": "number"
+      },
+      {
+        "Finance Collection": "amount"
+      },
+      {
+        "Vendors": "number"
+      },
+      {
+        "Bank Accounts": "number"
+      }
+    ],
+    "insight": {},
+    "_comment": ""
+  },
+  "avgTaxCollectedPerProperty": {
+    "chartName": "NATIONAL_PT_DSS_AVG_TAX_COLLECTION",
+    "queries": [
+      {
+        "module": "PT",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"ward\" : \"ward.keyword\",\"ulb\" : \"ulb.keyword\", \"state\" : \"state.keyword\"}",
+        "indexName": "pt-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"ND_Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}},\"No of properties paid\":{\"sum\":{\"field\":\"noOfPropertiesPaidToday\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "amount",
+    "action": "division",
+    "drillChart": "none",
+    "aggregationPaths": [
+      "ND_Total_Collection",
+      "No of properties paid"
+    ],
+    "computedFields": [
+      {
+        "postAggregationTheory": "",
+        "actionName": "DivisionComputedField",
+        "fields": [
+          "ND_Total_Collection",
+          "No of properties paid"
+        ],
+        "newField": "Avg Tax Collected per property",
+        "_comments": "fields are field names picked from its aggregation query to use post aggregation newField value with given new field name  "
+      }
+    ],
+    "insight": {
+      "chartResponseMap": "avgTaxCollectedPerProperty",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "year",
+      "isRoundOff": true
+    },
+    "_comment": "Average tax collected per property"
   },
   "totalNonTaxCollection": {
     "chartName": "DSS_TOTAL_NON_TAX_COLLECTION",
@@ -18458,49 +18914,224 @@
       "isRoundOff": true
     },
     "_comment": "Total non tax collection"
+    
   },
-  "avgTaxCollectedPerProperty": {
-    "chartName": "NATIONAL_PT_DSS_AVG_TAX_COLLECTION",
+  "nssPtSlaAchieved": {
+    "chartName": "NATIONAL_DSS_PT_SLA_ACHIEVED",
     "queries": [
       {
         "module": "PT",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
         "dateRefField": "date",
-        "requestQueryMap": "{\"ward\" : \"ward.keyword\",\"ulb\" : \"ulb.keyword\", \"state\" : \"state.keyword\"}",
         "indexName": "pt-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForUsageCategory\":0}},{\"match\":{\"noOfPropertiesPaidToday\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForUsageCategory\"}},{\"exists\":{\"field\":\"noOfPropertiesPaidToday\"}}]}},\"aggs\":{\"ND_Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}},\"No of properties paid\":{\"sum\":{\"field\":\"noOfPropertiesPaidToday\"}}}}}}"
       }
     ],
     "chartType": "metric",
-    "valueType": "amount",
-    "action": "division",
+    "valueType": "percentage",
     "drillChart": "none",
+    "documentType": "nss",
+    "action": "percentage",
+    "isRoundOff": true,
     "aggregationPaths": [
-      "ND_Total_Collection",
-      "No of properties paid"
-    ],
-    "computedFields": [
-      {
-        "postAggregationTheory": "",
-        "actionName": "DivisionComputedField",
-        "fields": [
-          "ND_Total_Collection",
-          "No of properties paid"
-        ],
-        "newField": "Avg Tax Collected per property",
-        "_comments": "fields are field names picked from its aggregation query to use post aggregation newField value with given new field name  "
-      }
+      "Total_Applications_Within_SLA",
+      "Total_Moved_Applications"
     ],
     "insight": {
-      "chartResponseMap": "avgTaxCollectedPerProperty",
-      "action": "differenceOfNumbers",
-      "upwardIndicator": "positive",
-      "downwardIndicator": "negative",
-      "textMessage": "$indicator$value% than last $insightInterval",
-      "colorCode": "#228B22",
-      "insightInterval": "year",
+      "chartResponseMap" : "nssPtSlaAchieved",
+      "action" : "differenceOfNumbers",
+      "upwardIndicator" : "positive",
+      "downwardIndicator" : "negative",
+      "textMessage" : "$indicator$value% than last $insightInterval",
+      "colorCode" : "#228B22",
+      "insightInterval" : "year",
       "isRoundOff": true
     },
-    "_comment": "Average tax collected per property"
+    "_comment": " "
+  },
+
+  "nssPtPendancy": {
+    "chartName": "NATIONAL_DSS_PT_PENDANCY",
+    "queries": [
+      {
+        "module": "PT",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
+        "dateRefField": "date",
+        "indexName": "pt-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"all_matching_docs\":{\"filters\":{\"filters\":{\"all\":{\"match_all\":{}}}},\"aggs\":{\"stateClosedApplications\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"intermediateAggrULB\":{\"terms\":{\"field\":\"ulb.keyword\"},\"aggs\":{\"intermediateAggrWard\":{\"terms\":{\"field\":\"ward.keyword\"},\"aggs\":{\"days\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"applications\":{\"avg\":{\"field\":\"todaysClosedApplications\"}}}},\"wardapplications\":{\"sum_bucket\":{\"buckets_path\":\"days.applications\"}}}},\"ulbApplications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrWard.wardapplications\"}}}},\"stateApplications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrULB.ulbApplications\"}}}},\"Total_Closed_Applications\":{\"sum_bucket\":{\"buckets_path\":\"stateClosedApplications.stateApplications\"}},\"stateTotalApplications\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"intermediateAggrULB\":{\"terms\":{\"field\":\"ulb.keyword\"},\"aggs\":{\"intermediateAggrWard\":{\"terms\":{\"field\":\"ward.keyword\"},\"aggs\":{\"days\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"applications\":{\"avg\":{\"field\":\"todaysTotalApplications\"}}}},\"wardapplications\":{\"sum_bucket\":{\"buckets_path\":\"days.applications\"}}}},\"ulbApplications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrWard.wardapplications\"}}}},\"stateApplications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrULB.ulbApplications\"}}}},\"Total_Applications\":{\"sum_bucket\":{\"buckets_path\":\"stateTotalApplications.stateApplications\"}},\"Applications_Pending\":{\"bucket_script\":{\"buckets_path\":{\"total\":\"Total_Applications\",\"closed\":\"Total_Closed_Applications\"},\"script\":\"(params.total - params.closed) \"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "percentage",
+    "drillChart": "none",
+    "documentType": "nss",
+    "action": "percentage",
+    "isRoundOff": true,
+    "aggregationPaths": [
+      "Applications_Pending",
+      "Total_Applications"
+    ],
+    "insight": {
+      "chartResponseMap" : "nssPtPendancy",
+      "action" : "differenceOfNumbers",
+      "upwardIndicator" : "positive",
+      "downwardIndicator" : "negative",
+      "textMessage" : "$indicator$value% than last $insightInterval",
+      "colorCode" : "#228B22",
+      "insightInterval" : "year",
+      "isRoundOff": true
+    },
+    "_comment": " "
+  },
+
+  "nssOverviewPendancy": {
+    "chartName": "NATIONAL_DSS_OVERVIEW_PENDANCY",
+    "queries": [
+      {
+        "module": "PT",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
+        "dateRefField": "date",
+        "indexName": "pt-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"all_matching_docs\":{\"filters\":{\"filters\":{\"all\":{\"match_all\":{}}}},\"aggs\":{\"stateClosedApplications\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"intermediateAggrULB\":{\"terms\":{\"field\":\"ulb.keyword\"},\"aggs\":{\"intermediateAggrWard\":{\"terms\":{\"field\":\"ward.keyword\"},\"aggs\":{\"days\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"applications\":{\"avg\":{\"field\":\"todaysClosedApplications\"}}}},\"wardapplications\":{\"sum_bucket\":{\"buckets_path\":\"days.applications\"}}}},\"ulbApplications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrWard.wardapplications\"}}}},\"stateApplications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrULB.ulbApplications\"}}}},\"Total_Closed_Applications\":{\"sum_bucket\":{\"buckets_path\":\"stateClosedApplications.stateApplications\"}},\"stateTotalApplications\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"intermediateAggrULB\":{\"terms\":{\"field\":\"ulb.keyword\"},\"aggs\":{\"intermediateAggrWard\":{\"terms\":{\"field\":\"ward.keyword\"},\"aggs\":{\"days\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"applications\":{\"avg\":{\"field\":\"todaysTotalApplications\"}}}},\"wardapplications\":{\"sum_bucket\":{\"buckets_path\":\"days.applications\"}}}},\"ulbApplications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrWard.wardapplications\"}}}},\"stateApplications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrULB.ulbApplications\"}}}},\"Total_Applications\":{\"sum_bucket\":{\"buckets_path\":\"stateTotalApplications.stateApplications\"}},\"Applications_Pending\":{\"bucket_script\":{\"buckets_path\":{\"total\":\"Total_Applications\",\"closed\":\"Total_Closed_Applications\"},\"script\":\"(params.total - params.closed) \"}}}}}}"
+      },
+      {
+        "module": "TL",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
+        "dateRefField": "date",
+        "indexName": "tl-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"all_matching_docs\":{\"filters\":{\"filters\":{\"all\":{\"match_all\":{}}}},\"aggs\":{\"stateClosedApplications\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"intermediateAggrULB\":{\"terms\":{\"field\":\"ulb.keyword\"},\"aggs\":{\"intermediateAggrWard\":{\"terms\":{\"field\":\"ward.keyword\"},\"aggs\":{\"days\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"applications\":{\"avg\":{\"field\":\"todaysClosedApplications\"}}}},\"wardapplications\":{\"sum_bucket\":{\"buckets_path\":\"days.applications\"}}}},\"ulbApplications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrWard.wardapplications\"}}}},\"stateApplications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrULB.ulbApplications\"}}}},\"Total_Closed_Applications\":{\"sum_bucket\":{\"buckets_path\":\"stateClosedApplications.stateApplications\"}},\"stateTotalApplications\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"intermediateAggrULB\":{\"terms\":{\"field\":\"ulb.keyword\"},\"aggs\":{\"intermediateAggrWard\":{\"terms\":{\"field\":\"ward.keyword\"},\"aggs\":{\"days\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"applications\":{\"avg\":{\"field\":\"todaysApplications\"}}}},\"wardapplications\":{\"sum_bucket\":{\"buckets_path\":\"days.applications\"}}}},\"ulbApplications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrWard.wardapplications\"}}}},\"stateApplications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrULB.ulbApplications\"}}}},\"Total_Applications\":{\"sum_bucket\":{\"buckets_path\":\"stateTotalApplications.stateApplications\"}},\"Applications_Pending\":{\"bucket_script\":{\"buckets_path\":{\"total\":\"Total_Applications\",\"closed\":\"Total_Closed_Applications\"},\"script\":\"(params.total - params.closed) \"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "percentage",
+    "drillChart": "none",
+    "documentType": "nss",
+    "action": "percentage",
+    "isRoundOff": true,
+    "aggregationPaths": [
+      "Applications_Pending",
+      "Total_Applications"
+    ],
+    "insight": {
+      "chartResponseMap" : "nssOverviewPendancy",
+      "action" : "differenceOfNumbers",
+      "upwardIndicator" : "positive",
+      "downwardIndicator" : "negative",
+      "textMessage" : "$indicator$value% than last $insightInterval",
+      "colorCode" : "#228B22",
+      "insightInterval" : "year",
+      "isRoundOff": true
+    },
+    "_comment": " "
+  },
+
+  "nssPtCitizenFeedbackScore": {
+    "chartName": "NATIONAL_DSS_PT_CITIZEN_FEEDBACK_SCORE",
+    "queries": [
+      {
+        "module": "CF",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
+        "dateRefField": "date",
+        "indexName": "citizen-feedback-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"serviceModule.keyword\":\"PT\"}}]}},\"aggs\":{\"Total Feedback Score\":{\"sum\":{\"script\":{\"lang\":\"painless\",\"inline\":\"doc['todaysAverageCitizenRating'].value * doc['todaysNoOfCitizenResponsesForChannel'].value\"}}},\"Total Number of Responses\":{\"sum\":{\"field\":\"todaysNoOfCitizenResponsesForChannel\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "nss",
+    "action": "division",
+    "isRoundOff": true,
+    "aggregationPaths": [
+      "Total Feedback Score",
+      "Total Number of Responses"
+    ],
+    "insight": {
+      "chartResponseMap" : "nssPtCitizenFeedbackScore",
+      "action" : "differenceOfNumbers",
+      "upwardIndicator" : "positive",
+      "downwardIndicator" : "negative",
+      "textMessage" : "$indicator$value% than last $insightInterval",
+      "colorCode" : "#228B22",
+      "insightInterval" : "year",
+      "isRoundOff": true
+    },
+    "_comment": " "
+  },
+  
+  "nssOverviewCitizenFeedbackScore": {
+    "chartName": "NATIONAL_DSS_OVERVIEW_CITIZEN_FEEDBACK_SCORE",
+    "queries": [
+      {
+        "module": "CF",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
+        "dateRefField": "date",
+        "indexName": "citizen-feedback-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"serviceModule.keyword\":\"PT\"}}]}},\"aggs\":{\"Total Feedback Score\":{\"sum\":{\"script\":{\"lang\":\"painless\",\"inline\":\"doc['todaysAverageCitizenRating'].value * doc['todaysNoOfCitizenResponsesForChannel'].value\"}}},\"Total Number of Responses\":{\"sum\":{\"field\":\"todaysNoOfCitizenResponsesForChannel\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "nss",
+    "action": "division",
+    "isRoundOff": true,
+    "aggregationPaths": [
+      "Total Feedback Score",
+      "Total Number of Responses"
+    ],
+    "insight": {
+      "chartResponseMap" : "nssOverviewCitizenFeedbackScore",
+      "action" : "differenceOfNumbers",
+      "upwardIndicator" : "positive",
+      "downwardIndicator" : "negative",
+      "textMessage" : "$indicator$value% than last $insightInterval",
+      "colorCode" : "#228B22",
+      "insightInterval" : "year",
+      "isRoundOff": true
+    },
+    "_comment": " "
+  },
+  
+   "nssPtCitizenServiceDeliveryIndex": {
+    "chartName": "NATIONAL_DSS_PT_CITIZEN_SERVICE_DELIVERY_INDEX",
+    "queries": [
+      {
+        "module": "PT",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
+        "dateRefField": "date",
+        "indexName": "pt-national-dashboard",
+        "aggrQuery": "{\"aggs\": {\"all_matching_docs\": {\"filters\": {\"filters\": {\"all\": {\"match_all\": {}}}},\"aggs\": {\"state\":{\"terms\": {\"field\": \"state.keyword\",\"size\": 10000},\"aggs\": {\"ulb\": {\"terms\": {\"field\": \"ulb.keyword\",\"size\": 10000},\"aggs\": {\"ward\": {\"terms\": {\"field\": \"ward.keyword\",\"size\": 10000},\"aggs\": {\"SlaintermediateAggr\": {\"terms\": {\"field\": \"date\",\"size\": 10000},\"aggs\": {\"applicationsSubmittedWithInSla\": {\"avg\": {\"field\": \"todaysApplicationsWithinSLA\"}}}},\"Total_Applications_Within_SLA\": {\"sum_bucket\": {\"buckets_path\": \"SlaintermediateAggr.applicationsSubmittedWithInSla\"}},\"app\": {\"filter\": {\"bool\": {\"must\":[{\"match\":{\"applicationStatus.keyword\" : \"APPROVED\"}}]}},\"aggs\": {\"totalapplication\": {\"sum\": {\"field\": \"todaysMovedApplicationsForApplicationStatus\"}}}},\"aggregatedsla\": {\"bucket_script\": {\"buckets_path\": {\"total\": \"app.totalapplication\",\"withinsla\": \"Total_Applications_Within_SLA\"},\"script\": \"((params.withinsla / params.total) * 100)*0.5\"}}}}}}}}}}}}"
+      },
+      {
+        "module": "CF",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
+        "dateRefField": "date",
+        "indexName": "citizen-feedback-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\": {\"must\": [{\"term\": {\"serviceModule.keyword\": \"PT\"}}]}},\"aggs\": {\"all_matching_docs\": {\"filters\": {\"filters\": {\"all\": {\"match_all\": {}}}},\"aggs\": {\"state\": {\"terms\": {\"field\": \"state.keyword\",\"size\": 10000},\"aggs\": {\"ulb\": {\"terms\": {\"field\": \"ulb.keyword\",\"size\": 10000},\"aggs\": {\"ward\": {\"terms\": {\"field\": \"ward.keyword\",\"size\": 10000},\"aggs\": {\"TotalFeedbackScore\": {\"sum\": {\"script\": {\"lang\": \"painless\",\"inline\": \"doc['todaysAverageCitizenRating'].value * doc['todaysNoOfCitizenResponsesForChannel'].value\"}}},\"TotalNumberofResponses\": {\"sum\": {\"field\": \"todaysNoOfCitizenResponsesForChannel\"}},\"avgfeedback\": {\"bucket_script\": {\"buckets_path\": {\"response\": \"TotalNumberofResponses\",\"feedbak\": \"TotalFeedbackScore\"},\"script\": \"((params.response / params.feedbak) * 100)*0.5\"}}}}}}}}}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "nss",
+    "action": "",
+    "isRoundOff": true,
+    "aggregationPaths": [
+      "aggregatedsla",
+      "avgfeedback"
+    ],
+    "insight": {
+      "chartResponseMap" : "nssPtCitizenServiceDeliveryIndex",
+      "action" : "differenceOfNumbers",
+      "upwardIndicator" : "positive",
+      "downwardIndicator" : "negative",
+      "textMessage" : "$indicator$value% than last $insightInterval",
+      "colorCode" : "#228B22",
+      "insightInterval" : "year",
+      "isRoundOff": true
+    },
+    "_comment": " "
   },
   "shareOnlineTotalRevenueCollection": {
     "chartName": "DSS_SHARE_ONLINE_REVENUE_COLLECTION",
@@ -19931,5 +20562,4 @@
     ],
       "_comment": " "
   }
-	
 }
