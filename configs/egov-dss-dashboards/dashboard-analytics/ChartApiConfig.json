@@ -8399,7 +8399,7 @@
             "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
             "dateRefField": "",
             "indexName": "pt-national-dashboard",
-            "aggrQuery": "{\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}"
+            "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"System\"}},{\"term\":{\"paymentChannelType.keyword\":\"Field\"}},{\"term\":{\"paymentChannelType.keyword\":\"Sewakendra\"}},{\"term\":{\"paymentChannelType.keyword\":\"POS\"}}]}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
           }
 
     ],
