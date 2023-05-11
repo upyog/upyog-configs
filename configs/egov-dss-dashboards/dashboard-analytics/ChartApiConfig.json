@@ -8384,6 +8384,52 @@
     },
     "_comment": ""
   },
+  "sharePTOnlinePie": {
+    "chartName": "DSS_PT_ONLINE_CHART",
+    "queries": [
+        {
+            "module": "PT",
+            "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+            "dateRefField": "",
+            "indexName": "pt-national-dashboard",
+            "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Paytm\"}},{\"term\":{\"paymentChannelType.keyword\":\"Razorpay\"}},{\"term\":{\"paymentChannelType.keyword\":\"PayU\"}},{\"term\":{\"paymentChannelType.keyword\":\"BBPS\"}},{\"term\":{\"paymentChannelType.keyword\":\"Freecharge\"}}]}},\"aggs\":{\"Target Collection Online\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
+          },
+          {
+            "module": "PT",
+            "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+            "dateRefField": "",
+            "indexName": "pt-national-dashboard",
+            "aggrQuery": "{\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}"
+          }
+
+    ],
+    "isMdmsEnabled": false,
+    "postAggregationTheory": "",
+    "chartType": "pie",
+    "valueType": "percentage",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "percentage",
+    "aggregationPaths": [
+	  "Target Collection Online",
+	  "Total Collection"
+    ]
+    ,
+    "computedFields": [
+      {
+        "postAggregationTheory" : "",
+        "action": "PercentageComputedField",
+        "fields" : ["Target Collection Online","Total Collection"],
+        "newField" : "Total_PT_Online",
+        "_comments": "fields are field names picked from its aggregation query to use post aggregation newField value with given new field name  "
+      }
+     ],
+	 "pathDataTypeMapping": [
+      ],
+    "insight": {
+    },
+    "_comment": ""
+  },
   	"targetAchievedv3": {
     "chartName": "NATIONAL_DSS_TARGET_ACHIEVED",
     "queries": [
