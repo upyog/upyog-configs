@@ -7961,6 +7961,174 @@
     },
     "_comment": " "
   },
+  "tltodaysLastYearCollectionv3": {
+    "chartName": "NATIONAL_DSS_TODAYS_LAST_YEAR_COLLECTION_TL",
+    "queries": [
+      {
+        "module": "TL",
+        "dateRefField": "",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "tl-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"now-366d/d\"}}},\"aggs\":{\"TodaysCollection\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "Amount",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "TodaysCollection"
+    ],
+    "insight": {
+      
+    },
+    "_comment": " "
+  },
+ 	"wstodaysLastYearCollectionv3": {
+    "chartName": "NATIONAL_DSS_TODAYS_LAST_YEAR_COLLECTION_WS",
+    "queries": [
+      {
+        "module": "WS",
+        "dateRefField": "",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "ws-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"now-366d/d\"}}},\"aggs\":{\"TodaysCollection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "Amount",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "TodaysCollection"
+    ],
+    "insight": {
+      
+    },
+    "_comment": " "
+  },
+  "mctodaysLastYearCollectionv3": {
+    "chartName": "NATIONAL_DSS_TODAYS_LAST_YEAR_COLLECTION_MC",
+    "queries": [
+      {
+        "module": "MC",
+        "dateRefField": "",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "mcollect-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"now-366d/d\"}}},\"aggs\":{\"TodaysCollection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "Amount",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "TodaysCollection"
+    ],
+    "insight": {
+      
+    },
+    "_comment": " "
+  },
+  "noctodaysLastYearCollectionv3": {
+    "chartName": "NATIONAL_DSS_TODAYS_LAST_YEAR_COLLECTION_NOC",
+    "queries": [
+      {
+        "module": "FIRENOC",
+        "dateRefField": "",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "firenoc-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"now-366d/d\"}}},\"aggs\":{\"TodaysCollection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "Amount",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "TodaysCollection"
+    ],
+    "insight": {
+      
+    },
+    "_comment": " "
+  },
+  "obpstodaysLastYearCollectionv3": {
+    "chartName": "NATIONAL_DSS_TODAYS_LAST_YEAR_COLLECTION_OBPS",
+    "queries": [
+      {
+        "module": "OBPS",
+        "dateRefField": "",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "obps-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"now-366d/d\"}}},\"aggs\":{\"TodaysCollection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "Amount",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "TodaysCollection"
+    ],
+    "insight": {
+      
+    },
+    "_comment": " "
+  },
+  "birthTodaysLastYearCollectionv3": {
+    "chartName": "NATIONAL_DSS_TODAYS_LAST_YEAR_COLLECTION_BIRTH",
+    "queries": [
+      {
+        "module": "Birth",
+        "dateRefField": "",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "birth-cert-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"now-366d/d\"}}},\"aggs\":{\"TodaysCollection\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "Amount",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "TodaysCollection"
+    ],
+    "insight": {
+      
+    },
+    "_comment": " "
+  },
+  "deathTodaysLastYearCollectionv3": {
+    "chartName": "NATIONAL_DSS_TODAYS_LAST_YEAR_COLLECTION_DEATH",
+    "queries": [
+      {
+        "module": "DEATH",
+        "dateRefField": "",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "death-cert-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"now-366d/d\"}}},\"aggs\":{\"TodaysCollection\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "Amount",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "TodaysCollection"
+    ],
+    "insight": {
+      
+    },
+    "_comment": " "
+  },
  	
  	"totalCollectionv3": {
     "chartName": "NATIONAL_DSS_TOTAL_COLLECTION",
