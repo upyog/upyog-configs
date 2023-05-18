@@ -8081,55 +8081,6 @@
     },
     "_comment": " "
   },
-  "birthTodaysLastYearCollectionv3": {
-    "chartName": "NATIONAL_DSS_TODAYS_LAST_YEAR_COLLECTION_BIRTH",
-    "queries": [
-      {
-        "module": "Birth",
-        "dateRefField": "",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "birth-cert-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"now-366d/d\"}}},\"aggs\":{\"TodaysCollection\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}"
-      }
-    ],
-    "chartType": "metric",
-    "valueType": "Amount",
-    "drillChart": "none",
-    "documentType": "_doc",
-    "action": "",
-    "aggregationPaths": [
-      "TodaysCollection"
-    ],
-    "insight": {
-      
-    },
-    "_comment": " "
-  },
-  "deathTodaysLastYearCollectionv3": {
-    "chartName": "NATIONAL_DSS_TODAYS_LAST_YEAR_COLLECTION_DEATH",
-    "queries": [
-      {
-        "module": "DEATH",
-        "dateRefField": "",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "death-cert-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"range\":{\"date\":{\"gte\":\"01-04-2022\",\"lte\":\"now-366d/d\"}}},\"aggs\":{\"TodaysCollection\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}"
-      }
-    ],
-    "chartType": "metric",
-    "valueType": "Amount",
-    "drillChart": "none",
-    "documentType": "_doc",
-    "action": "",
-    "aggregationPaths": [
-      "TodaysCollection"
-    ],
-    "insight": {
-      
-    },
-    "_comment": " "
-  },
- 	
  	"totalCollectionv3": {
     "chartName": "NATIONAL_DSS_TOTAL_COLLECTION",
     "queries": [
