@@ -761,7 +761,7 @@ ReportDefinitions:
     #   print:
     #     pdfPageSize: "A3"
     sourceColumns:
-      - name: consumername
+      - name: name
         label: reports.uc.consumername
         type: string
         source: uc
@@ -771,6 +771,11 @@ ReportDefinitions:
         type: string
         source: uc
         total: false
+      - name: uuid
+        label: reports.uc.uuid
+        type: string
+        source: uc
+        showColumn: false
       - name: receiptdate
         label: reports.uc.receiptdate
         type: string
@@ -801,7 +806,7 @@ ReportDefinitions:
       #   type: string
       #   source: uc
       #   total: false
-      - name: name
+      - name: consumername
         label: reports.uc.collectorname
         type: string
         source: uc
@@ -819,7 +824,7 @@ ReportDefinitions:
         source: uc
         isMandatory: false
         searchClause: AND pd.receiptdate <= $toDate
-      - name: name
+      - name: consumername
         label: reports.uc.collectorname
         type: singlevaluelist
         pattern: http://egov-hrms:8080/egov-hrms/employees/_search?tenantId=$tenantid&roles=UC_EMP|$.Employees[*].user.id|$.Employees[*].user.name
@@ -829,7 +834,7 @@ ReportDefinitions:
         searchClause: AND eg_user.id = $name::INTEGER
     query: |
         -- Use CTE to force query plan, compute & use CTE later
-        SELECT pay.payername as payername,consumername,pay.mobilenumber as mobilenumber,To_char((To_timestamp(pd.receiptdate / 1000) at time Zone 'Asia/Kolkata'), 'DD/MM/YYYY') as receiptdate,bill.servicecategory,rh.amount as amount,eg_user.name as name,pd.receiptnumber as receiptnumber FROM egcl_billdetial AS rh INNER JOIN (SELECT DISTINCT bill.id,status,consumercode, businessservice,message.message as servicecategory from egcl_bill bill LEFT OUTER JOIN message ON CONCAT('BILLINGSERVICE_BUSINESSSERVICE_',replace(businessservice, '.', '_')) = message.code AND message.locale='en_IN' AND message.module='rainmaker-uc')as bill ON bill.id = rh.billid and status != 'Cancelled' and businessservice not in ('PT','TL') LEFT OUTER JOIN egcl_paymentdetail as pd ON pd.billid = bill.id LEFT OUTER JOIN egcl_payment  AS pay ON pay.id = pd.paymentid JOIN (Select challanno as challanno,accountid,eg_user.name as consumername,additionaldetail from eg_echallan challan LEFT OUTER JOIN eg_user ON challan.accountid=eg_user.uuid) as challan on challan.challanno = bill.consumercode JOIN eg_user ON pay.createdby::INTEGER=eg_user.id WHERE rh.tenantid=$tenantid
+        SELECT pay.payername as payername,name,pay.mobilenumber as mobilenumber,To_char((To_timestamp(pd.receiptdate / 1000) at time Zone 'Asia/Kolkata'), 'DD/MM/YYYY') as receiptdate,bill.servicecategory,rh.amount as amount,eg_user.name as consumername,pd.receiptnumber as receiptnumber FROM egcl_billdetial AS rh INNER JOIN (SELECT DISTINCT bill.id,status,consumercode, businessservice,message.message as servicecategory from egcl_bill bill LEFT OUTER JOIN message ON CONCAT('BILLINGSERVICE_BUSINESSSERVICE_',replace(businessservice, '.', '_')) = message.code AND message.locale='en_IN' AND message.module='rainmaker-uc')as bill ON bill.id = rh.billid and status != 'Cancelled' and businessservice not in ('PT','TL') LEFT OUTER JOIN egcl_paymentdetail as pd ON pd.billid = bill.id LEFT OUTER JOIN egcl_payment  AS pay ON pay.id = pd.paymentid JOIN (Select challanno as challanno,accountid,eg_user.name as name,additionaldetail from eg_echallan challan LEFT OUTER JOIN eg_user ON challan.accountid=eg_user.uuid) as challan on challan.challanno = bill.consumercode JOIN eg_user ON pay.createdby::INTEGER=eg_user.id WHERE rh.tenantid=$tenantid
     orderby: ORDER BY pd.receiptdate DESC
 
   - reportName: ChallanStatusRegistry
