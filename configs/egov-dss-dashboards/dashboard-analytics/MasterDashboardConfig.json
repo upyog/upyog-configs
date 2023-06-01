@@ -1074,6 +1074,14 @@
                   "filter": {"title": "TODAY"},
                   "headers": []
                 },
+				{
+                  "id": "todaysLastYearCollectionv3",
+                  "name": "NATIONAL_DSS_TODAYS_LAST_YEAR_COLLECTION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": {"title": "TODAY"},
+                  "headers": []
+                },
                 {
                   "id": "totalCollectionv3",
                   "name": "NATIONAL_PT_DSS_TOTAL_COLLECTION",
@@ -1114,14 +1122,6 @@
                   "filter": "",
                   "headers": []
                 },
-                {
-                  "id": "sharePTOnline",
-                  "name": "DSS_PT_ONLINE",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
 				{
                   "id": "PTCollectionPercentage",
                   "name": "NATIONAL_DSS_PT_COLLECTION_PERCENTAGE",
@@ -1155,7 +1155,25 @@
                   "chartType": "metric",
                   "filter": "",
                   "headers": []
-                }
+                },
+        {
+        
+                  "id": "StateGDPwisePTRevenueCollection",
+                  "name": "DSS_STATE_GDP_PT_REVENUE_COLLECTION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                
+                          "id": "PropertyTaxRevenuePerHousehold",
+                          "name": "DSS_PT_TAX_REVENUE_PER_HOUSEHOLD",
+                          "code": "",
+                          "chartType": "metric",
+                          "filter": "",
+                          "headers": []
+                        }
               ]
             },
             {
@@ -1206,44 +1224,22 @@
                 }
               ]
             },
-            {
-              "id": 222,
-              "name": "NATIONAL_DSS_PT_TOP_3_PERFORMING_STATES_TARGET_ACHIEVEMENT",
+			{
+              "id": 225,
+              "name": "DSS_PT_ONLINE_CHART",
               "dimensions": {
                 "height": 250,
                 "width": 4
               },
-              "vizType": "performing-metric",
-              "noUnit": false,
-              "isCollapsible": false,
-              "label": "",
-              "charts": [
-                {
-                  "id": "topPerformingStatesv3",
-                  "name": "NATIONAL_DSS_PT_TOP_3_PERFORMING_STATES_TARGET_ACHIEVEMENT",
-                  "code": "",
-                  "chartType": "bar",
-                  "filter": "",
-                  "headers": []
-                }
-              ]
-            },
-            {
-              "id": 223,
-              "name": "NATIONAL_DSS_PT_BOTTOM_3_PERFORMING_STATES_TARGET_ACHIEVEMENT",
-              "dimensions": {
-                "height": 250,
-                "width": 4
-              },
-              "vizType": "performing-metric",
-              "noUnit": false,
+              "vizType": "chart",
+              "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "bottomPerformingStatesv3",
-                  "name": "NATIONAL_DSS_PT_BOTTOM_3_PERFORMING_STATES_TARGET_ACHIEVEMENT",
+                  "id": "sharePTOnlinePie",
+                  "name": "DSS_PT_ONLINE_CHART",
                   "code": "",
-                  "chartType": "bar",
+                  "chartType": "donut",
                   "filter": "",
                   "headers": []
                 }
@@ -1251,8 +1247,112 @@
             }
           ]
         },
-        {
+		{
           "row": 3,
+          "name": "NATIONAL_DSS_REVENUE",
+          "vizArray": [
+            {
+              "id": 125,
+              "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_POPULATION",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "performing-metric",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+			  {
+                  "id": "pttopPerformingStatesRevenue",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_PT",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "Revenue"
+                },
+                {
+                  "id": "pttopPerformingStatesRevenuePopulation",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_POPULATION_PT",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "Population"
+                },
+		       {
+                  "id": "pttopPerformingStatesRevenuePerHousehold",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_HOUSEHOLD_PT",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "Household"
+                },
+		      {
+                  "id": "pttopPerformingStatesRevenueGDP",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_GDP_PT",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "GDP"
+                }  
+              ]
+            },
+			{
+              "id": 124,
+              "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_POPULATION",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "performing-metric",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+			  {
+                  "id": "pttopPerformingStatesRevenue",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_PT",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "Revenue"
+                },
+                {
+                  "id": "ptbottomPerformingStatesRevenuePopulation",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_POPULATION_PT",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "Population"
+                },
+		       {
+                  "id": "ptbottomPerformingStatesRevenuePerHousehold",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_HOUSEHOLD_PT",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "Household"
+                },
+		      {
+                  "id": "ptbottomPerformingStatesRevenueGDP",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_GDP_PT",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName":"GDP"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 4,
           "name": "NATIONAL_DSS_REVENUE",
           "vizArray": [
             {
@@ -1289,7 +1389,7 @@
           ]
         },
         {
-          "row": 4,
+          "row": 5,
           "name": "NATIONAL_DSS_REVENUE",
           "vizArray": [
             {
@@ -1327,7 +1427,7 @@
           ]
         },
         {
-          "row": 5,
+          "row": 6,
           "name": "NATIONAL_DSS_SERVICE",
           "vizArray": [
             {
@@ -1438,7 +1538,7 @@
           ]
         },
         {
-          "row": 6,
+          "row": 7,
           "name": "NATIONAL_DSS_SERVICE",
           "vizArray": [
             {
@@ -1504,7 +1604,7 @@
             }          ]
         },
         {
-          "row": 7,
+          "row": 8,
           "name": "NATIONAL_DSS_SERVICE",
           "vizArray": [
             {
@@ -5094,7 +5194,7 @@
               ]
             },
             {
-              "id": 323,
+              "id": 322,
               "name": "DSS_FSM_BOTTOM_ULB_BY_PERFORMANCE",
               "dimensions": {
                 "height": 250,
@@ -6830,6 +6930,16 @@
                   },
                   "headers": []
                 },
+				{
+                  "id": "obpstodaysLastYearCollectionv3",
+                  "name": "NATIONAL_DSS_TODAYS_LAST_YEAR_COLLECTION_OBPS",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": {
+                    "title": "TODAY"
+                  },
+                  "headers": []
+                },
                 {
                   "id": "nssOBPSTotalCollection",
                   "name": "NSS_OBPS_TOTAL_COLLECTION",
@@ -7060,6 +7170,104 @@
                   "headers": []
                 }
               ]
+            },
+						{
+              "id": 125,
+              "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_POPULATION",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "performing-metric",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+			  {
+                  "id": "obpstopPerformingStatesRevenue",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_OBPS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "Revenue"
+                },
+                {
+                  "id": "obpstopPerformingStatesRevenuePopulation",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_POPULATION_OBPS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "Population"
+                },
+		       {
+                  "id": "obpstopPerformingStatesRevenuePerHousehold",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_HOUSEHOLD_OBPS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "Household"
+                },
+		      {
+                  "id": "obpstopPerformingStatesRevenueGDP",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_GDP_OBPS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "GDP"
+                } 
+              ]
+            },
+			{
+              "id": 124,
+              "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_POPULATION",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "performing-metric",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+		       {
+                  "id": "obpsbottomPerformingStatesRevenue",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_OBPS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "Revenue"
+                },
+                {
+                  "id": "obpsbottomPerformingStatesRevenuePopulation",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_POPULATION_OBPS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "Population"
+                },
+		       {
+                  "id": "obpsbottomPerformingStatesRevenuePerHousehold",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_HOUSEHOLD_OBPS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "Household"
+                },
+		      {
+                  "id": "obpsbottomPerformingStatesRevenueGDP",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_GDP_OBPS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "GDP"
+                }
+              ]
             }
           ]
         },
@@ -7166,6 +7374,16 @@
                 {
                   "id": "nssNOCTodaysCollection",
                   "name": "NSS_NOC_TODAYS_COLLECTION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": {
+                    "title": "TODAY"
+                  },
+                  "headers": []
+                },
+				{
+                  "id": "noctodaysLastYearCollectionv3",
+                  "name": "NATIONAL_DSS_TODAYS_LAST_YEAR_COLLECTION_NOC",
                   "code": "",
                   "chartType": "metric",
                   "filter": {
@@ -7451,6 +7669,110 @@
         {
           "row": 5,
           "name": "NSS_REVENUE",
+          "vizArray": [        
+{
+              "id": 125,
+              "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_POPULATION",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "performing-metric",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+			   {
+                  "id": "noctopPerformingStatesRevenue",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_NOC",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "Revenue"
+                },
+                {
+                  "id": "noctopPerformingStatesRevenuePopulation",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_POPULATION_NOC",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "Population"
+                },
+		       {
+                  "id": "noctopPerformingStatesRevenuePerHousehold",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_HOUSEHOLD_NOC",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "Household"
+                },
+		      {
+                  "id": "noctopPerformingStatesRevenueGDP",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_GDP_NOC",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "GDP"
+                } 
+              ]
+            },		  
+			{
+              "id": 124,
+              "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_POPULATION",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "performing-metric",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+				{
+                  "id": "nocbottomPerformingStatesRevenue",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_NOC",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "Revenue"
+                },
+                {
+                  "id": "noc+",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_POPULATION_NOC",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "Population"
+                },
+		       {
+                  "id": "nocbottomPerformingStatesRevenuePerHousehold",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_HOUSEHOLD_NOC",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "Household"
+                },
+		      {
+                  "id": "nocbottomPerformingStatesRevenueGDP",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_GDP_NOC",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "GDP"
+                }
+              ]
+            }
+          ]
+        },
+		{
+          "row": 6,
+          "name": "NSS_REVENUE",
           "vizArray": [
             {
               "id": 231,
@@ -7512,6 +7834,14 @@
                 {
                   "id": "nssWsTodaysCollection",
                   "name": "NSS_WS_TODAYS_COLLECTION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": {"title": "TODAY"},
+                  "headers": []
+                },
+				{
+                  "id": "wstodaysLastYearCollectionv3",
+                  "name": "NATIONAL_DSS_TODAYS_LAST_YEAR_COLLECTION_WS",
                   "code": "",
                   "chartType": "metric",
                   "filter": {"title": "TODAY"},
@@ -7587,8 +7917,8 @@
           "name": "NSS_REVENUE",
           "vizArray": [
             {
-              "id": 221,
-              "name": "NSS_WS_TOP_3_PERFORMING_STATES",
+              "id": 125,
+              "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_POPULATION",
               "dimensions": {
                 "height": 250,
                 "width": 4
@@ -7596,21 +7926,48 @@
               "vizType": "performing-metric",
               "noUnit": false,
               "isCollapsible": false,
-              "label": "",
               "charts": [
-                {
-                  "id": "nssWsTopPerformingUlbs",
-                  "name": "NSS_WS_TOP_3_PERFORMING_STATES",
+				{
+                  "id": "wstopPerformingStatesRevenue",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_WS",
                   "code": "",
                   "chartType": "bar",
                   "filter": "",
-                  "headers": []
-                }
+                  "headers": [],
+				  "tabName": "Revenue"
+                },
+                {
+                  "id": "wstopPerformingStatesRevenuePopulation",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_POPULATION_WS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "Population"
+                },
+		       {
+                  "id": "wstopPerformingStatesRevenuePerHousehold",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_HOUSEHOLD_WS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "Household"
+                },
+		      {
+                  "id": "wstopPerformingStatesRevenueGDP",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_GDP_WS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "GDP"
+                }  
               ]
-            },
-            {
-              "id": 222,
-              "name": "NSS_WS_BOTTOM_3_PERFORMING_STATES",
+            },			
+			{
+              "id": 124,
+              "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_POPULATION",
               "dimensions": {
                 "height": 250,
                 "width": 4
@@ -7619,13 +7976,41 @@
               "noUnit": false,
               "isCollapsible": false,
               "charts": [
-                {
-                  "id": "nssWsBottomPerformingUlbs",
-                  "name": "NSS_WS_BOTTOM_3_PERFORMING_STATES",
+		       {
+                  "id": "wsbottomPerformingStatesRevenue",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_WS",
                   "code": "",
                   "chartType": "bar",
                   "filter": "",
-                  "headers": []
+                  "headers": [],
+				  "tabName": "Revenue"
+                },
+                {
+                  "id": "wsbottomPerformingStatesRevenuePopulation",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_POPULATION_WS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "Population"
+                },
+		       {
+                  "id": "wsbottomPerformingStatesRevenuePerHousehold",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_HOUSEHOLD_WS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "Household"
+                },
+		      {
+                  "id": "wsbottomPerformingStatesRevenueGDP",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_GDP_WS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "GDP"
                 }
               ]
             }
@@ -7960,6 +8345,16 @@
                   },
                   "headers": []
                 },
+				{
+                  "id": "mctodaysLastYearCollectionv3",
+                  "name": "NATIONAL_DSS_TODAYS_LAST_YEAR_COLLECTION_MC",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": {
+                    "title": "TODAY"
+                  },
+                  "headers": []
+                },
                 {
                   "id": "mCollectTotalCollectionv2",
                   "name": "DSS_TOTAL_COLLECTION",
@@ -8258,6 +8653,14 @@
                   "filter": {"title": "TODAY"},
                   "headers": []
                 },
+				{
+                  "id": "tltodaysLastYearCollectionv3",
+                  "name": "NATIONAL_DSS_TODAYS_LAST_YEAR_COLLECTION_TL",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": {"title": "TODAY"},
+                  "headers": []
+                },
                 {
                   "id": "tradeLicenseTotalCollectionv2",
                   "name": "DSS_TL_TOTAL_COLLECTION",
@@ -8345,50 +8748,6 @@
           "name": "DSS_REVENUE",
           "vizArray": [
             {
-              "id": 321,
-              "name": "NATIONAL_DSS_TOP_PERFORMING_STATES",
-              "dimensions": {
-                "height": 250,
-                "width": 4
-              },
-              "vizType": "performing-metric",
-              "label": "",
-              "noUnit": false,
-              "isCollapsible": false,
-              "charts": [
-                {
-                  "id": "tlTopPerformingUlbs",
-                  "name": "NATIONAL_DSS_TOP_PERFORMING_STATES",
-                  "code": "",
-                  "chartType": "bar",
-                  "filter": "",
-                  "headers": []
-                }
-              ]
-            },
-            {
-              "id": 322,
-              "name": "NATIONAL_DSS_BOTTOM_PERFORMING_STATES",
-              "dimensions": {
-                "height": 250,
-                "width": 4
-              },
-              "vizType": "performing-metric",
-              "label": "",
-              "noUnit": false,
-              "isCollapsible": false,
-              "charts": [
-                {
-                  "id": "tlBottomPerformingUlbs",
-                  "name": "NATIONAL_DSS_BOTTOM_PERFORMING_STATES",
-                  "code": "",
-                  "chartType": "bar",
-                  "filter": "",
-                  "headers": []
-                }
-              ]
-            },
-            {
               "id": 323,
               "name": "DSS_TL_LICENSE_BY_TYPE",
               "dimensions": {
@@ -8407,6 +8766,104 @@
                   "chartType": "donut",
                   "filter": "",
                   "headers": []
+                }
+              ]
+            },
+			{
+              "id": 125,
+              "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_POPULATION",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "performing-metric",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+		      {
+                  "id": "tltopPerformingStatesRevenue",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_TL",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "Revenue"
+                },
+                {
+                  "id": "tltopPerformingStatesRevenuePopulation",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_POPULATION_TL",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "Population"
+                },
+		       {
+                  "id": "tltopPerformingStatesRevenuePerHousehold",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_HOUSEHOLD_TL",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "Household"
+                },
+		      {
+                  "id": "tltopPerformingStatesRevenueGDP",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_GDP_TL",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "GDP"
+                }  
+              ]
+            },
+						{
+              "id": 124,
+              "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_POPULATION",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },              
+			  "vizType": "performing-metric",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+		       {
+                  "id": "tlbottomPerformingStatesRevenue",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_TL",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "Revenue"
+                },
+				{
+                  "id": "tlbottomPerformingStatesRevenuePopulation",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_POPULATION_TL",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "Population"
+                },
+		       {
+                  "id": "tlbottomPerformingStatesRevenuePerHousehold",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_HOUSEHOLD_TL",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "Household"
+                },
+		      {
+                  "id": "tlbottomPerformingStatesRevenueGDP",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_GDP_TL",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "GDP"
                 }
               ]
             }
@@ -9109,7 +9566,15 @@
                   "chartType": "metric",
                   "filter": "",
                   "headers": []
-                }
+                },
+                {
+                          "id": "OpenApplicationsRatePGR",
+                          "name": "DSS_OPEN_PGR_APPLICATIONS_RATE",
+                          "code": "",
+                          "chartType": "metric",
+                          "filter": "",
+                          "headers": []
+                        }
               ]
             },
             {
