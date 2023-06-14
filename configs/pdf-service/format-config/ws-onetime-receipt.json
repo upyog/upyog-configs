@@ -446,21 +446,21 @@
             
       [     {
         "text": "Tax Head",
-        "style": "amounts"
+        "style": "receipt-table-value22"
       },
               {
                 "text": "Amount to be Paid",
-                "style": "amounts"
+                "style": "receipt-table-value22"
               },
         {
                 "text": "Amount Paid",
-                "style": "amounts"
+                "style": "receipt-table-value22"
               }
         
         
       ],
       
-      "{{#var_tax}}[{\"text\":\"{{taxHeadCode}}\",\"style\":\"receipt-table\"},{\"text\":\"{{amount}}\",\"style\":\"receipt-table\"},{\"text\":\"{{adjustedAmount}}\",\"style\":\"receipt-table\"}]{{/var_tax}}"
+      "{{#var_tax}}[{\"text\":\"{{taxHeadCode}}\",\"style\":\"receipt-tableee\"},{\"text\":\"{{amount}}\",\"style\":\"receipt-tableee\"},{\"text\":\"{{adjustedAmount}}\",\"style\":\"receipt-tableee\"}]{{/var_tax}}"
   
         
     ]
@@ -595,6 +595,31 @@
         "fontWeight": 400,
         "margin": [
           -30,
+          5,
+          0,
+          5
+        ]
+      },
+	   "receipt-table-value22": {
+        "color": "#000000",
+        "bold": true,
+        "fontSize": 10,
+        "fontWeight": 500,
+        "backgroundColor": "#D3D3D3",
+        "margin": [
+          8,
+          5,
+          0,
+          5
+        ]
+      },
+	   "receipt-tableee": {
+        "color": "#000000",
+        "bold": false,
+        "fontSize": 10,
+        "fontWeight": 400,
+        "margin": [
+          8,
           5,
           0,
           5
