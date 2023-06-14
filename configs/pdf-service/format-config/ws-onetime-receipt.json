@@ -435,6 +435,38 @@
         },
         "layout": {}
       },
+	  {
+        "style": "next-noc-table",
+        "table": {
+          "widths": [
+  
+            "40%","30%","30%"
+          ],
+          "body": [
+            
+      [     {
+        "text": "Tax Head",
+        "style": "amounts"
+      },
+              {
+                "text": "Amount to be Paid",
+                "style": "amounts"
+              },
+        {
+                "text": "Amount Paid",
+                "style": "amounts"
+              }
+        
+        
+      ],
+      
+      "{{#var_tax}}[{\"text\":\"{{taxHeadCode}}\",\"style\":\"receipt-table\"},{\"text\":\"{{amount}}\",\"style\":\"receipt-table\"},{\"text\":\"{{adjustedAmount}}\",\"style\":\"receipt-table\"}]{{/var_tax}}"
+  
+        
+    ]
+    },
+    "layout":{}
+    },
       {
         "style": "receipt-approver",
         "columns": [
@@ -529,7 +561,7 @@
         "color": "#000000",
         "margin": [
           -25,
-          45,
+          30,
           -22,
           -8
         ]
@@ -539,7 +571,7 @@
         "color": "#000000",
         "margin": [
           -25,
-          28,
+          18,
           -22,
           -8
         ]
@@ -551,9 +583,9 @@
         "fontWeight": 500,
         "margin": [
           8,
-          8,
+          5,
           0,
-          8
+          5
         ]
       },
       "receipt-table": {
@@ -563,9 +595,9 @@
         "fontWeight": 400,
         "margin": [
           -30,
-          8,
+          5,
           0,
-          8
+          5
         ]
       },
       "receipt-approver": {
@@ -573,7 +605,7 @@
         "bold": true,
         "margin": [
           -27,
-          50,
+          30,
           -10,
           0
         ],
@@ -583,7 +615,7 @@
         "fontSize": 12,
         "margin": [
           -27,
-          35,
+          25,
           -10,
           0
         ],
@@ -593,7 +625,7 @@
         "fontSize": 12,
         "margin": [
           -27,
-          30,
+          20,
           -10,
           0
         ],

@@ -75,6 +75,31 @@
                 },
                 "type": "date"
               },
+			   {
+              "variable": "var_tax",                        
+              "value":{
+                "path":"$.paymentDetails[0].bill.billDetails[0].billAccountDetails.*"
+              },
+               "type":"array",
+               "format":{                            
+                  "type":"string",
+                  "scema":[
+                     {
+                        "variable":"taxHeadCode",
+                        "value":  "taxHeadCode"
+                      
+                      },{
+                        "variable":"amount",
+                        "value":  "amount"
+                      
+                      },{
+                        "variable":"adjustedAmount",
+                        "value":  "adjustedAmount"
+                      
+                      }
+                     ]
+              } 
+           },
               {
                 "variable": "paymentMode",
                 "value": {
