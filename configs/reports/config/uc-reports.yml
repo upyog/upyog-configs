@@ -150,6 +150,11 @@ ReportDefinitions:
       print:
         pdfPageSize: "A2"
     sourceColumns:
+      - name: uuid
+        label: report.uc.uuid
+        type: string
+        source: uc
+        showColumn: false
       - name: challanno
         label: reports.uc.challanno
         type: string
@@ -297,6 +302,7 @@ ReportDefinitions:
              WITH receipt_breakup AS (
              SELECT 
                       billdetailid, 
+                      eg_user.uuid as uuid,
                       SUM(CASE WHEN taxheadcode LIKE '%_CGST' THEN adjustedamount ELSE 0 END) as cgst, 
                       SUM(CASE WHEN taxheadcode LIKE '%_TAX' THEN adjustedamount ELSE 0 END) as tax,
                       SUM(CASE WHEN taxheadcode LIKE '%_SGST' THEN adjustedamount ELSE 0 END) as sgst, 
