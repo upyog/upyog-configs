@@ -86,17 +86,31 @@
                   "scema":[
                      {
                         "variable":"taxHeadCode",
-                        "value":  "taxHeadCode"
+                        "value":  "taxHeadCode",
+			"localisation": {
+				"required": true,
+				"prefix": "MODULE",
+				"module": "rainmaker-common"
+			}
                       
-                      },{
+                      },
+			{
                         "variable":"amount",
-                        "value":  "amount"
-                      
+                        "value":  "amount",
+			"localisation": {
+				"required": true,
+				"prefix": "MODULE",
+				"module": "rainmaker-common"
+			}
                       },{
                         "variable":"adjustedAmount",
-                        "value":  "adjustedAmount"
-                      
+                        "value":  "adjustedAmount",
+  			"localisation": {
+				"required": true,
+				"prefix": "MODULE",
+				"module": "rainmaker-common"
                       }
+		      }
                      ]
               } 
            },
