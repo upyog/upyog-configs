@@ -5008,7 +5008,7 @@
             },
             {
               "id": 322,
-              "name": "DSS_FSM_TOTAL_CUMULATIVE_COLLECTION",
+              "name": "NATIONAL_DSS_TOTAL_CUMULATIVE_COLLECTION_FSM",
               "dimensions": {
                 "height": 450,
                 "width": 6
@@ -5019,7 +5019,7 @@
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "fsmTotalCumulativeCollection",
+                  "id": "cumulativeCollectionfsm",
                   "name": "Monthly",
                   "code": "",
                   "chartType": "line",
@@ -5529,8 +5529,37 @@
               ]
             }
           ]
+        },
+      {
+          "row": 5,
+          "name": "DSS_REVENUE",
+          "vizArray": [
+            {
+              "id": 339,
+              "name": "NATIONAL_DSS_DESLUDGING_REQUEST_REPORT",
+              "dimensions": {
+                "height": 350,
+                "width": 10
+              },
+              "vizType": "chart",
+              "label": "",
+              "noUnit": false,
+              "isCollapsible": true,
+              "charts": [
+                {
+                  "id": "desludgingrequestreportfsm",
+                  "name": "NATIONAL_DSS_DESLUDGING_REQUEST_REPORT",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "Boundary"
+                }
+              ]
+            }
+          ]
         }
-      ]
+	  ]
     },	
     {
       "name": "DSS_M_COLLECT_DASHBOARD",

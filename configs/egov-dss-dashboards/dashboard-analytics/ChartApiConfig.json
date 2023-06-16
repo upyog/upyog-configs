@@ -21920,5 +21920,86 @@
     "insight": {
     },
     "_comment": " collection/amount per usage type"
-  }	
+  },
+"cumulativeCollectionfsm": {
+    "chartName": "NATIONAL_DSS_TOTAL_CUMULATIVE_COLLECTION_FSM",
+    "queries": [
+      {
+        "module": "FSM",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "fsm-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}}}"
+      }
+    ],
+    "chartType": "line",
+    "valueType": "amount",
+    "action": "",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "aggregationPaths": [
+      "Collections"
+    ],
+    "isCumulative": true,
+    "interval": "month",
+    "insight": {
+    },
+    "_comment": " "
+  },
+   "desludgingrequestreportfsm": {
+    "chartName": "NATIONAL_DSS_DESLUDGING_REQUEST_REPORT",
+    "queries": [
+      {
+        "module": "FSM",
+        "requestQueryMap": "{\"ward\" : \"ward.keyword\",\"state\":\"state.keyword\"}",
+        "dateRefField": "date",
+        "indexName": "fsm-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"ulb.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"State\":{\"terms\":{\"field\":\"state.keyword\",\"size\":500},\"aggs\":{\"Open_Requests\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}},\"Closed_Requests\":{\"sum\":{\"field\":\"todaysClosedApplications\"}},\"Total_Requests\":{\"sum\":{\"field\":\"todaysApplications\"}},\"Completion_Rate\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total_Requests\",\"com\":\"Closed_Requests\"},\"script\":\"params.com / params.att * 100\"}},\"SLA_Achieved\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total_Requests\",\"com\":\"Resolved_Requests\"},\"script\":\"params.com / params.att * 100\"}},\"Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}"
+      }
+    ],
+    "isMdmsEnabled": false,
+    "filterKeys": [
+      {"key": "state", "column": "State"}
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "action": "",
+    "plotLabel": "State",
+    "isPostResponseHandler": true,
+    "postAggregationTheory" : "repsonseToDifferenceOfDates",
+    "documentType": "_doc",
+    "drillChart": "nationalPgrStatusDrillDownUlb",
+    "isRoundOff":true,
+    "aggregationPaths": [
+      "Open_Requests",
+      "Closed_Requests",
+      "Total_Requests",
+      "Completion_Rate",
+      "SLA_Achieved",
+	  "Total_Collection"
+    ],
+    "pathDataTypeMapping": [
+      {
+        "Open_Requests": "number"
+      },
+      {
+        "Closed_Requests": "number"
+      },
+      {
+        "Total_Requests": "number"
+      },
+      {
+        "Completion_Rate": "percentage"
+      },
+      {
+        "SLA_Achieved": "percentage"
+      },
+	  {
+	  "Total_Collection": "amount"
+	  }
+    ],
+    "insight": {
+    },
+    "_comment": " "
+  }  
 }
