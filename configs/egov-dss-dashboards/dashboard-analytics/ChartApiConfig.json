@@ -21657,11 +21657,11 @@
     "_comment": " TOP Performing States for Revenue"
   },
    "fsmtotalrequests": {
-    "chartName": "DSS_TOTAL_REQUESTS_FSM",
+    "chartName": "NATIONAL_DSS_TOTAL_REQUESTS_FSM",
     "queries": [
       {
         "module": "FSM",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "fsm-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.service.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Total Applications\":{\"sum\":{\"field\":\"todaysApplications\"}}}}}}"
@@ -21688,7 +21688,7 @@
     "_comment": " "
   },
   "fsmtotalsludgetreated": {
-    "chartName": "DSS_TOTAL_SLUDGE_TREATED",
+    "chartName": "NATIONAL_DSS_TOTAL_SLUDGE_TREATED",
     "queries": [
       {
         "module": "FSM",
@@ -21851,7 +21851,7 @@
     "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
-    "action": "division",
+    "action": "",
     "plotLabel": "DSS_TARGET_ACHIEVED",
     "order": "desc",
     "limit": 3,
@@ -21883,7 +21883,7 @@
     "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
-    "action": "division",
+    "action": "",
     "plotLabel": "DSS_TARGET_ACHIEVED",
     "order": "asc",
     "limit": 3,
@@ -21954,7 +21954,7 @@
         "requestQueryMap": "{\"ulb\" : \"ulb.keyword\",\"state\":\"state.keyword\"}",
         "dateRefField": "date",
         "indexName": "fsm-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"ulb.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"State\":{\"terms\":{\"field\":\"state.keyword\",\"size\":500},\"aggs\":{\"Open_Requests\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}},\"Closed_Requests\":{\"sum\":{\"field\":\"todaysClosedApplications\"}},\"Total_Requests\":{\"sum\":{\"field\":\"todaysApplications\"}},\"Completion_Rate\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total_Requests\",\"com\":\"Closed_Requests\"},\"script\":\"params.com / params.att * 100\"}},\"SLA_Achieved\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total_Requests\",\"com\":\"Resolved_Requests\"},\"script\":\"params.com / params.att * 100\"}},\"Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"ulb.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"State\":{\"terms\":{\"field\":\"state.keyword\",\"size\":500},\"aggs\":{\"Open_Requests\":{\"sum\":{\"field\":\"todaysApplications\"}},\"Closed_Requests\":{\"sum\":{\"field\":\"todaysClosedApplications\"}},\"Total_Requests\":{\"sum\":{\"field\":\"todaysApplications\"}},\"Completion_Rate\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total_Requests\",\"com\":\"Closed_Requests\"},\"script\":\"params.com / params.att * 100\"}},\"SLA_Achieved\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total_Requests\",\"com\":\"Resolved_Requests\"},\"script\":\"params.com / params.att * 100\"}},\"Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}"
       }
     ],
     "isMdmsEnabled": false,
@@ -22001,5 +22001,59 @@
     "insight": {
     },
     "_comment": " "
-  }  
+  },
+"fssmCapacityUtilization": {
+    "chartName": "DSS_FSTP_CAPACITY_UTILIZATION",
+    "queries": [
+      {
+        "module": "FSM",
+        "dateRefField": "date",
+       "requestQueryMap": "{\"ulb\" : \"ulb.keyword\",\"state\":\"state.keyword\"}",
+        "indexName": "fsm-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"TotalDumped\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"month\"},\"aggs\":{\"Dumped\":{\"sum\":{\"field\":\"totalSludgeDumped\"}}}},\"TotalCapacity\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"month\"},\"aggs\":{\"Dumped\":{\"sum\":{\"field\":\"totalFSTPCapacity\"}}}}}}}}"
+      }
+    ],
+    "chartType": "line",
+    "valueType": "amount",
+    "action": "",
+    "isRoundOff": true,
+    "documentType": "_doc",
+    "drillChart": "none",
+    "aggregationPaths": [
+      "TotalDumped",
+	  "TotalCapacity"
+    ],
+    "isCumulative": true,
+    "interval": "month",
+    "insight": {
+    },
+    "_comment": " "
+  },
+  "fssmMonthlyWasteCal": {
+    "chartName": "DSS_FSM_MONTHLY_WASTE_CAL",
+    "queries": [
+      {
+        "module": "FSM",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"ulb\" : \"ulb.keyword\",\"state\":\"state.keyword\"}",
+        "indexName": "fsm-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"TotalDumped\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"month\"},\"aggs\":{\"Dumped\":{\"sum\":{\"field\":\"totalSludgeDumped\"}}}},\"TotalCollected\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"month\"},\"aggs\":{\"Collected\":{\"sum\":{\"field\":\"totalSludgeCollected\"}}}}}}}}"
+      }
+    ],
+    "chartType": "line",
+    "valueType": "number",
+    "action": "",
+    "isRoundOff": true,
+    "documentType": "_doc",
+    "drillChart": "none",
+    "aggregationPaths": [
+      "TotalDumped",
+      "TotalCollected"
+    ],
+    "isCumulative": false,
+    "interval": "month",
+    "insight": {
+    },
+    "_comment": " "
+  }
 }
