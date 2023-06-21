@@ -21951,7 +21951,7 @@
     "queries": [
       {
         "module": "FSM",
-        "requestQueryMap": "{\"ward\" : \"ward.keyword\",\"state\":\"state.keyword\"}",
+        "requestQueryMap": "{\"ulb\" : \"ulb.keyword\",\"state\":\"state.keyword\"}",
         "dateRefField": "date",
         "indexName": "fsm-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"ulb.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"State\":{\"terms\":{\"field\":\"state.keyword\",\"size\":500},\"aggs\":{\"Open_Requests\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}},\"Closed_Requests\":{\"sum\":{\"field\":\"todaysClosedApplications\"}},\"Total_Requests\":{\"sum\":{\"field\":\"todaysApplications\"}},\"Completion_Rate\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total_Requests\",\"com\":\"Closed_Requests\"},\"script\":\"params.com / params.att * 100\"}},\"SLA_Achieved\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total_Requests\",\"com\":\"Resolved_Requests\"},\"script\":\"params.com / params.att * 100\"}},\"Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}"
@@ -21968,7 +21968,7 @@
     "isPostResponseHandler": true,
     "postAggregationTheory" : "repsonseToDifferenceOfDates",
     "documentType": "_doc",
-    "drillChart": "nationalPgrStatusDrillDownUlb",
+    "drillChart": "",
     "isRoundOff":true,
     "aggregationPaths": [
       "Open_Requests",
