@@ -21699,7 +21699,7 @@
       }
     ],
     "chartType": "metric",
-    "valueType": "Amount",
+    "valueType": "number",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "",
@@ -21823,7 +21823,7 @@
           "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
           "dateRefField": "date",
           "indexName": "fsm-national-dashboard",
-          "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"FIRENOC\"}},\"aggs\":{\"Average Citizen Rating\":{\"avg\":{\"field\":\"averageCitizenRating\"}}}}}}"
+          "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"FSM\"}},\"aggs\":{\"Average Citizen Rating\":{\"avg\":{\"field\":\"averageCitizenRating\"}}}}}}"
         }
       ],
       "chartType": "metric",
