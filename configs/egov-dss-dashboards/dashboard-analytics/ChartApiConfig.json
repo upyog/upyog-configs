@@ -21845,26 +21845,32 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "fsm-national-dashboard",
         "aggrQuery":"{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\": \"state.keyword\"},\"aggs\":{\"Total\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}"
+      },
+		{
+        "module": "MASTER",
+        "requestQueryMap": "{\"state\" : \"state.keyword\", \"module\" : \"module.keyword\", \"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": "date",
+        "indexName": "master-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"Total Revenue\":{\"terms\":{\"field\":\"state.keyword\",\"size\":\"200\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
       }      
     ],
 	"chartType": "perform",
-    "valueType": "amount",
+    "valueType": "percentage",
     "drillChart": "none",
     "documentType": "_doc",
-    "action": "",
-"plotLabel": "NATIONAL_DSS_SLA_ACHIEVED",
+    "action": "percentage",
+	"plotLabel": "NATIONAL_DSS_SLA_ACHIEVED",
     "order": "desc",
     "limit": 3,
     "isRoundOff": true,
     "aggregationPaths": [
-      "Total Collection"
+      "Total Collection",
+	  "Total Revenue"
     ],		
     "insight": {
     },
     "_comment": "Top Performing ULB for Collection"
   },
-  
-  
   "fsmbottomPerformingulb": {
     "chartName": "NATIONAL_DSS_BOTTOM_3_PERFORMING_ULB_FSM",
     "queries": [
@@ -21874,18 +21880,27 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "fsm-national-dashboard",
         "aggrQuery":"{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\": \"state.keyword\"},\"aggs\":{\"Total\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}"
-      }
+      },
+	  {
+        "module": "MASTER",
+        "requestQueryMap": "{\"state\" : \"state.keyword\", \"module\" : \"module.keyword\", \"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": "date",
+        "indexName": "master-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"Total Revenue\":{\"terms\":{\"field\":\"state.keyword\",\"size\":\"200\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
+      }  
     ],
 	"chartType": "perform",
-    "valueType": "amount",
+    "valueType": "percentage",
     "drillChart": "none",
     "documentType": "_doc",
-    "action": "",
+    "plotLabel": "NATIONAL_DSS_SLA_ACHIEVED",
+	"action": "percentage",
     "order": "asc",
     "limit": 3,
     "isRoundOff": true,
     "aggregationPaths": [
-      "Total Collection"
+      "Total Collection",
+	  "Total Revenue"
     ],			
     "insight": {
     },
