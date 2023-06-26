@@ -21975,6 +21975,116 @@
     "plotLabel": "State",
     "isPostResponseHandler": true,
     "documentType": "_doc",
+    "drillChart": "desludgingreportbyulb",
+    "isRoundOff":true,
+    "aggregationPaths": [
+      "Open_Requests",
+      "Closed_Requests",
+      "Total_Requests",
+      "Completion_Rate",
+      "SLA_Achieved",
+	  "Total_Collection"
+    ],
+    "pathDataTypeMapping": [
+      {
+        "Open_Requests": "number"
+      },
+      {
+        "Closed_Requests": "number"
+      },
+      {
+        "Total_Requests": "number"
+      },
+      {
+        "Completion_Rate": "percentage"
+      },
+      {
+        "SLA_Achieved": "percentage"
+      },
+	  {
+	  "Total_Collection": "amount"
+	  }
+    ],
+    "insight": {
+    },
+    "_comment": " "
+  },
+  "desludgingreportbyulb": {
+    "chartName": "NATIONAL_DSS_DESLUDGING_REPORT_BY_ULB",
+    "queries": [
+      {
+        "module": "FSM",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": "date",
+        "indexName": "fsm-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"ulb.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"ULB\":{\"terms\":{\"field\":\"ulb.keyword\",\"size\":500},\"aggs\":{\"Open_Requests\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total_Requests\",\"com\":\"Closed_Requests\"},\"script\":\"params.att -  params.com\"}},\"Closed_Requests\":{\"sum\":{\"field\":\"todaysClosedApplications\"}},\"Total_Requests\":{\"sum\":{\"field\":\"todaysApplications\"}},\"SLA_Achieved_Requests\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}},\"Completion_Rate\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total_Requests\",\"com\":\"Closed_Requests\"},\"script\":\"params.com / params.att * 100\"}},\"SLA_Achieved\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total_Requests\",\"com\":\"SLA_Achieved_Requests\"},\"script\":\"params.com / params.att * 100\"}},\"Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}"
+      }
+    ],
+    "isMdmsEnabled": false,
+    "filterKeys": [
+      {"key": "ulb", "column": "ULB"}
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "action": "",
+    "plotLabel": "ULB",
+    "isPostResponseHandler": true,
+    "documentType": "_doc",
+    "drillChart": "desludgingreportbyward",
+    "isRoundOff":true,
+    "aggregationPaths": [
+      "Open_Requests",
+      "Closed_Requests",
+      "Total_Requests",
+      "Completion_Rate",
+      "SLA_Achieved",
+	  "Total_Collection"
+    ],
+    "pathDataTypeMapping": [
+      {
+        "Open_Requests": "number"
+      },
+      {
+        "Closed_Requests": "number"
+      },
+      {
+        "Total_Requests": "number"
+      },
+      {
+        "Completion_Rate": "percentage"
+      },
+      {
+        "SLA_Achieved": "percentage"
+      },
+	  {
+	  "Total_Collection": "amount"
+	  }
+    ],
+    "insight": {
+    },
+    "_comment": " "
+  },
+  "desludgingreportbyward": {
+    "chartName": "NATIONAL_DSS_DESLUDGING_REPORT_BY_WARD",
+    "queries": [
+      {
+        "module": "FSM",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": "date",
+        "indexName": "fsm-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"ulb.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Ward\":{\"terms\":{\"field\":\"ward.keyword\",\"size\":500},\"aggs\":{\"Open_Requests\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total_Requests\",\"com\":\"Closed_Requests\"},\"script\":\"params.att -  params.com\"}},\"Closed_Requests\":{\"sum\":{\"field\":\"todaysClosedApplications\"}},\"Total_Requests\":{\"sum\":{\"field\":\"todaysApplications\"}},\"SLA_Achieved_Requests\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}},\"Completion_Rate\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total_Requests\",\"com\":\"Closed_Requests\"},\"script\":\"params.com / params.att * 100\"}},\"SLA_Achieved\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total_Requests\",\"com\":\"SLA_Achieved_Requests\"},\"script\":\"params.com / params.att * 100\"}},\"Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}"
+      }
+    ],
+    "isMdmsEnabled": false,
+    "filterKeys": [
+      {"key": "ward", "column": "Ward"}
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "action": "",
+    "plotLabel": "Ward",
+    "isPostResponseHandler": true,
+    "documentType": "_doc",
     "drillChart": "",
     "isRoundOff":true,
     "aggregationPaths": [
