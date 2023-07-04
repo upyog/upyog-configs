@@ -22172,5 +22172,48 @@
     "insight": {
     },
     "_comment": " "
+  },
+  "ptCollectionGDPwise": {
+    "chartName": "NATIONAL_DSS_PT_COLLECTION_GDP_WISE",
+    "queries": [
+      {
+        "module": "PT",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "pt-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\": \"state.keyword\"},\"aggs\":{\"Total\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}}}"
+      },
+      {
+        "module": "MASTER",
+        "indexName": "master-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"average_state_gdp\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}",
+        "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": "date"
+      }
+    ],
+	  "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "division",
+    "isRoundOff": true,
+    "aggregationPaths": [
+      "Total Collection", "average_state_gdp"
+    ],
+    "preActionTheory":{
+      "Total Collection":"repsonseToDifferenceOfDates",
+      "average_state_gdp":"repsonseToDifferenceOfDates"
+    },			    
+    "insight": {
+      "chartResponseMap" : "ptCollectionGDPwise",
+      "action" : "differenceOfNumbers",
+      "upwardIndicator" : "positive",
+      "downwardIndicator" : "negative",
+      "textMessage" : "$indicator$value% than last $insightInterval",
+      "colorCode" : "#228B22",
+      "insightInterval" : "year",
+      "isRoundOff": true
+    },
+    "_comment": "States GDP wise Property Tax Revenue"
   }
 }
