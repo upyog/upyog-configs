@@ -22215,5 +22215,46 @@
       "isRoundOff": true
     },
     "_comment": "States GDP wise Property Tax Revenue"
+  },
+  "ptCollectionUrbanHouseholdwise": {
+    "chartName": "NATIONAL_DSS_PT_COLLECTION_URBAN_HOUSEHOLD_WISE",
+    "queries": [
+      {
+        "module": "PT",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "pt-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}"
+      },
+    {
+        "module": "PT",
+        "dateRefField": "date",
+        "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
+        "indexName": "pt-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Properties\":{\"sum\":{\"field\":\"propertiesRegisteredForFinancialYear\"}}}}}}"
+      }
+      
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "division",
+    "isRoundOff": true,
+    "aggregationPaths": [
+      "Total Collection",
+      "Total Application"
+    ],
+    "insight": {
+      "chartResponseMap" : "ptCollectionUrbanHouseholdwise",
+      "action" : "differenceOfNumbers",
+      "upwardIndicator" : "positive",
+      "downwardIndicator" : "negative",
+      "textMessage" : "$indicator$value% than last $insightInterval",
+      "colorCode" : "#228B22",
+      "insightInterval" : "year",
+      "isRoundOff": true
+    },
+    "_comment": " "
   }
 }
