@@ -20814,7 +20814,7 @@
     "queries": [
       {
         "module": "FIRENOC",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "firenoc-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\": \"state.keyword\"},\"aggs\":{\"Total\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
@@ -20824,7 +20824,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"module\" : \"module.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"size\":\"200\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"size\":\"3\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}"
       }
       
     ],
