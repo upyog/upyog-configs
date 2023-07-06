@@ -8709,8 +8709,8 @@
     },
     "_comment": " collection/amount per usage type"
   },
-
-	"demandCollectionIndexStatesRevenuev3": {
+  
+  "demandCollectionIndexStatesRevenuev3": {
     "chartName": "NATIONAL_DSS_PT_KEY_FY_INDICATORS",
     "queries": [
       {
@@ -8725,7 +8725,7 @@
        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"state \":{\"terms\":{\"field\":\"state.keyword\",\"size\":200},\"aggs\":{\"PT_Target_Collection\":{\"filter\":{\"term\":{\"module.keyword\":\"PT\"}},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}}}}}"
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"terms\":{\"field\":\"state.keyword\",\"size\":200},\"aggs\":{\"Avg_State_Gdp\":{\"avg\":{\"field\":\"StateGDP\"}},\"PT_Target_Collection\":{\"filter\":{\"term\":{\"module.keyword\":\"PT\"}},\"aggs\":{\"sum_budget_proposed\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}}}"
       }
     ],
     "isMdmsEnabled": false,
@@ -8743,7 +8743,8 @@
       "PT_Total_Collection",
       "PT_Transactions",
       "PT_Assessed_Properties",
-      "PT_Target_Collection"
+      "PT_Target_Collection",
+      "Avg_State_Gdp"
     ],
      "computedFields": [
       {
@@ -8751,17 +8752,31 @@
         "actionName": "AdditiveComputedField",
         "fields" : ["PT_Target_Collection"],
         "newField" : "Target_Collection_PT",
-        "_comments": "fields are field names picked from its aggregation query to use post aggregation newField value with given new field name  "
+        "_comments": "fields are field names picked from its aggregation query to use post aggregation newField value with given new field name "
       },
       {
         "postAggregationTheory" : "",
         "actionName": "PercentageComputedField",
         "fields" : ["PT_Total_Collection","Target_Collection_PT"],
         "newField" : "Target Achieved",
-        "_comments": "fields are field names picked from its aggregation query to use post aggregation newField value with given new field name  "
+        "_comments": "fields are field names picked from its aggregation query to use post aggregation newField value with given new field name "
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "DivisionComputedField",
+        "fields" : ["PT_Total_Collection","Avg_State_Gdp"],
+        "newField" : "PT_Collection_By_Gdp",
+        "_comments": "fields property are field names picked from their aggregation query to further calculate it to form newField value with given new field name"
+      },
+      {
+        "postAggregationTheory" : "",
+        "actionName": "DivisionComputedField",
+        "fields" : ["PT_Total_Collection","PT_Assessed_Properties"],
+        "newField" : "PT_Collection_By_AssessedProperties",
+        "_comments": "fields property are field names picked from their aggregation query to further calculate it to form newField value with given new field name"
       }
     ],
-    "excludedColumns":["PT_Target_Collection"],
+    "excludedColumns":["PT_Target_Collection", "Avg_State_Gdp"],
     "pathDataTypeMapping": [
       {
         "PT_Total_Collection": "amount"
@@ -8780,6 +8795,12 @@
       },
       {
          "Target_Collection_PT": "amount"
+      },
+      {
+        "PT_Collection_By_Gdp": "number"
+      },
+      {
+        "PT_Collection_By_AssessedProperties": "number"
       }
     ],
     "insight": {
@@ -22172,90 +22193,6 @@
     "isCumulative": false,
     "interval": "month",
     "insight": {
-    },
-    "_comment": " "
-  },
-  "ptCollectionGDPwise": {
-    "chartName": "NATIONAL_DSS_PT_COLLECTION_GDP_WISE",
-    "queries": [
-      {
-        "module": "PT",
-        "dateRefField": "date",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "pt-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\": \"state.keyword\"},\"aggs\":{\"Total\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}}}"
-      },
-      {
-        "module": "MASTER",
-        "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"average_state_gdp\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}",
-        "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "date"
-      }
-    ],
-	  "chartType": "metric",
-    "valueType": "number",
-    "drillChart": "none",
-    "documentType": "_doc",
-    "action": "division",
-    "isRoundOff": true,
-    "aggregationPaths": [
-      "Total Collection", "average_state_gdp"
-    ],
-    "preActionTheory":{
-      "Total Collection":"repsonseToDifferenceOfDates",
-      "average_state_gdp":"repsonseToDifferenceOfDates"
-    },			    
-    "insight": {
-      "chartResponseMap" : "ptCollectionGDPwise",
-      "action" : "differenceOfNumbers",
-      "upwardIndicator" : "positive",
-      "downwardIndicator" : "negative",
-      "textMessage" : "$indicator$value% than last $insightInterval",
-      "colorCode" : "#228B22",
-      "insightInterval" : "year",
-      "isRoundOff": true
-    },
-    "_comment": "States GDP wise Property Tax Revenue"
-  },
-  "ptCollectionUrbanHouseholdwise": {
-    "chartName": "NATIONAL_DSS_PT_COLLECTION_URBAN_HOUSEHOLD_WISE",
-    "queries": [
-      {
-        "module": "PT",
-        "dateRefField": "date",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "pt-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}"
-      },
-    {
-        "module": "PT",
-        "dateRefField": "date",
-        "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "indexName": "pt-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Properties\":{\"sum\":{\"field\":\"propertiesRegisteredForFinancialYear\"}}}}}}"
-      }
-      
-    ],
-    "chartType": "metric",
-    "valueType": "number",
-    "drillChart": "none",
-    "documentType": "_doc",
-    "action": "division",
-    "isRoundOff": true,
-    "aggregationPaths": [
-      "Total Collection",
-      "Total Application"
-    ],
-    "insight": {
-      "chartResponseMap" : "ptCollectionUrbanHouseholdwise",
-      "action" : "differenceOfNumbers",
-      "upwardIndicator" : "positive",
-      "downwardIndicator" : "negative",
-      "textMessage" : "$indicator$value% than last $insightInterval",
-      "colorCode" : "#228B22",
-      "insightInterval" : "year",
-      "isRoundOff": true
     },
     "_comment": " "
   }
