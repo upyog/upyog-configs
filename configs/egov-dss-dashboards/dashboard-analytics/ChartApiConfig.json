@@ -9442,7 +9442,7 @@
         "indexName": "pt-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"assessedPropertiesForUsageCategory\"}}],\"must_not\":[{\"match\":{\"assessedPropertiesForUsageCategory\":0}}]}},\"aggs\":{\"Assessed Properties\":{\"sum\":{\"field\":\"assessedPropertiesForUsageCategory\"}}}}}}",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": ""
+        "dateRefField": "date"
       }
     ],
     "chartType": "metric",
