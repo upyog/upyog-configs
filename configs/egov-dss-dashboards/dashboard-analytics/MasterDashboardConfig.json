@@ -478,8 +478,62 @@
             }
           ]
         },
+        { 
+        "row": 3,
+        "name": "NATIONAL_DSS_OVERVIEW_REVENUE",
+        "vizArray": [
+          {
+            "id": 231,
+            "name": "NATIONAL_DSS_OVERVIEW_KEY_FY_REVENUE_INDICATORS",
+            "dimensions": {
+              "height": 350,
+              "width": 6
+            },
+            "vizType": "chart",
+            "noUnit": false,
+            "isCollapsible": false,
+            "charts": [
+              {
+                "id": "overviewStateWiseRevenueCollection",
+                "name": "NATIONAL_DSS_OVERVIEW_REVENUE_COLLECTION_STATES",
+                "code": "",
+                "chartType": "table",
+                "filter": "",
+                "headers": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+      "row": 4,
+      "name": "NATIONAL_DSS_OVERVIEW_GRIEVANCE",
+      "vizArray": [
         {
-          "row": 3,
+          "id": 231,
+          "name": "NATIONAL_DSS_OVERVIEW_KEY_FY_GRIEVANCE_INDICATORS",
+          "dimensions": {
+            "height": 350,
+            "width": 6
+          },
+          "vizType": "chart",
+          "noUnit": false,
+          "isCollapsible": false,
+          "charts": [
+            {
+              "id": "overviewStateWisePublicGrievance",
+              "name": "NATIONAL_DSS_OVERVIEW_GRIEVANCE_STATES",
+              "code": "",
+              "chartType": "table",
+              "filter": "",
+              "headers": []
+            }
+          ]
+        }
+      ]
+    },
+        {
+          "row": 5,
           "name": "NATIONAL_DSS_SERVICE",
           "vizArray": [
             {
@@ -550,7 +604,7 @@
           ]
         },
         {
-          "row": 4,
+          "row": 6,
           "name": "NATIONAL_DSS_SERVICE",
           "vizArray": [
                 {
@@ -1337,7 +1391,7 @@
               "name": "NATIONAL_DSS_PT_KEY_FY_INDICATORS",
               "dimensions": {
                 "height": 350,
-                "width": 12
+                "width": 14
               },
               "vizType": "chart",
               "noUnit": false,
