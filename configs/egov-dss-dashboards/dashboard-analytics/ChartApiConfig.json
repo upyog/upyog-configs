@@ -20816,7 +20816,7 @@
     "queries": [
       {
         "module": "PT",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "pt-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}}}"
@@ -20826,11 +20826,11 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"PT\"}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"PT\"]}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
       }
     ],
 	"chartType": "perform",
-    "valueType": "percentage",
+    "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
@@ -20840,10 +20840,7 @@
     "isRoundOff": true,
     "aggregationPaths": [
       "Total Collection", "Total Population"
-    ],
-    "preActionTheory":{
-      "Target Collection":"repsonseToDifferenceOfDates"
-    },			
+    ],			
     "insight": {
     },
     "_comment": " Bottom Performing States for Populationwise Revenue"
@@ -20854,7 +20851,7 @@
     "queries": [
       {
         "module": "TL",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "tl-national-dashboard",
         "aggrQuery":"{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}}}}}}}}"
@@ -20864,11 +20861,11 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"TL\"}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"TL\"]}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
       }
     ],
 	"chartType": "perform",
-    "valueType": "percentage",
+    "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
@@ -20878,10 +20875,7 @@
     "isRoundOff": true,
     "aggregationPaths": [
       "Total Collection", "Total Population"
-    ],
-    "preActionTheory":{
-      "Target Collection":"repsonseToDifferenceOfDates"
-    },			
+    ],			
     "insight": {
     },
     "_comment": " Bottom Performing States for Populationwise Revenue"
@@ -20891,7 +20885,7 @@
     "queries": [
       {
         "module": "WS",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "indexName": "ws-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}"
@@ -20901,11 +20895,11 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"WS\"}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"WS\"]}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
       } 
     ],
 	"chartType": "perform",
-    "valueType": "percentage",
+    "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
@@ -20915,10 +20909,7 @@
     "isRoundOff": true,
     "aggregationPaths": [
       "Total Collection", "Total Population"
-    ],
-    "preActionTheory":{
-      "Target Collection":"repsonseToDifferenceOfDates"
-    },			
+    ],			
     "insight": {
     },
     "_comment": " Bottom Performing States for Populationwise Revenue"
@@ -20928,7 +20919,7 @@
     "queries": [
       {
         "module": "FIRENOC",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "firenoc-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
@@ -20938,11 +20929,11 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"FIRENOC\"}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"FIRENOC\"]}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
       }
     ],
 	"chartType": "perform",
-    "valueType": "percentage",
+    "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
@@ -20952,10 +20943,7 @@
     "isRoundOff": true,
     "aggregationPaths": [
       "Total Collection", "Total Population"
-    ],
-    "preActionTheory":{
-      "Target Collection":"repsonseToDifferenceOfDates"
-    },			
+    ],		
     "insight": {
     },
     "_comment": " Bottom Performing States for Populationwise Revenue"
@@ -20965,7 +20953,7 @@
     "queries": [
       {
         "module": "OBPS",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "obps-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
@@ -20975,11 +20963,11 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"OBPS\"}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"OBPS\"]}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
       } 
     ],
 	"chartType": "perform",
-    "valueType": "percentage",
+    "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
@@ -20989,10 +20977,7 @@
     "isRoundOff": true,
     "aggregationPaths": [
       "Total Collection", "Total Population"
-    ],
-    "preActionTheory":{
-      "Target Collection":"repsonseToDifferenceOfDates"
-    },			
+    ],			
     "insight": {
     },
     "_comment": " Bottom Performing States for Populationwise Revenue"
@@ -21002,7 +20987,7 @@
     "queries": [
       {
         "module": "PT",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "pt-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}}}"
@@ -21013,11 +20998,11 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"PT\"}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"PT\"]}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
       }  
     ],
 	"chartType": "perform",
-    "valueType": "percentage",
+    "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
@@ -21027,10 +21012,7 @@
     "isRoundOff": true,
     "aggregationPaths": [
       "Total Collection", "Average Household"
-    ],
-    "preActionTheory":{
-      "Total Collection":"repsonseToDifferenceOfDates"
-    },			
+    ],			
     "insight": {
     },
     "_comment": " Bottom Performing States for Householdwise Revenue"
@@ -21040,7 +21022,7 @@
     "queries": [
       {
         "module": "TL",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "tl-national-dashboard",
         "aggrQuery":"{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}}}}}}}}"
@@ -21050,11 +21032,11 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"TL\"}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"TL\"]}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
       }
     ],
 	"chartType": "perform",
-    "valueType": "percentage",
+    "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
@@ -21064,10 +21046,7 @@
     "isRoundOff": true,
     "aggregationPaths": [
       "Total Collection", "Average Household"
-    ],
-    "preActionTheory":{
-      "Total Collection":"repsonseToDifferenceOfDates"
-    },			
+    ],			
     "insight": {
     },
     "_comment": " Bottom Performing States for Householdwise Revenue"
@@ -21077,7 +21056,7 @@
     "queries": [
       {
         "module": "OBPS",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "obps-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
@@ -21087,11 +21066,11 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"OBPS\"}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"OBPS\"]}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
       }     
     ],
 	"chartType": "perform",
-    "valueType": "percentage",
+    "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
@@ -21101,10 +21080,7 @@
     "isRoundOff": true,
     "aggregationPaths": [
       "Total Collection", "Average Household"
-    ],
-    "preActionTheory":{
-      "Total Collection":"repsonseToDifferenceOfDates"
-    },			
+    ],		
     "insight": {
     },
     "_comment": " Bottom Performing States for Householdwise Revenue"
@@ -21114,7 +21090,7 @@
     "queries": [
       {
         "module": "FIRENOC",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "firenoc-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
@@ -21124,11 +21100,11 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"FIRENOC\"}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"FIRENOC\"]}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
       } 
     ],
 	"chartType": "perform",
-    "valueType": "percentage",
+    "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
@@ -21138,10 +21114,7 @@
     "isRoundOff": true,
     "aggregationPaths": [
       "Total Collection", "Average Household"
-    ],
-    "preActionTheory":{
-      "Total Collection":"repsonseToDifferenceOfDates"
-    },			
+    ],			
     "insight": {
     },
     "_comment": " Bottom Performing States for Householdwise Revenue"
@@ -21151,7 +21124,7 @@
     "queries": [
       {
         "module": "WS",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "indexName": "ws-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}"
@@ -21161,11 +21134,11 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"WS\"}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"WS\"]}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
       }
     ],
 	"chartType": "perform",
-    "valueType": "percentage",
+    "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
@@ -21175,10 +21148,7 @@
     "isRoundOff": true,
     "aggregationPaths": [
       "Total Collection", "Average Household"
-    ],
-    "preActionTheory":{
-      "Total Collection":"repsonseToDifferenceOfDates"
-    },			
+    ],		
     "insight": {
     },
     "_comment": " Bottom Performing States for Householdwise Revenue"
@@ -21188,7 +21158,7 @@
     "queries": [
       {
         "module": "PT",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "pt-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}}}"	
@@ -21198,11 +21168,11 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"PT\"}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"PT\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
       }   
     ],
 	"chartType": "perform",
-    "valueType": "percentage",
+    "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
@@ -21212,10 +21182,7 @@
     "isRoundOff": true,
     "aggregationPaths": [
       "Total Collection", "Average GDP"
-    ],
-    "preActionTheory":{
-      "Total Collection":"repsonseToDifferenceOfDates"
-    },			
+    ],			
     "insight": {
     },
     "_comment": " Bottom Performing States for GDPwise Revenue"
@@ -21225,7 +21192,7 @@
     "queries": [
       {
         "module": "TL",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "tl-national-dashboard",
         "aggrQuery":"{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}}}}}}}}"
@@ -21235,11 +21202,11 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"TL\"}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"TL\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
       }
     ],
 	"chartType": "perform",
-    "valueType": "percentage",
+    "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
@@ -21249,10 +21216,7 @@
     "isRoundOff": true,
     "aggregationPaths": [
       "Total Collection", "Average GDP"
-    ],
-    "preActionTheory":{
-      "Total Collection":"repsonseToDifferenceOfDates"
-    },			
+    ],			
     "insight": {
     },
     "_comment": " Bottom Performing States for GDPwise Revenue"
@@ -21262,7 +21226,7 @@
     "queries": [
       {
         "module": "OBPS",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "obps-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
@@ -21272,11 +21236,11 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"OBPS\"}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"OBPS\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
       }  
     ],
 	"chartType": "perform",
-    "valueType": "percentage",
+    "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
@@ -21286,10 +21250,7 @@
     "isRoundOff": true,
     "aggregationPaths": [
       "Total Collection", "Average GDP"
-    ],
-    "preActionTheory":{
-      "Total Collection":"repsonseToDifferenceOfDates"
-    },			
+    ],		
     "insight": {
     },
     "_comment": " Bottom Performing States for GDPwise Revenue"
@@ -21299,7 +21260,7 @@
     "queries": [
       {
         "module": "FIRENOC",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "firenoc-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
@@ -21309,11 +21270,11 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"FIRENOC\"}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"FIRENOC\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
       }   
     ],
 	"chartType": "perform",
-    "valueType": "percentage",
+    "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
@@ -21323,10 +21284,7 @@
     "isRoundOff": true,
     "aggregationPaths": [
       "Total Collection", "Average GDP"
-    ],
-    "preActionTheory":{
-      "Total Collection":"repsonseToDifferenceOfDates"
-    },			
+    ],			
     "insight": {
     },
     "_comment": " Bottom Performing States for GDPwise Revenue"
@@ -21336,7 +21294,7 @@
     "queries": [
       {
         "module": "WS",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "indexName": "ws-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}"
@@ -21346,11 +21304,11 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"WS\"}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"WS\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
       }
     ],
 	"chartType": "perform",
-    "valueType": "percentage",
+    "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
@@ -21360,10 +21318,7 @@
     "isRoundOff": true,
     "aggregationPaths": [
       "Total Collection", "Average GDP"
-    ],
-    "preActionTheory":{
-      "Total Collection":"repsonseToDifferenceOfDates"
-    },			
+    ],		
     "insight": {
     },
     "_comment": " Bottom Performing States for GDPwise Revenue"
@@ -21418,11 +21373,11 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"TL\"}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"TL\"]}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
       }
     ],
 	"chartType": "perform",
-    "valueType": "percentage",
+    "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
@@ -21432,10 +21387,7 @@
     "isRoundOff": true,
     "aggregationPaths": [
       "Total Collection", "Total Population"
-    ],
-    "preActionTheory":{
-      "Target Collection":"repsonseToDifferenceOfDates"
-    },			
+    ],		
     "insight": {
     },
     "_comment": " Bottom Performing States for Populationwise Revenue"
@@ -21446,21 +21398,21 @@
       
       {
         "module": "OBPS",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "obps-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
       },
 	   {
         "module": "OBPS",
+		"dateRefField": "",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"OBPS\"}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"OBPS\"]}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
       }
     ],
 	"chartType": "perform",
-    "valueType": "percentage",
+    "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
@@ -21470,10 +21422,7 @@
     "isRoundOff": true,
     "aggregationPaths": [
       "Total Collection", "Total Population"
-    ],
-    "preActionTheory":{
-      "Target Collection":"repsonseToDifferenceOfDates"
-    },			
+    ],			
     "insight": {
     },
     "_comment": " Bottom Performing States for Populationwise Revenue"
@@ -21483,7 +21432,7 @@
     "queries": [
       {
         "module": "FIRENOC",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "firenoc-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
@@ -21493,11 +21442,11 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"FIRENOC\"}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"FIRENOC\"]}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
       }
     ],
 	"chartType": "perform",
-    "valueType": "percentage",
+    "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
@@ -21507,10 +21456,7 @@
     "isRoundOff": true,
     "aggregationPaths": [
       "Total Collection", "Total Population"
-    ],
-    "preActionTheory":{
-      "Target Collection":"repsonseToDifferenceOfDates"
-    },			
+    ],		
     "insight": {
     },
     "_comment": " Bottom Performing States for Populationwise Revenue"
@@ -21520,7 +21466,7 @@
     "queries": [
       {
         "module": "WS",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "indexName": "ws-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}"
@@ -21530,11 +21476,11 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"WS\"}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"WS\"]}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
       }  
     ],
 	"chartType": "perform",
-    "valueType": "percentage",
+    "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
@@ -21544,10 +21490,7 @@
     "isRoundOff": true,
     "aggregationPaths": [
       "Total Collection", "Total Population"
-    ],
-    "preActionTheory":{
-      "Target Collection":"repsonseToDifferenceOfDates"
-    },			
+    ],			
     "insight": {
     },
     "_comment": " Bottom Performing States for Populationwise Revenue"
@@ -21571,7 +21514,7 @@
       }
     ],
 	"chartType": "perform",
-    "valueType": "percentage",
+    "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
@@ -21591,7 +21534,7 @@
     "queries": [
       {
         "module": "TL",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "tl-national-dashboard",
         "aggrQuery":"{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}}}}}}}}"
@@ -21601,11 +21544,11 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"TL\"}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"TL\"]}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
       } 
     ],
 	"chartType": "perform",
-    "valueType": "percentage",
+    "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
@@ -21615,10 +21558,7 @@
     "isRoundOff": true,
     "aggregationPaths": [
       "Total Collection", "Average Household"
-    ],
-    "preActionTheory":{
-      "Total Collection":"repsonseToDifferenceOfDates"
-    },			
+    ],			
     "insight": {
     },
     "_comment": " Top Performing States for Householdwise Revenue"
@@ -21628,7 +21568,7 @@
     "queries": [
       {
         "module": "OBPS",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "obps-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
@@ -21638,11 +21578,11 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"OBPS\"}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"OBPS\"]}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
       }   
     ],
 	"chartType": "perform",
-    "valueType": "percentage",
+    "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
@@ -21652,10 +21592,7 @@
     "isRoundOff": true,
     "aggregationPaths": [
       "Total Collection", "Average Household"
-    ],
-    "preActionTheory":{
-      "Total Collection":"repsonseToDifferenceOfDates"
-    },			
+    ],			
     "insight": {
     },
     "_comment": " Top Performing States for Householdwise Revenue"
@@ -21665,7 +21602,7 @@
     "queries": [
       {
         "module": "FIRENOC",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "firenoc-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
@@ -21675,11 +21612,11 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"FIRENOC\"}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"FIRENOC\"]}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
       }
     ],
 	"chartType": "perform",
-    "valueType": "percentage",
+    "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
@@ -21689,10 +21626,7 @@
     "isRoundOff": true,
     "aggregationPaths": [
       "Total Collection", "Average Household"
-    ],
-    "preActionTheory":{
-      "Total Collection":"repsonseToDifferenceOfDates"
-    },			
+    ],		
     "insight": {
     },
     "_comment": " Top Performing States for Householdwise Revenue"
@@ -21702,7 +21636,7 @@
     "queries": [
       {
         "module": "WS",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "indexName": "ws-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}"
@@ -21712,11 +21646,11 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"WS\"}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"WS\"]}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
       } 
     ],
 	"chartType": "perform",
-    "valueType": "percentage",
+    "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
@@ -21726,10 +21660,7 @@
     "isRoundOff": true,
     "aggregationPaths": [
       "Total Collection", "Average Household"
-    ],
-    "preActionTheory":{
-      "Total Collection":"repsonseToDifferenceOfDates"
-    },			
+    ],			
     "insight": {
     },
     "_comment": " Top Performing States for Householdwise Revenue"
@@ -21788,7 +21719,7 @@
 	   }  
     ],
 	"chartType": "perform",
-    "valueType": "amount",
+    "valueType": "percentage",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "percentage",
@@ -21825,7 +21756,7 @@
       }	  
     ],
 	"chartType": "perform",
-    "valueType": "amount",
+    "valueType": "percentage",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "percentage",
@@ -21849,7 +21780,7 @@
     "queries": [
       {
         "module": "TL",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "tl-national-dashboard",
         "aggrQuery":"{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}}}}}}}}"
@@ -21859,11 +21790,11 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"TL\"}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"TL\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
       }   
     ],
 	"chartType": "perform",
-    "valueType": "percentage",
+    "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
@@ -21873,10 +21804,7 @@
     "isRoundOff": true,
     "aggregationPaths": [
       "Total Collection", "Average GDP"
-    ],
-    "preActionTheory":{
-      "Total Collection":"repsonseToDifferenceOfDates"
-    },			
+    ],			
     "insight": {
     },
     "_comment": " TOP Performing States for GDPwise Revenue"
@@ -21886,7 +21814,7 @@
     "queries": [
       {
         "module": "TL",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "tl-national-dashboard",
         "aggrQuery":"{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}}}}}}}}"
@@ -21896,14 +21824,14 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"PT\"}}]}},\"aggs\":{\"Target Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"TL\"]}}]}},\"aggs\":{\"Target Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}}}"
       }
     ],
 	"chartType": "perform",
     "valueType": "percentage",
     "drillChart": "none",
     "documentType": "_doc",
-    "action": "division",
+    "action": "percentage",
     "plotLabel": "DSS_TARGET_ACHIEVED",
     "order": "asc",
     "limit": 3,
@@ -21923,7 +21851,7 @@
     "queries": [
       {
         "module": "TL",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "tl-national-dashboard",
         "aggrQuery":"{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}}}}}}}}"	
@@ -21933,11 +21861,11 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"TL\"}}]}},\"aggs\":{\"Target Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"TL\"]}}]}},\"aggs\":{\"Target Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}}}"
       }  
     ],
 	"chartType": "perform",
-    "valueType": "amount",
+    "valueType": "percentage",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "percentage",
@@ -21949,7 +21877,7 @@
       "Total Collection", "Target Collection"
     ],
     "preActionTheory":{
-      "Total Collection":"repsonseToDifferenceOfDates"
+      "Target Collection":"repsonseToDifferenceOfDates"
     },			
     "insight": {
     },
@@ -21961,7 +21889,7 @@
     "queries": [
       {
         "module": "OBPS",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "obps-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
@@ -21971,11 +21899,11 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"OBPS\"}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"OBPS\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
       } 
     ],
 	"chartType": "perform",
-    "valueType": "percentage",
+    "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
@@ -21985,10 +21913,7 @@
     "isRoundOff": true,
     "aggregationPaths": [
       "Total Collection", "Average GDP"
-    ],
-    "preActionTheory":{
-      "Total Collection":"repsonseToDifferenceOfDates"
-    },			
+    ],			
     "insight": {
     },
     "_comment": " TOP Performing States for GDPwise Revenue"
@@ -21998,21 +21923,21 @@
     "queries": [
       {
         "module": "OBPS",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "obps-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
       },
 	   {
         "module": "OBPS",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"OBPS\"}}]}},\"aggs\":{\"Target Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"OBPS\"]}}]}},\"aggs\":{\"Target Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}}}"
       }
     ],
 	"chartType": "perform",
-    "valueType": "amount",
+    "valueType": "percentage",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "percentage",
@@ -22035,7 +21960,7 @@
     "queries": [
       {
         "module": "OBPS",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "obps-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
@@ -22045,11 +21970,11 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"OBPS\"}}]}},\"aggs\":{\"Target Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"OBPS\"]}}]}},\"aggs\":{\"Target Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}}}"
       }
     ],
 	"chartType": "perform",
-    "valueType": "amount",
+    "valueType": "percentage",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "percentage",
@@ -22061,7 +21986,7 @@
       "Total Collection", "Target Collection"
     ],
     "preActionTheory":{
-      "Total Collection":"repsonseToDifferenceOfDates"
+      "Target Collection":"repsonseToDifferenceOfDates"
     },			
     "insight": {
     },
@@ -22072,7 +21997,7 @@
     "queries": [
       {
         "module": "FIRENOC",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "firenoc-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
@@ -22082,11 +22007,11 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"FIRENOC\"}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"FIRENOC\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
       }
     ],
 	"chartType": "perform",
-    "valueType": "percentage",
+    "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
@@ -22096,10 +22021,7 @@
     "isRoundOff": true,
     "aggregationPaths": [
       "Total Collection", "Average GDP"
-    ],
-    "preActionTheory":{
-      "Total Collection":"repsonseToDifferenceOfDates"
-    },			
+    ],			
     "insight": {
     },
     "_comment": " TOP Performing States for GDPwise Revenue"
@@ -22109,7 +22031,7 @@
     "queries": [
       {
         "module": "FIRENOC",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "firenoc-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
@@ -22119,11 +22041,11 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"FIRENOC\"}}]}},\"aggs\":{\"Target Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"FIRENOC\"]}}]}},\"aggs\":{\"Target Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}}}"
       }   
     ],
 	"chartType": "perform",
-    "valueType": "amount",
+    "valueType": "percentage",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "percentage",
@@ -22146,7 +22068,7 @@
     "queries": [
       {
         "module": "FIRENOC",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "firenoc-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
@@ -22156,11 +22078,11 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"FIRENOC\"}}]}},\"aggs\":{\"Target Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"FIRENOC\"]}}]}},\"aggs\":{\"Target Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}}}"
       }    
     ],
 	"chartType": "perform",
-    "valueType": "amount",
+    "valueType": "percentage",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "percentage",
@@ -22172,7 +22094,7 @@
       "Total Collection", "Target Collection"
     ],
     "preActionTheory":{
-      "Total Collection":"repsonseToDifferenceOfDates"
+      "Target Collection":"repsonseToDifferenceOfDates"
     },			
     "insight": {
     },
@@ -22183,7 +22105,7 @@
     "queries": [
       {
         "module": "WS",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "indexName": "ws-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}"
@@ -22193,11 +22115,11 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"WS\"}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"WS\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
       }   
     ],
 	"chartType": "perform",
-    "valueType": "percentage",
+    "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
@@ -22207,10 +22129,7 @@
     "isRoundOff": true,
     "aggregationPaths": [
       "Total Collection", "Average GDP"
-    ],
-    "preActionTheory":{
-      "Total Collection":"repsonseToDifferenceOfDates"
-    },			
+    ],			
     "insight": {
     },
     "_comment": " TOP Performing States for GDPwise Revenue"
@@ -22220,7 +22139,7 @@
     "queries": [
       {
         "module": "WS",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "indexName": "ws-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}"
@@ -22230,11 +22149,11 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"WS\"}}]}},\"aggs\":{\"Target Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"WS\"]}}]}},\"aggs\":{\"Target Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}}}"
       }   
     ],
 	"chartType": "perform",
-    "valueType": "amount",
+    "valueType": "percentage",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "percentage",
@@ -22257,7 +22176,7 @@
     "queries": [
       {
         "module": "WS",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "indexName": "ws-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}"},
@@ -22266,11 +22185,11 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"WS\"}}]}},\"aggs\":{\"Target Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"WS\"]}}]}},\"aggs\":{\"Target Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}}}"
 		}  
 	  ],
 	"chartType": "perform",
-    "valueType": "amount",
+    "valueType": "percentage",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "percentage",
@@ -22282,7 +22201,7 @@
       "Total Collection", "Target Collection"
     ],
     "preActionTheory":{
-      "Total Collection":"repsonseToDifferenceOfDates"
+      "Target Collection":"repsonseToDifferenceOfDates"
     },			
     "insight": {
     },
