@@ -21373,7 +21373,7 @@
     "queries": [
       {
         "module": "PT",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "pt-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}}}"
@@ -21384,7 +21384,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"PT\"}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"PT\"]}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
       }
     ],
 	"chartType": "perform",
@@ -21398,10 +21398,7 @@
     "isRoundOff": true,
     "aggregationPaths": [
       "Total Collection", "Total Population"
-    ],
-    "preActionTheory":{
-      "Target Collection":"repsonseToDifferenceOfDates"
-    },			
+    ],			
     "insight": {
     },
     "_comment": " Top Performing States for Populationwise Revenue"
@@ -21560,7 +21557,7 @@
     "queries": [
       {
         "module": "PT",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "pt-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}}}"
@@ -21570,7 +21567,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"PT\"}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"PT\"]}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
       }
     ],
 	"chartType": "perform",
@@ -21584,10 +21581,7 @@
     "isRoundOff": true,
     "aggregationPaths": [
       "Total Collection", "Average Household"
-    ],
-    "preActionTheory":{
-      "Total Collection":"repsonseToDifferenceOfDates"
-    },			
+    ],			
     "insight": {
     },
     "_comment": " Top Performing States for Householdwise Revenue"
@@ -21745,7 +21739,7 @@
     "queries": [
       {
         "module": "PT",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "pt-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}}}"
@@ -21756,7 +21750,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"PT\"}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"PT\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
       } 
     ],
 	"chartType": "perform",
@@ -21770,10 +21764,7 @@
     "isRoundOff": true,
     "aggregationPaths": [
       "Total Collection", "Average GDP"
-    ],
-    "preActionTheory":{
-      "Total Collection":"repsonseToDifferenceOfDates"
-    },			
+    ],			
     "insight": {
     },
     "_comment": " TOP Performing States for GDPwise Revenue"
