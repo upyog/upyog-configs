@@ -21709,30 +21709,20 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "pt-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}}}"
-      },
-	   {
-        "module": "PT",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
-        "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"PT\"]}}]}},\"aggs\":{\"Target Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}}}"
-	   }  
+      }  
     ],
 	"chartType": "perform",
-    "valueType": "percentage",
+    "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
-    "action": "percentage",
+    "action": "",
     "plotLabel": "DSS_TARGET_ACHIEVED",
     "order": "asc",
     "limit": 3,
     "isRoundOff": true,
     "aggregationPaths": [
-      "Total Collection", "Target Collection"
-    ],
-    "preActionTheory":{
-      "Target Collection":"repsonseToDifferenceOfDates"
-    },			
+      "Total Collection"
+    ],			
     "insight": {
     },
     "_comment": " Bottom Performing States for Revenue"
@@ -21746,31 +21736,20 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "pt-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}}}"		
-      },
-	  {
-        "module": "PT",
-        "dateRefField": "",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"PT\"]}}]}},\"aggs\":{\"Target Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}}}"		
       }	  
     ],
 	"chartType": "perform",
-    "valueType": "percentage",
+    "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
-    "action": "percentage",
+    "action": "",
     "plotLabel": "DSS_TARGET_ACHIEVED",
     "order": "desc",
     "limit": 3,
     "isRoundOff": true,
     "aggregationPaths": [
-      "Total Collection",
-	  "Target Collection"
-    ],
-    "preActionTheory":{
-      "Target Collection":"repsonseToDifferenceOfDates"
-    },			
+      "Total Collection"
+    ],			
     "insight": {
     },
     "_comment": " TOP Performing States for Revenue"
