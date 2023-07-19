@@ -21735,7 +21735,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "pt-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}}}"		
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"state\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"TotalCollection\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}},\"targets\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}}}"		
       }	  
     ],
     "chartType": "perform",
@@ -21749,7 +21749,7 @@
     "isRoundOff": true,
     "aggregationPaths": [
       "Total Collection",
-	  "Total Collection"
+	  "targets"
     ],			
     "insight": {
     },
