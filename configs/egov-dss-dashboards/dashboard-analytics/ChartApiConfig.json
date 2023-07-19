@@ -21738,7 +21738,7 @@
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}}}"		
       }	  
     ],
-    "chartType": "metric",
+    "chartType": "perform",
     "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
@@ -21748,7 +21748,8 @@
     "limit": 3,
     "isRoundOff": true,
     "aggregationPaths": [
-      "Total Collection"
+      "Total Collection",
+	  "Total Collection"
     ],			
     "insight": {
     },
