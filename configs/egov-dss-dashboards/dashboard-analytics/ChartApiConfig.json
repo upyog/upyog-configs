@@ -21343,7 +21343,7 @@
       }
     ],
 	"chartType": "perform",
-    "valueType": "percentage",
+    "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
@@ -21685,7 +21685,7 @@
       } 
     ],
 	"chartType": "perform",
-    "valueType": "percentage",
+    "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
     "action": "division",
@@ -21718,7 +21718,7 @@
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection1\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Count\":\"asc\"}},\"aggs\":{\"Count\":{\"cardinality\":{\"field\":\"state.keyword\"}}}}}}}}"		
       }	  
     ],
-	"chartType": "metric",
+	"chartType": "perform",
     "valueType": "amount",
     "drillChart": "none",
     "documentType": "_doc",
