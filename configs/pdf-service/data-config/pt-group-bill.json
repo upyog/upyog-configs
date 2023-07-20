@@ -3,8 +3,8 @@
   "DataConfigs": {
     "serviceName": "rainmaker-common",
     "version": "1.0.0",
-    "baseKeyPath": "$",
-    "entityIdPath": "$.Bill[0].billNumber",
+    "baseKeyPath": "$.Bill.*",
+    "entityIdPath": "$.Bill[0].tenantId",
     "isCommonTableBorderRequired": true,
     "mappings": [
       {
@@ -457,7 +457,7 @@
               },
 
               {
-                "variable": "var_Bills",                        
+                "variable": "var_bills",                        
                 "value":{
                   "path":"$.Bill.*"
                 },
