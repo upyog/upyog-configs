@@ -1115,14 +1115,6 @@
                   "headers": []
                 },
 				{
-                  "id": "growthRatePT",
-                  "name": "DSS_GROWTH_RATE_PT",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-				{
                   "id": "PTCollectionPercentage",
                   "name": "NATIONAL_DSS_PT_COLLECTION_PERCENTAGE",
                   "code": "",
@@ -1312,8 +1304,8 @@
               "isCollapsible": false,
               "charts": [
 			  {
-                  "id": "pttopPerformingStatesRevenue",
-                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_PT",
+                  "id": "ptbottomPerformingStatesRevenue",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_PT",
                   "code": "",
                   "chartType": "bar",
                   "filter": "",
@@ -5426,7 +5418,304 @@
           ]
         }
       ]
-    },  
+    },
+{
+      "name": "NATIONAL_DSS_FSM_DASHBOARD",
+      "id": "national-fssm",
+      "isActive": "",
+      "style": "linear",
+      "visualizations": [
+        {
+          "row": 1,
+          "name": "NATIONAL_DSS_REVENUE",
+          "vizArray": [
+            {
+              "id": 511,
+              "name": "NATIONAL_DSS_OVERVIEW",
+              "dimensions": {
+                "height": 450,
+                "width": 4
+              },
+              "vizType": "metric-collection",
+              "label": "NATIONAL_DSS_OVERVIEW",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "fsmtotalrequests",
+                  "name": "NATIONAL_DSS_TOTAL_REQUESTS_FSM",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "fsmtotalsludgetreated",
+                  "name": "NATIONAL_DSS_TOTAL_SLUDGE_TREATED",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "avgfsmCollection",
+                  "name": "NATIONAL_DSS_AVG_COLLECTION_FSM",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "fsmtotalCollection",
+                  "name": "NATIONAL_DSS_TOTAL_COLLECTION_FSM",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "slaComplainceFSM",
+                  "name": "NATIONAL_DSS_SLA_COMPLAINCE_FSM",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "AvgCitizenRating",
+                  "name": "NATIONAL_DSS_AVG_CITIZEN_RATING",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            },
+            {
+              "id": 512,
+              "name": "NATIONAL_DSS_TOTAL_CUMULATIVE_COLLECTION_FSM",
+              "dimensions": {
+                "height": 450,
+                "width": 6
+              },
+              "vizType": "chart",
+              "label": "",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "cumulativeCollectionfsm",
+                  "name": "NATIONAL_DSS_TOTAL_CUMULATIVE_COLLECTION_FSM",
+                  "code": "",
+                  "chartType": "line",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 2,
+          "name": "NATIONAL_DSS_REVENUE",
+          "vizArray": [
+            {
+              "id": 513,
+              "name": "NATIONAL_DSS_TOP_3_PERFORMING_ULB_FSM",
+              "dimensions": {
+                "height": 250,
+                "width": 3
+              },
+              "vizType": "performing-metric",
+              "label": "",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "fsmtopPerformingulb",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_ULB_FSM",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            },
+            {
+              "id": 514,
+              "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_ULB_FSM",
+              "dimensions": {
+                "height": 250,
+                "width": 3
+              },
+              "vizType": "performing-metric",
+              "label": "",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "fsmbottomPerformingulb",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_ULB_FSM",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            },
+			{
+              "id": 515,
+              "name": "NATIONAL_DSS_FSM_COLLECTION_BY_USAGE_TYPE",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "chart",
+              "label": "",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "fsmcollectionByUsageType",
+                  "name": "NATIONAL_DSS_FSM_COLLECTION_BY_USAGE_TYPE",
+                  "code": "",
+                  "chartType": "donut",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 3,
+          "name": "NATIONAL_DSS_REVENUE",
+          "vizArray": [
+            {
+              "id": 516,
+              "name": "NATIONAL_DSS_FSTP_CAPACITY_UTILIZATION",
+              "dimensions": {
+                "height": 450,
+                "width": 5
+              },
+              "vizType": "chart",
+              "label": "",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "fssmCapacityUtilization",
+                  "name": "NATIONAL_DSS_FSTP_CAPACITY_UTILIZATION",
+                  "code": "",
+                  "chartType": "line",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            },
+{
+              "id": 517,
+              "name": "NATIONAL_DSS_FSM_MONTHLY_WASTE_CAL",
+              "dimensions": {
+                "height": 450,
+                "width": 5
+              },
+              "vizType": "chart",
+              "label": "",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "fssmMonthlyWasteCal",
+                  "name": "NATIONAL_DSS_FSM_MONTHLY_WASTE_CAL",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }            
+          ]
+        },
+        {
+          "row": 4,
+          "name": "NATIONAL_DSS_REVENUE",
+          "vizArray": [
+            {
+              "id": 518,
+              "name": "NATIONAL_DSS_FSM_TOP_DSO_BY_PERFORMANCE",
+              "dimensions": {
+                "height": 450,
+                "width": 5
+              },
+              "vizType": "chart",
+              "label": "",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "fsmTopDsoByPerformance",
+                  "name": "NATIONAL_DSS_FSM_TOP_DSO_BY_PERFORMANCE",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            },
+            {
+              "id": 519,
+              "name": "NATIONAL_DSS_FSM_BOTTOM_DSO_BY_PERFORMANCE",
+              "dimensions": {
+                "height": 450,
+                "width": 5
+              },
+              "vizType": "chart",
+              "label": "",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "fsmBottomDsoByPerformance",
+                  "name": "NATIONAL_DSS_FSM_BOTTOM_DSO_BY_PERFORMANCE",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+      {
+          "row": 5,
+          "name": "NATIONAL_DSS_REVENUE",
+          "vizArray": [
+            {
+              "id": 520,
+              "name": "NATIONAL_DSS_DESLUDGING_REQUEST_REPORT",
+              "dimensions": {
+                "height": 350,
+                "width": 10
+              },
+              "vizType": "chart",
+              "label": "",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "desludgingrequestreportfsm",
+                  "name": "NATIONAL_DSS_DESLUDGING_REQUEST_REPORT",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": []                }
+              ]
+            }
+          ]
+        }
+	  ]
+    },		
     {
       "name": "DSS_FSM_DASHBOARD",
       "id": "ulb-fsm",
@@ -7740,7 +8029,7 @@
 				  "tabName": "Revenue"
                 },
                 {
-                  "id": "noc+",
+                  "id": "nocbottomPerformingStatesRevenuePopulation",
                   "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_POPULATION_NOC",
                   "code": "",
                   "chartType": "bar",
@@ -8752,7 +9041,7 @@
               "name": "DSS_TL_LICENSE_BY_TYPE",
               "dimensions": {
                 "height": 250,
-                "width": 4
+                "width": 10
               },
               "vizType": "chart",
               "label": "",
@@ -8768,13 +9057,19 @@
                   "headers": []
                 }
               ]
-            },
+            }
+			]
+		},
+			{
+          "row": 3,
+          "name": "DSS_REVENUE",
+          "vizArray": [
 			{
               "id": 125,
               "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_POPULATION",
               "dimensions": {
                 "height": 250,
-                "width": 4
+                "width": 6
               },
               "vizType": "performing-metric",
               "noUnit": false,
@@ -8823,7 +9118,7 @@
               "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_POPULATION",
               "dimensions": {
                 "height": 250,
-                "width": 4
+                "width": 6
               },              
 			  "vizType": "performing-metric",
               "noUnit": false,
@@ -9490,12 +9785,43 @@
                   "headers": []
                 }
               ]
+            },
+			 {
+              "id": 206,
+              "name": "NURT_FSSM",
+              "vizType": "module",
+              "moduleLevel": "FSM",
+              "ref": {
+                "url": "national-fssm",
+                "logoUrl": "",
+                "type": "internal"
+              },
+              "label": "",
+              "charts": [
+                {
+                  "id": "cumulativeCollectionfsm",
+                  "name": "NATIONAL_DSS_TOTAL_CUMULATIVE_COLLECTION_FSM",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "fsmtotalrequests",
+                  "name": "DSS_TOTAL_REQUESTS_FSM",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
             }
           ]
       }
 
       ]
     },
+	
 
     {
       "name": "NATIONAL_DSS_PGR_DASHBOARD",
