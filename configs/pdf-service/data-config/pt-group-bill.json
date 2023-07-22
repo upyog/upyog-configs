@@ -638,7 +638,7 @@
           {
             "externalAPI": [
               {
-                "path": "https://egov-mdms-service.egov/egov-mdms-service/v1/_get",
+                "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
                 "queryParam": "moduleName=tenant&masterName=tenants&tenantId=pg&filter=%5B?(@.code=='{$.Bill[0].tenantId}')%5D",
                 "apiRequest": null,
                 "responseMapping": [
@@ -675,7 +675,7 @@
                 ]
               },
               {
-                "path": "https://billing-service.egov/billing-service/demand/_search",
+                "path": "http://billing-service.egov:8080/billing-service/demand/_search",
                 "queryParam": "tenantId=$.Bill[0].tenantId,consumerCode=$.Bill[0].consumerCode,businessService=SW",
                 "apiRequest": null,
                 "responseMapping": [
@@ -706,7 +706,7 @@
                 ]
               },
               {
-                "path": "https://billing-service.egov/billing-service/demand/_search",
+                "path": "http://billing-service.egov:8080/billing-service/demand/_search",
                 "queryParam": "tenantId=$.Bill[1].tenantId,consumerCode=$.Bill[1].consumerCode,businessService=WS",
                 "apiRequest": null,
                 "responseMapping": [
