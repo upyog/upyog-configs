@@ -476,13 +476,66 @@
               ]
             }
           ]
-        },
-        {
+        },  { 
           "row": 3,
-          "name": "NATIONAL_DSS_SERVICE",
+          "name": "NATIONAL_DSS_REVENUE",
           "vizArray": [
             {
               "id": 131,
+              "name": "NATIONAL_DSS_OVERVIEW_KEY_FY_REVENUE_INDICATORS",
+              "dimensions": {
+                "height": 350,
+                "width": 12
+              },
+              "vizType": "chart",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "overviewStateWiseRevenueCollection",
+                  "name": "NATIONAL_DSS_OVERVIEW_REVENUE_COLLECTION_STATES",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+        "row": 4,
+        "name": "NATIONAL_DSS_REVENUE",
+        "vizArray": [
+          {
+            "id": 141,
+            "name": "NATIONAL_DSS_OVERVIEW_KEY_FY_GRIEVANCE_INDICATORS",
+            "dimensions": {
+              "height": 350,
+              "width": 12
+            },
+            "vizType": "chart",
+            "noUnit": false,
+            "isCollapsible": false,
+            "charts": [
+              {
+                "id": "overviewStateWisePublicGrievance",
+                "name": "NATIONAL_DSS_OVERVIEW_GRIEVANCE_STATES",
+                "code": "",
+                "chartType": "table",
+                "filter": "",
+                "headers": []
+              }
+            ]
+          }
+        ]
+      },
+        {
+          "row": 5,
+          "name": "NATIONAL_DSS_SERVICE",
+          "vizArray": [
+            {
+              "id": 151,
               "name": "NATIONAL_DSS_OVERVIEW",
               "dimensions": {
                 "height": 450,
@@ -551,7 +604,7 @@
               ]
             },
             {
-              "id": 132,
+              "id": 152,
               "name": "NATIONAL_DSS_TOTAL_APPLICATION_&_CLOSED_APPLICATION",
               "dimensions": {
                 "height": 450,
@@ -573,11 +626,11 @@
           ]
         },
         {
-          "row": 4,
+          "row": 6,
           "name": "NATIONAL_DSS_SERVICE",
           "vizArray": [
                 {
-              "id": 141,
+              "id": 161,
               "name": "NATIONAL_DSS_TOTAL_APPLICATIONS_SERVICE_WISE",
               "dimensions": {
                 "height": 250,
@@ -597,7 +650,7 @@
               ]
             },
             {
-              "id": 142,
+              "id": 162,
               "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_COMPLETION_RATE",
               "dimensions": {
                 "height": 250,
@@ -618,7 +671,7 @@
               ]
             },
             {
-              "id": 143,
+              "id": 163,
               "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_COMPLETION_RATE",
               "dimensions": {
                 "height": 250,

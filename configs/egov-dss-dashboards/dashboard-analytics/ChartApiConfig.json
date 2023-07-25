@@ -22693,5 +22693,157 @@
     "insight": {
     },
     "_comment": " "
+  },
+  "overviewStateWiseRevenueCollection": {
+    "chartName": "NATIONAL_DSS_OVERVIEW_KEY_FY_REVENUE_INDICATORS",
+    "queries": [
+      {
+        "module": "PT",
+        "dateRefField": "",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "pt-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"state.keyword\":\"Pg\"}}]}},\"aggs\":{\"state \":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"Total_Tax_Collection\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}}}"
+      },
+      {
+        "module": "TL",
+        "dateRefField": "",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "tl-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"state.keyword\":\"Pg\"}}]}},\"aggs\":{\"state \":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"Total_Tax_Collection\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}}}}}}}}"
+      },
+      {
+        "module": "OBPS",
+        "dateRefField": "",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "obps-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"state.keyword\":\"Pg\"}}]}},\"aggs\":{\"state \":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"Total_Non_Tax_Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
+      },
+      {
+        "module": "FIRENOC",
+        "dateRefField": "",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "firenoc-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"state.keyword\":\"Pg\"}}]}},\"aggs\":{\"state \":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"Total_Non_Tax_Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
+      },
+      {
+        "module": "MC",
+        "dateRefField": "",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "mcollect-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"state.keyword\":\"Pg\"}}]}},\"aggs\":{\"state \":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"Total_Non_Tax_Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
+      },
+      {
+        "module": "WS",
+        "dateRefField": "",
+        "requestQueryMap": "{\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
+        "indexName": "ws-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"state.keyword\":\"PG\"}}]}},\"aggs\":{\"state \":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"Total_Non_Tax_Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}"
+      },
+    {
+        "module": "BIRTH",
+        "indexName": "birth-cert-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"state.keyword\":\"PG\"}}]}},\"aggs\":{\"state \":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"Total_Non_Tax_Collection\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}}}",
+        "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": ""
+     },
+     {
+        "module": "DEATH",
+        "indexName": "death-cert-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"state.keyword\":\"PG\"}}]}},\"aggs\":{\"state \":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"Total_Non_Tax_Collection\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}}}",
+        "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": ""
+      }
+    ],
+    "isMdmsEnabled": false,
+    "filterKeys": [
+      {"key": "state", "column": "State"}
+    ],
+    "chartType": "xtable",
+    "valueType": "amount",
+    "drillChart": "",
+    "action": "",
+    "plotLabel": "State",
+    "isPostResponseHandler": true,
+    "postAggregationTheory" : "repsonseToDifferenceOfDates",
+    "aggregationPaths": [
+      "Total_Tax_Collection",
+      "Total_Non_Tax_Collection"
+    ],
+     "computedFields": [
+      {
+        "postAggregationTheory" : "repsonseToDifferenceOfDates",
+        "actionName": "AdditiveComputedField",
+        "fields" : ["Total_Tax_Collection","Total_Non_Tax_Collection"],
+        "newField" : "Total_Collection",
+        "_comments": "fields are field names picked from its aggregation query to use post aggregation newField value with given new field name "
+      }
+    ],
+    "excludedColumns":[],
+    "pathDataTypeMapping": [
+      {
+        "Total_Tax_Collection": "amount"
+      },
+      {
+        "Total_Non_Tax_Collection": "amount"
+      },
+      {
+        "Total_Collection": "amount"
+      }
+    ],
+    "insight": {
+    },
+    "_comment": ""
+  },
+  
+  "overviewStateWisePublicGrievance": {
+    "chartName": "NATIONAL_DSS_OVERVIEW_KEY_FY_GRIEVANCE_INDICATORS",
+    "queries": [
+      {
+        "module": "PGR",
+        "dateRefField": "",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "pgr-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.service.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"state.keyword\":[\"Pg\",\"PG\"]}}]}},\"aggs\":{\"state\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"Total_Complaints\":{\"sum\":{\"field\":\"todaysComplaintsForCategory\"}},\"Pending_Complaints\":{\"sum\":{\"field\":\"todaysOpenComplaintsForDepartment\"}}}}}}}}"
+      }
+    ],
+    "isMdmsEnabled": false,
+    "filterKeys": [
+      {"key": "state", "column": "State"}
+    ],
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "",
+    "action": "",
+    "plotLabel": "State",
+    "isPostResponseHandler": true,
+    "postAggregationTheory" : "repsonseToDifferenceOfDates",
+    "aggregationPaths": [
+      "Total_Complaints",
+      "Pending_Complaints"
+    ],
+     "computedFields": [
+      {
+        "postAggregationTheory" : "repsonseToDifferenceOfDates",
+        "actionName": "PercentageComputedField",
+        "fields" : ["Pending_Complaints","Total_Complaints"],
+        "newField" : "Pending_Percentage",
+        "_comments": "fields are field names picked from its aggregation query to use post aggregation newField value with given new field name "
+      }
+    ],
+    "excludedColumns":[],
+    "pathDataTypeMapping": [
+      {
+        "Total_Complaints": "number"
+      },
+      {
+        "Pending_Complaints": "number"
+      },
+      {
+        "Pending_Percentage": "percentage"
+      }
+    ],
+    "insight": {
+    },
+    "_comment": ""
   }
 }
