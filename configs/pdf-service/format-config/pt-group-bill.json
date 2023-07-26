@@ -57,6 +57,15 @@
         "layout": "noBorders"
       },
       {
+        "text":"INTEGRATED BILL OF WATER & SEWERAGE",
+        "style":"block-head1",
+        "alignment": "center"
+     },
+      {
+        "text":"PROPERTY INFORMATION",
+        "style":"block-head"
+     },
+      {
         "style": "noc-table5",
         "table":{
             "widths":[
@@ -113,6 +122,73 @@
         },
         "layout": {}
       },
+      {
+        "text":"OWNER INFORMATION",
+        "style":"block-head"
+     },
+        {
+        "style": "noc-table5",
+        "table":{
+            "widths":[
+               "25%",
+              "25%",
+              "25%",
+              "28%"
+          ],
+          "body":[
+              [
+                {
+                  "text": "Name",
+                  "border": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ],
+                  "style": "receipt-table-value"
+                },
+                {
+                  "text": "Guardian Name",
+                  "border": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ],
+                  "style": "receipt-table-value"
+                },
+              {
+                "text": "Relationship",
+                "border": [
+                  true,
+                  true,
+                  true,
+                  true
+                ],
+                "style": "receipt-table-value"
+              },
+              {
+                "text": "Mobile Number",
+                "border": [
+                  true,
+                  true,
+                  true,
+                  true
+                ],
+                "style": "receipt-table-value"
+              }
+              ],
+              "{{#var_owners}}[{\"text\":\"{{name2}}\",\"style\":\"receipt-table\"},{\"text\":\"{{fatherOrHusbandName}}\",\"style\":\"receipt-table\"},{\"text\":\"{{relationship}}\",\"style\":\"receipt-table\"},{\"text\":\"{{mobileNumber}}\",\"style\":\"receipt-table\"}]{{/var_owners}}"
+
+
+          ]
+        },
+        "layout": {}
+      },
+      {
+        "text":"WATER AND SEWERAGE BILLS INFORMATION",
+        "style":"block-head"
+     },
       {
         "style": "noc-table5",
         "table":{
@@ -205,65 +281,7 @@
         },
         "layout": {}
       },
-      {
-        "style": "noc-table5",
-        "table":{
-            "widths":[
-               "25%",
-              "25%",
-              "25%",
-              "28%"
-          ],
-          "body":[
-              [
-                {
-                  "text": "Name",
-                  "border": [
-                    true,
-                    true,
-                    true,
-                    true
-                  ],
-                  "style": "receipt-table-value"
-                },
-                {
-                  "text": "Guardian Name",
-                  "border": [
-                    true,
-                    true,
-                    true,
-                    true
-                  ],
-                  "style": "receipt-table-value"
-                },
-              {
-                "text": "Relationship",
-                "border": [
-                  true,
-                  true,
-                  true,
-                  true
-                ],
-                "style": "receipt-table-value"
-              },
-              {
-                "text": "Mobile Number",
-                "border": [
-                  true,
-                  true,
-                  true,
-                  true
-                ],
-                "style": "receipt-table-value"
-              }
-              ],
-              "{{#var_owners}}[{\"text\":\"{{name2}}\",\"style\":\"receipt-table\"},{\"text\":\"{{fatherOrHusbandName2}}\",\"style\":\"receipt-table\"},{\"text\":\"{{relationship}}\",\"style\":\"receipt-table\"},{\"text\":\"{{mobileNumber}}\",\"style\":\"receipt-table\"}]{{/var_owners}}"
-
-
-          ]
-        },
-        "layout": {}
-      },
+    
       {
         "style": "noc-table3",
         "table": {
@@ -459,7 +477,7 @@
         "color": "#484848",
         "margin": [
           -25,
-          5,
+          10,
           -8,
           4
         ]
@@ -480,11 +498,28 @@
         "fontSize": 10,
         "fontWeight": 400,
         "margin": [
-          8,
           1,
+          5,
           0,
-          0
+          5
         ]
+      },
+      "block-head": {
+        "fontSize": 10,
+        "bold": true,
+        "letterSpacing": 0.74,
+        "margin": [
+          -25,
+          15,
+          -8,
+          3
+        ]
+      },
+      "block-head1": {
+        "fontSize": 12,
+        "bold": true,
+        "fontWeight": 600
+       
       },
       "receipt-table-value2": {
         "color": "#000000",
@@ -492,9 +527,9 @@
         "fontSize": 11,
         "fontWeight": 500,
         "margin": [
-          3,
+          10,
           1,
-          0,
+          5,
           0
         ]
       },
@@ -502,12 +537,12 @@
         "color": "#484848",
         "bold": true,
         "fontSize": 10,
-        "fontWeight": 400,
+        "fontWeight": 500,
         "margin": [
-          8,
           1,
+          7,
           0,
-          0
+          7
         ]
       },
       "receipt-table2": {
