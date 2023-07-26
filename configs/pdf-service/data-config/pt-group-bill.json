@@ -659,7 +659,9 @@
         },
         {
           "variable": "var_owners",                        
-          "value":"$.Bill[0].owners.*",
+           "value":{
+                  "path":"$.Bill[0].owners.*
+                },
            "type":"array",
            "format":{                            
               "type":"string",
@@ -758,7 +760,7 @@
               },
               {
 
-                "path": "http://localhost:8085/billing-service/demand/_search",
+                "path": "http://billing-service.egov:8080/billing-service/demand/_search",
                 "queryParam": "tenantId=$.Bill[1].tenantId,consumerCode=$.Bill[1].consumerCode,businessService=WS",
                 "apiRequest": null,
                 "responseMapping": [
