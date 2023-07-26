@@ -445,6 +445,19 @@
                 }
               },
               {
+                "variable": "propertyUniqueID",
+                "value": {
+                  "path": "$.Bill[0].propertyUniqueId"
+                }
+              },
+              {
+                "variable": "propertyAddress",
+                "value": {
+                  "path": "$.Bill[0].propertyAddress"
+                }
+              },
+
+              {
                 "variable": "city",
                 "value": {
                   "path": "$.Bill[0].tenantId"
@@ -643,7 +656,33 @@
               }
             ]
           }
-        }
+        },
+        {
+          "variable": "var_owners",                        
+          "value":"$.Bill[0].owners.*",
+           "type":"array",
+           "format":{                            
+              "type":"string",
+              "scema":[
+                 {
+                    "variable":"name2",
+                    "value":"name"
+                 },
+                 {
+                    "variable":"fatherOrHusbandName2",
+                    "value":"fatherOrHusbandName"
+                 },
+                 {
+                  "variable":"mobileNumber",
+                  "value":"mobileNumber"
+               },
+               {
+                "variable":"relationship",
+                "value":"relationship"
+             }
+                ]
+          } 
+       }
             ]
           },
          
@@ -718,7 +757,8 @@
                 ]
               },
               {
-                "path": "http://billing-service.egov:8080/billing-service/demand/_search",
+
+                "path": "http://localhost:8085/billing-service/demand/_search",
                 "queryParam": "tenantId=$.Bill[1].tenantId,consumerCode=$.Bill[1].consumerCode,businessService=WS",
                 "apiRequest": null,
                 "responseMapping": [
