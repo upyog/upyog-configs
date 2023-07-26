@@ -123,7 +123,7 @@
               "23%",
               "11%",
               "12%",
-              "9%"
+              "10%"
           ],
           "body":[
               [
@@ -138,7 +138,7 @@
                   "style": "receipt-table-value"
                 },
                 {
-                  "text": "Consumer Number",
+                  "text": "Consumer No.",
                   "border": [
                     true,
                     true,
@@ -168,7 +168,7 @@
                 "style": "receipt-table-value"
               },
               {
-                "text": "Bill Issue Date",
+                "text": "Bill Date",
                 "border": [
                   false,
                   true,
@@ -199,6 +199,65 @@
               }
               ],
               "{{#var_bills}}[{\"text\":\"{{businessService}}\",\"style\":\"receipt-table\"},{\"text\":\"{{consumerID}}\",\"style\":\"receipt-table\"},{\"text\":\"{{billNo}}\",\"style\":\"receipt-table\"},{\"text\":\"{{fromPeriod}}-{{toPeriod}}\",\"style\":\"receipt-table\"},{\"text\":\"{{billIssueDate}}\",\"style\":\"receipt-table\"},{\"text\":\"{{billDueDate}}\",\"style\":\"receipt-table\"},{\"text\":\"{{total}}\",\"style\":\"receipt-table\"}]{{/var_bills}}"
+
+
+          ]
+        },
+        "layout": {}
+      },
+      {
+        "style": "noc-table5",
+        "table":{
+            "widths":[
+               "25%",
+              "25%",
+              "25%",
+              "28%"
+          ],
+          "body":[
+              [
+                {
+                  "text": "Name",
+                  "border": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ],
+                  "style": "receipt-table-value"
+                },
+                {
+                  "text": "Guardian Name",
+                  "border": [
+                    true,
+                    true,
+                    true,
+                    true
+                  ],
+                  "style": "receipt-table-value"
+                },
+              {
+                "text": "Relationship",
+                "border": [
+                  true,
+                  true,
+                  true,
+                  true
+                ],
+                "style": "receipt-table-value"
+              },
+              {
+                "text": "Mobile Number",
+                "border": [
+                  true,
+                  true,
+                  true,
+                  true
+                ],
+                "style": "receipt-table-value"
+              }
+              ],
+              "{{#var_owners}}[{\"text\":\"{{name2}}\",\"style\":\"receipt-table\"},{\"text\":\"{{fatherOrHusbandName2}}\",\"style\":\"receipt-table\"},{\"text\":\"{{relationship}}\",\"style\":\"receipt-table\"},{\"text\":\"{{mobileNumber}}\",\"style\":\"receipt-table\"}]{{/var_owners}}"
 
 
           ]
@@ -419,7 +478,7 @@
         "color": "#000000",
         "bold": true,
         "fontSize": 10,
-        "fontWeight": 500,
+        "fontWeight": 400,
         "margin": [
           8,
           1,
