@@ -659,10 +659,9 @@
         },
         {
           "variable": "var_owners",                        
-          "value":
-          {
-            "path":"$.Bill[0].owners.*"
-          },
+           "value":{
+                  "path":"$.Bill[0].owners.*"
+                },
            "type":"array",
            "format":{                            
               "type":"string",
@@ -672,7 +671,7 @@
                     "value":"name"
                  },
                  {
-                    "variable":"fatherOrHusbandName",
+                    "variable":"fatherOrHusbandName2",
                     "value":"fatherOrHusbandName"
                  },
                  {
@@ -692,7 +691,7 @@
           {
             "externalAPI": [
               {
-                "path": "http://localhost:8086/egov-mdms-service/v1/_get",
+                "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
                 "queryParam": "moduleName=tenant&masterName=tenants&tenantId=pg&filter=%5B?(@.code=='{$.Bill[0].tenantId}')%5D",
                 "apiRequest": null,
                 "responseMapping": [
@@ -725,69 +724,6 @@
                       "prefix": "TENANT_TENANTS",
                       "module": "rainmaker-common"
                     }
-                  }
-                ]
-              },
-              {
-                "path": "http://localhost:8084/billing-service/demand/_search",
-                "queryParam": "tenantId=$.Bill[0].tenantId,consumerCode=$.Bill[0].consumerCode,businessService=SW",
-                "apiRequest": null,
-                "responseMapping": [
-                  {
-                    "variable": "sw_advanceAmount",
-                    "value": "$.Demands[(@.length-1)].demandDetails[?(@.taxHeadMasterCode == 'SW_ADVANCE_CARRYFORWARD')].taxAmount"
-                  },
-                  {
-                    "variable": "sw_roundoff",
-                    "value": "$.Demands[(@.length-1)].demandDetails[?(@.taxHeadMasterCode == 'SW_Round_Off')].taxAmount"
-                  },
-                  {
-                    "variable": "sw_charge",
-                    "value": "$.Demands[(@.length-1)].demandDetails[?(@.taxHeadMasterCode == 'SW_CHARGE')].taxAmount"
-                  },
-                  {
-                    "variable": "sw_water_cess",
-                    "value": "$.Demands[(@.length-1)].demandDetails[?(@.taxHeadMasterCode == 'SW_WATER_CESS')].taxAmount"
-                  },
-                  {
-                    "variable": "sw_time_interest",
-                    "value": "$.Demands[(@.length-1)].demandDetails[?(@.taxHeadMasterCode == 'SW_TIME_INTEREST')].taxAmount"
-                  },
-                  {
-                    "variable": "sw_time_penalty",
-                    "value": "$.Demands[(@.length-1)].demandDetails[?(@.taxHeadMasterCode == 'SW_TIME_PENALTY')].taxAmount"
-                  }
-                ]
-              },
-              {
-
-                "path": "http://localhost:8084/billing-service/demand/_search",
-                "queryParam": "tenantId=$.Bill[1].tenantId,consumerCode=$.Bill[1].consumerCode,businessService=WS",
-                "apiRequest": null,
-                "responseMapping": [
-                  {
-                    "variable": "ws_advanceAmount",
-                    "value": "$.Demands[(@.length-1)].demandDetails[?(@.taxHeadMasterCode == 'WS_ADVANCE_CARRYFORWARD')].taxAmount"
-                  },
-                  {
-                    "variable": "ws_roundoff",
-                    "value": "$.Demands[(@.length-1)].demandDetails[?(@.taxHeadMasterCode == 'WS_Round_Off')].taxAmount"
-                  },
-                  {
-                    "variable": "ws_charge",
-                    "value": "$.Demands[(@.length-1)].demandDetails[?(@.taxHeadMasterCode == 'WS_CHARGE')].taxAmount"
-                  },
-                  {
-                    "variable": "ws_water_cess",
-                    "value": "$.Demands[(@.length-1)].demandDetails[?(@.taxHeadMasterCode == 'WS_WATER_CESS')].taxAmount"
-                  },
-                  {
-                    "variable": "ws_time_interest",
-                    "value": "$.Demands[(@.length-1)].demandDetails[?(@.taxHeadMasterCode == 'WS_TIME_INTEREST')].taxAmount"
-                  },
-                  {
-                    "variable": "ws_time_penalty",
-                    "value": "$.Demands[(@.length-1)].demandDetails[?(@.taxHeadMasterCode == 'WS_TIME_PENALTY')].taxAmount"
                   }
                 ]
               }
