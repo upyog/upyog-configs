@@ -8252,7 +8252,7 @@
       {
         "module": "PT",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
+        "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"PT\"}}]}},\"aggs\":{\"Target Collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
       }
@@ -8715,7 +8715,6 @@
     },
     "_comment": " "
   },
-  
   	"cumulativeCollectionv3": {
     "chartName": "NATIONAL_DSS_TOTAL_CUMULATIVE_COLLECTION",
     "queries": [
@@ -20824,9 +20823,9 @@
 	   {
         "module": "PT",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
+        "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"PT\"]}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"PT\"]}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
       }
     ],
 	"chartType": "perform",
@@ -20859,9 +20858,9 @@
 	   {
         "module": "TL",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
+        "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"TL\"]}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"TL\"]}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
       }
     ],
 	"chartType": "perform",
@@ -20893,9 +20892,9 @@
 	   {
         "module": "WS",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
+        "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"WS\"]}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"WS\"]}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
       } 
     ],
 	"chartType": "perform",
@@ -20927,9 +20926,9 @@
 	   {
         "module": "FIRENOC",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
+        "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"FIRENOC\"]}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"FIRENOC\"]}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
       }
     ],
 	"chartType": "perform",
@@ -20961,9 +20960,9 @@
 	   {
         "module": "OBPS",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
+        "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"OBPS\"]}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"OBPS\"]}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
       } 
     ],
 	"chartType": "perform",
@@ -20996,9 +20995,9 @@
 	   {
         "module": "PT",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
+        "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"PT\"]}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"PT\"]}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
       }  
     ],
 	"chartType": "perform",
@@ -21030,9 +21029,9 @@
 	   {
         "module": "TL",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
+        "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"TL\"]}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"TL\"]}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
       }
     ],
 	"chartType": "perform",
@@ -21064,9 +21063,9 @@
 	   {
         "module": "OBPS",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
+        "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"OBPS\"]}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"OBPS\"]}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
       }     
     ],
 	"chartType": "perform",
@@ -21098,9 +21097,9 @@
 	   {
         "module": "FIRENOC",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
+        "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"FIRENOC\"]}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"FIRENOC\"]}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
       } 
     ],
 	"chartType": "perform",
@@ -21132,9 +21131,9 @@
 	   {
         "module": "WS",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
+        "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"WS\"]}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"WS\"]}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
       }
     ],
 	"chartType": "perform",
@@ -21166,9 +21165,9 @@
 	   {
         "module": "PT",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
+        "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"PT\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"PT\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
       }   
     ],
 	"chartType": "perform",
@@ -21200,9 +21199,9 @@
 	   {
         "module": "TL",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
+        "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"TL\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"TL\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
       }
     ],
 	"chartType": "perform",
@@ -21234,9 +21233,9 @@
 	   {
         "module": "OBPS",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
+        "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"OBPS\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"OBPS\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
       }  
     ],
 	"chartType": "perform",
@@ -21268,9 +21267,9 @@
 	   {
         "module": "FIRENOC",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
+        "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"FIRENOC\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"FIRENOC\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
       }   
     ],
 	"chartType": "perform",
@@ -21302,9 +21301,9 @@
 	   {
         "module": "WS",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
+        "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"WS\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"WS\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
       }
     ],
 	"chartType": "perform",
@@ -21337,9 +21336,9 @@
 	   {
         "module": "PT",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
+        "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"PT\"]}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"PT\"]}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
       }
     ],
 	"chartType": "perform",
@@ -21371,9 +21370,9 @@
 	   {
         "module": "TL",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
+        "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"TL\"]}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"TL\"]}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
       }
     ],
 	"chartType": "perform",
@@ -21405,10 +21404,10 @@
       },
 	   {
         "module": "OBPS",
-		"dateRefField": "",
+		"dateRefField": "financialYear.keyword",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"OBPS\"]}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"OBPS\"]}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
       }
     ],
 	"chartType": "perform",
@@ -21440,9 +21439,9 @@
 	   {
         "module": "FIRENOC",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
+        "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"FIRENOC\"]}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"FIRENOC\"]}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
       }
     ],
 	"chartType": "perform",
@@ -21474,9 +21473,9 @@
 	   {
         "module": "WS",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
+        "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"WS\"]}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"WS\"]}}]}},\"aggs\":{\"Total Population\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"statePopulation\"}}}}}}}}"
       }  
     ],
 	"chartType": "perform",
@@ -21508,9 +21507,9 @@
 	   {
         "module": "PT",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
+        "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"PT\"]}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"PT\"]}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
       }
     ],
 	"chartType": "perform",
@@ -21542,9 +21541,9 @@
 	   {
         "module": "TL",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
+        "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"TL\"]}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"TL\"]}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
       } 
     ],
 	"chartType": "perform",
@@ -21576,9 +21575,9 @@
 	   {
         "module": "OBPS",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
+        "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"OBPS\"]}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"OBPS\"]}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
       }   
     ],
 	"chartType": "perform",
@@ -21610,9 +21609,9 @@
 	   {
         "module": "FIRENOC",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
+        "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"FIRENOC\"]}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"FIRENOC\"]}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
       }
     ],
 	"chartType": "perform",
@@ -21644,9 +21643,9 @@
 	   {
         "module": "WS",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
+        "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"WS\"]}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"WS\"]}}]}},\"aggs\":{\"Average Household\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}}}"
       } 
     ],
 	"chartType": "perform",
@@ -21679,9 +21678,9 @@
 	   {
         "module": "PT",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
+        "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"PT\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"PT\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
       } 
     ],
 	"chartType": "perform",
@@ -21783,9 +21782,9 @@
 	   {
         "module": "TL",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
+        "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"TL\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"TL\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
       }   
     ],
 	"chartType": "perform",
@@ -21886,9 +21885,9 @@
 	   {
         "module": "OBPS",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
+        "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"OBPS\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"OBPS\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
       } 
     ],
 	"chartType": "perform",
@@ -21988,9 +21987,9 @@
 	   {
         "module": "FIRENOC",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
+        "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"FIRENOC\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"FIRENOC\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
       }
     ],
 	"chartType": "perform",
@@ -22090,9 +22089,9 @@
 	   {
         "module": "WS",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "",
+        "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"financialYear.keyword\":\"2023-24\"}},{\"terms\":{\"module.keyword\":[\"WS\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"WS\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
       }   
     ],
 	"chartType": "perform",
@@ -22695,7 +22694,7 @@
     },
     "_comment": " "
   },
-   "OverviewbottomPerformingStates": {
+  "OverviewbottomPerformingStates": {
     "chartName": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE",
     "queries": [
 	{
