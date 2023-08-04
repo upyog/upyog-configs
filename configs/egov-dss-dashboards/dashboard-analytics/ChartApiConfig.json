@@ -8852,7 +8852,7 @@
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"state \":{\"terms\":{\"field\":\"state.keyword\",\"size\":200},\"aggs\":{\"PT_Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}},\"PT_Transactions\":{\"sum\":{\"field\":\"transactionsForUsageCategory\"}},\"PT_Assessed_Properties\":{\"sum\":{\"field\":\"assessedPropertiesForUsageCategory\"}}}}}}}}"
       },
       {
-        "module": "MASTER",
+        "module": "PT",
        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "master-national-dashboard",
@@ -18954,6 +18954,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "pt-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total_Tax_Collection\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}"
+		
       }
 	  
 	  
@@ -18964,7 +18965,7 @@
     "documentType": "_doc",
     "action": "",
     "isRoundOff": true,
-    "aggregationPaths":"Total_Tax_Collection",
+    "aggregationPaths":["Total_Tax_Collection"],
     "_comment": "Total tax collection"
     
   },
