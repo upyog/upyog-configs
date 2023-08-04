@@ -19104,6 +19104,28 @@
     "_comment": "Total non tax collection"
     
   },
+  
+   "totalTaxCollection": {
+    "chartName": "DSS_TOTAL_TAX_COLLECTION",
+    "queries": [
+      {
+   	  "module": "PT",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "pt-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total_Tax_Collection\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "isRoundOff": true,
+    "aggregationPaths":"Total_Tax_Collection",
+    "_comment": "Total tax collection"
+    
+  },
   "nssPtSlaAchieved": {
     "chartName": "NATIONAL_DSS_PT_SLA_ACHIEVED",
     "queries": [
