@@ -11526,7 +11526,7 @@
         {
           "module": "WS",
           "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-          "dateRefField": "date",
+          "dateRefField": "financialYear.keyword",
           "indexName": "master-national-dashboard",
           "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"WS\"}},\"aggs\":{\"Target Collection\":{\"terms\":{\"field\":\"state.keyword\",\"size\":\"200\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}}}"
         }
@@ -12675,7 +12675,7 @@
       "queries": [
         {
           "module": "COMMON",
-          "dateRefField": "",
+          "dateRefField": "date",
           "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
           "indexName": "mcollect-national-dashboard",
           "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Receipts\":{\"sum\":{\"field\":\"numberOfReceiptsForPaymentMode\"}}}}}}"
@@ -15874,7 +15874,7 @@
     "queries": [
       {
         "module": "PGR",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "pgr-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.service.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Todays Complaints\":{\"sum\":{\"field\":\"todaysComplaintsForCategory\"}}}}}}"
@@ -15938,7 +15938,7 @@
     "queries": [
       {
         "module": "PGR",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "pgr-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"ulb.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"State\":{\"terms\":{\"field\":\"module.keyword\"},\"aggs\":{\"Test\":{\"terms\":{\"field\":\"module.keyword\"},\"aggs\":{\"Resolved_Complaints\":{\"sum\":{\"field\":\"todaysResolvedComplaintsForDepartment\"}},\"Total_Complaints\":{\"sum\":{\"field\":\"todaysComplaintsForCategory\"}}}},\"Resolved Complaints\":{\"sum_bucket\":{\"buckets_path\":\"Test.Resolved_Complaints\"}},\"Total Complaints\":{\"sum_bucket\":{\"buckets_path\":\"Test.Total_Complaints\"}},\"slaAchived\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total Complaints\",\"com\":\"Resolved Complaints\"},\"script\":\"params.com \/ params.att * 100\"}}}}}}}}"
