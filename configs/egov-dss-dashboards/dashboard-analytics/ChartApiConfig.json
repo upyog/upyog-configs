@@ -14989,12 +14989,55 @@
     "chartName": "NATIONAL_DSS_TARGET_COLLECTION",
     "queries": [
       {
-        "module": "MASTER",
+        "module": "PT",
         "requestQueryMap": "{\"module\" : \"module.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "date",
+        "dateRefField": "financialYear",
+        "indexName": "master-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Target Collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
+      },
+	  {
+        "module": "TL",
+        "requestQueryMap": "{\"module\" : \"module.keyword\", \"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": "financialYear",
+        "indexName": "master-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Target Collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
+      },
+	   {
+        "module": "FIRENOC",
+        "requestQueryMap": "{\"module\" : \"module.keyword\", \"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": "financialYear",
+        "indexName": "master-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Target Collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
+      },
+	   {
+        "module": "PGR",
+        "requestQueryMap": "{\"module\" : \"module.keyword\", \"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": "financialYear",
+        "indexName": "master-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Target Collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
+      },
+	   {
+        "module": "OBPS",
+        "requestQueryMap": "{\"module\" : \"module.keyword\", \"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": "financialYear",
+        "indexName": "master-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Target Collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
+      },
+	   {
+        "module": "FSM",
+        "requestQueryMap": "{\"module\" : \"module.keyword\", \"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": "financialYear",
+        "indexName": "master-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Target Collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
+      },
+	   {
+        "module": "WS",
+        "requestQueryMap": "{\"module\" : \"module.keyword\", \"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": "financialYear",
         "indexName": "master-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Target Collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
       }
+	  
     ],
     "chartType": "metric",
     "valueType": "amount",
@@ -15005,10 +15048,10 @@
       "Target Collection"
     ],
     "isDayUnit": true,
-    "postAggregationTheory" : "repsonseToDifferenceOfDates",
+    "postAggregationTheory" : "",
     "insight": {
       "chartResponseMap" : "targetCollectionvOverview",
-      "action" : "differenceOfNumbers",
+      "action" : "",
       "upwardIndicator" : "positive",
       "downwardIndicator" : "negative",
       "textMessage" : "$indicator$value% than last $insightInterval",
@@ -18900,6 +18943,31 @@
     },
     "_comment": "Average tax collected per property"
   },
+  
+  
+   "totalTaxCollection": {
+    "chartName": "DSS_TOTAL_TAX_COLLECTION",
+    "queries": [
+      {
+   	  "module": "PT",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "pt-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total_Tax_Collection\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}"
+      }
+	  
+	  
+    ],
+    "chartType": "metric",
+    "valueType": "amount",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "isRoundOff": true,
+    "aggregationPaths":"Total_Tax_Collection",
+    "_comment": "Total tax collection"
+    
+  },
   "totalNonTaxCollection": {
     "chartName": "DSS_TOTAL_NON_TAX_COLLECTION",
     "queries": [
@@ -18925,7 +18993,7 @@
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total_Non_Tax_Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
       {
-        "module": "W&S",
+        "module": "WS",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
         "indexName": "ws-national-dashboard",
@@ -18997,7 +19065,7 @@
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total_Non_Tax_Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
       {
-        "module": "W&S",
+        "module": "WS",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
         "indexName": "ws-national-dashboard",
@@ -19060,7 +19128,7 @@
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"ND_Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
       {
-        "module": "W&S",
+        "module": "WS",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
         "indexName": "ws-national-dashboard",
@@ -19105,27 +19173,6 @@
     
   },
   
-   "totalTaxCollection": {
-    "chartName": "DSS_TOTAL_TAX_COLLECTION",
-    "queries": [
-      {
-   	  "module": "PT",
-        "dateRefField": "date",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "pt-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total_Tax_Collection\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}"
-      }
-    ],
-    "chartType": "metric",
-    "valueType": "",
-    "drillChart": "none",
-    "documentType": "_doc",
-    "action": "",
-    "isRoundOff": true,
-    "aggregationPaths":"Total_Tax_Collection",
-    "_comment": "Total tax collection"
-    
-  },
   "nssPtSlaAchieved": {
     "chartName": "NATIONAL_DSS_PT_SLA_ACHIEVED",
     "queries": [
