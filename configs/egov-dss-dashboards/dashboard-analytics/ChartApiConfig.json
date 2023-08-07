@@ -8675,19 +8675,20 @@
   "targetAchievedv3": {
     "chartName": "NATIONAL_DSS_TARGET_ACHIEVED",
     "queries": [
-      {
-        "module": "PT",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "financialYear.keyword",
-        "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"PT\"}}]}},\"aggs\":{\"Actual collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
-      },
+	
       {
         "module": "PT",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "pt-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}"
+      },
+      {
+        "module": "PT",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": "financialYear.keyword",
+        "indexName": "master-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"PT\"}}]}},\"aggs\":{\"Actual collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -8695,7 +8696,7 @@
     "drillChart": "none",
     "documentType": "_doc",
     "action": "percentage",
-    "isRoundOff": true,
+    "isRoundOff": false,
     "aggregationPaths": [
       "Total Collection",
       "Actual collection"
@@ -14934,45 +14935,45 @@
     "queries": [
       {
 		"module":"PT",
-        "requestQueryMap": "{\"module\" : \"module.keyword\",\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Actual collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"PT\"}}]}},\"aggs\":{\"Target Collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
       },
 	  {
 		"module":"TL",
-        "requestQueryMap": "{\"module\" : \"module.keyword\",\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Actual collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"TL\"}}]}},\"aggs\":{\"Target Collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
       },
 	  {
 		"module":"FIRENOC",
-        "requestQueryMap": "{\"module\" : \"module.keyword\",\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Actual collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"FIRENOC\"}}]}},\"aggs\":{\"Target Collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
       },
 	  {
 		"module":"MCOLLECT",
-        "requestQueryMap": "{\"module\" : \"module.keyword\",\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Actual collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"MCOLLECT\"}}]}},\"aggs\":{\"Target Collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
       },
 	  {
 		"module":"WS",
-        "requestQueryMap": "{\"module\" : \"module.keyword\",\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Actual collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"WS\"}}]}},\"aggs\":{\"Target Collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
       },
 	  {
 		"module":"OBPS",
-        "requestQueryMap": "{\"module\" : \"module.keyword\",\"state\" :\"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "requestQueryMap": "{\"state\" :\"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Actual collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"OBPS\"}}]}},\"aggs\":{\"Target Collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -14983,8 +14984,7 @@
     "aggregationPaths": [
       "Actual collection"
     ],
-    "isDayUnit": true,
-    "postAggregationTheory": "",
+    
     "insight": {
       "chartResponseMap": "targetCollectionvOverview",
       "action": "differenceOfNumbers",
@@ -15107,7 +15107,7 @@
     },
     "_comment": " "
   },
-  "cumulativeCollectionOverview": {
+ "cumulativeCollectionOverview": {
     "chartName": "NATIONAL_DSS_TOTAL_CUMULATIVE_COLLECTION",
     "queries": [
       {
@@ -15115,54 +15115,54 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "pt-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForUsageCategory\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForUsageCategory\"}}]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}},\"CollectionsTax\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}},\"CollectionsNonTax\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"cardinality\":{\"field\":\"module.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForUsageCategory\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForUsageCategory\"}}]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}}}"
       },
       {
         "module": "TL",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "tl-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForTradeType\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForTradeType\"}}]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"interval\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}}}},\"CollectionsNonTax\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"interval\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}}}},\"CollectionsTax\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"interval\"},\"aggs\":{\"Sum\":{\"cardinality\":{\"field\":\"module.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForTradeType\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForTradeType\"}}]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}}}}}}}}"
       },
       {
         "module": "WS",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
         "indexName": "ws-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForConnectionType\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForConnectionType\"}}]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Water\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForConnectionType\"}}}}}},\"CollectionsNonTax\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Water\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForConnectionType\"}}}}}},\"CollectionsTax\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"interval\"},\"aggs\":{\"Sum\":{\"cardinality\":{\"field\":\"module.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForConnectionType\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForConnectionType\"}}]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Water\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForConnectionType\"}}}}}}}}}}"
       },
       {
         "module": "OBPS",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "obps-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForPaymentMode\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForPaymentMode\"}}]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}},\"CollectionsNonTax\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}},\"CollectionsTax\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"interval\"},\"aggs\":{\"Sum\":{\"cardinality\":{\"field\":\"module.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForPaymentMode\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForPaymentMode\"}}]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
       },
       {
         "module": "FIRENOC",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "firenoc-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForPaymentMode\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForPaymentMode\"}}]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}},\"CollectionsNonTax\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}},\"CollectionsTax\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"interval\"},\"aggs\":{\"Sum\":{\"cardinality\":{\"field\":\"module.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForPaymentMode\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForPaymentMode\"}}]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
       },
       {
         "module": "MCOLLECT",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "mcollect-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForPaymentMode\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForPaymentMode\"}}]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}},\"CollectionsNonTax\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}},\"CollectionsTax\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"interval\"},\"aggs\":{\"Sum\":{\"cardinality\":{\"field\":\"module.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForPaymentMode\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForPaymentMode\"}}]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
       },
       {
         "module": "BIRTH",
         "indexName": "birth-cert-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForChannel\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForChannel\"}}]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}},\"CollectionsNonTax\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}},\"CollectionsTax\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"interval\"},\"aggs\":{\"Sum\":{\"cardinality\":{\"field\":\"module.keyword\"}}}}}}}}",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForChannel\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForChannel\"}}]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}}}",
         "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date"
       },
       {
         "module": "DEATH",
         "indexName": "death-cert-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForChannel\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForChannel\"}}]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}},\"CollectionsNonTax\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}},\"CollectionsTax\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"interval\"},\"aggs\":{\"Sum\":{\"cardinality\":{\"field\":\"module.keyword\"}}}}}}}}",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForChannel\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForChannel\"}}]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}}}",
         "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date"
       }
@@ -15173,13 +15173,12 @@
     "drillChart": "none",
     "documentType": "_doc",
     "aggregationPaths": [
-      "Collections",
-      "CollectionsTax",
-      "CollectionsNonTax"
+      "Collections"
     ],
     "isCumulative": true,
     "interval": "month",
-    "insight": {},
+    "insight": {
+    },
     "_comment": " "
   },
   "topPerformingStatesOverview": {
@@ -19567,7 +19566,7 @@
       {
         "module": "WS",
         "dateRefField": "date",
-        "requestQueryMap": "{\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "ws-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
       },
