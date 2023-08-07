@@ -1068,31 +1068,7 @@
               "isCollapsible": false,
               "label": "NATIONAL_DSS_OVERVIEW",
               "charts": [
-                {
-                  "id": "todaysCollectionv3",
-                  "name": "NATIONAL_DSS_TOTAL_COLLECTION_TODAY",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": {"title": "TODAY"},
-                  "headers": []
-                },
-				{
-                  "id": "totalCollectionv3",
-                  "name": "NATIONAL_PT_DSS_TOTAL_COLLECTION",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-				{
-                  "id": "todaysLastYearCollectionv3",
-                  "name": "NATIONAL_DSS_TODAYS_LAST_YEAR_COLLECTION",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": {"title": "TODAY"},
-                  "headers": []
-                },                
-                {
+			  {
                   "id": "targetCollectionv3",
                   "name": "NATIONAL_PT_DSS_TARGET_COLLECTION",
                   "code": "",
@@ -1108,6 +1084,31 @@
                   "filter": "",
                   "headers": []
                 },
+                
+				{
+                  "id": "totalCollectionv3",
+                  "name": "NATIONAL_PT_DSS_TOTAL_COLLECTION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+				{
+                  "id": "todaysLastYearCollectionv3",
+                  "name": "NATIONAL_DSS_TODAYS_LAST_YEAR_COLLECTION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": {"title": "TODAY"},
+                  "headers": []
+                },     
+{
+                  "id": "todaysCollectionv3",
+                  "name": "NATIONAL_DSS_TOTAL_COLLECTION_TODAY",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": {"title": "TODAY"},
+                  "headers": []
+                },				
                 {
                   "id": "avgTaxCollectedPerProperty",
                   "name": "NATIONAL_PT_DSS_AVG_TAX_COLLECTION",
@@ -8936,14 +8937,23 @@
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
-                {
-                  "id": "tradeLicenseTodaysCollectionv2",
-                  "name": "DSS_TODAYS_COLLECTION",
+			  {
+                  "id": "tlTargetCollection",
+                  "name": "DSS_TARGET_COLLECTION",
                   "code": "",
                   "chartType": "metric",
-                  "filter": {"title": "TODAY"},
+                  "filter": "",
                   "headers": []
                 },
+                {
+                  "id": "tlTargetAchieved",
+                  "name": "DSS_TARGET_ACHIEVED",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                
 				{
                   "id": "tradeLicenseTotalCollectionv2",
                   "name": "DSS_TL_TOTAL_COLLECTION",
@@ -8961,19 +8971,11 @@
                   "headers": []
                 },                
                 {
-                  "id": "tlTargetCollection",
-                  "name": "DSS_TARGET_COLLECTION",
+                  "id": "tradeLicenseTodaysCollectionv2",
+                  "name": "DSS_TODAYS_COLLECTION",
                   "code": "",
                   "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "tlTargetAchieved",
-                  "name": "DSS_TARGET_ACHIEVED",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
+                  "filter": {"title": "TODAY"},
                   "headers": []
                 },
 				{
