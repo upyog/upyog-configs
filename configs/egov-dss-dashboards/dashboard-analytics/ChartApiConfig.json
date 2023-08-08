@@ -15095,16 +15095,6 @@
       "Total Collection",
       "Actual collection"
     ],
-    "insight": {
-      "chartResponseMap": "targetAchievedOverview",
-      "action": "differenceOfNumbers",
-      "upwardIndicator": "positive",
-      "downwardIndicator": "negative",
-      "textMessage": "$indicator$value% than last $insightInterval",
-      "colorCode": "#228B22",
-      "insightInterval": "year",
-      "isRoundOff": true
-    },
     "_comment": " "
   },
  "cumulativeCollectionOverview": {
@@ -15395,14 +15385,14 @@
     "queries": [
       {
         "module": "TL",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "tl-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"state\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"intermediateAggrULB\":{\"terms\":{\"field\":\"ulb.keyword\"},\"aggs\":{\"intermediateAggrWard\":{\"terms\":{\"field\":\"ward.keyword\"},\"aggs\":{\"days\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"applications\":{\"avg\":{\"field\":\"todaysApplications\"}}}},\"wardapplications\":{\"sum_bucket\":{\"buckets_path\":\"days.applications\"}}}},\"ulbApplications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrWard.wardapplications\"}}}},\"stateApplications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrULB.ulbApplications\"}}}},\"Total Applications\":{\"sum_bucket\":{\"buckets_path\":\"state.stateApplications\"}}}}}}"
       },
       {
         "module": "FIRENOC",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "firenoc-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Applications\":{\"sum\":{\"field\":\"todaysApplicationsForApplicationType\"}}}}}}"
@@ -15412,35 +15402,35 @@
         "indexName": "pt-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"state\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"intermediateAggrULB\":{\"terms\":{\"field\":\"ulb.keyword\"},\"aggs\":{\"intermediateAggrWard\":{\"terms\":{\"field\":\"ward.keyword\"},\"aggs\":{\"days\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"applications\":{\"avg\":{\"field\":\"todaysTotalApplications\"}}}},\"wardapplications\":{\"sum_bucket\":{\"buckets_path\":\"days.applications\"}}}},\"ulbApplications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrWard.wardapplications\"}}}},\"stateApplications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrULB.ulbApplications\"}}}},\"Total Applications\":{\"sum_bucket\":{\"buckets_path\":\"state.stateApplications\"}}}}}}",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": ""
+        "dateRefField": "date"
       },
       {
         "module": "OBPS",
         "indexName": "obps-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"state\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"intermediateAggrULB\":{\"terms\":{\"field\":\"ulb.keyword\"},\"aggs\":{\"intermediateAggrWard\":{\"terms\":{\"field\":\"ward.keyword\"},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"ocSubmitted\":{\"avg\":{\"field\":\"ocSubmitted\"}}}},\"Total OC Submitted\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.ocSubmitted\"}},\"intermediateAggr1\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"applicationsSubmitted\":{\"avg\":{\"field\":\"applicationsSubmitted\"}}}},\"Total Applications Submitted\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr1.applicationsSubmitted\"}},\"ward Total Applications\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total Applications Submitted\",\"com\":\"Total OC Submitted\"},\"script\":\"params.att + params.com\"}}}},\"ulbApplications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrWard.ward Total Applications\"}}}},\"stateApplications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrULB.ulbApplications\"}}}},\"Total Applications\":{\"sum_bucket\":{\"buckets_path\":\"state.stateApplications\"}}}}}}",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": ""
+        "dateRefField": "date"
       },
       {
         "module": "WS",
         "indexName": "ws-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"state\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"intermediateAggrULB\":{\"terms\":{\"field\":\"ulb.keyword\"},\"aggs\":{\"intermediateAggrWard\":{\"terms\":{\"field\":\"ward.keyword\"},\"aggs\":{\"days\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"applications\":{\"avg\":{\"field\":\"todaysTotalApplications\"}}}},\"wardapplications\":{\"sum_bucket\":{\"buckets_path\":\"days.applications\"}}}},\"ulbApplications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrWard.wardapplications\"}}}},\"stateApplications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrULB.ulbApplications\"}}}},\"Total Applications\":{\"sum_bucket\":{\"buckets_path\":\"state.stateApplications\"}}}}}}",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": ""
+        "dateRefField": "date"
       },
       {
         "module": "BIRTH",
         "indexName": "birth-cert-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"state\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"intermediateAggrULB\":{\"terms\":{\"field\":\"ulb.keyword\"},\"aggs\":{\"intermediateAggrWard\":{\"terms\":{\"field\":\"ward.keyword\"},\"aggs\":{\"days\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"applications\":{\"sum\":{\"field\":\"numberOfCertificatesDownloadedTodayForChannel\"}}}},\"wardapplications\":{\"sum_bucket\":{\"buckets_path\":\"days.applications\"}}}},\"ulbApplications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrWard.wardapplications\"}}}},\"stateApplications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrULB.ulbApplications\"}}}},\"Total Applications\":{\"sum_bucket\":{\"buckets_path\":\"state.stateApplications\"}}}}}}",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": ""
+        "dateRefField": "date"
       },
       {
         "module": "DEATH",
         "indexName": "death-cert-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"state\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"intermediateAggrULB\":{\"terms\":{\"field\":\"ulb.keyword\"},\"aggs\":{\"intermediateAggrWard\":{\"terms\":{\"field\":\"ward.keyword\"},\"aggs\":{\"days\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"applications\":{\"sum\":{\"field\":\"numberOfCertificatesDownloadedTodayForChannel\"}}}},\"wardapplications\":{\"sum_bucket\":{\"buckets_path\":\"days.applications\"}}}},\"ulbApplications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrWard.wardapplications\"}}}},\"stateApplications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrULB.ulbApplications\"}}}},\"Total Applications\":{\"sum_bucket\":{\"buckets_path\":\"state.stateApplications\"}}}}}}",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": ""
+        "dateRefField": "date"
       }
     ],
     "chartType": "metric",
@@ -15559,9 +15549,9 @@
       {
         "module": "COMMON",
         "indexName": "common-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"status.keyword\":\"Live\"}}]}},\"aggs\":{\"latest\":{\"terms\":{\"field\":\"date\",\"order\":{\"_term\":\"desc\"},\"size\":1},\"aggs\":{\"totalCitizensCount\":{\"avg\":{\"field\":\"totalCitizensCount\"}}}},\"Citizen Registered\":{\"avg_bucket\":{\"buckets_path\":\"latest.totalCitizensCount\"}}}}}}",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"status.keyword\":\"Live\"}}]}},\"aggs\":{\"stateWiseData\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"latest\":{\"terms\":{\"field\":\"date\",\"order\":{\"_term\":\"desc\"},\"size\":1},\"aggs\":{\"stateModuleWiseData\":{\"terms\":{\"field\":\"serviceModuleCode.keyword\"},\"aggs\":{\"totalCitizensForServiceModuleCount\":{\"sum\":{\"field\":\"totalCitizensCount\"}}}},\"maxCitizens\":{\"max_bucket\":{\"buckets_path\":\"stateModuleWiseData.totalCitizensForServiceModuleCount\"}}}},\"stateCitizensSummary\":{\"max_bucket\":{\"buckets_path\":\"latest.maxCitizens\"}}}},\"TotalCitizens\":{\"sum_bucket\":{\"buckets_path\":\"stateWiseData.stateCitizensSummary\"}}}}}}"
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "date"
+        "dateRefField": ""
       }
     ],
     "chartType": "metric",
@@ -15570,7 +15560,7 @@
     "documentType": "_doc",
     "drillChart": "none",
     "aggregationPaths": [
-      "Citizen Registered"
+      "TotalCitizens"
     ],
     "insight": {
       "chartResponseMap": "citizenRegisteredOverview",
@@ -20617,6 +20607,36 @@
   },
   "PropertyTaxRevenuePerHousehold": {
     "chartName": "DSS_PT_TAX_REVENUE_PER_HOUSEHOLD",
+    "queries": [
+      {
+        "module": "PT",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "pt-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}"
+      },
+      {
+        "module": "COMMON",
+        "dateRefField": "financialYear.keyword",
+        "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
+        "indexName": "master-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Properties\":{\"avg\":{\"field\":\"stateHousehold\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "Amount",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "isRoundOff": false,
+    "action": "division",
+    "aggregationPaths": [
+      "Total Collection",
+      "Total Properties"
+    ],
+    "_comment": " "
+  },
+   "PropertyTaxRevenuePerHouseholdOverview": {
+    "chartName": "DSS_PT_TAX_REVENUE_PER_HOUSEHOLD_OVERVIEW",
     "queries": [
       {
         "module": "PT",
