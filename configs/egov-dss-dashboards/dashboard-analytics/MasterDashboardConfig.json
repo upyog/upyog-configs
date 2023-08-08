@@ -502,9 +502,41 @@
               "isCollapsible": false,
               "label": "",
               "charts": [
+				{
+                  "id": "totalApplicationsOverview",
+                  "name": "NATIONAL_DSS_OVERVIEW_TOTAL_APPLICATION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "closedApplicationOverview",
+                  "name": "NATIONAL_DSS_CLOSED_APPLICATION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+				{
+                  "id": "slaAchievedOverview",
+                  "name": "NATIONAL_DSS_OVERVIEW_SLA_ACHIEVED",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
                 {
                   "id": "nssOverviewPendancy",
                   "name": "NATIONAL_DSS_OVERVIEW_PENDANCY",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+				{
+                  "id": "citizenRegisteredOverview",
+                  "name": "NATIONAL_DSS_CITIZEN_REGISTERED",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -521,38 +553,6 @@
 		            {
                   "id": "nssPtCitizenServiceDeliveryIndex",
                   "name": "NATIONAL_DSS_PT_CITIZEN_SERVICE_DELIVERY_INDEX",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "totalApplicationsOverview",
-                  "name": "NATIONAL_DSS_OVERVIEW_TOTAL_APPLICATION",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "closedApplicationOverview",
-                  "name": "NATIONAL_DSS_CLOSED_APPLICATION",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "slaAchievedOverview",
-                  "name": "NATIONAL_DSS_OVERVIEW_SLA_ACHIEVED",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "citizenRegisteredOverview",
-                  "name": "NATIONAL_DSS_CITIZEN_REGISTERED",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -7220,16 +7220,6 @@
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
-                {
-                  "id": "nssOBPSTodaysCollection",
-                  "name": "NSS_OBPS_TODAYS_COLLECTION",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": {
-                    "title": "TODAY"
-                  },
-                  "headers": []
-                },
 				{
                   "id": "nssOBPSTotalCollection",
                   "name": "NSS_OBPS_TOTAL_COLLECTION",
@@ -7241,6 +7231,16 @@
 				{
                   "id": "obpstodaysLastYearCollectionv3",
                   "name": "NATIONAL_DSS_TODAYS_LAST_YEAR_COLLECTION_OBPS",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": {
+                    "title": "TODAY"
+                  },
+                  "headers": []
+                },
+				{
+                  "id": "nssOBPSTodaysCollection",
+                  "name": "NSS_OBPS_TODAYS_COLLECTION",
                   "code": "",
                   "chartType": "metric",
                   "filter": {
@@ -7671,16 +7671,6 @@
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
-                {
-                  "id": "nssNOCTodaysCollection",
-                  "name": "NSS_NOC_TODAYS_COLLECTION",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": {
-                    "title": "TODAY"
-                  },
-                  "headers": []
-                },
 				{
                   "id": "nssNOCTotalCollection",
                   "name": "NSS_NOC_TOTAL_COLLECTION",
@@ -7692,6 +7682,16 @@
 				{
                   "id": "noctodaysLastYearCollectionv3",
                   "name": "NATIONAL_DSS_TODAYS_LAST_YEAR_COLLECTION_NOC",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": {
+                    "title": "TODAY"
+                  },
+                  "headers": []
+                },
+				{
+                  "id": "nssNOCTodaysCollection",
+                  "name": "NSS_NOC_TODAYS_COLLECTION",
                   "code": "",
                   "chartType": "metric",
                   "filter": {
@@ -8131,12 +8131,20 @@
               "isCollapsible": false,
               "label": "NSS_OVERVIEW",
               "charts": [
-                {
-                  "id": "nssWsTodaysCollection",
-                  "name": "NSS_WS_TODAYS_COLLECTION",
+				{
+                  "id": "nssWsTargetCollection",
+                  "name": "NSS_WS_TARGET_COLLECTION",
                   "code": "",
                   "chartType": "metric",
-                  "filter": {"title": "TODAY"},
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "nssWsTargetAchieved",
+                  "name": "NSS_WS_TARGET_ACHIEVED",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
                   "headers": []
                 },
 				{
@@ -8155,20 +8163,12 @@
                   "filter": {"title": "TODAY"},
                   "headers": []
                 },
-                {
-                  "id": "nssWsTargetCollection",
-                  "name": "NSS_WS_TARGET_COLLECTION",
+				{
+                  "id": "nssWsTodaysCollection",
+                  "name": "NSS_WS_TODAYS_COLLECTION",
                   "code": "",
                   "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "nssWsTargetAchieved",
-                  "name": "NSS_WS_TARGET_ACHIEVED",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
+                  "filter": {"title": "TODAY"},
                   "headers": []
                 },
 				{
@@ -8635,16 +8635,6 @@
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
-                {
-                  "id": "mCollectTodaysCollectionv2",
-                  "name": "DSS_TODAYS_COLLECTION",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": {
-                    "title": "TODAY"
-                  },
-                  "headers": []
-                },
 				{
                   "id": "mCollectTotalCollectionv2",
                   "name": "DSS_TOTAL_COLLECTION",
@@ -8656,6 +8646,16 @@
 				{
                   "id": "mctodaysLastYearCollectionv3",
                   "name": "NATIONAL_DSS_TODAYS_LAST_YEAR_COLLECTION_MC",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": {
+                    "title": "TODAY"
+                  },
+                  "headers": []
+                },
+				{
+                  "id": "mCollectTodaysCollectionv2",
+                  "name": "DSS_TODAYS_COLLECTION",
                   "code": "",
                   "chartType": "metric",
                   "filter": {
