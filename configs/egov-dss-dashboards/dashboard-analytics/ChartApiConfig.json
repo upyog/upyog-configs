@@ -8675,7 +8675,6 @@
   "targetAchievedv3": {
     "chartName": "NATIONAL_DSS_TARGET_ACHIEVED",
     "queries": [
-	
       {
         "module": "PT",
         "dateRefField": "date",
@@ -9418,7 +9417,7 @@
       "textMessage": "$indicator$value% than last $insightInterval",
       "colorCode": "#228B22",
       "insightInterval": "year",
-      "isRoundOff": true
+      "isRoundOff": false
     },
     "_comment": " totol properties count"
   },
@@ -9449,7 +9448,7 @@
       "textMessage": "$indicator$value% than last $insightInterval",
       "colorCode": "#228B22",
       "insightInterval": "year",
-      "isRoundOff": true
+      "isRoundOff": false
     },
     "_comment": " totol properties having assessmentNumber "
   },
@@ -9480,7 +9479,7 @@
       "textMessage": "$indicator$value% than last $insightInterval",
       "colorCode": "#228B22",
       "insightInterval": "year",
-      "isRoundOff": true
+      "isRoundOff": false
     },
     "_comment": " totol properties having assessmentNumber "
   },
@@ -14934,42 +14933,42 @@
     "chartName": "NATIONAL_DSS_TARGET_COLLECTION",
     "queries": [
       {
-		"module":"PT",
+        "module": "PT",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"match\":{\"module.keyword\":\"PT\"}}]}},\"aggs\":{\"Actual collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
       },
-	  {
-		"module":"TL",
+      {
+        "module": "TL",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"match\":{\"module.keyword\":\"TL\"}}]}},\"aggs\":{\"Actual collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
       },
-	  {
-		"module":"FIRENOC",
+      {
+        "module": "FIRENOC",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"match\":{\"module.keyword\":\"FIRENOC\"}}]}},\"aggs\":{\"Actual collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
       },
-	  {
-		"module":"MCOLLECT",
+      {
+        "module": "MCOLLECT",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"match\":{\"module.keyword\":\"MCOLLECT\"}}]}},\"aggs\":{\"Actual collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
       },
-	  {
-		"module":"WS",
+      {
+        "module": "WS",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"match\":{\"module.keyword\":\"WS\"}}]}},\"aggs\":{\"Actual collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
       },
-	  {
-		"module":"OBPS",
+      {
+        "module": "OBPS",
         "requestQueryMap": "{\"state\" :\"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
@@ -14984,7 +14983,6 @@
     "aggregationPaths": [
       "Actual collection"
     ],
-    
     "insight": {
       "chartResponseMap": "targetCollectionvOverview",
       "action": "differenceOfNumbers",
@@ -15001,42 +14999,42 @@
     "chartName": "NATIONAL_DSS_TARGET_ACHIEVED",
     "queries": [
       {
-		"module":"PT",
+        "module": "PT",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"match\":{\"module.keyword\":\"PT\"}}]}},\"aggs\":{\"Actual collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
       },
-	  {
-		"module":"TL",
+      {
+        "module": "TL",
         "requestQueryMap": "{\"module\" : \"module.keyword\",\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"match\":{\"module.keyword\":\"TL\"}}]}},\"aggs\":{\"Actual collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
       },
-	  {
-		"module":"FIRENOC",
+      {
+        "module": "FIRENOC",
         "requestQueryMap": "{\"module\" : \"module.keyword\",\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery":"{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"match\":{\"module.keyword\":\"FIRENOC\"}}]}},\"aggs\":{\"Actual collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"match\":{\"module.keyword\":\"FIRENOC\"}}]}},\"aggs\":{\"Actual collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
       },
-	  {
-		"module":"MCOLLECT",
+      {
+        "module": "MCOLLECT",
         "requestQueryMap": "{\"module\" : \"module.keyword\",\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"match\":{\"module.keyword\":\"MCOLLECT\"}}]}},\"aggs\":{\"Actual collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
       },
-	  {
-		"module":"WS",
+      {
+        "module": "WS",
         "requestQueryMap": "{\"module\" : \"module.keyword\",\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"match\":{\"module.keyword\":\"WS\"}}]}},\"aggs\":{\"Actual collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}"
       },
-	  {
-		"module":"OBPS",
+      {
+        "module": "OBPS",
         "requestQueryMap": "{\"module\" : \"module.keyword\",\"state\" :\"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
@@ -15097,7 +15095,7 @@
     ],
     "_comment": " "
   },
- "cumulativeCollectionOverview": {
+  "cumulativeCollectionOverview": {
     "chartName": "NATIONAL_DSS_TOTAL_CUMULATIVE_COLLECTION",
     "queries": [
       {
@@ -15167,8 +15165,7 @@
     ],
     "isCumulative": true,
     "interval": "month",
-    "insight": {
-    },
+    "insight": {},
     "_comment": " "
   },
   "topPerformingStatesOverview": {
@@ -15669,7 +15666,7 @@
       {
         "module": "COMMON",
         "indexName": "common-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"status.keyword\":\"Live\"}}]}},\"aggs\":{\"stateWiseData\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"latest\":{\"terms\":{\"field\":\"date\",\"order\":{\"_term\":\"desc\"},\"size\":1},\"aggs\":{\"stateModuleWiseData\":{\"terms\":{\"field\":\"serviceModuleCode.keyword\"},\"aggs\":{\"totalCitizensForServiceModuleCount\":{\"sum\":{\"field\":\"totalCitizensCount\"}}}},\"maxCitizens\":{\"max_bucket\":{\"buckets_path\":\"stateModuleWiseData.totalCitizensForServiceModuleCount\"}}}},\"stateCitizensSummary\":{\"max_bucket\":{\"buckets_path\":\"latest.maxCitizens\"}}}},\"TotalCitizens\":{\"sum_bucket\":{\"buckets_path\":\"stateWiseData.stateCitizensSummary\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"status.keyword\":\"Live\"}}]}},\"aggs\":{\"stateWiseData\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"latest\":{\"terms\":{\"field\":\"date\",\"order\":{\"_term\":\"desc\"},\"size\":1},\"aggs\":{\"stateModuleWiseData\":{\"terms\":{\"field\":\"serviceModuleCode.keyword\"},\"aggs\":{\"totalCitizensForServiceModuleCount\":{\"sum\":{\"field\":\"totalCitizensCount\"}}}},\"maxCitizens\":{\"max_bucket\":{\"buckets_path\":\"stateModuleWiseData.totalCitizensForServiceModuleCount\"}}}},\"stateCitizensSummary\":{\"max_bucket\":{\"buckets_path\":\"latest.maxCitizens\"}}}},\"TotalCitizens\":{\"sum_bucket\":{\"buckets_path\":\"stateWiseData.stateCitizensSummary\"}}}}}}",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": ""
       }
@@ -16548,7 +16545,7 @@
     "chartName": "DSS_TL_STATUS_BY_STATE",
     "queries": [
       {
-        "module": "COMMON",
+        "module": "TL",
         "requestQueryMap": "{\"state\" : \"state.keyword\"} ",
         "dateRefField": "date",
         "indexName": "tl-national-dashboard",
@@ -16642,7 +16639,7 @@
     "chartName": "DSS_TL_STATUS_BY_WARD",
     "queries": [
       {
-        "module": "COMMON",
+        "module": "TL",
         "requestQueryMap": "{\"state\" : \"state.keyword\" , \"ulb\" : \"ulb.keyword\" } ",
         "dateRefField": "date",
         "indexName": "tl-national-dashboard",
@@ -16736,7 +16733,7 @@
     "chartName": "DSS_TL_STATUS_BY_WARD",
     "queries": [
       {
-        "module": "COMMON",
+        "module": "TL",
         "requestQueryMap": "{\"state\" : \"state.keyword\" , \"ulb\" : \"ulb.keyword\" , \"ward\" : \"ward.keyword\" } ",
         "dateRefField": "date",
         "indexName": "tl-national-dashboard",
@@ -18980,8 +18977,7 @@
   "nonTaxRevenueContribution": {
     "chartName": "DSS_NON_TAX_REVENUE_CONTRIBUTION",
     "queries": [
-      
-{
+      {
         "module": "OBPS",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
@@ -19086,7 +19082,6 @@
         "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date"
       }
-
     ],
     "chartType": "metric",
     "valueType": "percentage",
@@ -20755,7 +20750,7 @@
     ],
     "_comment": " "
   },
-   "PropertyTaxRevenuePerHouseholdOverview": {
+  "PropertyTaxRevenuePerHouseholdOverview": {
     "chartName": "DSS_PT_TAX_REVENUE_PER_HOUSEHOLD_OVERVIEW",
     "queries": [
       {
