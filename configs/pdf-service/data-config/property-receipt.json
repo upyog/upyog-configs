@@ -66,6 +66,12 @@
                   "path": "$.paymentDetails[0].totalAmountPaid"
                 }
               },
+			   {
+                "variable": "assessmentYear", 
+                "value": {
+                  "path": "$.paymentDetails[0].additionalDetails.assessmentYears"
+                }
+              },
               {
                 "variable": "fromPeriod", 
                 "value": {
