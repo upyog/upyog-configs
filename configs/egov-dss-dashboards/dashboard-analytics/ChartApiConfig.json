@@ -16024,7 +16024,7 @@
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.service.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Closed Complaints\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"month\"},\"aggs\":{\"Closed_Complaints\":{\"sum\":{\"field\":\"todaysClosedComplaintsForDepartment\"}}}},\"Reopened Complaints\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"month\"},\"aggs\":{\"Reopened\":{\"sum\":{\"field\":\"todaysReopenedComplaintsForDepartment\"}}}},\"Total Complaints\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"month\"},\"aggs\":{\"total\":{\"sum\":{\"field\":\"todaysComplaintsForCategory\"}}}}}}}}"
       }
     ],
-    "chartType": "dual axis",
+    "chartType": "Line",
     "valueType": "number",
     "action": "",
     "drillChart": "none",
