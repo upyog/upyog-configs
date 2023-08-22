@@ -15118,7 +15118,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "pt-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForUsageCategory\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForUsageCategory\"}}]}},\"aggs\":{\"CollectionsTax\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForUsageCategory\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForUsageCategory\"}}]}},\"aggs\":{\"Collections Tax\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}}}"
       },
       {
         "module": "TL",
@@ -15132,7 +15132,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
         "indexName": "ws-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"\"todaysCollectionForPaymentChannelType\":0}}],\"must\":[{\"exists\":{\"field\":\"\"todaysCollectionForPaymentChannelType\"}}]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Water\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"\"todaysCollectionForPaymentChannelType\"}}}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForPaymentChannelType\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Water\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}}}"
       },
       {
         "module": "OBPS",
@@ -15174,47 +15174,47 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "tl-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForTradeType\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForTradeType\"}}]}},\"aggs\":{\"CollectionsNonTax\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForTradeType\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForTradeType\"}}]}},\"aggs\":{\"Collections NonTax\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}}}}}}}}"
       },
       {
         "module": "WS",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
         "indexName": "ws-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"\"todaysCollectionForPaymentChannelType\":0}}],\"must\":[{\"exists\":{\"field\":\"\"todaysCollectionForPaymentChannelType\"}}]}},\"aggs\":{\"CollectionsNonTax\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Water\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"\"todaysCollectionForPaymentChannelType\"}}}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForPaymentChannelType\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}]}},\"aggs\":{\"Collections NonTax\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Water\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}}}"
       },
       {
         "module": "OBPS",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "obps-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForPaymentMode\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForPaymentMode\"}}]}},\"aggs\":{\"CollectionsNonTax\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForPaymentMode\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForPaymentMode\"}}]}},\"aggs\":{\"Collections NonTax\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
       },
       {
         "module": "FIRENOC",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "firenoc-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForPaymentMode\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForPaymentMode\"}}]}},\"aggs\":{\"CollectionsNonTax\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForPaymentMode\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForPaymentMode\"}}]}},\"aggs\":{\"Collections NonTax\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
       },
       {
         "module": "MCOLLECT",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "mcollect-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForPaymentMode\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForPaymentMode\"}}]}},\"aggs\":{\"CollectionsNonTax\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForPaymentMode\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForPaymentMode\"}}]}},\"aggs\":{\"Collections NonTax\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
       },
       {
         "module": "BIRTH",
         "indexName": "birth-cert-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForChannel\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForChannel\"}}]}},\"aggs\":{\"CollectionsNonTax\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}}}",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForChannel\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForChannel\"}}]}},\"aggs\":{\"Collections NonTax\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}}}",
         "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date"
       },
       {
         "module": "DEATH",
         "indexName": "death-cert-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForChannel\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForChannel\"}}]}},\"aggs\":{\"CollectionsNonTax\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}}}",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForChannel\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForChannel\"}}]}},\"aggs\":{\"Collections NonTax\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}}}",
         "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date"
       }
@@ -15226,8 +15226,8 @@
     "documentType": "_doc",
     "aggregationPaths": [
       "Collections",
-	  "CollectionsTax",
-	  "CollectionsNonTax"
+	  "Collections Tax",
+	  "Collections NonTax"
     ],
     "isCumulative": true,
     "interval": "month",
