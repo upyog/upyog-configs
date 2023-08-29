@@ -13735,7 +13735,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "tl-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"transactions\":{\"value\":0}}}]}},\"aggs\":{\"intermediateAggrULB\":{\"terms\":{\"field\":\"ulb.keyword\",\"size\":10000},\"aggs\":{\"intermediateAggrWard\":{\"terms\":{\"field\":\"ward.keyword\",\"size\":10000},\"aggs\":{\"days\":{\"terms\":{\"field\":\"date\",\"size\":10000},\"aggs\":{\"transactions\":{\"avg\":{\"field\":\"transactions\"}}}},\"wardTransactions\":{\"sum_bucket\":{\"buckets_path\":\"days.transactions\"}}}},\"ulbTransactions\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrWard.wardTransactions\"}}}},\"Transactions\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrULB.ulbTransactions\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"transactions\":{\"value\":0}}}]}},\"aggs\":{\"Transactions\":{\"sum\":{\"field\":\"transactions\"}}}}}}"
       },
       {
         "module": "TL",
@@ -13871,7 +13871,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ward\" : \"ward.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "tl-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Tenants\":{\"terms\":{\"field\":\"ulb.keyword\",\"size\":10000},\"aggs\":{\"TL_Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}},\"Total_Licence_Issued_1\":{\"filter\":{\"bool\":{\"must_not\":[],\"must\":[{\"match\":{\"status.keyword\":\"APPROVED\"}}]}},\"aggs\":{\"Total_Licence_Issued\":{\"sum\":{\"field\":\"todaysTradeLicensesForStatus\"}}}},\"intermediateAggrWard\":{\"terms\":{\"field\":\"ward.keyword\",\"size\":10000},\"aggs\":{\"days\":{\"terms\":{\"field\":\"date\",\"size\":10000},\"aggs\":{\"applications\":{\"avg\":{\"field\":\"transactions\"}}}},\"wardapplications\":{\"sum_bucket\":{\"buckets_path\":\"days.applications\"}}}},\"Transactions\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrWard.wardapplications\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Tenants\":{\"terms\":{\"field\":\"ulb.keyword\"},\"aggs\":{\"TL_Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}},\"Total_Licence_Issued_1\":{\"filter\":{\"bool\":{\"must_not\":[],\"must\":[{\"match\":{\"status.keyword\":\"APPROVED\"}}]}},\"aggs\":{\"Total_Licence_Issued\":{\"sum\":{\"field\":\"todaysTradeLicensesForStatus\"}}}},\"Transactions\":{\"sum\":{\"field\":\"transactions\"}}}}}}}}"
       },
       {
         "module": "TL",
@@ -13941,7 +13941,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"regionId\" : \"region.keyword\", \"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\" }",
         "dateRefField": "date",
         "indexName": "tl-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Wards\":{\"terms\":{\"field\":\"ward.keyword\"},\"aggs\":{\"TL_Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}},\"Total_Licence_Issued\":{\"sum\":{\"field\":\"todaysTradeLicensesForStatus\"}},\"days\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"applications\":{\"avg\":{\"field\":\"transactions\"}}}},\"Transactions\":{\"sum_bucket\":{\"buckets_path\":\"days.applications\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Wards\":{\"terms\":{\"field\":\"ward.keyword\"},\"aggs\":{\"TL_Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}},\"Total_Licence_Issued\":{\"sum\":{\"field\":\"todaysTradeLicensesForStatus\"}},\"Transactions\":{\"sum\":{\"field\":\"transactions\"}}}}}}}}"
       },
       {
         "module": "COMMON",
