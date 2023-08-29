@@ -13728,15 +13728,9 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "tl-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"States\":{\"terms\":{\"field\":\"state.keyword\",\"size\":10000},\"aggs\":{\"TL_Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}},\"Total_Licence_Issued_1\":{\"filter\":{\"bool\":{\"must_not\":[],\"must\":[{\"match\":{\"status.keyword\":\"APPROVED\"}}]}},\"aggs\":{\"Total_Licence_Issued\":{\"sum\":{\"field\":\"todaysTradeLicensesForStatus\"}}}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"States\":{\"terms\":{\"field\":\"state.keyword\",\"size\":10000},\"aggs\":{\"TL_Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}},\"Total_Licence_Issued_1\":{\"filter\":{\"bool\":{\"must_not\":[],\"must\":[{\"match\":{\"status.keyword\":\"APPROVED\"}}]}},\"aggs\":{\"Total_Licence_Issued\":{\"sum\":{\"field\":\"todaysTradeLicensesForStatus\"}}}},\"Transactions\":{\"sum\":{\"field\":\"transactions\"}}}}}}}}"
       },
-      {
-        "module": "TL",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "date",
-        "indexName": "tl-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"transactions\":{\"value\":0}}}]}},\"aggs\":{\"Transactions\":{\"sum\":{\"field\":\"transactions\"}}}}}}"
-      },
+      
       {
         "module": "TL",
         "requestQueryMap": "{\"state\" : \"state.keyword\"}",
@@ -15988,7 +15982,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "pgr-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.service.tenantId.keyword\":\"pg.testing\"}},{\"term\":{\"todaysComplaintsForCategory\":0}}]}},\"aggs\":{\"Todays Complaints\":{\"sum\":{\"field\":\"todaysComplaintsForCategory\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.service.tenantId.keyword\":\"pg.testing\"}},{\"term\":{\"todaysComplaintsForStatus\":0}}]}},\"aggs\":{\"Todays Complaints\":{\"sum\":{\"field\":\"todaysComplaintsForStatus\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -16019,7 +16013,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "pgr-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"ulb.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Closed_Complaints\":{\"sum\":{\"field\":\"todaysClosedComplaintsForDepartment\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"ulb.keyword\":\"pg.testing\"}}],\"should\":[{\"match\":{\"status.keyword\":\"closed\"}},{\"match\":{\"status.keyword\":\"resolved\"}},{\"match\":{\"status.keyword\":\"rejected\"}}]}},\"aggs\":{\"Closed_Complaints\":{\"sum\":{\"field\":\"todaysComplaintsForStatus\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -16114,7 +16108,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "pgr-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.service.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Closed Complaints\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"month\"},\"aggs\":{\"Closed_Complaints\":{\"sum\":{\"field\":\"todaysClosedComplaintsForDepartment\"}}}},\"Opened Complaints\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"month\"},\"aggs\":{\"Reopened\":{\"sum\":{\"field\":\"todaysOpenComplaintsForDepartment\"}}}},\"Total Complaints\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"month\"},\"aggs\":{\"total\":{\"sum\":{\"field\":\"todaysComplaintsForCategory\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Closed Complaints\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"month\"},\"aggs\":{\"Closed_Complaints\":{\"filter\":{\"bool\":{\"should\":[{\"match\":{\"status.keyword\":\"closed\"}},{\"match\":{\"status.keyword\":\"resolved\"}},{\"match\":{\"status.keyword\":\"rejected\"}}]}},\"aggs\":{\"Close\":{\"sum\":{\"field\":\"todaysComplaintsForStatus\"}}}}}},\"Opened Complaints\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"month\"},\"aggs\":{\"Reopeneds\":{\"filter\":{\"bool\":{\"should\":[{\"match\":{\"status.keyword\":\"reopened\"}},{\"match\":{\"status.keyword\":\"open\"}},{\"match\":{\"status.keyword\":\"assigned\"}},{\"match\":{\"status.keyword\":\"reassigned\"}},{\"match\":{\"status.keyword\":\"reassignrequested\"}}]}},\"aggs\":{\"Reopened\":{\"sum\":{\"field\":\"todaysComplaintsForStatus\"}}}}}},\"Total Complaints\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"month\"},\"aggs\":{\"total\":{\"sum\":{\"field\":\"todaysComplaintsForStatus\"}}}}}}}}"
       }
     ],
     "chartType": "line",
@@ -16259,7 +16253,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "pgr-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.fsm.tenantid.keyword\":\"pb.testing\"}}]}},\"aggs\":{\"Total Citizens\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"month\"},\"aggs\":{\"state\":{\"terms\":{\"field\":\"state.keyword\",\"size\":200},\"aggs\":{\"intermediateAggrULB\":{\"terms\":{\"field\":\"ulb.keyword\",\"size\":200},\"aggs\":{\"intermediateAggrWard\":{\"terms\":{\"field\":\"ward.keyword\",\"size\":200},\"aggs\":{\"days\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"citizen\":{\"avg\":{\"field\":\"uniqueCitizens\"}}}},\"wardUniqueCitizens\":{\"sum_bucket\":{\"buckets_path\":\"days.citizen\"}}}},\"ulbUniqueCitizens\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrWard.wardUniqueCitizens\"}}}},\"stateUniqueCitizens\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrULB.ulbUniqueCitizens\"}}}},\"Unique Citizens\":{\"sum_bucket\":{\"buckets_path\":\"state.stateUniqueCitizens\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.fsm.tenantid.keyword\":\"pb.testing\"}}]}},\"aggs\":{\"Total Citizens\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"month\"},\"aggs\":{\"state\":{\"terms\":{\"field\":\"state.keyword\",\"size\":200},\"aggs\":{\"intermediateAggrULB\":{\"terms\":{\"field\":\"ulb.keyword\",\"size\":200},\"aggs\":{\"intermediateAggrWard\":{\"terms\":{\"field\":\"ward.keyword\",\"size\":200},\"aggs\":{\"days\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"citizen\":{\"sum\":{\"field\":\"uniqueCitizens\"}}}},\"wardUniqueCitizens\":{\"sum_bucket\":{\"buckets_path\":\"days.citizen\"}}}},\"ulbUniqueCitizens\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrWard.wardUniqueCitizens\"}}}},\"stateUniqueCitizens\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrULB.ulbUniqueCitizens\"}}}},\"Unique Citizens\":{\"sum_bucket\":{\"buckets_path\":\"state.stateUniqueCitizens\"}}}}}}}}"
       }
     ],
     "chartType": "line",
