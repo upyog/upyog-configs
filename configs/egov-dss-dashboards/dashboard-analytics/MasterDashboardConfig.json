@@ -9045,7 +9045,7 @@
               "name": "DSS_TL_LICENSE_BY_TYPE",
               "dimensions": {
                 "height": 250,
-                "width": 10
+                "width": 5
               },
               "vizType": "chart",
               "label": "",
@@ -9059,6 +9059,50 @@
                   "chartType": "donut",
                   "filter": "",
                   "headers": []
+                }
+              ]
+            },
+			{
+              "id": 324,
+              "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_SLA_TL",
+              "dimensions": {
+                "height": 250,
+                "width": 5
+              },              
+			  "vizType": "performing-metric",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+		       {
+                  "id": "tltopPerformingStatesSLA",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_SLA_TL",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "Revenue"
+                }
+              ]
+            },
+			{
+              "id": 126,
+              "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_SLA_TL",
+              "dimensions": {
+                "height": 250,
+                "width": 5
+              },              
+			  "vizType": "performing-metric",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+		       {
+                  "id": "tlbottomPerformingStatesSLA",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_SLA_TL",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "Revenue"
                 }
               ]
             }
