@@ -12148,7 +12148,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
         "indexName": "ws-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"Connections\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"connectionsCreatedForConnectionType\"}}],\"must_not\":[{\"match\":{\"connectionsCreatedForConnectionType\":0}}]}},\"}},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"connectionsCreatedForConnectionType\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"Connections\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"connectionsCreatedForConnectionType\"}}],\"must_not\":[{\"match\":{\"connectionsCreatedForConnectionType\":0}}]}},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"connectionsCreatedForConnectionType\"}}}}}}"
       }
     ],
     "translateTenantCode": false,
@@ -12623,7 +12623,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "mcollect-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"numberOfReceiptsForPaymentMode\"}}],\"must_not\":[{\"match\":{\"numberOfReceiptsForPaymentMode\":0}}]}},\"}},\"aggs\":{\"Total Receipts\":{\"sum\":{\"field\":\"numberOfReceiptsForPaymentMode\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"numberOfReceiptsForPaymentMode\"}}],\"must_not\":[{\"match\":{\"numberOfReceiptsForPaymentMode\":0}}]}},\"aggs\":{\"Total Receipts\":{\"sum\":{\"field\":\"numberOfReceiptsForPaymentMode\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -13129,7 +13129,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "tl-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysTradeLicensesForStatus\":0}}],{\"must\":[{\"match\":{\"status.keyword\":\"APPROVED\"}}]}},\"aggs\":{\"Total Licenses\":{\"sum\":{\"field\":\"todaysTradeLicensesForStatus\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysTradeLicensesForStatus\"}},{\"match\":{\"status.keyword\":\"APPROVED\"}}],\"must_not\":[{\"match\":{\"todaysTradeLicensesForStatus\":0}}]}},\"aggs\":{\"Total Licenses\":{\"sum\":{\"field\":\"todaysTradeLicensesForStatus\"}}}}}}"
       }
     ],
     "chartType": "metric",
