@@ -10554,7 +10554,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"ward\" : \"ward.keyword\",\"ulb\" : \"ulb.keyword\",\"state\" : \"state.keyword\"}",
         "indexName": "firenoc-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"todaysDate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_term\":\"desc\"},\"size\":1},\"aggs\":{\"Todays Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}},\"lastUpdatedTime\":{\"terms\":{\"field\":\"lastModifiedTime\",\"order\":{\"_term\":\"desc\"},\"size\":1}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysCollectionForPaymentMode\"}}],\"must_not\":[{\"match\":{\"todaysCollectionForPaymentMode\":0}}]}},\"aggs\":{\"todaysDate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_term\":\"desc\"},\"size\":1},\"aggs\":{\"Todays Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}},\"lastUpdatedTime\":{\"terms\":{\"field\":\"lastModifiedTime\",\"order\":{\"_term\":\"desc\"},\"size\":1}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -10576,7 +10576,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"ward\" : \"ward.keyword\", \"ulb\" : \"ulb.keyword\", \"state\" : \"state.keyword\"}",
         "indexName": "firenoc-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysCollectionForPaymentMode\"}}],\"must_not\":[{\"match\":{\"todaysCollectionForPaymentMode\":0}}]}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -10606,7 +10606,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"ward\" : \"ward.keyword\",\"ulb\" : \"ulb.keyword\", \"state\" : \"state.keyword\"}",
         "indexName": "firenoc-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total applications\":{\"sum\":{\"field\":\"todaysApplicationsForApplicationType\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysApplicationsForApplicationType\"}}],\"must_not\":[{\"match\":{\"todaysApplicationsForApplicationType\":0}}]}},\"aggs\":{\"Total applications\":{\"sum\":{\"field\":\"todaysApplicationsForApplicationType\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -10636,7 +10636,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"ward\" : \"ward.keyword\",\"ulb\" : \"ulb.keyword\", \"state\" : \"state.keyword\"}",
         "indexName": "firenoc-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"type.keyword\":\"NEW\"}}]}},\"aggs\":{\"Actual Noc's Issued\":{\"sum\":{\"field\":\"nocIssuedTodayForType\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"nocIssuedTodayForType\"}},{\"term\":{\"type.keyword\":\"NEW\"}}],\"must_not\":[{\"match\":{\"nocIssuedTodayForType\":0}}]},\"aggs\":{\"Actual Noc's Issued\":{\"sum\":{\"field\":\"nocIssuedTodayForType\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -10812,7 +10812,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"ward\" : \"ward.keyword\",\"ulb\" : \"ulb.keyword\", \"state\" : \"state.keyword\"}",
         "indexName": "firenoc-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"type.keyword\":\"PROVISIONAL\"}}]}},\"aggs\":{\"Provisional Noc's Issued\":{\"sum\":{\"field\":\"nocIssuedTodayForType\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"nocIssuedTodayForType\"}},{\"term\":{\"type.keyword\":\"PROVISIONAL\"}}],\"must_not\":[{\"match\":{\"nocIssuedTodayForType\":0}}]}},\"aggs\":{\"Provisional Noc's Issued\":{\"sum\":{\"field\":\"nocIssuedTodayForType\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -10868,7 +10868,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"ward\" : \"ward.keyword\",\"ulb\" : \"ulb.keyword\", \"state\" : \"state.keyword\"}",
         "indexName": "firenoc-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"NOC Collection by PaymentMode\":{\"terms\":{\"field\":\"paymentMode.keyword\"},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysCollectionForPaymentMode\"}}],\"must_not\":[{\"match\":{\"todaysCollectionForPaymentMode\":0}}]}},\"aggs\":{\"NOC Collection by PaymentMode\":{\"terms\":{\"field\":\"paymentMode.keyword\"},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}}}"
       }
     ],
     "chartType": "pie",
@@ -10890,7 +10890,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"ward\" : \"ward.keyword\",\"ulb\" : \"ulb.keyword\", \"state\" : \"state.keyword\"}",
         "indexName": "firenoc-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"fire NOC Issued\":{\"terms\":{\"field\":\"type.keyword\"},\"aggs\":{\"nocs issued by type\":{\"sum\":{\"field\":\"nocIssuedTodayForType\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"nocIssuedTodayForType\"}}],\"must_not\":[{\"match\":{\"nocIssuedTodayForType\":0}}]}},\"aggs\":{\"fire NOC Issued\":{\"terms\":{\"field\":\"type.keyword\"},\"aggs\":{\"nocs issued by type\":{\"sum\":{\"field\":\"nocIssuedTodayForType\"}}}}}}}}"
       }
     ],
     "chartType": "pie",
@@ -10912,14 +10912,14 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"ward\" : \"ward.keyword\",\"ulb\" : \"ulb.keyword\", \"state\" : \"state.keyword\"}",
         "indexName": "firenoc-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Noc's issued\":{\"terms\":{\"field\":\"state.keyword\",\"size\":\"200\",\"order\":{\"Total applications\":\"desc\"}},\"aggs\":{\"Total applications\":{\"sum\":{\"field\":\"todaysApplicationsForApplicationType\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysApplicationsForApplicationType\"}}],\"must_not\":[{\"match\":{\"todaysApplicationsForApplicationType\":0}}]}},\"aggs\":{\"Total Noc's issued\":{\"terms\":{\"field\":\"state.keyword\",\"size\":\"200\",\"order\":{\"Total applications\":\"desc\"}},\"aggs\":{\"Total applications\":{\"sum\":{\"field\":\"todaysApplicationsForApplicationType\"}}}}}}}}"
       },
       {
         "module": "FIRENOC",
         "dateRefField": "date",
         "requestQueryMap": "{\"ward\" : \"ward.keyword\",\"ulb\" : \"ulb.keyword\", \"state\" : \"state.keyword\"}",
         "indexName": "firenoc-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Actual Nocs issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"applicationType.keyword\":\"NEW\"}}]}},\"aggs\":{\"Noc's issued\":{\"terms\":{\"field\":\"state.keyword\",\"size\":\"200\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysApplicationsForApplicationType\"}}}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysApplicationsForApplicationType\"}}],\"must_not\":[{\"match\":{\"todaysApplicationsForApplicationType\":0}}]}},\"aggs\":{\"Actual Nocs issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"applicationType.keyword\":\"NEW\"}}]}},\"aggs\":{\"Noc's issued\":{\"terms\":{\"field\":\"state.keyword\",\"size\":\"200\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysApplicationsForApplicationType\"}}}}}}}}}}"
       }
     ],
     "isMdmsEnabled": false,
@@ -10949,14 +10949,14 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"ward\" : \"ward.keyword\",\"ulb\" : \"ulb.keyword\", \"state\" : \"state.keyword\"}",
         "indexName": "firenoc-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Noc's issued\":{\"terms\":{\"field\":\"state.keyword\",\"size\":\"200\",\"order\":{\"Total applications\":\"desc\"}},\"aggs\":{\"Total applications\":{\"sum\":{\"field\":\"todaysApplicationsForApplicationType\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysApplicationsForApplicationType\"}}],\"must_not\":[{\"match\":{\"todaysApplicationsForApplicationType\":0}}]}},\"aggs\":{\"Total Noc's issued\":{\"terms\":{\"field\":\"state.keyword\",\"size\":\"200\",\"order\":{\"Total applications\":\"desc\"}},\"aggs\":{\"Total applications\":{\"sum\":{\"field\":\"todaysApplicationsForApplicationType\"}}}}}}}}"
       },
       {
         "module": "FIRENOC",
         "dateRefField": "date",
         "requestQueryMap": "{\"ward\" : \"ward.keyword\",\"ulb\" : \"ulb.keyword\", \"state\" : \"state.keyword\"}",
         "indexName": "firenoc-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Provisional Nocs issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"applicationType.keyword\":\"PROVISIONAL\"}}]}},\"aggs\":{\"Noc's issued\":{\"terms\":{\"field\":\"state.keyword\",\"size\":\"200\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysApplicationsForApplicationType\"}}}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysApplicationsForApplicationType\"}}],\"must_not\":[{\"match\":{\"todaysApplicationsForApplicationType\":0}}]}},\"aggs\":{\"Provisional Nocs issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"applicationType.keyword\":\"PROVISIONAL\"}}]}},\"aggs\":{\"Noc's issued\":{\"terms\":{\"field\":\"state.keyword\",\"size\":\"200\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysApplicationsForApplicationType\"}}}}}}}}}}"
       }
     ],
     "isMdmsEnabled": false,
@@ -20378,6 +20378,7 @@
         "dateRefField": "date",
         "indexName": "obps-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"OBPS\"}},{\"exists\":{\"field\":\"avgDaysForApplicationApproval\"}}],\"must_not\":[{\"match\":{\"avgDaysForApplicationApproval\":0}}]}},\"aggs\":{\"Average Days for OBPS Certificate\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
+	  }
     ],
     "chartType": "metric",
     "valueType": "number",
