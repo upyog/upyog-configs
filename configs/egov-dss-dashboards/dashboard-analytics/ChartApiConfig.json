@@ -22892,40 +22892,6 @@
     "insight": {},
     "_comment": " TOP Performing States for revenue"
   },
-    "tltopPerformingStatesSLA": {
-    "chartName": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_SLA_TL",
-    "queries": [
-      {
-        "module": "TL",
-        "dateRefField": "date",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "tl-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}],\"must_not\":[{\"match\":{\"todaysApprovedApplicationsWithinSLA\":0}}]}},\"aggs\":{\" ApplicationsApprovedwithinSLA\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}}}}}"
-      },
-      {
-        "module": "TL",
-        "dateRefField": "date",
-		"requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "indexName": "tl-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysApprovedApplications\"}}],\"must_not\":[{\"match\":{\"todaysApprovedApplications\":0}}]}},\"aggs\":{\"TotalApplications\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}}}}}"
-      }
-    ],
-    "chartType": "perform",
-    "valueType": "percentage",
-    "drillChart": "none",
-    "documentType": "_doc",
-    "action": "percentage",
-    "plotLabel": "DSS_TARGET_ACHIEVED",
-    "order": "desc",
-    "limit": 3,
-    "isRoundOff": false,
-    "aggregationPaths": [
-      "ApplicationsApprovedwithinSLA",
-      "TotalApplications"
-    ],
-    "insight": {},
-    "_comment": " TOP Performing States for SLA Achievement"
-  },
   "tlbottomPerformingStatesSLA": {
     "chartName": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_SLA_TL",
     "queries": [
@@ -22959,6 +22925,40 @@
     ],
     "insight": {},
     "_comment": " Bottom Performing States for GDPwise Revenue"
+  },
+  "tltopPerformingStatesSLA": {
+    "chartName": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_SLA_TL",
+    "queries": [
+      {
+        "module": "TL",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "tl-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}],\"must_not\":[{\"match\":{\"todaysApprovedApplicationsWithinSLA\":0}}]}},\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}}}}}"
+      },
+      {
+        "module": "TL",
+		"dateRefField": "date",
+        "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
+        "indexName": "tl-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysApprovedApplications\"}}],\"must_not\":[{\"match\":{\"todaysApprovedApplications\":0}}]}},\"aggs\":{\"TotalApplications\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}}}}}"
+      }
+    ],
+    "chartType": "perform",
+    "valueType": "percentage",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "percentage",
+    "plotLabel": "DSS_TARGET_ACHIEVED",
+    "order": "desc",
+    "limit": 3,
+    "isRoundOff": false,
+    "aggregationPaths": [
+      "ApplicationsApprovedwithinSLA",
+      "TotalApplications"
+    ],
+    "insight": {},
+    "_comment": " TOP Performing States for GDPwise Revenue"
   },
     "wstopPerformingStatesSLA": {
     "chartName": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_SLA_WS",
