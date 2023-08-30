@@ -8308,13 +8308,13 @@
             }
           ]
         },
-        {
+		{
           "row": 3,
           "name": "NSS_REVENUE",
           "vizArray": [
             {
-              "id": 223,
-              "name": "NSS_WS_COLLECTION_BY_USAGE",
+              "id": 226,
+              "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_SLA_WS",
               "dimensions": {
                 "height": 250,
                 "width": 4
@@ -8324,12 +8324,62 @@
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "nssWsCollectionByUsage",
-                  "name": "NSS_WS_COLLECTION_BY_USAGE",
+                  "id": "wstopPerformingStatesSLA",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_SLA_WS",
                   "code": "",
                   "chartType": "donut",
                   "filter": "",
                   "headers": []
+                }
+              ]
+            },
+            {
+              "id": 227,
+              "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_SLA_WS",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "performing-metric",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "wsbottomPerformingStatesSLA",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_SLA_WS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "SLA"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 4,
+          "name": "NSS_REVENUE",
+          "vizArray": [
+            {
+              "id": 223,
+              "name": "NSS_WS_COLLECTION_BY_USAGE",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "performing-metric",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "nssWsCollectionByUsage",
+                  "name": "NSS_WS_COLLECTION_BY_USAGE",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "SLAs"
                 }
               ]
             },
@@ -8357,7 +8407,7 @@
           ]
         },
         {
-          "row": 4,
+          "row": 5,
           "name": "NSS_REVENUE",
           "vizArray": [
             {
@@ -8385,7 +8435,7 @@
           ]
         },
         {
-          "row": 5,
+          "row": 6,
           "name": "NSS_REVENUE",
           "vizArray": [
             {
