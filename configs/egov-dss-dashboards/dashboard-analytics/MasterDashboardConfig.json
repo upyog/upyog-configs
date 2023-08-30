@@ -8319,17 +8319,18 @@
                 "height": 250,
                 "width": 4
               },
-              "vizType": "chart",
-              "noUnit": true,
+              "vizType": "performing-metric",
+              "noUnit": false,
               "isCollapsible": false,
               "charts": [
                 {
                   "id": "wstopPerformingStatesSLA",
                   "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_SLA_WS",
                   "code": "",
-                  "chartType": "donut",
+                  "chartType": "bar",
                   "filter": "",
-                  "headers": []
+                  "headers": [],
+				  "tabName": "SLA"
                 }
               ]
             },
@@ -8368,18 +8369,17 @@
                 "height": 250,
                 "width": 4
               },
-              "vizType": "performing-metric",
-              "noUnit": false,
+              "vizType": "chart",
+              "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
                   "id": "nssWsCollectionByUsage",
                   "name": "NSS_WS_COLLECTION_BY_USAGE",
                   "code": "",
-                  "chartType": "bar",
+                  "chartType": "donut",
                   "filter": "",
-                  "headers": [],
-				  "tabName": "SLAs"
+                  "headers": []
                 }
               ]
             },
