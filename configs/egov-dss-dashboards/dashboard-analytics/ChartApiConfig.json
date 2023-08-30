@@ -22892,7 +22892,7 @@
     "insight": {},
     "_comment": " TOP Performing States for revenue"
   },
-      "tltopPerformingStatesSLA": {
+    "tltopPerformingStatesSLA": {
     "chartName": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_SLA_TL",
     "queries": [
       {
@@ -22904,8 +22904,8 @@
       },
       {
         "module": "TL",
-        "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
+		"requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "indexName": "tl-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysApprovedApplications\"}}],\"must_not\":[{\"match\":{\"todaysApprovedApplications\":0}}]}},\"aggs\":{\"TotalApplications\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}}}}}"
       }
