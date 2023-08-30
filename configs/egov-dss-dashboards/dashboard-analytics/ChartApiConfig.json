@@ -22907,7 +22907,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "tl-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"TL\"}},{\"exists\":{\"field\":\"todaysApprovedApplications\"}}],\"must_not\":[{\"match\":{\"todaysApprovedApplications\":0}}]}},\"aggs\":{\"TotalApplications\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysApprovedApplications\"}}],\"must_not\":[{\"match\":{\"todaysApprovedApplications\":0}}]}},\"aggs\":{\"TotalApplications\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}}}}}"
       }
     ],
     "chartType": "perform",
@@ -22934,21 +22934,21 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "tl-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"TL\"}},{\"exists\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}],\"must_not\":[{\"match\":{\"todaysApprovedApplicationsWithinSLA\":0}}]}},\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}],\"must_not\":[{\"match\":{\"todaysApprovedApplicationsWithinSLA\":0}}]}},\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}}}}}"
       },
       {
         "module": "TL",
 		"dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "indexName": "tl-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"module.keyword\":\"TL\"}},{\"exists\":{\"field\":\"todaysApprovedApplications\"}}],\"must_not\":[{\"match\":{\"todaysApprovedApplications\":0}}]}},\"aggs\":{\"TotalApplications\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"todaysApprovedApplications\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysApprovedApplications\"}}],\"must_not\":[{\"match\":{\"todaysApprovedApplications\":0}}]}},\"aggs\":{\"TotalApplications\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}}}}}"
       }
     ],
     "chartType": "perform",
-    "valueType": "amount",
+    "valueType": "percentage",
     "drillChart": "none",
     "documentType": "_doc",
-    "action": "division",
+    "action": "percentage",
     "plotLabel": "DSS_TARGET_ACHIEVED",
     "order": "asc",
     "limit": 3,
