@@ -22959,7 +22959,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "ws-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysCompletedApplicationsWithinSLA\"}}],\"must_not\":[{\"match\":{\"todaysCompletedApplicationsWithinSLA\":0}}]}},\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCompletedApplicationsWithinSLA\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"slaCompliance\"}}],\"must_not\":[{\"match\":{\"slaCompliance\":0}}]}},\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"slaCompliance\"}}}}}}}}"
       },
       {
         "module": "WS",
@@ -22973,14 +22973,13 @@
     "valueType": "percentage",
     "drillChart": "none",
     "documentType": "_doc",
-    "action": "percentage",
+    "action": "",
     "plotLabel": "DSS_TARGET_ACHIEVED",
     "order": "asc",
     "limit": 3,
     "isRoundOff": false,
     "aggregationPaths": [
-      "ApplicationsApprovedwithinSLA",
-      "TotalApplications"
+      "ApplicationsApprovedwithinSLA"
     ],
     "insight": {},
     "_comment": " Bottom Performing States for SLA"
@@ -22993,7 +22992,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "ws-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysCompletedApplicationsWithinSLA\"}}],\"must_not\":[{\"match\":{\"todaysCompletedApplicationsWithinSLA\":0}}]}},\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCompletedApplicationsWithinSLA\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"slaCompliance\"}}],\"must_not\":[{\"match\":{\"slaCompliance\":0}}]}},\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"slaCompliance\"}}}}}}}}"
       },
       {
         "module": "WS",
@@ -23007,14 +23006,13 @@
     "valueType": "percentage",
     "drillChart": "none",
     "documentType": "_doc",
-    "action": "percentage",
+    "action": "",
     "plotLabel": "DSS_TARGET_ACHIEVED",
     "order": "desc",
     "limit": 3,
     "isRoundOff": false,
     "aggregationPaths": [
-      "ApplicationsApprovedwithinSLA",
-      "TotalApplications"
+      "ApplicationsApprovedwithinSLA"
     ],
     "insight": {},
     "_comment": " TOP Performing States for SLA"
