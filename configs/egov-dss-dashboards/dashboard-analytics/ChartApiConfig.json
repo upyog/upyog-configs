@@ -22960,7 +22960,14 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "ws-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"slaCompliance\"}}],\"must_not\":[{\"match\":{\"slaCompliance\":0}}]}},\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"slaCompliance\"}}}}}}}}"
-      }
+      },
+	  {
+		"module": "WS",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "ws-national-dashboard",
+		"aggrQuery":"\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Cardina1\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"cardinality\":{\"field\":\"state.keyword\"}}}}}}}}"
+		}
     ],
     "chartType": "perform",
     "valueType": "percentage",
@@ -22972,7 +22979,8 @@
     "limit": 3,
     "isRoundOff": false,
     "aggregationPaths": [
-      "ApplicationsApprovedwithinSLA"
+      "ApplicationsApprovedwithinSLA",
+	  "Cardina1"
     ],
     "insight": {},
     "_comment": " Bottom Performing States for SLA"
@@ -22986,7 +22994,14 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "ws-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"slaCompliance\"}}],\"must_not\":[{\"match\":{\"slaCompliance\":0}}]}},\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"slaCompliance\"}}}}}}}}"
-      }
+      },
+	  {
+		"module": "WS",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "ws-national-dashboard",
+		"aggrQuery":"\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Cardina1\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"cardinality\":{\"field\":\"state.keyword\"}}}}}}}}"
+		}
     ],
     "chartType": "perform",
     "valueType": "percentage",
@@ -22998,7 +23013,8 @@
     "limit": 3,
     "isRoundOff": false,
     "aggregationPaths": [
-      "ApplicationsApprovedwithinSLA"
+      "ApplicationsApprovedwithinSLA",
+	  "Cardina1"
     ],
     "insight": {},
     "_comment": " TOP Performing States for SLA"
