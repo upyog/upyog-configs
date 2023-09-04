@@ -12179,7 +12179,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
         "indexName": "ws-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"ulb.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"state\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"intermediateAggrULB\":{\"terms\":{\"field\":\"ulb.keyword\"},\"aggs\":{\"intermediateAggrWard\":{\"terms\":{\"field\":\"ward.keyword\"},\"aggs\":{\"todaysDate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_term\":\"desc\"},\"size\":1},\"aggs\":{\"SLACompliance\":{\"avg\":{\"field\":\"slaCompliance\"}}}},\"wardSLACompliance\":{\"avg_bucket\":{\"buckets_path\":\"todaysDate.SLACompliance\"}}}},\"ulbSLACompliance\":{\"avg_bucket\":{\"buckets_path\":\"intermediateAggrWard.wardSLACompliance\"}}}},\"stateSLACompliance\":{\"avg_bucket\":{\"buckets_path\":\"intermediateAggrULB.ulbSLACompliance\"}}}},\"SLA Compliance\":{\"avg_bucket\":{\"buckets_path\":\"state.stateSLACompliance\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"slaCompliance\"}}],\"must_not\":[{\"term\":{\"ulb.keyword\":\"pg.testing\"}},{\"match\":{\"slaCompliance\":0}}]}},\"aggs\":{\"state\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"SLACompliance\":{\"avg\":{\"field\":\"slaCompliance\"}}}}}}}}"
       }
     ],
     "translateTenantCode": false,
