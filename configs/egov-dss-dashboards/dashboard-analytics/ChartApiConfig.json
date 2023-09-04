@@ -12179,7 +12179,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
         "indexName": "ws-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"slaCompliance\"}}],\"must_not\":[{\"term\":{\"ulb.keyword\":\"pg.testing\"}},{\"match\":{\"slaCompliance\":0}}]}},\"aggs\":{\"state\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"SLACompliance\":{\"avg\":{\"field\":\"slaCompliance\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"slaCompliance\"}}],\"must_not\":[{\"term\":{\"ulb.keyword\":\"pg.testing\"}},{\"match\":{\"slaCompliance\":0}}]}},\"aggs\":{\"SLACompliance\":{\"avg\":{\"field\":\"slaCompliance\"}}}}}}"
       }
     ],
     "translateTenantCode": false,
@@ -22959,7 +22959,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "ws-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"slaCompliance\"}}],\"must_not\":[{\"match\":{\"slaCompliance\":0}}]}},\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"slaCompliance\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"slaCompliance\"}}],\"must_not\":[{\"match\":{\"slaCompliance\":0}}]}},\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"slaCompliance\"}}}}}}}}"
       },
 	  {
 		"module": "WS",
