@@ -12143,7 +12143,7 @@
     "queries": [
       {
         "module": "WS",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
         "indexName": "ws-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"Connections\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"connectionsCreatedForConnectionType\"}}],\"must_not\":[{\"match\":{\"connectionsCreatedForConnectionType\":0}}]}},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"connectionsCreatedForConnectionType\"}}}}}}"
