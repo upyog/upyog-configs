@@ -8308,8 +8308,58 @@
             }
           ]
         },
-        {
+		{
           "row": 3,
+          "name": "NSS_REVENUE",
+          "vizArray": [
+            {
+              "id": 226,
+              "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_SLA_WS",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "performing-metric",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "wstopPerformingStatesSLA",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_SLA_WS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "SLA"
+                }
+              ]
+            },
+            {
+              "id": 227,
+              "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_SLA_WS",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "performing-metric",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "wsbottomPerformingStatesSLA",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_SLA_WS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "SLA"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 4,
           "name": "NSS_REVENUE",
           "vizArray": [
             {
@@ -8357,7 +8407,7 @@
           ]
         },
         {
-          "row": 4,
+          "row": 5,
           "name": "NSS_REVENUE",
           "vizArray": [
             {
@@ -8385,7 +8435,7 @@
           ]
         },
         {
-          "row": 5,
+          "row": 6,
           "name": "NSS_REVENUE",
           "vizArray": [
             {
@@ -9037,7 +9087,7 @@
               "name": "DSS_TL_LICENSE_BY_TYPE",
               "dimensions": {
                 "height": 250,
-                "width": 10
+                "width": 5
               },
               "vizType": "chart",
               "label": "",
@@ -9051,6 +9101,50 @@
                   "chartType": "donut",
                   "filter": "",
                   "headers": []
+                }
+              ]
+            },
+			{
+              "id": 127,
+              "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_SLA_TL",
+              "dimensions": {
+                "height": 250,
+                "width": 5
+              },              
+			  "vizType": "performing-metric",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+		       {
+                  "id": "tltopPerformingStatesSLA",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_SLA_TL",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "SLA"
+                }
+              ]
+            },
+			{
+              "id": 126,
+              "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_SLA_TL",
+              "dimensions": {
+                "height": 250,
+                "width": 5
+              },              
+			  "vizType": "performing-metric",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+		       {
+                  "id": "tlbottomPerformingStatesSLA",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_SLA_TL",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "SLA"
                 }
               ]
             }
