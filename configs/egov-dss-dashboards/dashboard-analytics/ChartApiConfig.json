@@ -13753,7 +13753,7 @@
     "aggregationPaths": [
       "TL_Total_Collection",
       "Transactions",
-      "Total_Licence_Issued_1",
+      "Total_Licence_Issued",
       "Target_Collection"
     ],
     "pathDataTypeMapping": [
@@ -13767,7 +13767,7 @@
         "Transactions": "number"
       },
       {
-        "Total_Licence_Issued_1": "number"
+        "Total_Licence_Issued": "number"
       },
       {
         "TL_Target_Achieved": "amount"
@@ -13778,7 +13778,7 @@
         "postAggregationTheory": "",
         "actionName": "PercentageComputedField",
         "fields": [
-          "Total_Licence_Issued_1",
+          "TL_Total_Collection",
           "Target_Collection"
         ],
         "newField": "TL_Target_Achieved",
