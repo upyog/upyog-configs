@@ -1,0 +1,486 @@
+{
+  "key": "pt-defaulternotice",
+  "config": {
+    "defaultStyle": {
+      "font": "Cambay"
+     },
+    "content": [
+      {
+        "style": "noc-head",
+        "table": {
+          "widths": [
+           
+            "*",
+            120
+          ],
+          "body": [
+            [
+              {
+                "stack": [
+                  {
+                    "text": "{{logo-header}} {{Municipal_Corporation}}",
+                    "style": "receipt-logo-header"
+                  },
+                  {
+                    "text": "{{serviceType}} {{payment_receipt}}",
+                    "style": "receipt-logo-sub-header"
+                  }
+                ],
+                "alignment": "left",
+                "margin": [
+                  0,
+                  10,
+                  0,
+                  0
+                ]
+              },
+              {
+                "stack": [
+                  {
+                    "text": "{{address}}"
+                  },
+                  {
+                    "text": "{{phoneNumber}}"
+                  },
+                  {
+                    "text": "{{website}}"
+                  },
+                  {
+                    "text": "{{email}}"
+                  }
+                ],
+                "alignment": "right",
+                "color": "#484848",
+                "margin": [
+                  -100,
+                  0,
+                  -25,
+                  0
+                ]
+              }
+            ]
+          ]
+        },
+        "layout": "noBorders"
+      },
+      {
+        "style": "noc-head",
+        "table": {
+          "widths": [
+            "20%","60%","20%"
+          ],
+          "body": [
+            [
+              {
+                "text": 
+                  {
+                    "text": "TO"
+                  }
+                ,
+                "alignment": "left",
+                "style": "sub-header1"
+              },
+              {
+                "text": 
+                  {
+                    "text": ""
+                  }
+                ,
+                "alignment": "left",
+                "style": "sub-header1"
+              },
+              {
+                "text": 
+                  {
+                    "text": ""
+                  }
+                ,
+                "alignment": "left",
+                "style": "sub-header1"
+              }
+          ],
+            [  
+              {
+              "text": 
+                {
+                  "text": ""
+                }
+              ,
+              "alignment": "left",
+              "style": "sub-header1"
+            },
+            {
+              "text": 
+                {
+                  "text": "{{propertyUniqueID}}"
+                }
+              ,
+              "alignment": "left",
+              "style": "sub-header1"
+            },
+            {
+              "text": 
+                {
+                  "text": " Dated {{date}}"
+                }
+              ,
+              "alignment": "left",
+              "style": "sub-header1"
+            }
+            ],
+            [  
+              {
+              "text": 
+                {
+                  "text": ""
+                }
+              ,
+              "alignment": "left",
+              "style": "sub-header1"
+            },
+            {
+              "text": 
+                {
+                  "text": "{{payerName}}"
+                }
+              ,
+              "alignment": "left",
+              "style": "sub-header1"
+            },
+            {
+              "text": 
+                {
+                  "text": ""
+                }
+              ,
+              "alignment": "left",
+              "style": "sub-header1"
+            }
+            ],
+            [  
+              {
+              "text": 
+                {
+                  "text": ""
+                }
+              ,
+              "alignment": "left",
+              "style": "sub-header1"
+            },
+            {
+              "text": 
+                {
+                  "text": "{{mobileNo}}"
+                }
+              ,
+              "alignment": "left",
+              "style": "sub-header1"
+            },
+            {
+              "text": 
+                {
+                  "text": ""
+                }
+              ,
+              "alignment": "left",
+              "style": "sub-header1"
+            }
+            ],
+            [  
+              {
+              "text": 
+                {
+                  "text": ""
+                }
+              ,
+              "alignment": "left",
+              "style": "sub-header1"
+            },
+            {
+              "text": 
+                {
+                  "text": "{{propertyAddress}}"
+                }
+              ,
+              "alignment": "left",
+              "style": "sub-header1"
+            },
+            {
+              "text": 
+                {
+                  "text": ""
+                }
+              ,
+              "alignment": "left",
+              "style": "sub-header1"
+            }
+            ]
+          ]
+        },
+        "layout": "noBorders"
+      },
+      {
+        "style": "receipt-approver",
+        "columns": [
+          {
+            "text": 
+              {
+                "text": "Notice ",
+                "bold": true,
+                "alignment": "center",
+                "decoration": "underline"
+              }
+            }
+          ]
+        },
+      {
+        "style": "noc-table",
+        "table": {
+          "widths": [
+            "100%"
+          ],
+          "body": [
+            [
+              {
+                "text": "This is to inform you that through Government Notification No: <51-Leg./2013> dated < 22/11/2013 > ,",
+                "border": [
+                  false,
+                  false,
+                  false,
+                  false
+                ],
+                "style": "receipt-table"
+              }
+            ],[
+              {
+                "text": "property tax has been levied on every property within the limits of the Municipal Corporation whether ",
+                "border": [
+                  false,
+                  false,
+                  false,
+                  false
+                ],
+                "style": "receipt-table"
+              
+              }
+            ],
+            [
+              {
+                "text": "commercial/residential from the year 2013-14 . Under Section <…112-A(1)..> of the <…Punjab Municipal ",
+                "border": [
+                  false,
+                  false,
+                  false,
+                  false
+                ],
+                "style": "receipt-table"
+              
+              }
+            ],
+            [
+              {
+                "text": " Corporation> (Second Amendment) Act, 2013…>, the owner/occupier is mandated to file a property tax ",
+                "border": [
+                  false,
+                  false,
+                  false,
+                  false
+                ],
+                "style": "receipt-table"
+              
+              }
+            ],
+            [
+              {
+                "text": "return every year from Number/Property ID number has been given to each property by the {{logo_header}}.",
+                "border": [
+                  false,
+                  false,
+                  false,
+                  false 
+                ],
+                "style": "receipt-table"
+              
+              }
+            ],
+            [
+              {
+                "text": "This UPIN number helps you to pay property tax of your property. Property tax can be paid online ",
+                "border": [
+                  false,
+                  false,
+                  false,
+                  false
+                ],
+                "style": "receipt-table"
+              
+              }
+            ],
+            [
+              {
+                "text": " at {{website}} or by visiting the MC office/CSC/CFC centre.",
+                "border": [
+                  false,
+                  false,
+                  false,
+                  false
+                ],
+                "style": "receipt-table"
+              
+              }
+            ],
+            [
+              {
+                "text": "     According to the office records, the property tax is due on your property and has not been ",
+                "border": [
+                  false,
+                  false,
+                  false,
+                  false
+                ],
+                "style": "receipt-table"
+              
+              }
+            ],
+            [
+              {
+                "text": " paid till the financial year {{Year}}. Therefore, you should submit the property tax return ",
+                "border": [
+                  false,
+                  false,
+                  false,
+                  false
+                ],
+                "style": "receipt-table"
+              
+              }
+            ],
+            [
+              {
+                "text": " of your property within seven days of receiving this information notice to avoid legal action ",
+                "border": [
+                  false,
+                  false,
+                  false,
+                  false
+                ],
+                "style": "receipt-table"
+              
+              }
+            ],
+            [
+              {
+                "text": " taken by this office to recover the outstanding tax. ",
+                "border": [
+                  false,
+                  false,
+                  false,
+                  false
+                ],
+                "style": "receipt-table"
+              
+              }
+            ]
+          ]
+
+         
+        },
+        "layout": {}
+      },
+      
+      {
+        "style": "receipt-approver",
+        "text": 
+              {
+                "text": "Commissioner, ",
+                "bold": true
+              },
+            "alignment": "right"
+            },
+
+         {
+        "style": "receipt-approver",
+        "text": 
+              {
+                "text": "Muinicipal Corporation ",
+                "bold": true
+              },
+            "alignment": "right"
+            }
+            
+      
+    ],
+    "styles": {
+     "noc-head": {
+      "margin": [
+        -30,
+        -30,
+        0,
+        1
+      ]
+    },
+    "receipt-logo-header": {
+      "color": "#000000",
+      "fontSize": 14,
+      "bold": true,
+      "letterSpacing": 0.74,
+      "margin": [
+        0,
+        0,
+        0,
+        5
+      ]
+    },
+    "receipt-logo-sub-header": {
+      "color": "#000000",
+      "fontSize": 12,
+      "letterSpacing": 0.6
+    },
+     "noc-table": {
+      "fontSize": 12,
+      "color": "#000000",
+      "margin": [
+        -10,
+        10,
+        -22,
+        2
+      ]
+    },
+     "receipt-table-value": {
+      "color": "#000000",
+      "bold": true,
+      "fontSize": 12,
+      "fontWeight": 500,
+      "margin": [
+        8,
+        8,
+        0,
+        8
+      ]
+    },
+    "receipt-table": {
+      "color": "#000000",
+      "bold": false,
+      "fontSize": 12,
+      "fontWeight": 400,
+      "alignment":"justify",
+      "margin": [
+        -10,
+        2,
+        -10,
+        2
+      ]
+    },
+     "receipt-approver": {
+      "fontSize": 12,
+      "bold": true,
+      "margin": [
+        -27,
+        10,
+        -10,
+        0
+      ],
+      "color": "#484848"
+        }   }
+  }
+}
