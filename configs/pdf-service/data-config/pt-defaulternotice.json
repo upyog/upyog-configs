@@ -16,7 +16,7 @@
               {
                 "variable": "propertyUniqueID",
                 "value": {
-                  "path": "$.consumerCode"
+                  "path": "$.propertyId"
                 }
               },
 
@@ -26,23 +26,30 @@
                   "path": "$.dueAmountYear"
                 }
               },              {
-                "variable": "propertyAddress",
+                "variable": "doorNo",
                 "value": {
-                  "path": "$.payerAddress"
+                  "path": "$.address.doorNo"
+                }
+              },
+              {
+                "variable": "locality",
+                "value": {
+                  "path": "$.address.locality.name"
+                }
+              },
+              {
+                "variable": "city",
+                "value": {
+                  "path": "$.address.city"
                 }
               },
               {
                 "variable": "mobileNo",
                 "value": {
-                  "path": "$.mobileNumber"
+                  "path": "$.owners[0].mobileNumber"
                 }
               },
-              {
-                "variable": "payerAddress",
-                "value": {
-                  "path": "$.payerAddress"
-                }
-              },
+             
               {
                 "variable": "payer_name",
                 "value": {
@@ -251,19 +258,19 @@
               {
                 "variable": "payerName",
                 "value": {
-                  "path": "$.payerName"
+                  "path": "$.owners[0].name"
                 }
               },
               {
                 "variable": "propertyID",
                 "value": {
-                  "path": "$.consumerCode"
+                  "path": "$.propertyId"
                 }
               },
               {
                 "variable": "consumerID",
                 "value": {
-                  "path": "$.consumerCode"
+                  "path": "$.propertyId"
                 }
               },
               {
