@@ -9,12 +9,12 @@
         "style": "noc-head",
         "table": {
           "widths": [
-           
-            "*",
-            120
+            "30%",
+            "70%"
           ],
           "body": [
             [
+            
               {
                 "stack": [
                   {
@@ -22,7 +22,7 @@
                     "style": "receipt-logo-header"
                   },
                   {
-                    "text": "",
+                    "text": " PT Defaulter Notice",
                     "style": "receipt-logo-sub-header"
                   }
                 ],
@@ -37,10 +37,10 @@
               {
                 "stack": [
                   {
-                    "text": "{{address}}"
+                    "text": "{{address}} pp"
                   },
                   {
-                    "text": "{{phoneNumber}}"
+                    "text": "{{phoneNumber}} tt"
                   },
                   {
                     "text": "{{website}}"
@@ -52,9 +52,9 @@
                 "alignment": "right",
                 "color": "#484848",
                 "margin": [
-                  -100,
+                  10,
                   0,
-                  -25,
+                  0,
                   0
                 ]
               }
@@ -402,7 +402,7 @@
         "style": "receipt-approver",
         "text": 
               {
-                "text": "Muinicipal Corporation ",
+                "text": "Municipal Corporation ",
                 "bold": true
               },
             "alignment": "right"
@@ -414,8 +414,8 @@
      "noc-head": {
       "margin": [
         -30,
-        -30,
-        0,
+        10,
+        -15,
         1
       ]
     },
