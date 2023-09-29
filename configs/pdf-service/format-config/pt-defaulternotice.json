@@ -6,15 +6,24 @@
      },
     "content": [
       {
-        "style": "noc-head",
+        "style": "noc-header",
         "table": {
           "widths": [
-            "30%",
-            "70%"
+            80,
+            "*",
+            200
           ],
           "body": [
             [
-            
+              {
+                "image": "{{logoImage}}",
+                "width": 50,
+                "height": 61.25
+              },
+              {
+                
+                  "text": ""
+              },
               {
                 "stack": [
                   {
@@ -22,38 +31,26 @@
                     "style": "receipt-logo-header"
                   },
                   {
-                    "text": " PT Defaulter Notice",
-                    "style": "receipt-logo-sub-header"
-                  }
-                ],
-                "alignment": "left",
-                "margin": [
-                  0,
-                  10,
-                  0,
-                  0
-                ]
-              },
-              {
-                "stack": [
-                  {
-                    "text": "{{address}} pp"
-                  },
-                  {
-                    "text": "{{phoneNumber}} tt"
-                  },
-                  {
-                    "text": "{{website}}"
-                  },
-                  {
-                    "text": "{{email}}"
+                    "stack": [
+                      {
+                        "text": "{{address}}"
+                      },
+                      {
+                        "text": "{{phoneNumber}}"
+                      },
+                      {
+                        "text": "{{website}}"
+                      },
+                      {
+                        "text": "{{email}}"
+                      }
+                    ]
                   }
                 ],
                 "alignment": "right",
-                "color": "#484848",
                 "margin": [
-                  10,
                   0,
+                  10,
                   0,
                   0
                 ]
@@ -62,6 +59,13 @@
           ]
         },
         "layout": "noBorders"
+      },
+      {
+        "text":"PT Defaulter Notice",
+        "alignment":"center",
+        "decoration":"underline",
+        "fontSize":14,
+        "bold":true
       },
       {
         "style": "noc-head",
@@ -220,20 +224,6 @@
         "layout": "noBorders"
       },
       {
-        "style": "receipt-approver",
-        "columns": [
-          {
-            "text": 
-              {
-                "text": "Notice ",
-                "bold": true,
-                "alignment": "center",
-                "decoration": "underline"
-              }
-            }
-          ]
-        },
-      {
         "style": "noc-table",
         "table": {
           "widths": [
@@ -242,7 +232,7 @@
           "body": [
             [
               {
-                "text": "This is to inform you that through Government Notification No: <51-Leg./2013> dated < 22/11/2013 > ,",
+                "text": "   This is to inform you that through Government Notification No: <51-Leg./2013> dated < 22/11/2013 > ,",
                 "border": [
                   false,
                   false,
@@ -266,7 +256,7 @@
             ],
             [
               {
-                "text": "commercial/residential from the year 2013-14 . Under Section <…112-A(1)..> of the <…Punjab Municipal ",
+                "text": "commercial / residential from the year 2013-14 . Under Section <…112-A(1)..> of the <…Punjab Municipal ",
                 "border": [
                   false,
                   false,
@@ -292,7 +282,7 @@
             ],
             [
               {
-                "text": "return every year from Number/Property ID number has been given to each property by the {{logo_header}}.",
+                "text": "return every year from Number / Property ID number has been given to each property by the {{logo_header}}.",
                 "border": [
                   false,
                   false,
@@ -305,7 +295,7 @@
             ],
             [
               {
-                "text": "This UPIN number helps you to pay property tax of your property. Property tax can be paid online ",
+                "text": "This UPIN number helps you to pay property tax of your property. Property tax can be paid online at ",
                 "border": [
                   false,
                   false,
@@ -318,7 +308,7 @@
             ],
             [
               {
-                "text": " at {{website}} or by visiting the MC office/CSC/CFC centre.",
+                "text": "{{website}} or by visiting the MC office/CSC/CFC centre.",
                 "border": [
                   false,
                   false,
@@ -331,7 +321,7 @@
             ],
             [
               {
-                "text": "     According to the office records, the property tax is due on your property and has not been ",
+                "text": "     According to the office records, the property tax is due on your property and has not been  paid till",
                 "border": [
                   false,
                   false,
@@ -344,7 +334,7 @@
             ],
             [
               {
-                "text": " paid till the financial year {{Year}}. Therefore, you should submit the property tax return ",
+                "text": " the financial year {{Year}}.",
                 "border": [
                   false,
                   false,
@@ -357,7 +347,7 @@
             ],
             [
               {
-                "text": " of your property within seven days of receiving this information notice to avoid legal action ",
+                "text": " Therefore, you should submit the property tax return of yourproperty within seven days of receiving ",
                 "border": [
                   false,
                   false,
@@ -370,7 +360,7 @@
             ],
             [
               {
-                "text": " taken by this office to recover the outstanding tax. ",
+                "text": " this information notice to avoid legal action taken by this office to recover the outstanding tax. ",
                 "border": [
                   false,
                   false,
@@ -413,12 +403,21 @@
     "styles": {
      "noc-head": {
       "margin": [
-        -30,
+        -15,
         10,
         -15,
         1
       ]
     },
+    
+      "noc-header": {
+        "margin": [
+          -25,
+          -30,
+          0,
+          1
+        ]
+      },
     "receipt-logo-header": {
       "color": "#000000",
       "fontSize": 14,
@@ -426,7 +425,7 @@
       "letterSpacing": 0.74,
       "margin": [
         0,
-        0,
+        -10,
         0,
         5
       ]
@@ -439,11 +438,12 @@
      "noc-table": {
       "fontSize": 12,
       "color": "#000000",
+      "alignment":"justify",
       "margin": [
-        -10,
-        10,
-        -22,
-        2
+        -15,
+        8,
+        -8,
+        4
       ]
     },
      "receipt-table-value": {
@@ -463,7 +463,7 @@
       "bold": false,
       "fontSize": 12,
       "fontWeight": 400,
-      "alignment":"justify",
+      "alignment":"justified",
       "margin": [
         -10,
         2,
