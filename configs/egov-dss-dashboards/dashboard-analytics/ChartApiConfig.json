@@ -12143,7 +12143,7 @@
     "queries": [
       {
         "module": "WS",
-        "dateRefField": "date",
+        "dateRefField": "",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
         "indexName": "ws-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"Connections\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"connectionsCreatedForConnectionType\"}}],\"must_not\":[{\"match\":{\"connectionsCreatedForConnectionType\":0}}]}},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"connectionsCreatedForConnectionType\"}}}}}}"
@@ -13754,7 +13754,7 @@
     "aggregationPaths": [
       "TL_Total_Collection",
       "Transactions",
-      "Total_Licence_Issued",
+      "Total_Licence_Issued_1",
       "Target_Collection"
     ],
     "pathDataTypeMapping": [
@@ -13768,7 +13768,7 @@
         "Transactions": "number"
       },
       {
-        "Total_Licence_Issued": "number"
+        "Total_Licence_Issued_1": "number"
       },
       {
         "TL_Target_Achieved": "amount"
@@ -13779,7 +13779,7 @@
         "postAggregationTheory": "",
         "actionName": "PercentageComputedField",
         "fields": [
-          "TL_Total_Collection",
+          "Total_Licence_Issued_1",
           "Target_Collection"
         ],
         "newField": "TL_Target_Achieved",
@@ -13864,14 +13864,14 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ward\" : \"ward.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "tl-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Tenants\":{\"terms\":{\"field\":\"ulb.keyword\"},\"aggs\":{\"TL_Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}},\"Total_Licence_Issued_1\":{\"filter\":{\"bool\":{\"must_not\":[],\"must\":[{\"match\":{\"status.keyword\":\"APPROVED\"}}]}},\"aggs\":{\"Total_Licence_Issued\":{\"sum\":{\"field\":\"todaysTradeLicensesForStatus\"}}}},\"Transactions\":{\"sum\":{\"field\":\"transactions\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Tenants\":{\"terms\":{\"field\":\"ulb.keyword\",\"size\":10000},\"aggs\":{\"TL_Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}},\"Total_Licence_Issued_1\":{\"filter\":{\"bool\":{\"must_not\":[],\"must\":[{\"match\":{\"status.keyword\":\"APPROVED\"}}]}},\"aggs\":{\"Total_Licence_Issued\":{\"sum\":{\"field\":\"todaysTradeLicensesForStatus\"}}}},\"intermediateAggrWard\":{\"terms\":{\"field\":\"ward.keyword\",\"size\":10000},\"aggs\":{\"days\":{\"terms\":{\"field\":\"date\",\"size\":10000},\"aggs\":{\"applications\":{\"avg\":{\"field\":\"transactions\"}}}},\"wardapplications\":{\"sum_bucket\":{\"buckets_path\":\"days.applications\"}}}},\"Transactions\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrWard.wardapplications\"}}}}}}}}"
       },
       {
         "module": "TL",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[],\"must\":[{\"term\":{\"module.keyword\":\"TL\"}}]}},\"aggs\":{\"Tenants\":{\"terms\":{\"field\":\"ulb.keyword\"},\"aggs\":{\"Target_Collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"budgetProposedForMunicipalCorporation\":0}}],\"must\":[{\"term\":{\"module.keyword\":\"TL\"}}]}},\"aggs\":{\"Tenants\":{\"terms\":{\"field\":\"ulb.keyword\"},\"aggs\":{\"Target_Collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}}}"
       }
     ],
     "filterKeys": [
