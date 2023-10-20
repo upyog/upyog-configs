@@ -10,6 +10,11 @@ ReportDefinitions:
         type: string
         source: fsm
         total: false
+      - name: financialyear
+        label: Financial Year
+        type: string
+        source: fsm
+        total: false	
       - name: receiptnumber
         label: REPORT_FSM_RESULT_RECEIPTNUMBER
         type: string
@@ -110,8 +115,15 @@ ReportDefinitions:
         wrapper: true
         isMandatory: false
         searchClause: AND app.dso_id = $dsoId
+      - name: year
+        label: Financial Year
+        type: singlevaluelist
+	source: fsm
+	pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egf-master&masterName=FinancialYear|$.MdmsRes.egf-master.FinancialYear.[?(@.module=='FSM')].code|$.MdmsRes.egf-master.FinancialYear.[?(@.module=='FSM')].name
+	isMandatory: false
+        searchClause: AND paydl.receiptdate >= (select extract(EPOCH from(select TO_TIMESTAMP( (select CONCAT(split_part($year, '-', 1), '-04-01 00:00:00' ) ), 'YYYY-MM-DD HH24s:MI:SS' ) at time zone 'GMT'))* 1000 ) and paydl.receiptdate <= (select extract(EPOCH from(select TO_TIMESTAMP( (select CONCAT(cast((cast(split_part($year, '-', 1) as integer) + 1 ) as varchar), '-03-31 23:59:59' ) ), 'YYYY-MM-DD HH24s:MI:SS' )at time zone 'GMT'))* 1000 + 3000000)
     query: |
-          select To_char(To_timestamp(paydl.receiptdate / 1000), 'DD/MM/YYYY')  as receiptdate, paydl.receiptnumber as receiptnumber,b.consumercode AS applicationno,(select name from eg_user where uuid=app.accountid ) as name,  pay.paymentmode as instrumenttype, (case when (pay.paymentmode like 'CHEQUE' OR pay.paymentmode like 'DD') then To_char(To_timestamp(pay.instrumentdate / 1000), 'DD/MM/YYYY')  else  'NA' end)  as chequedate, (case when (pay.paymentmode like 'CHEQUE' OR pay.paymentmode like 'DD') then pay.instrumentnumber else  'NA' end) as chequeno, (case when (pay.paymentmode like 'CHEQUE' OR pay.paymentmode like 'DD') then pay.additionaldetails::json#>>'{bankDetails,BANK}'  else  'NA' end) as bankname, (case when pay.paymentmode='ONLINE' then pay.transactionnumber else  'NA' end) as transactionid, (case when pay.paymentmode='CARD' then pay.instrumentnumber else  '' end) as carddigit, bd.amount as amount,pay.paymentstatus as status from egcl_bill b inner join egcl_billdetial bd ON b.id = bd.billid AND b.tenantid = bd.tenantid INNER JOIN eg_fsm_application app on b.consumercode =app.applicationno and b.tenantid =app.tenantid inner join egcl_paymentdetail paydl   ON b.id = paydl.billid    AND b.tenantid = paydl.tenantid inner join egcl_payment pay  ON paydl.paymentid = pay.id and   paydl.tenantid =pay.tenantid where pay.tenantid=$tenantid and b.businessservice ='FSM.TRIP_CHARGES' 
+          select To_char(To_timestamp(paydl.receiptdate / 1000), 'DD/MM/YYYY')  as receiptdate,(CASE WHEN EXTRACT(MONTH FROM TO_TIMESTAMP(paydl.receiptdate / 1000)) >= 4 THEN CONCAT (EXTRACT(YEAR FROM TO_TIMESTAMP(paydl.receiptdate / 1000)), '-', EXTRACT(YEAR FROM TO_TIMESTAMP(paydl.receiptdate / 1000)) + 1) ELSE CONCAT(EXTRACT(YEAR FROM TO_TIMESTAMP(paydl.receiptdate / 1000)) - 1, '-', EXTRACT(YEAR FROM TO_TIMESTAMP(paydl.receiptdate / 1000))) END) AS financialyear, paydl.receiptnumber as receiptnumber,b.consumercode AS applicationno,(select name from eg_user where uuid=app.accountid ) as name,  pay.paymentmode as instrumenttype, (case when (pay.paymentmode like 'CHEQUE' OR pay.paymentmode like 'DD') then To_char(To_timestamp(pay.instrumentdate / 1000), 'DD/MM/YYYY')  else  'NA' end)  as chequedate, (case when (pay.paymentmode like 'CHEQUE' OR pay.paymentmode like 'DD') then pay.instrumentnumber else  'NA' end) as chequeno, (case when (pay.paymentmode like 'CHEQUE' OR pay.paymentmode like 'DD') then pay.additionaldetails::json#>>'{bankDetails,BANK}'  else  'NA' end) as bankname, (case when pay.paymentmode='ONLINE' then pay.transactionnumber else  'NA' end) as transactionid, (case when pay.paymentmode='CARD' then pay.instrumentnumber else  '' end) as carddigit, bd.amount as amount,pay.paymentstatus as status from egcl_bill b inner join egcl_billdetial bd ON b.id = bd.billid AND b.tenantid = bd.tenantid INNER JOIN eg_fsm_application app on b.consumercode =app.applicationno and b.tenantid =app.tenantid inner join egcl_paymentdetail paydl   ON b.id = paydl.billid    AND b.tenantid = paydl.tenantid inner join egcl_payment pay  ON paydl.paymentid = pay.id and   paydl.tenantid =pay.tenantid where pay.tenantid=$tenantid and b.businessservice ='FSM.TRIP_CHARGES' 
     orderby: order by paydl.receiptdate  desc
   - reportName: FSMRequestReport
     summary: Report gives the highlevel information of FSM Requests
