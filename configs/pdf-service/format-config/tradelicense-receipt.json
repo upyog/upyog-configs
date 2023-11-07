@@ -436,6 +436,55 @@
         "layout": {}
       },
       {
+        "style": "next-noc-table",
+        "table": {
+            "widths": [
+                "60%",
+                "30%",
+                "10%"
+            ],
+            "body": [
+                [
+                    {
+                        "text": "{{total_amount}}",
+                        "border": [
+                            true,
+                            true,
+                            false,
+                            true
+                        ],
+                        "bold": true,
+                        "style": "receipt-table-value-down"
+                    },
+                    {
+                        "text": "{{totalAmount}}",
+                        "border": [
+                            false,
+                            true,
+                            false,
+                            true
+                        ],
+                        "bold": true,
+                        "style": "receipt-table-value-down"
+                    },
+                    {
+                        "image": "{{qrcodeimage}}",
+                        "style": "receipt-table-value-total-Qr",
+                        "border": [
+                            false,
+                            true,
+                            true,
+                            true
+                        ],
+                        "width": 72,
+                        "height": 72
+                    }
+                ]
+            ]
+        },
+        "layout": {}
+    },
+      {
         "style": "receipt-approver",
         "columns": [
           {
@@ -527,7 +576,7 @@
       "color": "#000000",
       "margin": [
         -25,
-        45,
+        10,
         -22,
         -8
       ]
@@ -549,11 +598,33 @@
       "fontWeight": 500,
       "margin": [
         8,
-        8,
+        2,
         0,
-        8
+        2
       ]
     },
+    "receipt-table-value-total-Qr": {
+      "alignment": "right",
+      "margin": [
+          0,
+          3,
+          10,
+          0
+      ]
+  },
+  "receipt-table-value-down": {
+      "color": "#000000",
+      "bold": false,
+      "fontSize": 12,
+      "fontWeight": 400,
+      "alignment": "left",
+      "margin": [
+          3,
+          5,
+          0,
+          5
+      ]
+  },
     "receipt-table": {
       "color": "#000000",
       "bold": false,
@@ -561,9 +632,9 @@
       "fontWeight": 400,
       "margin": [
         -10,
-        8,
+        2,
         0,
-        8
+        2
       ]
     },
      "receipt-approver": {
@@ -601,7 +672,7 @@
       "fontSize": 12,
       "margin": [
         2,
-        5,
+        3,
         0,
         0
       ],
