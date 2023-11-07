@@ -142,6 +142,55 @@
         "layout": {}
       },
       {
+        "style": "next-noc-table",
+        "table": {
+            "widths": [
+                "60%",
+                "30%",
+                "10%"
+            ],
+            "body": [
+                [
+                    {
+                        "text": "{{total_amount}}",
+                        "border": [
+                            true,
+                            true,
+                            false,
+                            true
+                        ],
+                        "bold": true,
+                        "style": "receipt-table-value-down"
+                    },
+                    {
+                        "text": "{{totalAmount}}",
+                        "border": [
+                            false,
+                            true,
+                            false,
+                            true
+                        ],
+                        "bold": true,
+                        "style": "receipt-table-value-down"
+                    },
+                    {
+                        "image": "{{qrcodeimage}}",
+                        "style": "receipt-table-value-total-Qr",
+                        "border": [
+                            false,
+                            true,
+                            true,
+                            true
+                        ],
+                        "width": 72,
+                        "height": 72
+                    }
+                ]
+            ]
+        },
+        "layout": {}
+    },
+      {
         "style": "receipt-approver",
         "columns": [
           {
@@ -581,7 +630,7 @@
       "fontSize": 9,
       "margin": [
         2,
-        5,
+        3,
         0,
         0
       ],
