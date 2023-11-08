@@ -105,6 +105,32 @@ serviceMaps:
             - jsonPath: $.PetRegistrationApplications.*.petDetails.vaccinationNumber
 
             - jsonPath: $.PetRegistrationApplications.*.petDetails.petDetailsId
+        
+            
+        - query: INSERT INTO eg_ptr_applicationdocuments( id, tenantId, documentType, filestoreId, documentUid, petApplicationId, active, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: PetRegistrationApplications.*.documents.*
+          jsonMaps:
+            - jsonPath: $.PetRegistrationApplications.*.id
+
+            - jsonPath: $.PetRegistrationApplications.*.tenantId
+ 
+            - jsonPath: $.PetRegistrationApplications.*.documentType
+
+            - jsonPath: $.PetRegistrationApplications.*.filestoreId
+
+            - jsonPath: $.PetRegistrationApplications.*.documentUid
+            
+            - jsonPath: $.PetRegistrationApplications.*.[?({id} in @.documents[*].id)].id
+             
+            - jsonPath: $.PetRegistrationApplications.*.active
+            
+            - jsonPath: $.PetRegistrationApplications.*.auditDetails.createdBy
+            
+            - jsonPath: $.PetRegistrationApplications.*.auditDetails.lastModifiedBy
+            
+            - jsonPath: $.PetRegistrationApplications.*.auditDetails.createdTime
+            
+            - jsonPath: $.PetRegistrationApplications.*.auditDetails.lastModifiedTime
 
 
     - version: 1.0
