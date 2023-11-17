@@ -929,7 +929,7 @@ ReportDefinitions:
       - name: module
         label: module
         type: singlevaluelist
-        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?&masterName=nationalInfoUser|$.MdmsRes.tenant.FinancialYearnationalInfoUser.statecode|$.MdmsRes.tenant.nationalInfoUser.statecode
+        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?moduleName=tenant&masterName=nationalInfoUser|$.MdmsRes.tenant.nationalInfoUser.statecode|$.MdmsRes.tenant.nationalInfoUser.statecode
         source: nss
         wrapper: true
         isMandatory: false
