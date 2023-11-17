@@ -916,7 +916,7 @@ ReportDefinitions:
         source: uc
         total: false
       - name: module
-        label: Module
+        label: module
         type: string
         source: uc
         total: false
@@ -927,10 +927,10 @@ ReportDefinitions:
         total: false
     searchParams:
       - name: module
-        label: module
+        label: report.uc.module
         type: singlevaluelist
-        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=tenant&masterName=nationalInfoUser|$.MdmsRes.tenant.nationalInfoUser.stateCode|$.MdmsRes.tenant.nationalInfoUser.stateCode
-        source: nss
+        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=tenant&masterName=nationalInfoUser|$.MdmsRes.tenant.nationalInfoUser.*.stateCode|$.MdmsRes.tenant.nationalInfoUser.*.stateCode
+        source: uc
         wrapper: true
         isMandatory: false
         searchClause: AND data.state = $State
