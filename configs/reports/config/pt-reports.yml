@@ -153,7 +153,6 @@ ReportDefinitions:
         JOIN egcl_paymentdetail AS ed ON ep.id = ed.paymentid JOIN egcl_bill  as bill on ed.billid=bill.id JOIN eg_pt_property as property on bill.consumercode=property.propertyid JOIN eg_pt_address as ptd on property.id=ptd.propertyid JOIN eg_user as users on ep.createdby::int=users.id JOIN eg_userrole_v1 as userrole on users.id=userrole.user_id  where 1=1  and ed.businessservice='PT' and ep.paymentstatus !='CANCELLED' and ep.tenantid=$tenantid and userrole.role_tenantid=$tenantid and ep.paymentmode!='ONLINE' and userrole.role_code='PT_CEMP' and property.status='ACTIVE'
   groupby: group by locality,name,paymentinstrument,user_uuid
 
-  
 - reportName: DefaulterReport
   decryptionPathId: DefaulterReport
   summary: Report is usually generated weekly/monthly to send notice to the defaulters and used only in the demand-based systems.
@@ -165,8 +164,18 @@ ReportDefinitions:
     type: string
     source: pt
     total: false
-  - name: name
-    label: reports.pt.consumername
+  - name: Owner_Name
+    label: reports.pt.owner_name
+    type: string
+    source: pt
+    total: false
+  - name: Contact
+    label: reports.pt.contact
+    type: string
+    source: pt
+    total: false
+  - name: Father_name
+    label: reports.pt.Father_Name
     type: string
     source: pt
     total: false
@@ -177,21 +186,16 @@ ReportDefinitions:
     total: false
     localisationPrefix: TENANTS_MOHALLA_
     isLocalisationRequired: true
-  - name: propertystatus
-    label: reports.pt.propertystatus
-    type: string
-    source: pt
-    total: false
-  - name: user_uuid
-    label: reports.pt.user_uuid
-    type: string
-    source: pt
-    showColumn: false
-  - name: dueamount
-    label: reports.pt.dueamount
+  - name: taxDue
+    label: reports.pt.taxDue
     type: string
     source: pt
     total: true
+  - name: taxDueYear
+    label: reports.pt.taxDueYear
+    type: string
+    source: pt
+    showColumn: false
   searchParams:
   - name: locality
     label: reports.pt.locality
@@ -212,6 +216,6 @@ ReportDefinitions:
     isMandatory: false
     localisationPrefix: PROPERTYTAX_BILLING_SLAB_
     isLocalisationRequired: false
-    searchClause: AND usagecategory = $usagetype 
+    searchClause: AND usagecategory = $usagetype
   query: |
-        select distinct(propertyid),name,user_uuid,(select status  from eg_pt_property where propertyid=propertyid order by createdtime asc limit 1)as propertystatus,locality,dueamount from (SELECT ep.propertyid,ep.usagecategory,(select name from eg_user where uuid=(select userid from eg_pt_owner where propertyid=propertyid order by createdtime limit 1)) as name, (select userid from eg_pt_owner where propertyid=propertyid order by createdtime limit 1) as user_uuid, ep.status  AS propertystatus,ea.locality   FROM eg_pt_property ep join eg_pt_address as ea on ep.id=ea.propertyid where ep.tenantid=$tenantid) property join (select consumercode, (sum(taxamount)-sum(collectionamount)) as dueamount from egbs_demand_v1 as demand join egbs_demanddetail_v1 as demanddetail on demand.id=demanddetail.demandid where (demanddetail.taxamount - demanddetail.collectionamount)>0 and demand.ispaymentcompleted is not true and demand.tenantid=$tenantid group by consumercode) demand on property.propertyid=demand.consumercode where 1=1
+        select * from (SELECT  property.propertyid, usr.name as owner_name, usr.mobilenumber as contact,(CASE WHEN usr.guardianrelation LIKE 'FATHER' THEN usr.guardian ELSE 'NULL' END) as Father_Name, property.usagecategory, locality  FROM EG_PT_PROPERTY property INNER JOIN EG_PT_ADDRESS address ON property.id = address.propertyid INNER JOIN EG_PT_OWNER owner ON property.id = owner.propertyid INNER JOIN eg_user usr ON owner.userid=usr.uuid  LEFT OUTER JOIN EG_PT_UNIT unit ON property.id =  unit.propertyid  WHERE  property.tenantId==$tenantid AND owner.status = 'ACTIVE' AND property.status = 'ACTIVE') as propertydata LEFT OUTER JOIN (select consumercode,sum(taxdue) as taxDue, STRING_AGG(year || '(Rs.' || taxdue || ')',',')  as taxDueYear from ( select d.consumercode, (to_char((To_timestamp(d.taxperiodfrom/1000) at time Zone 'Asia/Kolkata'),'YYYY') || '-' || to_char((To_timestamp(d.taxperiodto/1000) at time Zone 'Asia/Kolkata'),'YY')) as year ,  sum(dd.taxamount)-sum(dd.collectionamount) as taxdue from egbs_demanddetail_v1 dd, egbs_demand_v1 d where dd.demandid=d.id and d.status!='CANCELLED' and dd.tenantid=$tenantid and d.tenantid==$tenantid and (to_char((To_timestamp(d.taxperiodfrom/1000) at time Zone 'Asia/Kolkata'),'YYYY') || '-' || to_char((To_timestamp(d.taxperiodto/1000) at time Zone 'Asia/Kolkata'),'YY')) != '2023-24' group by d.consumercode,(to_char((To_timestamp(d.taxperiodfrom/1000) at time Zone 'Asia/Kolkata'),'YYYY') || '-' || to_char((To_timestamp(d.taxperiodto/1000) at time Zone 'Asia/Kolkata'),'YY'))) tax where taxDue>0 group by tax.consumercode) as taxdata on propertydata.propertyid=taxdata.consumercode
