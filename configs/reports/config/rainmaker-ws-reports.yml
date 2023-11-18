@@ -1911,13 +1911,13 @@ ReportDefinitions:
         type: epoch
         source: ws
         isMandatory: true
-        searchClause: AND createdtime >= $fromDate
+        searchClause: AND ws.createdtime >= $fromDate
       - name: toDate
         label: reports.ws.toDate
         type: epoch
         source: ws
         isMandatory: true
-        searchClause: AND createdtime <= $toDate
+        searchClause: AND ws.createdtime <= $toDate
       - name: locality
         label: reports.wns.locality
         type: singlevaluelist
