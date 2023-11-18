@@ -1790,28 +1790,33 @@ ReportDefinitions:
     version: 1.0.0
     moduleName: rainmaker-ws
     sourceColumns:
-      - name: tenantId
-        label: report.ws.tenantId
+       - name: connectionno
+        label: Connection No.
         type: string
         source: ws
-        total: false
+        total: false   
       - name: propertyid
-        label: report.ws.propertyid
-        type: string
-        source: ws
-        total: false
-      - name: Owner_Name
-        label: report.ws.name
+        label: Property ID
         type: string
         source: ws
         total: false
       - name: locality
-        label: report.wns.locality
+        label: Locality
         type: string
         source: wns
         total: false
         localisationPrefix: TENANTS_MOHALLA_
         isLocalisationRequired: true
+      - name: Disconnection_date
+        label: Disconnection Date
+        type: string
+        source: ws
+        total: false
+      - name: name
+        label: Owner Name
+        type: string
+        source: ws
+        total: false
     searchParams:
       - name: fromDate
         label: reports.ws.fromDate
@@ -1825,14 +1830,6 @@ ReportDefinitions:
         source: ws
         isMandatory: true
         searchClause: AND dateeffectivefrom <= $toDate
-      - name: ulb
-        label: ULB
-        type: singlevaluelist
-        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=tenant&masterName=tenants|$.MdmsRes.tenant.tenants.*.code|$.MdmsRes.tenant.tenants.*.name
-        source: ws
-        wrapper: true
-        isMandatory: false
-        searchClause: AND ws.tenantId = $ulb
       - name: locality
         label: reports.wns.locality
         type: singlevaluelist
