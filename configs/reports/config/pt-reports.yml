@@ -169,12 +169,12 @@ ReportDefinitions:
     type: string
     source: pt
     total: false
-  - name: Contact
+  - name: mobilenumber
     label: Mobile Number
     type: string
     source: pt
     total: false
-  - name: Father_name
+  - name: guardian
     label: Father's Name
     type: string
     source: pt
@@ -218,5 +218,5 @@ ReportDefinitions:
     isLocalisationRequired: false
     searchClause: AND usagecategory = $usagetype
   query: |
-        select * from (SELECT  property.propertyid, usr.name as name, usr.mobilenumber as contact,(CASE WHEN usr.guardianrelation LIKE 'FATHER' THEN usr.guardian ELSE 'NULL' END) as Father_Name, property.usagecategory, locality  FROM EG_PT_PROPERTY property INNER JOIN EG_PT_ADDRESS address ON property.id = address.propertyid INNER JOIN EG_PT_OWNER owner ON property.id = owner.propertyid INNER JOIN eg_user usr ON owner.userid=usr.uuid  LEFT OUTER JOIN EG_PT_UNIT unit ON property.id =  unit.propertyid  WHERE  property.tenantId=$tenantid AND owner.status = 'ACTIVE' AND property.status = 'ACTIVE') as propertydata LEFT OUTER JOIN (select consumercode,sum(taxdue) as taxDue, STRING_AGG(year || '(Rs.' || taxdue || ')',',')  as taxDueYear from ( select d.consumercode, (to_char((To_timestamp(d.taxperiodfrom/1000) at time Zone 'Asia/Kolkata'),'YYYY') || '-' || to_char((To_timestamp(d.taxperiodto/1000) at time Zone 'Asia/Kolkata'),'YY')) as year ,  sum(dd.taxamount)-sum(dd.collectionamount) as taxdue from egbs_demanddetail_v1 dd, egbs_demand_v1 d where dd.demandid=d.id and d.status!='CANCELLED' and dd.tenantid=$tenantid and d.tenantid=$tenantid and (to_char((To_timestamp(d.taxperiodfrom/1000) at time Zone 'Asia/Kolkata'),'YYYY') || '-' || to_char((To_timestamp(d.taxperiodto/1000) at time Zone 'Asia/Kolkata'),'YY')) != '2023-24' group by d.consumercode,(to_char((To_timestamp(d.taxperiodfrom/1000) at time Zone 'Asia/Kolkata'),'YYYY') || '-' || to_char((To_timestamp(d.taxperiodto/1000) at time Zone 'Asia/Kolkata'),'YY'))) tax where taxDue>0 group by tax.consumercode) as taxdata on propertydata.propertyid=taxdata.consumercode
+        select * from (SELECT  property.propertyid, usr.name as name, usr.mobilenumber as mobilenumber,(CASE WHEN usr.guardianrelation LIKE 'FATHER' THEN usr.guardian ELSE 'NULL' END) as guardian, property.usagecategory, locality  FROM EG_PT_PROPERTY property INNER JOIN EG_PT_ADDRESS address ON property.id = address.propertyid INNER JOIN EG_PT_OWNER owner ON property.id = owner.propertyid INNER JOIN eg_user usr ON owner.userid=usr.uuid  LEFT OUTER JOIN EG_PT_UNIT unit ON property.id =  unit.propertyid  WHERE  property.tenantId=$tenantid AND owner.status = 'ACTIVE' AND property.status = 'ACTIVE') as propertydata LEFT OUTER JOIN (select consumercode,sum(taxdue) as taxDue, STRING_AGG(year || '(Rs.' || taxdue || ')',',')  as taxDueYear from ( select d.consumercode, (to_char((To_timestamp(d.taxperiodfrom/1000) at time Zone 'Asia/Kolkata'),'YYYY') || '-' || to_char((To_timestamp(d.taxperiodto/1000) at time Zone 'Asia/Kolkata'),'YY')) as year ,  sum(dd.taxamount)-sum(dd.collectionamount) as taxdue from egbs_demanddetail_v1 dd, egbs_demand_v1 d where dd.demandid=d.id and d.status!='CANCELLED' and dd.tenantid=$tenantid and d.tenantid=$tenantid and (to_char((To_timestamp(d.taxperiodfrom/1000) at time Zone 'Asia/Kolkata'),'YYYY') || '-' || to_char((To_timestamp(d.taxperiodto/1000) at time Zone 'Asia/Kolkata'),'YY')) != '2023-24' group by d.consumercode,(to_char((To_timestamp(d.taxperiodfrom/1000) at time Zone 'Asia/Kolkata'),'YYYY') || '-' || to_char((To_timestamp(d.taxperiodto/1000) at time Zone 'Asia/Kolkata'),'YY'))) tax where taxDue>0 group by tax.consumercode) as taxdata on propertydata.propertyid=taxdata.consumercode
   orderby: order by taxDue desc
