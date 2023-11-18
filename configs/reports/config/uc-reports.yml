@@ -926,8 +926,8 @@ ReportDefinitions:
         source: uc
         total: false
     searchParams:
-      - name: module
-        label: report.uc.module
+      - name: State
+        label: State
         type: singlevaluelist
         pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=tenant&masterName=nationalInfoUser|$.MdmsRes.tenant.nationalInfoUser.*.stateCode|$.MdmsRes.tenant.nationalInfoUser.*.stateCode
         source: uc
