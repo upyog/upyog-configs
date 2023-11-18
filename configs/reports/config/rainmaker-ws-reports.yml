@@ -1868,11 +1868,6 @@ ReportDefinitions:
         type: string
         source: ws
         total: false   
-      - name: propertyid
-        label: Property ID
-        type: string
-        source: ws
-        total: false
       - name: locality
         label: Locality
         type: string
@@ -1880,7 +1875,7 @@ ReportDefinitions:
         total: false
         localisationPrefix: TENANTS_MOHALLA_
         isLocalisationRequired: true
-      - name: Disconnection_date
+      - name: Connection_date
         label: Connection Date
         type: string
         source: ws
@@ -1900,7 +1895,7 @@ ReportDefinitions:
         type: string
         source: pt
         total: false
-      - name: relation
+      - name: guardianrelation
         label: Guardian's Relation
         type: string
         source: pt
@@ -1913,7 +1908,7 @@ ReportDefinitions:
         isMandatory: true
         searchClause: AND ws.createdtime >= $fromDate
       - name: toDate
-        label: reports.ws.toDate
+        label: reports.ws.toDate            
         type: epoch
         source: ws
         isMandatory: true
