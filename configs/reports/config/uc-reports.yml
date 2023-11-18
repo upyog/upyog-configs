@@ -929,7 +929,7 @@ ReportDefinitions:
       - name: State
         label: State
         type: singlevaluelist
-        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=tenant&masterName=nationalInfoUser|$.MdmsRes.tenant.nationalInfoUser.*.stateCode|$.MdmsRes.tenant.nationalInfoUser.*.stateCode
+        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=pg&moduleName=tenant&masterName=nationalInfoUser|$.MdmsRes.tenant.nationalInfoUser.*.stateCode|$.MdmsRes.tenant.nationalInfoUser.*.stateCode
         source: uc
         wrapper: true
         isMandatory: false
