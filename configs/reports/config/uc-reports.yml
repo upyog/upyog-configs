@@ -921,8 +921,8 @@ ReportDefinitions:
         source: uc
         total: false
       - name: date
-        label: Date
-        type: date
+        label: date
+        type: string
         source: uc
         total: false
     searchParams:
@@ -943,6 +943,6 @@ ReportDefinitions:
         isMandatory: false
         searchClause: AND data.module = $module
     query: |
-        select data.state, data.module, max( data.date ) AS last_pushed_date  from (select split_part(datakey, ':','1') as date,split_part(datakey, ':','2') as module, split_part(datakey, ':','3') as ward, split_part(datakey, ':','4') as ulb, split_part(datakey, ':','6') as state from nss_ingest_data)as data where data.module != 'COMMON' 
+        select data.state, data.module, max( data.date ) AS date  from (select split_part(datakey, ':','1') as date,split_part(datakey, ':','2') as module, split_part(datakey, ':','3') as ward, split_part(datakey, ':','4') as ulb, split_part(datakey, ':','6') as state from nss_ingest_data)as data where data.module != 'COMMON' 
     groupby: GROUP BY data.state ,data.module
     orderby: ORDER BY data.state ASC
