@@ -1785,7 +1785,7 @@ ReportDefinitions:
       ws.status = 'Active'
     orderby: ORDER BY ws.tenantId ASC
     
-- reportName: WaterDisconnectionReport
+  - reportName: WaterDisconnectionReport
     summary: Water Disconnection Report
     version: 1.0.0
     moduleName: rainmaker-ws
@@ -1805,21 +1805,6 @@ ReportDefinitions:
         type: string
         source: ws
         total: false
-      - name: Owner_Mobile_Number
-        label: report.ws.mobilenumber
-        type: string
-        source: ws
-        total: false 
-      - name: Father_name
-        label: report.ws.guardian
-        type: string
-        source: ws
-        total: false  
-      - name: Father_name
-        label: report.ws.guardian
-        type: string
-        source: ws
-        total: false 
       - name: locality
         label: report.wns.locality
         type: string
@@ -1858,6 +1843,5 @@ ReportDefinitions:
         localisationPrefix: TENANTS_MOHALLA_
         isLocalisationRequired: true
         searchClause: AND locality = $locality
-    query: select * from (SELECT  property.propertyid, usr.name as Owner_Name, usr.mobilenumber,usr.guardian as Father_NAME, locality  FROM EG_PT_PROPERTY property INNER JOIN EG_PT_ADDRESS address         ON property.id = address.propertyid INNER JOIN EG_PT_OWNER owner ON property.id = owner.propertyid INNER JOIN eg_user usr ON owner.userid=usr.uuid  LEFT OUTER JOIN EG_PT_UNIT unit ON property.id =  unit.propertyid  WHERE  property.tenantId= 'pg.citya'  AND owner.status = 'ACTIVE' AND property.status = 'ACTIVE') as propertydata LEFT OUTER JOIN (select consumercode,sum(taxdue) as taxDue, STRING_AGG(year || '(Rs.' || taxdue || ')',',')  as taxDueYear from ( select d.consumercode, (to_char((To_timestamp(d.taxperiodfrom/1000) at time Zone 'Asia/Kolkata'),'YYYY') || '-' || to_char((To_timestamp(d.taxperiodto/1000) at time Zone 'Asia/Kolkata'),'YY')) as year ,  sum(dd.taxamount)-sum(dd.collectionamount) as taxdue from egbs_demanddetail_v1 dd, egbs_demand_v1 d where dd.demandid=d.id and d.status!='CANCELLED' and dd.tenantid=$tenantid and d.tenantid=$tenantid and (to_char((To_timestamp(d.taxperiodfrom/1000) at time Zone 'Asia/Kolkata'),'YYYY') || '-' || to_char((To_timestamp(d.taxperiodto/1000) at time Zone 'Asia/Kolkata'),'YY')) != '2023-24' group by d.consumercode,(to_char((To_timestamp(d.taxperiodfrom/1000) at time Zone 'Asia/Kolkata'),'YYYY') || '-' || to_char((To_timestamp(d.taxperiodto/1000) at time Zone 'Asia/Kolkata'),'YY'))) tax where taxDue>0 groupby tax.consumercode) as taxdata on propertydata.propertyid=taxdata.consumercode
+    query: select distinct(ws.connectionno), ws.tenantid,pt.propertyid,ws.locality, to_char( To_timestamp(ws.dateeffectivefrom / 1000), 'DD/MM/YYYY' ) as Disconnection_date,(select name from eg_user where uuid=(select userid from eg_pt_owner where pt.propertyid=pt.propertyid order by createdtime limit 1)) as name, (select userid from eg_pt_owner where propertyid=propertyid order by createdtime limit 1) as user_uuid, ws.property_id  from eg_ws_connection ws LEFT JOIN eg_pt_property pt ON ws.property_id = pt.propertyid INNER JOIN eg_pt_address ptad ON pt.id=ptad.propertyid where ws.applicationtype = 'DISCONNECT_WATER_CONNECTION'
     orderby: ORDER BY ws.tenantId ASC
-
