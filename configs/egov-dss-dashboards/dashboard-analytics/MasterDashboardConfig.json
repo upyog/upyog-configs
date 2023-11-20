@@ -7563,8 +7563,59 @@
             }
           ]
         },
-        {
+		{
           "row": 4,
+          "name": "NSS_REVENUE",
+          "vizArray": [
+            {
+              "id": 675,
+              "name": "NSS_NOC_TOP_3_PERFORMING_STATES",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "performing-metric",
+              "isCollapsible": false,
+              "label": "",
+              "charts": [
+                {
+                  "id": "obpstopPerformingStatesSLA",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_SLA_OBPS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "SLA"
+                }
+              ]
+            },
+            {
+              "id": 676,
+              "name": "NSS_NOC_BOTTOM_3_PERFORMING_STATES",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "performing-metric",
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "obpsbottomPerformingStatesSLA",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_SLA_OBPS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "SLA"
+                }
+                
+              ]
+            }
+          ]
+        },
+
+        {
+          "row": 5,
           "name": "NSS_OBPS_DASHBOARD",
           "vizArray": [
             {
@@ -7614,7 +7665,7 @@
           ]
         },
         {
-          "row": 5,
+          "row": 6,
           "name": "NSS_OBPS_DASHBOARD",
           "vizArray": [
             {
@@ -8062,8 +8113,58 @@
             }
           ]
         },
-		{
+		  {
           "row": 6,
+          "name": "NSS_REVENUE",
+          "vizArray": [
+            {
+              "id": 677,
+              "name": "NSS_NOC_TOP_3_PERFORMING_STATES",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "performing-metric",
+              "isCollapsible": false,
+              "label": "",
+              "charts": [
+                {
+                  "id": "firenoctopPerformingStatesSLA",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_SLA_FIRENOC",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "SLA"
+                }
+              ]
+            },
+            {
+              "id": 678,
+              "name": "NSS_NOC_BOTTOM_3_PERFORMING_STATES",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "performing-metric",
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "firenocbottomPerformingStatesSLA",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_SLA_FIRENOC",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "SLA"
+                }
+                
+              ]
+            }
+          ]
+        },
+		{
+          "row": 7,
           "name": "NSS_REVENUE",
           "vizArray": [
             {
