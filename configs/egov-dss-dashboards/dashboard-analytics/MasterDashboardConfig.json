@@ -7565,7 +7565,7 @@
         },
 		{
           "row": 4,
-          "name": "NSS_REVENUE",
+          "name": "NSS_OBPS_DASHBOARD",
           "vizArray": [
             {
               "id": 675,
@@ -11055,9 +11055,10 @@
       "name": "NATIONAL_MAIN_DASHBOARD",
       "id": "mainDashboard",
       "isActive": "",
-      "style": "",
+      "style": "linear",
       "visualizations": [
         {
+			"row":1,
           "name": "NATIONAL_DSS_REVENUE",
           "vizArray": [
             {
@@ -11070,20 +11071,12 @@
 			  
 				 {
                   "id": "totalCollectionOverview",
-                  "name": "NATIONAL_DSS_TOTAL_COLLECTION",
+                  "name": "NATIONAL_DSS_TOTAL_COLLECTION_MAIN",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
                   "headers": []
                 },
-				{
-                  "id": "totalCollectionv3",
-                  "name": "DSS_TOTAL_TAX_COLLECTION",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },                          
 				{
                   "id": "StateGDPwiseTotalRevenueCollection",
                   "name": "DSS_STATE_GDP_REVENUE_COLLECTION",
@@ -11092,15 +11085,24 @@
                   "filter": "",
                   "headers": []
                 },
-				
-				{
-                  "id": "RevenuePerPopulation",
-                  "name": "DSS_REVENUE_PER_POPULATION",
+				 {
+                  "id": "TotalRevenuePerHouseholdOverview",
+                  "name": "DSS_TOTAL_REVENUE_PER_HOUSEHOLD_OVERVIEW_MAIN",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }  ,
+{
+                  "id": "PropertyTaxRevenuePerHouseholdOverview",
+                  "name": "DSS_PT_TAX_REVENUE_PER_HOUSEHOLD_OVERVIEW_MAIN",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
                   "headers": []
                 }
+				
+				
               ]
             },
 			{
@@ -11110,17 +11112,26 @@
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
+			  {
+                  "id": "totalCollectionv3",
+                  "name": "DSS_TOTAL_TAX_COLLECTION_MAIN",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }, 
 				{
-                  "id": "TotalRevenuePerHouseholdOverview",
-                  "name": "DSS_TOTAL_REVENUE_PER_HOUSEHOLD_OVERVIEW",
+                  "id": "RevenuePerPopulation",
+                  "name": "DSS_REVENUE_PER_POPULATION",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
                   "headers": []
                 },
+				
 				{
-                  "id": "PropertyTaxRevenuePerHouseholdOverview",
-                  "name": "DSS_PT_TAX_REVENUE_PER_HOUSEHOLD_OVERVIEW",
+                  "id": "revenueCollectedPerProperty",
+                  "name": "NATIONAL_REVENUE_DSS_AVG_TAX_COLLECTION_MAIN",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -11184,8 +11195,16 @@
                   "headers": []
                 },
                 {
-                  "id": "closedApplicationOverview",
+                  "id": "totalApprovedApplications",
                   "name": "NATIONAL_DSS_CLOSED_APPLICATION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+				{
+                  "id": "approvedApplicationsWithinSLA",
+                  "name": "NATIONAL_DSS_APPROVED_APPLICATIONS_WITHIN_SLA",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
