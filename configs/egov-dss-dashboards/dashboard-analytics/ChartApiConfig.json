@@ -19291,10 +19291,10 @@
     "queries": [
       {
         "module": "PT",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "pt-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"all_matching_docs\":{\"filters\":{\"filters\":{\"all\":{\"match_all\":{}}}},\"aggs\":{\"stateClosedApplications\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"intermediateAggrULB\":{\"terms\":{\"field\":\"ulb.keyword\"},\"aggs\":{\"intermediateAggrWard\":{\"terms\":{\"field\":\"ward.keyword\"},\"aggs\":{\"days\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"applications\":{\"avg\":{\"field\":\"todaysClosedApplications\"}}}},\"wardapplications\":{\"sum_bucket\":{\"buckets_path\":\"days.applications\"}}}},\"ulbApplications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrWard.wardapplications\"}}}},\"stateApplications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrULB.ulbApplications\"}}}},\"Total_Closed_Applications\":{\"sum_bucket\":{\"buckets_path\":\"stateClosedApplications.stateApplications\"}},\"stateTotalApplications\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"intermediateAggrULB\":{\"terms\":{\"field\":\"ulb.keyword\"},\"aggs\":{\"intermediateAggrWard\":{\"terms\":{\"field\":\"ward.keyword\"},\"aggs\":{\"days\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"applications\":{\"avg\":{\"field\":\"todaysTotalApplications\"}}}},\"wardapplications\":{\"sum_bucket\":{\"buckets_path\":\"days.applications\"}}}},\"ulbApplications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrWard.wardapplications\"}}}},\"stateApplications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrULB.ulbApplications\"}}}},\"Total_Applications\":{\"sum_bucket\":{\"buckets_path\":\"stateTotalApplications.stateApplications\"}},\"Applications_Pending\":{\"bucket_script\":{\"buckets_path\":{\"total\":\"Total_Applications\",\"closed\":\"Total_Closed_Applications\"},\"script\":\"(params.total - params.closed) \"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"all_matching_docs\":{\"filters\":{\"filters\":{\"all\":{\"match_all\":{}}}},\"aggs\":{\"Total_Closed_Applications\":{\"sum\":{\"field\":\"todaysClosedApplications\"}},\"Total_Applications\":{\"sum\":{\"field\":\"todaysTotalApplications\"}},\"Applications_Pending\":{\"bucket_script\":{\"buckets_path\":{\"total\":\"Total_Applications\",\"closed\":\"Total_Closed_Applications\"},\"script\":\"(params.total-params.closed)\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -23529,6 +23529,39 @@
 	  ],
     
     "_comment": " SLA Achieved Percentage "
+  },
+  "nssTLPendancy": {
+    "chartName": "NATIONAL_DSS_TL_PENDANCY",
+    "queries": [
+      {
+        "module": "TL",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": "date",
+        "indexName": "tl-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"all_matching_docs\":{\"filters\":{\"filters\":{\"all\":{\"match_all\":{}}}},\"aggs\":{\"Total_Closed_Applications\":{\"sum\":{\"field\":\"todaysClosedApplications\"}},\"Total_Applications\":{\"sum\":{\"field\":\"todaysTotalApplications\"}},\"Applications_Pending\":{\"bucket_script\":{\"buckets_path\":{\"total\":\"Total_Applications\",\"closed\":\"Total_Closed_Applications\"},\"script\":\"(params.total-params.closed)\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "percentage",
+    "drillChart": "none",
+    "documentType": "nss",
+    "action": "percentage",
+    "isRoundOff": true,
+    "aggregationPaths": [
+      "Applications_Pending",
+      "Total_Applications"
+    ],
+    "insight": {
+      "chartResponseMap": "nssTLPendancy",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "year",
+      "isRoundOff": true
+    },
+    "_comment": " "
   }
 
 }
