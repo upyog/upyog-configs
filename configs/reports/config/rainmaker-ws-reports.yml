@@ -1924,7 +1924,7 @@ ReportDefinitions:
         wrapper: true
         localisationPrefix: TENANTS_MOHALLA_
         isLocalisationRequired: true
-        searchClause: AND locality = $locality
+        searchClause: AND ptad.locality = $locality
     query: select distinct(ws.connectionno), ws.tenantid,ws.createdtime,ws.locality, to_char( To_timestamp(ws.dateeffectivefrom / 1000), 'DD/MM/YYYY' ) as Connection_date, usr.name,usr.mobilenumber,usr.guardian,usr.guardianrelation, (select userid from eg_pt_owner where propertyid=propertyid order by createdtime limit 1) as user_uuid, ws.property_id  from eg_ws_connection ws LEFT JOIN eg_pt_property pt ON ws.property_id = pt.propertyid INNER JOIN eg_pt_address ptad ON pt.id=ptad.propertyid INNER JOIN EG_PT_OWNER owner ON pt.id = owner.propertyid INNER JOIN eg_user usr ON owner.userid=usr.uuid where ws.applicationtype IN('NEW_WATER_CONNECTION') and ws.applicationstatus='CONNECTION_ACTIVATED'
     orderby: ORDER BY ws.tenantId ASC
     
@@ -1993,7 +1993,7 @@ ReportDefinitions:
         wrapper: true
         localisationPrefix: TENANTS_MOHALLA_
         isLocalisationRequired: true
-        searchClause: AND locality = $locality
+        searchClause: AND ptad.locality = $locality
     query: select distinct(ws.connectionno), ws.tenantid,ws.createdtime,ws.locality, to_char( To_timestamp(ws.dateeffectivefrom / 1000), 'DD/MM/YYYY' ) as Connection_date, usr.name,usr.mobilenumber,usr.guardian,usr.guardianrelation, (select userid from eg_pt_owner where propertyid=propertyid order by createdtime limit 1) as user_uuid, ws.property_id  from eg_sw_connection ws LEFT JOIN eg_pt_property pt ON ws.property_id = pt.propertyid INNER JOIN eg_pt_address ptad ON pt.id=ptad.propertyid INNER JOIN EG_PT_OWNER owner ON pt.id = owner.propertyid INNER JOIN eg_user usr ON owner.userid=usr.uuid where ws.applicationtype IN('NEW_WATER_CONNECTION') and ws.applicationstatus='CONNECTION_ACTIVATED'
     orderby: ORDER BY ws.tenantId ASC
   - reportName: SewerageDisconnectionReport
@@ -2066,6 +2066,6 @@ ReportDefinitions:
         wrapper: true
         localisationPrefix: TENANTS_MOHALLA_
         isLocalisationRequired: true
-        searchClause: AND locality = $locality
+        searchClause: AND ptad.locality = $locality
     query: select distinct(ws.connectionno), ws.tenantid, pt.propertyid,ws.locality, to_char( To_timestamp(ws.dateeffectivefrom / 1000), 'DD/MM/YYYY' ) as Disconnection_date,usr.name,usr.mobilenumber,usr.guardian,usr.guardianrelation as relation, (select userid from eg_pt_owner where propertyid=propertyid order by createdtime limit 1) as user_uuid, ws.property_id  from eg_sw_connection ws LEFT JOIN eg_pt_property pt ON ws.property_id = pt.propertyid INNER JOIN eg_pt_address ptad ON pt.id=ptad.propertyid INNER JOIN EG_PT_OWNER owner ON pt.id = owner.propertyid INNER JOIN eg_user usr ON owner.userid=usr.uuid where ws.applicationtype IN('DISCONNECT_WATER_CONNECTION','DISCONNECT_SEWERAGE_CONNECTION') and ws.applicationstatus='DISCONNECTION_EXECUTED'
     orderby: ORDER BY ws.tenantId ASC
