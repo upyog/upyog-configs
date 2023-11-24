@@ -339,7 +339,7 @@
                   true,
                   false,
                   false,
-                  true
+                  false
                 ],
                 "style": "receipt-table-value"
               },
@@ -349,7 +349,7 @@
                   false,
                   false,
                   false,
-                  true
+                  false
                 ],
                 "style": "receipt-table",
                 "font": "Roboto"
@@ -360,12 +360,55 @@
                   false,
                   false,
                   false,
-                  true
+                  false
                 ],
                 "style": "receipt-table-value"
               },
               {
                 "text": "₹ {{pendingAmount}}",
+                "border": [
+                  false,
+                  false,
+                  true,
+                  false
+                ],
+                "style": "receipt-table"
+              }
+            ],	
+            [
+              {
+                "text": "{{g8_receipt_no}}",
+                "border": [
+                  true,
+                  false,
+                  false,
+                  true
+                ],
+                "style": "receipt-table-value"
+              },
+              {
+                "text": "{{G8ReceiptNo}}",
+                "border": [
+                  false,
+                  false,
+                  false,
+                  true
+                ],
+                "style": "receipt-table",
+                "font": "Roboto"
+              },
+              {
+                "text": "{{g8_receipt_date}}",
+                "border": [
+                  false,
+                  false,
+                  false,
+                  true
+                ],
+                "style": "receipt-table-value"
+              },
+              {
+                "text": "{{G8ReceiptDate}}",
                 "border": [
                   false,
                   false,
