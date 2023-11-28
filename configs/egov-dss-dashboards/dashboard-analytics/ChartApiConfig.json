@@ -15528,7 +15528,7 @@
       {
         "module": "OBPS",
         "indexName": "obps-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"all_matching_docs\":{\"filters\":{\"filters\":{\"all\":{\"match_all\":{}}}},\"aggs\":{\"Total_Applications\":{\"sum\":{\"field\":\"todaysClosedApplicationsPermit\"}},\"Total_Applications_OC\":{\"sum\":{\"field\":\"todaysClosedApplicationsOC\"}},\"TotalApplications\":{\"bucket_script\":{\"buckets_path\":{\"total\":\"Total_Applications\",\"total_oc\":\"Total_Applications_OC\"},\"script\":\"(params.total+params.total_oc)\"}}}}}}",
+        "aggrQuery": "{\"aggs\":{\"all_matching_docs\":{\"filters\":{\"filters\":{\"all\":{\"match_all\":{}}}},\"aggs\":{\"Total_Applications\":{\"sum\":{\"field\":\"todaysClosedApplicationsPermit\"}},\"Total_Applications_OC\":{\"sum\":{\"field\":\"todaysClosedApplicationsOC\"}},\"Total Applications\":{\"bucket_script\":{\"buckets_path\":{\"total\":\"Total_Applications\",\"total_oc\":\"Total_Applications_OC\"},\"script\":\"(params.total+params.total_oc)\"}}}}}}",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date"
       },
@@ -15553,7 +15553,7 @@
     "documentType": "_doc",
     "drillChart": "none",
     "aggregationPaths": [
-      "Applications Closed"
+      "Total Applications"
     ],
     "insight": {
       "chartResponseMap": "closedApplicationOverview",
