@@ -318,10 +318,10 @@ ReportDefinitions:
   - name: complainttype
     label: Complaint_Type
     type: singlevaluelist
-    pattern: 'list://Property Tax Assessment:Property Tax Assessment,Property Tax Appeal Petition:Property Tax Appeal Petition,Change Of Title Or Ownership Of Property:Change Of Title Or Ownership Of Property,Dealer Registration:Dealer Registration,Dealer Assessment:Dealer Assessment,Refund Claims:Refund Claims'
+    pattern: 'list://Property Tax Assessment:PropertyTaxAssessment,Property Tax Appeal Petition:PropertyTaxAppealPetition,Change Of Title Or Ownership Of Property:ChangeOfTitleOrOwnershipOfProperty,DealerRegistration:Dealer Registration,DealerAssessment:Dealer Assessment,RefundClaims:Refund Claims'
     source: pt
     isMandatory: false
-    searchClause: AND complainttype = $complainttype
+    searchClause: AND eg_pgr_service_v2.servicecode = $complainttype
   query: |
     SELECT 
     DISTINCT ON (servicerequestid)
