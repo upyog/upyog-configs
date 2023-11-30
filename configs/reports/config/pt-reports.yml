@@ -318,7 +318,7 @@ ReportDefinitions:
   - name: complainttype
     label: Complaint_Type
     type: singlevaluelist
-    pattern: 'list://Property Tax Assessment:PropertyTaxAssessment,Property Tax Appeal Petition:PropertyTaxAppealPetition,Change Of Title Or Ownership Of Property:ChangeOfTitleOrOwnershipOfProperty,DealerRegistration:Dealer Registration,DealerAssessment:Dealer Assessment,RefundClaims:Refund Claims'
+    pattern: 'list://PropertyTaxAssessment:Property Tax Assessment,PropertyTaxAppealPetition:Property Tax Appeal Petition,ChangeOfTitleOrOwnershipOfProperty:Change Of Title Or Ownership Of Property,DealerRegistration:Dealer Registration,DealerAssessment:Dealer Assessment,RefundClaims:Refund Claims'
     source: pt
     isMandatory: false
     searchClause: AND eg_pgr_service_v2.servicecode = $complainttype
