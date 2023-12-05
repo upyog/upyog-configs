@@ -310,7 +310,6 @@ ReportDefinitions:
       -- Use CTE to force query plan, compute & use CTE later
 
       WITH receipt_breakup AS 
-
       (
           SELECT
               pd.id as pdid,
@@ -335,7 +334,6 @@ ReportDefinitions:
           WHERE payment.tenantid = $tenantid and payment.paymentstatus != 'CANCELLED' 
           group by pdid
       )
-
       SELECT
           --count(*)	
           pd.tenantid AS tenantid,
@@ -347,7 +345,7 @@ ReportDefinitions:
           payment.totalamountpaid as amount, 
           payment.paymentmode as instrumenttype, 
           payment.transactionnumber,
-          concat(to_char((To_timestamp(get_fromperiod(pd.billid)/1000) at time Zone 'Asia/Kolkata'),'DD-MM-YYYY'),'-', to_char((To_timestamp(get_toperiod(pd.billid)/1000) at time Zone 'Asia/Kolkata'),'DD-MM-YYYY')) as billperiod, 
+          concat(to_char((To_timestamp((pd.billid)/1000) at time Zone 'Asia/Kolkata'),'DD-MM-YYYY'),'-', to_char((To_timestamp((pd.billid)/1000) at time Zone 'Asia/Kolkata'),'DD-MM-YYYY')) as billperiod, 
           to_char((To_timestamp(payment.transactiondate/1000) at time Zone 'Asia/Kolkata'),'DD-MM-YYYY') AS transactiondate, 
           payment.totaldue - payment.totalamountpaid AS pendingamount,
           Initcap(case when pt.usagecategory like '%.%' then split_part(pt.usagecategory,'.',2) else pt.usagecategory end) as usagetype,
