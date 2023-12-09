@@ -2067,3 +2067,156 @@ ReportDefinitions:
         searchClause: AND ptad.locality = $locality
     query: select distinct(ws.connectionno), ws.tenantid, pt.propertyid,ws.locality, to_char( To_timestamp(ws.dateeffectivefrom / 1000), 'DD/MM/YYYY' ) as Disconnection_date,usr.name,usr.mobilenumber,usr.guardian,usr.guardianrelation as relation, (select userid from eg_pt_owner where propertyid=propertyid order by createdtime limit 1) as user_uuid, ws.property_id  from eg_sw_connection ws LEFT JOIN eg_pt_property pt ON ws.property_id = pt.propertyid INNER JOIN eg_pt_address ptad ON pt.id=ptad.propertyid INNER JOIN EG_PT_OWNER owner ON pt.id = owner.propertyid INNER JOIN eg_user usr ON owner.userid=usr.uuid where ws.applicationtype IN('DISCONNECT_WATER_CONNECTION','DISCONNECT_SEWERAGE_CONNECTION') and ws.applicationstatus='DISCONNECTION_EXECUTED'
     orderby: ORDER BY ws.tenantId ASC
+  - reportName: DemandCollectionBalancedRegister
+    summary: Demand Collection
+    version: 1.0.0
+    moduleName: rainmaker-ws
+    additionalConfig:
+      print:
+        pdfPageSize: A1
+    sourceColumns:
+      - name: username
+        label: Name
+        type: string
+        source: ws
+        total: false
+      - name: mobilenumber
+        label: Mobile
+        type: string
+        source: ws
+        total: false
+      - name: amount_paid
+        label: Paid Amount
+        type: string
+        source: ws
+        total: false
+      - name: transactiondate
+        label: Date of Transaction
+        type: string
+        source: ws
+        total: false
+      - name: consumercode
+        label: Consumer Code
+        type: string
+        source: ws
+        total: false
+      - name: penalty
+        label: Penalty
+        type: string
+        source: ws
+        total: false
+      - name: interest
+        label: Interest
+        type: string
+        source: ws
+        total: false
+      - name: formfee
+        label: Form Fee
+        type: string
+        source: ws
+        total: false
+      - name: onetimefee
+        label: One Time Fee
+        type: string
+        source: ws
+        total: false
+      - name: othercharge
+        label: Other Charges
+        type: string
+        source: ws
+        total: true
+      - name: roadcuttingcharge
+        label: Road Cutting Charges
+        type: string
+        source: ws
+        total: true
+      - name: scrutinyfee
+        label: Scrutiny Fee
+        type: string
+        source: ws
+        total: false
+      - name: securitycharge
+        label: Security Charges
+        type: string
+        source: ws
+        total: true
+      - name: taxandcess
+        label: Tax & Cess
+        type: string
+        source: ws
+        total: true
+      - name: reconnectionfee
+        label: Reconnection Fees
+        type: string
+        source: ws
+        total: true
+    searchParams:
+      - name: fromDate
+        label: reports.pt.fromDate
+        type: epoch
+        source: pt
+        isMandatory: true
+        searchClause: AND a.receiptdate >= $fromDate
+      - name: toDate
+        label: reports.pt.toDate
+        type: epoch
+        source: pt
+        isMandatory: true
+        searchClause: AND a.receiptdate <= $toDate
+      - name: connectionType
+        label: connectionType
+        type: singlevaluelist
+        pattern: list://WS%:Water,SW%:Sewerage
+        source: pt
+        isMandatory: true
+        searchClause: AND a.businessservice like $connectionType
+    query: >
+      -- Use CTE to force query plan, compute & use CTE later
+
+select
+    *
+from
+    (
+    select
+        bd.id as billdid,
+        eg_user.username,
+        eg_user.mobilenumber,
+        pd.businessservice,
+        pd.tenantid,
+        payment.totalamountpaid as amount_paid ,
+        ws.property_id,
+        to_char((To_timestamp(payment.transactiondate / 1000) at time zone 'Asia/Kolkata'), 'DD-MM-YYYY') as transactiondate,
+        pd.receiptdate,
+        bill.consumercode
+    from
+        egcl_bill bill
+    left join egcl_billdetial bd on
+        bill.id = bd.billid
+    join egcl_paymentdetail pd on
+        pd.billid = bill.id
+    left join egcl_payment payment on
+        pd.paymentid = payment.id
+    left join eg_ws_connection ws on
+        ws.applicationno = bill.consumercode
+    left join eg_user on
+        eg_user.id = pd.createdby::INTEGER
+    where payment.paymentstatus != 'CANCELLED') a
+left outer join (
+    select SUM(CASE WHEN taxheadcode LIKE 'W%PENALTY' THEN amount ELSE 0 END) as penalty, 
+              SUM(CASE WHEN taxheadcode LIKE 'W%INTEREST' THEN amount ELSE 0 END) as interest, 
+              SUM(CASE WHEN taxheadcode LIKE 'WS_FEE_ROUND_OFF' THEN amount ELSE 0 END) as roundoff, 
+              SUM(CASE WHEN taxheadcode LIKE 'WS_FORM_FEE' THEN amount ELSE 0 END) as formfee, 
+              SUM(CASE WHEN taxheadcode LIKE 'WS_ONE_TIME_FEE' THEN amount ELSE 0 END) as onetimefee,
+              SUM(CASE WHEN taxheadcode LIKE 'WS_OTHER_CHARGE' THEN amount ELSE 0 END) as othercharge,
+              SUM(CASE WHEN taxheadcode LIKE 'WS_ROAD_CUTTING_CHARGE' THEN amount ELSE 0 END) as roadcuttingcharge,
+              SUM(CASE WHEN taxheadcode LIKE 'WS_SCRUTINY_FEE' THEN amount ELSE 0 END)  as scrutinyfee,
+              SUM(CASE WHEN taxheadcode LIKE 'WS_SECURITY_CHARGE' THEN amount ELSE 0 END) as securitycharge,
+              SUM(CASE WHEN taxheadcode LIKE 'WS_TAX_AND_CESS' THEN amount ELSE 0 END) as taxandcess,
+              SUM(CASE WHEN taxheadcode LIKE 'WS_RECONNECTION_CHARGE' THEN amount ELSE 0 END) as reconnectionFee,
+    --  amount,
+        dd.billdetail
+    from
+        egbs_billaccountdetail_v1 dd
+        group by dd.billdetail
+        )b on
+    a.billdid = b.billdetail
