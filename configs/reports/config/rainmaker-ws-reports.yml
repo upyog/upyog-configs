@@ -2076,12 +2076,12 @@ ReportDefinitions:
         pdfPageSize: A1
     sourceColumns:
       - name: username
-        label: Name
+        label: Payer Name
         type: string
         source: ws
         total: false
       - name: mobilenumber
-        label: Mobile
+        label: Payer Contact
         type: string
         source: ws
         total: false
@@ -2176,8 +2176,8 @@ ReportDefinitions:
         (
         select
         bd.id as billdid,
-        eg_user.username,
-        eg_user.mobilenumber,
+        payment.payername,
+        payment.mobilenumber,
         pd.businessservice,
         pd.tenantid,
         payment.totalamountpaid as amount_paid ,
@@ -2195,8 +2195,6 @@ ReportDefinitions:
         pd.paymentid = payment.id
         left join eg_ws_connection ws on
         ws.connectionno = bill.consumercode
-        left join eg_user on
-        eg_user.id = pd.createdby::INTEGER
         where payment.paymentstatus != 'CANCELLED' and pd.businessservice IN ('WS','WSReconnection','WS.ONE_TIME_FEE')) a
         left outer join (
         select SUM(CASE WHEN taxheadcode LIKE 'W%PENALTY' THEN amount ELSE 0 END) as penalty, 
