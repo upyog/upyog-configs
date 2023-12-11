@@ -105,7 +105,7 @@ serviceMaps:
 
       - jsonPath: $.Property.auditDetails.lastModifiedTime
      
-      - jsonPath: $.Property.additionalDetails
+      - jsonPath: $.Property.owners.*.additionalDetails
         type: JSON
         dbType: JSONB
 
