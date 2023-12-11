@@ -2172,12 +2172,11 @@ ReportDefinitions:
         searchClause: AND a.businessservice like $connectionType
     query: >
       -- Use CTE to force query plan, compute & use CTE later
-
-select
-    *
-from
-    (
-    select
+        select
+        *
+        from
+        (
+        select
         bd.id as billdid,
         eg_user.username,
         eg_user.mobilenumber,
@@ -2188,21 +2187,21 @@ from
         to_char((To_timestamp(payment.transactiondate / 1000) at time zone 'Asia/Kolkata'), 'DD-MM-YYYY') as transactiondate,
         pd.receiptdate,
         bill.consumercode
-    from
+        from
         egcl_bill bill
-    left join egcl_billdetial bd on
+        left join egcl_billdetial bd on
         bill.id = bd.billid
-    join egcl_paymentdetail pd on
+        join egcl_paymentdetail pd on
         pd.billid = bill.id
-    left join egcl_payment payment on
+        left join egcl_payment payment on
         pd.paymentid = payment.id
-    left join eg_ws_connection ws on
+        left join eg_ws_connection ws on
         ws.applicationno = bill.consumercode
-    left join eg_user on
+        left join eg_user on
         eg_user.id = pd.createdby::INTEGER
-    where payment.paymentstatus != 'CANCELLED') a
-left outer join (
-    select SUM(CASE WHEN taxheadcode LIKE 'W%PENALTY' THEN amount ELSE 0 END) as penalty, 
+        where payment.paymentstatus != 'CANCELLED') a
+        left outer join (
+        select SUM(CASE WHEN taxheadcode LIKE 'W%PENALTY' THEN amount ELSE 0 END) as penalty, 
               SUM(CASE WHEN taxheadcode LIKE 'W%INTEREST' THEN amount ELSE 0 END) as interest, 
               SUM(CASE WHEN taxheadcode LIKE 'WS_FEE_ROUND_OFF' THEN amount ELSE 0 END) as roundoff, 
               SUM(CASE WHEN taxheadcode LIKE 'WS_FORM_FEE' THEN amount ELSE 0 END) as formfee, 
@@ -2213,10 +2212,11 @@ left outer join (
               SUM(CASE WHEN taxheadcode LIKE 'WS_SECURITY_CHARGE' THEN amount ELSE 0 END) as securitycharge,
               SUM(CASE WHEN taxheadcode LIKE 'WS_TAX_AND_CESS' THEN amount ELSE 0 END) as taxandcess,
               SUM(CASE WHEN taxheadcode LIKE 'WS_RECONNECTION_CHARGE' THEN amount ELSE 0 END) as reconnectionFee,
-    --  amount,
+        --  amount,
         dd.billdetail
-    from
+        from
         egbs_billaccountdetail_v1 dd
         group by dd.billdetail
         )b on
-    a.billdid = b.billdetail
+        a.billdid = b.billdetail
+    Orderby: ORDER BY a.receiptdate DESC
