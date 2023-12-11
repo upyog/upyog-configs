@@ -2076,12 +2076,12 @@ ReportDefinitions:
         pdfPageSize: A1
     sourceColumns:
       - name: username
-        label: Name
+        label: Payer Name
         type: string
         source: ws
         total: false
       - name: mobilenumber
-        label: Mobile
+        label: Payer Contact
         type: string
         source: ws
         total: false
@@ -2122,6 +2122,11 @@ ReportDefinitions:
         total: false
       - name: othercharge
         label: Other Charges
+        type: string
+        source: ws
+        total: true
+      - name: advance
+        label: Advance
         type: string
         source: ws
         total: true
@@ -2171,8 +2176,8 @@ ReportDefinitions:
         (
         select
         bd.id as billdid,
-        eg_user.username,
-        eg_user.mobilenumber,
+        payment.payername,
+        payment.mobilenumber,
         pd.businessservice,
         pd.tenantid,
         payment.totalamountpaid as amount_paid ,
@@ -2189,9 +2194,7 @@ ReportDefinitions:
         left join egcl_payment payment on
         pd.paymentid = payment.id
         left join eg_ws_connection ws on
-        ws.applicationno = bill.consumercode
-        left join eg_user on
-        eg_user.id = pd.createdby::INTEGER
+        ws.connectionno = bill.consumercode
         where payment.paymentstatus != 'CANCELLED' and pd.businessservice IN ('WS','WSReconnection','WS.ONE_TIME_FEE')) a
         left outer join (
         select SUM(CASE WHEN taxheadcode LIKE 'W%PENALTY' THEN amount ELSE 0 END) as penalty, 
@@ -2199,17 +2202,18 @@ ReportDefinitions:
               SUM(CASE WHEN taxheadcode LIKE 'WS_FEE_ROUND_OFF' THEN amount ELSE 0 END) as roundoff, 
               SUM(CASE WHEN taxheadcode LIKE 'WS_FORM_FEE' THEN amount ELSE 0 END) as formfee, 
               SUM(CASE WHEN taxheadcode LIKE 'WS_ONE_TIME_FEE' THEN amount ELSE 0 END) as onetimefee,
-              SUM(CASE WHEN taxheadcode LIKE 'WS_OTHER_CHARGE' THEN amount ELSE 0 END) as othercharge,
+              SUM(CASE WHEN taxheadcode LIKE 'WS%CHARGE' THEN amount ELSE 0 END) as othercharge,
+              SUM(CASE WHEN taxheadcode LIKE 'WS_ADVANCE_CARRYFORWARD' THEN amount ELSE 0 END) as advance,
               SUM(CASE WHEN taxheadcode LIKE 'WS_ROAD_CUTTING_CHARGE' THEN amount ELSE 0 END) as roadcuttingcharge,
               SUM(CASE WHEN taxheadcode LIKE 'WS_SCRUTINY_FEE' THEN amount ELSE 0 END)  as scrutinyfee,
               SUM(CASE WHEN taxheadcode LIKE 'WS_SECURITY_CHARGE' THEN amount ELSE 0 END) as securitycharge,
               SUM(CASE WHEN taxheadcode LIKE 'WS_TAX_AND_CESS' THEN amount ELSE 0 END) as taxandcess,
               SUM(CASE WHEN taxheadcode LIKE 'WS_RECONNECTION_CHARGE' THEN amount ELSE 0 END) as reconnectionFee,
         --  amount,
-        dd.billdetail
+        dd.billdetailid
         from
-        egbs_billaccountdetail_v1 dd
-        group by dd.billdetail
+        egcl_billaccountdetail dd
+        group by dd.billdetailid
         )b on
-        a.billdid = b.billdetail
+        a.billdid = b.billdetailid
     Orderby: ORDER BY a.receiptdate DESC
