@@ -2204,7 +2204,7 @@ ReportDefinitions:
               SUM(CASE WHEN taxheadcode LIKE 'WS_FEE_ROUND_OFF' THEN amount ELSE 0 END) as roundoff, 
               SUM(CASE WHEN taxheadcode LIKE 'WS_FORM_FEE' THEN amount ELSE 0 END) as formfee, 
               SUM(CASE WHEN taxheadcode LIKE 'WS_ONE_TIME_FEE' THEN amount ELSE 0 END) as onetimefee,
-              SUM(CASE WHEN taxheadcode LIKE 'WS_OTHER_CHARGE' THEN amount ELSE 0 END) as othercharge,
+              SUM(CASE WHEN taxheadcode LIKE 'WS%CHARGE' THEN amount ELSE 0 END) as othercharge,
               SUM(CASE WHEN taxheadcode LIKE 'WS_ADVANCE_CARRYFORWARD' THEN amount ELSE 0 END) as advance,
               SUM(CASE WHEN taxheadcode LIKE 'WS_ROAD_CUTTING_CHARGE' THEN amount ELSE 0 END) as roadcuttingcharge,
               SUM(CASE WHEN taxheadcode LIKE 'WS_SCRUTINY_FEE' THEN amount ELSE 0 END)  as scrutinyfee,
