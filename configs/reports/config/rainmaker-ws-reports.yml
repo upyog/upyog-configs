@@ -2189,7 +2189,7 @@ ReportDefinitions:
         left join egcl_payment payment on
         pd.paymentid = payment.id
         left join eg_ws_connection ws on
-        ws.applicationno = bill.consumercode
+        ws.connectionno = bill.consumercode
         left join eg_user on
         eg_user.id = pd.createdby::INTEGER
         where payment.paymentstatus != 'CANCELLED' and pd.businessservice IN ('WS','WSReconnection','WS.ONE_TIME_FEE')) a
