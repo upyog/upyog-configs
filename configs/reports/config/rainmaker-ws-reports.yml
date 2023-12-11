@@ -2206,10 +2206,10 @@ ReportDefinitions:
               SUM(CASE WHEN taxheadcode LIKE 'WS_TAX_AND_CESS' THEN amount ELSE 0 END) as taxandcess,
               SUM(CASE WHEN taxheadcode LIKE 'WS_RECONNECTION_CHARGE' THEN amount ELSE 0 END) as reconnectionFee,
         --  amount,
-        dd.billdetail
+        dd.billdetailid
         from
-        egbs_billaccountdetail_v1 dd
-        group by dd.billdetail
+        egcl_billaccountdetail dd
+        group by dd.billdetailid
         )b on
-        a.billdid = b.billdetail
+        a.billdid = b.billdetailid
     Orderby: ORDER BY a.receiptdate DESC
