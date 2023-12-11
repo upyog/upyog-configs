@@ -2125,6 +2125,11 @@ ReportDefinitions:
         type: string
         source: ws
         total: true
+      - name: advance
+        label: Advance
+        type: string
+        source: ws
+        total: true
       - name: roadcuttingcharge
         label: Road Cutting Charges
         type: string
@@ -2200,6 +2205,7 @@ ReportDefinitions:
               SUM(CASE WHEN taxheadcode LIKE 'WS_FORM_FEE' THEN amount ELSE 0 END) as formfee, 
               SUM(CASE WHEN taxheadcode LIKE 'WS_ONE_TIME_FEE' THEN amount ELSE 0 END) as onetimefee,
               SUM(CASE WHEN taxheadcode LIKE 'WS_OTHER_CHARGE' THEN amount ELSE 0 END) as othercharge,
+              SUM(CASE WHEN taxheadcode LIKE 'WS_ADVANCE_CARRYFORWARD' THEN amount ELSE 0 END) as advance,
               SUM(CASE WHEN taxheadcode LIKE 'WS_ROAD_CUTTING_CHARGE' THEN amount ELSE 0 END) as roadcuttingcharge,
               SUM(CASE WHEN taxheadcode LIKE 'WS_SCRUTINY_FEE' THEN amount ELSE 0 END)  as scrutinyfee,
               SUM(CASE WHEN taxheadcode LIKE 'WS_SECURITY_CHARGE' THEN amount ELSE 0 END) as securitycharge,
