@@ -229,7 +229,7 @@ ReportDefinitions:
   decryptionPathId: DescriptionReport
   summary: Fetches PT complaint
   version: 1.0.0
-  moduleName: pgr
+  moduleName: pt-reports
   externalService:
   - entity: $.MdmsRes.RAINMAKER-PGR.ServiceDefs
     apiURL: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?moduleName=RAINMAKER-PGR&masterName=ServiceDefs&tenantId=$tenantId
@@ -256,11 +256,6 @@ ReportDefinitions:
     total: false
   - name: dateofcomplaint
     label: reports.pgr.dateofcomplaint
-    type: string
-    source: eg_pgr_service
-    total: false
-  - name: dateofassignment
-    label: reports.pgr.dateofassignment
     type: string
     source: eg_pgr_service
     total: false
@@ -315,13 +310,13 @@ ReportDefinitions:
     source: eg_pgr_service
     isMandatory: false
     searchClause: AND eg_pgr_service_v2.createdtime <= $toDate
-  - name: deptname
-    label: reports.pgr.dept.name
+  - name: complainttype
+    label: Complaint_Type
     type: singlevaluelist
-    source: eg_pgr_service
-    pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=common-masters&masterName=Department|$.MdmsRes.common-masters.Department[*].code|$.MdmsRes.common-masters.Department[*].name   
+    pattern: 'list://PropertyTaxAssessment:Property Tax Assessment,PropertyTaxAppealPetition:Property Tax Appeal Petition,ChangeOfTitleOrOwnershipOfProperty:Change Of Title Or Ownership Of Property,DealerRegistration:Dealer Registration,DealerAssessment:Dealer Assessment,RefundClaims:Refund Claims'
+    source: pt
     isMandatory: false
-    searchClause: AND deptmap_def.code = $deptname
+    searchClause: AND eg_pgr_service_v2.servicecode = $complainttype
   query: |
     SELECT 
     DISTINCT ON (servicerequestid)
