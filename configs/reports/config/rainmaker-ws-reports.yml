@@ -2157,20 +2157,26 @@ ReportDefinitions:
         total: true
     searchParams:
       - name: fromDate
-        label: Date
+        label: From Date
         type: epoch
         source: pt
-        isMandatory: true
-        searchClause: AND a.transactiondate = $fromDate
+        isMandatory: false
+        searchClause: AND a.receiptdate >= $fromDate
+      - name: toDate
+        label: To Date
+        type: epoch
+        source: pt
+        isMandatory: false
+        searchClause: AND a.receiptdate <= $toDate
     query: >
       -- Use CTE to force query plan, compute & use CTE later
         WITH a as(
-        select c.consumercode,bd.id as billdid, pd.businessservice, pd.tenantid, payment.totalamountpaid as amount_paid , to_char((To_timestamp(payment.transactiondate / 1000) at time zone 'Asia/Kolkata'), 'DD-MM-YYYY') as transactiondate, payment.payername, payment.mobilenumber from egcl_payment payment join egcl_paymentdetail pd on pd.paymentid = payment.id JOIN egcl_bill bill ON pd.billid = bill.id Join egcl_billdetial bd on bill.id = bd.billid
+        select c.consumercode,bd.id as billdid, pd.businessservice, pd.tenantid, payment.totalamountpaid as amount_paid , to_char((To_timestamp(payment.transactiondate / 1000) at time zone 'Asia/Kolkata'), 'DD-MM-YYYY') as transactiondate,pd.receiptdate, payment.payername, payment.mobilenumber from egcl_payment payment join egcl_paymentdetail pd on pd.paymentid = payment.id JOIN egcl_bill bill ON pd.billid = bill.id Join egcl_billdetial bd on bill.id = bd.billid
         JOIN (Select (CASE WHEN ws.connectionno IS NOT NULL THEN ws.connectionno ELSE applicationno END) as consumercode from eg_ws_connection ws GROUP BY consumercode)c ON c.consumercode=bill.consumercode
         where payment.paymentstatus != 'CANCELLED' and pd.businessservice IN ('WS','WSReconnection','WS.ONE_TIME_FEE'))
         select * from a left outer join(
-        select SUM(CASE WHEN taxheadcode LIKE 'WS_TIME_PENALTY' THEN amount WHEN taxheadcode LIKE 'WS_ADHOC_PENALTY' THEN amount WHEN taxheadcode LIKE 'WS_TIME_ADHOC_PENALTY' THEN amount ELSE 0 END) as penalty, 
-              SUM(CASE WHEN taxheadcode LIKE 'WS_TIME_INTEREST' THEN amount ELSE 0 END) as interest, 
+        select SUM(CASE WHEN taxheadcode LIKE 'W%PENALTY' THEN amount ELSE 0 END) as penalty, 
+              SUM(CASE WHEN taxheadcode LIKE 'W%INTEREST' THEN amount ELSE 0 END) as interest, 
               SUM(CASE WHEN taxheadcode LIKE 'WS_FEE_ROUND_OFF' THEN amount ELSE 0 END) as roundoff, 
               SUM(CASE WHEN taxheadcode LIKE 'WS_FORM_FEE' THEN amount ELSE 0 END) as formfee, 
               SUM(CASE WHEN taxheadcode LIKE 'WS_ONE_TIME_FEE' THEN amount ELSE 0 END) as onetimefee,
