@@ -2190,7 +2190,7 @@ ReportDefinitions:
               SUM(CASE WHEN taxheadcode LIKE 'WS_SECURITY_CHARGE' THEN amount ELSE 0 END) as securitycharge,
               SUM(CASE WHEN taxheadcode LIKE 'WS_TAX_AND_CESS' THEN amount ELSE 0 END) as taxandcess,
               SUM(CASE WHEN taxheadcode LIKE 'WS_RECONNECTION_CHARGE' THEN amount ELSE 0 END) as reconnectionFee,
-        dd.billdetailid/
+        dd.billdetailid
         from
         egcl_billaccountdetail dd
         group by dd.billdetailid
