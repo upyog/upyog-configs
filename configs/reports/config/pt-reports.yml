@@ -413,6 +413,6 @@ ReportDefinitions:
         COUNT(case when (select usagecategory from eg_pt_property where propertyid=pd.consumercode and status='ACTIVE') = 'RESIDENTIAL' then 1 end) as RESIDENTIAL,
         COUNT(case when (select usagecategory from eg_pt_property where propertyid=pd.consumercode and status='ACTIVE') like '%NONRESIDENTIAL%' then 1 end) as NONRESIDENTIAL,
         COUNT(case when (select usagecategory from eg_pt_property where propertyid=pd.consumercode and status='ACTIVE') = 'MIXED' then 1 end) as MIXED
-    from
+        from
         eg_pt_property propData JOIN eg_pt_address pa ON pa.propertyid=propData.id
-    LEFT OUTER JOIN paymentdata pd on pd.consumercode = propdata.propertyid  where propData.status='ACTIVE'
+        LEFT OUTER JOIN paymentdata pd on pd.consumercode = propdata.propertyid  where propData.status='ACTIVE'
