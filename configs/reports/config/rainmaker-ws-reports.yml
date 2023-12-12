@@ -2196,4 +2196,5 @@ ReportDefinitions:
         group by dd.billdetailid
         )b on
         a.billdid = b.billdetailid
+        where a.businessservice IN ('WS','WSReconnection','WS.ONE_TIME_FEE')
     Orderby: ORDER BY a.transactiondate DESC
