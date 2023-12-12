@@ -347,3 +347,72 @@ ReportDefinitions:
     eg_pgr_address_v2.parentid = eg_pgr_service_v2.id
     AND eg_pgr_service_v2.applicationstatus IN ('PENDINGFORASSIGNMENT','PENDINGATLME','PENDINGFORREASSIGNMENT','REJECTED') AND eg_pgr_service_v2.servicecode IN('PropertyTaxAppealPetition','PropertyTaxAssessment','ChangeOfTitleOrOwnershipOfProperty','DealerRegistration','DealerAssessment','RefundClaims')
   orderby: ORDER BY servicerequestid, epa.createdtime desc
+  
+- reportName: PTCoverageReport
+  summary: Report is used for audit, day-end, and year-end finance reconciliation activities 
+  version: 1.0.0
+  moduleName: pt-reports
+  sourceColumns:
+  - name: Total_properties
+    label: Total Properties
+    type: string
+    source: pt
+    total: false
+  - name: tax_paying
+    label: Properties Paying Tax
+    type: string
+    source: pt
+    total: false
+  - name: RESIDENTIAL
+    label: RESIDENTIAL
+    type: string
+    source: pt
+    total: false
+  - name: NONRESIDENTIAL
+    label: NON RESIDENTIAL
+    type: string
+    source: pt
+    showColumn: false 
+  - name: MIXED
+    label: MIXED
+    type: string
+    source: pt
+    total: true
+  searchParams:
+  - name: locality
+    label: reports.pt.locality
+    type: singlevaluelist
+    pattern: http://egov-location.egov:8080/egov-location/location/v11/boundarys/_search?hierarchyTypeCode=ADMIN&boundaryType=Locality&tenantId=$tenantid|$.TenantBoundary[0].boundary.*.code|$.TenantBoundary[0].boundary.*.code
+    source: pt
+    wrapper: true
+    isMandatory: false
+    localisationPrefix: TENANTS_MOHALLA_
+    isLocalisationRequired: true
+    searchClause: AND pa.locality = $locality   
+  query: |
+        with paymentdata as(
+        select
+            distinct on (bill.consumercode)
+            bill.consumercode,p.transactiondate 
+        from
+            egcl_payment p
+        left outer join egcl_paymentdetail pd on
+            pd.paymentid = p.id
+        --left outer join egbs_bill_v1 bill on
+        left outer join egcl_bill bill on
+            pd.billid = bill.id
+        where
+            pd.businessservice = 'PT'
+            and p.paymentstatus != 'CANCELLED'
+        order by bill.consumercode,p.transactiondate desc
+        
+        )
+        
+        select
+        count(distinct propData.propertyid) as Total_properties,count(pd.consumercode) as tax_paying,
+        COUNT(case when (select usagecategory from eg_pt_property where propertyid=pd.consumercode and status='ACTIVE') = 'RESIDENTIAL' then 1 end) as RESIDENTIAL,
+        COUNT(case when (select usagecategory from eg_pt_property where propertyid=pd.consumercode and status='ACTIVE') like '%NONRESIDENTIAL%' then 1 end) as NONRESIDENTIAL,
+        COUNT(case when (select usagecategory from eg_pt_property where propertyid=pd.consumercode and status='ACTIVE') = 'MIXED' then 1 end) as MIXED
+    from
+        eg_pt_property propData JOIN eg_pt_address pa ON pa.propertyid=propData.id
+    LEFT OUTER JOIN paymentdata pd on pd.consumercode = propdata.propertyid  where propData.status='ACTIVE'
