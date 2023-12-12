@@ -2170,11 +2170,14 @@ ReportDefinitions:
         searchClause: AND a.receiptdate <= $toDate
     query: >
       -- Use CTE to force query plan, compute & use CTE later
-        WITH a as(
+        select
+        *
+        from
+        (
         select c.consumercode,bd.id as billdid, pd.businessservice, pd.tenantid, payment.totalamountpaid as amount_paid , to_char((To_timestamp(payment.transactiondate / 1000) at time zone 'Asia/Kolkata'), 'DD-MM-YYYY') as transactiondate,payment.transactiondate as recieptdate, payment.payername, payment.mobilenumber from egcl_payment payment join egcl_paymentdetail pd on pd.paymentid = payment.id JOIN egcl_bill bill ON pd.billid = bill.id Join egcl_billdetial bd on bill.id = bd.billid
         JOIN (Select (CASE WHEN ws.connectionno IS NOT NULL THEN ws.connectionno ELSE applicationno END) as consumercode from eg_ws_connection ws GROUP BY consumercode)c ON c.consumercode=bill.consumercode
-        where payment.paymentstatus != 'CANCELLED' and pd.businessservice IN ('WS','WSReconnection','WS.ONE_TIME_FEE'))
-        select * from a left outer join(
+        where payment.paymentstatus != 'CANCELLED' and pd.businessservice IN ('WS','WSReconnection','WS.ONE_TIME_FEE')) a
+        left outer join(
         select SUM(CASE WHEN taxheadcode LIKE 'W%PENALTY' THEN amount ELSE 0 END) as penalty, 
               SUM(CASE WHEN taxheadcode LIKE 'W%INTEREST' THEN amount ELSE 0 END) as interest, 
               SUM(CASE WHEN taxheadcode LIKE 'WS_FEE_ROUND_OFF' THEN amount ELSE 0 END) as roundoff, 
@@ -2187,7 +2190,7 @@ ReportDefinitions:
               SUM(CASE WHEN taxheadcode LIKE 'WS_SECURITY_CHARGE' THEN amount ELSE 0 END) as securitycharge,
               SUM(CASE WHEN taxheadcode LIKE 'WS_TAX_AND_CESS' THEN amount ELSE 0 END) as taxandcess,
               SUM(CASE WHEN taxheadcode LIKE 'WS_RECONNECTION_CHARGE' THEN amount ELSE 0 END) as reconnectionFee,
-        dd.billdetailid
+        dd.billdetailid/
         from
         egcl_billaccountdetail dd
         group by dd.billdetailid
