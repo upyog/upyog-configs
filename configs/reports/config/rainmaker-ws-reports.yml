@@ -2099,62 +2099,69 @@ ReportDefinitions:
         label: Paid Amount
         type: number
         source: ws
-        total: true
+        total: false
       - name: penalty
         label: Penalty
         type: string
         source: ws
-        total: true
+        total: false
       - name: interest
         label: Interest
         type: number
         source: ws
-        total: true
+        total: false
       - name: formfee
         label: Form Fee
         type: string
         source: ws
-        total: true
+        total: false
       - name: onetimefee
         label: One Time Fee
         type: string
         source: ws
-        total: true
+        total: false
+        showcolumn: true
       - name: othercharge
         label: Other Charges
         type: string
         source: ws
-        total: true
+        total: false
       - name: advance
         label: Advance
         type: string
         source: ws
-        total: true
+        total: false
       - name: roadcuttingcharge
         label: Road Cutting Charges
         type: string
         source: ws
-        total: true
+        total: false
       - name: scrutinyfee
         label: Scrutiny Fee
         type: string
         source: ws
-        total: true
+        total: false
       - name: securitycharge
         label: Security Charges
         type: string
         source: ws
-        total: true
+        total: false
       - name: taxandcess
         label: Tax & Cess
         type: number
         source: ws
-        total: true
+        total: false
       - name: reconnectionfee
         label: Reconnection Fees
         type: string
         source: ws
-        total: true
+        total: false
+      - name: rebate
+        label: Rebate
+        type: string
+        source: ws
+        total: false
+        showcolumn: true
     searchParams:
       - name: fromDate
         label: From Date
@@ -2178,18 +2185,20 @@ ReportDefinitions:
         JOIN (Select (CASE WHEN ws.connectionno IS NOT NULL THEN ws.connectionno ELSE applicationno END) as consumercode from eg_ws_connection ws GROUP BY consumercode)c ON c.consumercode=bill.consumercode
         where payment.paymentstatus != 'CANCELLED' and pd.businessservice IN ('WS','WSReconnection','WS.ONE_TIME_FEE')) a
         left outer join(
-        select SUM(CASE WHEN taxheadcode LIKE 'W%PENALTY' THEN amount ELSE 0 END) as penalty, 
-              SUM(CASE WHEN taxheadcode LIKE 'W%INTEREST' THEN amount ELSE 0 END) as interest, 
-              SUM(CASE WHEN taxheadcode LIKE 'WS_FEE_ROUND_OFF' THEN amount ELSE 0 END) as roundoff, 
+        select SUM(CASE WHEN taxheadcode LIKE 'WS%PENALTY' THEN amount ELSE 0 END) as penalty, 
+              SUM(CASE WHEN taxheadcode LIKE 'WS_TIME_INTEREST' THEN amount ELSE 0 END) as interest, 
+              SUM(CASE WHEN taxheadcode IN('WS_Round_Off', 'WS_FEE_ROUND_OFF') THEN amount ELSE 0 END) as roundoff, 
               SUM(CASE WHEN taxheadcode LIKE 'WS_FORM_FEE' THEN amount ELSE 0 END) as formfee, 
               SUM(CASE WHEN taxheadcode LIKE 'WS_ONE_TIME_FEE' THEN amount ELSE 0 END) as onetimefee,
-              SUM(CASE WHEN taxheadcode LIKE 'WS%CHARGE' THEN amount ELSE 0 END) as othercharge,
+              SUM(CASE WHEN taxheadcode IN ('WS_OTHER_CHARGE','WS_METER_CHARGE') THEN amount ELSE 0 END) as othercharge,
               SUM(CASE WHEN taxheadcode LIKE 'WS_ADVANCE_CARRYFORWARD' THEN amount ELSE 0 END) as advance,
               SUM(CASE WHEN taxheadcode LIKE 'WS_ROAD_CUTTING_CHARGE' THEN amount ELSE 0 END) as roadcuttingcharge,
               SUM(CASE WHEN taxheadcode LIKE 'WS_SCRUTINY_FEE' THEN amount ELSE 0 END)  as scrutinyfee,
               SUM(CASE WHEN taxheadcode LIKE 'WS_SECURITY_CHARGE' THEN amount ELSE 0 END) as securitycharge,
-              SUM(CASE WHEN taxheadcode LIKE 'WS_TAX_AND_CESS' THEN amount ELSE 0 END) as taxandcess,
+              SUM(CASE WHEN taxheadcode IN('WS_WATER_CESS', 'WS_TAX_AND_CESS') THEN amount ELSE 0 END) as taxandcess,
               SUM(CASE WHEN taxheadcode LIKE 'WS_RECONNECTION_CHARGE' THEN amount ELSE 0 END) as reconnectionFee,
+              SUM(CASE WHEN taxheadcode IN( 'WS_TIME_ADHOC_REBATE','WS_ADHOC_REBATE') THEN amount ELSE 0 END) as rebate,
+
         dd.billdetailid
         from
         egcl_billaccountdetail dd
