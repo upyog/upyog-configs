@@ -2172,13 +2172,13 @@ ReportDefinitions:
         label: From Date
         type: epoch
         source: pt
-        isMandatory: false
+        isMandatory: true
         searchClause: AND a.receiptdate >= $fromDate
       - name: toDate
         label: To Date
         type: epoch
         source: pt
-        isMandatory: false
+        isMandatory: true
         searchClause: AND a.receiptdate <= $toDate
     query: >
       -- Use CTE to force query plan, compute & use CTE later
