@@ -2188,7 +2188,7 @@ ReportDefinitions:
         (
         select c.consumercode,bd.id as billdid, pd.businessservice, pd.tenantid, payment.totalamountpaid as amount_paid , to_char((To_timestamp(payment.transactiondate / 1000) at time zone 'Asia/Kolkata'), 'DD-MM-YYYY') as transactiondate,payment.transactiondate as receiptdate, payment.payername, payment.mobilenumber from egcl_payment payment join egcl_paymentdetail pd on pd.paymentid = payment.id JOIN egcl_bill bill ON pd.billid = bill.id INNER JOIN egcl_billdetial bd on bill.id = bd.billid
         JOIN (Select (CASE WHEN ws.connectionno IS NOT NULL THEN ws.connectionno ELSE applicationno END) as consumercode from eg_ws_connection ws GROUP BY consumercode)c ON c.consumercode=bill.consumercode
-        where payment.paymentstatus != 'CANCELLED' and pd.businessservice IN ('WS','WSReconnection','WS.ONE_TIME_FEE')) a
+        where payment.paymentstatus != 'CANCELLED' and pd.businessservice IN ('WS','WSReconnection','WS.ONE_TIME_FEE') and payment.totalamountpaid>0) a
         left outer join(
         select
               SUM(CASE WHEN taxheadcode LIKE ('WS_CHARGE') THEN amount ELSE 0 END) as watercharge,
@@ -2212,5 +2212,5 @@ ReportDefinitions:
         group by dd.billdetailid
         )b on
         a.billdid = b.billdetailid
-        where a.businessservice IN ('WS','WSReconnection','WS.ONE_TIME_FEE')
+        where 1=1
     Orderby: ORDER BY a.transactiondate DESC
