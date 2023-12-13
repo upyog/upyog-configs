@@ -2107,18 +2107,18 @@ ReportDefinitions:
         total: false
       - name: formfee
         label: Form Fee
-        type: string
+        type: number
         source: ws
         total: false
       - name: onetimefee
         label: One Time Fee
-        type: string
+        type: number
         source: ws
         total: false
         showcolumn: true
       - name: penalty
         label: Penalty
-        type: string
+        type: number
         source: ws
         total: false
       - name: interest
@@ -2128,7 +2128,7 @@ ReportDefinitions:
         total: false
       - name: rebate
         label: Rebate
-        type: string
+        type: number
         source: ws
         total: false
         showcolumn: true
@@ -2139,32 +2139,32 @@ ReportDefinitions:
         total: false
       - name: securitycharge
         label: Security Charges
-        type: string
+        type: number
         source: ws
         total: false
       - name: roadcuttingcharge
         label: Road Cutting Charges
-        type: string
+        type: number
         source: ws
         total: false
       - name: scrutinyfee
         label: Scrutiny Fee
-        type: string
+        type: number
         source: ws
         total: false
       - name: othercharge
         label: Other Charges
-        type: string
+        type: number
         source: ws
         total: false
       - name: advance
         label: Advance
-        type: string
+        type: number
         source: ws
         total: false
       - name: reconnectionfee
         label: Reconnection Fees
-        type: string
+        type: number
         source: ws
         total: false
     searchParams:
@@ -2213,4 +2213,4 @@ ReportDefinitions:
         )b on
         a.billdid = b.billdetailid
         where 1=1
-    Orderby: ORDER BY a.transactiondate DESC
+    Orderby: ORDER BY a.receiptdate DESC
