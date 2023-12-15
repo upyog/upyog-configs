@@ -105,6 +105,12 @@
                 "type": "date"
               },
               {
+                "variable": "stakeholderType", 
+                "value": {
+                  "path": "$.paymentDetails[0].additionalDetails.stakeholderType"
+                }
+              },
+              {
                 "variable": "paymentMode", 
                 "value": {
                   "path": "$.paymentMode"
