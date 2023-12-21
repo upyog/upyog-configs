@@ -2520,5 +2520,5 @@ ReportDefinitions:
     INNER JOIN (VALUES tbl_def_dept) AS deptmap_def(name,code) ON departmap.department = deptmap_def.code
     WHERE
     eg_pgr_address_v2.parentid = eg_pgr_service_v2.id
-    AND eg_pgr_service_v2.applicationstatus IN ('PENDINGFORASSIGNMENT','PENDINGATLME','PENDINGFORREASSIGNMENT','REJECTED')
+    AND eg_pgr_service_v2.applicationstatus IN ('PENDINGFORASSIGNMENT','PENDINGATLME','PENDINGFORREASSIGNMENT','REJECTED','CLOSEDAFTERREJECTION','RESOLVED','CLOSEDAFTERRESOLUTION')
   orderby: ORDER BY servicerequestid, epa.createdtime desc
