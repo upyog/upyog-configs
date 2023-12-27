@@ -23755,6 +23755,106 @@
       "Applications_Pending"
     ],
     "_comment": " "
-  }
+  },
+  "mainPendingAppBeyondSLA": {
+    "chartName": "NATIONAL_DSS_PENDING_APPLICATIONS_SLA",
+    "queries": [
+      {
+        "module": "OBPS",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": "date",
+        "indexName": "obps-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"todaysDate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_term\":\"desc\"},\"size\":1},\"aggs\":{\"Beyond SLA Application\":{\"sum\":{\"field\":\"pendingApplicationsBeyondTimeline\"}}}},\"lastUpdatedTime\":{\"terms\":{\"field\":\"lastModifiedTime\",\"order\":{\"_term\":\"desc\"},\"size\":1}}}}}}"
+      },
+	  {
+        "module": "PGR",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": "date",
+        "indexName": "pgr-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"todaysDate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_term\":\"desc\"},\"size\":1},\"aggs\":{\"Beyond SLA Application\":{\"sum\":{\"field\":\"pendingApplicationsBeyondTimeline\"}}}},\"lastUpdatedTime\":{\"terms\":{\"field\":\"lastModifiedTime\",\"order\":{\"_term\":\"desc\"},\"size\":1}}}}}}"
+      },
+	   {
+        "module": "WS",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": "date",
+        "indexName": "ws-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"todaysDate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_term\":\"desc\"},\"size\":1},\"aggs\":{\"Beyond SLA Application\":{\"sum\":{\"field\":\"pendingApplicationsBeyondTimeline\"}}}},\"lastUpdatedTime\":{\"terms\":{\"field\":\"lastModifiedTime\",\"order\":{\"_term\":\"desc\"},\"size\":1}}}}}}"
+      },
+	  {
+        "module": "FIRENOC",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": "date",
+        "indexName": "firenoc-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"todaysDate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_term\":\"desc\"},\"size\":1},\"aggs\":{\"Beyond SLA Application\":{\"sum\":{\"field\":\"pendingApplicationsBeyondTimeline\"}}}},\"lastUpdatedTime\":{\"terms\":{\"field\":\"lastModifiedTime\",\"order\":{\"_term\":\"desc\"},\"size\":1}}}}}}"
+      },
+	   {
+        "module": "TL",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": "date",
+        "indexName": "tl-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"todaysDate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_term\":\"desc\"},\"size\":1},\"aggs\":{\"Beyond SLA Application\":{\"sum\":{\"field\":\"pendingApplicationsBeyondTimeline\"}}}},\"lastUpdatedTime\":{\"terms\":{\"field\":\"lastModifiedTime\",\"order\":{\"_term\":\"desc\"},\"size\":1}}}}}}"
+      },
+	  {
+        "module": "PT",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": "date",
+        "indexName": "pt-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"todaysDate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_term\":\"desc\"},\"size\":1},\"aggs\":{\"Beyond SLA Application\":{\"sum\":{\"field\":\"pendingApplicationsBeyondTimeline\"}}}},\"lastUpdatedTime\":{\"terms\":{\"field\":\"lastModifiedTime\",\"order\":{\"_term\":\"desc\"},\"size\":1}}}}}}"
+      },
+	        {
+        "module": "OBPS",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": "",
+        "indexName": "obps-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"all_matching_docs\":{\"filters\":{\"filters\":{\"all\":{\"match_all\":{}}}},\"aggs\":{\"Total_Closed_Applications\":{\"sum\":{\"field\":\"todaysClosedApplicationsPermit\"}},\"Total_Closed_Applications_OC\":{\"sum\":{\"field\":\"todaysClosedApplicationsOC\"}},\"Total_Applications\":{\"sum\":{\"field\":\"applicationsSubmitted\"}},\"Total_Applications_OC\":{\"sum\":{\"field\":\"ocSubmitted\"}},\"Applications_Pending\":{\"bucket_script\":{\"buckets_path\":{\"total\":\"Total_Applications\",\"total_oc\":\"Total_Applications_OC\",\"closed\":\"Total_Closed_Applications\",\"closed_oc\":\"Total_Closed_Applications_OC\"},\"script\":\"(params.total+params.total_oc-params.closed_oc-params.closed)\"}}}}}}"
+      },
+	   {
+        "module": "WS",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": "",
+        "indexName": "ws-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"all_matching_docs\":{\"filters\":{\"filters\":{\"all\":{\"match_all\":{}}}},\"aggs\":{\"Total_Closed_Applications\":{\"sum\":{\"field\":\"todaysClosedApplications\"}},\"Total_Applications\":{\"sum\":{\"field\":\"todaysTotalApplications\"}},\"Applications_Pending\":{\"bucket_script\":{\"buckets_path\":{\"total\":\"Total_Applications\",\"closed\":\"Total_Closed_Applications\"},\"script\":\"(params.total-params.closed)\"}}}}}}"
+      },
+	  {
+        "module": "FIRENOC",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": "",
+        "indexName": "firenoc-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"all_matching_docs\":{\"filters\":{\"filters\":{\"all\":{\"match_all\":{}}}},\"aggs\":{\"Total_Closed_Applications\":{\"sum\":{\"field\":\"todaysClosedApplications\"}},\"Total_Applications\":{\"sum\":{\"field\":\"todaysApplicationsForApplicationType  \"}},\"Applications_Pending\":{\"bucket_script\":{\"buckets_path\":{\"total\":\"Total_Applications\",\"closed\":\"Total_Closed_Applications\"},\"script\":\"(params.total-params.closed)\"}}}}}}"
+      },
+	   {
+        "module": "TL",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": "",
+        "indexName": "tl-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"all_matching_docs\":{\"filters\":{\"filters\":{\"all\":{\"match_all\":{}}}},\"aggs\":{\"Total_Closed_Applications\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}},\"Total_Applications\":{\"sum\":{\"field\":\"todaysApplications\"}},\"Applications_Pending\":{\"bucket_script\":{\"buckets_path\":{\"total\":\"Total_Applications\",\"closed\":\"Total_Closed_Applications\"},\"script\":\"(params.total-params.closed)\"}}}}}}"
+      },
+	  {
+        "module": "PT",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": "",
+        "indexName": "pt-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"all_matching_docs\":{\"filters\":{\"filters\":{\"all\":{\"match_all\":{}}}},\"aggs\":{\"Total_Closed_Applications\":{\"sum\":{\"field\":\"todaysClosedApplications\"}},\"Total_Applications\":{\"sum\":{\"field\":\"todaysTotalApplications\"}},\"Applications_Pending\":{\"bucket_script\":{\"buckets_path\":{\"total\":\"Total_Applications\",\"closed\":\"Total_Closed_Applications\"},\"script\":\"(params.total-params.closed)\"}}}}}}"
+      },
+	  	  {
+        "module": "PGR",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "dateRefField": "",
+        "indexName": "pgr-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"all_matching_docs\":{\"filters\":{\"filters\":{\"all\":{\"match_all\":{}}}},\"aggs\":{\"Total_Closed_Applications\":{\"sum\":{\"field\":\"todaysClosedComplaintsForDepartment\"}},\"Total_Applications\":{\"sum\":{\"field\":\"todaysComplaintsForDepartment\"}},\"Applications_Pending\":{\"bucket_script\":{\"buckets_path\":{\"total\":\"Total_Applications\",\"closed\":\"Total_Closed_Applications\"},\"script\":\"(params.total-params.closed)\"}}}}}}"
+      }
 
+    ],
+    "chartType": "metric",
+    "valueType": "percentage",
+    "drillChart": "none",
+    "documentType": "nss",
+    "action": "percentage",
+    "isRoundOff": true,
+    "aggregationPaths": [
+      "Beyond SLA Application",
+	  "Applications_Pending"
+    ],
+    "_comment": " "
+  }
 }

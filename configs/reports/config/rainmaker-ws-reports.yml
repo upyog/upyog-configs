@@ -347,7 +347,7 @@ ReportDefinitions:
           payment.totalamountpaid as amount, 
           payment.paymentmode as instrumenttype, 
           payment.transactionnumber,
-          concat(to_char((To_timestamp(get_fromperiod(pd.billid)/1000) at time Zone 'Asia/Kolkata'),'DD-MM-YYYY'),'-', to_char((To_timestamp(get_toperiod(pd.billid)/1000) at time Zone 'Asia/Kolkata'),'DD-MM-YYYY')) as billperiod, 
+          concat(to_char((To_timestamp((pd.billid)/1000) at time Zone 'Asia/Kolkata'),'DD-MM-YYYY'),'-', to_char((To_timestamp((pd.billid)/1000) at time Zone 'Asia/Kolkata'),'DD-MM-YYYY')) as billperiod, 
           to_char((To_timestamp(payment.transactiondate/1000) at time Zone 'Asia/Kolkata'),'DD-MM-YYYY') AS transactiondate, 
           payment.totaldue - payment.totalamountpaid AS pendingamount,
           Initcap(case when pt.usagecategory like '%.%' then split_part(pt.usagecategory,'.',2) else pt.usagecategory end) as usagetype,
@@ -1784,3 +1784,435 @@ ReportDefinitions:
       WHERE ws.applicationstatus in ('CONNECTION_ACTIVATED','APPROVED') and
       ws.status = 'Active'
     orderby: ORDER BY ws.tenantId ASC
+    
+  - reportName: WaterDisconnectionReport
+    decryptionPathId: DefaulterReport
+    summary: Water Disconnection Report
+    version: 1.0.0
+    moduleName: rainmaker-ws
+    sourceColumns:
+      - name: connectionno
+        label: Connection No.
+        type: string
+        source: ws
+        total: false   
+      - name: propertyid
+        label: Property ID
+        type: string
+        source: ws
+        total: false
+      - name: locality
+        label: Locality
+        type: string
+        source: wns
+        total: false
+        localisationPrefix: TENANTS_MOHALLA_
+        isLocalisationRequired: true
+      - name: Disconnection_date
+        label: Disconnection Date
+        type: string
+        source: ws
+        total: false
+      - name: name
+        label: Owner Name
+        type: string
+        source: ws
+        total: false
+      - name: mobilenumber
+        label: Mobile Number
+        type: string
+        source: pt
+        total: false
+      - name: guardian
+        label: Guardian's Name
+        type: string
+        source: pt
+        total: false
+      - name: relation
+        label: Guardian's Relation
+        type: string
+        source: pt
+        total: false
+    searchParams:
+      - name: fromDate
+        label: reports.ws.fromDate
+        type: epoch
+        source: ws
+        isMandatory: true
+        searchClause: AND dateeffectivefrom >= $fromDate
+      - name: toDate
+        label: reports.ws.toDate
+        type: epoch
+        source: ws
+        isMandatory: true
+        searchClause: AND dateeffectivefrom <= $toDate
+      - name: locality
+        label: reports.wns.locality
+        type: singlevaluelist
+        source: wns
+        pattern: http://egov-location.egov:8080/egov-location/location/v11/boundarys/_search?hierarchyTypeCode=ADMIN&boundaryType=Locality&tenantId=$tenantid|$.TenantBoundary[0].boundary.*.code|$.TenantBoundary[0].boundary.*.code
+        isMandatory: false
+        wrapper: true
+        localisationPrefix: TENANTS_MOHALLA_
+        isLocalisationRequired: true
+        searchClause: AND ptad.locality = $locality
+    query: select distinct(ws.connectionno), ws.tenantid, pt.propertyid,ws.locality, to_char( To_timestamp(ws.dateeffectivefrom / 1000), 'DD/MM/YYYY' ) as Disconnection_date,usr.name,usr.mobilenumber,usr.guardian,usr.guardianrelation as relation, (select userid from eg_pt_owner where propertyid=propertyid order by createdtime limit 1) as user_uuid, ws.property_id  from eg_ws_connection ws LEFT JOIN eg_pt_property pt ON ws.property_id = pt.propertyid INNER JOIN eg_pt_address ptad ON pt.id=ptad.propertyid INNER JOIN EG_PT_OWNER owner ON pt.id = owner.propertyid INNER JOIN eg_user usr ON owner.userid=usr.uuid where ws.applicationtype IN('DISCONNECT_WATER_CONNECTION','DISCONNECT_SEWERAGE_CONNECTION') and ws.applicationstatus='DISCONNECTION_EXECUTED'
+    orderby: ORDER BY ws.tenantId ASC
+    
+  - reportName: WaterConnectionReport
+    decryptionPathId: DefaulterReport
+    summary: Water Connection Report
+    version: 1.0.0
+    moduleName: rainmaker-ws
+    sourceColumns:
+      - name: connectionno
+        label: Connection No.
+        type: string
+        source: ws
+        total: false   
+      - name: locality
+        label: Locality
+        type: string
+        source: wns
+        total: false
+        localisationPrefix: TENANTS_MOHALLA_
+        isLocalisationRequired: true
+      - name: Connection_date
+        label: Connection Date
+        type: string
+        source: ws
+        total: false
+      - name: name
+        label: Owner Name
+        type: string
+        source: ws
+        total: false
+      - name: mobilenumber
+        label: Mobile Number
+        type: string
+        source: pt
+        total: false
+      - name: guardian
+        label: Guardian's Name
+        type: string
+        source: pt
+        total: false
+      - name: guardianrelation
+        label: Guardian's Relation
+        type: string
+        source: pt
+        total: false
+    searchParams:
+      - name: fromDate
+        label: reports.ws.fromDate
+        type: epoch
+        source: ws
+        isMandatory: true
+        searchClause: AND ws.createdtime >= $fromDate
+      - name: toDate
+        label: reports.ws.toDate            
+        type: epoch
+        source: ws
+        isMandatory: true
+        searchClause: AND ws.createdtime <= $toDate
+      - name: locality
+        label: reports.wns.locality
+        type: singlevaluelist
+        source: wns
+        pattern: http://egov-location.egov:8080/egov-location/location/v11/boundarys/_search?hierarchyTypeCode=ADMIN&boundaryType=Locality&tenantId=$tenantid|$.TenantBoundary[0].boundary.*.code|$.TenantBoundary[0].boundary.*.code
+        isMandatory: false
+        wrapper: true
+        localisationPrefix: TENANTS_MOHALLA_
+        isLocalisationRequired: true
+        searchClause: AND ptad.locality = $locality
+    query: select distinct(ws.connectionno), ws.tenantid,ws.createdtime,ws.locality, to_char( To_timestamp(wsservice.connectionexecutiondate / 1000), 'DD/MM/YYYY' ) as Connection_date, usr.name,usr.mobilenumber,usr.guardian,usr.guardianrelation, (select userid from eg_pt_owner where propertyid=propertyid order by createdtime limit 1) as user_uuid, ws.property_id  from eg_ws_connection ws LEFT JOIN eg_pt_property pt ON ws.property_id = pt.propertyid INNER JOIN eg_ws_service wsservice on wsservice.connection_id=ws.id INNER JOIN eg_pt_address ptad ON pt.id=ptad.propertyid INNER JOIN EG_PT_OWNER owner ON pt.id = owner.propertyid INNER JOIN eg_user usr ON owner.userid=usr.uuid where ws.applicationtype IN('NEW_WATER_CONNECTION') and ws.applicationstatus='CONNECTION_ACTIVATED'
+    orderby: ORDER BY ws.tenantId ASC
+    
+  - reportName: SewerageConnectionReport
+    decryptionPathId: DefaulterReport
+    summary: Sewerage Connection Report
+    version: 1.0.0
+    moduleName: rainmaker-ws
+    sourceColumns:
+      - name: connectionno
+        label: Connection No.
+        type: string
+        source: ws
+        total: false   
+      - name: locality
+        label: Locality
+        type: string
+        source: wns
+        total: false
+        localisationPrefix: TENANTS_MOHALLA_
+        isLocalisationRequired: true
+      - name: Connection_date
+        label: Connection Date
+        type: string
+        source: ws
+        total: false
+      - name: name
+        label: Owner Name
+        type: string
+        source: ws
+        total: false
+      - name: mobilenumber
+        label: Mobile Number
+        type: string
+        source: pt
+        total: false
+      - name: guardian
+        label: Guardian's Name
+        type: string
+        source: pt
+        total: false
+      - name: guardianrelation
+        label: Guardian's Relation
+        type: string
+        source: pt
+        total: false
+    searchParams:
+      - name: fromDate
+        label: reports.ws.fromDate
+        type: epoch
+        source: ws
+        isMandatory: true
+        searchClause: AND ws.createdtime >= $fromDate
+      - name: toDate
+        label: reports.ws.toDate            
+        type: epoch
+        source: ws
+        isMandatory: true
+        searchClause: AND ws.createdtime <= $toDate
+      - name: locality
+        label: reports.wns.locality
+        type: singlevaluelist
+        source: wns
+        pattern: http://egov-location.egov:8080/egov-location/location/v11/boundarys/_search?hierarchyTypeCode=ADMIN&boundaryType=Locality&tenantId=$tenantid|$.TenantBoundary[0].boundary.*.code|$.TenantBoundary[0].boundary.*.code
+        isMandatory: false
+        wrapper: true
+        localisationPrefix: TENANTS_MOHALLA_
+        isLocalisationRequired: true
+        searchClause: AND ptad.locality = $locality
+    query: select distinct(ws.connectionno), ws.tenantid,ws.createdtime,ws.locality, to_char( To_timestamp(swservice.connectionexecutiondate / 1000), 'DD/MM/YYYY' ) as Connection_date, usr.name,usr.mobilenumber,usr.guardian,usr.guardianrelation, (select userid from eg_pt_owner where propertyid=propertyid order by createdtime limit 1) as user_uuid, ws.property_id  from eg_sw_connection ws LEFT JOIN eg_pt_property pt ON ws.property_id = pt.propertyid INNER JOIN eg_sw_service swservice on swservice.connection_id=ws.id INNER JOIN eg_pt_address ptad ON pt.id=ptad.propertyid INNER JOIN EG_PT_OWNER owner ON pt.id = owner.propertyid INNER JOIN eg_user usr ON owner.userid=usr.uuid where ws.applicationtype IN('NEW_SEWERAGE_CONNECTION') and ws.applicationstatus='CONNECTION_ACTIVATED'
+    orderby: ORDER BY ws.tenantId ASC
+  - reportName: SewerageDisconnectionReport
+    decryptionPathId: DefaulterReport
+    summary: Water Disconnection Report
+    version: 1.0.0
+    moduleName: rainmaker-ws
+    sourceColumns:
+      - name: connectionno
+        label: Connection No.
+        type: string
+        source: ws
+        total: false   
+      - name: propertyid
+        label: Property ID
+        type: string
+        source: ws
+        total: false
+      - name: locality
+        label: Locality
+        type: string
+        source: wns
+        total: false
+        localisationPrefix: TENANTS_MOHALLA_
+        isLocalisationRequired: true
+      - name: Disconnection_date
+        label: Disconnection Date
+        type: string
+        source: ws
+        total: false
+      - name: name
+        label: Owner Name
+        type: string
+        source: ws
+        total: false
+      - name: mobilenumber
+        label: Mobile Number
+        type: string
+        source: pt
+        total: false
+      - name: guardian
+        label: Guardian's Name
+        type: string
+        source: pt
+        total: false
+      - name: relation
+        label: Guardian's Relation
+        type: string
+        source: pt
+        total: false
+    searchParams:
+      - name: fromDate
+        label: reports.ws.fromDate
+        type: epoch
+        source: ws
+        isMandatory: true
+        searchClause: AND dateeffectivefrom >= $fromDate
+      - name: toDate
+        label: reports.ws.toDate
+        type: epoch
+        source: ws
+        isMandatory: true
+        searchClause: AND dateeffectivefrom <= $toDate
+      - name: locality
+        label: reports.wns.locality
+        type: singlevaluelist
+        source: wns
+        pattern: http://egov-location.egov:8080/egov-location/location/v11/boundarys/_search?hierarchyTypeCode=ADMIN&boundaryType=Locality&tenantId=$tenantid|$.TenantBoundary[0].boundary.*.code|$.TenantBoundary[0].boundary.*.code
+        isMandatory: false
+        wrapper: true
+        localisationPrefix: TENANTS_MOHALLA_
+        isLocalisationRequired: true
+        searchClause: AND ptad.locality = $locality
+    query: select distinct(ws.connectionno), ws.tenantid, pt.propertyid,ws.locality, to_char( To_timestamp(ws.dateeffectivefrom / 1000), 'DD/MM/YYYY' ) as Disconnection_date,usr.name,usr.mobilenumber,usr.guardian,usr.guardianrelation as relation, (select userid from eg_pt_owner where propertyid=propertyid order by createdtime limit 1) as user_uuid, ws.property_id  from eg_sw_connection ws LEFT JOIN eg_pt_property pt ON ws.property_id = pt.propertyid INNER JOIN eg_pt_address ptad ON pt.id=ptad.propertyid INNER JOIN EG_PT_OWNER owner ON pt.id = owner.propertyid INNER JOIN eg_user usr ON owner.userid=usr.uuid where ws.applicationtype IN('DISCONNECT_WATER_CONNECTION','DISCONNECT_SEWERAGE_CONNECTION') and ws.applicationstatus='DISCONNECTION_EXECUTED'
+    orderby: ORDER BY ws.tenantId ASC
+  - reportName: DemandCollectionBalancedRegister
+    summary: Demand Collection
+    version: 1.0.0
+    moduleName: rainmaker-ws
+    additionalConfig:
+      print:
+        pdfPageSize: A1
+    sourceColumns:
+      - name: consumercode
+        label: Consumer Code
+        type: string
+        source: ws
+        total: false
+      - name: payername
+        label: Payer Name
+        type: string
+        source: ws
+        total: false
+      - name: mobilenumber
+        label: Payer Contact
+        type: string
+        source: ws
+        total: false
+      - name: transactiondate
+        label: Date of Transaction
+        type: string
+        source: ws
+        total: false
+      - name: amount_paid
+        label: Paid Amount
+        type: number
+        source: ws
+        total: false
+      - name: watercharge
+        label: Water Charges
+        type: number
+        source: ws
+        total: false
+      - name: formfee
+        label: Form Fee
+        type: number
+        source: ws
+        total: false
+      - name: onetimefee
+        label: One Time Fee
+        type: number
+        source: ws
+        total: false
+        showcolumn: true
+      - name: penalty
+        label: Penalty
+        type: number
+        source: ws
+        total: false
+      - name: interest
+        label: Interest
+        type: number
+        source: ws
+        total: false
+      - name: rebate
+        label: Rebate
+        type: number
+        source: ws
+        total: false
+        showcolumn: true
+      - name: taxandcess
+        label: Tax & Cess
+        type: number
+        source: ws
+        total: false
+      - name: securitycharge
+        label: Security Charges
+        type: number
+        source: ws
+        total: false
+      - name: roadcuttingcharge
+        label: Road Cutting Charges
+        type: number
+        source: ws
+        total: false
+      - name: scrutinyfee
+        label: Scrutiny Fee
+        type: number
+        source: ws
+        total: false
+      - name: othercharge
+        label: Other Charges
+        type: number
+        source: ws
+        total: false
+      - name: advance
+        label: Advance
+        type: number
+        source: ws
+        total: false
+      - name: reconnectionfee
+        label: Reconnection Fees
+        type: number
+        source: ws
+        total: false
+    searchParams:
+      - name: fromDate
+        label: From Date
+        type: epoch
+        source: pt
+        isMandatory: true
+        searchClause: AND a.receiptdate >= $fromDate
+      - name: toDate
+        label: To Date
+        type: epoch
+        source: pt
+        isMandatory: true
+        searchClause: AND a.receiptdate <= $toDate
+    query: >
+      -- Use CTE to force query plan, compute & use CTE later
+        select
+        *
+        from
+        (
+        select c.consumercode,bd.id as billdid, pd.businessservice, pd.tenantid, payment.totalamountpaid as amount_paid , to_char((To_timestamp(payment.transactiondate / 1000) at time zone 'Asia/Kolkata'), 'DD-MM-YYYY') as transactiondate,payment.transactiondate as receiptdate, payment.payername, payment.mobilenumber from egcl_payment payment join egcl_paymentdetail pd on pd.paymentid = payment.id JOIN egcl_bill bill ON pd.billid = bill.id INNER JOIN egcl_billdetial bd on bill.id = bd.billid
+        JOIN (Select (CASE WHEN ws.connectionno IS NOT NULL THEN ws.connectionno ELSE applicationno END) as consumercode from eg_ws_connection ws GROUP BY consumercode)c ON c.consumercode=bill.consumercode
+        where payment.paymentstatus != 'CANCELLED' and pd.businessservice IN ('WS','WSReconnection','WS.ONE_TIME_FEE') and payment.totalamountpaid>0 and bd.amount>0) a
+        left outer join(
+        select
+              SUM(CASE WHEN taxheadcode LIKE ('WS_CHARGE') THEN amount ELSE 0 END) as watercharge,
+              SUM(CASE WHEN taxheadcode LIKE 'WS_FORM_FEE' THEN amount ELSE 0 END) as formfee, 
+              SUM(CASE WHEN taxheadcode LIKE 'WS_ONE_TIME_FEE' THEN amount ELSE 0 END) as onetimefee,
+              SUM(CASE WHEN taxheadcode LIKE 'WS%PENALTY' THEN amount ELSE 0 END) as penalty, 
+              SUM(CASE WHEN taxheadcode LIKE 'WS_TIME_INTEREST' THEN amount ELSE 0 END) as interest,
+              SUM(CASE WHEN taxheadcode IN('WS_WATER_CESS', 'WS_TAX_AND_CESS') THEN amount ELSE 0 END) as taxandcess,
+              SUM(CASE WHEN taxheadcode IN( 'WS_TIME_ADHOC_REBATE','WS_ADHOC_REBATE') THEN amount ELSE 0 END) as rebate,              
+              SUM(CASE WHEN taxheadcode LIKE 'WS_SECURITY_CHARGE' THEN amount ELSE 0 END) as securitycharge,
+              SUM(CASE WHEN taxheadcode IN('WS_Round_Off', 'WS_FEE_ROUND_OFF') THEN amount ELSE 0 END) as roundoff, 
+              SUM(CASE WHEN taxheadcode IN ('WS_OTHER_CHARGE','WS_METER_CHARGE') THEN amount ELSE 0 END) as othercharge,
+              SUM(CASE WHEN taxheadcode LIKE 'WS_ADVANCE_CARRYFORWARD' THEN amount ELSE 0 END) as advance,
+              SUM(CASE WHEN taxheadcode LIKE 'WS_ROAD_CUTTING_CHARGE' THEN amount ELSE 0 END) as roadcuttingcharge,
+              SUM(CASE WHEN taxheadcode LIKE 'WS_SCRUTINY_FEE' THEN amount ELSE 0 END)  as scrutinyfee,
+              SUM(CASE WHEN taxheadcode LIKE 'WS_RECONNECTION_CHARGE' THEN amount ELSE 0 END) as reconnectionFee,
+              
+        dd.billdetailid
+        from
+        egcl_billaccountdetail dd
+        group by dd.billdetailid
+        )b on
+        a.billdid = b.billdetailid
+        where 1=1
+    Orderby: ORDER BY a.receiptdate DESC
