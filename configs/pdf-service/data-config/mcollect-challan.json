@@ -702,7 +702,8 @@
                         "qrcodeConfig": [
                             {
                                 "variable": "qrcodeimage",
-                                "value": "Payer Name : {{consumerName}},Challan number: {{challanNo}}, Challan Date: {{billDate}}, Total Amount: {{totalAmount}}, Billing Period: {{fromPeriod}} to {{toPeriod}}"
+                                "value": "/digit-ui/citizen/challan/details?tenantId={{tenantid}}&challanNo={{challanNo}}"
+
                             }
                         ]
                     }

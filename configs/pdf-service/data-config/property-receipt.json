@@ -628,7 +628,37 @@
              {             
                       "variable":"email",
                       "value":"$.Properties[0].owners[0].emailId"
-                    }
+                    },
+                    {
+                      "variable": "var_owners",                        
+                      "value":"$.Properties[0].owners[?(@.active== true && @.status== 'ACTIVE')]",
+                       "type":"array",
+                       "format":{                            
+                          "type":"string",
+                          "scema":[
+                             {
+                                "variable":"name2",
+                                "value":"name"
+                             },
+                             {
+                                "variable":"fatherOrHusbandName2",
+                                "value":"fatherOrHusbandName"
+                             },
+                             {
+                              "variable":"mobileNumber",
+                              "value":"mobileNumber"
+                           },
+                           {
+                            "variable":"relationship",
+                            "value":"relationship"
+                         },
+                           {
+                            "variable":"ownerType",
+                            "value":"ownerType"
+                         }
+                            ]
+                      } 
+                   }
 					]
 			  },
               { 
