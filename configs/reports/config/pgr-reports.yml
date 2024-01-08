@@ -2459,6 +2459,11 @@ ReportDefinitions:
     type: string
     source: eg_pgr_service
     total: false
+  - name: days_difference
+    label: Actual Turnaround Time
+    type: string
+    source: eg_pgr_service
+    total: false 
   searchParams:
   - name: ulb
     label: ULB
@@ -2504,8 +2509,8 @@ ReportDefinitions:
     (with address_data as(select string_agg(value, ', ') from (select (json_each_text(row_to_json(x1))).value from (SELECT epa.landmark, (SELECT boundary_def.name FROM (VALUES tbl_boundary) AS boundary_def(name,code) WHERE boundary_def.code=epa.locality), epa.city, epa.pincode FROM eg_pgr_address_v2 epa WHERE epa.parentid=eg_pgr_service_v2.id) x1) as x2)SELECT address_data.string_agg AS address FROM address_data),
     description,
     deptmap_def.name as department,
-    (SELECT (CASE WHEN (((SELECT deptmap.slaHours FROM (VALUES tbl_dept) AS deptmap(serviceCode, department, slaHours) WHERE deptmap.serviceCode = eg_pgr_service_v2.servicecode)::integer / 24) - ((((select extract(epoch from now())) * 1000) - eg_pgr_service_v2.createdtime)::bigint/86400000)) < 1 THEN CONCAT('Overdue by ', ((((select extract(epoch from now())) * 1000) - eg_pgr_service_v2.createdtime)::bigint/86400000) - ((SELECT deptmap.slaHours FROM (VALUES tbl_dept) AS deptmap(serviceCode, department, slaHours) WHERE deptmap.serviceCode = eg_pgr_service_v2.servicecode)::integer / 24), ' days') ELSE CONCAT(((SELECT deptmap.slaHours FROM (VALUES tbl_dept) AS deptmap(serviceCode, department, slaHours) WHERE deptmap.serviceCode = eg_pgr_service_v2.servicecode)::integer / 24) - ((((select extract(epoch from now())) * 1000) - eg_pgr_service_v2.createdtime)::bigint/86400000), ' days remaining') END) as slaHours)
-    FROM eg_pgr_service_v2
+    (SELECT (CASE WHEN (((SELECT deptmap.slaHours FROM (VALUES tbl_dept) AS deptmap(serviceCode, department, slaHours) WHERE deptmap.serviceCode = eg_pgr_service_v2.servicecode)::integer / 24) - ((((select extract(epoch from now())) * 1000) - eg_pgr_service_v2.createdtime)::bigint/86400000)) < 1 THEN CONCAT('Overdue by ', ((((select extract(epoch from now())) * 1000) - eg_pgr_service_v2.createdtime)::bigint/86400000) - ((SELECT deptmap.slaHours FROM (VALUES tbl_dept) AS deptmap(serviceCode, department, slaHours) WHERE deptmap.serviceCode = eg_pgr_service_v2.servicecode)::integer / 24), ' days') ELSE CONCAT(((SELECT deptmap.slaHours FROM (VALUES tbl_dept) AS deptmap(serviceCode, department, slaHours) WHERE deptmap.serviceCode = eg_pgr_service_v2.servicecode)::integer / 24) - ((((select extract(epoch from now())) * 1000) - eg_pgr_service_v2.createdtime)::bigint/86400000), ' days remaining') END) as slaHours),
+    ( CASE WHEN eg_pgr_service_v2.applicationstatus IN ('CLOSEDAFTERREJECTION', 'RESOLVED', 'CLOSEDAFTERRESOLUTION') THEN CASE WHEN (eg_pgr_service_v2.lastmodifiedtime - eg_pgr_service_v2.createdtime) < (1000 * 60 * 60) THEN CEIL((eg_pgr_service_v2.lastmodifiedtime - eg_pgr_service_v2.createdtime) / (1000 * 60)) || ' minutes' WHEN (eg_pgr_service_v2.lastmodifiedtime - eg_pgr_service_v2.createdtime) < (1000 * 60 * 60 * 24) THEN CEIL((eg_pgr_service_v2.lastmodifiedtime - eg_pgr_service_v2.createdtime) / (1000 * 60 * 60)) || ' hours' ELSE CEIL((eg_pgr_service_v2.lastmodifiedtime - eg_pgr_service_v2.createdtime) / (1000 * 60 * 60 * 24)) || ' days' END ELSE '0' END) as days_difference FROM eg_pgr_service_v2
     left outer join eg_pgr_address_v2 on eg_pgr_address_v2.parentid = eg_pgr_service_v2.id
     left outer join eg_user on eg_user.uuid = eg_pgr_service_v2.accountid
     left outer join eg_wf_processinstance_v2 as epa on epa.businessId = eg_pgr_service_v2.servicerequestid and epa.action in ('ASSIGN','REASSIGN')
@@ -2515,5 +2520,5 @@ ReportDefinitions:
     INNER JOIN (VALUES tbl_def_dept) AS deptmap_def(name,code) ON departmap.department = deptmap_def.code
     WHERE
     eg_pgr_address_v2.parentid = eg_pgr_service_v2.id
-    AND eg_pgr_service_v2.applicationstatus IN ('PENDINGFORASSIGNMENT','PENDINGATLME','PENDINGFORREASSIGNMENT','REJECTED')
+    AND eg_pgr_service_v2.applicationstatus IN ('PENDINGFORASSIGNMENT','PENDINGATLME','PENDINGFORREASSIGNMENT','REJECTED','CLOSEDAFTERREJECTION','RESOLVED','CLOSEDAFTERRESOLUTION')
   orderby: ORDER BY servicerequestid, epa.createdtime desc

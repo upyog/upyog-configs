@@ -214,10 +214,10 @@
         "style": "next-noc-table",
         "table": {
           "widths": [
+            "20%",
+            "20%",
             "25%",
-            "25%",
-            "25%",
-            "25%"
+            "35%"
           ],
           "body": [
             [
@@ -242,7 +242,7 @@
                 "style": "receipt-table"
               },
               {
-                "text": "{{billing_period}}",
+                "text": "{{total_bill_amount}}",
                 "border": [
                   false,
                   true,
@@ -252,7 +252,7 @@
                 "style": "receipt-table-value"
               },
               {
-                "text": "{{fromPeriod}} {{to}} {{toPeriod}}",
+                "text": "₹ {{dueAmount}}",
                 "border": [
                   false,
                   true,
@@ -264,29 +264,9 @@
             ],
             [
               {
-                "text": "{{total_bill_amount}}",
-                "border": [
-                  true,
-                  false,
-                  false,
-                  false
-                ],
-                "style": "receipt-table-value"
-              },
-              {
-                "text": "₹ {{dueAmount}}",
-                "border": [
-                  false,
-                  false,
-                  false,
-                  false
-                ],
-                "style": "receipt-table"
-              },
-              {
                 "text": "{{paid_amount}}",
                 "border": [
-                  false,
+                  true,
                   false,
                   false,
                   false
@@ -298,17 +278,15 @@
                 "border": [
                   false,
                   false,
-                  true,
+                  false,
                   false
                 ],
                 "style": "receipt-table"
-              }
-            ],
-            [
+              },
               {
                 "text": "{{pending_amount}}",
                 "border": [
-                  true,
+                  false,
                   false,
                   false,
                   false
@@ -317,26 +295,6 @@
               },
               {
                 "text": "₹ {{pendingAmount}}",
-                "border": [
-                  false,
-                  false,
-                  false,
-                  false
-                ],
-                "style": "receipt-table"
-              },
-              {
-                "text": "{{excess_amount_paid}}",
-                "border": [
-                  false,
-                  false,
-                  false,
-                  false
-                ],
-                "style": "receipt-table-value"
-              },
-              {
-                "text": "₹ {{excessAmountPaid}}",
                 "border": [
                   false,
                   false,
@@ -436,6 +394,205 @@
         "layout": {}
       },
       {
+        "text":"AMOUNT TO BE PAID",
+        "style":"block-head"
+      },
+      {
+        "style": "next-noc-table",
+        "table": {
+          "widths": [
+  
+            "8%","9%","5%","7%","8%","8%","8%","8%","9%","8%","8%","7%","7%"
+          ],
+          "body": [
+            
+      [     {
+        "text": "Year",
+        "style": "amounts"
+      },
+              {
+                "text": "Property Tax",
+                "style": "amounts"
+              },
+        {
+                "text": "Fire Cess",
+                "style": "amounts"
+              },
+        {
+                "text": "Cancer Cess",
+                "style": "amounts"
+              },
+        {
+                "text": "Penalty",
+                "style": "amounts"
+              },
+        {
+                "text": "Rebate",
+                "style": "amounts"
+              },
+        {
+                "text": "Interest",
+                "style": "amounts"
+              },
+        {
+                "text": "Usage Exemp.",
+                "style": "amounts"
+              },
+        {
+                "text": "Category Exemp.",
+                "style": "amounts"
+              },
+              {
+                "text": "Adhoc Penalty",
+                "style": "amounts"
+              },
+              {
+                "text": "Adhoc Rebate",
+                "style": "amounts"
+              },
+        {
+                "text": "Round Off",
+                "style": "amounts"
+              },
+        {
+                "text": "Total",
+                "style": "amounts"
+              }
+        
+      ],
+      
+      "{{#var_tax}}[{\"text\":\"{{year}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{tax}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{firecess}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{cancercess}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{penalty}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{rebate}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{interest}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{usage_exemption}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{special_category_exemption}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{adhoc_penalty}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{adhoc_rebate}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{roundoff}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{total}}\",\"style\":\"receipt-tablee\"}]{{/var_tax}}"
+  
+        
+    ]
+    },
+    "layout":{}
+    }, 
+      {
+        "text":"SUMMARY OF PAID AMOUNT",
+        "style":"block-head"
+      },
+      {
+        "style": "next-noc-table",
+        "table": {
+          "widths": [
+            "8%","9%","5%","7%","8%","8%","8%","8%","9%","8%","8%","7%","7%"
+          ],
+          "body": [
+            
+      [     {
+        "text": "Year",
+        "style": "amounts"
+      },
+              {
+                "text": "Property Tax",
+                "style": "amounts"
+              },
+        {
+                "text": "Fire Cess",
+                "style": "amounts"
+              },
+        {
+                "text": "Cancer Cess",
+                "style": "amounts"
+              },
+        {
+                "text": "Penalty",
+                "style": "amounts"
+              },
+        {
+                "text": "Rebate",
+                "style": "amounts"
+              },
+        {
+                "text": "Interest",
+                "style": "amounts"
+              },
+        {
+                "text": "Usage Exemp.",
+                "style": "amounts"
+              },
+        {
+                "text": "Category Exemp.",
+                "style": "amounts"
+              },
+              {
+                "text": "Adhoc Penalty",
+                "style": "amounts"
+              },
+              {
+                "text": "Adhoc Rebate",
+                "style": "amounts"
+              },
+        {
+                "text": "Round Off",
+                "style": "amounts"
+              },
+        {
+                "text": "Total",
+                "style": "amounts"
+              }
+        
+      ],
+      
+      "{{#var_bills}}[{\"text\":\"{{year}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{tax}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{firecess}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{cancercess}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{penalty}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{rebate}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{interest}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{usage_exemption}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{special_category_exemption}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{adhoc_penalty}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{adhoc_rebate}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{roundoff}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{total}}\",\"style\":\"receipt-tablee\"}]{{/var_bills}}"
+  
+        
+    ]
+    },
+    "layout":{}
+    },
+      {
+        "style": "next-noc-table",
+        "table": {
+            "widths": [
+                "60%",
+                "30%",
+                "10%"
+            ],
+            "body": [
+                [
+                    {
+                        "text": "{{total_amount}}",
+                        "border": [
+                            true,
+                            true,
+                            false,
+                            true
+                        ],
+                        "bold": true,
+                        "style": "receipt-table-value-down"
+                    },
+                    {
+                        "text": "{{totalAmount}}",
+                        "border": [
+                            false,
+                            true,
+                            false,
+                            true
+                        ],
+                        "bold": true,
+                        "style": "receipt-table-value-down"
+                    },
+                    {
+                        "image": "{{qrcodeimage}}",
+                        "style": "receipt-table-value-total-Qr",
+                        "border": [
+                            false,
+                            true,
+                            true,
+                            true
+                        ],
+                        "width": 72,
+                        "height": 72
+                    }
+                ]
+            ]
+        },
+        "layout": {}
+    },
+   
+      {
         "style": "receipt-approver",
         "columns": [
           {
@@ -507,106 +664,158 @@
     },
     "receipt-logo-header": {
       "color": "#000000",
-      "fontSize": 14,
+      "fontSize": 10,
       "bold": true,
       "letterSpacing": 0.74,
       "margin": [
         0,
         0,
         0,
-        5
+        3
       ]
     },
-    "receipt-logo-sub-header": {
+       "receipt-logo-sub-header": {
       "color": "#000000",
-      "fontSize": 12,
+      "fontSize": 10,
       "letterSpacing": 0.6
     },
      "noc-table": {
-      "fontSize": 12,
+      "fontSize": 10,
       "color": "#000000",
       "margin": [
         -25,
-        45,
+        4,
         -22,
-        -8
+        4
       ]
     },
+    "receipt-table-value-total-Qr": {
+      "alignment": "right",
+      "margin": [
+          0,
+          3,
+          10,
+          0
+      ]
+  },
+  "receipt-table-value-down": {
+      "color": "#000000",
+      "bold": false,
+      "fontSize": 10,
+      "fontWeight": 400,
+      "alignment": "left",
+      "margin": [
+          3,
+          5,
+          0,
+          5
+      ]
+  },
+
     "next-noc-table": {
-      "fontSize": 12,
+      "fontSize": 10,
       "color": "#000000",
       "margin": [
         -25,
-        28,
+        2,
         -22,
-        -8
+        5
       ]
     },
      "receipt-table-value": {
       "color": "#000000",
       "bold": true,
-      "fontSize": 12,
+      "fontSize": 10,
       "fontWeight": 500,
       "margin": [
         8,
-        8,
+        0.5,
         0,
-        8
+        0.5
       ]
     },
     "receipt-table": {
       "color": "#000000",
       "bold": false,
-      "fontSize": 12,
+      "fontSize": 10,
       "fontWeight": 400,
       "margin": [
         -10,
-        8,
+        0.5,
         0,
-        8
+        0.5
+      ]
+    },
+    "receipt-tablee": {
+      "color": "#000000",
+      "bold": false,
+      "fontSize": 8,
+      "fontWeight": 400,
+      "margin": [
+        0,
+        0,
+        0,
+        0
       ]
     },
      "receipt-approver": {
-      "fontSize": 12,
+      "fontSize": 10,
       "bold": true,
       "margin": [
         -27,
-        50,
+        10,
         -10,
         0
       ],
       "color": "#484848"
     },
     "no-signature": {
-      "fontSize": 12,
+      "fontSize": 10,
       "margin": [
         -27,
-        10,
+        5,
         -10,
         0
       ],
       "color": "#484848"
     },
     "pt-disclaimer": {
-      "fontSize": 12,
+      "fontSize": 6,
       "margin": [
         -27,
-        10,
+        5,
         -10,
         0
       ],
       "color": "#484848"
     },
     "pt-disclaimer-value": {
-      "fontSize": 12,
+      "fontSize": 6,
       "margin": [
         2,
-        5,
+        1,
         0,
         0
       ],
       "color": "#484848"
-     }
+     },
+     "amounts":
+     {
+         "fontSize": 10,
+         "bold":true,
+         "backgroundColor": "#D3D3D3"
+     },
+     "block-head": {
+      "fontSize": 9,
+      "bold": true,
+      "letterSpacing": 0.74,
+      "margin": [
+        -25,
+        5,
+        0,
+        2
+      ]
+    }
    }
   }
 }

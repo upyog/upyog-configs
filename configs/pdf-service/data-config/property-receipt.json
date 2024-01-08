@@ -61,9 +61,39 @@
                }
               },
               {
+                "variable": "total_amount",
+                "value": {
+                    "path": "PDF_STATIC_LABEL_CONSOLIDATED_TLAPP_TOTAL_AMOUNT"
+                },
+                "type": "label",
+                "localisation": {
+                    "required": true,
+                    "prefix": null,
+                    "module":"rainmaker-common"
+                }
+            },
+              {
+                "variable": "totalAmount",
+                "value": {
+                    "path": "$.totalAmountPaid"
+                }
+            },
+            {
+              "variable": "tenantid", 
+              "value": {
+                "path": "$.tenantId"
+              }
+            },
+             {
                 "variable": "paidAmount", 
                 "value": {
                   "path": "$.paymentDetails[0].totalAmountPaid"
+                }
+              },
+			   {
+                "variable": "assessmentYear", 
+                "value": {
+                  "path": "$.paymentDetails[0].additionalDetails.assessmentYears"
                 }
               },
               {
@@ -403,7 +433,139 @@
                   "prefix": null,
                   "module":"rainmaker-common"
                }
-              }
+              },
+              {
+                "variable": "var_bills",                        
+                "value":{
+                  "path":"$.paymentDetails[0].additionalDetails.arrearArray.*"
+                },
+                 "type":"array",
+                 "format":{                            
+                    "type":"string",
+                    "scema":[
+                       {
+                          "variable":"year",
+                          "value":  "year"
+                        
+                        },{
+                          "variable":"tax",
+                          "value":  "tax"
+                        
+                        },{
+                          "variable":"firecess",
+                          "value":  "firecess"
+                        
+                        },{
+                          "variable":"cancercess",
+                          "value":  "cancercess"
+                        
+                        },{
+                          "variable":"penalty",
+                          "value":  "penalty"
+                        
+                        },{
+                          "variable":"interest",
+                          "value":  "interest"
+                        
+                        },{
+                          "variable":"rebate",
+                          "value":  "rebate"
+                        
+                        },
+                        {
+                          "variable":"usage_exemption",
+                          "value":  "usage_exemption"
+                        
+                        },{
+                          "variable":"special_category_exemption",
+                          "value":  "special_category_exemption"
+                        
+                        },{
+                          "variable":"adhoc_penalty",
+                          "value":  "adhoc_penalty"
+                        
+                        },{
+                          "variable":"adhoc_rebate",
+                          "value":  "adhoc_rebate"
+                        
+                        },{
+                          "variable":"roundoff",
+                          "value":  "roundoff"
+                        
+                        },{
+                          "variable":"total",
+                          "value":  "total"
+                        
+                        }
+                       ]
+                } 
+             },
+             {
+              "variable": "var_tax",                        
+              "value":{
+                "path":"$.paymentDetails[0].additionalDetails.taxArray.*"
+              },
+               "type":"array",
+               "format":{                            
+                  "type":"string",
+                  "scema":[
+                     {
+                        "variable":"year",
+                        "value":  "year"
+                      
+                      },{
+                        "variable":"tax",
+                        "value":  "tax"
+                      
+                      },{
+                        "variable":"firecess",
+                        "value":  "firecess"
+                      
+                      },{
+                        "variable":"cancercess",
+                        "value":  "cancercess"
+                      
+                      },{
+                        "variable":"penalty",
+                        "value":  "penalty"
+                      
+                      },{
+                        "variable":"interest",
+                        "value":  "interest"
+                      
+                      },{
+                        "variable":"rebate",
+                        "value":  "rebate"
+                      
+                      },
+                      {
+                        "variable":"usage_exemption",
+                        "value":  "usage_exemption"
+                      
+                      },{
+                        "variable":"special_category_exemption",
+                        "value":  "special_category_exemption"
+                      
+                      },{
+                        "variable":"adhoc_penalty",
+                        "value":  "adhoc_penalty"
+                      
+                      },{
+                        "variable":"adhoc_rebate",
+                        "value":  "adhoc_rebate"
+                      
+                      },{
+                        "variable":"roundoff",
+                        "value":  "roundoff"
+                      
+                      },{
+                        "variable":"total",
+                        "value":  "total"
+                      
+                      }
+                     ]
+              } 
+           }
             ]
           },
           {
@@ -497,7 +659,15 @@
                 ]
             }
             ]
-          }
+          },
+          {
+            "qrcodeConfig": [
+                {
+                    "variable": "qrcodeimage",
+                    "value": "/digit-ui/citizen/payment/verification?tenantId={{tenantid}}&receiptNumber={{receiptNo}}"
+                }
+            ]
+        }
         ]
       }
     ]

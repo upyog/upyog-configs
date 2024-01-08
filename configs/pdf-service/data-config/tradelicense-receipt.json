@@ -60,6 +60,30 @@
                }
               },
               {
+                "variable": "total_amount",
+                "value": {
+                    "path": "PDF_STATIC_LABEL_CONSOLIDATED_TLAPP_TOTAL_AMOUNT"
+                },
+                "type": "label",
+                "localisation": {
+                    "required": true,
+                    "prefix": null,
+                    "module":"rainmaker-common"
+                }
+            },
+              {
+                "variable": "totalAmount",
+                "value": {
+                    "path": "$.totalAmountPaid"
+                }
+            },
+            {
+              "variable": "tenantid", 
+              "value": {
+                "path": "$.tenantId"
+              }
+            },
+              {
                 "variable": "paidAmount", 
                 "value": {
                   "path": "$.paymentDetails[0].totalAmountPaid"
@@ -137,7 +161,7 @@
                 "localisation":{
                   "required":true,
                   "prefix": null,
-                  "module":"rainmaker-common"
+                  "module":"rainmaker-tl"
                }
               },
               {
@@ -484,7 +508,15 @@
                 ]
             }
             ]
-          }
+          },
+          {
+            "qrcodeConfig": [
+                {
+                    "variable": "qrcodeimage",
+                    "value": "/digit-ui/citizen/payment/verification?tenantId={{tenantid}}&receiptNumber={{receiptNo}}"
+                }
+            ]
+        }
         ]
       }
     ]

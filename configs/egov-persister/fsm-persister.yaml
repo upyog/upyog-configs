@@ -1,6 +1,7 @@
 
 serviceMaps: 
   serviceName: fsm
+  serviceName: fsm
   mappings: 
     - 
       description: "Persists FSM Application details in eg_fsm_application  table"
@@ -160,6 +161,7 @@ serviceMaps:
               jsonPath: $.fsm.pitDetail.auditDetails.lastModifiedTime
           query: "INSERT INTO  eg_fsm_pit_detail( id, tenantid, height, length, width, diameter, distancefromroad, fsm_id, additionaldetails,  createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
       version: 1.0
+    
     - 
       description: "Persists FSM Application details in eg_fsm_application  table"
       fromTopic: update-fsm-application
@@ -481,6 +483,4 @@ serviceMaps:
             - jsonPath: $.vehicleTrip.*.id
           query: UPDATE eg_vehicle_trip SET  status=?, lastmodifiedby=?, lastmodifiedtime=? WHERE id=?
       version: 1.0
-      
-   
                 

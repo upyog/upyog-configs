@@ -302,23 +302,7 @@
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
-                {
-                  "id": "todaysCollectionOverview",
-                  "name": "NATIONAL_DSS_TOTAL_COLLECTION_TODAY",
-                  "code": "",
-                  "chartType": "",
-                  "filter": {"title": "TODAY"},
-                  "headers": []
-                },
-                {
-                  "id": "totalCollectionOverview",
-                  "name": "NATIONAL_DSS_TOTAL_COLLECTION",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
+			  {
                   "id": "targetCollectionvOverview",
                   "name": "NATIONAL_DSS_TARGET_COLLECTION",
                   "code": "",
@@ -326,15 +310,23 @@
                   "filter": "",
                   "headers": []
                 },
-                {
-                  "id": "targetAchievedOverview",
-                  "name": "NATIONAL_DSS_TARGET_ACHIEVED",
+				 {
+                  "id": "totalCollectionOverview",
+                  "name": "NATIONAL_DSS_TOTAL_COLLECTION",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
                   "headers": []
                 },
-                {
+				{
+                  "id": "totalCollectionv3",
+                  "name": "DSS_TOTAL_TAX_COLLECTION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+				{
                   "id": "totalNonTaxCollection",
                   "name": "DSS_TOTAL_NON_TAX_COLLECTION",
                   "code": "",
@@ -343,13 +335,23 @@
                   "headers": []
                 },
                 {
+                  "id": "todaysCollectionOverview",
+                  "name": "NATIONAL_DSS_TOTAL_COLLECTION_TODAY",
+                  "code": "",
+                  "chartType": "",
+                  "filter": {"title": "TODAY"},
+                  "headers": []
+                },
+               
+                 {
                   "id": "nonTaxRevenueContribution",
                   "name": "DSS_NON_TAX_REVENUE_CONTRIBUTION",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
                   "headers": []
-                },
+                },         
+               
 				{
                   "id": "slaComplainceOverview",
                   "name": "DSS_SLA_COMPLAINCE_OVERVIEW",
@@ -368,6 +370,14 @@
                 },{
                   "id": "StateGDPwiseTotalRevenueCollection",
                   "name": "DSS_STATE_GDP_REVENUE_COLLECTION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+				{
+                  "id": "PropertyTaxRevenuePerHouseholdOverview",
+                  "name": "DSS_PT_TAX_REVENUE_PER_HOUSEHOLD_OVERVIEW",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -434,7 +444,7 @@
             },
             {
               "id": 122,
-              "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_TARGET_ACHIEVEMENT",
+              "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE",
               "dimensions": {
                 "height": 250,
                 "width": 4
@@ -445,8 +455,8 @@
               "label": "",
               "charts": [
                 {
-                  "id": "topPerformingStatesOverview",
-                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_TARGET_ACHIEVEMENT",
+                  "id": "OverviewtopPerformingStates",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE",
                   "code": "",
                   "chartType": "bar",
                   "filter": "",
@@ -456,7 +466,7 @@
             },
             {
               "id": 123,
-              "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_TARGET_ACHIEVEMENT",
+              "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE",
               "dimensions": {
                 "height": 250,
                 "width": 4
@@ -466,8 +476,8 @@
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "bottomPerformingStatesOverview",
-                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_TARGET_ACHIEVEMENT",
+                  "id": "OverviewbottomPerformingStates",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE",
                   "code": "",
                   "chartType": "bar",
                   "filter": "",
@@ -492,9 +502,41 @@
               "isCollapsible": false,
               "label": "",
               "charts": [
+				{
+                  "id": "totalApplicationsOverview",
+                  "name": "NATIONAL_DSS_OVERVIEW_TOTAL_APPLICATION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "closedApplicationOverview",
+                  "name": "NATIONAL_DSS_CLOSED_APPLICATION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+				{
+                  "id": "slaAchievedOverview",
+                  "name": "NATIONAL_DSS_OVERVIEW_SLA_ACHIEVED",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
                 {
                   "id": "nssOverviewPendancy",
                   "name": "NATIONAL_DSS_OVERVIEW_PENDANCY",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+				{
+                  "id": "citizenRegisteredOverview",
+                  "name": "NATIONAL_DSS_CITIZEN_REGISTERED",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -511,38 +553,6 @@
 		            {
                   "id": "nssPtCitizenServiceDeliveryIndex",
                   "name": "NATIONAL_DSS_PT_CITIZEN_SERVICE_DELIVERY_INDEX",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "totalApplicationsOverview",
-                  "name": "NATIONAL_DSS_OVERVIEW_TOTAL_APPLICATION",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "closedApplicationOverview",
-                  "name": "NATIONAL_DSS_CLOSED_APPLICATION",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "slaAchievedOverview",
-                  "name": "NATIONAL_DSS_OVERVIEW_SLA_ACHIEVED",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "citizenRegisteredOverview",
-                  "name": "NATIONAL_DSS_CITIZEN_REGISTERED",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -1066,31 +1076,7 @@
               "isCollapsible": false,
               "label": "NATIONAL_DSS_OVERVIEW",
               "charts": [
-                {
-                  "id": "todaysCollectionv3",
-                  "name": "NATIONAL_DSS_TOTAL_COLLECTION_TODAY",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": {"title": "TODAY"},
-                  "headers": []
-                },
-				{
-                  "id": "todaysLastYearCollectionv3",
-                  "name": "NATIONAL_DSS_TODAYS_LAST_YEAR_COLLECTION",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": {"title": "TODAY"},
-                  "headers": []
-                },
-                {
-                  "id": "totalCollectionv3",
-                  "name": "NATIONAL_PT_DSS_TOTAL_COLLECTION",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
+			  {
                   "id": "targetCollectionv3",
                   "name": "NATIONAL_PT_DSS_TARGET_COLLECTION",
                   "code": "",
@@ -1106,6 +1092,31 @@
                   "filter": "",
                   "headers": []
                 },
+                
+				{
+                  "id": "totalCollectionv3",
+                  "name": "NATIONAL_PT_DSS_TOTAL_COLLECTION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+				{
+                  "id": "todaysLastYearCollectionv3",
+                  "name": "NATIONAL_DSS_TODAYS_LAST_YEAR_COLLECTION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": {"title": "TODAY"},
+                  "headers": []
+                },     
+{
+                  "id": "todaysCollectionv3",
+                  "name": "NATIONAL_DSS_TOTAL_COLLECTION_TODAY",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": {"title": "TODAY"},
+                  "headers": []
+                },				
                 {
                   "id": "avgTaxCollectedPerProperty",
                   "name": "NATIONAL_PT_DSS_AVG_TAX_COLLECTION",
@@ -1468,14 +1479,6 @@
                 {
                   "id": "completionRateV3",
                   "name": "NATIONAL_DSS_PT_COMPLETION_RATE",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "nssPtSlaAchieved",
-                  "name": "NATIONAL_DSS_PT_SLA_ACHIEVED",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -7259,14 +7262,12 @@
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
-                {
-                  "id": "nssOBPSTodaysCollection",
-                  "name": "NSS_OBPS_TODAYS_COLLECTION",
+				{
+                  "id": "nssOBPSTotalCollection",
+                  "name": "NSS_OBPS_TOTAL_COLLECTION",
                   "code": "",
                   "chartType": "metric",
-                  "filter": {
-                    "title": "TODAY"
-                  },
+                  "filter": {},
                   "headers": []
                 },
 				{
@@ -7279,12 +7280,14 @@
                   },
                   "headers": []
                 },
-                {
-                  "id": "nssOBPSTotalCollection",
-                  "name": "NSS_OBPS_TOTAL_COLLECTION",
+				{
+                  "id": "nssOBPSTodaysCollection",
+                  "name": "NSS_OBPS_TODAYS_COLLECTION",
                   "code": "",
                   "chartType": "metric",
-                  "filter": {},
+                  "filter": {
+                    "title": "TODAY"
+                  },
                   "headers": []
                 },
 				{
@@ -7411,6 +7414,14 @@
                 {
                   "id": "nssOBPSSlaComplianceOC",
                   "name": "NSS_OBPS_SLA_COMPLIANCE_OC",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+				{
+                  "id": "nssOBPSPendancy",
+                  "name": "NATIONAL_DSS_OBPS_PENDANCY",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -7610,8 +7621,59 @@
             }
           ]
         },
-        {
+		{
           "row": 4,
+          "name": "NSS_OBPS_DASHBOARD",
+          "vizArray": [
+            {
+              "id": 675,
+              "name": "NSS_NOC_TOP_3_PERFORMING_STATES",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "performing-metric",
+              "isCollapsible": false,
+              "label": "",
+              "charts": [
+                {
+                  "id": "obpstopPerformingStatesSLA",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_SLA_OBPS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "SLA"
+                }
+              ]
+            },
+            {
+              "id": 676,
+              "name": "NSS_NOC_BOTTOM_3_PERFORMING_STATES",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "performing-metric",
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "obpsbottomPerformingStatesSLA",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_SLA_OBPS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "SLA"
+                }
+                
+              ]
+            }
+          ]
+        },
+
+        {
+          "row": 5,
           "name": "NSS_OBPS_DASHBOARD",
           "vizArray": [
             {
@@ -7661,7 +7723,7 @@
           ]
         },
         {
-          "row": 5,
+          "row": 6,
           "name": "NSS_OBPS_DASHBOARD",
           "vizArray": [
             {
@@ -7710,14 +7772,12 @@
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
-                {
-                  "id": "nssNOCTodaysCollection",
-                  "name": "NSS_NOC_TODAYS_COLLECTION",
+				{
+                  "id": "nssNOCTotalCollection",
+                  "name": "NSS_NOC_TOTAL_COLLECTION",
                   "code": "",
                   "chartType": "metric",
-                  "filter": {
-                    "title": "TODAY"
-                  },
+                  "filter": "",
                   "headers": []
                 },
 				{
@@ -7730,12 +7790,14 @@
                   },
                   "headers": []
                 },
-                {
-                  "id": "nssNOCTotalCollection",
-                  "name": "NSS_NOC_TOTAL_COLLECTION",
+				{
+                  "id": "nssNOCTodaysCollection",
+                  "name": "NSS_NOC_TODAYS_COLLECTION",
                   "code": "",
                   "chartType": "metric",
-                  "filter": "",
+                  "filter": {
+                    "title": "TODAY"
+                  },
                   "headers": []
                 },
 				 {
@@ -7838,6 +7900,14 @@
                 {
                   "id": "nssNOCSLAComplianceActual",
                   "name": "NSS_NOC_SLA_COMPLIANCE_ACTUAL",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+				{
+                  "id": "nssNOCPendancy",
+                  "name": "NATIONAL_DSS_NOC_PENDANCY",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -8109,8 +8179,58 @@
             }
           ]
         },
-		{
+		  {
           "row": 6,
+          "name": "NSS_REVENUE",
+          "vizArray": [
+            {
+              "id": 677,
+              "name": "NSS_NOC_TOP_3_PERFORMING_STATES",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "performing-metric",
+              "isCollapsible": false,
+              "label": "",
+              "charts": [
+                {
+                  "id": "firenoctopPerformingStatesSLA",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_SLA_FIRENOC",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "SLA"
+                }
+              ]
+            },
+            {
+              "id": 678,
+              "name": "NSS_NOC_BOTTOM_3_PERFORMING_STATES",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "performing-metric",
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "firenocbottomPerformingStatesSLA",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_SLA_FIRENOC",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "SLA"
+                }
+                
+              ]
+            }
+          ]
+        },
+		{
+          "row": 7,
           "name": "NSS_REVENUE",
           "vizArray": [
             {
@@ -8170,31 +8290,7 @@
               "isCollapsible": false,
               "label": "NSS_OVERVIEW",
               "charts": [
-                {
-                  "id": "nssWsTodaysCollection",
-                  "name": "NSS_WS_TODAYS_COLLECTION",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": {"title": "TODAY"},
-                  "headers": []
-                },
 				{
-                  "id": "wstodaysLastYearCollectionv3",
-                  "name": "NATIONAL_DSS_TODAYS_LAST_YEAR_COLLECTION_WS",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": {"title": "TODAY"},
-                  "headers": []
-                },
-                {
-                  "id": "nssWsTotalCollection",
-                  "name": "NSS_WS_TOTAL_COLLECTION",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
                   "id": "nssWsTargetCollection",
                   "name": "NSS_WS_TARGET_COLLECTION",
                   "code": "",
@@ -8208,6 +8304,30 @@
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
+                  "headers": []
+                },
+				{
+                  "id": "nssWsTotalCollection",
+                  "name": "NSS_WS_TOTAL_COLLECTION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+				{
+                  "id": "wstodaysLastYearCollectionv3",
+                  "name": "NATIONAL_DSS_TODAYS_LAST_YEAR_COLLECTION_WS",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": {"title": "TODAY"},
+                  "headers": []
+                },
+				{
+                  "id": "nssWsTodaysCollection",
+                  "name": "NSS_WS_TODAYS_COLLECTION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": {"title": "TODAY"},
                   "headers": []
                 },
 				{
@@ -8355,8 +8475,58 @@
             }
           ]
         },
-        {
+		{
           "row": 3,
+          "name": "NSS_REVENUE",
+          "vizArray": [
+            {
+              "id": 226,
+              "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_SLA_WS",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "performing-metric",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "wstopPerformingStatesSLA",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_SLA_WS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "SLA"
+                }
+              ]
+            },
+            {
+              "id": 227,
+              "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_SLA_WS",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "performing-metric",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "wsbottomPerformingStatesSLA",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_SLA_WS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "SLA"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 4,
           "name": "NSS_REVENUE",
           "vizArray": [
             {
@@ -8404,7 +8574,7 @@
           ]
         },
         {
-          "row": 4,
+          "row": 5,
           "name": "NSS_REVENUE",
           "vizArray": [
             {
@@ -8432,7 +8602,7 @@
           ]
         },
         {
-          "row": 5,
+          "row": 6,
           "name": "NSS_REVENUE",
           "vizArray": [
             {
@@ -8519,6 +8689,14 @@
                 {
                   "id": "nssWsActiveSewerageConnection",
                   "name": "NSS_WS_ACTIVE_SEWERAGE_CONNECTIONS",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+				{
+                  "id": "nssWSPendancy",
+                  "name": "NATIONAL_DSS_WS_PENDANCY",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -8674,14 +8852,12 @@
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
-                {
-                  "id": "mCollectTodaysCollectionv2",
-                  "name": "DSS_TODAYS_COLLECTION",
+				{
+                  "id": "mCollectTotalCollectionv2",
+                  "name": "DSS_TOTAL_COLLECTION",
                   "code": "",
                   "chartType": "metric",
-                  "filter": {
-                    "title": "TODAY"
-                  },
+                  "filter": "",
                   "headers": []
                 },
 				{
@@ -8694,12 +8870,14 @@
                   },
                   "headers": []
                 },
-                {
-                  "id": "mCollectTotalCollectionv2",
-                  "name": "DSS_TOTAL_COLLECTION",
+				{
+                  "id": "mCollectTodaysCollectionv2",
+                  "name": "DSS_TODAYS_COLLECTION",
                   "code": "",
                   "chartType": "metric",
-                  "filter": "",
+                  "filter": {
+                    "title": "TODAY"
+                  },
                   "headers": []
                 },
                 {
@@ -8984,31 +9162,7 @@
               "noUnit": true,
               "isCollapsible": false,
               "charts": [
-                {
-                  "id": "tradeLicenseTodaysCollectionv2",
-                  "name": "DSS_TODAYS_COLLECTION",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": {"title": "TODAY"},
-                  "headers": []
-                },
-				{
-                  "id": "tltodaysLastYearCollectionv3",
-                  "name": "NATIONAL_DSS_TODAYS_LAST_YEAR_COLLECTION_TL",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": {"title": "TODAY"},
-                  "headers": []
-                },
-                {
-                  "id": "tradeLicenseTotalCollectionv2",
-                  "name": "DSS_TL_TOTAL_COLLECTION",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
+			  {
                   "id": "tlTargetCollection",
                   "name": "DSS_TARGET_COLLECTION",
                   "code": "",
@@ -9024,17 +9178,34 @@
                   "filter": "",
                   "headers": []
                 },
+                
 				{
-                  "id": "slaComplainceTL",
-                  "name": "DSS_SLA_COMPLAINCE_TL",
+                  "id": "tradeLicenseTotalCollectionv2",
+                  "name": "DSS_TL_TOTAL_COLLECTION",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
                   "headers": []
                 },
 				{
-                  "id": "growthRateNonTaxRevenueCollection",
-                  "name": "DSS_GROWTH_RATE_NON_TAX_REVENUE_COLLECTION",
+                  "id": "tltodaysLastYearCollectionv3",
+                  "name": "NATIONAL_DSS_TODAYS_LAST_YEAR_COLLECTION_TL",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": {"title": "TODAY"},
+                  "headers": []
+                },                
+                {
+                  "id": "tradeLicenseTodaysCollectionv2",
+                  "name": "DSS_TODAYS_COLLECTION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": {"title": "TODAY"},
+                  "headers": []
+                },
+				{
+                  "id": "slaComplainceTL",
+                  "name": "DSS_SLA_COMPLAINCE_TL",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -9091,7 +9262,7 @@
               "name": "DSS_TL_LICENSE_BY_TYPE",
               "dimensions": {
                 "height": 250,
-                "width": 10
+                "width": 5
               },
               "vizType": "chart",
               "label": "",
@@ -9105,6 +9276,50 @@
                   "chartType": "donut",
                   "filter": "",
                   "headers": []
+                }
+              ]
+            },
+			{
+              "id": 127,
+              "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_SLA_TL",
+              "dimensions": {
+                "height": 250,
+                "width": 5
+              },              
+			  "vizType": "performing-metric",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+		       {
+                  "id": "tltopPerformingStatesSLA",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_SLA_TL",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "SLA"
+                }
+              ]
+            },
+			{
+              "id": 126,
+              "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_SLA_TL",
+              "dimensions": {
+                "height": 250,
+                "width": 5
+              },              
+			  "vizType": "performing-metric",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+		       {
+                  "id": "tlbottomPerformingStatesSLA",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_SLA_TL",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+				  "tabName": "SLA"
                 }
               ]
             }
@@ -9302,6 +9517,14 @@
                   "chartType": "metric",
                   "filter": "",
                   "headers": []
+                },
+				{
+                  "id": "nssTLPendancy",
+                  "name": "NATIONAL_DSS_TL_PENDANCY",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
                 }
               ]
             },
@@ -9395,36 +9618,6 @@
               ]
             }
           ]
-        },
-        {
-          "row": 8,
-          "name": "DSS_SERVICE",
-          "vizArray": [
-            {
-              "id": 351,
-              "name": "DSS_TL_STATUS_BOUNDARY",
-              "dimensions": {
-                "height": 250,
-                "width": 4
-              },
-              "vizType": "chart",
-              "label": "",
-              "noUnit": false,
-              "isCollapsible": true,
-              "charts": [
-                {
-                  "id": "tlStatusByState",
-                  "name": "",
-                  "code": "",
-                  "chartType": "table",
-                  "filter": "",
-                  "headers": [],
-                  "tabName": "Boundary"
-
-                }
-              ]
-            }
-          ]
         }
       ]
     },
@@ -9451,31 +9644,7 @@
                 "type": "internal"
               },
               "charts": [
-                {
-                  "id": "nssOverviewCitizenFeedbackScore",
-                  "name": "NATIONAL_DSS_OVERVIEW_CITIZEN_FEEDBACK_SCORE",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "nssOverviewPendancy",
-                  "name": "NATIONAL_DSS_OVERVIEW_PENDANCY",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-		            {
-                  "id": "nssPtCitizenServiceDeliveryIndex",
-                  "name": "NATIONAL_DSS_PT_CITIZEN_SERVICE_DELIVERY_INDEX",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
+			  {
                   "id": "nurtOnboardedStates",
                   "name": "NURT_ONBOARDED_STATES",
                   "code": "",
@@ -9500,6 +9669,22 @@
                   "headers": []
                 },
                 {
+                  "id": "nurtTotalCitzens",
+                  "name": "NURT_TOTAL_CITIZENS",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+				{
+                  "id": "targetCollectionvOverview",
+                  "name": "NATIONAL_DSS_TARGET_COLLECTION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
                   "id": "totalCollectionOverview",
                   "name": "NATIONAL_DSS_TOTAL_COLLECTION",
                   "code": "",
@@ -9515,16 +9700,18 @@
                   "filter": "",
                   "headers": []
                 },
-                 {
-                  "id": "nurtTotalCitzens",
-                  "name": "NURT_TOTAL_CITIZENS",
+{
+                  "id": "StateGDPwiseTotalRevenueCollection",
+                  "name": "DSS_STATE_GDP_REVENUE_COLLECTION",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
                   "headers": []
-                },{
-                  "id": "StateGDPwiseTotalRevenueCollection",
-                  "name": "DSS_STATE_GDP_REVENUE_COLLECTION",
+                },
+				
+				{
+                  "id": "PropertyTaxRevenuePerHouseholdOverview",
+                  "name": "DSS_PT_TAX_REVENUE_PER_HOUSEHOLD_OVERVIEW",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -9533,6 +9720,23 @@
 				{
                   "id": "NonTaxRevenuePerHousehold",
                   "name": "DSS_NON_TAX_REVENUE_PER_HOUSEHOLD",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+				 {
+                  "id": "nssOverviewCitizenFeedbackScore",
+                  "name": "NATIONAL_DSS_OVERVIEW_CITIZEN_FEEDBACK_SCORE",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+				 
+                {
+                  "id": "nssPtCitizenServiceDeliveryIndex",
+                  "name": "NATIONAL_DSS_PT_CITIZEN_SERVICE_DELIVERY_INDEX",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -9780,7 +9984,7 @@
               "id": 203,
               "name": "NURT_MCOLLECT",
               "vizType": "module",
-              "moduleLevel": "MC",
+              "moduleLevel": "MCOLLECT",
               "ref": {
                 "url": "national-mcollect",
                 "logoUrl": "",
@@ -9849,7 +10053,7 @@
               "label": "",
               "charts": [
                 {
-                  "id": "cumulativeCollectionfsm",
+                  "id": "fsmtotalCollection",
                   "name": "NATIONAL_DSS_TOTAL_CUMULATIVE_COLLECTION_FSM",
                   "code": "",
                   "chartType": "metric",
@@ -10927,6 +11131,195 @@
             }
           ]
         } 
+      ]
+    },
+	{
+      "name": "NATIONAL_MAIN_DASHBOARD",
+      "id": "mainDashboard",
+      "isActive": "",
+      "style": "linear",
+      "visualizations": [
+       {
+      "row":1,
+          "name": "NATIONAL_DSS_REVENUE",
+          "vizArray": [
+            {
+              "id": 200,
+              "name": "NATIONAL_DSS_OVERVIEW",
+              "vizType": "metric-collection",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "totalCollectionOverview",
+                  "name": "NATIONAL_DSS_TOTAL_COLLECTION_MAIN",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "totalCollectionv3",
+                  "name": "DSS_TOTAL_TAX_COLLECTION_MAIN",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "StateGDPwiseTotalRevenueCollection",
+                  "name": "DSS_STATE_GDP_REVENUE_COLLECTION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "RevenuePerPopulation",
+                  "name": "DSS_REVENUE_PER_POPULATION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "TotalRevenuePerHouseholdOverview",
+                  "name": "DSS_TOTAL_REVENUE_PER_HOUSEHOLD_OVERVIEW_MAIN",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "taxCollectedPerProperty",
+                  "name": "NATIONAL_PT_DSS_TAX_COLLECTION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "PropertyTaxRevenuePerHouseholdOverview",
+                  "name": "DSS_PT_TAX_REVENUE_PER_HOUSEHOLD_OVERVIEW_MAIN",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "revenueCollectedPerProperty",
+                  "name": "NATIONAL_REVENUE_DSS_AVG_TAX_COLLECTION_MAIN",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }   
+            
+              ]
+            },
+       {
+              "id": 202,
+              "name": "NATIONAL_DSS_TOTAL_CUMULATIVE_COLLECTION_SERVICE_WISE",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "totalCollectionServiceWiseOverview",
+                  "name": "NATIONAL_DSS_TOTAL_CUMULATIVE_COLLECTION_SERVICE_WISE",
+                  "code": "",
+                  "chartType": "donut",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+       
+        {
+          "row": 2,
+          "name": "NATIONAL_DSS_SERVICE",
+          "vizArray": [
+            {
+              "id": 131,
+              "name": "NATIONAL_DSS_OVERVIEW",
+              "dimensions": {
+                "height": 450,
+                "width": 5
+              },
+              "vizType": "metric-collection",
+              "isCollapsible": false,
+              "label": "",
+              "charts": [
+				{
+                  "id": "totalApplicationsOverview",
+                  "name": "NATIONAL_DSS_OVERVIEW_TOTAL_APPLICATION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "closedApplicationOverview",
+                  "name": "NATIONAL_DSS_CLOSED_APPLICATION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+				{
+                  "id": "slaComplainceOverview",
+                  "name": "NATIONAL_DSS_APPROVED_APPLICATIONS_WITHIN_SLA",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+				{
+                  "id": "mainPendingApp",
+                  "name": "NATIONAL_DSS_PENDING_APPLICATIONS",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+				{
+                  "id": "mainPendingAppBeyondSLA",
+                  "name": "NATIONAL_DSS_PENDING_APPLICATIONS_SLA",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            },
+            {
+              "id": 132,
+              "name": "NATIONAL_DSS_TOTAL_APPLICATION_&_CLOSED_APPLICATION",
+              "dimensions": {
+                "height": 450,
+                "width": 7
+              },
+              "vizType": "chart",
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "totalApplication&ClosedApplicationOverview",
+                  "name": "NATIONAL_DSS_TOTAL_APPLICATION_&_CLOSED_APPLICATION",
+                  "code": "",
+                  "chartType": "line",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        }
       ]
     }
   ]
