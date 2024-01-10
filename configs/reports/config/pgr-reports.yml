@@ -2568,7 +2568,7 @@ ReportDefinitions:
     isMandatory: false
     localisationPrefix: TENANTS_MOHALLA_
     isLocalisationRequired: true
-    searchClause: AND pa.locality = $locality 
+    searchClause: AND pad.locality = $locality 
   - name: fromDate
     label: From Date
     type: epoch
