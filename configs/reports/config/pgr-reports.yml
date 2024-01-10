@@ -2506,7 +2506,8 @@ ReportDefinitions:
     eg_user.id,
     eg_user.tenantid,
     eg_pgr_address_v2.landmark,
-    (with address_data as(select string_agg(value, ', ') from (select (json_each_text(row_to_json(x1))).value from (SELECT epa.landmark, (SELECT boundary_def.name FROM (VALUES tbl_boundary) AS boundary_def(name,code) WHERE boundary_def.code=epa.locality), epa.city, epa.pincode FROM eg_pgr_address_v2 epa WHERE epa.parentid=eg_pgr_service_v2.id) x1) as x2)SELECT address_data.string_agg AS address FROM address_data),
+    (with address_data as(select string_agg(value, ', ') from (select (json_each_text(row_to_json(x1))).value from (SELECT epa.landmark, (SELECT boundary_def.name FROM (VALUES tbl_boundary) AS boundary_def(name,code) WHERE boundary_def.code=epa.
+    ), epa.city, epa.pincode FROM eg_pgr_address_v2 epa WHERE epa.parentid=eg_pgr_service_v2.id) x1) as x2)SELECT address_data.string_agg AS address FROM address_data),
     description,
     deptmap_def.name as department,
     (SELECT (CASE WHEN (((SELECT deptmap.slaHours FROM (VALUES tbl_dept) AS deptmap(serviceCode, department, slaHours) WHERE deptmap.serviceCode = eg_pgr_service_v2.servicecode)::integer / 24) - ((((select extract(epoch from now())) * 1000) - eg_pgr_service_v2.createdtime)::bigint/86400000)) < 1 THEN CONCAT('Overdue by ', ((((select extract(epoch from now())) * 1000) - eg_pgr_service_v2.createdtime)::bigint/86400000) - ((SELECT deptmap.slaHours FROM (VALUES tbl_dept) AS deptmap(serviceCode, department, slaHours) WHERE deptmap.serviceCode = eg_pgr_service_v2.servicecode)::integer / 24), ' days') ELSE CONCAT(((SELECT deptmap.slaHours FROM (VALUES tbl_dept) AS deptmap(serviceCode, department, slaHours) WHERE deptmap.serviceCode = eg_pgr_service_v2.servicecode)::integer / 24) - ((((select extract(epoch from now())) * 1000) - eg_pgr_service_v2.createdtime)::bigint/86400000), ' days remaining') END) as slaHours),
@@ -2522,3 +2523,73 @@ ReportDefinitions:
     eg_pgr_address_v2.parentid = eg_pgr_service_v2.id
     AND eg_pgr_service_v2.applicationstatus IN ('PENDINGFORASSIGNMENT','PENDINGATLME','PENDINGFORREASSIGNMENT','REJECTED','CLOSEDAFTERREJECTION','RESOLVED','CLOSEDAFTERRESOLUTION')
   orderby: ORDER BY servicerequestid, epa.createdtime desc
+- reportName: GrievanceDispatchDate
+  decryptionPathId: DescriptionReport
+  summary: Fetches the date when grievance got first level assignment
+  version: 1.0.0
+  moduleName: pgr
+  sourceColumns:
+  - name: businessid
+    label: Grievance ID
+    type: string
+    source: eg_pgr_service
+    total: false
+  - name: servicecode
+    label: Grievance Type
+    type: string
+    source: eg_pgr_service
+    total: false
+  - name: createdtime
+    label: Grievance Submission Date
+    type: string
+    source: eg_pgr_service
+    total: false
+  - name: name
+    label: Assigned To
+    type: string
+    source: eg_pgr_service
+    total: false
+  - name: assignmentDate
+    label: Grievance Dispatch Date
+    type: string
+    source: eg_pgr_service
+    total: false
+  - name: currentstatus
+    label: Status
+    type: string
+    source: eg_pgr_service
+    total: false
+  searchParams:
+  - name: locality
+    label: reports.pt.locality
+    type: singlevaluelist
+    pattern: http://egov-location.egov:8080/egov-location/location/v11/boundarys/_search?hierarchyTypeCode=ADMIN&boundaryType=Locality&tenantId=$tenantid|$.TenantBoundary[0].boundary.*.code|$.TenantBoundary[0].boundary.*.code
+    source: pt
+    wrapper: true
+    isMandatory: false
+    localisationPrefix: TENANTS_MOHALLA_
+    isLocalisationRequired: true
+    searchClause: AND pa.locality = $locality 
+  - name: fromDate
+    label: From Date
+    type: epoch
+    source: eg_pgr_service
+    isMandatory: false
+    searchClause: AND createdtime >= $fromDate
+  - name: toDate
+    label: To Date
+    type: epoch
+    source: eg_pgr_service
+    isMandatory: false
+    searchClause: AND createdtime <= $toDate
+  - name: deptname
+    label: reports.pgr.dept.name
+    type: singlevaluelist
+    source: eg_pgr_service
+    pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=common-masters&masterName=Department|$.MdmsRes.common-masters.Department[*].code|$.MdmsRes.common-masters.Department[*].name   
+    isMandatory: false
+    searchClause: AND deptmap_def.code = $deptname
+  query: |
+    With PGR_DATA as(select DISTINCT ON(epa.businessid) epa.createdtime, epa.businessid,epa.id from eg_wf_processinstance_v2 epa where epa.businessservice='PGR' and epa.action='ASSIGN' order by epa.businessid,epa.createdtime asc)
+    select ps.servicecode as servicecode,ps.id as id, ps.createdtime as createdtime,pd.businessid as businessid,pd.createdtime as assignmentDate,Initcap(ps.applicationstatus) as currentstatus,usr.username as name from eg_user usr RIGHT OUTER JOIN eg_wf_assignee_v2 asg ON usr.uuid=asg.assignee RIGHT JOIN PGR_DATA pd ON pd.id= asg.processinstanceid LEFT JOIN eg_pgr_service_v2 ps ON ps.servicerequestid=pd.businessid LEFT JOIN eg_pgr_address_v2 pad ON ps.id=pad.parentid where 1=1
+  orderby: ORDER BY servicecode, createdtime DESC
