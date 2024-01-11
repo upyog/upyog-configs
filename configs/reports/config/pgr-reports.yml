@@ -2573,15 +2573,58 @@ ReportDefinitions:
     label: From Date
     type: epoch
     source: eg_pgr_service
-    isMandatory: false
+    isMandatory: true
     searchClause: AND ps.createdtime >= $fromDate
   - name: toDate
     label: To Date
     type: epoch
     source: eg_pgr_service
-    isMandatory: false
+    isMandatory: true
     searchClause: AND ps.createdtime <= $toDate
   query: |
     With PGR_DATA as(select DISTINCT ON(epa.businessid) epa.createdtime, epa.businessid,epa.id from eg_wf_processinstance_v2 epa where epa.businessservice='PGR' and epa.action='ASSIGN' order by epa.businessid,epa.createdtime asc)
     select ps.servicecode as servicecode,ps.id as id,to_char(to_timestamp(TRUNC(CAST(ps.createdtime AS bigint) / 1000)), 'DD/MM/YY') as createdtime,pd.businessid as businessid,to_char(to_timestamp(TRUNC(CAST(pd.createdtime AS bigint) / 1000)), 'DD/MM/YY') as assignmentDate,Initcap(ps.applicationstatus) as currentstatus,usr.username as name from eg_user usr RIGHT OUTER JOIN eg_wf_assignee_v2 asg ON usr.uuid=asg.assignee RIGHT JOIN PGR_DATA pd ON pd.id= asg.processinstanceid LEFT JOIN eg_pgr_service_v2 ps ON ps.servicerequestid=pd.businessid LEFT JOIN eg_pgr_address_v2 pad ON ps.id=pad.parentid where 1=1
-  orderby: ORDER BY servicecode, createdtime DESC
+  orderby: ORDER BY ps.createdtime DESC
+- reportName: GrievanceReopenRecord
+  summary: Fetches the date how many times application was reopened
+  version: 1.0.0
+  moduleName: pgr
+  sourceColumns:
+  - name: businessid
+    label: Grievance ID
+    type: string
+    source: eg_pgr_service
+    total: false
+  - name: reopen_count
+    label: Number of Times Grievance is Reopened
+    type: string
+    source: eg_pgr_service
+    total: false
+  searchParams:
+  - name: locality
+    label: reports.pt.locality
+    type: singlevaluelist
+    pattern: http://egov-location.egov:8080/egov-location/location/v11/boundarys/_search?hierarchyTypeCode=ADMIN&boundaryType=Locality&tenantId=$tenantid|$.TenantBoundary[0].boundary.*.code|$.TenantBoundary[0].boundary.*.code
+    source: pt
+    wrapper: true
+    isMandatory: false
+    localisationPrefix: TENANTS_MOHALLA_
+    isLocalisationRequired: true
+    searchClause: AND pd.locality = $locality 
+  - name: fromDate
+    label: From Date
+    type: epoch
+    source: eg_pgr_service
+    isMandatory: true
+    searchClause: AND ps.createdtime >= $fromDate
+  - name: toDate
+    label: To Date
+    type: epoch
+    source: eg_pgr_service
+    isMandatory: true
+    searchClause: AND ps.createdtime <= $toDate
+  query: |
+    with pgr_data as (select ps.servicerequestid,pad.locality , ps.servicecode as servicecode,ps.id as id, epa.createdtime as createdtime from eg_pgr_service_v2 ps LEFT JOIN eg_wf_processinstance_v2 epa ON epa.businessid=ps.servicerequestid LEFT JOIN eg_pgr_address_v2 pad ON ps.id=pad.parentid  where epa.action='REOPEN' order by ps.servicerequestid DESC)
+        Select pd.serviceRequestid as businessid,count(pd.servicerequestid) as reopen_count from eg_pgr_service_v2 ps RIGHT JOIN pgr_data pd ON pd.serviceRequestid=ps.servicerequestid where 1=1
+  groupby: GROUP BY pd.serviceRequestid
+  orderby: ORDER BY pd.serviceRequestid
