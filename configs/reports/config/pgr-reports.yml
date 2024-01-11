@@ -2574,14 +2574,14 @@ ReportDefinitions:
     type: epoch
     source: eg_pgr_service
     isMandatory: false
-    searchClause: AND createdtime >= $fromDate
+    searchClause: AND ps.createdtime >= $fromDate
   - name: toDate
     label: To Date
     type: epoch
     source: eg_pgr_service
     isMandatory: false
-    searchClause: AND createdtime <= $toDate
+    searchClause: AND ps.createdtime <= $toDate
   query: |
     With PGR_DATA as(select DISTINCT ON(epa.businessid) epa.createdtime, epa.businessid,epa.id from eg_wf_processinstance_v2 epa where epa.businessservice='PGR' and epa.action='ASSIGN' order by epa.businessid,epa.createdtime asc)
-    select ps.servicecode as servicecode,ps.id as id, ps.createdtime as createdtime,pd.businessid as businessid,pd.createdtime as assignmentDate,Initcap(ps.applicationstatus) as currentstatus,usr.username as name from eg_user usr RIGHT OUTER JOIN eg_wf_assignee_v2 asg ON usr.uuid=asg.assignee RIGHT JOIN PGR_DATA pd ON pd.id= asg.processinstanceid LEFT JOIN eg_pgr_service_v2 ps ON ps.servicerequestid=pd.businessid LEFT JOIN eg_pgr_address_v2 pad ON ps.id=pad.parentid where 1=1
+    select ps.servicecode as servicecode,ps.id as id,to_char(to_timestamp(TRUNC(CAST(ps.createdtime AS bigint) / 1000)), 'DD/MM/YY') as createdtime,pd.businessid as businessid,to_char(to_timestamp(TRUNC(CAST(pd.createdtime AS bigint) / 1000)), 'DD/MM/YY') as assignmentDate,Initcap(ps.applicationstatus) as currentstatus,usr.username as name from eg_user usr RIGHT OUTER JOIN eg_wf_assignee_v2 asg ON usr.uuid=asg.assignee RIGHT JOIN PGR_DATA pd ON pd.id= asg.processinstanceid LEFT JOIN eg_pgr_service_v2 ps ON ps.servicerequestid=pd.businessid LEFT JOIN eg_pgr_address_v2 pad ON ps.id=pad.parentid where 1=1
   orderby: ORDER BY servicecode, createdtime DESC
