@@ -1178,3 +1178,71 @@ ReportDefinitions:
     searchClause: AND tl.financialyear = $financialYear
   query: select licensenumber, eg_user.uuid as uuid, coalesce(to_char(To_timestamp(issueddate / 1000), 'DD/MM/YYYY'),'NA') as issueddate,coalesce(to_char(To_timestamp(validto / 1000), 'DD/MM/YYYY'),'NA') as licenseexpirydate, tradename, split_part(tlunit.tradetype,'.',2) as tradetype, deptmap_def.code as tradesubtype, eg_user.name as name, eg_user.mobilenumber as mobilenumber, CASE WHEN(round( date_part( 'epoch', now() ) )*1000 - validto)/86400000>=0 THEN floor(((round( date_part( 'epoch', now() ) )*1000 - validto)/86400000)-(select count(dt) from generate_series((select to_timestamp(validto/1000)::date),(select to_timestamp(date_part( 'epoch', now()))::date), interval '1' day) as t(dt) where extract(dow from dt) in (0,6))) else null end as elapsedtime, tl.status as status from eg_tl_tradelicense tl inner join eg_tl_tradelicensedetail tld on tl.id = tld.tradelicenseid inner join eg_tl_owner on tld.id=eg_tl_owner.tradelicensedetailid inner join eg_user on eg_user.uuid=eg_tl_owner.id inner join eg_tl_tradeunit tlunit on tlunit.tradelicensedetailid=tld.id inner join (VALUES tbl_def_dept) AS deptmap_def(code,name) ON deptmap_def.code=tlunit.tradetype where tl.businessservice='TL' and licensenumber is not null and tl.tenantid = $tenantid AND tl.status in('MANUALEXPIRED', 'EXPIRED', 'APPROVED')
   orderby: ORDER BY floor(((round( date_part( 'epoch', now() ) )*1000 - validto)/86400000)-(select count(dt) from generate_series((select to_timestamp(validto/1000)::date), (select to_timestamp(date_part( 'epoch', now()))::date), interval '1' day) as t(dt) where extract(dow from dt) in (0,6))) desc
+- reportName: TradeLicenseDefaulterReport
+  decryptionPathId: StateLevelTradeLicenseRegistryReport
+  summary: Trade License Defaulter List
+  version: 1.0.0
+  moduleName: rainmaker-tl
+  sourceColumns:
+  - name: tl_data.licensenumber
+    label: License Number
+    type: string
+    source: tl
+    total: false
+  - name: valid_date
+    label: License Valid Upto
+    type: string
+    source: tl
+    total: false
+  - name: tl_data.financialyear
+    label: Financial Year
+    type: string
+    source: tl
+    total: false
+  - name: tl_data.name
+    label: Owner Name
+    type: string
+    source: tl
+    total: false
+  - name: mobilenumber
+    label: Contact
+    type: string
+    source: tl
+    total: false
+  - name: locality
+    label: Locality
+    type: string
+    source: tl
+    total: false
+  - name: status
+    label: Status
+    type: string
+    source: tl
+    total: false
+  searchParams:
+  - name: fromDate
+    label: From Date
+    type: epoch
+    source: tl
+    isMandatory: false
+    searchClause: AND tl.createdtime >= $fromDate
+  - name: toDate
+    label: To Date
+    type: epoch
+    source: tl
+    isMandatory: false
+    searchClause: AND tl.createdtime  <= $toDate 
+  - name: locality
+    label: Locality
+    type: singlevaluelist
+    pattern: http://egov-location.egov:8080/egov-location/location/v11/boundarys/_search?hierarchyTypeCode=ADMIN&boundaryType=Locality&tenantId=$tenantid|$.TenantBoundary[0].boundary.*.code|$.TenantBoundary[0].boundary.*.code
+    source: pt
+    wrapper: true
+    isMandatory: false
+    localisationPrefix: TENANTS_MOHALLA_
+    isLocalisationRequired: true
+    searchClause: AND addr.locality = $locality 
+  query: |
+    with tl_data as (select tld.id,tl.status, tl.licensenumber, tl.validto,usr.name,usr.mobilenumber, financialyear from eg_tl_tradelicense tl inner join eg_tl_tradelicensedetail tld on tl.id= tld.tradelicenseid  LEFT JOIN eg_tl_owner owner ON owner.tradelicensedetailid=tld.id LEFT JOIN eg_user usr on usr.uuid=owner.id where tl.businessservice='TL' and financialyear=(select max(financialyear) from eg_tl_tradelicense where licensenumber=tl.licensenumber) and tl.tenantid= 'pg.citya' and tl.status IN ('EXPIRED','APPROVED','PENDINGPAYMENT') order by tl.lastmodifiedtime desc)
+    SELECT addr.locality,tl_data.status,to_char((To_timestamp(tl_data.validto/1000) at time Zone 'Asia/Kolkata'),'DD-MM-YYYY') as valid_date, tl_data.username, tl_data.mobilenumber,tl_data.licensenumber,tl_data.financialyear from tl_data inner join eg_tl_address addr on addr.tradelicensedetailid=tl_data.id where tl_data.validto <= (CAST(EXTRACT(epoch FROM NOW()) AS BIGINT)*1000)
+  order by : ORDER BY tl_data.licensenumber DESC
