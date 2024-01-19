@@ -1184,7 +1184,7 @@ ReportDefinitions:
   version: 1.0.0
   moduleName: rainmaker-tl
   sourceColumns:
-  - name: tl_data.licensenumber
+  - name: licensenumber
     label: License Number
     type: string
     source: tl
@@ -1194,12 +1194,12 @@ ReportDefinitions:
     type: string
     source: tl
     total: false
-  - name: tl_data.financialyear
+  - name: financialyear
     label: Financial Year
     type: string
     source: tl
     total: false
-  - name: tl_data.name
+  - name: username
     label: Owner Name
     type: string
     source: tl
@@ -1214,6 +1214,7 @@ ReportDefinitions:
     type: string
     source: tl
     total: false
+    localisationPrefix: TENANTS_MOHALLA_
   - name: status
     label: Status
     type: string
@@ -1224,13 +1225,13 @@ ReportDefinitions:
     label: From Date
     type: epoch
     source: tl
-    isMandatory: false
+    isMandatory: true
     searchClause: AND tl_data.createdtime >= $fromDate
   - name: toDate
     label: To Date
     type: epoch
     source: tl
-    isMandatory: false
+    isMandatory: true
     searchClause: AND tl_data.createdtime  <= $toDate 
   - name: locality
     label: Locality
