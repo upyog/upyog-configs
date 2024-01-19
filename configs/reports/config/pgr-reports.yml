@@ -2731,7 +2731,7 @@ ReportDefinitions:
     searchClause: AND ps.createdtime <= $toDate
   - name: priority
     label: Priority
-    type: string
+    type: singlevaluelist
     pattern:    http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=RAINMAKER-PGR&masterName=PriorityLevel|$.MdmsRes.RAINMAKER-PGR.PriorityLevel.*.code
     source: pgr
     isMandatory: true
