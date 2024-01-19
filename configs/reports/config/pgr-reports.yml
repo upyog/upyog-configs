@@ -2731,9 +2731,9 @@ ReportDefinitions:
     searchClause: AND ps.createdtime <= $toDate
   - name: priority
     label: Priority
-    type: string
+    type: singlevaluelist
     pattern:    http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=RAINMAKER-PGR&masterName=PriorityLevel|$.MdmsRes.RAINMAKER-PGR.PriorityLevel.*.code
     source: pgr
-    isMandatory: true
+    isMandatory: false
     searchClause: ps.priority = $priority
   query: select ps.servicerequestid, ps.servicecode,ps.priority,ps.applicationstatus,pu.name,pu.mobilenumber from eg_pgr_service_v2 ps join eg_pgr_address_v2 pad on ps.id=pad.parentid  join eg_user pu on ps.accountid=pu.uuid where 1:1
