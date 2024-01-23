@@ -1199,7 +1199,7 @@ ReportDefinitions:
     type: string
     source: tl
     total: false
-  - name: username
+  - name: name
     label: Owner Name
     type: string
     source: tl
@@ -1244,6 +1244,6 @@ ReportDefinitions:
     isLocalisationRequired: true
     searchClause: AND addr.locality = $locality 
   query: |
-    with tl_data as (select tld.id,tl.status, tl.licensenumber, tl.validto,tl.createdtime,usr.username,usr.mobilenumber, financialyear from eg_tl_tradelicense tl inner join eg_tl_tradelicensedetail tld on tl.id= tld.tradelicenseid  LEFT JOIN eg_tl_owner owner ON owner.tradelicensedetailid=tld.id LEFT JOIN eg_user usr on usr.uuid=owner.id where tl.businessservice='TL' and financialyear=(select max(financialyear) from eg_tl_tradelicense where licensenumber=tl.licensenumber) and tl.tenantid= 'pg.citya' and tl.status IN ('EXPIRED','APPROVED','PENDINGPAYMENT') order by tl.lastmodifiedtime desc)
-    SELECT addr.locality,tl_data.status,to_char((To_timestamp(tl_data.validto/1000) at time Zone 'Asia/Kolkata'),'DD-MM-YYYY') as valid_date, tl_data.username, tl_data.mobilenumber,tl_data.licensenumber,tl_data.financialyear from tl_data inner join eg_tl_address addr on addr.tradelicensedetailid=tl_data.id where tl_data.validto <= (CAST(EXTRACT(epoch FROM NOW()) AS BIGINT)*1000)
+    with tl_data as (select tld.id,tl.status, tl.licensenumber, tl.validto,tl.createdtime,usr.uuid,usr.name,usr.mobilenumber, financialyear from eg_tl_tradelicense tl inner join eg_tl_tradelicensedetail tld on tl.id= tld.tradelicenseid  LEFT JOIN eg_tl_owner owner ON owner.tradelicensedetailid=tld.id LEFT JOIN eg_user usr on usr.uuid=owner.id where tl.businessservice='TL' and financialyear=(select max(financialyear) from eg_tl_tradelicense where licensenumber=tl.licensenumber) and tl.tenantid= 'pg.citya' and tl.status IN ('EXPIRED','APPROVED','PENDINGPAYMENT') order by tl.lastmodifiedtime desc)
+    SELECT addr.locality,tl_data.status,to_char((To_timestamp(tl_data.validto/1000) at time Zone 'Asia/Kolkata'),'DD-MM-YYYY') as valid_date, tl_data.name,tl_data.uuid, tl_data.mobilenumber,tl_data.licensenumber,tl_data.financialyear from tl_data inner join eg_tl_address addr on addr.tradelicensedetailid=tl_data.id where tl_data.validto <= (CAST(EXTRACT(epoch FROM NOW()) AS BIGINT)*1000)
   order by : ORDER BY tl_data.licensenumber DESC
