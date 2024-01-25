@@ -2632,6 +2632,11 @@ ReportDefinitions:
   summary: Refers to the top 10 grievances which are registered the most in a given time period.
   version: 1.0.0
   moduleName: pgr
+  externalService:
+  - entity: $.MdmsRes.RAINMAKER-PGR.ServiceDefs
+    apiURL: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?moduleName=RAINMAKER-PGR&masterName=ServiceDefs&tenantId=$tenantId
+    keyOrder: serviceCode,name
+    tableName: tbl_dept
   sourceColumns:
   - name: servicecode
     label: Grievance Type
@@ -2667,8 +2672,9 @@ ReportDefinitions:
     isMandatory: true
     searchClause: AND ps.createdtime <= $toDate
   query: |
-    select ps.servicecode as servicecode, count(ps.id) as total from eg_pgr_service_v2 ps join eg_pgr_address_v2 pad on ps.id=pad.parentid where 1=1   
-  groupby: GROUP BY ps.servicecode
+    select departmap.name as servicecode, count(ps.id) as total from eg_pgr_service_v2 ps join eg_pgr_address_v2 pad on ps.id=pad.parentid INNER JOIN (VALUES tbl_dept) AS departmap(serviceCode, name) 
+    ON departmap.serviceCode = ps.servicecode where 1=1   
+  groupby: GROUP BY departmap.name
   orderby: ORDER BY total DESC limit 10
 - reportName: GrievanceWithPriority
   decryptionPathId: DescriptionReport
