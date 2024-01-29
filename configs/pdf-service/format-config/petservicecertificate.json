@@ -1,0 +1,524 @@
+{
+    "key": "petservicecertificate",
+    "config": {
+        "defaultStyle": {
+            "font": "Cambay"
+             },
+             "content": [
+              {
+                "style": "noc-head",
+                "table": {
+                  "widths": [
+                    "*"
+                  ],
+                  "body": [
+                    [
+                      {
+                        "image": "{{ULB_LOGO}}",
+                        "width": 70,
+                        "height": 82,
+                        "alignment": "center",
+                        "margin": [
+                          0,
+                          10,
+                          0,
+                          10
+                        ]
+                      }
+                    ],
+                    [
+                      {
+                        "stack": [
+                          {
+                            "text": "{{ULB_CITY}} {{municipal_corportaion}}",
+                            "style": "receipt-logo-header"
+                          },
+                          {
+                            "text": "{{ULB_ADDRESS}}",
+                            "style": "receipt-logo-sub-header"
+                          },
+                          {
+                            "style": "noc-head",
+                            "table": {
+                              "widths": [
+                                "*",
+                                "*"
+                              ],
+                              "body": [
+                                [
+                                  {
+                                    "text": "{{corporation_fax}} : {{CorporationContact_Value}} ",
+                                    "style": "receipt-sub-address-sub-header"
+                                  }
+                                ]
+                              ]
+                            },
+                            "layout": "noBorders"
+                          },
+                          {
+                            "style": "noc-head",
+                            "table": {
+                              "widths": [
+                                "*",
+                                "*"
+                              ],
+                              "body": [
+                                [
+                                  {
+                                    "text": "{{corporation_website}} : {{corporationWebsite}}",
+                                    "style": "receipt-sub-website-sub-header"
+                                  }
+                                ]
+                              ]
+                            },
+                            "layout": "noBorders"
+                          },
+                          {
+                            "style": "noc-head",
+                            "table": {
+                              "widths": [
+                                "*",
+                                "*"
+                              ],
+                              "body": [
+                                [
+                                  {
+                                    "text": "{{corporation_email}} : {{corporationEmail}}",
+                                    "style": "receipt-sub-email-sub-header"
+                                  }
+                                ]
+                              ]
+                            },
+                            "layout": "noBorders"
+                          }
+                        ],
+                        "alignment": "left",
+                        "margin": [
+                          0,
+                          10,
+                          0,
+                          0
+                        ]
+                      }
+                    ],
+                    [
+                      {
+                        "stack": [
+                          {
+                            "text": "{{Pet_Registration_Certificate}}",
+                            "style": "receipt-sub-logo-header"
+                          },
+                          
+                          {
+                            "style": "noc-head",
+                            "table": {
+                              "widths": [
+                                "35%",
+                                "65%"
+                              ],
+                              "body": [
+                                [
+                                  {
+                                    "text": "{{Application_Number_Label}}",
+                                    "style": "receipt-content"
+                                  },
+                                  {
+                                    "text": "{{Application_Number}}",
+                                    "style": "receipt-content",
+                                    "font": "Roboto"
+                                  }
+                                ]
+                              ]
+                            },
+                            "layout": "noBorders"
+                          },
+                          {
+                            "style": "noc-head",
+                            "table": {
+                              "widths": [
+                                "35%",
+                                "65%"
+                              ],
+                              "body": [
+                                [
+                                  {
+                                    "text": "{{Receipt_Number_Label}}",
+                                    "style": "receipt-content"
+                                  },
+                                  {
+                                    "text": "{{Receipt_Number}}",
+                                    "style": "receipt-content",
+                                    "font": "Roboto"
+                                  }
+                                ]
+                              ]
+                            },
+                            "layout": "noBorders"
+                          },
+                          {
+                            "style": "noc-head",
+                            "table": {
+                              "widths": [
+                                "35%",
+                                "65%"
+                              ],
+                              "body": [
+                                [
+                                  {
+                                    "text": "{{Owner_Name_Label}}",
+                                    "style": "receipt-content"
+                                  },
+                                  {
+                                    "text": "{{Owner_Name}}",
+                                    "style": "receipt-content",
+                                    "font": "Roboto"
+                                  }
+                                ]
+                              ]
+                            },
+                            "layout": "noBorders"
+                          },
+                          {
+                            "style": "noc-head",
+                            "table": {
+                              "widths": [
+                                "35%",
+                                "65%"
+                              ],
+                              "body": [
+                                [
+                                  {
+                                    "text": "{{Owner_Contact_Label}}",   
+                                    "style": "receipt-content"
+                                  },
+                                  {
+                                    "text": "{{Owner_Contact}}",
+                                    "style": "receipt-content",
+                                    "font": "Roboto"
+                                  }
+                                ]
+                              ]
+                            },
+                            "layout": "noBorders"
+                          },
+                          {
+                            "style": "noc-head",
+                            "table": {
+                              "widths": [
+                                "35%",
+                                "65%"
+                              ],
+                              "body": [
+                                [
+                                  {
+                                    "text": "{{Pet_Type_Label}}",
+                                    "style": "receipt-content"
+                                  },
+                                  {
+                                    "text": "{{Pet_Type}}",
+                                    "style": "receipt-content",
+                                    "font": "Roboto"
+                                  }
+                                ]
+                              ]
+                            },
+                            "layout": "noBorders"
+                          },
+                          {
+                            "style": "noc-head",
+                            "table": {
+                              "widths": [
+                                "35%",
+                                "65%"
+                              ],
+                              "body": [
+                                [
+                                  {
+                                    "text": "{{Breed_Type_Label}}",
+                                    "style": "receipt-content"
+                                  },
+                                  {
+                                    "text": "{{Breed_Type}}",
+                                    "style": "receipt-content",
+                                    "font": "Roboto"
+                                  }
+                                ]
+                              ]
+                            },
+                            "layout": "noBorders"
+                          },
+                          {
+                            "style": "noc-head",
+                            "table": {
+                              "widths": [
+                                "35%",
+                                "65%"
+                              ],
+                              "body": [
+                                [
+                                  {
+                                    "text": "{{Vaccination_Date_Label}}",
+                                    "style": "receipt-content"
+                                  },
+                                  {
+                                    "text": "{{Vaccination_Date}}",
+                                    "style": "receipt-content",
+                                    "font": "Roboto"
+                                  }
+                                ]
+                              ]
+                            },
+                            "layout": "noBorders"
+                          },
+                          {
+                            "style": "noc-head",
+                            "table": {
+                              "widths": [
+                                "35%",
+                                "65%"
+                              ],
+                              "body": [
+                                [
+                                  {
+                                    "text": "{{Vaccination_Number_Label}}",
+                                    "style": "receipt-content"
+                                  },
+                                  {
+                                    "text": "{{Vaccination_Number}}",
+                                    "style": "receipt-content",
+                                    "font": "Roboto"
+                                  }
+                                ]
+                              ]
+                            },
+                            "layout": "noBorders"
+                          },
+                          {
+                            "style": "noc-head",
+                            "table": {
+                              "widths": [
+                                "35%",
+                                "65%"
+                              ],
+                              "body": [
+                                [
+                                  {
+                                    "text": "{{Doctor_Name_Label}}",
+                                    "style": "receipt-content"
+                                  },
+                                  {
+                                    "text": "{{Doctor_Name}}",
+                                    "style": "receipt-content",
+                                    "font": "Roboto"
+                                  }
+                                ]
+                              ]
+                            },
+                            "layout": "noBorders"
+                          },
+                          {
+                            "style": "noc-head",
+                            "table": {
+                              "widths": [
+                                "35%",
+                                "65%"
+                              ],
+                              "body": [
+                                [
+                                  {
+                                    "text": "{{Clinic_Name_Label}}",
+                                    "style": "receipt-content"
+                                  },
+                                  {
+                                    "text": "{{Clinic_Name}}",
+                                    "style": "receipt-content",
+                                    "font": "Roboto"
+                                  }
+                                ]
+                              ]
+                            },
+                            "layout": "noBorders"
+                          }
+                         
+                        ],
+                        "alignment": "left",
+                        "margin": [
+                          0,
+                          10,
+                          0,
+                          0
+                        ]
+                      }
+                      
+                    ],
+                    [
+                      {
+                        "stack": [
+                          {
+                            "text": "{{Order_Label}}",
+                            "bold": true,
+                            "style": "receipt-order-header"
+                          }
+                          
+                        ],
+                        "alignment": "left",
+                        "margin": [
+                          0,
+                          10,
+                          0,
+                          0
+                        ]
+                      }
+                    ]
+                    
+                    
+                  ]
+                },
+                "layout": "noBorders"
+              }
+            
+            ],
+            "styles": {
+              "noc-head": {
+                "margin": [
+                  -30,
+                  -35,
+                  0,
+                  -2
+                ]
+              },
+              "receipt-approver": {
+                "color": "#000000",
+                "fontSize": 14,
+                "letterSpacing": 0.6,
+                "alignment": "center",
+                "margin": [
+                  -10,
+                  50,
+                  0,
+                  1
+                ]
+              },
+              "receipt-logo-header": {
+                "color": "#000000",
+                "fontSize": 20,
+                "letterSpacing": 0.74,
+                "alignment": "center",
+                "margin": [
+                  0,
+                  0,
+                  0,
+                  5
+                ]
+              },
+              "receipt-sub-logo-header": {
+                "color": "#000000",
+                "fontSize": 18,
+                "letterSpacing": 0.74,
+                "alignment": "center",
+                "margin": [
+                  0,
+                  5,
+                  0,
+                  10
+                ]
+              },
+              "receipt-logo-sub-header": {
+                "color": "#484848",
+                "fontSize": 14,
+                "letterSpacing": 0.6,
+                "alignment": "center",
+                "margin": [
+                  0,
+                  5,
+                  0,
+                  0
+                ]
+              },
+              "receipt-sub-logo-sub-header": {
+                "color": "#484848",
+                "fontSize": 14,
+                "letterSpacing": 0.6,
+                "alignment": "left",
+                "margin": [
+                  50,
+                  40,
+                  0,
+                  0
+                ]
+              },
+              "receipt-sub-address-sub-header": {
+                "color": "#484848",
+                "fontSize": 14,
+                "letterSpacing": 0.1,
+                "alignment": "right",
+                "margin": [
+                  50,
+                  30,
+                  -80,
+                  0
+                ]
+              },
+              "receipt-sub-website-sub-header": {
+                "color": "#484848",
+                "fontSize": 14,
+                "letterSpacing": 0.1,
+                "alignment": "right",
+                "margin": [
+                  50,
+                  30,
+                  -120,
+                  0
+                ]
+              },
+              "receipt-sub-email-sub-header": {
+                "color": "#484848",
+                "fontSize": 14,
+                "letterSpacing": 0.1,
+                "alignment": "right",
+                "margin": [
+                  50,
+                  30,
+                  -110,
+                  0
+                ]
+              },
+              "receipt-order-header": {
+                "color": "#000000",
+                "fontSize": 14,
+                "letterSpacing": 0.6,
+                "alignment": "left",
+                "margin": [
+                  19,
+                  0,
+                  0,
+                  1
+                ]
+              },
+              "receipt-order-content": {
+                "color": "#484848",
+                "fontSize": 14,
+                "letterSpacing": 0.4,
+                "alignment": "left",
+                "margin": [
+                  19,
+                  -2,
+                  0,
+                  1
+                ]
+              },
+              "receipt-content": {
+                "color": "#000000",
+                "fontSize": 14,
+                "letterSpacing": 0.4,
+                "alignment": "left",
+                "margin": [
+                  50,
+                  30,
+                  0,
+                  0
+                ]
+              }
+            }
+           }
+        }
