@@ -1161,13 +1161,13 @@ ReportDefinitions:
     label: FromDate
     type: epoch
     source: tl
-    isMandatory: false
+    isMandatory: true
     searchClause: AND tl.issueddate >= $fromDate
   - name: toDate
     label: ToDate
     type: epoch
     source: tl
-    isMandatory: false
+    isMandatory: true
     searchClause: AND tl.issueddate  <= $toDate 
   - name: financialYear
     label: FinancialYear

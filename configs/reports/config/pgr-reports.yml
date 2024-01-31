@@ -2477,13 +2477,13 @@ ReportDefinitions:
     label: reports.pgr.datefrom
     type: epoch
     source: eg_pgr_service
-    isMandatory: false
+    isMandatory: true
     searchClause: AND eg_pgr_service_v2.createdtime >= $fromDate
   - name: toDate
     label: reports.pgr.dateto
     type: epoch
     source: eg_pgr_service
-    isMandatory: false
+    isMandatory: true
     searchClause: AND eg_pgr_service_v2.createdtime <= $toDate
   - name: deptname
     label: reports.pgr.dept.name
@@ -2675,7 +2675,7 @@ ReportDefinitions:
     select departmap.name as servicecode, count(ps.id) as total from eg_pgr_service_v2 ps join eg_pgr_address_v2 pad on ps.id=pad.parentid INNER JOIN (VALUES tbl_dept) AS departmap(serviceCode, name) 
     ON departmap.serviceCode = ps.servicecode where 1=1   
   groupby: GROUP BY departmap.name
-  orderby: ORDER BY total DESC limit 10
+  orderby: ORDER BY total DESC
 - reportName: GrievanceWithPriority
   decryptionPathId: DescriptionReport
   summary: Grievance deatils for selected Priority level 
