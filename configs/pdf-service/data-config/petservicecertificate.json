@@ -3,7 +3,7 @@
     "DataConfigs": {
       "serviceName": "rainmaker-common",
       "version": "1.0.0",
-      "baseKeyPath": "$.Payments.*",
+      "baseKeyPath": "$.PetRegistrationApplications.*",
       "entityIdPath":"$.id",
       "isCommonTableBorderRequired": true,
       "mappings": [
@@ -32,6 +32,18 @@
                   }
                 },
                 {
+                    "variable": "doctorName", 
+                    "value": {
+                      "path": "$.doctorName"
+                    }
+                  },
+                  {
+                    "variable": "clinicName", 
+                    "value": {
+                      "path": "$.clinicName"
+                    }
+                  },
+                {
                   "variable": "receiptNo", 
                   "value": {
                     "path": "$.paymentDetails[0].receiptNumber"
@@ -48,6 +60,28 @@
                     "module":"rainmaker-common"
                  }
                 },
+                {
+                    "variable": "petType", 
+                    "value": {
+                      "path": "$.paymentDetails[0].businessService"
+                    },
+                    "localisation":{
+                      "required":true,
+                      "prefix":"MODULE",   
+                      "module":"rainmaker-common"
+                   }
+                  },
+                  {
+                    "variable": "breedType", 
+                    "value": {
+                      "path": "$.paymentDetails[0].businessService"
+                    },
+                    "localisation":{
+                      "required":true,
+                      "prefix":"MODULE",   
+                      "module":"rainmaker-common"
+                   }
+                  },
               {
                 "variable": "tenantid", 
                 "value": {
@@ -120,6 +154,30 @@
                  }
                 },
                 {
+                    "variable": "doctor_Name",
+                    "value": {
+                      "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_DOCTOR_NAME"
+                    },
+                    "type": "label",
+                    "localisation":{
+                      "required":true,
+                      "prefix": null,
+                      "module":"rainmaker-common"
+                   }
+                  },
+                  {
+                    "variable": "clinic_Name",
+                    "value": {
+                      "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_CLINIC_NAME"
+                    },
+                    "type": "label",
+                    "localisation":{
+                      "required":true,
+                      "prefix": null,
+                      "module":"rainmaker-common"
+                   }
+                  },
+                {
                   "variable": "service_type",
                   "value": {
                     "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_SERVICE_TYPE"
@@ -131,6 +189,30 @@
                     "module":"rainmaker-common"
                  }
                 },
+                {
+                    "variable": "pet_type",
+                    "value": {
+                      "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_PET_TYPE"
+                    },
+                    "type": "label",
+                    "localisation":{
+                      "required":true,
+                      "prefix": null,
+                      "module":"rainmaker-common"
+                   }
+                  },
+                  {
+                    "variable": "breed_type",
+                    "value": {
+                      "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_BREED_TYPE"
+                    },
+                    "type": "label",
+                    "localisation":{
+                      "required":true,
+                      "prefix": null,
+                      "module":"rainmaker-common"
+                   }
+                  },
                 
                 {
                   "variable": "commissioner/eo",
@@ -236,7 +318,19 @@
                       } 
                    }
                   ]
-              }
+              },
+              {
+                "path": "http://pet-services:8080/pet-services/pet-registration/_search",
+                "queryParam": "tenantId=$.tenantId,consumerCodes=$.applicationNumber,businessServices=pet-services",
+                "apiRequest": null,
+                "responseMapping":[
+                  {            
+                    "variable":"Receipt_Number",
+                    "value":"$.Payments[0].paymentDetails[0].receiptNumber"
+                  }
+  
+                ]
+             }
               ]
             },
             {
