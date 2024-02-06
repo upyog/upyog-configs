@@ -347,13 +347,13 @@ ReportDefinitions:
     label: reports.tl.fromDate
     type: epoch
     source: tl
-    isMandatory: false
+    isMandatory: true
     searchClause: AND tl.lastmodifiedtime >= $fromDate
   - name: toDate
     label: reports.tl.toDate
     type: epoch
     source: tl
-    isMandatory: false
+    isMandatory: true
     searchClause: AND tl.lastmodifiedtime  <= $toDate 
   query: |
     SELECT licensenumber,
