@@ -2676,67 +2676,7 @@ ReportDefinitions:
     ON departmap.serviceCode = ps.servicecode where 1=1   
   groupby: GROUP BY departmap.name
   orderby: ORDER BY total DESC
-- reportName: GrievanceWithPriority
-  decryptionPathId: DescriptionReport
-  summary: Grievance deatils for selected Priority level 
-  version: 1.0.0
-  moduleName: pgr
-  sourceColumns:
-  - name: servicerequestid
-    label: Grievance ID 
-    type: string
-    source: eg_pgr_service
-    total: false
-  - name: servicecode
-    label: Grievance Type
-    type: string
-    source: eg_pgr_service
-    total: false
-  - name: name
-    label: Name
-    type: string
-    source: eg_user
-    total: false
-  - name: mobilenumber
-    label: Mobile Number
-    type: string
-    source: eg_user
-    total: false
-  - name: priority
-    label: Priority
-    type: string
-    source: eg_pgr_service
-    total: false
-  - name: applicationstatus
-    label: Application Status
-    type: string
-    source: eg_pgr_service
-    total: false
-  searchParams:
-  - name: locality
-    label: reports.pt.locality
-    type: singlevaluelist
-    pattern: http://egov-location.egov:8080/egov-location/location/v11/boundarys/_search?hierarchyTypeCode=ADMIN&boundaryType=Locality&tenantId=$tenantid|$.TenantBoundary[0].boundary.*.code|$.TenantBoundary[0].boundary.*.code
-    source: pt
-    wrapper: true
-    isMandatory: false
-    localisationPrefix: TENANTS_MOHALLA_
-    isLocalisationRequired: true
-    searchClause: AND pad.locality = $locality 
-  - name: fromDate
-    label: From Date
-    type: epoch
-    source: eg_pgr_service
-    isMandatory: true
-    searchClause: AND ps.createdtime >= $fromDate
-  - name: toDate
-    label: To Date
-    type: epoch
-    source: eg_pgr_service
-    isMandatory: true
-    searchClause: AND ps.createdtime <= $toDate
-    query: | 
-        select ps.servicerequestid, ps.servicecode,ps.priority,ps.applicationstatus,pu.name,pu.mobilenumber from eg_pgr_service_v2 ps join eg_pgr_address_v2 pad on ps.id=pad.parentid join eg_user pu on ps.accountid=pu.uuid where 1=1       
+
 - reportName: CitizenGrievanceFeedback
   decryptionPathId: DescriptionReport
   summary: Fetches the Citizen Feedback provided on the grievance
@@ -2805,6 +2745,76 @@ ReportDefinitions:
   query: |
         select epa.comment as Feedback,pgr.rating ,usr.name, usr.mobilenumber,pgr.servicecode,  pad.locality,  pgr.servicerequestid from eg_pgr_service_v2 pgr INNER JOIN eg_wf_processinstance_v2 epa ON epa.businessid=pgr.servicerequestid left outer join eg_pgr_address_v2 pad on pad.parentid = pgr.id JOIN eg_user usr ON usr.uuid=pgr.accountid where pgr.applicationstatus IN('CANCELLED','REJECTED','RESOLVED','CLOSEDAFTERRESOLUTION','CLOSEDAFTERREJECTION') and epa.action='RATE'
   orderby: ORDER BY servicerequestid desc
+  
+  
+- reportName: GrievanceWithPriority
+  decryptionPathId: DescriptionReport
+  summary: Fetches the Citizen Feedback provided on the grievance
+  version: 1.0.0
+  moduleName: pgr
+  sourceColumns:
+  - name: servicerequestid
+    label: Grievance ID
+    type: string
+    source: eg_pgr_service
+    total: false
+  - name: servicecode
+    label: Grievance Type
+    type: string
+    source: eg_pgr_service
+    total: false
+  - name: name
+    label: Name
+    type: string
+    source: eg_user
+    total: false
+  - name: mobilenumber
+    label: Mobile Number
+    type: string
+    source: eg_user
+    total: false
+  - name: locality
+    label: Locality
+    type: string
+    source: pt
+    total: false
+    localisationPrefix: TENANTS_MOHALLA_
+  - name: priority
+    label: Priority
+    type: string
+    source: eg_pgr_service
+    total: false
+  - name: applicationstatus
+    label: Application Status
+    type: string
+    source: eg_pgr_service
+    total: false
+  searchParams:
+  - name: locality
+    label: reports.pt.locality
+    type: singlevaluelist
+    pattern: http://egov-location.egov:8080/egov-location/location/v11/boundarys/_search?hierarchyTypeCode=ADMIN&boundaryType=Locality&tenantId=$tenantid|$.TenantBoundary[0].boundary.*.code|$.TenantBoundary[0].boundary.*.code
+    source: pt
+    wrapper: true
+    isMandatory: false
+    localisationPrefix: TENANTS_MOHALLA_
+    isLocalisationRequired: true
+    searchClause: AND pad.locality = $locality
+  - name: fromDate
+    label: From Date
+    type: epoch
+    source: eg_pgr_service
+    isMandatory: true
+    searchClause: AND ps.createdtime >= $fromDate
+  - name: toDate
+    label: To Date
+    type: epoch
+    source: eg_pgr_service
+    isMandatory: true
+    searchClause: AND ps.createdtime <= $toDate
+  query: |
+        select ps.servicerequestid,ps.servicecode,ps.priority,ps.applicationstatus,pu.name,pu.mobilenumber from eg_pgr_service_v2 ps join eg_pgr_address_v2 pad on ps.id=pad.parentid join eg_user pu on ps.accountid=pu.uuid where 1=1
+
 - reportName: StatusofGrievance
   summary: This report provides the details of status of grievances.
   version: 1.0.0
