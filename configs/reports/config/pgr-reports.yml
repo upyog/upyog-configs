@@ -2747,8 +2747,6 @@ ReportDefinitions:
   orderby: ORDER BY servicerequestid desc
   
   
-  
-
 - reportName: GrievanceWithPriority
   decryptionPathId: DescriptionReport
   summary: Fetches the Citizen Feedback provided on the grievance
@@ -2815,4 +2813,4 @@ ReportDefinitions:
     isMandatory: true
     searchClause: AND ps.createdtime <= $toDate
   query: |
-    select ps.servicerequestid,ps.servicecode,ps.priority,ps.applicationstatus,pu.name,pu.mobilenumber from eg_pgr_service_v2 ps join eg_pgr_address_v2 pad on ps.id=pad.parentid join eg_user pu on ps.accountid=pu.uuid where 1=1
+        select ps.servicerequestid,ps.servicecode,ps.priority,ps.applicationstatus,pu.name,pu.mobilenumber from eg_pgr_service_v2 ps join eg_pgr_address_v2 pad on ps.id=pad.parentid join eg_user pu on ps.accountid=pu.uuid where 1=1
