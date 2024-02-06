@@ -2800,7 +2800,7 @@ ReportDefinitions:
     localisationPrefix: TENANTS_MOHALLA_
     isLocalisationRequired: true
     searchClause: AND pad.locality = $locality
-   - name: priority
+  - name: priority
     label: Priority
     type: singlevaluelist
     pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=pg&moduleName=RAINMAKER-PGR&masterName=PriorityLevel|$.MdmsRes.RAINMAKER-PGR.PriorityLevel.*.name|$.MdmsRes.RAINMAKER-PGR.PriorityLevel.*.name
