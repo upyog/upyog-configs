@@ -235,8 +235,8 @@ ReportDefinitions:
     query: |
       SELECT fsm.applicationno as applicationNo , to_char(to_timestamp(fsm.createdtime/1000),'DD/MM/YYYY') as applicationDate,boundary.name as locality, 
       statuskeys.message as currentStatus,  pay.paymentmode as instrumentType, propertytype.name as proprtyTypeSubType,vendor.name dsoName, 
-      CASE WHEN pidso.lastmodifiedtime <= 0  THEN 'NA' ELSE to_char(to_timestamp(pidso.lastmodifiedtime/1000),'DD/MM/YYYY') END  as assignedToDSoOn, 
-      CASE WHEN picomplete.lastmodifiedtime <= 0  THEN 'NA' ELSE to_char(to_timestamp(picomplete.lastmodifiedtime/1000),'DD/MM/YYYY')  END as dateOfCompletion,
+      (CASE WHEN pidso.lastmodifiedtime <= 0  THEN 'NA' ELSE to_char(to_timestamp(pidso.lastmodifiedtime/1000),'DD/MM/YYYY') END) as assignedToDSoOn, 
+      (CASE WHEN picomplete.lastmodifiedtime <= 0  THEN 'NA' ELSE to_char(to_timestamp(picomplete.lastmodifiedtime/1000),'DD/MM/YYYY')  END) as dateOfCompletion,
       coalesce(payment.amountpaid) as amountpaid 
       FROM eg_fsm_application fsm 
       JOIN eg_fsm_address address ON ( address.fsm_id = fsm.id) 
