@@ -9426,7 +9426,7 @@
         "indexName": "pt-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"propertiesRegisteredForFinancialYear\"}}],\"must_not\":[{\"match\":{\"propertiesRegisteredForFinancialYear\":0}}]}},\"aggs\":{\"Total Properties\":{\"sum\":{\"field\":\"propertiesRegisteredForFinancialYear\"}}}}}}",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": ""
+        "dateRefField": "date"
       }
     ],
     "chartType": "metric",
@@ -13734,7 +13734,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\"}",
         "dateRefField": "financialYear.keyword",
         "indexName": "master-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[],\"must\":[{\"term\":{\"module.keyword\":\"TL\"}}]}},\"aggs\":{\"States\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"Target_Collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[],\"must\":[{\"term\":{\"module.keyword\":\"TL\"}}]}},\"aggs\":{\"States\":{\"terms\":{\"field\":\"state.keyword\",\"size\":10000},\"aggs\":{\"Target_Collection\":{\"sum\":{\"field\":\"budgetProposedForMunicipalCorporation\"}}}}}}}}"
       }
     ],
     "filterKeys": [
