@@ -22411,7 +22411,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "fsm-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.service.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Total Applications\":{\"sum\":{\"field\":\"todaysApplications\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.service.tenantId.keyword\":\"pg.testing\"}},{\"match\":{\"todaysApplications\":\"0\"}}]}},\"aggs\":{\"total\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"total1\":{\"terms\":{\"field\":\"ward.keyword\"},\"aggs\":{\"total2\":{\"avg\":{\"field\":\"todaysApplications\"}}}},\"total3\":{\"sum_bucket\":{\"buckets_path\":\"total1.total2\"}}}},\"TotalApplications\":{\"sum_bucket\":{\"buckets_path\":\"total.total3\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -22701,7 +22701,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "fsm-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"ulb.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"State\":{\"terms\":{\"field\":\"state.keyword\",\"size\":500},\"aggs\":{\"Open_Requests\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total_Requests\",\"com\":\"Closed_Requests\"},\"script\":\"params.att -  params.com\"}},\"Closed_Requests\":{\"sum\":{\"field\":\"todaysClosedApplications\"}},\"Total_Requests\":{\"sum\":{\"field\":\"todaysApplications\"}},\"SLA_Achieved_Requests\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}},\"Completion_Rate\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total_Requests\",\"com\":\"Closed_Requests\"},\"script\":\"params.com / params.att * 100\"}},\"SLA_Achieved\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total_Requests\",\"com\":\"SLA_Achieved_Requests\"},\"script\":\"params.com / params.att * 100\"}},\"Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"ulb.keyword\":\"pg.testing\"}},{\"match:{\"todaysApplications\":\"0\"}}]}},\"aggs\":{\"State\":{\"terms\":{\"field\":\"state.keyword\",\"size\":500},\"aggs\":{\"Open_Requests\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total_Requests\",\"com\":\"Closed_Requests\"},\"script\":\"params.att-params.com\"}},\"Closed_Requests\":{\"sum\":{\"field\":\"todaysClosedApplications\"}},\"total\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"total1\":{\"terms\":{\"field\":\"ward.eeyword\"},\"aggs\":{\"total2\":{\"avg\":{\"field\":\"todaysApplications\"}}}},\"total3\":{\"sum_bucket\":{\"buckets_path\":\"total1.total2\"}}}},\"Total_Requests\":{\"sum_bucket\":{\"buckets_path\":\"total.total3\"}},\"SLA_Achieved_Requests\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}},\"Completion_Rate\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total_Requests\",\"com\":\"Closed_Requests\"},\"script\":\"params.com/params.att*100\"}},\"SLA_Achieved\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total_Requests\",\"com\":\"SLA_Achieved_Requests\"},\"script\":\"params.com/params.att*100\"}},\"Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}"
       }
     ],
     "isMdmsEnabled": false,
