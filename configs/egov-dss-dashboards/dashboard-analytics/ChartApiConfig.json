@@ -22411,7 +22411,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "fsm-national-dashboard",
-        "aggrQuery": "{\"aggs\": {\"AGGR\": {\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"ulb.keyword\":\"pg.testing\"}},{\"match\":{\"todaysApplications\":\"0\"}}]}},\"aggs\":{\"State\":{\"terms\":{\"field\":\"state.keyword\",\"size\":500},\"aggs\":{\"total\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"total1\":{\"terms\":{\"field\":\"ulb.keyword\"},\"aggs\":{\"total2\":{\"terms\":{\"field\":\"ward.keyword\"},\"aggs\":{\"total3\":{\"avg\":{\"field\":\"todaysApplications\"}}}},\"total4\":{\"sum_bucket\":{\"buckets_path\":\"total2.total3\"}}}},\"total5\":{\"sum_bucket\":{\"buckets_path\":\"total1.total4\"}}}},\"Total_Requests\":{\"sum_bucket\":{\"buckets_path\":\"total.total5\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\": {\"AGGR\": {\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"ulb.keyword\":\"pg.testing\"}},{\"match\":{\"todaysApplications\":\"0\"}}]}},\"aggs\":{\"State\":{\"terms\":{\"field\":\"state.keyword\",\"size\":500},\"aggs\":{\"total\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"total1\":{\"terms\":{\"field\":\"ulb.keyword\"},\"aggs\":{\"total2\":{\"terms\":{\"field\":\"ward.keyword\"},\"aggs\":{\"total3\":{\"avg\":{\"field\":\"todaysApplications\"}}}},\"total4\":{\"sum_bucket\":{\"buckets_path\":\"total2.total3\"}}}},\"total5\":{\"sum_bucket\":{\"buckets_path\":\"total1.total4\"}}}},\"Total Applications\":{\"sum_bucket\":{\"buckets_path\":\"total.total5\"}}}}}}}}"
       }
     ],
     "chartType": "metric",
