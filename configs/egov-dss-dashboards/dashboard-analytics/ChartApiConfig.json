@@ -22411,7 +22411,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "fsm-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.service.tenantId.keyword\":\"pg.testing\"}},{\"match\":{\"todaysApplications\":\"0\"}}]}},\"aggs\":{\"total\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"total1\":{\"terms\":{\"field\":\"ward.keyword\"},\"aggs\":{\"total2\":{\"avg\":{\"field\":\"todaysApplications\"}}}},\"total3\":{\"sum_bucket\":{\"buckets_path\":\"total1.total2\"}}}},\"TotalApplications\":{\"sum_bucket\":{\"buckets_path\":\"total.total3\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.service.tenantId.keyword\":\"pg.testing\"}},{\"match\":{\"todaysApplications\":\"0\"}}]}},\"aggs\":{\"total\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"total1\":{\"terms\":{\"field\":\"ward.keyword\"},\"aggs\":{\"total2\":{\"avg\":{\"field\":\"todaysApplications\"}}}},\"total3\":{\"sum_bucket\":{\"buckets_path\":\"total1.total2\"}}}},\"Total Applications\":{\"sum_bucket\":{\"buckets_path\":\"total.total3\"}}}}}}"
       }
     ],
     "chartType": "metric",
