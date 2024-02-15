@@ -9426,7 +9426,7 @@
         "indexName": "pt-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"propertiesRegisteredForFinancialYear\"}}],\"must_not\":[{\"match\":{\"propertiesRegisteredForFinancialYear\":0}}]}},\"aggs\":{\"Total Properties\":{\"sum\":{\"field\":\"propertiesRegisteredForFinancialYear\"}}}}}}",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": ""
+        "dateRefField": "date"
       }
     ],
     "chartType": "metric",
