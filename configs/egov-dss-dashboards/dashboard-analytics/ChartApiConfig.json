@@ -20693,7 +20693,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "pt-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"PT\"}},\"aggs\":{\"Stipulated Days for Property Tax\":{\"avg\":{\"field\":\"StipulatedDays\"}}}}}}"
+        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"StipulatedDays\"}}],\"must_not\":[{\"match\":{\"StipulatedDays\":0}}]}},\"aggs\":{\"Per_Day_Averages\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"day\",\"format\":\"dd-MM-yyyy\",\"min_doc_count\":1},\"aggs\":{\"Stipulated_Days_for_PT\":{\"avg\":{\"field\":\"StipulatedDays\"}}}},\"Overall_Average\":{\"avg_bucket\":{\"buckets_path\":\"Per_Day_Averages>Stipulated_Days_for_PT\"}}}}"
       }
     ],
     "chartType": "metric",
@@ -20702,7 +20702,7 @@
     "drillChart": "none",
     "documentType": "_doc",
     "aggregationPaths": [
-      "Stipulated Days for Property Tax"
+      "Overall_Average"
     ],
     "_comment": " "
   },
@@ -20714,7 +20714,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "tl-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"TL\"}},\"aggs\":{\"Stipulated Days for TL\":{\"avg\":{\"field\":\"StipulatedDays\"}}}}}}"
+        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"StipulatedDays\"}}],\"must_not\":[{\"match\":{\"StipulatedDays\":0}}]}},\"aggs\":{\"Per_Day_Averages\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"day\",\"format\":\"dd-MM-yyyy\",\"min_doc_count\":1},\"aggs\":{\"Stipulated_Days_for_TL\":{\"avg\":{\"field\":\"StipulatedDays\"}}}},\"Overall_Average\":{\"avg_bucket\":{\"buckets_path\":\"Per_Day_Averages>Stipulated_Days_for_TL\"}}}}"
       }
     ],
     "chartType": "metric",
@@ -20723,7 +20723,7 @@
     "drillChart": "none",
     "documentType": "_doc",
     "aggregationPaths": [
-      "Stipulated Days for TL"
+      "Overall_Average"
     ],
     "_comment": " "
   },
@@ -20735,7 +20735,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "birth-cert-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"BIRTH\"}},\"aggs\":{\"Stipulated Days for Birth Certificate\":{\"avg\":{\"field\":\"StipulatedDays\"}}}}}}"
+        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"StipulatedDays\"}}],\"must_not\":[{\"match\":{\"StipulatedDays\":0}}]}},\"aggs\":{\"Per_Day_Averages\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"day\",\"format\":\"dd-MM-yyyy\",\"min_doc_count\":1},\"aggs\":{\"Stipulated_Days_for_Birth\":{\"avg\":{\"field\":\"StipulatedDays\"}}}},\"Overall_Average\":{\"avg_bucket\":{\"buckets_path\":\"Per_Day_Averages>Stipulated_Days_for_Birth\"}}}}"
       }
     ],
     "chartType": "metric",
@@ -20744,7 +20744,7 @@
     "drillChart": "none",
     "documentType": "_doc",
     "aggregationPaths": [
-      "Stipulated Days for Birth Certificate"
+      "Overall_Average"
     ],
     "_comment": " "
   },
@@ -20756,7 +20756,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "death-cert-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"DEATH\"}},\"aggs\":{\"Stipulated  Days for Death Certificate\":{\"avg\":{\"field\":\"StipulatedDays\"}}}}}}"
+        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"StipulatedDays\"}}],\"must_not\":[{\"match\":{\"StipulatedDays\":0}}]}},\"aggs\":{\"Per_Day_Averages\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"day\",\"format\":\"dd-MM-yyyy\",\"min_doc_count\":1},\"aggs\":{\"Stipulated_Days_for_Death\":{\"avg\":{\"field\":\"StipulatedDays\"}}}},\"Overall_Average\":{\"avg_bucket\":{\"buckets_path\":\"Per_Day_Averages>Stipulated_Days_for_Death\"}}}}"
       }
     ],
     "chartType": "metric",
@@ -20765,7 +20765,7 @@
     "drillChart": "none",
     "documentType": "_doc",
     "aggregationPaths": [
-      "Stipulated Days for Death Certificate"
+      "Overall_Average"
     ],
     "_comment": " "
   },
@@ -20777,7 +20777,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "ws-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"WS\"}},\"aggs\":{\"Stipulated Days for WS\":{\"avg\":{\"field\":\"StipulatedDays\"}}}}}}"
+        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"StipulatedDays\"}}],\"must_not\":[{\"match\":{\"StipulatedDays\":0}}]}},\"aggs\":{\"Per_Day_Averages\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"day\",\"format\":\"dd-MM-yyyy\",\"min_doc_count\":1},\"aggs\":{\"Stipulated_Days_for_WS\":{\"avg\":{\"field\":\"StipulatedDays\"}}}},\"Overall_Average\":{\"avg_bucket\":{\"buckets_path\":\"Per_Day_Averages>Stipulated_Days_for_WS\"}}}}"
       }
     ],
     "chartType": "metric",
@@ -20786,7 +20786,7 @@
     "drillChart": "none",
     "documentType": "_doc",
     "aggregationPaths": [
-      "Stipulated Days for WS"
+      "Overall_Average"
     ],
     "_comment": " "
   },
@@ -20798,7 +20798,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "obps-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"OBPS\"}},\"aggs\":{\"Stipulated Days for OBPS\":{\"avg\":{\"field\":\"StipulatedDays\"}}}}}}"
+        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"StipulatedDays\"}}],\"must_not\":[{\"match\":{\"StipulatedDays\":0}}]}},\"aggs\":{\"Per_Day_Averages\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"day\",\"format\":\"dd-MM-yyyy\",\"min_doc_count\":1},\"aggs\":{\"Stipulated_Days_for_OBPS\":{\"avg\":{\"field\":\"StipulatedDays\"}}}},\"Overall_Average\":{\"avg_bucket\":{\"buckets_path\":\"Per_Day_Averages>Stipulated_Days_for_OBPS\"}}}}"
       }
     ],
     "chartType": "metric",
@@ -20807,7 +20807,7 @@
     "drillChart": "none",
     "documentType": "_doc",
     "aggregationPaths": [
-      "Stipulated Days for OBPS"
+      "Overall_Average"
     ],
     "_comment": " "
   },
@@ -20819,7 +20819,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "firenoc-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"FIRENOC\"}},\"aggs\":{\"Stipulated Days for NOC\":{\"avg\":{\"field\":\"StipulatedDays\"}}}}}}"
+        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"StipulatedDays\"}}],\"must_not\":[{\"match\":{\"StipulatedDays\":0}}]}},\"aggs\":{\"Per_Day_Averages\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"day\",\"format\":\"dd-MM-yyyy\",\"min_doc_count\":1},\"aggs\":{\"Stipulated_Days_for_NOC\":{\"avg\":{\"field\":\"StipulatedDays\"}}}},\"Overall_Average\":{\"avg_bucket\":{\"buckets_path\":\"Per_Day_Averages>Stipulated_Days_for_NOC\"}}}}"
       }
     ],
     "chartType": "metric",
@@ -20828,7 +20828,7 @@
     "drillChart": "none",
     "documentType": "_doc",
     "aggregationPaths": [
-      "Stipulated Days for NOC"
+      "Overall_Average"
     ],
     "_comment": " "
   },
@@ -20840,7 +20840,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "pgr-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"PGR\"}},\"aggs\":{\"Stipulated Days for PGR\":{\"avg\":{\"field\":\"StipulatedDays\"}}}}}}"
+        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"StipulatedDays\"}}],\"must_not\":[{\"match\":{\"StipulatedDays\":0}}]}},\"aggs\":{\"Per_Day_Averages\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"day\",\"format\":\"dd-MM-yyyy\",\"min_doc_count\":1},\"aggs\":{\"Stipulated_Days_for_PGR\":{\"avg\":{\"field\":\"StipulatedDays\"}}}},\"Overall_Average\":{\"avg_bucket\":{\"buckets_path\":\"Per_Day_Averages>Stipulated_Days_for_PGR\"}}}}"
       }
     ],
     "chartType": "metric",
@@ -20849,7 +20849,7 @@
     "drillChart": "none",
     "documentType": "_doc",
     "aggregationPaths": [
-      "Stipulated Days for PGR"
+      "Overall_Average"
     ],
     "_comment": " "
   },
