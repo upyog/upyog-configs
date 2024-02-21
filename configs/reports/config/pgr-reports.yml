@@ -2589,9 +2589,24 @@ ReportDefinitions:
   summary: Fetches the date how many times application was reopened
   version: 1.0.0
   moduleName: pgr
+  externalService:
+  - entity: $.MdmsRes.RAINMAKER-PGR.ServiceDefs
+    apiURL: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?moduleName=RAINMAKER-PGR&masterName=ServiceDefs&tenantId=$tenantId
+    keyOrder: serviceCode,name,menuPath
+    tableName: tbl_dept
   sourceColumns:
   - name: businessid
     label: Grievance ID
+    type: string
+    source: eg_pgr_service
+    total: false
+  - name: category
+    label: Grievance Type
+    type: string
+    source: eg_pgr_service
+    total: false
+  - name: subcategory
+    label: Grievance Subtype
     type: string
     source: eg_pgr_service
     total: false
@@ -2625,8 +2640,8 @@ ReportDefinitions:
     searchClause: AND ps.createdtime <= $toDate
   query: |
     with pgr_data as (select ps.servicerequestid,pad.locality , ps.servicecode as servicecode,ps.id as id, epa.createdtime as createdtime from eg_pgr_service_v2 ps LEFT JOIN eg_wf_processinstance_v2 epa ON epa.businessid=ps.servicerequestid LEFT JOIN eg_pgr_address_v2 pad ON ps.id=pad.parentid  where epa.action='REOPEN' order by ps.servicerequestid DESC)
-        Select pd.serviceRequestid as businessid,count(pd.servicerequestid) as reopen_count from eg_pgr_service_v2 ps RIGHT JOIN pgr_data pd ON pd.serviceRequestid=ps.servicerequestid where 1=1
-  groupby: GROUP BY pd.serviceRequestid
+    Select pd.serviceRequestid as businessid,departmap.name as subcategory, departmap.menuPath as category,count(pd.servicerequestid) as reopen_count,pd.servicecode from eg_pgr_service_v2 ps RIGHT JOIN pgr_data pd ON pd.serviceRequestid=ps.servicerequestid INNER JOIN (VALUES tbl_dept) AS departmap(serviceCode, name, menuPath) ON departmap.serviceCode = ps.servicecode where 1=1
+  groupby: GROUP BY pd.serviceRequestid,pd.servicecode, departmap.name, departmap.menuPath
   orderby: ORDER BY pd.serviceRequestid
 - reportName: TopTenGrievances
   summary: Refers to the top 10 grievances which are registered the most in a given time period.
