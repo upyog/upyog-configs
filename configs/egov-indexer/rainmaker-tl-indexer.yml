@@ -6,6 +6,7 @@ ServiceMaps:
     configKey: INDEX
     indexes:
     - name: tlindex-v1
+      type: _doc
       id: $.id, $.tenantId
       isBulk: true
       timeStampField: $.auditDetails.createdTime
