@@ -8333,7 +8333,7 @@
         "module": "PT",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "pt-national-dashboard",
+        "indexName": "pt-national-dashboard-agg-month",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForUsageCategory\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForUsageCategory\"}}]}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}"
       }
     ],
@@ -8836,7 +8836,7 @@
         "module": "PT",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "pt-national-dashboard",
+        "indexName": "pt-national-dashboard-agg-month",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForUsageCategory\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForUsageCategory\"}}]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}}}"
       }
     ],
@@ -8934,7 +8934,7 @@
         "module": "PT",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
-        "indexName": "pt-national-dashboard",
+        "indexName": "pt-national-dashboard-agg-month",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"usageCategory\"}},{\"exists\":{\"field\":\"todaysCollectionForUsageCategory\"}}],\"must_not\":[{\"match\":{\"todaysCollectionForUsageCategory\":0}}]}},\"aggs\":{\"Usage Type\":{\"terms\":{\"field\":\"usageCategory.keyword\",\"size\":1000},\"aggs\":{\"Amount Paid\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}}}"
       }
     ],
@@ -19085,7 +19085,7 @@
         "module": "PT",
         "dateRefField": "date",
         "requestQueryMap": "{\"ward\" : \"ward.keyword\",\"ulb\" : \"ulb.keyword\", \"state\" : \"state.keyword\"}",
-        "indexName": "pt-national-dashboard",
+        "indexName": "pt-national-dashboard-agg-month",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"ND_Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}},\"No of properties paid\":{\"sum\":{\"field\":\"noOfPropertiesPaidToday\"}}}}}}"
       }
     ],
@@ -20790,7 +20790,7 @@
         "module": "PT",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
-        "indexName": "pt-national-dashboard",
+        "indexName": "pt-national-dashboard-agg-month",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"PT\"}},\"aggs\":{\"Stipulated Days for Property Tax\":{\"avg\":{\"field\":\"StipulatedDays\"}}}}}}"
       }
     ],
