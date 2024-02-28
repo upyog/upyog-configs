@@ -104,7 +104,7 @@ ServiceMaps:
     configKey: INDEX
     indexes:
       - name: property-services
-        type: general
+        type: _doc
         id: $.propertyId,$.tenantId
         jsonPath: $.Property
         timeStampField: $.auditDetails.lastModifiedTime
