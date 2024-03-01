@@ -41,7 +41,7 @@ ServiceMaps:
           uriResponseMapping:
           - inJsonPath: $.MdmsRes.tenant.tenants
             outJsonPath: $.Data.tenantData
-        - path: http://egov-mdms-service.egov:8080/egov-mdms-service/v1/_search
+        - path: http://mdms-v2.egov:8080/mdms-v2/v1/_search
           moduleName: TradeLicense
           masterName: TradeType
           tenantId: pg
@@ -93,7 +93,7 @@ ServiceMaps:
           uriResponseMapping:
           - inJsonPath: $.MdmsRes.tenant.tenants
             outJsonPath: $.Data.tenantData
-        - path: http://egov-mdms-service.egov:8080/egov-mdms-service/v1/_search
+        - path: http://mdms-v2.egov:8080/mdms-v2/v1/_search
           moduleName: TradeLicense
           masterName: TradeType
           tenantId: pg
@@ -146,7 +146,7 @@ ServiceMaps:
           uriResponseMapping:
           - inJsonPath: $.MdmsRes.tenant.tenants
             outJsonPath: $.Data.tenantData
-        - path: http://egov-mdms-service.egov:8080/egov-mdms-service/v1/_search
+        - path: http://mdms-v2.egov:8080/mdms-v2/v1/_search
           moduleName: TradeLicense
           masterName: TradeType
           tenantId: pg
@@ -197,7 +197,7 @@ ServiceMaps:
           uriResponseMapping:
           - inJsonPath: $.MdmsRes.tenant.tenants
             outJsonPath: $.Data.tenantData
-        - path: http://egov-mdms-service.egov:8080/egov-mdms-service/v1/_search
+        - path: http://mdms-v2.egov:8080/mdms-v2/v1/_search
           moduleName: TradeLicense
           masterName: TradeType
           tenantId: pg
