@@ -8834,10 +8834,10 @@
     "queries": [
       {
         "module": "PT",
-        "dateRefField": "date",
+        "dateRefField": "month",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "pt-national-dashboard-agg-month",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForUsageCategory\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForUsageCategory\"}}]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForUsageCategory\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForUsageCategory\"}}]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"month\",\"calendar_interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}}}"
       }
     ],
     "chartType": "line",
@@ -8849,7 +8849,7 @@
       "Collections"
     ],
     "isCumulative": true,
-    "interval": "month",
+    "calendar_interval": "month",
     "insight": {},
     "_comment": " "
   },
