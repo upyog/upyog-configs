@@ -6,7 +6,7 @@ ServiceMaps:
     configKey: INDEX
     indexes:
       - name: pt-fuzzy-search-index
-        type: general
+        type: _doc
         id: $.propertyId,$.tenantId
         jsonPath: $.Property
         timeStampField: $.auditDetails.lastModifiedTime
@@ -199,7 +199,7 @@ ServiceMaps:
               outJsonPath: $.Data.usageCategory  
               
       - name: property-application
-        type: general
+        type: _doc
         id: $.propertyId,$.acknowldgementNumber,$.tenantId
         jsonPath: $.Property
         timeStampField: $.auditDetails.lastModifiedTime
@@ -258,7 +258,7 @@ ServiceMaps:
     configKey: INDEX
     indexes:
       - name: property-services
-        type: general
+        type: _doc
         id: $.propertyId,$.tenantId
         jsonPath: $.Property
         timeStampField: $.auditDetails.lastModifiedTime
@@ -353,7 +353,7 @@ ServiceMaps:
               outJsonPath: $.Data.usageCategory  
         
       - name: property-application
-        type: general
+        type: _doc
         id: $.propertyId,$.acknowldgementNumber,$.tenantId
         jsonPath: $.Property
         timeStampField: $.auditDetails.lastModifiedTime
@@ -412,7 +412,7 @@ ServiceMaps:
     configKey: INDEX
     indexes:
       - name: property-services
-        type: general
+        type: _doc
         id: $.propertyId,$.tenantId
         jsonPath: $.Property
         timeStampField: $.auditDetails.lastModifiedTime 
@@ -560,7 +560,7 @@ ServiceMaps:
     configKey: LEGACYINDEX
     indexes:
       - name: property-services
-        type: general
+        type: _doc
         isBulk: true
         id: $.propertyId,$.tenantId
         jsonPath: $.Properties.*
@@ -659,7 +659,7 @@ ServiceMaps:
     configKey: LEGACYINDEX
     indexes:
       - name: property-application
-        type: general
+        type: _doc
         isBulk: true
         id: $.propertyId,$.acknowldgementNumber,$.tenantId
         jsonPath: $.Properties.*
@@ -719,7 +719,7 @@ ServiceMaps:
     configKey: INDEX
     indexes:
       - name: property-assessments
-        type: general
+        type: _doc
         id: $.assessmentNumber, $.tenantId
         jsonPath: $.Assessment
         timeStampField: $.auditDetails.createdTime
@@ -775,7 +775,7 @@ ServiceMaps:
     configKey: INDEX
     indexes:
       - name: property-assessments
-        type: general
+        type: _doc
         id: $.assessmentNumber, $.tenantId
         jsonPath: $.Assessment
         timeStampField: $.auditDetails.createdTime
@@ -832,7 +832,7 @@ ServiceMaps:
     configKey: INDEX
     indexes:
       - name: property-assessments
-        type: general
+        type: _doc
         id: $.assessmentNumber, $.tenantId
         jsonPath: $.Assessment
         timeStampField: $.auditDetails.createdTime
@@ -889,7 +889,7 @@ ServiceMaps:
     configKey: LEGACYINDEX
     indexes:
       - name: property-assessments
-        type: general
+        type: _doc
         id: $.assessmentNumber, $.tenantId
         jsonPath: $.Assessments.*
         isBulk: true
@@ -947,7 +947,7 @@ ServiceMaps:
     configKey: INDEX
     indexes:
       - name: property-services
-        type: general
+        type: _doc
         id: $.propertyId,$.tenantId
         jsonPath: $.Property
         timeStampField: $.auditDetails.lastModifiedTime
