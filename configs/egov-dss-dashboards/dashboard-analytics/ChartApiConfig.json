@@ -9637,8 +9637,8 @@
     "queries": [
       {
         "module": "PT",
-        "indexName": "pt-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"assessedPropertiesForUsageCategory\"}}],\"must_not\":[{\"match\":{\"assessedPropertiesForUsageCategory\":0}}]}},\"aggs\":{\"Assesments\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"assessedPropertiesForUsageCategory\"}}}}}}}}",
+        "indexName": "pt-national-dashboard-agg-month",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"assessedPropertiesForUsageCategory\"}}],\"must_not\":[{\"match\":{\"assessedPropertiesForUsageCategory\":0}}]}},\"aggs\":{\"Assesments\":{\"date_histogram\":{\"field\":\"month\",\"calendar_interval\":\"month\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"assessedPropertiesForUsageCategory\"}}}}}}}}",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date"
       }
@@ -9663,8 +9663,8 @@
         "module": "PT",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
-        "indexName": "pt-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Closed Application\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"assessedPropertiesForUsageCategory\"}}}},\"Total Application\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"propertiesRegisteredForFinancialYear\"}}}}}}}}"
+        "indexName": "pt-national-dashboard-agg-month",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Closed Application\":{\"terms\":{\"field\":\"state\"},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"assessedPropertiesForUsageCategory\"}}}},\"Total Application\":{\"terms\":{\"field\":\"state\"},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"propertiesRegisteredForFinancialYear\"}}}}}}}}"
       }
     ],
     "chartType": "perform",
@@ -9690,8 +9690,8 @@
         "module": "PT",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
-        "indexName": "pt-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Closed Application\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"assessedPropertiesForUsageCategory\"}}}},\"Total Application\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"propertiesRegisteredForFinancialYear\"}}}}}}}}"
+        "indexName": "pt-national-dashboard-agg-month",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Closed Application\":{\"terms\":{\"field\":\"state\"},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"assessedPropertiesForUsageCategory\"}}}},\"Total Application\":{\"terms\":{\"field\":\"state\"},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"propertiesRegisteredForFinancialYear\"}}}}}}}}"
       }
     ],
     "chartType": "perform",
