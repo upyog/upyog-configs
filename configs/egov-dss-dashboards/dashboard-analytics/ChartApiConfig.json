@@ -9521,7 +9521,7 @@
     "queries": [
       {
         "module": "PT",
-        "indexName": "pt-national-dashboard",
+        "indexName": "pt-national-dashboard-agg-month",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"propertiesRegisteredForFinancialYear\"}}],\"must_not\":[{\"match\":{\"propertiesRegisteredForFinancialYear\":0}}]}},\"aggs\":{\"Total Properties\":{\"sum\":{\"field\":\"propertiesRegisteredForFinancialYear\"}}}}}}",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": ""
@@ -9542,10 +9542,10 @@
     "queries": [
       {
         "module": "PT",
-        "indexName": "pt-national-dashboard",
+        "indexName": "pt-national-dashboard-agg-month",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"assessedPropertiesForUsageCategory\"}}],\"must_not\":[{\"match\":{\"assessedPropertiesForUsageCategory\":0}}]}},\"aggs\":{\"Assessed Properties\":{\"sum\":{\"field\":\"assessedPropertiesForUsageCategory\"}}}}}}",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "date"
+        "dateRefField": "month"
       }
     ],
     "chartType": "metric",
@@ -9605,9 +9605,9 @@
       {
         "module": "PT",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "date",
-        "indexName": "pt-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Closed Application\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"assessedPropertiesForUsageCategory\"}}}},\"Total Application\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"propertiesRegisteredForFinancialYear\"}}}}}}}}"
+        "dateRefField": "month",
+        "indexName": "pt-national-dashboard-agg-month",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Closed Application\":{\"terms\":{\"field\":\"state\"},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"assessedPropertiesForUsageCategory\"}}}},\"Total Application\":{\"terms\":{\"field\":\"state\"},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"propertiesRegisteredForFinancialYear\"}}}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -9638,9 +9638,9 @@
       {
         "module": "PT",
         "indexName": "pt-national-dashboard-agg-month",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"assessedPropertiesForUsageCategory\"}}],\"must_not\":[{\"match\":{\"assessedPropertiesForUsageCategory\":0}}]}},\"aggs\":{\"Assesments\":{\"date_histogram\":{\"field\":\"month\",\"calendar_interval\":\"month\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"assessedPropertiesForUsageCategory\"}}}}}}}}",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"assessedPropertiesForUsageCategory\"}}],\"must_not\":[{\"match\":{\"assessedPropertiesForUsageCategory\":0}}]}},\"aggs\":{\"Assesments\":{\"date_histogram\":{\"field\":\"month\",\"calendar_interval\":\"intervalvalue\",\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"SUM\":{\"sum\":{\"field\":\"assessedPropertiesForUsageCategory\"}}}}}}}}",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "date"
+        "dateRefField": "month"
       }
     ],
     "chartType": "line",
@@ -9652,7 +9652,7 @@
       "Assesments"
     ],
     "isCumulative": true,
-    "interval": "month",
+    "calendar_interval": "month",
     "insight": {},
     "_comment": " totol properties having assessmentNumber "
   },
@@ -9716,9 +9716,9 @@
       {
         "module": "PT",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "date",
-        "indexName": "pt-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"usageCategory\"}},{\"exists\":{\"field\":\"assessedPropertiesForUsageCategory\"}}],\"must_not\":{\"match\":{\"assessedPropertiesForUsageCategory\":0}}}},\"aggs\":{\"Usage Type\":{\"terms\":{\"field\":\"usageCategory.keyword\"},\"aggs\":{\"Assessed Properties\":{\"sum\":{\"field\":\"assessedPropertiesForUsageCategory\"}}}}}}}}"
+        "dateRefField": "month",
+        "indexName": "pt-national-dashboard-agg-month",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"usageCategory\"}},{\"exists\":{\"field\":\"assessedPropertiesForUsageCategory\"}}],\"must_not\":{\"match\":{\"assessedPropertiesForUsageCategory\":0}}}},\"aggs\":{\"Usage Type\":{\"terms\":{\"script\":{\"source\":\"def usage=doc['usageCategory'].value.toLowerCase();usage.replace(' ','').replace('-','')\",\"lang\":\"painless\"}},\"aggs\":{\"Assessed Properties\":{\"sum\":{\"field\":\"assessedPropertiesForUsageCategory\"}}}}}}}}"
       }
     ],
     "chartType": "pie",
