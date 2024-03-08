@@ -6,36 +6,57 @@
     },
     "content": [
       {
+        "canvas": [
+          {
+            "type": "rect",
+            "x": 0,
+            "y": 0,
+            "w": 595.28,
+            "h": 841.89,
+            "r": 0,
+            "stroke": true,
+            "lineWidth": 2,
+            "color": "black"
+          }
+        ],
+        "margin": [20, 20, 20, 20]
+      },
+      {
         "style": "header",
-        "text": "PET CERTIFICATE",
-        "bold": true,
-        "fontSize": 20,
-        "margin": [0, 0, 0, 20]
-      },
-      {
-        "text": "This certifies that:",
-        "style": "subheader"
-      },
-      {
-        "style": "content",
-        "ul": [
+        "text": [
+          "PET CERTIFICATE ",
           {
-            "text": "Owner's Name: {{Owner_Name}}",
-            "margin": [0, 10, 0, 0]
-          },
-          {
-            "text": "Pet's Name: {{Pet_Name}}",
-            "margin": [0, 10, 0, 0]
-          },
-          {
-            "text": "has been registered with the Pet Registration Authority on {{Registration_Date}}.",
-            "margin": [0, 10, 0, 20]
+            "text": "_______________________________",
+            "underline": true
           }
         ]
       },
       {
+        "text": "This certifies that: {{Owner_Name}} has Registered their Pet in an Urban Local Body with Pet details as follows:",
+        "style": "content",
+        "margin": [0, 10, 0, 10]
+      },
+      {
+        "text": "Pet's Name: {{Pet_Name}}",
+        "style": "subheader",
+        "margin": [0, 0, 0, 10]
+      },
+      {
+        "text": "Pet's Type: {{Pet_Type}}",
+        "style": "subheader",
+        "bold": true,
+        "margin": [0, 0, 0, 10]
+      },
+      {
+        "text": "Breed Type: {{Breed_Type}}",
+        "style": "subheader",
+        "bold": true,
+        "margin": [0, 0, 0, 20]
+      },
+      {
         "text": "Vaccination Details:",
-        "style": "subheader"
+        "style": "subheader",
+        "margin": [0, 0, 0, 10]
       },
       {
         "style": "content",
@@ -68,11 +89,10 @@
         "fontSize": 20,
         "bold": true,
         "alignment": "center",
-        "margin": [0, 0, 0, 20]
+        "margin": [0, 20, 0, 20]
       },
       "subheader": {
         "fontSize": 16,
-        "bold": true,
         "margin": [0, 0, 0, 10]
       },
       "content": {
