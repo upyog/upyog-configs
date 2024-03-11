@@ -147,16 +147,25 @@
                 "border": [false, true, false, false],
                 "style": "receipt-table"
               },
-
               {
-                "text": "{{fromPeriod}} {{to}} {{toPeriod}}",
+                "text": "{{billing_period}}",
+                "border": [false, true, false, false],
+                "style": "receipt-table-value"
+              },
+              {
+                "text": "-",
                 "border": [false, true, true, false],
                 "style": "receipt-table"
               }
             ],
             [
               {
-                "text": "₹ {{dueAmount}}",
+                "text": "{{total_bill_amount}}",
+                "border": [true, false, false, false],
+                "style": "receipt-table-value"
+              },
+              {
+                "text": "-",
                 "border": [false, false, false, false],
                 "style": "receipt-table"
               },
@@ -173,13 +182,22 @@
             ],
             [
               {
-                "text": "₹ {{pendingAmount}}",
+                "text": "{{pending_amount}}",
+                "border": [true, false, false, false],
+                "style": "receipt-table-value"
+              },
+              {
+                "text": "-",
                 "border": [false, false, false, false],
                 "style": "receipt-table"
               },
-
               {
-                "text": "₹ {{excessAmountPaid}}",
+                "text": "{{excess_amount_paid}}",
+                "border": [false, false, false, false],
+                "style": "receipt-table-value"
+              },
+              {
+                "text": "-",
                 "border": [false, false, true, false],
                 "style": "receipt-table"
               }
