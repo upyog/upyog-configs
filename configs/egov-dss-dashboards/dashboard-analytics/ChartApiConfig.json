@@ -13193,7 +13193,7 @@
         "module": "TL",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "tl-national-dashboard-transform",
+        "indexName": "tl-national-dashboard-transform-monthly",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}}}}}}"
       }
     ],
@@ -13254,7 +13254,7 @@
         "module": "COMMON",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "tl-national-dashboard-transform",
+        "indexName": "tl-national-dashboard-transform-monthly",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"month\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}}}}}}}}"
       }
     ],
@@ -13338,7 +13338,7 @@
         "module": "COMMON",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "tl-national-dashboard-transform",
+        "indexName": "tl-national-dashboard-transform-monthly",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Trade Type\":{\"terms\":{\"field\":\"tradeType.keyword\"},\"aggs\":{\"Total collection\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}}}}}}}}"
       }
     ],
@@ -13389,7 +13389,7 @@
         "module": "TL",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "tl-national-dashboard-transform",
+        "indexName": "tl-national-dashboard-transform-monthly",
         "aggrQuery": "{\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}}}}"
       }
     ],
@@ -14357,7 +14357,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "indexName": "tl-national-dashboard-transform",
+        "indexName": "tl-national-dashboard-transform-monthly",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[],\"must\":[{\"match\":{\"status\":\"APPROVED\"}}]}},\"aggs\":{\"Trade Licence Issued\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"month\"},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"todaysTradeLicensesForStatus\"}}}}}}}}",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date"
@@ -19991,14 +19991,14 @@
         "module": "TL",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "tl-national-dashboard-transform",
+        "indexName": "tl-national-dashboard-transform-monthly",
         "aggrQuery": "{\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}"
       },
       {
         "module": "TL",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "tl-national-dashboard-transform",
+        "indexName": "tl-national-dashboard-transform-monthly",
         "aggrQuery": "{\"aggs\":{\"TotalApplications\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}"
       }
     ],
@@ -20515,7 +20515,7 @@
         "module": "TL",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
-        "indexName": "tl-national-dashboard-transform",
+        "indexName": "tl-national-dashboard-transform-monthly",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module\":\"TL\"}},\"aggs\":{\"Average Days to Issue TL\":{\"sum\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
       }
     ],
@@ -20811,7 +20811,7 @@
         "module": "TL",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
-        "indexName": "tl-national-dashboard-transform",
+        "indexName": "tl-national-dashboard-transform-monthly",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module\":\"TL\"}},\"aggs\":{\"Stipulated Days for TL\":{\"sum\":{\"field\":\"StipulatedDays\"}}}}}}"
       }
     ],
@@ -22134,14 +22134,14 @@
         "module": "TL",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "tl-national-dashboard-transform",
+        "indexName": "tl-national-dashboard-transform-monthly",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state\",\"size\": \"50\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}}}}}}}}"
       },
       {
         "module": "TL",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "tl-national-dashboard-transform",
+        "indexName": "tl-national-dashboard-transform-monthly",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection1\":{\"terms\":{\"field\":\"state\",\"size\": \"50\",\"order\":{\"Count\":\"asc\"}},\"aggs\":{\"Count\":{\"cardinality\":{\"field\":\"state\"}}}}}}}}"
       }
     ],
@@ -22168,14 +22168,14 @@
         "module": "TL",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "tl-national-dashboard-transform",
+        "indexName": "tl-national-dashboard-transform-monthly",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state\",\"size\": \"50\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}}}}}}}} "
       },
       {
         "module": "TL",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "tl-national-dashboard-transform",
+        "indexName": "tl-national-dashboard-transform-monthly",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection1\":{\"terms\":{\"field\":\"state\",\"size\": \"50\",\"order\":{\"Count\":\"desc\"}},\"aggs\":{\"Count\":{\"cardinality\":{\"field\":\"state\"}}}}}}}}"
       }
     ],
@@ -23159,14 +23159,14 @@
         "module": "TL",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "tl-national-dashboard-transform",
+        "indexName": "tl-national-dashboard-transform-monyhly",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}]}},\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"terms\":{\"field\":\"state\",\"size\": \"50\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}}}}}"
       },
       {
         "module": "TL",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "indexName": "tl-national-dashboard-transform",
+        "indexName": "tl-national-dashboard-transform-monthly",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysApprovedApplications\"}}]}},\"aggs\":{\"TotalApplications\":{\"terms\":{\"field\":\"state\",\"size\": \"50\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}}}}"
       }
     ],
@@ -23193,15 +23193,15 @@
         "module": "TL",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "tl-national-dashboard-transform",
-        "aggrQuery": "{\\\"aggs\\\":{\\\"AGGR\\\":{\\\"filter\\\":{\\\"bool\\\":{\\\"must\\\":[{\\\"exists\\\":{\\\"field\\\":\\\"todaysApprovedApplicationsWithinSLA\\\"}}]}},\\\"aggs\\\":{\\\"ApplicationsApprovedwithinSLA\\\":{\\\"terms\\\":{\\\"field\\\":\\\"state\\\",\\\"size\\\": \\\"50\\\",\\\"order\\\":{\\\"Sum\\\":\\\"desc\\\"}},\\\"aggs\\\":{\\\"Sum\\\":{\\\"sum\\\":{\\\"field\\\":\\\"todaysApprovedApplicationsWithinSLA\\\"}}}}}}}}"
+        "indexName": "tl-national-dashboard-transform-monthly",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}]}},\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"terms\":{\"field\":\"state\",\"size\": \"50\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}}}}}"
       },
       {
         "module": "TL",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "indexName": "tl-national-dashboard-transform",
-        "aggrQuery": "{\\\"aggs\\\":{\\\"AGGR\\\":{\\\"filter\\\":{\\\"bool\\\":{\\\"must\\\":[{\\\"exists\\\":{\\\"field\\\":\\\"todaysApprovedApplications\\\"}}]}},\\\"aggs\\\":{\\\"TotalApplications\\\":{\\\"terms\\\":{\\\"field\\\":\\\"state\\\",\\\"size\\\": \\\"50\\\",\\\"order\\\":{\\\"Sum\\\":\\\"desc\\\"}},\\\"aggs\\\":{\\\"Sum\\\":{\\\"sum\\\":{\\\"field\\\":\\\"todaysApprovedApplications\\\"}}}}}}}}"
+        "indexName": "tl-national-dashboard-transform-monthly",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysApprovedApplications\"}}]}},\"aggs\":{\"TotalApplications\":{\"terms\":{\"field\":\"state\",\"size\": \"50\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}}}}}"
       }
     ],
     "chartType": "perform",
