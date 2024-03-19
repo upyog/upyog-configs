@@ -217,7 +217,6 @@ ReportDefinitions:
     type: singlevaluelist
     source: wns
     pattern: http://egov-location.egov:8080/egov-location/location/v11/boundarys/_search?hierarchyTypeCode=ADMIN&boundaryType=Locality&tenantId=$tenantid|$.TenantBoundary[0].boundary.*.code|$.TenantBoundary[0].boundary.*.code
-    isMandatory: false
     wrapper: true
     localisationPrefix: TENANTS_MOHALLA_
     isLocalisationRequired: true
@@ -238,7 +237,6 @@ ReportDefinitions:
     wrapper: true
     isMandatory: false
     localisationPrefix: WATERSERVICE_USAGE_TYPE_
-    isMandatory: false
     searchClause: AND uuids.usagecategory = $usageType
   - name: connectionType
     label: reports.wns.connectionType
@@ -249,7 +247,74 @@ ReportDefinitions:
     localisationPrefix: WATERSEREVICE_CONNECTION_TYPE_
     isLocalisationRequired: false
     source: wns
-    isMandatory: false
     searchClause: AND s.connectiontype = $connectionType
   query: WITH cte AS(select id,ws.connectionno as connectionno,locality,property_id,tenantid from (select connectionno,max(createdtime) as ctime from eg_ws_connection group by connectionno) as wsmax inner join (select id,connectionno,locality,property_id,tenantid,createdtime from eg_ws_connection where tenantid=$tenantid) as ws on wsmax.connectionno=ws.connectionno and wsmax.ctime=ws.createdtime), cteSw AS(select id,sw.connectionno as connectionno,locality,property_id,tenantid from (select connectionno,max(createdtime) as ctime from eg_sw_connection group by connectionno) as swmax inner join (select id,connectionno,locality,property_id,tenantid,createdtime from eg_sw_connection where tenantid=$tenantid) as sw on swmax.connectionno=sw.connectionno and swmax.ctime=sw.createdtime) select res.consumercode,res.totaldue, CASE WHEN res.businessservice='WS' THEN 'Water' ELSE NULL END as service, res.payer as payername, conn.locality from (select consumercode,sum(totalamount) as totaldue, billid, businessservice, b.payername as payer from (select id,status, payername from egbs_bill_v1 where status='ACTIVE') as b inner join egbs_billdetail_v1 on b.id=egbs_billdetail_v1.billid where businessservice='WS' and expirydate<(extract(epoch from now()))*1000 and tenantid=$tenantid group by consumercode,billid,businessservice, b.payername)res inner join cte as conn on res.consumercode=conn.connectionno inner join (select connection_id,connectiontype from eg_ws_service)as s ON conn.id=s.connection_id inner join (select CASE WHEN uuid1.userid IS NOT NULL THEN uuid1.userid WHEN uuid1.userid IS NULL and uuid2.userid is NOT NULL THEN uuid2.userid END as finaluuid,uuid2.propertyid as propertyid,uuid2.connectionno as connectionno, uuid2.usagecategory from (select ch.userid ,conn.property_id,connectionno from eg_ws_connectionholder as ch inner join cte as conn on ch.connectionid=conn.id) as uuid1 right outer join (select pto.userid, prop.propertyid, prop.usagecategory, wsConn.connectionno from eg_pt_owner as pto inner join eg_pt_property as prop ON prop.id = pto.propertyid inner join cte as wsConn on wsConn.property_id=prop.propertyid ) as uuid2 on uuid1.property_id=uuid2.propertyid group by finaluuid,uuid2.propertyid,uuid2.connectionno, uuid2.usagecategory) as uuids ON uuids.propertyid=conn.property_id and uuids.connectionno=conn.connectionno where conn.tenantid=$tenantid and res.totaldue>0 UNION ALL select res.consumercode,res.totaldue, CASE WHEN res.businessservice='SW' THEN 'Sewerage' ELSE NULL END as service, res.payer as payername, conn.locality from (select consumercode,sum(totalamount) as totaldue, billid, businessservice, b.payername as payer from (select id,status, payername from egbs_bill_v1 where status='ACTIVE') as b inner join egbs_billdetail_v1 on b.id=egbs_billdetail_v1.billid where businessservice='SW' and expirydate<(extract(epoch from now()))*1000 and tenantid=$tenantid group by consumercode,billid,businessservice, b.payername)res inner join cteSw as conn on res.consumercode=conn.connectionno inner join (select connection_id,connectiontype from eg_sw_service)as s ON conn.id=s.connection_id inner join (select CASE WHEN uuid1.userid IS NOT NULL THEN uuid1.userid WHEN uuid1.userid IS NULL and uuid2.userid is NOT NULL THEN uuid2.userid END as finaluuid,uuid2.propertyid as propertyid,uuid2.connectionno as connectionno, uuid2.usagecategory from (select ch.userid ,conn.property_id,connectionno from eg_sw_connectionholder as ch inner join cteSw as conn on ch.connectionid=conn.id) as uuid1 right outer join (select pto.userid, prop.propertyid, prop.usagecategory, swConn.connectionno from eg_pt_owner as pto inner join eg_pt_property as prop ON prop.id = pto.propertyid inner join cteSw as swConn on swConn.property_id=prop.propertyid ) as uuid2 on uuid1.property_id=uuid2.propertyid group by finaluuid,uuid2.propertyid,uuid2.connectionno, uuid2.usagecategory) as uuids ON uuids.propertyid=conn.property_id and uuids.connectionno=conn.connectionno where conn.tenantid=$tenantid and res.totaldue>0
   groupby: GROUP BY res.consumercode,res.totaldue,service,locality,res.payer
+- reportName: StateLevelWater&SewerageReport
+  summary: WS Basic Report State Level
+  version: 1.0.0
+  moduleName: rainmaker-wns
+  sourceColumns:
+  - name: connectionno
+    label: Connection No.
+    type: string
+    source: wns
+    total: false      
+  - name: connectiontype
+    label: Connection Type
+    type: string
+    source: wns
+    total: false
+  - name: status
+    label: Connection Status
+    type: string
+    source: wns
+  - name: formattedIssuedDate
+    label: Date Effective From
+    type: string
+    source: wns
+    total: false
+  - name: property_id
+    label: Property ID
+    type: string
+    source: wns
+    total: false
+  - name: locality
+    label: Locality
+    type: string
+    source: wns
+    total: false
+    localisationPrefix: TENANTS_MOHALLA_
+    isLocalisationRequired: true
+  searchParams:
+  - name: fromDate
+    label: From Date
+    type: epoch
+    source: wns
+    isMandatory: true
+    searchClause: AND dateeffectivefrom >= $fromDate
+  - name: toDate
+    label: To Date
+    type: epoch
+    source: wns
+    isMandatory: true
+    searchClause: AND dateeffectiveto <= $toDate
+  - name: serviceName
+    label: Service Name
+    type: singlevaluelist
+    source: wns
+    isMandatory: false
+    pattern: 'list://WS%:Water,SW%:Sewerage'
+    searchClause: AND cd.connectionno like $serviceName
+  - name: locality
+    label: Locality
+    type: singlevaluelist
+    source: wns
+    pattern: http://egov-location.egov:8080/egov-location/location/v11/boundarys/_search?hierarchyTypeCode=ADMIN&boundaryType=Locality&tenantId=$tenantid|$.TenantBoundary[0].boundary.*.code|$.TenantBoundary[0].boundary.*.code
+    isMandatory: false
+    wrapper: true
+    localisationPrefix: TENANTS_MOHALLA_
+    isLocalisationRequired: true
+    searchClause: AND cd.locality = $locality
+  query: WITH CONNECTION_DETAILS AS(WITH WSRankedConnections AS ( SELECT connectionno,property_id,applicationstatus,status,applicationno, locality,tenantId,to_char(To_timestamp(dateeffectivefrom / 1000), 'DD/MM/YYYY') as  formattedIssuedDate, dateeffectivefrom, id, ROW_NUMBER() OVER (PARTITION BY connectionno ORDER BY createdtime DESC) AS row_num FROM eg_ws_connection WHERE applicationstatus IN('CONNECTION_ACTIVATED','DISCONNECTION_EXECUTED') order by connectionno desc), SWRankedConnections AS  (SELECT connectionno,property_id,applicationstatus,status,applicationno, locality,tenantId,to_char(To_timestamp(dateeffectivefrom / 1000), 'DD/MM/YYYY') as  formattedIssuedDate,dateeffectivefrom, id, ROW_NUMBER() OVER (PARTITION BY connectionno ORDER BY createdtime DESC) AS row_num FROM  eg_sw_connection WHERE applicationstatus IN('CONNECTION_ACTIVATED','DISCONNECTION_EXECUTED') order by connectionno desc)  (SELECT connectionno, status, applicationno, applicationstatus,locality,tenantId, formattedIssuedDate,dateeffectivefrom,id,property_id FROM WSRankedConnections JOIN eg_ws_service wssrvc ON wssrvc.connection_id=WSRankedConnections.id WHERE (status = 'Active' and applicationstatus='CONNECTION_ACTIVATED' AND row_num = 1) OR (status = 'Inactive' AND applicationstatus='DISCONNECTION_EXECUTED' and row_num = 1) UNION ALL (SELECT connectionno, status, applicationno,  applicationstatus,locality,tenantId,formattedIssuedDate,dateeffectivefrom, id, property_id FROM SWRankedConnections JOIN eg_sw_service swsrvc ON swsrvc.connection_id=SWRankedConnections.id WHERE (status = 'Active' and applicationstatus='CONNECTION_ACTIVATED' AND row_num = 1) OR (status = 'Inactive' AND applicationstatus='DISCONNECTION_EXECUTED' and row_num = 1)))) SELECT connectionno,tenantId,locality,status, applicationstatus, cd.formattedIssuedDate,CASE WHEN connectionno like 'WS%' THEN 'Water' WHEN connectionno like 'SW%' THEN 'Sewerage' ELSE NULL END as connectiontype, dateeffectivefrom, property_id from CONNECTION_DETAILS as cd WHERE 1=1
+  orderby: ORDER BY connectionno
