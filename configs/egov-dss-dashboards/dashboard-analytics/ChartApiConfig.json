@@ -13885,7 +13885,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"regionId\" : \"region.keyword\", \"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\" }",
         "dateRefField": "date",
         "indexName": "tl-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Wards\":{\"terms\":{\"field\":\"ward.keyword\",\"size\":10000},\"aggs\":{\"TL_Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}},\"Total_Licence_Issued\":{\"sum\":{\"field\":\"todaysTradeLicensesForStatus\"}},\"Transactions\":{\"sum\":{\"field\":\"transactions\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Wards\":{\"terms\":{\"field\":\"ward.keyword\",\"size\":10000},\"aggs\":{\"TL_Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}},\"Total_Licence_Issued_1\":{\"filter\":{\"bool\":{\"must_not\":[],\"must\":[{\"match\":{\"status.keyword\":\"APPROVED\"}}]}},\"aggs\":{\"Total_Licence_Issued\":{\"sum\":{\"field\":\"todaysTradeLicensesForStatus\"}}}},\"Transactions\":{\"sum\":{\"field\":\"transactions\"}}}}}}}}"
       },
       {
         "module": "COMMON",
@@ -14114,7 +14114,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"regionId\" : \"region.keyword\", \"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\" }",
         "dateRefField": "date",
         "indexName": "tl-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Wards\":{\"terms\":{\"field\":\"ward.keyword\"},\"aggs\":{\"days\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"applicationsTax\":{\"avg\":{\"field\":\"tlTax\"}},\"applicationsPenalty\":{\"avg\":{\"field\":\"adhocPenalty\"}},\"applicationsRebate\":{\"avg\":{\"field\":\"adhocRebate\"}}}},\"TL_Tax\":{\"sum_bucket\":{\"buckets_path\":\"days.applicationsTax\"}},\"Adhoc_Penalty\":{\"sum_bucket\":{\"buckets_path\":\"days.applicationsPenalty\"}},\"Adhoc_Rebate\":{\"sum_bucket\":{\"buckets_path\":\"days.applicationsRebate\"}},\"Total_Amount\":{\"bucket_script\":{\"buckets_path\":{\"Adhoc_Rebate\":\"Adhoc_Rebate\",\"TL_Tax\":\"TL_Tax\",\"Adhoc_Penalty\":\"Adhoc_Penalty\"},\"script\":{\"source\":\" params.TL_Tax + params.Adhoc_Penalty - params.Adhoc_Rebate\"}}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Wards\":{\"terms\":{\"field\":\"ward.keyword\",\"size\":10000},\"aggs\":{\"days\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"applicationsTax\":{\"avg\":{\"field\":\"tlTax\"}},\"applicationsPenalty\":{\"avg\":{\"field\":\"adhocPenalty\"}},\"applicationsRebate\":{\"avg\":{\"field\":\"adhocRebate\"}}}},\"TL_Tax\":{\"sum_bucket\":{\"buckets_path\":\"days.applicationsTax\"}},\"Adhoc_Penalty\":{\"sum_bucket\":{\"buckets_path\":\"days.applicationsPenalty\"}},\"Adhoc_Rebate\":{\"sum_bucket\":{\"buckets_path\":\"days.applicationsRebate\"}},\"Total_Amount\":{\"bucket_script\":{\"buckets_path\":{\"Adhoc_Rebate\":\"Adhoc_Rebate\",\"TL_Tax\":\"TL_Tax\",\"Adhoc_Penalty\":\"Adhoc_Penalty\"},\"script\":{\"source\":\" params.TL_Tax + params.Adhoc_Penalty - params.Adhoc_Rebate\"}}}}}}}}}"
       }
     ],
     "filterKeys": [
