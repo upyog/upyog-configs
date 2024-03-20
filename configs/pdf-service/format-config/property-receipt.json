@@ -394,15 +394,59 @@
         "layout": {}
       },
       {
+        "text":"OWNER/OCCUPIER INFORMATION",
+        "style":"block-head",
+        "decoration":"underline"
+     },
+     {
+       "style": "next-noc-table",
+       "table": {
+        "widths": [
+          "*","*","*","*","*"
+        ],
+        "body": [
+          
+    [        {
+              "text": "Owner Name",
+              "style": "amounts"
+            },
+      {
+              "text": "Mobile Number",
+              "style": "amounts"
+            },
+      {
+              "text": "Guardian Name",
+              "style": "amounts"
+            },
+      {
+              "text": "Relationship",
+              "style": "amounts"
+            },
+      {
+              "text": "OwnerType",
+              "style": "amounts"
+            }
+      
+    ],
+    
+    "{{#var_owners}}[{\"text\":\"{{name2}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{mobileNumber}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{fatherOrHusbandName2}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{relationship}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{ownerType}}\",\"style\":\"receipt-tablee\"}]{{/var_owners}}"
+
+      
+  ]
+  },
+       "layout": {}
+     },
+      {
         "text":"AMOUNT TO BE PAID",
-        "style":"block-head"
+        "style":"block-head",
+        "decoration": "underline"
       },
       {
         "style": "next-noc-table",
         "table": {
           "widths": [
   
-            "8%","9%","5%","7%","8%","8%","8%","8%","9%","8%","8%","7%","7%"
+            "8%","9%","5%","7%","8%","8%","9%","8%","9%","8%","8%","7%","6%"
           ],
           "body": [
             
@@ -470,13 +514,14 @@
     }, 
       {
         "text":"SUMMARY OF PAID AMOUNT",
-        "style":"block-head"
+        "style":"block-head",
+        "decoration": "underline"
       },
       {
         "style": "next-noc-table",
         "table": {
           "widths": [
-            "8%","9%","5%","7%","8%","8%","8%","8%","9%","8%","8%","7%","7%"
+            "8%","9%","5%","7%","8%","8%","9%","8%","9%","8%","8%","7%","6%"
           ],
           "body": [
             
@@ -664,7 +709,7 @@
     },
     "receipt-logo-header": {
       "color": "#000000",
-      "fontSize": 10,
+      "fontSize": 9,
       "bold": true,
       "letterSpacing": 0.74,
       "margin": [
@@ -676,17 +721,17 @@
     },
        "receipt-logo-sub-header": {
       "color": "#000000",
-      "fontSize": 10,
+      "fontSize": 9,
       "letterSpacing": 0.6
     },
      "noc-table": {
-      "fontSize": 10,
+      "fontSize": 9,
       "color": "#000000",
       "margin": [
         -25,
-        4,
+        2,
         -22,
-        4
+        2
       ]
     },
     "receipt-table-value-total-Qr": {
@@ -701,7 +746,7 @@
   "receipt-table-value-down": {
       "color": "#000000",
       "bold": false,
-      "fontSize": 10,
+      "fontSize": 9,
       "fontWeight": 400,
       "alignment": "left",
       "margin": [
@@ -713,7 +758,7 @@
   },
 
     "next-noc-table": {
-      "fontSize": 10,
+      "fontSize": 9,
       "color": "#000000",
       "margin": [
         -25,
@@ -725,7 +770,7 @@
      "receipt-table-value": {
       "color": "#000000",
       "bold": true,
-      "fontSize": 10,
+      "fontSize": 9,
       "fontWeight": 500,
       "margin": [
         8,
@@ -737,7 +782,7 @@
     "receipt-table": {
       "color": "#000000",
       "bold": false,
-      "fontSize": 10,
+      "fontSize": 9,
       "fontWeight": 400,
       "margin": [
         -10,
@@ -759,7 +804,7 @@
       ]
     },
      "receipt-approver": {
-      "fontSize": 10,
+      "fontSize": 9,
       "bold": true,
       "margin": [
         -27,
@@ -770,7 +815,7 @@
       "color": "#484848"
     },
     "no-signature": {
-      "fontSize": 10,
+      "fontSize": 9,
       "margin": [
         -27,
         5,
@@ -801,7 +846,7 @@
      },
      "amounts":
      {
-         "fontSize": 10,
+         "fontSize": 9,
          "bold":true,
          "backgroundColor": "#D3D3D3"
      },
@@ -811,7 +856,7 @@
       "letterSpacing": 0.74,
       "margin": [
         -25,
-        5,
+        2,
         0,
         2
       ]
