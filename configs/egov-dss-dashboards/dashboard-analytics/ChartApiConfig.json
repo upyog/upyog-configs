@@ -20552,7 +20552,7 @@
         "indexName": "master-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"StateGDP\"}}],\"must_not\":[{\"match\":{\"StateGDP\":0}}]}},\"aggs\":{\"State GDP\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}",
         "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "date"
+        "dateRefField": ""
       }
     ],
     "chartType": "metric",
@@ -20820,7 +20820,7 @@
         "indexName": "master-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"match\":{\"module.keyword\":\"PT\"}}]}},\"aggs\":{\"State GDP\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}",
         "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "financialYear.keyword"
+        "dateRefField": ""
       }
     ],
     "chartType": "metric",
@@ -21348,7 +21348,7 @@
       {
         "module": "PT",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "financialYear.keyword",
+        "dateRefField": "",
         "indexName": "master-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"PT\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
       }
@@ -21382,7 +21382,7 @@
       {
         "module": "TL",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "financialYear.keyword",
+        "dateRefField": "",
         "indexName": "master-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"TL\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
       }
@@ -21416,7 +21416,7 @@
       {
         "module": "OBPS",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "financialYear.keyword",
+        "dateRefField": "",
         "indexName": "master-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"OBPS\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
       }
@@ -21450,7 +21450,7 @@
       {
         "module": "FIRENOC",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "financialYear.keyword",
+        "dateRefField": "",
         "indexName": "master-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"FIRENOC\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
       }
@@ -21484,7 +21484,7 @@
       {
         "module": "WS",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "financialYear.keyword",
+        "dateRefField": "",
         "indexName": "master-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"WS\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
       }
@@ -21858,7 +21858,7 @@
       {
         "module": "PT",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "financialYear.keyword",
+        "dateRefField": "",
         "indexName": "master-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"PT\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
       }
@@ -21960,7 +21960,7 @@
       {
         "module": "TL",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "financialYear.keyword",
+        "dateRefField": "",
         "indexName": "master-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"TL\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
       }
@@ -22062,7 +22062,7 @@
       {
         "module": "OBPS",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "financialYear.keyword",
+        "dateRefField": "",
         "indexName": "master-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"OBPS\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
       }
@@ -22164,7 +22164,7 @@
       {
         "module": "FIRENOC",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "financialYear.keyword",
+        "dateRefField": "",
         "indexName": "master-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"FIRENOC\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
       }
@@ -22266,7 +22266,7 @@
       {
         "module": "WS",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
-        "dateRefField": "financialYear.keyword",
+        "dateRefField": "",
         "indexName": "master-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"module.keyword\":[\"WS\"]}}]}},\"aggs\":{\"Average GDP\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"StateGDP\"}}}}}}}}"
       }
