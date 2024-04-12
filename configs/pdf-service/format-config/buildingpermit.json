@@ -2,75 +2,114 @@
   "key": "buildingpermit",
   "config": {
     "defaultStyle": {
-      "font": "Cambay"
+      "font": "Cambay",
+      "fontSize":8
     },
     "content": [
-      {
-        "text" : "{{GENERATED_ON}} : ",
-        "absolutePosition" : {
-           "x" : 400,
-           "y" : 5
-        }
-      },
-      {
-        "text" : " {{orderGeneratedOn}}",
-        "absolutePosition" : {
-           "x" : 490,
-           "y" : 5
-        }
-      },
       {
         "columns": [
           {
             "image": "{{logoImage}}",
             "width": 50,
             "height": 61.25,
-            "alignment": "left"
+            "margin":[0,-10,0,0] 
           },
           {
             "stack": [
               {
-                "text": "{{tenantName}} {{Muncipal_Council}}",
-                "style": "header"
+                "text": "{{Muncipal_Council}}, {{tenantName}} ",
+                "style": "sub-header",
+                "alignment":"center",
+                "margin":[0,3,0,0],
+                "fontSize":12,
+                "bold":true  
               },
               {
-                "text": "{{BPA_FORM}}",
-                "style": "sub-header"
-              },
+                "text": "{{BPA_BUILDING_PERMIT}}",
+                "style": "header",
+                "alignment":"center",
+                "fontSize":10,
+                "margin":[0,-1,0,0],
+                "bold":true
+              } ,
               {
-                "text": "{{BPA_FORM_APPROVAL}}",
-                "style": "header"
-              },
-              {
-                "text": "{{BPA_BYELAWS}}",
-                "style": "sub-header"
-              }
-            ]
+                "text": "{{BPA_UNDER_SELF_CERTIFICATION_SCHEME}}",
+                "style": "header",
+                "alignment":"center",
+                "fontSize":10,
+                
+                "bold":true
+              } 
+            ],
+            "margin":[0, -10, 0, 0],
+            "width":"*",
+            "alignment":"center"
           },
           {
-            "image": "{{logoImage}}",
-            "width": 50,
-            "height": 61.25,
-            "alignment": "right"
+            "image": "{{qrCode}}",
+            "alignment": "right",
+            "width": 60,
+            "height":70,
+            "margin":[0, -10, 0,0]
           }
-        ]
+        ],
+        "margin":[0, -10, 0,0]
       },
       {
         "columns": [
           {
             "text": [
               {
-                "text": "{{PLAN_PERMISION_NO}} : ",
+                "text": "{{FILE_BPA_NO}}",
                 "bold": true
               },
               {
-                "text": "{{planPermissionNo}}",
-                "bold": true,
-                "font": "Roboto"
+                "text": " {{applicationNo}}",
+                "bold": false 
               }
-            ],
-            "alignment": "left",
-            "width": "*"
+            ] 
+          },
+          {
+            "text": [
+              
+              {
+                "text": " {{DATED}}",
+                "bold": true,
+                "alignment":"right" 
+              },
+              {
+                "text": " {{orderGeneratedOn}}",
+                "bold": false,
+                "alignment":"right"  
+              }
+            ] 
+           
+          } 
+        ],
+        "margin":[0, 5, 0, 0],
+        "style": "top-margin"
+      },
+      {
+        "columns": [
+          {
+            "text": [
+              {
+                "text": "{{TO}} : ",
+                "bold": true
+              },
+              {
+                "text": "{{favourOf}},",
+                "bold": false
+              },
+              {
+                "text": " {{doorNo}}",
+                "bold": false
+              },
+              {
+                "text": " {{locality}}.",
+                "bold": false
+              }
+            ] 
           }
         ],
         "style": "top-margin"
@@ -78,235 +117,822 @@
       {
         "text": [
           {
-            "text": "{{WRT_TXT}}"
+            "text": "{{NAME_OF_STAKEHOLFDER_CONTENT}} :  ",
+            "bold": true
           },
           {
-            "text": " {{applicationNo}}",
+            "text": "{{stakeholderName}}, ",
+            "bold": false
+          },
+          {
+            "text": "{{stakeholderAddress}}",
+            "bold": false
+          }
+        ],
+        "style": "top-margin"
+      },
+      {
+        "columns":[
+          {
+            "text": "{{SUBJECT}} :  ",
             "bold": true,
-            "font": "Roboto"
+            "width":"auto"
           },
           {
-            "text": " {{dated}}"
-          },
-          {
-            "text": " {{applicationDate}}"
-          },
-          {
-            "text": ", {{PERMISSION_GRANT_TXT}} : "
+            "text": "{{SUBJECT_CONTENT}}",
+            "decoration":"underline",
+            "width":"auto",
+            "bold": true,
+            "margin":[5,0,0,0]
+            
           }
         ],
+        "margin":[0,5,0,0],
+        "alignment":"justify",
         "style": "top-margin"
       },
+
       {
         "text": [
           {
-            "text": "{{SALUTATION}} "
-          },
-          {
-            "text": "{{favourOf}}",
-            "bold": true
-          },
-          {
-            "text": " {{FOR}} "
+            "text": "{{DEAR_SIR_MADAM}} , "
           }
         ],
-        "style": "top-margin"
+        "margin":[0,-5,0,10]
+        
       },
       {
-        "text": [
+        "columns":[
           {
-            "text": "{{DSCR1}} {{PLOT_NO}}"
-          },
-          {
-            "text": " {{plotNo}}",
-            "bold": true
-          },
-          {
-            "text": " {{KHATA_NO}} "
-          },
-          {
-            "text": "{{khataNo}}",
-            "bold": true
-          },
-          {
-            "text": " {{HOLDING_NO}} "
-          },
-          {
-            "text": "{{holdingNo}}",
-            "bold": true
-          },
-          {
-            "text": " {{SERVEY_NO}} "
-          },
-          {
-            "text": "{{reServeyPlotNo}}",
-            "bold": true
-          },
-          {
-            "text": " {{TOWNPLANNING_TXT}} "
-          },
-          {
-            "text": "{{townPlanningScheme}}",
-            "bold": true
-          },
-          {
-            "text": " {{PROPOSE_LAND}} "
-          },
-          {
-            "text": "{{proposedLandUse}}",
-            "bold": true
-          },
-          {
-            "text": " {{OF}} "
-          },
-          {
-            "text": "{{tenantName}} {{BPA_PDF_MUNCIPAL}}",
-            "bold": true
-          },
-          {
-            "text": "  {{CONDNS_TXT}}"
-          }
-        ]
-      },
-      {
-        "separator": ")",
-        "ol": [
-          "{{conditions}}"
-        ]
-      },
-      {
-        "stack": [
-          {
-            "text": "{{PERMIT_DETAILS_TXT}},"
-          }
-        ],
-        "bold": true,
-        "style": "top-margin"
-      },
-      {
-        "table": {
-          "widths": [
-            "auto",
-            "auto"
-          ],
-          "body": [
-            [
+            "stack":[
               {
-                "text": "Fee Description",
-                "bold": true
-              },
-              {
-                "text": "Amount (Rs)",
-                "bold": true,
-                "alignment": "right"
-              }
-            ],
-            [
-              {
-                "text": "{{appHeadCode}}"
-              },
-              {
-                "text": "{{appFee}}",
-                "alignment": "right"
-              }
-            ],
-            [
-              {
-                "text": "{{sanHeadCode}}"
-              },
-              {
-                "text": "{{sanFee}}",
-                "alignment": "right"
-              }
-            ],
-            [
-              {
-                "text": "Total",
-                "bold": true
-              },
-              {
-                "text": "{{totalDue}}",
-                "bold": true,
-                "alignment": "right"
+                "text":" - ",
+                "margin":[15,0,0,0]
               }
             ]
+          },
+          {
+            "text":[
+                {  
+                  "text":" {{REFERNCE_TEXT}} " 
+                },
+                {
+                  "text": "{{applicationDate}} ",
+                  "bold":true
+                },
+                {
+                  "text": "{{GRANT_OF_SANCTION_TEXT}} "
+                },
+                {
+                  "text": " {{RESIDENTIAL_PLOTTED}} ",
+                  "bold":true
+                },
+                {
+                  "text":" {{BUILDING_HAVING}} :"
+                },
+                {
+                  "text":" {{PLOT_SIZE}} :",
+                  "bold":true
+                  
+                },
+                {
+                  "text":" {{plotArea}}, ",
+                  "bold":true
+                },
+                {
+                  "text":" {{PLOT_NO}} :",
+                  "bold":true
+                },
+                {
+                  "text":" {{plotNo}}, ",
+                  "bold":true
+                },
+                {
+                  "text":" {{KHATA_NO}}",
+                  "bold":true
+                },
+                {
+                  "text":" {{khataNo}}, ",
+                  "bold":true
+                },
+                {
+                  "text":" {{situatedin}}"
+                },
+                {
+                  "text":" {{locality}}.",
+                  "bold":true
+                },
+                {
+                  "text":" {{SELF_CERTIFIED_UNDER}}"
+                },
+                {
+                  "text":" {{orderGeneratedOn}}."
+                }
+            ],
+            "margin":[-230,-1,0,0],
+            "alignment":"justify"
+            
+         }
+        ]
+      },
+      
+     {
+      "columns":[
+        {
+          "stack":[
+            {
+              "text": " -  ",
+              "margin":[15,0,0,0]
+            }
           ]
         },
-        "margin": [
-          0,
-          5,
-          0,
-          0
-        ]
-      },
+        {
+          "text":[
+            
+            {
+              "text": " {{VALID_UPTO}}."
+            }
+          
+          ],
+         
+          "margin":[-230,0,0,0],
+          "alignment":"justify",
+          "style": "top-margin"
+         
+        }
+
+      ]
+     },
+     {
+      "columns":[
+        {
+          "stack":[
+            {
+              "text": " -  ",
+              "margin":[15,0,0,0]
+            }
+          ]
+        },
+        {
+          "text":[
+              
+            {
+              "text": "{{RESPONSIBILITY_TXT}}"
+    
+            },
+            {
+              "text":" ({{favourOf}})/",
+              "bold":true
+            },
+            {
+              "text":" {{YOUR_PROFESSIONAL}}:"
+            },
+            {
+              "text":" ({{stakeholderName}})",
+              "bold":true
+            },
+            {
+              "text":"  {{RESTS_UPTO_YOU}}"
+            }
+          
+          ],
+          "margin":[-230,0,0,0],
+          "alignment":"justify",
+          "style": "top-margin"
+        }
+      ]
+     }, 
       {
-        "stack": [
+        "columns":[
           {
-            "text": "{{BY_ORDER}}",
+            "stack":[
+              {
+                "text": " -  ",
+                "margin":[15,0,0,0]
+              }
+            
+            
+            ]
+          },
+          {
+            "text":[
+              {
+                "text": " {{REGARDING_TXT}}"
+                
+              }
+            ],
+            "margin":[-230,0,0,0],
+            "alignment":"justify",
             "style": "top-margin"
-          },
-          {
-            "text": "{{AUTH_OFFICER}}",
-            "margin": 2
-          },
-          {
-            "text": "{{approvedBy}}",
-            "margin": 2
+
           }
-        ],
-        "alignment": "right",
-        "style": "top-margin"
+        ]      
       },
+      
       {
-        "text": [
+        "columns":[
           {
-            "text": "{{VALIDITY_DSCR}} "
+            "stack":[
+              {
+                "text":" - ",
+                "margin":[15,0,0,0]
+                
+              }
+              
+            ]
           },
           {
-            "text": "{{validityDate}}"
-          },
-          {
-            "text": " {{ONLY}}."
-          }
-        ],
-        "style": "top-margin",
-        "bold": true
-      },
-      {
-        "text": "{{NOTE}} : ",
-        "bold": true,
-        "style": "top-margin"
-      },
-      {
-        "text": [
-          {
-            "text": "{{SUMMARY1}}"
-          },
-          {
-            "text": " {{Bihar_Tenant}} "
-          },
-          {
-            "text": "{{SUMMARY2}}."
-          }
-        ],
-        "style": "top-margin"
-      },
-      {
-        "image": "{{qrCode}}",
-        "alignment": "right",
-        "width": 100,
-        "height": 100
-      },
-      {
-        "stack":[
-          {
-            "text" : "{{REPORT_RUNDATE}} : {{reportrunDate}}",
-            "alignment" : "right"              
+            "text":[
+              {
+                "text":"{{THE}}"
+                
+                
+              },
+              {
+                "text":" {{stakeholderName}}",
+                "bold":true
+              },
+              {
+                "text":" ({{profession}})",
+                "bold":true
+              },
+              {
+                "text":" {{CORRECTNESS_OWNERSHIP}}"
+              }
+            ],
+            "margin":[-230,0,0,0],
+            "alignment":"justify",
+            "style": "top-margin"
+           
           }
         ]
-      }
-    ],
-  "footer": "(function(currentPage, pageCount) { return currentPage.toString() + ' of ' + pageCount; })",
+      },
+      {
+        "columns":[
+          {
+            "stack":[
+              
+                {
+                  "text": " -  ",
+                  
+                  "margin":[15,0,0,0]
+                }
+             
+            ]
+          },
+          {
+            "text":[
+              {
+                "text":" {{FURNISHED_FOUND_INCORRECT}} "
+                
+              }
+            ],
+            "margin":[-230,0,0,0],
+            "alignment":"justify",
+            "style": "top-margin"
+          }
+          
+        ]
+      },
+      {
+        "columns":[
+          {
+            "stack":[
+              
+                {
+                  "text": " -  ",
+                  
+                  "margin":[15,0,0,0]
+                }
+             
+            ]
+          },
+          {
+            "text":[
+              {
+                "text":"{{THE_PLOT_REGULARISED_UNDER}} "
+                
+              },
+              {
+                "text":"{{nocNumber}} ",
+                "bold":true
+              },
+              {
+                "text":"{{dated}} "
+              },
+              {
+                "text":" {{orderGeneratedOn}}, "
+              },
+              {
+                "text":"{{REGISTERED_NAME_OF}}"
+              },
+              
+              {
+                "text":"{{REGULATION_FALLS_UNDER}}"
+              },
+              {
+                "text":" {{Muncipal_Council}}, {{tenantName}} "
+              }
+            ],
+            "margin":[-230,0,0,0],
+            "alignment":"justify",
+            "style": "top-margin"
+          }
+          
+        ]
+      },
+      {
+        "columns":[
+          {
+            "stack":[
+              
+                {
+                  "text": " -  ",
+                  
+                  "margin":[15,0,0,0]
+                }
+             
+            ]
+          },
+          {
+            "text":[
+              {
+                
+                "text":"{{MISREPRESENTATION}}"
+              }
+            ],
+            "margin":[-230,0,0,0],
+            "alignment":"justify",
+            "style": "top-margin"
+          }
+          
+        ]
+      },
+      {
+        "columns":[
+          {
+            "stack":[
+              
+                {
+                  "text": " 1. ",
+                  
+                  "margin":[15,0,0,0]
+                }
+            ]
+          },
+          {
+            "text":[
+              {
+                "text":" {{TERMS}} "
+                
+              }
+            ],
+            "margin":[-230,0,0,0],
+            "alignment":"justify",
+            "style": "top-margin"
+          }
+          
+        ]
+      },
+      {
+        "columns":[
+          {
+            "stack":[
+              
+                {
+                  "text": " 2.  ",
+                  
+                  "margin":[15,0,0,0]
+                }
+             
+            ]
+          },
+          {
+            "text":[
+              {
+                "text":" {{TERMS2}} "
+                
+              }
+            ],
+            "margin":[-230,0,0,0],
+            "alignment":"justify",
+            "style": "top-margin"
+          }
+          
+        ]
+      },
+      {
+        "columns":[
+          {
+            "stack":[
+              
+                {
+                  "text": " 3.  ",
+                  
+                  "margin":[15,0,0,0]
+                }
+             
+            ]
+          },
+          {
+            "text":[
+              {
+                "text":" {{TERMS3}} "
+                
+              }
+            ],
+            "margin":[-230,0,0,0],
+            "alignment":"justify",
+            "style": "top-margin"
+          }
+          
+        ]
+      },
+      {
+        "columns":[
+          {
+            "stack":[
+                {
+                  "text": " 4.  ",
+                  "margin":[15,0,0,0]
+                }
+            ]
+          },
+          {
+            "text":[
+              {
+                "text":" {{TERMS4}} " 
+              }
+            ],
+            "margin":[-230,0,0,0],
+            "alignment":"justify",
+            "style": "top-margin"
+          }
+          
+        ]
+      },
+      {
+        "columns":[
+          {
+            "stack":[
+              
+                {
+                  "text": " 5.  ",
+                  
+                  "margin":[15,0,0,0]
+                }
+             
+            ]
+          },
+          {
+            "text":[
+              {
+                "text":" {{TERMS5}} "
+                
+              }
+            ],
+            "margin":[-230,0,0,0],
+            "alignment":"justify",
+            "style": "top-margin"
+          }
+          
+        ]
+      },
+      {
+        "columns":[
+          {
+            "stack":[
+              
+                {
+                  "text": " 6.  ",
+                  
+                  "margin":[15,0,0,0]
+                }
+             
+            ]
+          },
+          {
+            "text":[
+              {
+                "text":" {{TERMS6}} "
+                
+              }
+            ],
+            "margin":[-230,0,0,0],
+            "alignment":"justify",
+            "style": "top-margin"
+          }
+          
+        ]
+      },
+      {
+        "columns":[
+          {
+            "stack":[
+              
+                {
+                  "text": " 7.  ",
+                  
+                  "margin":[15,0,0,0]
+                }
+             
+            ]
+          },
+          {
+            "text":[
+              {
+                "text":" {{TERMS7}} "
+                
+              }
+            ],
+            "margin":[-230,0,0,0],
+            "alignment":"justify",
+            "style": "top-margin"
+          }
+          
+        ]
+      },
+      {
+        "columns":[
+          {
+            "stack":[
+              
+                {
+                  "text": " 8.  ",
+                  
+                  "margin":[15,0,0,0]
+                }
+             
+            ]
+          },
+          {
+            "text":[
+              {
+                "text":" {{TERMS8}} "
+                
+              }
+            ],
+            "margin":[-230,0,0,0],
+            "alignment":"justify",
+            "style": "top-margin"
+          }
+          
+        ]
+      },
+      {
+        "columns":[
+          {
+            "stack":[
+              
+                {
+                  "text": " 9.  ",
+                  
+                  "margin":[15,0,0,0]
+                }
+             
+            ]
+          },
+          {
+            "text":[
+              {
+                "text":" {{TERMS9}} "
+                
+              }
+            ],
+            "margin":[-230,0,0,0],
+            "alignment":"justify",
+            "style": "top-margin"
+          }
+          
+        ]
+      },
+      {
+        "columns":[
+          {
+            "stack":[
+              
+                {
+                  "text": " 10.  ",
+                  
+                  "margin":[15,0,0,0]
+                }
+             
+            ]
+          },
+          {
+            "text":[
+              {
+                "text":" {{TERMS10}} "
+                
+              }
+            ],
+            "margin":[-230,0,0,0],
+            "alignment":"justify",
+            "style": "top-margin"
+          }
+          
+        ]
+      },
+      {
+        "columns":[
+          {
+            "stack":[
+              
+                {
+                  "text": " 11.  ",
+                  
+                  "margin":[15,0,0,0]
+                }
+             
+            ]
+          },
+          {
+            "text":[
+              {
+                "text":" {{TERMS11}} "
+                
+              }
+            ],
+            "margin":[-230,0,0,0],
+            "alignment":"justify",
+            "style": "top-margin"
+          }
+          
+        ]
+      },
+      {
+        "columns":[
+          {
+            "stack":[
+              {
+                "text": " 12.  ",
+                "margin":[15,0,0,0]
+              }
+            
+            
+            ]
+          },
+          {
+            "text":[
+              {
+                "text": "{{PLAN_SANCTION}}"
+                
+              },
+              {
+                "text":" {{profession}} {{stakeholderName}}.",
+                "bold":true
+              },
+              {
+                "text":" {{FURTHERMORE_THE}}"
+              },
+              {
+                "text":" {{Muncipal_Council}} {{tenantName}} ",
+                "bold":true
+              },
+              {
+                "text":" {{RESERVES_RIGHT}}."
+              }
+              
+            ],
+            "margin":[-230,0,0,0],
+            "alignment":"justify",
+            "style": "top-margin"
+
+          }
+        ]      
+      },
+      {
+        "columns":[
+          {
+            "stack":[
+              {
+                "text": " 13. ",
+                "margin":[15,0,0,0]
+              }
+            
+            
+            ]
+          },
+          {
+            "text":[
+              {
+                "text": "{{SHORTFALL_P2}}"
+                
+              },
+              {
+                "text":" {{profession}} {{stakeholderName}} ",
+                "bold":true
+              },
+              {
+                "text":" {{IS_LIABLE}}."
+              }
+              
+            ],
+            "margin":[-230,0,0,0],
+            "alignment":"justify",
+            "style": "top-margin"
+
+          }
+        ]      
+      },
+      
+      {
+        "columns":[
+          {
+            "stack":[
+              
+                {
+                  "text": "{{Muncipal_Council}}"
+                },
+                {
+                  "text": "{{tenantName}}"
+
+                },
+                {
+                  "text": [
+                    {
+                      "text":"{{DATE_AND_TIME}}:"
+                    },
+                    {
+                      "text":" {{orderGeneratedOn}}"
+                    }
+                  ] 
+                }
+                
+              
+            ],
+            "style": "top-margin",
+            "alignment":"left"
+          },
+          {
+            "stack":[
+              {
+                "text": [
+                  {
+                    "text":"{{SELF_CERTIFIED_BY}}:"
+                  },
+                  {
+                    "text": " {{profession}}"
+                   
+                  }
+                ]
+                
+                
+              },
+              
+              {
+                "text": [
+                  {
+                    "text":"{{REGISTRATION_NUMBER}}:"
+                  },
+                  {
+                    "text": " {{stakeholderRegistrationNumber}}"
+                   
+                  }
+                ]
+                
+                
+              },
+              {
+                "text":[
+                  {
+                    "text":"{{ADDRESS}}:"
+                  },
+                  {
+                    "text":" {{stakeholderAddress}}"
+                  }
+                ]
+              },
+              {
+                "text":[
+                  {
+                    "text":"{{DATED}}"
+                  },
+                  {
+                    "text":" {{orderGeneratedOn}}"
+                  }
+                ]
+              }
+              
+            ],
+            "alignment":"right"
+          }
+        ],
+        
+        "bold":true,
+        "margin":[20,10,20,0]
+      },
+      {
+        "text":[
+          {
+            "text":"**{{COMPUTER_GENERATED_STATEMENT}}"
+          }
+        ],
+        "alignment":"center",
+        "margin":[0,5,0,0]
+      } 
+],
+  
 	"styles": {
       "header": {
         "bold": true,
@@ -316,7 +942,7 @@
         "alignment": "center",
         "margin": [
           0,
-          5,
+          2,
           0,
           5
         ]
@@ -324,7 +950,7 @@
       "top-margin": {
         "margin": [
           0,
-          10,
+          2,
           0,
           0
         ]
@@ -332,7 +958,7 @@
       "top-high-margin": {
         "margin": [
           0,
-          30,
+          0,
           0,
           0
         ]
