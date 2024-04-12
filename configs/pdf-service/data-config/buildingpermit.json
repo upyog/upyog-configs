@@ -6,7 +6,7 @@
     "baseKeyPath": "$.Bpa.*",
     "entityIdPath": "$.applicationNo",
     "isCommonTableBorderRequired": true,
-    "mappings": [
+    "mappings": [ 
       {
         "mappings": [
           {
@@ -46,6 +46,12 @@
                 "variable": "locality",
                 "value": {
                   "path": "$.landInfo.address.locality.name"
+                }
+              },
+              {
+                "variable": "doorNo",
+                "value": {
+                  "path": "$.landInfo.address.doorNo"
                 }
               },
               {
@@ -96,6 +102,33 @@
                 }
               },
               {
+                "variable": "stakeholderName",
+                "value": {
+                  "path": "$.additionalDetails.stakeholderName"
+                  
+                }
+              },
+              {
+                "variable": "nocNumber",
+                "value": {
+                  "path": "$.additionalDetails.nocNumber"
+                  
+                }
+              },
+              {
+                "variable": "stakeholderAddress",
+                "value": {
+                  "path": "$.additionalDetails.stakeholderAddress"
+                }
+              },
+              {
+                "variable": "stakeholderRegistrationNumber",
+                "value": {
+                  "path": "$.additionalDetails.stakeholderRegistrationNumber"
+                }
+              },
+              
+              {
                 "variable": "proposedLandUse",
                 "value": {
                   "path": "$.additionalDetails.proposedLandUse"
@@ -105,6 +138,19 @@
                 "variable": "WRT_TXT",
                 "value": {
                   "path": "BOA_PDF_WRT_TXT"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-bpa"
+                }
+              },
+              
+              {
+                "variable": "REGISTRATION_NUMBER",
+                "value": {
+                  "path": "BPA_PDF_REGISTRATION_NUMBER"
                 },
                 "type": "label",
                 "localisation": {
@@ -137,9 +183,57 @@
                 }
               },
               {
+                "variable": "ADDRESS",
+                "value": {
+                  "path": "BPA_PDF_ADDRESS"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-bpa"
+                }
+              },
+              {
+                "variable": "SELF_CERTIFIED_BY",
+                "value": {
+                  "path": "BPA_PDF_SELF_CERTIFIED_BY"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-bpa"
+                }
+              },
+              {
+                "variable": "COMPUTER_GENERATED_STATEMENT",
+                "value": {
+                  "path": "BPA_PDF_COMPUTER_GENERATED_STATEMENT"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-bpa"
+                }
+              },
+              {
                 "variable": "BPA_UNDER_SELF_CERTIFICATION_SCHEME",
                 "value": {
                   "path": "BPA_PDF_BPA_UNDER_SELF_CERTIFICATION_SCHEME"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-bpa"
+                }
+              },
+              {
+                "variable": "BPA_BUILDING_PERMIT",
+                "value": {
+                  "path": "BPA_PDF_BPA_BUILDING_PERMIT"
                 },
                 "type": "label",
                 "localisation": {
@@ -164,6 +258,54 @@
                 "variable": "FILE_BPA_NO",
                 "value": {
                   "path": "BPA_PDF_FILE_BPA_NO"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-bpa"
+                }
+              },
+              {
+                "variable": "THE_PLOT_REGULARISED_UNDER",
+                "value": {
+                  "path": "BPA_PDF_THE_PLOT_REGULARISED_UNDER"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-bpa"
+                }
+              },
+              {
+                "variable": "REGISTERED_NAME_OF",
+                "value": {
+                  "path": "BPA_PDF_REGISTERED_NAME_OF"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-bpa"
+                }
+              },
+              {
+                "variable": "REGULATION_FALLS_UNDER",
+                "value": {
+                  "path": "BPA_PDF_REGULATION_FALLS_UNDER"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-bpa"
+                }
+              },
+              {
+                "variable": "MISREPRESENTATION",
+                "value": {
+                  "path": "BPA_PDF_MISREPRESENTATION"
                 },
                 "type": "label",
                 "localisation": {
@@ -293,9 +435,21 @@
                 }
               },
               {
-                "variable": "BUILDING_HAVING_PLOT_SIZE",
+                "variable": "BUILDING_HAVING",
                 "value": {
-                  "path": "BPA_PDF_BUILDING_HAVING_PLOT_SIZE"
+                  "path": "BPA_PDF_BUILDING_HAVING"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-bpa"
+                }
+              },
+              {
+                "variable": "PLOT_SIZE",
+                "value": {
+                  "path": "BPA_PDF_PLOT_SIZE"
                 },
                 "type": "label",
                 "localisation": {
@@ -545,6 +699,78 @@
                 }
               },
               {
+                "variable": "TERMS11",
+                "value": {
+                  "path": "BPA_PDF_TERMS11"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-bpa"
+                }
+              },
+              {
+                "variable": "PLAN_SANCTION",
+                "value": {
+                  "path": "BPA_PDF_PLAN_SANCTION"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-bpa"
+                }
+              },
+              {
+                "variable": "FURTHERMORE_THE",
+                "value": {
+                  "path": "BPA_PDF_FURTHERMORE_THE"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-bpa"
+                }
+              },
+              {
+                "variable": "RESERVES_RIGHT",
+                "value": {
+                  "path": "BPA_PDF_RESERVES_RIGHT"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-bpa"
+                }
+              },
+              {
+                "variable": "SHORTFALL_P2",
+                "value": {
+                  "path": "BPA_PDF_SHORTFALL_P2"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-bpa"
+                }
+              },
+              {
+                "variable": "IS_LIABLE",
+                "value": {
+                  "path": "BPA_PDF_IS_LIABLE"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-bpa"
+                }
+              },
+              {
                 "variable": "SET_OF_SANCTIONED_PLAN",
                 "value": {
                   "path": "BPA_PDF_SET_OF_SANCTIONED_PLAN"
@@ -598,6 +824,11 @@
                   "path": "$.approvalDate"
                 },
                 "type": "date"
+                
+                  
+                  
+               
+                
               },
               {
                 "variable": "Muncipal_Council",
@@ -1050,7 +1281,7 @@
           {
             "externalAPI": [
               {
-                "path": "http://collection-services:8080/collection-services/payments/BPA.NC_SAN_FEE/_search",
+                "path": "http://localhost:8081/collection-services/payments/BPA.NC_SAN_FEE/_search",
                 "queryParam": "tenantId=$.tenantId,consumerCodes=$.applicationNo",
                 "apiRequest": null,
                 "responseMapping": [
@@ -1070,7 +1301,7 @@
                 ]
               },
               {
-                "path": "http://collection-services:8080/collection-services/payments/BPA.NC_APP_FEE/_search",
+                "path": "http://localhost:8081/collection-services/payments/BPA.NC_APP_FEE/_search",
                 "queryParam": "tenantId=$.tenantId,consumerCodes=$.applicationNo",
                 "apiRequest": null,
                 "responseMapping": [
@@ -1090,7 +1321,7 @@
                 ]
               },
               {
-                "path": "http://egov-workflow-v2.egov:8080/egov-workflow-v2/egov-wf/process/_search",
+                "path": "http://localhost:8082/egov-workflow-v2/egov-wf/process/_search",
                 "queryParam": "tenantId=$.tenantId,businessIds=$.applicationNo,history=true",
                 "apiRequest": null,
                 "responseMapping": [
@@ -1102,7 +1333,7 @@
                 ]
               },
               {
-                "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
+                "path": "http://localhost:8088/egov-mdms-service/v1/_get",
                 "queryParam": "moduleName=tenant&masterName=tenants&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}')%5D",
                 "apiRequest": null,
                 "responseMapping": [
