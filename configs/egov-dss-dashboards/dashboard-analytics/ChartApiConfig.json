@@ -11809,7 +11809,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ward\" : \"ward.keyword\"}",
         "indexName": "ws-national-dashboard-monthly",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"State\":{\"terms\":{\"field\":\"state.keyword\",\"size\":1000},\"aggs\":{\"Total_Transactions\":{\"sum\":{\"field\":\"transactions\"}},\"Total_Connections\":{\"sum\":{\"field\":\"connectionsCreatedForConnectionType\"}},\"Ws_Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"State\":{\"terms\":{\"field\":\"state\",\"size\":1000},\"aggs\":{\"Total_Transactions\":{\"sum\":{\"field\":\"transactions\"}},\"Total_Connections\":{\"sum\":{\"field\":\"connectionsCreatedForConnectionType\"}},\"Ws_Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}"
       }
     ],
     "filterKeys": [
@@ -12051,7 +12051,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ward\" : \"ward.keyword\"}",
         "indexName": "ws-national-dashboard-monthly",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"State \":{\"terms\":{\"field\":\"state.keyword\",\"size\":1000},\"aggs\":{\"Interest\":{\"filter\":{\"terms\":{\"taxHeads.keyword\":[\"INTEREST\"]}},\"aggs\":{\"amount\":{\"sum\":{\"field\":\"todaysCollectionForTaxHeads\"}}}},\"Late_Charges\":{\"filter\":{\"terms\":{\"taxHeads.keyword\":[\"LATE.CHARGES\"]}},\"aggs\":{\"amount\":{\"sum\":{\"field\":\"todaysCollectionForTaxHeads\"}}}},\"Arrear_Charges\":{\"filter\":{\"terms\":{\"taxHeads.keyword\":[\"ARREAR.CHARGES\"]}},\"aggs\":{\"amount\":{\"sum\":{\"field\":\"todaysCollectionForTaxHeads\"}}}},\"Advance\":{\"filter\":{\"terms\":{\"taxHeads.keyword\":[\"ADVANCE\"]}},\"aggs\":{\"amount\":{\"sum\":{\"field\":\"todaysCollectionForTaxHeads\"}}}},\"Current_Charges\":{\"filter\":{\"terms\":{\"taxHeads.keyword\":[\"CURRENT.CHARGES\"]}},\"aggs\":{\"amount\":{\"sum\":{\"field\":\"todaysCollectionForTaxHeads\"}}}},\"Ws_Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForTaxHeads\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"State \":{\"terms\":{\"field\":\"state\",\"size\":1000},\"aggs\":{\"Interest\":{\"filter\":{\"terms\":{\"taxHeads.keyword\":[\"INTEREST\"]}},\"aggs\":{\"amount\":{\"sum\":{\"field\":\"todaysCollectionForTaxHeads\"}}}},\"Late_Charges\":{\"filter\":{\"terms\":{\"taxHeads.keyword\":[\"LATE.CHARGES\"]}},\"aggs\":{\"amount\":{\"sum\":{\"field\":\"todaysCollectionForTaxHeads\"}}}},\"Arrear_Charges\":{\"filter\":{\"terms\":{\"taxHeads.keyword\":[\"ARREAR.CHARGES\"]}},\"aggs\":{\"amount\":{\"sum\":{\"field\":\"todaysCollectionForTaxHeads\"}}}},\"Advance\":{\"filter\":{\"terms\":{\"taxHeads.keyword\":[\"ADVANCE\"]}},\"aggs\":{\"amount\":{\"sum\":{\"field\":\"todaysCollectionForTaxHeads\"}}}},\"Current_Charges\":{\"filter\":{\"terms\":{\"taxHeads.keyword\":[\"CURRENT.CHARGES\"]}},\"aggs\":{\"amount\":{\"sum\":{\"field\":\"todaysCollectionForTaxHeads\"}}}},\"Ws_Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForTaxHeads\"}}}}}}}}"
       }
     ],
     "isMdmsEnabled": false,
@@ -12400,7 +12400,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
         "indexName": "ws-national-dashboard-monthly",
-        "aggrQuery": "{\"aggs\":{\"Water Connections\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Water\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"connectionType.keyword\":[\"WATER.NONMETERED\",\"WATER.METERED\"]}}]}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"connectionsCreatedForConnectionType\"}}}}}},\"Sewerage Connections\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sewerage\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"connectionType.keyword\":[\"SEWERAGE\"]}}]}},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"connectionsCreatedForConnectionType\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"Water Connections\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"month\"},\"aggs\":{\"Water\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"connectionType.keyword\":[\"WATER.NONMETERED\",\"WATER.METERED\"]}}]}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"connectionsCreatedForConnectionType\"}}}}}},\"Sewerage Connections\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"month\"},\"aggs\":{\"Sewerage\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"connectionType.keyword\":[\"SEWERAGE\"]}}]}},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"connectionsCreatedForConnectionType\"}}}}}}}}"
       }
     ],
     "translateTenantCode": false,
@@ -12495,7 +12495,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ward\" : \"ward.keyword\"}",
         "indexName": "ws-national-dashboard-monthly",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"State \":{\"terms\":{\"field\":\"state.keyword\",\"size\":1000},\"aggs\":{\"Pending_from_0_to_3_days\":{\"filter\":{\"terms\":{\"duration.keyword\":[\"0to3Days\"]}},\"aggs\":{\"Total\":{\"sum\":{\"field\":\"pendingConnectionsForDuration\"}}}},\"Pending_from_3_to_7_days\":{\"filter\":{\"terms\":{\"duration.keyword\":[\"3to7Days\"]}},\"aggs\":{\"Total\":{\"sum\":{\"field\":\"pendingConnectionsForDuration\"}}}},\"Pending_from_7_to_15_days\":{\"filter\":{\"terms\":{\"duration.keyword\":[\"7to15Days\"]}},\"aggs\":{\"Total\":{\"sum\":{\"field\":\"pendingConnectionsForDuration\"}}}},\"Pending_from_more_than_15_days\":{\"filter\":{\"terms\":{\"duration.keyword\":[\"MoreThan15Days\"]}},\"aggs\":{\"Total\":{\"sum\":{\"field\":\"pendingConnectionsForDuration\"}}}},\"Total Connection\":{\"sum\":{\"field\":\"pendingConnectionsForDuration\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"State \":{\"terms\":{\"field\":\"state\",\"size\":1000},\"aggs\":{\"Pending_from_0_to_3_days\":{\"filter\":{\"terms\":{\"duration.keyword\":[\"0to3Days\"]}},\"aggs\":{\"Total\":{\"sum\":{\"field\":\"pendingConnectionsForDuration\"}}}},\"Pending_from_3_to_7_days\":{\"filter\":{\"terms\":{\"duration.keyword\":[\"3to7Days\"]}},\"aggs\":{\"Total\":{\"sum\":{\"field\":\"pendingConnectionsForDuration\"}}}},\"Pending_from_7_to_15_days\":{\"filter\":{\"terms\":{\"duration.keyword\":[\"7to15Days\"]}},\"aggs\":{\"Total\":{\"sum\":{\"field\":\"pendingConnectionsForDuration\"}}}},\"Pending_from_more_than_15_days\":{\"filter\":{\"terms\":{\"duration.keyword\":[\"MoreThan15Days\"]}},\"aggs\":{\"Total\":{\"sum\":{\"field\":\"pendingConnectionsForDuration\"}}}},\"Total Connection\":{\"sum\":{\"field\":\"pendingConnectionsForDuration\"}}}}}}}}"
       }
     ],
     "isMdmsEnabled": false,
@@ -12634,7 +12634,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "mcollect-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"todaysDate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_term\":\"desc\"},\"size\":1},\"aggs\":{\"Todays Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}},\"lastUpdatedTime\":{\"terms\":{\"field\":\"lastModifiedTime\",\"order\":{\"_term\":\"desc\"},\"size\":1}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"todaysDate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_key\":\"desc\"},\"size\":1},\"aggs\":{\"Todays Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}},\"lastUpdatedTime\":{\"terms\":{\"field\":\"lastModifiedTime\",\"order\":{\"_key\":\"desc\"},\"size\":1}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -12937,7 +12937,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\"}",
         "dateRefField": "date",
         "indexName": "mcollect-national-dashboard-monthly",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"State name\":{\"terms\":{\"field\":\"state.keyword\"},  \"aggs\":{\"Total_Receipts\":{\"sum\":{\"field\":\"numberOfReceiptsForPaymentMode\"}},\"MC_TOTAL_COLLECTION\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}},\"Total_Challans\":{\"sum\":{\"field\":\"numberOfChallansForChallanStatus\"}} }}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"State name\":{\"terms\":{\"field\":\"state\"},  \"aggs\":{\"Total_Receipts\":{\"sum\":{\"field\":\"numberOfReceiptsForPaymentMode\"}},\"MC_TOTAL_COLLECTION\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}},\"Total_Challans\":{\"sum\":{\"field\":\"numberOfChallansForChallanStatus\"}} }}}}}}"
       }
     ],
     "isMdmsEnabled": false,
@@ -16624,7 +16624,7 @@
         "requestQueryMap": "{\"ward\" : \"ward.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "pgr-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"ulb.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Department\":{\"terms\":{\"field\":\"department.keyword\"},\"aggs\":{\"Total_Closed_Complaints\":{\"sum\":{\"field\":\"todaysClosedComplaintsForDepartment\"}},\"Total_Resolved_Complaints\":{\"sum\":{\"field\":\"todaysResolvedComplaintsForDepartment\"}},\"Open_Complaints\":{\"sum\":{\"field\":\"todaysOpenComplaintsForDepartment\"}},\"Total_Complaints\":{\"sum\":{\"field\":\"todaysComplaintsForDepartment\"}},\"CompletionRate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_term\":\"desc\"},\"size\":1},\"aggs\":{\"rate\":{\"avg\":{\"field\":\"completionRateForDepartment\"}}}},\"Completion_Rate\":{\"avg_bucket\":{\"buckets_path\":\"CompletionRate.rate\"}},\"SLA\":{\"terms\":{\"field\":\"date\",\"order\":{\"_term\":\"desc\"},\"size\":1},\"aggs\":{\"slaAchievement\":{\"avg\":{\"field\":\"slaAchievementForDepartment\"}}}},\"SLA_Achieved\":{\"avg_bucket\":{\"buckets_path\":\"SLA.slaAchievement\"}},\"Assigned_Complaints\":{\"sum\":{\"field\":\"todaysAssignedComplaintsForDepartment\"}},\"Rejected_Complaints\":{\"sum\":{\"field\":\"todaysRejectedComplaintsForDepartment\"}},\"Reassigned_Complaints\":{\"sum\":{\"field\":\"todaysReassignedComplaintsForDepartment\"}},\"Reopened_Complaints\":{\"sum\":{\"field\":\"todaysReopenedComplaintsForDepartment\"}},\"Reassign_Requested\":{\"sum\":{\"field\":\"todaysReassignRequestedComplaintsForDepartment\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"ulb.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"State\":{\"terms\":{\"field\":\"state\",\"size\":500},\"aggs\":{\"Test\":{\"terms\":{\"field\":\"module\",\"size\":500},\"aggs\":{\"Closed_Complaints\":{\"sum\":{\"field\":\"todaysClosedComplaintsForDepartment\"}},\"Total_Complaints\":{\"sum\":{\"field\":\"todaysComplaintsForCategory\"}},\"Resolved_Complaints\":{\"sum\":{\"field\":\"todaysResolvedComplaintsForDepartment\"}}}},\"Total_Closed_Complaints\":{\"sum_bucket\":{\"buckets_path\":\"Test.Closed_Complaints\"}},\"Total Complaints\":{\"sum_bucket\":{\"buckets_path\":\"Test.Total_Complaints\"}},\"Total_Resolved_Complaints\":{\"sum_bucket\":{\"buckets_path\":\"Test.Resolved_Complaints\"}},\"Completion_Rate\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total Complaints\",\"com\":\"Total_Closed_Complaints\"},\"script\":\"params.com / params.att * 100\"}},\"SLA_Achieved\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total Complaints\",\"com\":\"Total_Resolved_Complaints\"},\"script\":\"params.com / params.att * 100\"}},\"Open_Complaints\":{\"sum\":{\"field\":\"todaysOpenComplaintsForDepartment\"}},\"Total_Complaints\":{\"sum\":{\"field\":\"todaysComplaintsForCategory\"}},\"Assigned_Complaints\":{\"sum\":{\"field\":\"todaysAssignedComplaintsForDepartment\"}},\"Rejected_Complaints\":{\"sum\":{\"field\":\"todaysRejectedComplaintsForDepartment\"}},\"Reassigned_Complaints\":{\"sum\":{\"field\":\"todaysReassignedComplaintsForDepartment\"}},\"Reopened_Complaints\":{\"sum\":{\"field\":\"todaysReopenedComplaintsForDepartment\"}},\"Reassign_Requested\":{\"sum\":{\"field\":\"todaysReassignRequestedComplaintsForDepartment\"}}}}}}}}"
       }
     ],
     "isMdmsEnabled": false,
@@ -20443,7 +20443,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "pgr-national-dashboard-monthly",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Completed Within SLA\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"todaysResolvedComplaintsForDepartment\"}}}},\"Total Applications\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"todaysComplaintsForCategory\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Completed Within SLA\":{\"terms\":{\"field\":\"state\"},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"todaysResolvedComplaintsForDepartment\"}}}},\"Total Applications\":{\"terms\":{\"field\":\"state\"},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"todaysComplaintsForCategory\"}}}}}}}}"
       }
     ],
     "chartType": "perform",
@@ -20469,7 +20469,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "pgr-national-dashboard-monthly",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Completed Within SLA\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"todaysResolvedComplaintsForDepartment\"}}}},\"Total Applications\":{\"terms\":{\"field\":\"state.keyword\"},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"todaysComplaintsForCategory\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Completed Within SLA\":{\"terms\":{\"field\":\"state\"},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"todaysResolvedComplaintsForDepartment\"}}}},\"Total Applications\":{\"terms\":{\"field\":\"state\"},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"todaysComplaintsForCategory\"}}}}}}}}"
       }
     ],
     "chartType": "perform",
@@ -22441,14 +22441,14 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "indexName": "ws-national-dashboard-monthly",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state\",\"size\": \"50\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}"
       },
       {
         "module": "WS",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "ws-national-dashboard-monthly",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection1\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Count\":\"asc\"}},\"aggs\":{\"Count\":{\"cardinality\":{\"field\":\"state.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection1\":{\"terms\":{\"field\":\"state\",\"size\": \"50\",\"order\":{\"Count\":\"desc\"}},\"aggs\":{\"Count\":{\"cardinality\":{\"field\":\"state\"}}}}}}}}"
       }
     ],
     "chartType": "perform",
@@ -22475,14 +22475,14 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "indexName": "ws-national-dashboard-monthly",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state\",\"size\": \"50\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}"
       },
       {
         "module": "WS",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "ws-national-dashboard-monthly",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection1\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Count\":\"desc\"}},\"aggs\":{\"Count\":{\"cardinality\":{\"field\":\"state.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection1\":{\"terms\":{\"field\":\"state\",\"size\": \"50\",\"order\":{\"Count\":\"desc\"}},\"aggs\":{\"Count\":{\"cardinality\":{\"field\":\"state\"}}}}}}}}"
       }
     ],
     "chartType": "perform",
@@ -23228,14 +23228,14 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "ws-national-dashboard-monthly",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"slaCompliance\"}}]}},\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"slaCompliance\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"slaCompliance\"}}]}},\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"terms\":{\"field\":\"state\",\"size\": \"50\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"slaCompliance\"}}}}}}}}"
       },
       {
         "module": "WS",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "ws-national-dashboard-monthly",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Cardina1\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"cardinality\":{\"field\":\"state.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Cardina1\":{\"terms\":{\"field\":\"state\",\"size\": \"50\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"cardinality\":{\"field\":\"state\"}}}}}}}}"
       }
     ],
     "chartType": "perform",
@@ -23262,14 +23262,14 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "ws-national-dashboard-monthly",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"slaCompliance\"}}]}},\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"slaCompliance\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"slaCompliance\"}}]}},\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"terms\":{\"field\":\"state\",\"size\": \"50\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"avg\":{\"field\":\"slaCompliance\"}}}}}}}}"
       },
       {
         "module": "WS",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "ws-national-dashboard-monthly",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Cardina1\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"cardinality\":{\"field\":\"state.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Cardina1\":{\"terms\":{\"field\":\"state\",\"size\": \"50\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"cardinality\":{\"field\":\"state\"}}}}}}}}"
       }
     ],
     "chartType": "perform",
