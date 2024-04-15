@@ -16140,7 +16140,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "pgr-national-dashboard-monthly",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"ulb.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"State\":{\"terms\":{\"field\":\"module.keyword\"},\"aggs\":{\"Test\":{\"terms\":{\"field\":\"module.keyword\"},\"aggs\":{\"Resolved_Complaints\":{\"sum\":{\"field\":\"todaysResolvedComplaintsForDepartment\"}},\"Total_Complaints\":{\"sum\":{\"field\":\"todaysComplaintsForCategory\"}}}},\"Resolved Complaints\":{\"sum_bucket\":{\"buckets_path\":\"Test.Resolved_Complaints\"}},\"Total Complaints\":{\"sum_bucket\":{\"buckets_path\":\"Test.Total_Complaints\"}},\"slaAchived\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total Complaints\",\"com\":\"Resolved Complaints\"},\"script\":\"params.com / params.att * 100\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"ulb\":\"pg.testing\"}}]}},\"aggs\":{\"State\":{\"terms\":{\"field\":\"module\"},\"aggs\":{\"Test\":{\"terms\":{\"field\":\"module\"},\"aggs\":{\"Resolved_Complaints\":{\"sum\":{\"field\":\"todaysResolvedComplaintsForDepartment\"}},\"Total_Complaints\":{\"sum\":{\"field\":\"todaysComplaintsForCategory\"}}}},\"Resolved Complaints\":{\"sum_bucket\":{\"buckets_path\":\"Test.Resolved_Complaints\"}},\"Total Complaints\":{\"sum_bucket\":{\"buckets_path\":\"Test.Total_Complaints\"}},\"slaAchived\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total Complaints\",\"com\":\"Resolved Complaints\"},\"script\":\"params.com / params.att * 100\"}}}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -16172,7 +16172,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "pgr-national-dashboard-monthly",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"ulb.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"State\":{\"terms\":{\"field\":\"module.keyword\"},\"aggs\":{\"Test\":{\"terms\":{\"field\":\"module.keyword\"},\"aggs\":{\"Closed_Complaints\":{\"sum\":{\"field\":\"todaysClosedComplaintsForDepartment\"}},\"Total_Complaints\":{\"sum\":{\"field\":\"todaysComplaintsForCategory\"}}}},\"Closed Complaints\":{\"sum_bucket\":{\"buckets_path\":\"Test.Closed_Complaints\"}},\"Total Complaints\":{\"sum_bucket\":{\"buckets_path\":\"Test.Total_Complaints\"}},\"Completion Rate\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total Complaints\",\"com\":\"Closed Complaints\"},\"script\":\"params.com / params.att * 100\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"ulb\":\"pg.testing\"}}]}},\"aggs\":{\"State\":{\"terms\":{\"field\":\"module\"},\"aggs\":{\"Test\":{\"terms\":{\"field\":\"module\"},\"aggs\":{\"Closed_Complaints\":{\"sum\":{\"field\":\"todaysClosedComplaintsForDepartment\"}},\"Total_Complaints\":{\"sum\":{\"field\":\"todaysComplaintsForCategory\"}}}},\"Closed Complaints\":{\"sum_bucket\":{\"buckets_path\":\"Test.Closed_Complaints\"}},\"Total Complaints\":{\"sum_bucket\":{\"buckets_path\":\"Test.Total_Complaints\"}},\"Completion Rate\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total Complaints\",\"com\":\"Closed Complaints\"},\"script\":\"params.com / params.att * 100\"}}}}}}}}"
       }
     ],
     "chartType": "metric",
