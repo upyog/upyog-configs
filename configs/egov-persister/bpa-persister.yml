@@ -227,3 +227,24 @@ serviceMaps:
           - jsonPath: $.BPA.approvalDate
 
           - jsonPath: $.BPA.id
+ - version: 1.0
+   description: Updates bpa status for auto escalate
+   fromTopic: bpa-auto-escalation
+   isTransaction: true
+   queryMaps:
+
+       - query: UPDATE eg_bpa_buildingplan SET status=?, additionaldetails=?, lastmodifiedby=?, lastmodifiedtime=? WHERE applicationno=?;
+         basePath: BPA
+         jsonMaps:
+
+          - jsonPath: $.BPA.status
+
+          - jsonPath: $.BPA.additionalDetails
+            type: JSON
+            dbType: JSONB
+
+          - jsonPath: $.BPA.auditDetails.lastModifiedBy
+
+          - jsonPath: $.BPA.auditDetails.lastModifiedTime
+
+          - jsonPath: $.BPA.applicationno
