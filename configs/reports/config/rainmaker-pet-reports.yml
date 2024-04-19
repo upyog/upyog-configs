@@ -1,0 +1,94 @@
+---
+ReportDefinitions:
+- reportName: PetReport
+  decryptionPathId: PetReport
+  summary: Fetches pet data based on provided search parameters
+  version: 1.0.0
+  moduleName: rainmaker-pet
+  sourceColumns:
+  - name: ptenantId
+    label: ULB
+    type: string
+    source: pet
+    total: false
+  - name: papplicationNumber
+    label: ApplicationNumber
+    type: string
+    source: pet
+    total: false
+  - name: papplicantName
+    label: ApplicantName
+    type: string
+    source: pet
+    total: false
+  - name: pemailId
+    label: EmailId
+    type: string
+    source: pet
+    total: false
+  - name: pmobilenumber
+    label: Mobilenumber
+    type: stringarray
+    source: pet
+    total: false
+  - name: ptpetName
+    label: PetName
+    type: string
+    source: pet
+    total: false
+  - name: ptpetType
+    label: PetType
+    type: string
+    source: pet
+    total: false
+  - name: ptbreedType
+    label: BreedType
+    type: string
+    source: pet
+    total: false
+  - name: ptpetAge
+    label: PetAge
+    type: string
+    source: pet
+    total: false
+  searchParams:
+  - name: ptenantid
+    label: ULB
+    type: epoch
+    source: pet
+    isMandatory: false
+    searchClause: AND ptr.tenantid = $ptenantid
+  - name: fromDate
+    label: From Date
+    type: epoch
+    source: pet
+    isMandatory: true
+    searchClause: AND auditDetails.createdTime >= $fromDate
+  - name: toDate
+    label: To Date
+    type: epoch
+    source: pet
+    isMandatory: true
+    searchClause: AND auditDetails.createdTime  <= $toDate 
+  - name: locality
+    label: Locality
+    type: singlevaluelist
+    pattern: http://egov-location.egov:8080/egov-location/location/v11/boundarys/_search?hierarchyTypeCode=ADMIN&boundaryType=Locality&tenantId=$tenantid|$.TenantBoundary[0].boundary.*.code|$.TenantBoundary[0].boundary.*.code
+    source: pet
+    wrapper: true
+    isMandatory: false
+    localisationPrefix: TENANTS_MOHALLA_
+    isLocalisationRequired: true
+    searchClause: AND locality in ($locality)
+  - name: status
+    label: Status
+    type: singlevaluelist
+    source: pet
+    isMandatory: false
+    searchClause: AND status = stat.applicationstatus 
+    pattern: 'list://REGISTRATIONCOMPLETED:REGISTRATIONCOMPLETED,REJECTED:REJECTED'
+
+  query: |
+    select ptr.tenantid as ptenantid, ptr.applicationnumber as papplicationnumber,to_char(to_timestamp(ptr.createdtime/1000),'DD/MM/YYYY') as pcreatedtime, ptr.applicantname as papplicantname, ptr.mobilenumber as pmobilenumber, ptr.emailid as pemailid, pet.petname as ptpetname, pet.pettype as ptpettype, pet.breedtype as ptbreedtype, pet.petage as ptpetage from eg_ptr_registration ptr left join eg_ptr_petdetails pet on ptr.id = pet.petdetailsid left join (select pi.businessid, max(pi.lastmodifiedtime) as lastmodifiedtime from eg_wf_processinstance_v2 pi left join eg_wf_state_v2 stat on (stat.uuid = pi.status) where pi.businessservice in ('ptr') and stat.applicationstatus = 'REGISTRATIONCOMPLETED' group by pi.businessid) pidso on (pidso.businessid = ptr.applicationnumber) where pidso.businessid is not null order by ptr.applicationnumber;
+  
+  orderby: ORDER BY papplicationNumber desc
