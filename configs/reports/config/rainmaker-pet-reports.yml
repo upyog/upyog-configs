@@ -1,7 +1,6 @@
 ---
 ReportDefinitions:
 - reportName: PetReport
-  decryptionPathId: PetReport
   summary: Fetches pet data based on provided search parameters
   version: 1.0.0
   moduleName: rainmaker-pet
@@ -89,13 +88,13 @@ ReportDefinitions:
     type: epoch
     source: pet
     isMandatory: false
-    searchClause: AND auditDetails.createdTime >= $fromDate
+    searchClause: AND ptr.createdTime >= $fromDate
   - name: toDate
     label: To Date
     type: epoch
     source: pet
     isMandatory: false
-    searchClause: AND auditDetails.createdTime  <= $toDate 
+    searchClause: AND ptr.createdTime  <= $toDate 
   - name: status
     label: Status
     type: singlevaluelist
