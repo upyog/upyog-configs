@@ -10966,7 +10966,7 @@
         "module": "FIRENOC",
         "dateRefField": "date",
         "requestQueryMap": "{\"ward\" : \"ward.keyword\",\"ulb\" : \"ulb.keyword\", \"state\" : \"state.keyword\"}",
-        "indexName": "firenoc-national-dashboard",
+        "indexName": "firenoc-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Actual Nocs issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"applicationType.keyword\":\"ACTUAL\"}}]}},\"aggs\":{\"Noc's issued\":{\"terms\":{\"field\":\"state\",\"size\":\"1000\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysApplicationsForApplicationType\"}}}}}}}}}}"
       }
     ],
