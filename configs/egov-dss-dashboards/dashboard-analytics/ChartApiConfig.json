@@ -12968,8 +12968,8 @@
         "module": "COMMON",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
-        "indexName": "mcollect-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Tenant\":{\"terms\":{\"field\":\"ulb.keyword\",\"size\":\"1000\"},  \"aggs\":{\"Total_Receipts\":{\"sum\":{\"field\":\"numberOfReceiptsForPaymentMode\"}},\"MC_TOTAL_COLLECTION\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}},\"Total_Challans\":{\"sum\":{\"field\":\"numberOfChallansForChallanStatus\"}} }}}}}}"
+        "indexName": "mcollect-national-dashboard-*",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Tenant\":{\"terms\":{\"field\":\"ulb\",\"size\":\"1000\"},  \"aggs\":{\"Total_Receipts\":{\"sum\":{\"field\":\"numberOfReceiptsForPaymentMode\"}},\"MC_TOTAL_COLLECTION\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}},\"Total_Challans\":{\"sum\":{\"field\":\"numberOfChallansForChallanStatus\"}} }}}}}}"
       }
     ],
     "isMdmsEnabled": false,
@@ -13081,7 +13081,7 @@
         "module": "COMMON",
         "requestQueryMap": "{\"departmentId\" : \"category.keyword\" , \"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\" , \"ward\" : \"ward.keyword\" }",
         "dateRefField": "date",
-        "indexName": "mcollect-national-dashboard",
+        "indexName": "mcollect-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Department\":{\"terms\":{\"field\":\"category.keyword\"},  \"aggs\":{\"Total_Receipts\":{\"sum\":{\"field\":\"numberOfReceiptsForCategory\"}},\"MC_TOTAL_COLLECTION\":{\"sum\":{\"field\":\"todaysCollectionForCategory\"}}, \"Total_Challans\":{\"sum\":{\"field\":\"numberOfChallansForCategory\"}}}}}}}}"
       }
     ],
