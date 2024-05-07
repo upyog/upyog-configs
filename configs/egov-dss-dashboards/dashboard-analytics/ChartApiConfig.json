@@ -12968,7 +12968,7 @@
         "module": "COMMON",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
-        "indexName": "mcollect-national-dashboard-*",
+        "indexName": "mcollect-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Tenant\":{\"terms\":{\"field\":\"ulb\",\"size\":\"1000\"},  \"aggs\":{\"Total_Receipts\":{\"sum\":{\"field\":\"numberOfReceiptsForPaymentMode\"}},\"MC_TOTAL_COLLECTION\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}},\"Total_Challans\":{\"sum\":{\"field\":\"numberOfChallansForChallanStatus\"}} }}}}}}"
       }
     ],
