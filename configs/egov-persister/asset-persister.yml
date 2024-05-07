@@ -1,0 +1,221 @@
+serviceMaps:
+  serviceName: asset-services
+  mappings:
+    - version: 1.0
+      description: Persists asset details in eg_asset_assetdetails table
+      fromTopic: save-asset-assetdetails
+      isTransaction: true
+      queryMaps:
+        - query: INSERT INTO eg_asset_assetdetails (
+                        id,
+                        tenantId, 
+                        bookRefNo, 
+                        name, 
+                        description, 
+                        classification, 
+                        parentCategory, 
+                        department, 
+                        applicationNo, 
+                        approvalNo, 
+                        approvalDate, 
+                        applicationDate, 
+                        status, 
+                        action, 
+                        businessService, 
+                        additionalDetails,
+                        createdBy, 
+                        lastmodifiedBy, 
+                        createdTime, 
+                        lastmodifiedTime,
+                        accountId
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: Asset
+          jsonMaps:
+            - jsonPath: $.Asset.id
+            - jsonPath: $.Asset.tenantId
+            - jsonPath: $.Asset.assetBookRefNo
+            - jsonPath: $.Asset.assetName
+            - jsonPath: $.Asset.description
+            - jsonPath: $.Asset.assetClassification
+            - jsonPath: $.Asset.assetParentCategory
+            - jsonPath: $.Asset.department
+            - jsonPath: $.Asset.applicationNo
+            - jsonPath: $.Asset.approvalNo
+            - jsonPath: $.Asset.approvalDate
+            - jsonPath: $.Asset.applicationDate
+            - jsonPath: $.Asset.status
+            - jsonPath: $.Asset.action
+            - jsonPath: $.Asset.businessService
+            - jsonPath: $.Asset.additionalDetails
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.Asset.auditDetails.createdBy
+            - jsonPath: $.Asset.auditDetails.lastModifiedBy
+            - jsonPath: $.Asset.auditDetails.createdTime
+            - jsonPath: $.Asset.auditDetails.lastModifiedTime
+            - jsonPath: $.Asset.accountId
+
+
+        - query: INSERT INTO eg_asset_document(documentId, documenttype, fileStoreId, assetid, documentuid, docDetails, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: Asset.documents.*
+          jsonMaps:
+            - jsonPath: $.Asset.documents.*.documentId
+            - jsonPath: $.Asset.documents.*.documentType
+            - jsonPath: $.Asset.documents.*.fileStoreId
+            - jsonPath: $.Asset.id
+            - jsonPath: $.Asset.documents.*.documentUid
+            - jsonPath: $.Asset.documents.*.docDetails
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.Asset.auditDetails.createdBy
+            - jsonPath: $.Asset.auditDetails.lastModifiedBy
+            - jsonPath: $.Asset.auditDetails.createdTime
+            - jsonPath: $.Asset.auditDetails.lastModifiedTime
+
+        - query: INSERT INTO eg_asset_addressDetails (
+                  addressId,
+                  tenantId,
+                  doorNo,
+                  latitude,
+                  longitude,
+                  addressNumber,
+                  type,
+                  addressLine1,
+                  addressLine2,
+                  landmark,
+                  city,
+                  pincode,
+                  detail,
+                  buildingName,
+                  street,
+                  locality_code,
+                  locality_name,
+                  locality_label,
+                  locality_latitude,
+                  locality_longitude,
+                  locality_materializedPath,
+                  asset_id
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: Asset.addressDetails
+          jsonMaps:
+            - jsonPath: $.Asset.addressDetails.addressId
+            - jsonPath: $.Asset.tenantId
+            - jsonPath: $.Asset.addressDetails.doorNo
+            - jsonPath: $.Asset.addressDetails.latitude
+            - jsonPath: $.Asset.addressDetails.longitude
+            - jsonPath: $.Asset.addressDetails.addressNumber
+            - jsonPath: $.Asset.addressDetails.type
+            - jsonPath: $.Asset.addressDetails.addressLine1
+            - jsonPath: $.Asset.addressDetails.addressLine2
+            - jsonPath: $.Asset.addressDetails.landmark
+            - jsonPath: $.Asset.addressDetails.city
+            - jsonPath: $.Asset.addressDetails.pincode
+            - jsonPath: $.Asset.addressDetails.detail
+            - jsonPath: $.Asset.addressDetails.buildingName
+            - jsonPath: $.Asset.addressDetails.street
+            - jsonPath: $.Asset.addressDetails.locality.code
+            - jsonPath: $.Asset.addressDetails.locality.name
+            - jsonPath: $.Asset.addressDetails.locality.label
+            - jsonPath: $.Asset.addressDetails.locality.latitude
+            - jsonPath: $.Asset.addressDetails.locality.longitude
+            - jsonPath: $.Asset.addressDetails.locality.materializedPath
+            - jsonPath: $.Asset.id
+
+        - query: INSERT INTO eg_asset_auditdetails SELECT * FROM eg_asset_assetdetails WHERE id = ?;
+          basePath: Asset
+          jsonMaps:
+            - jsonPath: $.Asset.id
+
+
+    - version: 1.0
+      description: update assetdetails details in EG_Asset_assetdetails table
+      fromTopic: update-asset-assetdetails
+      isTransaction: true
+      queryMaps:
+        - query: UPDATE eg_asset_assetdetails SET applicationno = ?, approvalNo = ?, applicationDate = ?, status = ?, additionaldetails = ?, lastmodifiedby = ?, lastmodifiedtime = ?, approvalDate = ? WHERE id = ?;
+          basePath: Asset
+          jsonMaps:
+            - jsonPath: $.Asset.applicationNo
+            - jsonPath: $.Asset.approvalNo
+            - jsonPath: $.Asset.applicationDate
+            - jsonPath: $.Asset.status
+            - jsonPath: $.Asset.additionalDetails
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.Asset.auditDetails.lastModifiedBy
+            - jsonPath: $.Asset.auditDetails.lastModifiedTime
+            - jsonPath: $.Asset.approvalDate
+            - jsonPath: $.Asset.id
+
+        - query: INSERT INTO eg_asset_auditdetails SELECT * FROM eg_asset_assetdetails WHERE id = ?;
+          basePath: Asset
+          jsonMaps:
+            - jsonPath: $.Asset.id
+
+        - query: INSERT INTO eg_asset_document(documentid, documenttype, filestoreid, assetid, documentuid, docdetails, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (documentid) DO UPDATE SET documenttype =?,  fileStoreId =?, docDetails=?, lastmodifiedby =?, lastmodifiedtime =?;
+          basePath: Asset.documents.*
+          jsonMaps:
+            - jsonPath: $.Asset.documents.*.documentId
+            - jsonPath: $.Asset.documents.*.documentType
+            - jsonPath: $.Asset.documents.*.fileStoreId
+            - jsonPath: $.Asset.id
+            - jsonPath: $.Asset.documents.*.documentUid
+            - jsonPath: $.Asset.documents.*.docDetails
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.Asset.auditDetails.createdBy
+            - jsonPath: $.Asset.auditDetails.lastModifiedBy
+            - jsonPath: $.Asset.auditDetails.createdTime
+            - jsonPath: $.Asset.auditDetails.lastModifiedTime
+
+            - jsonPath: $.Asset.documents.*.documentType
+            - jsonPath: $.Asset.documents.*.fileStoreId
+            - jsonPath: $.Asset.documents.*.docDetails
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.Asset.auditDetails.lastModifiedBy
+            - jsonPath: $.Asset.auditDetails.lastModifiedTime
+
+    - version: 1.0
+      description: update assetdetails details in EG_Asset_assetdetails table
+      fromTopic: update-asset-workflow
+      isTransaction: true
+      queryMaps:
+        - query: INSERT INTO eg_asset_document(documentid, documenttype, filestoreid, assetdetailsid, documentuid, docDetails, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET documenttype = ?, fileStoreId = ?, additionalDetails = ?, lastmodifiedby = ?, lastmodifiedtime = ?;
+          basePath: Asset.documents.*
+          jsonMaps:
+            - jsonPath: $.Asset.documents.*.documentId
+            - jsonPath: $.Asset.documents.*.documentType
+            - jsonPath: $.Asset.documents.*.fileStoreId
+            - jsonPath: $.Asset.id
+            - jsonPath: $.Asset.documents.*.documentUid
+            - jsonPath: $.Asset.documents.*.docDetails
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.Asset.auditDetails.createdBy
+            - jsonPath: $.Asset.auditDetails.lastModifiedBy
+            - jsonPath: $.Asset.auditDetails.createdTime
+            - jsonPath: $.Asset.auditDetails.lastModifiedTime
+              type: JSON
+              dbType: JSONB
+
+        - query: INSERT INTO eg_asset_auditdetails SELECT * FROM eg_Asset_buildingplan WHERE id = ?;
+          basePath: Asset
+          jsonMaps:
+            - jsonPath: $.Asset.id
+
+        - query: UPDATE eg_Asset_assetdetails SET applicationno = ?, approvalNo = ?, applicationDate = ?, status = ?, additionaldetails = ?, lastmodifiedby = ?, lastmodifiedtime = ?, approvalDate = ? WHERE id = ?;
+          basePath: Asset
+          jsonMaps:
+            - jsonPath: $.Asset.applicationNo
+            - jsonPath: $.Asset.approvalNo
+            - jsonPath: $.Asset.applicationDate
+            - jsonPath: $.Asset.status
+            - jsonPath: $.Asset.additionalDetails
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.Asset.auditDetails.lastModifiedBy
+            - jsonPath: $.Asset.auditDetails.lastModifiedTime
+            - jsonPath: $.Asset.approvalDate
+            - jsonPath: $.Asset.id
+        
