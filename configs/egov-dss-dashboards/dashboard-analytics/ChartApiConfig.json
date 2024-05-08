@@ -16287,7 +16287,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "pgr-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.fsm.tenantid.keyword\":\"pb.testing\"}}]}},\"aggs\":{\"state\":{\"terms\":{\"field\":\"state\"},\"aggs\":{\"intermediateAggrULB\":{\"terms\":{\"field\":\"ulb\"},\"aggs\":{\"days\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"month\"},\"aggs\":{\"citizen\":{\"sum\":{\"field\":\"uniqueCitizens\"}}}},\"ulbUniqueCitizens\":{\"sum_bucket\":{\"buckets_path\":\"days.citizen\"}}}},\"stateUniqueCitizens\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrULB.ulbUniqueCitizens\"}}}},\"Unique Citizens\":{\"sum_bucket\":{\"buckets_path\":\"state.stateUniqueCitizens\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.fsm.tenantid.keyword\":\"pb.testing\"}}]}},\"aggs\":{\"Total Citizens\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"month\"},\"aggs\":{\"state\":{\"terms\":{\"field\":\"state\",\"size\":1000},\"aggs\":{\"intermediateAggrULB\":{\"terms\":{\"field\":\"ulb\",\"size\":1000},\"aggs\":{\"days\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"citizen\":{\"sum\":{\"field\":\"uniqueCitizens\"}}}},\"ulbUniqueCitizens\":{\"sum_bucket\":{\"buckets_path\":\"days.citizen\"}}}},\"stateUniqueCitizens\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrULB.ulbUniqueCitizens\"}}}},\"Unique Citizens\":{\"sum_bucket\":{\"buckets_path\":\"state.stateUniqueCitizens\"}}}}}}}}"
       }
     ],
     "chartType": "line",
