@@ -20729,7 +20729,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "pt-national-dashboard-*",
-        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"StipulatedDays\"}}],\"must_not\":[{\"match\":{\"StipulatedDays\":0}}]}},\"aggs\":{\"Per_Day_Averages\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"day\",\"format\":\"dd-MM-yyyy\",\"min_doc_count\":1},\"aggs\":{\"Stipulated_Days_for_PT\":{\"avg\":{\"field\":\"StipulatedDays\"}}}},\"Overall_Average\":{\"avg_bucket\":{\"buckets_path\":\"Per_Day_Averages>Stipulated_Days_for_PT\"}}}}"
+        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"StipulatedDays\"}}],\"must_not\":[{\"match\":{\"StipulatedDays\":0}}]}},\"aggs\":{\"Per_Day_Averages\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"day\",\"format\":\"dd-MM-yyyy\",\"min_doc_count\":1},\"aggs\":{\"Stipulated_Days_for_PT\":{\"avg\":{\"field\":\"StipulatedDays\"}}}},\"Overall_Average\":{\"avg_bucket\":{\"buckets_path\":\"Per_Day_Averages>Stipulated_Days_for_PT\"}}}}"
       }
     ],
     "chartType": "metric",
