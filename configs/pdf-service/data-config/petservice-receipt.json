@@ -55,7 +55,7 @@
                 },
                 "localisation": {
                   "required": true,
-                  "prefix": "MODULE",
+                  "prefix": "",
                   "module": "rainmaker-common"
                 }
               },
@@ -179,11 +179,12 @@
               {
                 "variable": "consumer_id",
                 "value": {
-                  "path": "$.paymentDetails[0].businessService"
+                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_CONSUMER_ID"
                 },
+                "type": "label",
                 "localisation": {
                   "required": true,
-                  "prefix": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_CONSUMER_ID",
+                  "prefix": null,
                   "module": "rainmaker-common"
                 }
               },
@@ -247,18 +248,7 @@
                   "module": "rainmaker-common"
                 }
               },
-              {
-                "variable": "billing_period",
-                "value": {
-                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_BILLING_PERIOD"
-                },
-                "type": "label",
-                "localisation": {
-                  "required": true,
-                  "prefix": null,
-                  "module": "rainmaker-common"
-                }
-              },
+
               {
                 "variable": "paid_amount",
                 "value": {
@@ -445,7 +435,7 @@
           {
             "externalAPI": [
               {
-                "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
+                "path": "http://localhost:8094/egov-mdms-service/v1/_get",
                 "queryParam": "moduleName=tenant&masterName=tenants&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}')%5D",
                 "apiRequest": null,
                 "responseMapping": [
@@ -482,7 +472,7 @@
                 ]
               },
               {
-                "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
+                "path": "http://localhost:8094/egov-mdms-service/v1/_get",
                 "queryParam": "moduleName=tenant&masterName=footer&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}' %26%26 @.service=='{$.paymentDetails[0].businessService}')%5D",
                 "apiRequest": null,
                 "responseMapping": [
@@ -514,7 +504,7 @@
             "qrcodeConfig": [
               {
                 "variable": "qrcodeimage",
-                "value": "/digit-ui/citizen/payment/verification?tenantId={{tenantid}}&receiptNumber={{receiptNo}}"
+                "value": "{{website}}/digit-ui/citizen/payment/verification?tenantId={{tenantid}}&receiptNumber={{receiptNo}}"
               }
             ]
           }

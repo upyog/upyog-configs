@@ -8,13 +8,14 @@
       {
         "style": "noc-head",
         "table": {
-          "widths": [60, "*", 120],
+          "widths": [85, "*", 120],
           "body": [
             [
               {
                 "image": "{{logoImage}}",
-                "width": 50,
-                "height": 61.25
+                "width": 80,
+                "height": 40,
+                "margin": [5, 10, 0, 0]
               },
               {
                 "stack": [
@@ -28,7 +29,7 @@
                   }
                 ],
                 "alignment": "left",
-                "margin": [0, 10, 0, 0]
+                "margin": [5, 5, 0, 0]
               },
               {
                 "stack": [
@@ -36,13 +37,10 @@
                     "text": "{{address}}"
                   },
                   {
-                    "text": "{{phoneNumber}}"
-                  },
-                  {
                     "text": "{{website}}"
                   },
                   {
-                    "text": "{{email}}"
+                    "text": "{{email}}, {{phoneNumber}}"
                   }
                 ],
                 "alignment": "right",
@@ -57,7 +55,7 @@
       {
         "style": "noc-table",
         "table": {
-          "widths": ["25%", "25%", "25%", "25%"],
+          "widths": ["22%", "28%", "22%", "28%"],
           "body": [
             [
               {
@@ -72,7 +70,7 @@
                 "font": "Roboto"
               },
               {
-                "text": "{{consumer_id}}",
+                "text": "Pet {{consumer_id}}",
                 "border": [false, true, false, false],
                 "style": "receipt-table-value"
               },
@@ -134,7 +132,7 @@
       {
         "style": "next-noc-table",
         "table": {
-          "widths": ["25%", "25%", "25%", "25%"],
+          "widths": ["22%", "28%", "22%", "28%"],
           "body": [
             [
               {
@@ -148,57 +146,13 @@
                 "style": "receipt-table"
               },
               {
-                "text": "{{billing_period}}",
+                "text": "{{paid_amount}}",
                 "border": [false, true, false, false],
                 "style": "receipt-table-value"
               },
               {
-                "text": "-",
-                "border": [false, true, true, false],
-                "style": "receipt-table"
-              }
-            ],
-            [
-              {
-                "text": "{{total_bill_amount}}",
-                "border": [true, false, false, false],
-                "style": "receipt-table-value"
-              },
-              {
-                "text": "-",
-                "border": [false, false, false, false],
-                "style": "receipt-table"
-              },
-              {
-                "text": "{{paid_amount}}",
-                "border": [false, false, false, false],
-                "style": "receipt-table-value"
-              },
-              {
                 "text": "₹ {{paidAmount}}",
-                "border": [false, false, true, false],
-                "style": "receipt-table"
-              }
-            ],
-            [
-              {
-                "text": "{{pending_amount}}",
-                "border": [true, false, false, false],
-                "style": "receipt-table-value"
-              },
-              {
-                "text": "-",
-                "border": [false, false, false, false],
-                "style": "receipt-table"
-              },
-              {
-                "text": "{{excess_amount_paid}}",
-                "border": [false, false, false, false],
-                "style": "receipt-table-value"
-              },
-              {
-                "text": "-",
-                "border": [false, false, true, false],
+                "border": [false, true, true, false],
                 "style": "receipt-table"
               }
             ],
