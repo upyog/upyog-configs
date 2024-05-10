@@ -10602,7 +10602,7 @@
         "dateRefField": "",
         "requestQueryMap": "{\"ward\" : \"ward.keyword\",\"ulb\" : \"ulb.keyword\",\"state\" : \"state.keyword\"}",
         "indexName": "firenoc-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"todaysDate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_term\":\"desc\"},\"size\":1},\"aggs\":{\"Todays Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}},\"lastUpdatedTime\":{\"terms\":{\"field\":\"lastModifiedTime\",\"order\":{\"_term\":\"desc\"},\"size\":1}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"todaysDate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_key\":\"desc\"},\"size\":1},\"aggs\":{\"Todays Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}},\"lastUpdatedTime\":{\"terms\":{\"field\":\"lastModifiedTime\",\"order\":{\"_key\":\"desc\"},\"size\":1}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -11033,7 +11033,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"ward\" : \"ward.keyword\",\"ulb\" : \"ulb.keyword\", \"state\" : \"state.keyword\"}",
         "indexName": "firenoc-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"Total Noc's issued\":{\"terms\":{\"field\":\"state\",\"size\":\"1000\",\"order\":{\"Total applications\":\"asc\"}},\"aggs\":{\"Total applications\":{\"sum\":{\"field\":\"todaysApplicationsForApplicationType\"}}}}}}"
+            "aggrQuery": "{\"aggs\":{\"Total Noc's issued\":{\"terms\":{\"field\":\"state\",\"size\":\"1000\",\"order\":{\"Total applications\":\"asc\"}},\"aggs\":{\"Total applications\":{\"sum\":{\"field\":\"todaysApplicationsForApplicationType\"}}}}}}"
       },
       {
         "module": "FIRENOC",
@@ -20559,7 +20559,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "firenoc-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"FIRENOC\"}},\"aggs\":{\"Average Days to Issue NOC\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module\":\"FIRENOC\"}},\"aggs\":{\"Average Days to Issue NOC\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
       }
     ],
     "chartType": "metric",
