@@ -19,16 +19,14 @@ serviceMaps:
                         approvalNo, 
                         approvalDate, 
                         applicationDate, 
-                        status, 
-                        action, 
-                        businessService, 
+                        status,  
                         additionalDetails,
                         createdBy, 
                         lastmodifiedBy, 
                         createdTime, 
                         lastmodifiedTime,
                         accountId
-                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: Asset
           jsonMaps:
             - jsonPath: $.Asset.id
@@ -44,8 +42,6 @@ serviceMaps:
             - jsonPath: $.Asset.approvalDate
             - jsonPath: $.Asset.applicationDate
             - jsonPath: $.Asset.status
-            - jsonPath: $.Asset.action
-            - jsonPath: $.Asset.businessService
             - jsonPath: $.Asset.additionalDetails
               type: JSON
               dbType: JSONB
