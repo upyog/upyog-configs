@@ -15906,21 +15906,21 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "tl-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"CompletedWithinSLA\":{\"terms\":{\"field\":\"state\"},\"aggs\":{\"intermediateAggrULB\":{\"terms\":{\"field\":\"ulb\"},\"aggs\":{\"days\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"applications\":{\"avg\":{\"field\":\"todaysLicenseIssuedWithinSLA\"}}}}},\"ulbApplications\":{\"sum_bucket\":{\"buckets_path\":\"days.applications\"}}}},\"stateApplications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrULB.ulbApplications\"}}}}},\"TotalApplications\":{\"terms\":{\"field\":\"state\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysTradeLicensesForStatus\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"CompletedWithinSLA\":{\"terms\":{\"field\":\"state\"},\"aggs\":{\"intermediateAggrULB\":{\"terms\":{\"field\":\"ulb\"},\"aggs\":{\"days\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"applications\":{\"avg\":{\"field\":\"todaysLicenseIssuedWithinSLA\"}}}},\"ulbApplications\":{\"sum_bucket\":{\"buckets_path\":\"days.applications\"}}}},\"stateApplications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrULB.ulbApplications\"}}}},\"TotalApplications\":{\"terms\":{\"field\":\"state\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysTradeLicensesForStatus\"}}}}}}}}"
       },
       {
         "module": "OBPS",
         "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
         "dateRefField": "date",
         "indexName": "obps-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Licenses Within SLA\":{\"terms\":{\"field\":\"state\"},\"aggs\":{\"Total Permits\":{\"sum\":{\"field\":\"permitsIssuedForRiskType\"}}}},\"Total Applications\":{\"terms\":{\"field\":\"state\"},\"aggs\":{\"intermediateAggrULB\":{\"terms\":{\"field\":\"ulb\"},\"aggs\":{\"days\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"applications\":{\"avg\":{\"field\":\"applicationsSubmitted\"}}}}},\"ulbApplications\":{\"sum_bucket\":{\"buckets_path\":\"days.applications\"}}}},\"Sum\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrULB.ulbApplications\"}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"LicensesWithinSLA\":{\"terms\":{\"field\":\"state\"},\"aggs\":{\"TotalPermits\":{\"sum\":{\"field\":\"permitsIssuedForRiskType\"}}}},\"TotalApplications\":{\"terms\":{\"field\":\"state\"},\"aggs\":{\"intermediateAggrULB\":{\"terms\":{\"field\":\"ulb\"},\"aggs\":{\"days\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"applications\":{\"avg\":{\"field\":\"applicationsSubmitted\"}}}},\"ulbApplications\":{\"sum_bucket\":{\"buckets_path\":\"days.applications\"}}}},\"Sum\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrULB.ulbApplications\"}}}}}}}}"
       },
       {
         "module": "FIRENOC",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "firenoc-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Completed Within SLA\":{\"terms\":{\"field\":\"state\"},\"aggs\":{\"intermediateAggrULB\":{\"terms\":{\"field\":\"ulb\"},\"aggs\":{\"days\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"applications\":{\"avg\":{\"field\":\"todaysCompletedApplicationsWithinSLA\"}}}}},\"ulbApplications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrULB.days.applications\"}}}}}},\"Total Applications\":{\"terms\":{\"field\":\"state\"},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"todaysApplicationsForApplicationType\"}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"CompletedWithinSLA\":{\"terms\":{\"field\":\"state\"},\"aggs\":{\"intermediateAggrULB\":{\"terms\":{\"field\":\"ulb\"},\"aggs\":{\"days\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"applications\":{\"avg\":{\"field\":\"todaysCompletedApplicationsWithinSLA\"}}}},\"ulbApplications\":{\"sum_bucket\":{\"buckets_path\":\"days.applications\"}}}},\"Sum\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrULB.ulbApplications\"}}}},\"TotalApplications\":{\"terms\":{\"field\":\"state\"},\"aggs\":{\"sum\":{\"sum\":{\"field\":\"todaysApplicationsForApplicationType\"}}}}}}}}"
       }
     ],
     "chartType": "perform",
