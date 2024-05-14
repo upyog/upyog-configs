@@ -8837,7 +8837,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "pt-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForUsageCategory\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForUsageCategory\"}}]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysCollectionForUsageCategory\":0}}],\"must\":[{\"exists\":{\"field\":\"todaysCollectionForUsageCategory\"}}]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"month\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}}}\n"
       }
     ],
     "chartType": "line",
