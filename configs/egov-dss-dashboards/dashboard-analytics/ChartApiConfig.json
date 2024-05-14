@@ -20433,7 +20433,7 @@
         "requestQueryMap": "{\"state\" : \"state\", \"ulb\" : \"ulb\"}",
         "dateRefField": "date",
         "indexName": "pt-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"PT\"}},\"aggs\":{\"Average Days for Property Tax\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module\":\"PT\"}},\"aggs\":{\"Average Days for Property Tax\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
       }
     ],
     "chartType": "metric",
