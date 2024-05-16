@@ -14127,9 +14127,9 @@
     "action": "",
     "plotLabel": "Regions",
     "aggregationPaths": [
-      "ULB_TL_Tax",
-      "ULB_Adhoc_Penalty",
-      "ULB_Adhoc_Rebate"
+      "TL Tax",
+      "Adhoc Penalty",
+      "Adhoc Rebate"
     ],
     "pathDataTypeMapping": [
       {
@@ -14147,9 +14147,9 @@
         "postAggregationTheory": "",
         "actionName": "AdditiveComputedField",
         "fields": [
-          "TL_Tax",
-          "Adhoc_Penalty",
-          "Adhoc_Rebate"
+          "TL Tax",
+          "Adhoc Penalty",
+          "Adhoc Rebate"
         ],
         "newField": "Total Amount",
         "_comments": "fields are field names picked from its aggregation query to use post aggregation newField value with given new field name  "
@@ -14182,23 +14182,23 @@
     "action": "",
     "plotLabel": "ULB",
     "aggregationPaths": [
-      "TL_Tax",
-      "Adhoc_Penalty",
-      "Adhoc_Rebate",
-      "Total_Amount"
+      "ULB_TL_Tax",
+      "ULB_Adhoc_Penalty",
+      "ULB_Adhoc_Rebate",
+      "ULB_Total_Amoun"
     ],
     "pathDataTypeMapping": [
       {
-        "TL_Tax": "amount"
+        "ULB_TL_Tax": "amount"
       },
       {
-        "Adhoc_Penalty": "amount"
+        "ULB_Adhoc_Penalty": "amount"
       },
       {
-        "Adhoc_Rebate": "amount"
+        "ULB_Adhoc_Rebate": "amount"
       },
       {
-        "Total_Amount": "amount"
+        "ULB_Total_Amoun": "amount"
       }
     ],
     "insight": {},
@@ -22377,14 +22377,14 @@
       {
         "module": "WS",
         "dateRefField": "date",
-        "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
+        "requestQueryMap": "{\"state\" : \"state\", \"ulb\" : \"ulb\"}",
         "indexName": "ws-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state\",\"size\": \"50\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}"
       },
       {
         "module": "WS",
         "dateRefField": "date",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
         "indexName": "ws-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection1\":{\"terms\":{\"field\":\"state\",\"size\": \"50\",\"order\":{\"Count\":\"asc\"}},\"aggs\":{\"Count\":{\"cardinality\":{\"field\":\"state\"}}}}}}}}"
       }
@@ -22411,14 +22411,14 @@
       {
         "module": "WS",
         "dateRefField": "date",
-        "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
+        "requestQueryMap": "{\"state\" : \"state\", \"ulb\" : \"ulb\"}",
         "indexName": "ws-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\":\"state\",\"size\": \"50\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}"
       },
       {
         "module": "WS",
         "dateRefField": "date",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
         "indexName": "ws-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection1\":{\"terms\":{\"field\":\"state\",\"size\": \"50\",\"order\":{\"Count\":\"desc\"}},\"aggs\":{\"Count\":{\"cardinality\":{\"field\":\"state\"}}}}}}}}"
       }
@@ -23352,7 +23352,7 @@
       {
         "module": "FIRENOC",
         "dateRefField": "date",
-        "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
+        "requestQueryMap": "{\"state\" : \"state\", \"ulb\" : \"ulb\"}",
         "indexName": "firenoc-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysApprovedApplications\"}}],\"must_not\":[{\"match\":{\"todaysApprovedApplications\":0}}]}},\"aggs\":{\"TotalApplications\":{\"terms\":{\"field\":\"state\",\"size\": \"50\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}}}}}"
       }
