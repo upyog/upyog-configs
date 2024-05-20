@@ -14285,7 +14285,7 @@
         "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
         "dateRefField": "date",
         "indexName": "tl-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Licenses Within SLA\":{\"terms\":{\"field\":\"state\"},\"aggs\":{\"intermediateAggrULB\":{\"terms\":{\"field\":\"ulb\"},\"aggs\":{\"days\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"applications\":{\"avg\":{\"field\":\"todaysLicenseIssuedWithinSLA\"}}}},\"ulbapplications\":{\"sum_bucket\":{\"buckets_path\":\"days.applications\"}}}},\"Licenses Within SLA\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrULB.ulbApplications\"}}}},\"Total Licenses\":{\"terms\":{\"field\":\"state\"},\"aggs\":{\"intermediateAggrULB\":{\"terms\":{\"field\":\"ulb\"},\"aggs\":{\"days\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"licenses\":{\"sum\":{\"field\":\"todaysTradeLicensesForStatus\"}}}},\"ulblicenses\":{\"sum_bucket\":{\"buckets_path\":\"days.licenses\"}}}},\"Total Licenses\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrULB.ulblicenses\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Total Licenses\":{\"terms\":{\"field\":\"state\"},\"aggs\":{\"intermediateAggrULB\":{\"terms\":{\"field\":\"ulb\"},\"aggs\":{\"days\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"licenses\":{\"sum\":{\"field\":\"todaysTradeLicensesForStatus\"}}}},\"ulblicenses\":{\"sum_bucket\":{\"buckets_path\":\"days.licenses\"}}}},\"totalLicenses\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggrULB.ulblicenses\"}}}}}}}}"
       }
     ],
     "chartType": "perform",
