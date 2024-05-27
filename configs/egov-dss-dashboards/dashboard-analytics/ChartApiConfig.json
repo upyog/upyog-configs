@@ -13175,8 +13175,8 @@
       {
         "module": "COMMON",
         "dateRefField": "date",
-        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
-        "indexName": "tl-national-dashboard-*",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "tl-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"match\":{\"status.keyword\":\"APPROVED\"}}]}},\"aggs\":{\"Total Licenses\":{\"sum\":{\"field\":\"todaysTradeLicensesForStatus\"}}}}}}"
       }
     ],
