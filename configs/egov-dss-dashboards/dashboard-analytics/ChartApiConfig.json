@@ -20454,7 +20454,7 @@
         "requestQueryMap": "{\"state\" : \"state\", \"ulb\" : \"ulb\"}",
         "dateRefField": "date",
         "indexName": "tl-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module\":\"TL\"}},\"aggs\":{\"Average Days to Issue TL\":{\"sum\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module\":\"TL\"}},\"aggs\":{\"Average Days to Issue TL\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
       }
     ],
     "chartType": "metric",
