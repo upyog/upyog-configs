@@ -67,6 +67,19 @@
                 },
                 "type": "date"
               },
+
+              {
+                "variable": "COLONY_TEXT",
+                "value": {
+                  "path": "$.additionalDetails.permitData"
+                }
+              },
+              {
+                "variable": "submissionDate",
+                "value": {
+                  "path": "$.additionalDetails.submissionDate"
+                }
+              },
               {
                 "variable": "conditions",
                 "value": {
