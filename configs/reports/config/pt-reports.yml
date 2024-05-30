@@ -416,3 +416,68 @@ ReportDefinitions:
         from
         eg_pt_property propData JOIN eg_pt_address pa ON pa.propertyid=propData.id
         LEFT OUTER JOIN paymentdata pd on pd.consumercode = propdata.propertyid  where propData.status='ACTIVE'
+- reportName: PTTop20TaxPayers
+  decryptionPathId: DefaulterReport
+  summary: It helps administrators track the top 20 tax payers in the ULB. 
+  version: 1.0.0
+  moduleName: pt-reports
+  sourceColumns:
+  - name: propertyid
+    label: Property ID
+    type: string
+    source: pt
+    total: false
+  - name: name
+    label: Owner Name
+    type: string
+    source: pt
+    showColumn: true
+  - name: mobilenumber
+    label: Contact No.
+    type: string
+    source: pt
+    total: false
+  - name: amountCollected
+    label: Amount Collected
+    type: string
+    source: pt
+    total: true
+  - name: financial_year
+    label: Financial Year
+    type: string
+    source: pt
+    total: false 
+  - name: address
+    label: Locality
+    type: string
+    source: pt
+    total: false
+    localisationPrefix: TENANTS_MOHALLA_
+    isLocalisationRequired: true 
+  searchParams:
+  - name: fromDate
+    label: From Date
+    type: epoch
+    source: pt
+    isMandatory: true
+    searchClause: AND bill.createdtime >= $fromDate
+  - name: toDate
+    label: To Date
+    type: epoch
+    source: pt
+    isMandatory: true
+    searchClause: AND bill.createdtime <= $toDate
+  - name: locality
+    label: Locality
+    type: singlevaluelist
+    pattern: http://egov-location.egov:8080/egov-location/location/v11/boundarys/_search?hierarchyTypeCode=ADMIN&boundaryType=Locality&tenantId=$tenantid|$.TenantBoundary[0].boundary.*.code|$.TenantBoundary[0].boundary.*.code
+    source: pt
+    wrapper: true
+    isMandatory: false
+    localisationPrefix: TENANTS_MOHALLA_
+    isLocalisationRequired: true
+    searchClause: AND ptd.locality = $locality  
+  query: | 
+    SELECT property.propertyid as propertyid, CASE WHEN EXTRACT(MONTH FROM TO_TIMESTAMP(bill.createdtime / 1000)) >= 4 THEN EXTRACT(YEAR FROM TO_TIMESTAMP(bill.createdtime / 1000)) || '-' || EXTRACT(YEAR FROM TO_TIMESTAMP(bill.createdtime / 1000)) + 1 ELSE EXTRACT(YEAR FROM TO_TIMESTAMP(bill.createdtime / 1000)) - 1 || '-' || EXTRACT(YEAR FROM TO_TIMESTAMP(bill.createdtime / 1000)) END AS financial_year, users.name AS name, users.mobilenumber AS mobilenumber, ptd.locality as address, SUM(totalamountpaid) AS amountCollected FROM egcl_payment AS ep JOIN egcl_paymentdetail AS ed ON ep.id = ed.paymentid JOIN egcl_bill AS bill ON ed.billid = bill.id JOIN eg_pt_property AS property ON bill.consumercode = property.propertyid JOIN eg_pt_owner AS owner ON property.id = owner.propertyid JOIN eg_pt_address as ptd on property.id=ptd.propertyid  JOIN eg_user AS users ON owner.userid = users.uuid WHERE ed.businessservice = 'PT' AND ep.paymentstatus != 'CANCELLED' AND ep.tenantid = 'pg.citya' AND owner.status = 'ACTIVE' AND property.status = 'ACTIVE'
+  groupby: GROUP BY  property.propertyid, financial_year, users.name, users.mobilenumber, ptd.locality
+  orderby: ORDER BY amountCollected DESC LIMIT 20

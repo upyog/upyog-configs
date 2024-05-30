@@ -1,0 +1,88 @@
+{
+  "key": "petservicecertificate",
+  "config": {
+    "defaultStyle": {
+      "font": "Cambay"
+    },
+    "content": [
+      {
+        "style": "header",
+        "text": [
+          "PET CERTIFICATE"
+        ]
+      },
+
+      {
+        "text": "This certifies that: {{Owner_Name}} with mobile Number: {{Owner_Contact}} has registered their Pet in an Urban Local Body with Pet details as follows:",
+        "style": "content",
+        "margin": [0, 10, 0, 10]
+      },
+      {
+        "text": "Pet's Name: {{Pet_Name}}",
+        "style": "subheader",
+        "margin": [0, 0, 0, 10]
+      },
+      {
+        "text": "Pet's Type: {{Pet_Type}}",
+        "style": "subheader",
+        "margin": [0, 0, 0, 10]
+      },
+      {
+        "text": "Breed Type: {{Breed_Type}}",
+        "style": "subheader",
+        "margin": [0, 0, 0, 20]
+      },
+      {
+        "text": "Vaccination Details:",
+        "style": "subheader",
+        "margin": [0, 0, 0, 10]
+      },
+      {
+        "style": "content",
+        "ol": [
+          {
+            "text": "Vaccination Number: {{Vaccine_Number}}",
+            "margin": [0, 5, 0, 5]
+          },
+          {
+            "text": "Vaccination Date: {{Vaccine_Date}}",
+            "margin": [0, 5, 0, 5]
+          },
+          {
+            "text": "Administered by Doctor: {{Doctor_Name}}",
+            "margin": [0, 5, 0, 5]
+          },
+          {
+            "text": "Clinic Name: {{Clinic_Name}}",
+            "margin": [0, 5, 0, 20]
+          }
+        ]
+      },
+      {
+        "text": "This certificate serves as an acknowledgment of the ownership of the above-mentioned pet and the fulfillment of all registration requirements.",
+        "style": "footer"
+      }
+    ],
+    "styles": {
+      "header": {
+        "fontSize": 20,
+        "bold": true,
+        "alignment": "center",
+        "margin": [0, 20, 0, 20]
+      },
+      "subheader": {
+        "fontSize": 16,
+        "margin": [0, 0, 0, 10]
+      },
+      "content": {
+        "fontSize": 14,
+        "margin": [0, 0, 0, 10]
+      },
+      "footer": {
+        "fontSize": 14,
+        "italics": true,
+        "margin": [0, 20, 0, 0]
+      }
+    }
+  }
+}

@@ -1,8 +1,7 @@
 {
-  "key": "fsm-receipt",
-  "documentType": "FSM_RECEIPT",
+  "key": "petservice-receipt",
   "DataConfigs": {
-    "moduleName": "rainmaker-common",
+    "serviceName": "rainmaker-common",
     "version": "1.0.0",
     "baseKeyPath": "$.Payments.*",
     "entityIdPath": "$.id",
@@ -36,6 +35,11 @@
                 "variable": "paymentStatus",
                 "value": {
                   "path": "$.paymentStatus"
+                },
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-common"
                 }
               },
               {
@@ -58,27 +62,27 @@
               {
                 "variable": "total_amount",
                 "value": {
-                    "path": "PDF_STATIC_LABEL_CONSOLIDATED_TLAPP_TOTAL_AMOUNT"
+                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_TLAPP_TOTAL_AMOUNT"
                 },
                 "type": "label",
                 "localisation": {
-                    "required": true,
-                    "prefix": null,
-                    "module":"rainmaker-common"
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-common"
                 }
-            },
+              },
               {
-                "variable": "totalAmountPaid",
+                "variable": "totalAmount",
                 "value": {
-                    "path": "$.totalAmountPaid"
+                  "path": "$.totalAmountPaid"
                 }
-            },
-            {
-              "variable": "tenantid", 
-              "value": {
-                "path": "$.tenantId"
-              }
-            },
+              },
+              {
+                "variable": "tenantid",
+                "value": {
+                  "path": "$.tenantId"
+                }
+              },
               {
                 "variable": "paidAmount",
                 "value": {
@@ -157,7 +161,7 @@
                 "localisation": {
                   "required": true,
                   "prefix": null,
-                  "module": "rainmaker-common"
+                  "module": "rainmaker-ptr"
                 }
               },
               {
@@ -175,19 +179,18 @@
               {
                 "variable": "consumer_id",
                 "value": {
-                  "path": "PDF_STATIC_LABEL_FSM_RECEIPT_CONSUMER_ID"
+                  "path": "$.paymentDetails[0].businessService"
                 },
-                "type": "label",
                 "localisation": {
                   "required": true,
-                  "prefix": null,
+                  "prefix": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_CONSUMER_ID",
                   "module": "rainmaker-common"
                 }
               },
               {
                 "variable": "payment_date",
                 "value": {
-                  "path": "PDF_STATIC_LABEL_FSM_RECEIPT_PAYMENT_DATE"
+                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_PAYMENT_DATE"
                 },
                 "type": "label",
                 "localisation": {
@@ -199,7 +202,7 @@
               {
                 "variable": "payer_name",
                 "value": {
-                  "path": "PDF_STATIC_LABEL_FSM_RECEIPT_PAYER_NAME"
+                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_PAYER_NAME"
                 },
                 "type": "label",
                 "localisation": {
@@ -259,7 +262,7 @@
               {
                 "variable": "paid_amount",
                 "value": {
-                  "path": "PDF_STATIC_LABEL_FSM_RECEIPT_PAID_AMOUNT"
+                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_PAID_AMOUNT"
                 },
                 "type": "label",
                 "localisation": {
@@ -269,9 +272,9 @@
                 }
               },
               {
-                "variable": "due_amount",
+                "variable": "total_bill_amount",
                 "value": {
-                  "path": "PDF_STATIC_LABEL_FSM_RECEIPT_DUE_AMOUNT"
+                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_TOTAL_BILL_AMOUNT"
                 },
                 "type": "label",
                 "localisation": {
@@ -280,22 +283,11 @@
                   "module": "rainmaker-common"
                 }
               },
+
               {
                 "variable": "pending_amount",
                 "value": {
-                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_TOTAL_AMOUNT_DUE"
-                },
-                "type": "label",
-                "localisation": {
-                  "required": true,
-                  "prefix": null,
-                  "module": "rainmaker-common"
-                }
-              },
-              {
-                "variable": "excess_amount_paid",
-                "value": {
-                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_EXCESS_AMOUNT_PAID"
+                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_PENDING_AMOUNT"
                 },
                 "type": "label",
                 "localisation": {
@@ -307,7 +299,7 @@
               {
                 "variable": "payment_mode",
                 "value": {
-                  "path": "PDF_STATIC_LABEL_FSM_RECEIPT_PAYMENT_MODE"
+                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_PAYMENT_MODE"
                 },
                 "type": "label",
                 "localisation": {
@@ -367,7 +359,7 @@
               {
                 "variable": "commissioner/eo",
                 "value": {
-                  "path": "PDF_STATIC_LABEL_FSM_RECEIPT_COMMISSIONER_EO"
+                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_COMMISSIONER_EO"
                 },
                 "type": "label",
                 "localisation": {
@@ -401,66 +393,6 @@
                 }
               },
               {
-                "variable": "disclamer_1",
-                "value": {
-                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_DISCLAIMER_FIRST_LINE"
-                },
-                "type": "label",
-                "localisation": {
-                  "required": true,
-                  "prefix": null,
-                  "module": "rainmaker-common"
-                }
-              },
-              {
-                "variable": "disclamer_2",
-                "value": {
-                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_DISCLAIMER_SECOND_LINE"
-                },
-                "type": "label",
-                "localisation": {
-                  "required": true,
-                  "prefix": null,
-                  "module": "rainmaker-common"
-                }
-              },
-              {
-                "variable": "disclamer_3",
-                "value": {
-                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_DISCLAIMER_THIRD_LINE"
-                },
-                "type": "label",
-                "localisation": {
-                  "required": true,
-                  "prefix": null,
-                  "module": "rainmaker-common"
-                }
-              },
-              {
-                "variable": "disclamer_4",
-                "value": {
-                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_DISCLAIMER_4"
-                },
-                "type": "label",
-                "localisation": {
-                  "required": true,
-                  "prefix": null,
-                  "module": "rainmaker-common"
-                }
-              },
-              {
-                "variable": "disclamer_5",
-                "value": {
-                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_DISCLAIMER_FIFTH_LINE"
-                },
-                "type": "label",
-                "localisation": {
-                  "required": true,
-                  "prefix": null,
-                  "module": "rainmaker-common"
-                }
-              },
-              {
                 "variable": "to",
                 "value": {
                   "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_TO"
@@ -485,69 +417,9 @@
                 }
               },
               {
-                "variable": "total_bill_amount",
+                "variable": "excess_amount_paid",
                 "value": {
-                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_TOTAL_BILL_AMOUNT"
-                },
-                "type": "label",
-                "localisation": {
-                  "required": true,
-                  "prefix": null,
-                  "module": "rainmaker-common"
-                }
-              },
-              {
-                "variable": "no_of_trip",
-                "value": {
-                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_NO_OF_TRIP"
-                },
-                "type": "label",
-                "localisation": {
-                  "required": true,
-                  "prefix": null,
-                  "module": "rainmaker-common"
-                }
-              },
-              {
-                "variable": "amount_per_trip",
-                "value": {
-                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_AMOUNT_PER_TRIP"
-                },
-                "type": "label",
-                "localisation": {
-                  "required": true,
-                  "prefix": null,
-                  "module": "rainmaker-common"
-                }
-              },
-              {
-                "variable": "advance_paid_amount",
-                "value": {
-                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_ADVANCE_AMOUNT_PAID"
-                },
-                "type": "label",
-                "localisation": {
-                  "required": true,
-                  "prefix": null,
-                  "module": "rainmaker-common"
-                }
-              },
-              {
-                "variable": "total_amount",
-                "value": {
-                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_TOTAL_AMOUNT"
-                },
-                "type": "label",
-                "localisation": {
-                  "required": true,
-                  "prefix": null,
-                  "module": "rainmaker-common"
-                }
-              },
-              {
-                "variable": "balance_amount_paid",
-                "value": {
-                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_BALANCE_AMOUNT_PAID"
+                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_EXCESS_AMOUNT_PAID"
                 },
                 "type": "label",
                 "localisation": {
@@ -567,14 +439,6 @@
               {
                 "variable": "excessAmountPaid",
                 "formula": "{{paidAmount}}>{{dueAmount}}?{{paidAmount}}-{{dueAmount}}:0"
-              },
-              {
-                "variable": "totalAmount",
-                "formula": "{{noOfTrips}}*{{amountPerTrip}}"
-              },
-              {
-                "variable": "balanceAmountPaid",
-                "formula": "{{dueAmount}}=={{paidAmount}}?{{paidAmount}}:0"
               }
             ]
           },
@@ -614,16 +478,6 @@
                       "prefix": "TENANT_TENANTS",
                       "module": "rainmaker-common"
                     }
-                  },
-                  {
-                    "variable": "ulbgrade",
-                    "value": "$.MdmsRes.tenant.tenants[0].city.ulbGrade",
-                    "type": "label",
-                    "localisation": {
-                      "required": true,
-                      "prefix": "ULBGRADE",
-                      "module": "rainmaker-common"
-                    }
                   }
                 ]
               },
@@ -653,36 +507,17 @@
                     }
                   }
                 ]
-              },
-              {
-                "path": "http://fsm.egov:8080/fsm/v1/_search",
-                "queryParam": "applicationNos=$.paymentDetails[0].bill.consumerCode,tenantId=$.tenantId",
-                "apiRequest": null,
-                "responseMapping": [
-                  {
-                    "variable": "noOfTrips",
-                    "value": "$.fsm[0].noOfTrips"
-                  },
-                  {
-                    "variable": "amountPerTrip",
-                    "value": "$.fsm[0].additionalDetails.tripAmount"
-                  },
-                  {
-                    "variable": "advancePaidAmount",
-                    "value": "$.fsm[0].advanceAmount"
-                  }
-                ]
               }
             ]
           },
           {
             "qrcodeConfig": [
-                {
-                    "variable": "qrcodeimage",
-                    "value": "/digit-ui/citizen/payment/verification?tenantId={{tenantid}}&receiptNumber={{receiptNo}}"
-                }
+              {
+                "variable": "qrcodeimage",
+                "value": "/digit-ui/citizen/payment/verification?tenantId={{tenantid}}&receiptNumber={{receiptNo}}"
+              }
             ]
-        }
+          }
         ]
       }
     ]
