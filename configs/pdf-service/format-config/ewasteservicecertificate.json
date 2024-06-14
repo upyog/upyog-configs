@@ -1,0 +1,95 @@
+{
+  "key": "ewasteservicecertificate",
+  "config": {
+    "defaultStyle": {
+      "font": "Cambay"
+    },
+    "content": [
+      {
+        "style": "header",
+        "text": "E-WASTE DISPOSAL CERTIFICATE"
+      },
+      {
+        "text": "This certifies that: {{Applicant_Name}} with mobile number: {{Applicant_Contact}} has disposed of their e-waste through a registered vendor with the product details as follows:",
+        "style": "content",
+        "margin": [0, 10, 0, 10]
+      },
+      {
+        "table": {
+          "headerRows": 1,
+          "widths": ["*", "*", "*", "*"],
+          "body": [
+            [
+              { "text": "Product ID", "style": "tableHeader" },
+              { "text": "Product Name", "style": "tableHeader" },
+              { "text": "Quantity", "style": "tableHeader" },
+              { "text": "Price", "style": "tableHeader" }
+            ],
+            "{{#each ewasteDetails}}",
+            [
+              { "text": "{{productId}}", "style": "tableContent" },
+              { "text": "{{productName}}", "style": "tableContent" },
+              { "text": "{{quantity}}", "style": "tableContent" },
+              { "text": "{{price}}", "style": "tableContent" }
+            ],
+            "{{/each}}"
+          ]
+        },
+        "layout": "lightHorizontalLines",
+        "margin": [0, 10, 0, 20]
+      },
+      {
+        "text": "Transactional Details:",
+        "style": "subheader",
+        "margin": [0, 10, 0, 10]
+      },
+      {
+        "columns": [
+          {
+            "width": "50%",
+            "stack": [
+              { "text": "Calculated Amount: {{Calculated_Amount}}", "style": "content" },
+              { "text": "Final Amount: {{Final_Amount}}", "style": "content" },
+              { "text": "Pickup Date: {{Pickup_Date}}", "style": "content" },
+              { "text": "Payment Method: ONLINE", "style": "content" }
+            ]
+          }
+        ],
+        "margin": [0, 10, 0, 20]
+      },
+      {
+        "text": "This is to certify that the e-waste described above has been collected and properly disposed of by the registered vendor. The certificate is issued to acknowledge the successful completion of the e-waste disposal process.",
+        "style": "footer"
+      }
+    ],
+    "styles": {
+      "header": {
+        "fontSize": 20,
+        "bold": true,
+        "alignment": "center",
+        "margin": [0, 20, 0, 20]
+      },
+      "subheader": {
+        "fontSize": 16,
+        "margin": [0, 0, 0, 10]
+      },
+      "content": {
+        "fontSize": 14,
+        "margin": [0, 0, 0, 10]
+      },
+      "tableHeader": {
+        "bold": true,
+        "fontSize": 13,
+        "color": "black"
+      },
+      "tableContent": {
+        "fontSize": 12
+      },
+      "footer": {
+        "fontSize": 14,
+        "italics": true,
+        "margin": [0, 20, 0, 0]
+      }
+    }
+  }
+}
