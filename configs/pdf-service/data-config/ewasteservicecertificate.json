@@ -21,7 +21,7 @@
                 "localisation": {
                   "required": true,
                   "prefix": null,
-                  "module": "rainmaker-common"
+                  "module": "rainmaker-ew"
                 }
               },
               {
@@ -33,7 +33,7 @@
                 "localisation": {
                   "required": true,
                   "prefix": null,
-                  "module": "rainmaker-common"
+                  "module": "rainmaker-ew"
                 }
               },
               {
@@ -45,7 +45,7 @@
                 "localisation": {
                   "required": true,
                   "prefix": null,
-                  "module": "rainmaker-common"
+                  "module": "rainmaker-ew"
                 }
               },
               {
@@ -57,11 +57,11 @@
                 "localisation": {
                   "required": true,
                   "prefix": null,
-                  "module": "rainmaker-common"
+                  "module": "rainmaker-ew"
                 }
               },
               {
-                "variable": "Request_Id_Label",
+                "variable": "Request_Id",
                 "value": {
                   "path": "PDF_STATIC_LABEL_REQUEST_ID_LABEL"
                 },
@@ -69,7 +69,7 @@
                 "localisation": {
                   "required": true,
                   "prefix": null,
-                  "module": "rainmaker-common"
+                  "module": "rainmaker-ew"
                 }
               },
               {
@@ -81,11 +81,11 @@
                 "localisation": {
                   "required": true,
                   "prefix": null,
-                  "module": "rainmaker-common"
+                  "module": "rainmaker-ew"
                 }
               },
               {
-                "variable": "Applicant_Mobile",
+                "variable": "Applicant_Contact",
                 "value": {
                   "path": "PDF_STATIC_LABEL_RECEIPT_OWNER_CONTACT"
                 },
@@ -93,19 +93,7 @@
                 "localisation": {
                   "required": true,
                   "prefix": null,
-                  "module": "rainmaker-common"
-                }
-              },
-              {
-                "variable": "weight_quantity",
-                "value": {
-                  "path": "PDF_STATIC_LABEL_WEIGHT_QUANTITY"
-                },
-                "type": "label",
-                "localisation": {
-                  "required": true,
-                  "prefix": null,
-                  "module": "rainmaker-ewaste"
+                  "module": "rainmaker-ew"
                 }
               },
               {
@@ -117,7 +105,7 @@
                 "localisation": {
                   "required": true,
                   "prefix": null,
-                  "module": "rainmaker-ewaste"
+                  "module": "rainmaker-ew"
                 }
               },
               {
@@ -129,7 +117,7 @@
                 "localisation": {
                   "required": true,
                   "prefix": null,
-                  "module": "rainmaker-ewaste"
+                  "module": "rainmaker-ew"
                 }
               },
               {
@@ -141,7 +129,7 @@
                 "localisation": {
                   "required": true,
                   "prefix": null,
-                  "module": "rainmaker-ewaste"
+                  "module": "rainmaker-ew"
                 }
               },
               {
@@ -153,7 +141,19 @@
                 "localisation": {
                   "required": true,
                   "prefix": null,
-                  "module": "rainmaker-ewaste"
+                  "module": "rainmaker-ew"
+                }
+              },
+              {
+                "variable": "Product_Names",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_PRODUCT_NAMES"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-ew"
                 }
               },
               {
@@ -165,13 +165,13 @@
               {
                 "variable": "Applicant_Name",
                 "value": {
-                  "path": "$.applicantName"
+                  "path": "$.applicant.applicantName"
                 }
               },
               {
                 "variable": "Applicant_Contact",
                 "value": {
-                  "path": "$.mobileNumber"
+                  "path": "$.applicant.mobileNumber"
                 }
               },
               {
@@ -205,7 +205,9 @@
                     "path": "$.ewasteDetails"
                   }
                 ]
-              }
+              }            
+              
+              
             ]
           },
           {
@@ -216,29 +218,25 @@
                 "apiRequest": null,
                 "responseMapping": [
                   {
-                    "variable": "ULB_LOGO",
-                    "value": "$.MdmsRes.tenant.tenants[0].logoId",
-                    "type": "image"
-                  },
-                  {
-                    "variable": "ULB_ADDRESS",
+                    "variable": "address",
                     "value": "$.MdmsRes.tenant.tenants[0].address"
                   },
                   {
-                    "variable": "ULB_CITY",
-                    "value": "$.MdmsRes.tenant.tenants[0].name"
-                  },
-                  {
-                    "variable": "CorporationContact_Value",
+                    "variable": "phoneNumber",
                     "value": "$.MdmsRes.tenant.tenants[0].contactNumber"
                   },
                   {
-                    "variable": "corporationWebsite",
+                    "variable": "website",
                     "value": "$.MdmsRes.tenant.tenants[0].domainUrl"
                   },
                   {
-                    "variable": "corporationEmail",
+                    "variable": "email",
                     "value": "$.MdmsRes.tenant.tenants[0].emailId"
+                  },
+                  {
+                    "variable": "logoImage",
+                    "value": "$.MdmsRes.tenant.tenants[0].logoId",
+                    "type": "image"
                   }
                 ]
               },
