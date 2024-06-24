@@ -1,0 +1,116 @@
+{
+    "key": "ownerconsent",
+    "config": {
+      "defaultStyle": {
+        "font": "Cambay",
+        "alignment": "justify"
+      },
+      "content": [
+        {
+          "text": "DECLARATION UNDER SELF-CERTIFICATION SCHEME",
+          "style": "header",
+          "alignment": "center",
+          "margin": [0, 0, 0, 1]
+        },
+        {
+          "text": "(By Owner)",
+          "style": "header",
+          "alignment": "center",
+          "margin": [0, 0, 0, 1]
+        },
+        {
+          "text": [
+            "To,"
+          ],
+          "margin": [0, 0, 0, 2]
+        },
+        {
+          "text": [
+            "{{Ulblisttype}}"
+          ],
+          "bold": true,
+          "margin": [0, 0, 0, 0]
+        },
+        {
+          "text": [
+            "{{ulbname}}"
+          ],
+          "bold": true,
+          "margin": [0, 0, 0, 2]
+        },
+        {
+          "text": [
+            "Dear Sir or Madam,"
+          ],
+  
+          "margin": [0, 0, 0, 7]
+        },
+        {
+          "text": [
+            "I/We, Shri/Smt/Kum. ",{"text": "{{name}}", "bold": true},"under signed owner of land bearing Kh. No ",{"text": "{{khasraNumber}}", "bold": true}," of"," ", {"text": "{{Ulblisttype}}", "bold":true}, " - ",{"text": "{{ulbname}}", "bold": true},
+            " Area ",{"text": "{{area}}", "bold": true}," (Sq.mts).",
+            " I/We hereby declare that the ",
+            {"text": "{{architectName}}", "bold": true},
+            " Registration No ",
+            {"text": "{{architectid}}", "bold": true},
+            " is appointed by me/us and is authorized to make representation/application with regard to aforesaid construction to any of the authorities."
+          ],
+          "alignment": "justify"
+        },
+        {
+          "text": [
+            "I/We further declare that I am/We are aware of all the action taken or representation made by the ", {"text": " {{architectName}} {{architecttype}}", "bold": true}," authorized by me/us."
+          ],
+          "alignment": "justify",
+          "margin": [0, 0, 0, 10]
+        },
+        {
+          "ol": [
+            "That I am/We are sole owner of the site.",
+            "There is no dispute regarding the site and if any dispute arises then I shall be solely responsible for the same.",
+            "That construction of the building will be undertaken as per the approved building plans and structural design given by the Structural Engineer."
+          ],
+          "alignment": "justify",
+          "margin": [20, 0, 0, 10]
+        },
+        {
+          "text": "That above stated facts are true and all the requisite documents uploaded with this E-Naksha plan have been signed by the owner/owners in my presence",
+          "margin": [0, 0, 0, 25]
+        },
+        {
+          "columns": [
+            {
+              "width": "*",
+              "alignment": "right",
+              "stack": [
+                {"text": ["Name of Owner : ", {"text": "{{name}}", "bold": true}]},
+                {"text": ["Application Number : ", {"text": "{{applicationNo}}", "bold": true}]},
+                {"text": ["Mobile : ", {"text": "{{mobileNumber}}", "bold": true}]},
+                {"text": ["Signature : ", {"text": "Verified by OTP at {{reportrunDate}}", "bold": true}]}
+              ]
+            }
+          ]
+        }
+      ],
+      "styles": {
+        "header": {
+          "fontSize": 12,
+          "bold": true,
+          "margin": [0, 0, 0, 10]
+        },
+        "subheader": {
+          "fontSize": 12,
+          "italics": true,
+          "margin": [0, 0, 0, 5]
+        }
+      },
+      "fonts": {
+        "Times": {
+          "normal": "Times-Roman",
+          "bold": "Times-Bold",
+          "italics": "Times-Italic",
+          "bolditalics": "Times-BoldItalic"
+        }
+      }
+    }
+  }
