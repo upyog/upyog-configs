@@ -13,20 +13,24 @@ serviceMaps:
                         name, 
                         description, 
                         classification, 
-                        parentCategory, 
+                        parentCategory,
+                        category,
+                        subcategory,
                         department, 
                         applicationNo, 
                         approvalNo, 
                         approvalDate, 
                         applicationDate, 
-                        status,  
+                        status, 
                         additionalDetails,
                         createdBy, 
                         lastmodifiedBy, 
                         createdTime, 
                         lastmodifiedTime,
-                        accountId
-                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+                        accountId,
+                        financialYear,
+                        sourceOfFinance
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: Asset
           jsonMaps:
             - jsonPath: $.Asset.id
@@ -36,6 +40,8 @@ serviceMaps:
             - jsonPath: $.Asset.description
             - jsonPath: $.Asset.assetClassification
             - jsonPath: $.Asset.assetParentCategory
+            - jsonPath: $.Asset.assetCategory
+            - jsonPath: $.Asset.assetSubCategory
             - jsonPath: $.Asset.department
             - jsonPath: $.Asset.applicationNo
             - jsonPath: $.Asset.approvalNo
@@ -50,6 +56,8 @@ serviceMaps:
             - jsonPath: $.Asset.auditDetails.createdTime
             - jsonPath: $.Asset.auditDetails.lastModifiedTime
             - jsonPath: $.Asset.accountId
+            - jsonPath: $.Asset.financialYear
+            - jsonPath: $.Asset.sourceOfFinance
 
 
         - query: INSERT INTO eg_asset_document(documentId, documenttype, fileStoreId, assetid, documentuid, docDetails, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
