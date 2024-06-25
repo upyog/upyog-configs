@@ -38,7 +38,7 @@ serviceMaps:
    isTransaction: true
    queryMaps:
 
-       - query: INSERT INTO public.community_hall_booking_details(booking_id, booking_no,booking_date, application_no, application_date, applicant_name, applicant_email_id,applicant_mobile_no, applicant_alternate_mobile_no, tenant_id, community_hall_id,community_hall_name, booking_status, resident_type, special_category, purpose, purpose_description,event_name, event_organized_by, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+       - query: INSERT INTO public.community_hall_booking_details(booking_id, booking_no,booking_date, applicant_name, applicant_email_id,applicant_mobile_no, applicant_alternate_mobile_no, tenant_id, community_hall_id,community_hall_name, booking_status, resident_type, special_category, purpose, purpose_description,event_name, event_organized_by, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
          basePath: hallsBookingApplication
          jsonMaps:
           - jsonPath: $.hallsBookingApplication.bookingId
@@ -46,10 +46,6 @@ serviceMaps:
           - jsonPath: $.hallsBookingApplication.bookingNo
           
           - jsonPath: $.hallsBookingApplication.bookingDate
-          
-          - jsonPath: $.hallsBookingApplication.applicationNo
-
-          - jsonPath: $.hallsBookingApplication.applicationDate
           
           - jsonPath: $.hallsBookingApplication.applicantName
 
@@ -159,8 +155,17 @@ serviceMaps:
           - jsonPath: $.hallsBookingApplication.auditDetails.createdTime
 
           - jsonPath: $.hallsBookingApplication.auditDetails.lastModifiedTime
-      
 
+- version: 1.0
+      description: update community hall booking details
+      fromTopic: update-community-hall-booking
+      isTransaction: true
+      queryMaps:
 
-
- 
+       - query: UPDATE community_hall_booking_details SET lastmodifiedby = ?, lastmodifiedtime = ? WHERE booking_id = ?;
+         basePath: hallsBookingApplication
+         jsonMaps:
+           - jsonPath: $.hallsBookingApplication.bookingStatus
+           - jsonPath: $.hallsBookingApplication.auditDetails.lastModifiedBy
+           - jsonPath: $.hallsBookingApplication.auditDetails.lastModifiedTime
+        
