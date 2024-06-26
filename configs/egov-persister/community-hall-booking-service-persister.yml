@@ -155,17 +155,16 @@ serviceMaps:
           - jsonPath: $.hallsBookingApplication.auditDetails.createdTime
 
           - jsonPath: $.hallsBookingApplication.auditDetails.lastModifiedTime
-
-- version: 1.0
-      description: update community hall booking details
-      fromTopic: update-community-hall-booking
-      isTransaction: true
-      queryMaps:
-
-       - query: UPDATE community_hall_booking_details SET lastmodifiedby = ?, lastmodifiedtime = ? WHERE booking_id = ?;
+          
+          
+ - version: 1.0
+   description: Update community hall booking details after application is edited
+   fromTopic: update-community-hall-booking
+   isTransaction: true
+   queryMaps:
+       - query: UPDATE community_hall_booking_details SET booking_status= ?, lastmodifiedby = ?, lastmodifiedtime = ? WHERE booking_id = ?;
          basePath: hallsBookingApplication
          jsonMaps:
            - jsonPath: $.hallsBookingApplication.bookingStatus
            - jsonPath: $.hallsBookingApplication.auditDetails.lastModifiedBy
            - jsonPath: $.hallsBookingApplication.auditDetails.lastModifiedTime
-        
