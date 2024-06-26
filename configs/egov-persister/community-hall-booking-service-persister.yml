@@ -111,15 +111,15 @@ serviceMaps:
           - jsonPath: $.hallsBookingApplication.auditDetails.lastModifiedTime
           
        - query: INSERT INTO public.community_hall_booking_document_details(document_detail_id, booking_id, document_type, filestore_id, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?);
-         basePath: hallsBookingApplication.uploadedDocumentDetails.*
+         basePath: hallsBookingApplication.documents.*
          jsonMaps:
-          - jsonPath: $.hallsBookingApplication.uploadedDocumentDetails.*.documentId
+          - jsonPath: $.hallsBookingApplication.documents.*.documentId
 
-          - jsonPath: $.hallsBookingApplication.uploadedDocumentDetails.*.bookingId
+          - jsonPath: $.hallsBookingApplication.documents.*.bookingId
 
-          - jsonPath: $.hallsBookingApplication.uploadedDocumentDetails.*.documentType
+          - jsonPath: $.hallsBookingApplication.documents.*.documentType
 
-          - jsonPath: $.hallsBookingApplication.uploadedDocumentDetails.*.fileStoreId
+          - jsonPath: $.hallsBookingApplication.documents.*.fileStoreId
 
           - jsonPath: $.hallsBookingApplication.auditDetails.createdBy
 
