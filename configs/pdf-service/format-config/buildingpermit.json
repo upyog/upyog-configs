@@ -17,7 +17,7 @@
           {
             "stack": [
               {
-                "text": "{{Muncipal_Council}}, {{tenantName}} ",
+                "text": "{{ulbType}}, {{ulbName}} ",
                 "style": "sub-header",
                 "alignment":"center",
                 "margin":[0,3,0,0],
@@ -117,7 +117,11 @@
       {
         "text": [
           {
-            "text": "{{NAME_OF_STAKEHOLFDER_CONTENT}} :  ",
+            "text": "{{NAME_OF_STAKEHOLFDER_CONTENT}} ",
+            "bold": true
+          },
+          {
+            "text": "{{profession}} :  ",
             "bold": true
           },
           {
@@ -796,10 +800,10 @@
             "stack":[
               
                 {
-                  "text": "{{Muncipal_Council}}"
+                  "text": "{{ulbType}}"
                 },
                 {
-                  "text": "{{tenantName}}"
+                  "text": "{{ulbName}}"
 
                 },
                 {
@@ -808,7 +812,7 @@
                       "text":"{{DATE_AND_TIME}}:"
                     },
                     {
-                      "text":" {{submissionDate}}"
+                      "text":" {{formattedSubmissionDate}}"
                     }
                   ] 
                 }

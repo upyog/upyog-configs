@@ -82,6 +82,12 @@
                 "type": "date"
               },
               {
+                "variable": "formattedSubmissionDate",
+                "value": {
+                  "path": "$.additionalDetails.formattedSubmissionDate"
+                }
+              },
+              {
                 "variable": "conditions",
                 "value": {
                   "path": "$.additionalDetails"
@@ -119,6 +125,20 @@
                 "variable": "stakeholderName",
                 "value": {
                   "path": "$.additionalDetails.stakeholderName"
+                  
+                }
+              },
+              {
+                "variable": "ulbName",
+                "value": {
+                  "path": "$.additionalDetails.UlbName"
+                  
+                }
+              },
+              {
+                "variable": "ulbType",
+                "value": {
+                  "path": "$.additionalDetails.Ulblisttype"
                   
                 }
               },
