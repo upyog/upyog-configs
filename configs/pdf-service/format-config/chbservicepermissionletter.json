@@ -1,0 +1,71 @@
+{
+    "key": "chbservicepermissionletter",
+    "config": {
+      "defaultStyle": {
+        "font": "Cambay"
+      },
+      "content": [
+        {
+          "style": "header",
+          "text": "PERMISSION LETTER"
+        },
+        {
+          "text": "Permission is accorded to: {{Applicant_Name}} with mobile Number: {{Owner_Contact}} to use the Hall with Hall details as follows:",
+          "style": "content",
+          "margin": [0, 10, 0, 10]
+        },
+        {
+          "text": "Hall Name: {{Hall_Name}}",
+          "style": "subheader",
+          "margin": [0, 0, 0, 10]
+        },
+        {
+          "text": "Booking Number: {{Booking_Number}}",
+          "style": "subheader",
+          "margin": [0, 0, 0, 10]
+        },
+        {
+          "text": "Booking Slot: {{Booking_Slot}}",
+          "style": "subheader",
+          "margin": [0, 0, 0, 20]
+        },
+        {
+          "text": "Booking Status: {{Booking_status}}",
+          "style": "subheader",
+          "margin": [0, 0, 0, 20]
+        },
+        {
+          "text": "Start Date: {{Start_Date}}",
+          "style": "subheader",
+          "margin": [0, 0, 0, 20]
+        },
+        {
+          "text": "End Date: {{End_Date}}",
+          "style": "subheader",
+          "margin": [0, 0, 0, 20]
+        }
+        ,{
+            "text": "Amount Paid: {{Amount_Paid}}",
+            "style": "subheader",
+            "margin":[0, 0, 0, 20]
+        }
+      ],
+      "styles": {
+        "header": {
+          "fontSize": 20,
+          "bold": true,
+          "alignment": "center",
+          "margin": [0, 20, 0, 20]
+        },
+        "subheader": {
+          "fontSize": 16,
+          "margin": [0, 0, 0, 10]
+        },
+        "content": {
+          "fontSize": 14,
+          "margin": [0, 0, 0, 10]
+        }
+      }
+    }
+  }
+  
