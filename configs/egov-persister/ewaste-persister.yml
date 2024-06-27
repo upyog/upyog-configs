@@ -143,7 +143,7 @@ serviceMaps:
       fromTopic: update-ewaste-request
       isTransaction: true
       queryMaps:
-        - query: UPDATE eg_ew_requests SET transactionId = ?,pickUpDate = ?, finalAmount = ?, requestStatus = ?  WHERE id=?;
+        - query: UPDATE eg_ew_requests SET transactionId = ?,pickUpDate = ?, finalAmount = ?, requestStatus = ?, lastmodifiedby = ?, lastmodifiedtime = ?  WHERE id=?;
           basePath: EwasteApplication.*
           jsonMaps:
 
@@ -154,5 +154,9 @@ serviceMaps:
             - jsonPath: $.EwasteApplication.*.finalAmount
 
             - jsonPath: $.EwasteApplication.*.requestStatus
+            
+            - jsonPath: $.EwasteApplication.*.auditDetails.lastModifiedBy
+            
+            - jsonPath: $.EwasteApplication.*.auditDetails.lastModifiedTime
 
             - jsonPath: $.EwasteApplication.*.id
