@@ -6,89 +6,160 @@
     },
     "content": [
       {
-        "style": "header",
-        "text": "E-WASTE DISPOSAL CERTIFICATE"
-      },
-      {
-        "text": "This certifies that: {{Applicant_Name}} with mobile number: {{Applicant_Contact}} has disposed of their e-waste through a registered vendor with the product details as follows:",
-        "style": "content",
-        "margin": [0, 10, 0, 10]
-      },
-      {
+        "style": "noc-head",
         "table": {
-          "headerRows": 1,
-          "widths": ["*", "*", "*", "*"],
+          "widths": [
+            100,
+            "*",
+            150
+          ],
           "body": [
             [
-              { "text": "Product ID", "style": "tableHeader" },
-              { "text": "Product Name", "style": "tableHeader" },
-              { "text": "Quantity", "style": "tableHeader" },
-              { "text": "Price", "style": "tableHeader" }
-            ],
-            "{{#each ewasteDetails}}",
-            [
-              { "text": "{{productId}}", "style": "tableContent" },
-              { "text": "{{productName}}", "style": "tableContent" },
-              { "text": "{{quantity}}", "style": "tableContent" },
-              { "text": "{{price}}", "style": "tableContent" }
-            ],
-            "{{/each}}"
+              {
+                "image": "{{logoImage}}",
+                "width": 80,
+                "height": 45
+              },
+              {
+                "stack": [
+                  {
+                    "style": "header",
+                    "text": [
+                      "E-WASTE CERTIFICATE"
+                    ],
+                    "decoration": "underline"
+                  }
+                ],
+                "alignment": "center",
+                "margin": [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "stack": [
+                  {
+                    "text": "{{address}}"
+                  },
+                  {
+                    "text": " {{website}}"
+                  },
+                  {
+                    "text": "{{email}} , {{phoneNumber}}"
+                  }
+                ],
+                "alignment": "right",
+                "color": "#484848",
+                "margin": [
+                  -100,
+                  0,
+                  -25,
+                  0
+                ]
+              }
+            ]
           ]
         },
-        "layout": "lightHorizontalLines",
-        "margin": [0, 10, 0, 20]
+        "layout": "noBorders"
       },
+      {
+        "text": ["This certifies that: ", { "text": "{{Applicant_Name}}", "bold": true }, " with mobile number: ", { "text": "{{Applicant_Contact}}", "bold": true }, " has disposed off their e-waste through a registered vendor under request id: ", { "text": "{{Request_Id}}", "bold": true }, "."],
+        "style": "content",
+        "margin": [0, 40, 0, 10]
+        },
       {
         "text": "Transactional Details:",
         "style": "subheader",
-        "margin": [0, 10, 0, 10]
+        "margin": [
+          0,
+          10,
+          0,
+          5
+        ]
       },
       {
         "columns": [
           {
             "width": "50%",
             "stack": [
-              { "text": "Calculated Amount: {{Calculated_Amount}}", "style": "content" },
-              { "text": "Final Amount: {{Final_Amount}}", "style": "content" },
-              { "text": "Pickup Date: {{Pickup_Date}}", "style": "content" },
-              { "text": "Payment Method: ONLINE", "style": "content" }
+              {
+                "text": [
+                  "Calculated Amount: ",
+                  {
+                    "text": "{{Calculated_Amount}}",
+                    "bold": true
+                  }
+                ],
+                "style": "content"
+              },
+              {
+                "text": [
+                  "Final Amount: ",
+                  {
+                    "text": "{{Final_Amount}}",
+                    "bold": true
+                  }
+                ],
+                "style": "content"
+              },
+              {
+                "text": [
+                  "Pickup Date: ",
+                  {
+                    "text": "{{Approval_Date}}",
+                    "bold": true
+                  }
+                ],
+                "style": "content"
+              },
+              {
+                "text": [
+                  "Payment Method: ",
+                  {
+                    "text": "ONLINE",
+                    "bold": true
+                  }
+                ],
+                "style": "content"
+              }
             ]
           }
         ],
-        "margin": [0, 10, 0, 20]
+        "margin": [
+          0,
+          10,
+          0,
+          20
+        ]
       },
       {
         "text": "This is to certify that the e-waste described above has been collected and properly disposed of by the registered vendor. The certificate is issued to acknowledge the successful completion of the e-waste disposal process.",
-        "style": "footer"
+        "style": "footer",
+        "margin": [
+          0,
+          20,
+          0,
+          0
+        ]
       }
     ],
     "styles": {
       "header": {
         "fontSize": 20,
-        "bold": true,
-        "alignment": "center",
-        "margin": [0, 20, 0, 20]
+        "bold": true
       },
       "subheader": {
         "fontSize": 16,
-        "margin": [0, 0, 0, 10]
+        "bold": true
       },
       "content": {
-        "fontSize": 14,
-        "margin": [0, 0, 0, 10]
-      },
-      "tableHeader": {
-        "bold": true,
-        "fontSize": 13,
-        "color": "black"
-      },
-      "tableContent": {
-        "fontSize": 12
+        "fontSize": 14
       },
       "footer": {
         "fontSize": 14,
-        "italics": true,
-        "margin": [0, 20, 0, 0]
+        "italics": true
       }
     }
   }

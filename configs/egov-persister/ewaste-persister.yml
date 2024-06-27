@@ -113,12 +113,37 @@ serviceMaps:
 
             - jsonPath: $.EwasteApplication.*.id
 
+        - query: INSERT INTO eg_ew_ewastedocuments( id, tenantId, documentType, filestoreId, documentUid, ewid, active, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: EwasteApplication.*.documents.*
+          jsonMaps:
+            - jsonPath: $.EwasteApplication.*.id
+
+            - jsonPath: $.EwasteApplication.*.tenantId
+ 
+            - jsonPath: $.EwasteApplication.*.documentType
+
+            - jsonPath: $.EwasteApplication.*.filestoreId
+
+            - jsonPath: $.EwasteApplication.*.documentUid
+            
+            - jsonPath: $.EwasteApplication.*.[?({id} in @.documents[*].id)].id
+             
+            - jsonPath: $.EwasteApplication.*.active
+            
+            - jsonPath: $.EwasteApplication.*.auditDetails.createdBy
+            
+            - jsonPath: $.EwasteApplication.*.auditDetails.lastModifiedBy
+            
+            - jsonPath: $.EwasteApplication.*.auditDetails.createdTime
+            
+            - jsonPath: $.EwasteApplication.*.auditDetails.lastModifiedTime
+  
     - version: 1.0
       description: Update Ewaste application request in tables
       fromTopic: update-ewaste-request
       isTransaction: true
       queryMaps:
-        - query: UPDATE eg_ew_requests SET transactionId = ?,pickUpDate = ?, finalAmount = ?, requestStatus = ?  WHERE id=?;
+        - query: UPDATE eg_ew_requests SET transactionId = ?,pickUpDate = ?, finalAmount = ?, requestStatus = ?, lastmodifiedby = ?, lastmodifiedtime = ?  WHERE id=?;
           basePath: EwasteApplication.*
           jsonMaps:
 
@@ -129,5 +154,9 @@ serviceMaps:
             - jsonPath: $.EwasteApplication.*.finalAmount
 
             - jsonPath: $.EwasteApplication.*.requestStatus
+            
+            - jsonPath: $.EwasteApplication.*.auditDetails.lastModifiedBy
+            
+            - jsonPath: $.EwasteApplication.*.auditDetails.lastModifiedTime
 
             - jsonPath: $.EwasteApplication.*.id
