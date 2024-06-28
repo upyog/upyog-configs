@@ -8716,7 +8716,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "pt-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Paytm\"}},{\"term\":{\"paymentChannelType.keyword\":\"Razorpay\"}},{\"term\":{\"paymentChannelType.keyword\":\"PayU\"}},{\"term\":{\"paymentChannelType.keyword\":\"BBPS\"}},{\"term\":{\"paymentChannelType.keyword\":\"Freecharge\"}}]}},\"aggs\":{\"Target Collection Online\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Digital\"}}]}},\"aggs\":{\"Target Collection Online\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
       },
       {
         "module": "PT",
@@ -8761,14 +8761,13 @@
         "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
         "dateRefField": "",
         "indexName": "pt-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Paytm\"}},{\"term\":{\"paymentChannelType.keyword\":\"Razorpay\"}},{\"term\":{\"paymentChannelType.keyword\":\"PayU\"}},{\"term\":{\"paymentChannelType.keyword\":\"BBPS\"}},{\"term\":{\"paymentChannelType.keyword\":\"Freecharge\"}}]}},\"aggs\":{\"Collection Online\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
-      },
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Digital\"}}]}},\"aggs\":{\"Collection Online\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
       {
         "module": "PT",
         "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
         "dateRefField": "",
         "indexName": "pt-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"System\"}},{\"term\":{\"paymentChannelType.keyword\":\"Field\"}},{\"term\":{\"paymentChannelType.keyword\":\"Sewakendra\"}},{\"term\":{\"paymentChannelType.keyword\":\"POS\"}}]}},\"aggs\":{\"Collection Offline\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Non Digital\"}}]}},\"aggs\":{\"Collection Offline\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
       }
     ],
     "isMdmsEnabled": false,
@@ -19552,19 +19551,19 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "pt-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Paytm\"}},{\"term\":{\"paymentChannelType.keyword\":\"Razorpay\"}},{\"term\":{\"paymentChannelType.keyword\":\"PayU\"}},{\"term\":{\"paymentChannelType.keyword\":\"BBPS\"}},{\"term\":{\"paymentChannelType.keyword\":\"Freecharge\"}}]}},\"aggs\":{\"Target Collection PT\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Digital\"}}]}},\"aggs\":{\"Target Collection PT\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
       },
       {
         "module": "TL",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "tl-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Paytm\"}},{\"term\":{\"paymentChannelType.keyword\":\"Razorpay\"}},{\"term\":{\"paymentChannelType.keyword\":\"PayU\"}},{\"term\":{\"paymentChannelType.keyword\":\"BBPS\"}},{\"term\":{\"paymentChannelType.keyword\":\"Freecharge\"}}]}},\"aggs\":{\"Target Collection TL\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Digital\"}}]}},\"aggs\":{\"Target Collection TL\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
       },
       {
         "module": "WS",
         "indexName": "ws-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Paytm\"}},{\"term\":{\"paymentChannelType.keyword\":\"PAYTM\"}},{\"term\":{\"paymentChannelType.keyword\":\"RAZORPAY\"}},{\"term\":{\"paymentChannelType.keyword\":\"POS\"}},{\"term\":{\"paymentChannelType.keyword\":\"AXIS\"}},{\"term\":{\"paymentChannelType.keyword\":\"EBS payment gateway\"}},{\"term\":{\"paymentChannelType.keyword\":\"Razorpay\"}},{\"term\":{\"paymentChannelType.keyword\":\"PayU\"}},{\"term\":{\"paymentChannelType.keyword\":\"BBPS\"}},{\"term\":{\"paymentChannelType.keyword\":\"Freecharge\"}}]}},\"aggs\":{\"Target Collection WS\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Digital\"}}]}},\"aggs\":{\"Target Collection WS\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}",
         "requestQueryMap": "{\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
         "dateRefField": "date"
       },
@@ -19573,33 +19572,33 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "obps-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentMode.keyword\":\"DEBIT.CARD\"}},{\"term\":{\"paymentMode.keyword\":\"CREDIT.CARD\"}},{\"term\":{\"paymentMode.keyword\":\"UPI\"}}]}},\"aggs\":{\"Target Collection OBPS\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentMode.keyword\":\"Digital\"}}]}},\"aggs\":{\"Target Collection OBPS\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
       {
         "module": "FIRENOC",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "firenoc-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentMode.keyword\":\"ONLINE\"}},{\"term\":{\"paymentMode.keyword\":\"UPI\"}},{\"term\":{\"paymentMode.keyword\":\"DEBIT_CARD\"}}]}},\"aggs\":{\"Target Collection FIRENOC\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentMode.keyword\":\"Digital\"}}]}},\"aggs\":{\"Target Collection FIRENOC\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
       {
         "module": "MC",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "mcollect-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentMode.keyword\":\"ONLINE\"}},{\"term\":{\"paymentMode.keyword\":\"UPI\"}},{\"term\":{\"paymentMode.keyword\":\"QR_CODE\"}},{\"term\":{\"paymentMode.keyword\":\"Paytm Postpaid\"}},{\"term\":{\"paymentMode.keyword\":\"CARD\"}},{\"term\":{\"paymentMode.keyword\":\"NB\"}}]}},\"aggs\":{\"Target Collection MC\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentMode.keyword\":\"Digital\"}}]}},\"aggs\":{\"Target Collection MC\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
       {
         "module": "BIRTH",
         "indexName": "birth-cert-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"channel.keyword\":\"Paytm\"}},{\"term\":{\"channel.keyword\":\"Razorpay\"}},{\"term\":{\"channel.keyword\":\"PayU\"}},{\"term\":{\"channel.keyword\":\"BBPS\"}},{\"term\":{\"channel.keyword\":\"Freecharge\"}}]}},\"aggs\":{\"Target Collection BIRTH\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"channel.keyword\":\"Digital\"}}]}},\"aggs\":{\"Target Collection BIRTH\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}",
         "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date"
       },
       {
         "module": "DEATH",
         "indexName": "death-cert-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"channel.keyword\":\"Paytm\"}},{\"term\":{\"channel.keyword\":\"Razorpay\"}},{\"term\":{\"channel.keyword\":\"PayU\"}},{\"term\":{\"channel.keyword\":\"BBPS\"}},{\"term\":{\"channel.keyword\":\"Freecharge\"}}]}},\"aggs\":{\"Target Collection BIRTH\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"channel.keyword\":\"Digital\"}}]}},\"aggs\":{\"Target Collection DEATH\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}",
         "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date"
       },
@@ -19694,12 +19693,12 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "tl-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Paytm\"}},{\"term\":{\"paymentChannelType.keyword\":\"Razorpay\"}},{\"term\":{\"paymentChannelType.keyword\":\"PayU\"}},{\"term\":{\"paymentChannelType.keyword\":\"BBPS\"}},{\"term\":{\"paymentChannelType.keyword\":\"Freecharge\"}}]}},\"aggs\":{\"Target Collection TL\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Digital\"}}]}},\"aggs\":{\"Target Collection TL\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
       },
       {
         "module": "WS",
         "indexName": "ws-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Paytm\"}},{\"term\":{\"paymentChannelType.keyword\":\"PAYTM\"}},{\"term\":{\"paymentChannelType.keyword\":\"RAZORPAY\"}},{\"term\":{\"paymentChannelType.keyword\":\"POS\"}},{\"term\":{\"paymentChannelType.keyword\":\"AXIS\"}},{\"term\":{\"paymentChannelType.keyword\":\"EBS payment gateway\"}},{\"term\":{\"paymentChannelType.keyword\":\"Razorpay\"}},{\"term\":{\"paymentChannelType.keyword\":\"PayU\"}},{\"term\":{\"paymentChannelType.keyword\":\"BBPS\"}},{\"term\":{\"paymentChannelType.keyword\":\"Freecharge\"}}]}},\"aggs\":{\"Target Collection WS\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Digital\"}}]}},\"aggs\":{\"Target Collection WS\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}",
         "requestQueryMap": "{\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
         "dateRefField": "date"
       },
@@ -19708,33 +19707,33 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "obps-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentMode.keyword\":\"DEBIT.CARD\"}},{\"term\":{\"paymentMode.keyword\":\"CREDIT.CARD\"}},{\"term\":{\"paymentMode.keyword\":\"UPI\"}}]}},\"aggs\":{\"Target Collection OBPS\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentMode.keyword\":\"Digital\"}}]}},\"aggs\":{\"Target Collection OBPS\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
       {
         "module": "FIRENOC",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "firenoc-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentMode.keyword\":\"ONLINE\"}},{\"term\":{\"paymentMode.keyword\":\"UPI\"}},{\"term\":{\"paymentMode.keyword\":\"DEBIT_CARD\"}}]}},\"aggs\":{\"Target Collection FIRENOC\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentMode.keyword\":\"Digital\"}}]}},\"aggs\":{\"Target Collection FIRENOC\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
       {
         "module": "MC",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "mcollect-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentMode.keyword\":\"ONLINE\"}},{\"term\":{\"paymentMode.keyword\":\"UPI\"}},{\"term\":{\"paymentMode.keyword\":\"QR_CODE\"}},{\"term\":{\"paymentMode.keyword\":\"Paytm Postpaid\"}},{\"term\":{\"paymentMode.keyword\":\"CARD\"}},{\"term\":{\"paymentMode.keyword\":\"NB\"}}]}},\"aggs\":{\"Target Collection MC\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentMode.keyword\":\"Digital\"}}]}},\"aggs\":{\"Target Collection MC\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
       {
         "module": "BIRTH",
         "indexName": "birth-cert-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"channel.keyword\":\"Paytm\"}},{\"term\":{\"channel.keyword\":\"Razorpay\"}},{\"term\":{\"channel.keyword\":\"PayU\"}},{\"term\":{\"channel.keyword\":\"BBPS\"}},{\"term\":{\"channel.keyword\":\"Freecharge\"}}]}},\"aggs\":{\"Target Collection BIRTH\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"channel.keyword\":\"Digital\"}}]}},\"aggs\":{\"Target Collection BIRTH\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}",
         "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date"
       },
       {
         "module": "DEATH",
         "indexName": "death-cert-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"channel.keyword\":\"Paytm\"}},{\"term\":{\"channel.keyword\":\"Razorpay\"}},{\"term\":{\"channel.keyword\":\"PayU\"}},{\"term\":{\"channel.keyword\":\"BBPS\"}},{\"term\":{\"channel.keyword\":\"Freecharge\"}}]}},\"aggs\":{\"Target Collection BIRTH\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"channel.keyword\":\"Digital\"}}]}},\"aggs\":{\"Target Collection BIRTH\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}",
         "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date"
       },
