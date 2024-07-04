@@ -338,7 +338,7 @@ ReportDefinitions:
         label: ULBName
         type: singlevaluelist
         source: obps
-        isMandatory: false,
+        isMandatory: false
         pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=tenant&masterName=tenants|$.MdmsRes.tenant.tenants.*.code|$.MdmsRes.tenant.tenants.*.name
         searchClause: AND bp.additionalDetails->>'UlbName' = $ulbName
       - name: applicationNo
