@@ -101,7 +101,7 @@ ReportDefinitions:
       - name: instrumentType
         label: REPORTS_OBPS_PARAM_INSTRUMENTTYPE
         type: singlevaluelist
-        pattern: "list://CASH:CASH,ONLINE:ONLINE,CARD:CARD,DD:DD,CHEQUE:CHEQUE"
+        pattern: 'list://CASH:CASH,ONLINE:ONLINE,CARD:CARD,DD:DD,CHEQUE:CHEQUE'
         source: obps
         wrapper: true
         isMandatory: false
@@ -109,7 +109,7 @@ ReportDefinitions:
       - name: instrumentStatus
         label: REPORTS_OBPS_PARAM_INSTRUMENTSTATUS
         type: singlevaluelist
-        pattern: "list://APPROVED:APPROVED,REMITTED:REMITTED,CANCELLED:CANCELLED,ACTIVE:ACTIVE"
+        pattern: 'list://APPROVED:APPROVED,REMITTED:REMITTED,CANCELLED:CANCELLED,ACTIVE:ACTIVE'
         wrapper: true
         isMandatory: false
         searchClause: AND instrumentstatus = $instrumentStatus
@@ -212,7 +212,7 @@ ReportDefinitions:
         source: obps
         isMandatory: false
         searchClause: AND landinfo.channel in ( $applicationChannel )
-        pattern: "list://SYSTEM:SYSTEM"
+        pattern: 'list://SYSTEM:SYSTEM'
         isLocalisationRequired: true
         localisationPrefix: WF_BPA_
       - name: applicationType
@@ -220,7 +220,7 @@ ReportDefinitions:
         type: multivaluelist
         source: obps
         isMandatory: false
-        pattern: "list://BUILDING_OC_PLAN_SCRUTINY:BUILDING_OC_PLAN_SCRUTINY,BUILDING_PLAN_SCRUTINY:BUILDING_PLAN_SCRUTINY"
+        pattern: 'list://BUILDING_OC_PLAN_SCRUTINY:BUILDING_OC_PLAN_SCRUTINY,BUILDING_PLAN_SCRUTINY:BUILDING_PLAN_SCRUTINY'
         searchClause: AND bp.additionaldetails->>'applicationType' in ( $applicationType )
         isLocalisationRequired: true
         localisationPrefix: WF_BPA_
@@ -229,7 +229,7 @@ ReportDefinitions:
         type: multivaluelist
         source: obps
         isMandatory: false
-        pattern: "list://NEW_CONSTRUCTION:NEW_CONSTRUCTION"
+        pattern: 'list://NEW_CONSTRUCTION:NEW_CONSTRUCTION'
         searchClause: AND bp.additionaldetails->> 'serviceType' in ( $serviceType )
         isLocalisationRequired: true
       - name: status
@@ -237,7 +237,7 @@ ReportDefinitions:
         type: multivaluelist
         source: obps
         isMandatory: false
-        pattern: "list://CITIZEN_ACTION_PENDING_AT_DOC_VERIF:CITIZEN_ACTION_PENDING_AT_DOC_VERIF,INPROGRESS:INPROGRESS,PENDING_APPL_FEE:PENDING_APPL_FEE,PENDING_SANC_FEE_PAYMENT:PENDING_SANC_FEE_PAYMENT,DOC_VERIFICATION_INPROGRESS:DOC_VERIFICATION_INPROGRESS,CITIZEN_ACTION_PENDING_AT_NOC_VERIF:CITIZEN_ACTION_PENDING_AT_NOC_VERIF,PERMIT REVOCATION:PERMIT REVOCATION,FIELDINSPECTION_INPROGRESS:FIELDINSPECTION_INPROGRESS,PENDING_FEE:PENDING_FEE,NOC_VERIFICATION_INPROGRESS:NOC_VERIFICATION_INPROGRESS,INITIATED:INITIATED,CITIZEN_APPROVAL_INPROCESS:CITIZEN_APPROVAL_INPROCESS,REJECTED:REJECTED,APPROVED:APPROVED,CITIZEN_ACTION_PENDING_AT_FI_VERIF:CITIZEN_ACTION_PENDING_AT_FI_VERIF,APPROVAL_INPROGRESS:APPROVAL_INPROGRESS"
+        pattern: 'list://CITIZEN_ACTION_PENDING_AT_DOC_VERIF:CITIZEN_ACTION_PENDING_AT_DOC_VERIF,INPROGRESS:INPROGRESS,PENDING_APPL_FEE:PENDING_APPL_FEE,PENDING_SANC_FEE_PAYMENT:PENDING_SANC_FEE_PAYMENT,DOC_VERIFICATION_INPROGRESS:DOC_VERIFICATION_INPROGRESS,CITIZEN_ACTION_PENDING_AT_NOC_VERIF:CITIZEN_ACTION_PENDING_AT_NOC_VERIF,PERMIT REVOCATION:PERMIT REVOCATION,FIELDINSPECTION_INPROGRESS:FIELDINSPECTION_INPROGRESS,PENDING_FEE:PENDING_FEE,NOC_VERIFICATION_INPROGRESS:NOC_VERIFICATION_INPROGRESS,INITIATED:INITIATED,CITIZEN_APPROVAL_INPROCESS:CITIZEN_APPROVAL_INPROCESS,REJECTED:REJECTED,APPROVED:APPROVED,CITIZEN_ACTION_PENDING_AT_FI_VERIF:CITIZEN_ACTION_PENDING_AT_FI_VERIF,APPROVAL_INPROGRESS:APPROVAL_INPROGRESS'
         searchClause: AND bp.status in ( $status )
         isLocalisationRequired: true
         localisationPrefix: WF_BPA_
@@ -332,7 +332,7 @@ ReportDefinitions:
         type: singlevaluelist
         source: obps
         isMandatory: false
-        pattern: "list://Municipal Corporation:Municipal Corporation,Municipal Council:Municipal Council,Nagar Panchayat:Nagar Panchayat,Improvement Trust:Improvement Trust"
+        pattern: 'list://Municipal Corporation:Municipal Corporation,Municipal Council:Municipal Council,Nagar Panchayat:Nagar Panchayat,Improvement Trust:Improvement Trust'
         searchClause: AND bp.additionalDetails->>'Ulblisttype' = $ulbType
       - name: ulbName
         label: ULBName
