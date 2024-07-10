@@ -371,11 +371,11 @@ ReportDefinitions:
             bd.additionalDetails->>'latitude' AS Latitude,
             bd.additionalDetails->>'longitude' AS Longitude,
             bp.additionalDetails->>'P1charges' AS Pay1_Charges,
-            bp.additionalDetails->>'selfCertificationCharges'->>'BPA_MALBA_CHARGES' AS Malba_Charges,
-            bp.additionalDetails->>'selfCertificationCharges'->>'BPA_LABOUR_CESS' AS Labour_Cess,
-            bp.additionalDetails->>'selfCertificationCharges'->>'BPA_WATER_CHARGES' AS Water_charges,
-            bp.additionalDetails->>'selfCertificationCharges'->>'BPA_DEVELOPMENT_CHARGES' AS Development_charges,
-            bp.additionalDetails->>'selfCertificationCharges'->>'BPA_OTHER_CHARGES' AS Other_charges 
+            bp.additionalDetails->'selfCertificationCharges'->>'BPA_MALBA_CHARGES' AS Malba_Charges,
+            bp.additionalDetails->'selfCertificationCharges'->>'BPA_LABOUR_CESS' AS Labour_Cess,
+            bp.additionalDetails->'selfCertificationCharges'->>'BPA_WATER_CHARGES' AS Water_charges,
+            bp.additionalDetails->'selfCertificationCharges'->>'BPA_DEVELOPMENT_CHARGES' AS Development_charges,
+            bp.additionalDetails->'selfCertificationCharges'->>'BPA_OTHER_CHARGES' AS Other_charges 
       FROM eg_bpa_buildingplan bp 
       JOIN eg_bpa_document bd ON bp.id = bd.buildingplanid 
       WHERE 1=1
