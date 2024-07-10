@@ -246,7 +246,7 @@ ReportDefinitions:
     orderby: ORDER BY normalappdate asc
 
   - reportName: ObpsMISReport1
-    decryptionPathId: ObpsMISReport1
+    decryptionPathId: ObpsDailyCollectionReport
     summary: OBPS MIS Report 1
     version: 1.0.0
     moduleName: rainmaker-obps
@@ -351,14 +351,14 @@ ReportDefinitions:
         label: FromDate
         type: epoch
         source: obps
-        isMandatory: false
-        searchClause: AND submissiondate >= $fromDate
+        isMandatory: true
+        searchClause: AND bp.createdTime >= $fromDate
       - name: toDate
         label: ToDate
         type: epoch
         source: obps
-        isMandatory: false
-        searchClause: AND submissiondate <= $toDate
+        isMandatory: true
+        searchClause: AND bp.createdTime <= $toDate
       
     query: >-
       SELECT bp.additionalDetails->'District' AS District,
@@ -379,4 +379,5 @@ ReportDefinitions:
       FROM eg_bpa_buildingplan bp 
       JOIN eg_bpa_document bd ON bp.id = bd.buildingplanid 
       WHERE 1=1
+      
     orderby: ORDER BY submissiondate DESC
