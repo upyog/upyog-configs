@@ -297,4 +297,3 @@ ReportDefinitions:
         searchClause: AND bp.createdTime <= $toDate
 
     query: SELECT bp.additionalDetails->'District' AS District,bp.additionalDetails->'ownerName' AS ApplicantName FROM eg_bpa_buildingplan bp  WHERE 1=1
-    orderby: ORDER BY submissiondate DESC
