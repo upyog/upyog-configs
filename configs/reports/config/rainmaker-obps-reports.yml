@@ -381,3 +381,273 @@ ReportDefinitions:
       WHERE 1=1
 
     orderby: ORDER BY submissiondate DESC
+
+  - reportName: ObpsApplicationApprovedAfterTimeframeReport
+    decryptionPathId: ObpsDailyCollectionReport
+    summary: OBPS Application Approved After Timeframe Report
+    version: 1.0.0
+    moduleName: rainmaker-obps
+    sourceColumns:
+      - name: District
+        label: District
+        type: string
+        source: obps
+        total: false
+      - name: UlbType
+        label: ULBType
+        type: string
+        source: obps
+        total: false
+      - name: UlbName
+        label: UlbName
+        type: string
+        source: obps
+        total: false
+      - name: applicationno
+        label: ApplicationNumber
+        type: string
+        source: obps
+        total: false
+      - name: ApplicantName
+        label: ApplicantName
+        type: string
+        source: obps
+        total: false
+      - name: submissiondate
+        label: SubmissionDate
+        type: string
+        source: obps
+        total: false
+      - name: approval_date
+        label: ApprovalDate
+        type: string
+        source: obps
+        total: false
+      - name: above_sla
+        label: Application Remaining Pending with Officer after timeframe and got appproved
+        type: string
+        source: obps
+        total: false
+      - name: Name_of_officer
+        label: NameOfOfficer
+        type: string
+        source: obps
+        total: false
+    searchParams:
+      - name: ulbType
+        label: ULBType
+        type: singlevaluelist
+        source: obps
+        isMandatory: false
+        pattern: "list://Municipal Corporation:Municipal Corporation,Municipal Council:Municipal Council,Nagar Panchayat:Nagar Panchayat,Improvement Trust:Improvement Trust"
+        searchClause: AND bp.additionalDetails->>'Ulblisttype' = $ulbType
+      - name: ulbName
+        label: ULBName
+        type: singlevaluelist
+        source: obps
+        isMandatory: false
+        pattern: "http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=tenant&masterName=tenants|$.MdmsRes.tenant.tenants.*.code|$.MdmsRes.tenant.tenants.*.name"
+        searchClause: AND bp.additionalDetails->>'UlbName' = $ulbName
+      - name: applicationNo
+        label: ApplicationNumber
+        type: string
+        source: obps
+        isMandatory: false
+        searchClause: AND bp.applicationno = $applicationNo
+      - name: fromDate
+        label: FromDate
+        type: epoch
+        source: obps
+        isMandatory: true
+        searchClause: AND bp.createdTime >= $fromDate
+      - name: toDate
+        label: ToDate
+        type: epoch
+        source: obps
+        isMandatory: true
+        searchClause: AND bp.createdTime <= $toDate
+
+    query: >-
+      SELECT
+      bp.additionalDetails->>'District' AS District,
+      bp.additionalDetails->>'Ulblisttype' AS UlbType,
+      bp.additionalDetails->>'UlbName' AS UlbName,
+      bp.applicationno,
+      bp.additionalDetails->>'ownerName' AS ApplicantName,
+      to_char(to_timestamp(bp.createdTime / 1000), 'DD/MM/YYYY') as submissiondate,
+      TO_CHAR(TO_TIMESTAMP(bp.approvaldate / 1000), 'DD/MM/YYYY') AS approval_date,
+      wft.escalated as above_sla,
+      (SELECT eg_user.name
+       FROM eg_user
+       JOIN eg_bpa_buildingplan bp2 ON eg_user.uuid = bp2.lastmodifiedby
+       WHERE bp2.applicationno = bp.applicationno) AS Name_of_officer
+      FROM eg_bpa_buildingplan bp 
+      JOIN eg_wf_processinstance_v2 wft ON wft.businessid=bp.applicationno
+      WHERE 1=1
+
+    orderby: ORDER BY submissiondate DESC
+
+  - reportName: ObpsUlbWiseStatusReport
+    decryptionPathId: ObpsDailyCollectionReport
+    summary: OBPS ULB Wise Status Report
+    version: 1.0.0
+    moduleName: rainmaker-obps
+    sourceColumns:
+      - name: District
+        label: District
+        type: string
+        source: obps
+        total: false
+      - name: UlbType
+        label: ULBType
+        type: string
+        source: obps
+        total: false
+      - name: UlbName
+        label: UlbName
+        type: string
+        source: obps
+        total: false
+      - name: count
+        label: Total Cases Submitted
+        type: string
+        source: obps
+        total: false
+    searchParams:
+      - name: ulbType
+        label: ULBType
+        type: singlevaluelist
+        source: obps
+        isMandatory: false
+        pattern: "list://Municipal Corporation:Municipal Corporation,Municipal Council:Municipal Council,Nagar Panchayat:Nagar Panchayat,Improvement Trust:Improvement Trust"
+        searchClause: AND bp.additionalDetails->>'Ulblisttype' = $ulbType
+      - name: ulbName
+        label: ULBName
+        type: singlevaluelist
+        source: obps
+        isMandatory: false
+        pattern: "http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=tenant&masterName=tenants|$.MdmsRes.tenant.tenants.*.code|$.MdmsRes.tenant.tenants.*.name"
+        searchClause: AND bp.additionalDetails->>'UlbName' = $ulbName
+      - name: fromDate
+        label: FromDate
+        type: epoch
+        source: obps
+        isMandatory: true
+        searchClause: AND bp.createdTime >= $fromDate
+      - name: toDate
+        label: ToDate
+        type: epoch
+        source: obps
+        isMandatory: true
+        searchClause: AND bp.createdTime <= $toDate
+
+    query: >-
+      SELECT 
+      bp.additionalDetails->>'District' AS District, 
+      bp.additionalDetails->>'Ulblisttype' AS UlbType, 
+      UPPER(bp.additionalDetails->>'UlbName') AS UlbName,
+      COUNT(*) AS count
+      FROM 
+      eg_bpa_buildingplan bp
+      GROUP BY 
+      bp.additionalDetails->>'District', 
+      bp.additionalDetails->>'Ulblisttype', 
+      bp.additionalDetails->>'UlbName'
+
+    orderby: ORDER BY District, UlbType, UlbName
+
+  - reportName: ObpsBlockingCasesDetailsReport
+    decryptionPathId: ObpsDailyCollectionReport
+    summary: OBPS Blocking Cases Details Report
+    version: 1.0.0
+    moduleName: rainmaker-obps
+    sourceColumns:
+      - name: District
+        label: District
+        type: string
+        source: obps
+        total: false
+      - name: UlbType
+        label: ULBType
+        type: string
+        source: obps
+        total: false
+      - name: UlbName
+        label: UlbName
+        type: string
+        source: obps
+        total: false
+      - name: applicationno
+        label: ApplicationNumber
+        type: string
+        source: obps
+        total: false
+      - name: ApplicantName
+        label: ApplicantName
+        type: string
+        source: obps
+        total: false
+      - name: submissiondate
+        label: SubmissionDate
+        type: string
+        source: obps
+        total: false
+      - name: Latitude
+        label: Latitude
+        type: string
+        source: obps
+        total: false
+      - name: Longitude
+        label: Longitude
+        type: string
+        source: obps
+        total: false
+    searchParams:
+      - name: ulbType
+        label: ULBType
+        type: singlevaluelist
+        source: obps
+        isMandatory: false
+        pattern: "list://Municipal Corporation:Municipal Corporation,Municipal Council:Municipal Council,Nagar Panchayat:Nagar Panchayat,Improvement Trust:Improvement Trust"
+        searchClause: AND bp.additionalDetails->>'Ulblisttype' = $ulbType
+      - name: ulbName
+        label: ULBName
+        type: singlevaluelist
+        source: obps
+        isMandatory: false
+        pattern: "http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=tenant&masterName=tenants|$.MdmsRes.tenant.tenants.*.code|$.MdmsRes.tenant.tenants.*.name"
+        searchClause: AND bp.additionalDetails->>'UlbName' = $ulbName
+      - name: applicationNo
+        label: ApplicationNumber
+        type: string
+        source: obps
+        isMandatory: false
+        searchClause: AND bp.applicationno = $applicationNo
+      - name: fromDate
+        label: FromDate
+        type: epoch
+        source: obps
+        isMandatory: true
+        searchClause: AND bp.createdTime >= $fromDate
+      - name: toDate
+        label: ToDate
+        type: epoch
+        source: obps
+        isMandatory: true
+        searchClause: AND bp.createdTime <= $toDate
+
+    query: >-
+      SELECT 
+      bp.additionalDetails->>'District' AS District,
+      bp.additionalDetails->>'Ulblisttype' AS UlbType,
+      bp.additionalDetails->>'UlbName' AS UlbName,
+      bp.applicationno,
+      bp.additionalDetails->>'ownerName' AS ApplicantName,
+      to_char(To_timestamp(bp.createdTime / 1000), 'DD/MM/YYYY') as submissiondate,
+      bd.additionalDetails->>'latitude' AS Latitude,
+      bd.additionalDetails->>'longitude' AS Longitude
+      FROM eg_bpa_buildingplan bp 
+      JOIN eg_bpa_document bd ON bp.id = bd.buildingplanid 
+      WHERE 1=1
+
+    orderby: ORDER BY submissiondate DESC
