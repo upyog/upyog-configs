@@ -218,7 +218,7 @@ serviceMaps:
       isTransaction: true
       queryMaps:
         - query:  INSERT INTO eg_asset_assignmentdetails(
-                  id,
+                  assignmentid,
                   tenantid,
                   assetid,
                   applicationno,
@@ -236,7 +236,7 @@ serviceMaps:
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: Asset.assetAssignment
           jsonMaps:
-            - jsonPath: $.Asset.assetAssignment.id
+            - jsonPath: $.Asset.assetAssignment.assignmentId
             - jsonPath: $.Asset.tenantId
             - jsonPath: $.Asset.id
             - jsonPath: $.Asset.applicationNo
@@ -267,7 +267,7 @@ serviceMaps:
                     lastmodifiedtime = ?,
                     isassigned = ?
                   WHERE
-                    id = ?;
+                    assignmentid = ?;
           basePath: Asset.assetAssignment
           jsonMaps:
             - jsonPath: $.Asset.assetAssignment.assignedUserName
@@ -277,9 +277,9 @@ serviceMaps:
             - jsonPath: $.Asset.assetAssignment.auditDetails.lastModifiedBy
             - jsonPath: $.Asset.assetAssignment.auditDetails.lastModifiedTime
             - jsonPath: $.Asset.assetAssignment.isAssigned
-            - jsonPath: $.Asset.assetAssignment.id
+            - jsonPath: $.Asset.assetAssignment.assignmentId
 
-        - query: INSERT INTO eg_asset_assignment_history SELECT * FROM EG_Asset_assignmentdetails WHERE id = ?;
+        - query: INSERT INTO eg_asset_assignment_history SELECT * FROM EG_Asset_assignmentdetails WHERE assignmentid = ?;
           basePath: Asset
           jsonMaps:
-            - jsonPath: $.Asset.assetAssignment.id
+            - jsonPath: $.Asset.assetAssignment.assignmentId
