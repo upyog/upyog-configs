@@ -190,8 +190,7 @@ serviceMaps:
        - query: UPDATE public.eg_chb_slot_detail SET status=?, lastmodifiedby=?, lastmodifiedtime=? WHERE slot_id=?
          basePath: hallsBookingApplication.bookingSlotDetails.*
          jsonMaps:
-           - jsonPath: $.hallsBookingApplication.bookingStatus
-           - jsonPath: $.hallsBookingApplication.paymentDate
+           - jsonPath: $.hallsBookingApplication.bookingSlotDetails.*.status
            - jsonPath: $.hallsBookingApplication.auditDetails.lastModifiedBy
            - jsonPath: $.hallsBookingApplication.auditDetails.lastModifiedTime
-           - jsonPath: $.hallsBookingApplication.bookingId
+           - jsonPath: $.hallsBookingApplication.bookingSlotDetails.*.slotId
