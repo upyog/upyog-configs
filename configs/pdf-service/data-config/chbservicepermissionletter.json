@@ -1,11 +1,11 @@
 {
-    "key": "chbservicepermissionletter",
+    "key": "chbpermissionletter",
     "documentType": "CHBLETTER",
     "DataConfigs": {
         "moduleName": "chb-services",
         "version": "1.0.0",
-        "baseKeyPath": "$.hallsbookingApplication.*",
-        "entityIdPath": "$.id",
+        "baseKeyPath": "$.hallsBookingApplication[*]",
+        "entityIdPath": "$.bookingNo",
         "isCommonTableBorderRequired": true,
         "mappings": [
             {
@@ -49,9 +49,9 @@
                                 }
                             },
                             {
-                                "variable": "Permission_Letter",
+                                "variable": "Pet_Registration_Certificate",
                                 "value": {
-                                    "path": "PDF_STATIC_LABEL_CHB_PERMISSION_LETTER"
+                                    "path": "PDF_STATIC_LABEL_PET_REGISTRATION_CERTIFICATE"
                                 },
                                 "type": "label",
                                 "localisation": {
@@ -61,271 +61,134 @@
                                 }
                             },
                             {
-                                "variable": "Booking_Id_Label",
+                                "variable": "bookingNo",
                                 "value": {
-                                    "path": "PDF_STATIC_LABEL_BOOKING_ID_LABEL"
-                                },
-                                "type": "label",
-                                "localisation": {
-                                    "required": true,
-                                    "prefix": null,
-                                    "module": "rainmaker-common"
+                                    "path": "$.bookingNo"
                                 }
                             },
                             {
-                                "variable": "Receipt_Number_Label",
+                                "variable": "BookingStatus",
                                 "value": {
-                                    "path": "PDF_STATIC_LABEL_RECEIPT_NUMBER_LABEL"
-                                },
-                                "type": "label",
-                                "localisation": {
-                                    "required": true,
-                                    "prefix": null,
-                                    "module": "rainmaker-common"
+                                    "path": "$.bookingStatus"
                                 }
                             },
                             {
-                                "variable": "Booking_Number",
+                                "variable": "HALL_NAME",
                                 "value": {
-                                    "path": "PDF_STATIC_LABEL_RECEIPT_BOOKING_NUMBER"
-                                },
-                                "type": "label",
-                                "localisation": {
-                                    "required": true,
-                                    "prefix": null,
-                                    "module": "rainmaker-common"
+                                    "path": "$.communityHallCode"
                                 }
                             },
                             {
-                                "variable": "Applicant_Name",
+                                "variable": "PURPOSE",
                                 "value": {
-                                    "path": "PDF_STATIC_LABEL_RECEIPT_APPLICANT_NAME"
-                                },
-                                "type": "label",
-                                "localisation": {
-                                    "required": true,
-                                    "prefix": null,
-                                    "module": "rainmaker-common"
+                                    "path": "$.purpose.purpose"
                                 }
                             },
                             {
-                                "variable": "Applicant_Contact",
+                                "variable": "ACCOUNT_NUMBER",
                                 "value": {
-                                    "path": "PDF_STATIC_LABEL_RECEIPT_APPLICANT_CONTACT"
-                                },
-                                "type": "label",
-                                "localisation": {
-                                    "required": true,
-                                    "prefix": null,
-                                    "module": "rainmaker-common"
+                                    "path": "$.applicantDetail.accountNumber"
                                 }
                             },
                             {
-                                "variable": "Booking_Slot",
+                                "variable": "APPLICANT_NAME",
                                 "value": {
-                                    "path": "PDF_STATIC_LABEL_RECEIPT_BOOKING_SLOT"
-                                },
-                                "type": "label",
-                                "localisation": {
-                                    "required": true,
-                                    "prefix": null,
-                                    "module": "rainmaker-common"
+                                    "path": "$.applicantDetail.applicantName"
                                 }
                             },
                             {
-                                "variable": "Booking_status",
+                                "variable": "BANK_NAME",
                                 "value": {
-                                    "path": "PDF_STATIC_LABEL_RECEIPT_BOOKING_STATUS"
-                                },
-                                "type": "label",
-                                "localisation": {
-                                    "required": true,
-                                    "prefix": null,
-                                    "module": "rainmaker-common"
+                                    "path": "$.applicantDetail.bankName"
                                 }
                             },
                             {
-                                "variable": "Hall_Name",
+                                "variable": "IFSC_CODE",
                                 "value": {
-                                    "path": "PDF_STATIC_LABEL_RECEIPT_HALL_NAME"
-                                },
-                                "type": "label",
-                                "localisation": {
-                                    "required": true,
-                                    "prefix": null,
-                                    "module": "rainmaker-common"
+                                    "path": "$.applicantDetail.ifscCode"
                                 }
+                                
                             },
                             {
-                                "variable": "Hall_Code",
-                                "value": {
-                                    "path": "PDF_STATIC_LABEL_RECEIPT_HALL_CODE"
-                                },
-                                "type": "label",
-                                "localisation": {
-                                    "required": true,
-                                    "prefix": null,
-                                    "module": "rainmaker-common"
-                                }
-                            },
-                            {
-                                "variable": "Start_Date",
-                                "value": {
-                                    "path": "PDF_STATIC_LABEL_RECEIPT_START_DATE"
-                                },
-                                "type": "label",
-                                "localisation": {
-                                    "required": true,
-                                    "prefix": null,
-                                    "module": "rainmaker-common"
-                                }
-                            },
-                            {
-                                "variable": "End_Date",
-                                "value": {
-                                    "path": "PDF_STATIC_LABEL_RECEIPT_END_DATE"
-                                },
-                                "type": "label",
-                                "localisation": {
-                                    "required": true,
-                                    "prefix": null,
-                                    "module": "rainmaker-common"
-                                }
-                            },
-                            {
-                                "variable": "Booking_Date",
-                                "value": {
-                                    "path": "PDF_STATIC_LABEL_RECEIPT_BOOKING_DATE"
-                                },
-                                "type": "label",
-                                "localisation": {
-                                    "required": true,
-                                    "prefix": null,
-                                    "module": "rainmaker-common"
-                                }
-                            },
-                            {
-                                "variable": "Amount_Paid",
-                                "value": {
-                                    "path": "PDF_STATIC_LABEL_RECEIPT_AMOUNT_PAID"
-                                },
-                                "type": "label",
-                                "localisation": {
-                                    "required": true,
-                                    "prefix": null,
-                                    "module": "rainmaker-common"
-                                }
-                            },
-
-
-
-                            {
-                                "variable": "Booking_Number",
-                                "value": {
-                                    "path": "$.BookingNumber"
-                                }
-                            },
-                            {
-                                "variable": "Applicant_Name",
-                                "value": {
-                                    "path": "$.applicantName"
-                                }
-                            },
-                            {
-                                "variable": "Application_Contact",
-                                "value": {
-                                    "path": "$.mobileNumber"
-                                }
-                            },
-                            {
-                                "variable": "Booking_Slot",
-                                "value": {
-                                    "path": "$.BookingSlot"
-                                }
-                            },
-                            {
-                                "variable": "Booking_status",
-                                "value": {
-                                    "path": "$.BookingStatus"
-                                }
-                            },
-                            {
-                                "variable": "Hall_Name",
-                                "value": {
-                                    "path": "$.HallCode"
-                                }
-                            },
-                            {
-                                "variable": "Hall_Code",
-                                "value": {
-                                    "path": "$.HallCode"
-                                }
-                            },
-
-                            {
-                                "variable": "Start_Date",
-                                "value": {
-                                    "path": "$.StartDate"
-                                }
-                            },
-                            {
-                                "variable": "End_Date",
-                                "value": {
-                                    "path": "$.EndDate"
-                                }
-                            },
-                            {
-                                "variable": "Booking_Date",
-                                "value": {
-                                    "path": "$.BookingDate"
-                                }
-                            },{
-                                "variable":"Amount_Paid",
-                                "value": {
-                                    "path": "$.AmountPaid"
-                                }
-                            }
-                            
-                
+                              "variable": "BOOKING_DATE",
+                              "value": {
+                                  "path": "$.bookingSlotDetails[0].bookingDate"
+                              }
+                          },
+                          {
+                              "variable": "BOOKING_FROM_DATE",
+                              "value": {
+                                  "path": "$.bookingSlotDetails[1].bookingDate"
+                              }
+                          },
+                          {
+                              "variable": "BOOKING_TO_DATE",
+                              "value": {
+                                  "path": "$.bookingSlotDetails[2].bookingDate"
+                              }
+                          }
+  
                         ]
                     },
                     {
                         "externalAPI": [
                             {
-                                "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
+                                "path": "http://localhost:8090/egov-mdms-service/v1/_get",
                                 "queryParam": "moduleName=tenant&masterName=tenants&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}')%5D",
                                 "apiRequest": null,
                                 "responseMapping": [
                                     {
-                                        "variable": "ULB_LOGO",
-                                        "value": "$.MdmsRes.tenant.tenants[0].logoId",
-                                        "type": "image"
-                                    },
-                                    {
-                                        "variable": "ULB_ADDRESS",
+                                        "variable": "address",
                                         "value": "$.MdmsRes.tenant.tenants[0].address"
                                     },
                                     {
-                                        "variable": "ULB_CITY",
-                                        "value": "$.MdmsRes.tenant.tenants[0].name"
-                                    },
-                                    {
-                                        "variable": "CorporationContact_Value",
+                                        "variable": "phoneNumber",
                                         "value": "$.MdmsRes.tenant.tenants[0].contactNumber"
                                     },
                                     {
-                                        "variable": "corporationWebsite",
+                                        "variable": "website",
                                         "value": "$.MdmsRes.tenant.tenants[0].domainUrl"
                                     },
                                     {
-                                        "variable": "corporationEmail",
+                                        "variable": "email",
                                         "value": "$.MdmsRes.tenant.tenants[0].emailId"
+                                    },
+                                    {
+                                        "variable": "logoImage",
+                                        "value": "$.MdmsRes.tenant.tenants[0].logoId",
+                                        "type": "image"
                                     }
                                 ]
                             },
                             {
-                                "path": "http://egov-workflow-v2.egov:8080/egov-workflow-v2/egov-wf/process/_search",
-                                "queryParam": "businessIds=$.applicationNumber,history=true,tenantId=$.tenantId",
+                              "path": "http://localhost:8090/egov-mdms-service/v1/_get",
+                              "queryParam": "moduleName=CHB&masterName=CommunityHalls&tenantId=pg",
+                              "apiRequest": null,
+                              "responseMapping": [
+                                  {
+                                      "variable": "terms",
+                                      "value": "$.MdmsRes.CHB.CommunityHalls[0].termsAndCondition"
+                                  },
+                                  {
+                                      "variable": "cancellationPolicy",
+                                      "value": "$.MdmsRes.CHB.CommunityHalls[0].cancellationPolicy"
+                                  }
+                              ]
+                          },
+                          {
+                              "path": "http://localhost:8090/egov-mdms-service/v1/_get",
+                              "queryParam": "moduleName=CHB&masterName=CalculationType&tenantId=pg",
+                              "apiRequest": null,
+                              "responseMapping": [
+                                  {
+                                      "variable": "amount",
+                                      "value": "$.MdmsRes.CHB.CalculationType[0].amount"
+                                  }
+                              ]
+                          },
+                            {
+                                "path": "http://localhost:8091/egov-workflow-v2/egov-wf/process/_search",
+                                "queryParam": "businessIds=$.bookingNo,history=true,tenantId=$.tenantId",
                                 "apiRequest": null,
                                 "responseMapping": [
                                     {
@@ -338,11 +201,42 @@
                                         "type": "date"
                                     }
                                 ]
+                            },
+                            {
+                              "path": "http://localhost:8098/billing-service/bill/v2/_fetchbill",
+                              "queryParam": "tenantId=pg.citya,consumerCode=$.bookingNo,businessService=chb-services",
+                              "apiRequest": null,
+                              "responseMapping": [
+                                {
+                                  "variable": "totalAmount",
+                                  "value": "Bill[0].totalAmount"
+                                },
+                                {
+                                  "variable": "securityDeposit",
+                                  "value": "Bill[0].billDetails[0].billAccountDetails[0].amount"
+                                },
+                                {
+                                  "variable": "sgst",
+                                  "value": "Bill[0].billDetails[0].billAccountDetails[1].amount"
+                                },
+                                {
+                                  "variable": "cgst",
+                                  "value": "Bill[0].billDetails[0].billAccountDetails[2].amount"
+                                },
+                                {
+                                  "variable": "rent",
+                                  "value": "Bill[0].billDetails[0].billAccountDetails[3].amount"
+                                }
+                              ]
                             }
+                            
+                            
+                            
                         ]
                     }
                 ]
             }
         ]
     }
-}
+  }
+  
