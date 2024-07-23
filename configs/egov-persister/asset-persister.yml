@@ -234,8 +234,8 @@ serviceMaps:
                   lastModifiedtime,
                   isassigned
                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                ON CONFLICT (assetid) 
-                DO UPDATE SET
+               ON CONFLICT (assetid) 
+               DO UPDATE SET
                   assignmentid = EXCLUDED.assignmentid,
                   tenantid = EXCLUDED.tenantid,
                   applicationno = EXCLUDED.applicationno,
@@ -250,7 +250,7 @@ serviceMaps:
                   createdtime = EXCLUDED.createdtime,
                   lastModifiedtime = EXCLUDED.lastModifiedtime,
                   isassigned = EXCLUDED.isassigned;
-              basePath: Asset.assetAssignment
+          basePath: Asset.assetAssignment
           jsonMaps:
             - jsonPath: $.Asset.assetAssignment.assignmentId
             - jsonPath: $.Asset.tenantId
