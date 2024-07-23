@@ -223,6 +223,7 @@ serviceMaps:
                   assetid,
                   applicationno,
                   assignedusername,
+                  employeecode,
                   designation,
                   department,
                   assigneddate,
@@ -233,7 +234,7 @@ serviceMaps:
                   lastModifiedtime,
                   isassigned
                 )
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: Asset.assetAssignment
           jsonMaps:
             - jsonPath: $.Asset.assetAssignment.assignmentId
@@ -242,6 +243,7 @@ serviceMaps:
             - jsonPath: $.Asset.applicationNo
             - jsonPath: $.Asset.assetAssignment.assignedUserName
             - jsonPath: $.Asset.assetAssignment.designation
+            - jsonPath: $.Asset.assetAssignment.employeeCode
             - jsonPath: $.Asset.assetAssignment.department
             - jsonPath: $.Asset.assetAssignment.assignedDate
             - jsonPath: $.Asset.assetAssignment.returnDate
@@ -260,6 +262,7 @@ serviceMaps:
         - query:  UPDATE eg_asset_assignmentdetails
                   SET
                     assignedusername = ?,
+                    employeecode = ?,
                     designation = ?,
                     department = ?,
                     returndate = ?,
