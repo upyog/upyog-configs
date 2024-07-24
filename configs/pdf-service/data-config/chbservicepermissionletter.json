@@ -133,7 +133,7 @@
                     {
                         "externalAPI": [
                             {
-                                "path": "http://localhost:8090/egov-mdms-service/v1/_get",
+                                "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
                                 "queryParam": "moduleName=tenant&masterName=tenants&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}')%5D",
                                 "apiRequest": null,
                                 "responseMapping": [
@@ -161,8 +161,8 @@
                                 ]
                             },
                             {
-                              "path": "http://localhost:8090/egov-mdms-service/v1/_get",
-                              "queryParam": "moduleName=CHB&masterName=CommunityHalls&tenantId=pg",
+                                "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
+                                "queryParam": "moduleName=CHB&masterName=CommunityHalls&tenantId=pg",
                               "apiRequest": null,
                               "responseMapping": [
                                   {
@@ -176,8 +176,8 @@
                               ]
                           },
                           {
-                              "path": "http://localhost:8090/egov-mdms-service/v1/_get",
-                              "queryParam": "moduleName=CHB&masterName=CalculationType&tenantId=pg",
+                            "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
+                            "queryParam": "moduleName=CHB&masterName=CalculationType&tenantId=pg",
                               "apiRequest": null,
                               "responseMapping": [
                                   {
@@ -187,7 +187,7 @@
                               ]
                           },
                             {
-                                "path": "http://localhost:8091/egov-workflow-v2/egov-wf/process/_search",
+                                "path": "http://egov-workflow-v2.egov:8080/egov-workflow-v2/egov-wf/process/_search",
                                 "queryParam": "businessIds=$.bookingNo,history=true,tenantId=$.tenantId",
                                 "apiRequest": null,
                                 "responseMapping": [
@@ -203,8 +203,8 @@
                                 ]
                             },
                             {
-                              "path": "http://localhost:8098/billing-service/bill/v2/_fetchbill",
-                              "queryParam": "tenantId=pg.citya,consumerCode=$.bookingNo,businessService=chb-services",
+                                "path": "http://billing-service:8080/billing-service/bill/v2/_fetchbill",
+                                "queryParam": "tenantId=pg.citya,consumerCode=$.bookingNo,businessService=chb-services",
                               "apiRequest": null,
                               "responseMapping": [
                                 {
