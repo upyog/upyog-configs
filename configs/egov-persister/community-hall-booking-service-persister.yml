@@ -179,17 +179,28 @@ serviceMaps:
           - jsonPath: $.hallsBookingApplication.address.localityCode
 
           - jsonPath: $.hallsBookingApplication.address.pincode
+          
+       - query: INSERT INTO public.eg_chb_booking_detail_audit SELECT * FROM public.eg_chb_booking_detail WHERE booking_id = ?;
+         basePath: hallsBookingApplication
+         jsonMaps:
+            - jsonPath: $.hallsBookingApplication.bookingId
+
+       - query: INSERT INTO public.eg_chb_slot_detail_audit SELECT * FROM public.eg_chb_slot_detail WHERE slot_id = ?;
+         basePath: hallsBookingApplication.bookingSlotDetails.*
+         jsonMaps:
+            - jsonPath: $.hallsBookingApplication.bookingSlotDetails.*.slotId
 
  - version: 1.0
    description: Update community hall booking details after application is changed
    fromTopic: update-community-hall-booking
    isTransaction: true
    queryMaps:
-       - query: UPDATE public.eg_chb_booking_detail SET booking_status= ?, payment_date = ?, lastmodifiedby = ?, lastmodifiedtime = ? WHERE booking_id = ?;
+       - query: UPDATE public.eg_chb_booking_detail SET booking_status= ?, payment_date = ?, receipt_no = ?, lastmodifiedby = ?, lastmodifiedtime = ? WHERE booking_id = ?;
          basePath: hallsBookingApplication
          jsonMaps:
            - jsonPath: $.hallsBookingApplication.bookingStatus
            - jsonPath: $.hallsBookingApplication.paymentDate
+           - jsonPath: $.hallsBookingApplication.receiptNo
            - jsonPath: $.hallsBookingApplication.auditDetails.lastModifiedBy
            - jsonPath: $.hallsBookingApplication.auditDetails.lastModifiedTime
            - jsonPath: $.hallsBookingApplication.bookingId
@@ -201,3 +212,13 @@ serviceMaps:
            - jsonPath: $.hallsBookingApplication.auditDetails.lastModifiedBy
            - jsonPath: $.hallsBookingApplication.auditDetails.lastModifiedTime
            - jsonPath: $.hallsBookingApplication.bookingSlotDetails.*.slotId
+
+       - query: INSERT INTO public.eg_chb_booking_detail_audit SELECT * FROM public.eg_chb_booking_detail WHERE booking_id = ?;
+         basePath: hallsBookingApplication
+         jsonMaps:
+            - jsonPath: $.hallsBookingApplication.bookingId
+
+       - query: INSERT INTO public.eg_chb_slot_detail_audit SELECT * FROM public.eg_chb_slot_detail WHERE slot_id = ?;
+         basePath: hallsBookingApplication.bookingSlotDetails.*
+         jsonMaps:
+            - jsonPath: $.hallsBookingApplication.bookingSlotDetails.*.slotId
