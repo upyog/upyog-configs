@@ -195,7 +195,7 @@ serviceMaps:
    fromTopic: update-community-hall-booking
    isTransaction: true
    queryMaps:
-       - query: UPDATE public.eg_chb_booking_detail SET booking_status= ?, payment_date = ?, receipt_no = ?, lastmodifiedby = ?, lastmodifiedtime = ? WHERE booking_id = ?;
+       - query: UPDATE public.eg_chb_booking_detail SET booking_status= ?, payment_date = ?, receipt_no = ?, lastmodifiedby = ?, lastmodifiedtime = ?, permission_letter_filestore_id = ?, payment_receipt_filestore_id = ? WHERE booking_id = ?;
          basePath: hallsBookingApplication
          jsonMaps:
            - jsonPath: $.hallsBookingApplication.bookingStatus
@@ -203,6 +203,8 @@ serviceMaps:
            - jsonPath: $.hallsBookingApplication.receiptNo
            - jsonPath: $.hallsBookingApplication.auditDetails.lastModifiedBy
            - jsonPath: $.hallsBookingApplication.auditDetails.lastModifiedTime
+           - jsonPath: $.hallsBookingApplication.permissionLetterFilestoreId
+           - jsonPath: $.hallsBookingApplication.paymentReceiptFilestoreId
            - jsonPath: $.hallsBookingApplication.bookingId
 
        - query: UPDATE public.eg_chb_slot_detail SET status=?, lastmodifiedby=?, lastmodifiedtime=? WHERE slot_id=?
