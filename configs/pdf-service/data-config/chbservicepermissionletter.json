@@ -49,9 +49,9 @@
                                 }
                             },
                             {
-                                "variable": "Pet_Registration_Certificate",
+                                "variable": "Chb_Registration_Certificate",
                                 "value": {
-                                    "path": "PDF_STATIC_LABEL_PET_REGISTRATION_CERTIFICATE"
+                                    "path": "PDF_STATIC_LABEL_CHB_REGISTRATION_CERTIFICATE"
                                 },
                                 "type": "label",
                                 "localisation": {
@@ -112,19 +112,19 @@
                             {
                               "variable": "BOOKING_DATE",
                               "value": {
-                                  "path": "$.bookingSlotDetails[0].bookingDate"
+                                  "path": "$.bookingSlotDetails[0].bookingDate" 
                               }
                           },
                           {
                               "variable": "BOOKING_FROM_DATE",
                               "value": {
-                                  "path": "$.bookingSlotDetails[1].bookingDate"
+                                  "path": "$.bookingSlotDetails[1].bookingDate" 
                               }
                           },
                           {
                               "variable": "BOOKING_TO_DATE",
                               "value": {
-                                  "path": "$.bookingSlotDetails[2].bookingDate"
+                                  "path": "$.bookingSlotDetails[0].bookingDate"
                               }
                           }
   
@@ -133,7 +133,7 @@
                     {
                         "externalAPI": [
                             {
-                                "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
+                              "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
                                 "queryParam": "moduleName=tenant&masterName=tenants&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}')%5D",
                                 "apiRequest": null,
                                 "responseMapping": [
@@ -176,8 +176,8 @@
                               ]
                           },
                           {
-                            "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
-                            "queryParam": "moduleName=CHB&masterName=CalculationType&tenantId=pg",
+                              "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
+                              "queryParam": "moduleName=CHB&masterName=CalculationType&tenantId=pg",
                               "apiRequest": null,
                               "responseMapping": [
                                   {
@@ -186,8 +186,19 @@
                                   }
                               ]
                           },
+                          {
+                              "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
+                              "queryParam": "moduleName=CHB&masterName=CommunityHalls&tenantId=pg",
+                              "apiRequest": null,
+                              "responseMapping": [
+                                {
+                                  "variable": "DISCLAIMER",
+                                  "value": "$.MdmsRes.CHB.CommunityHalls[0].disclaimer"
+                                }
+                              ]
+                            },
                             {
-                                "path": "http://egov-workflow-v2.egov:8080/egov-workflow-v2/egov-wf/process/_search",
+                              "path": "http://egov-workflow-v2.egov:8080/egov-workflow-v2/egov-wf/process/_search",
                                 "queryParam": "businessIds=$.bookingNo,history=true,tenantId=$.tenantId",
                                 "apiRequest": null,
                                 "responseMapping": [
@@ -201,32 +212,33 @@
                                         "type": "date"
                                     }
                                 ]
-                            },
+                            },    
                             {
-                                "path": "http://billing-service:8080/billing-service/bill/v2/_fetchbill",
-                                "queryParam": "tenantId=pg.citya,consumerCode=$.bookingNo,businessService=chb-services",
+                              "path": "https://niuatt.niua.in/collection-services/payments/chb-services/_search",
+                               "queryParam": "tenantId=pg.citya,consumerCode=$.bookingNo",
                               "apiRequest": null,
                               "responseMapping": [
                                 {
                                   "variable": "totalAmount",
-                                  "value": "Bill[0].totalAmount"
-                                },
-                                {
-                                  "variable": "securityDeposit",
-                                  "value": "Bill[0].billDetails[0].billAccountDetails[0].amount"
-                                },
-                                {
-                                  "variable": "sgst",
-                                  "value": "Bill[0].billDetails[0].billAccountDetails[1].amount"
+                                  "value": "Payments[0].totalDue"
                                 },
                                 {
                                   "variable": "cgst",
-                                  "value": "Bill[0].billDetails[0].billAccountDetails[2].amount"
+                                  "value": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[2].amount"
+                                },
+                                {
+                                  "variable": "securityDeposit",
+                                  "value": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[0].amount"
+                                },
+                                {
+                                  "variable": "sgst",
+                                  "value": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[1].amount"
                                 },
                                 {
                                   "variable": "rent",
-                                  "value": "Bill[0].billDetails[0].billAccountDetails[3].amount"
+                                  "value": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[3].amount"
                                 }
+                               
                               ]
                             }
                             
