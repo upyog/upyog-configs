@@ -59,15 +59,27 @@
           },
           {
             "text": [
-              {"text": "To,", "bold": false, "margin": [0, 0, 0, 5]},
-              {"text": "{{APPLICANT_NAME}}", "bold": true, "margin": [0, 0, 0, 5]},
-              {"text": "{{APPLICANT_DOOR}} {{APPLICANT_HOUSE_NO}}, ", "bold": false},
-              {"text": "{{APPLICANT_STREET}}, ", "bold": false},
-              {"text": "{{APPLICANT_LOCALITY}}, ", "bold": false},
-              {"text": "{{APPLICANT_CITY}}", "bold": false}
+              {"text": "To,", "bold": false, "margin": [0, 0, 0, 5]}
             ],
             "style": "content",
             "margin": [0, 5, 0, 10]
+          },
+          {
+            "text": [
+              {"text": "{{APPLICANT_NAME}}", "bold": false, "margin": [0, 0, 0, 5]}
+            ],
+            "style": "content",
+            "margin": [0, 5, 0, 10]
+          },
+          {
+            "text": [
+              {"text": "{{HOUSE_NO}} ", "bold": false},
+              {"text": "{{APPLICANT_STREET}} ", "bold": false},
+              {"text": "{{APPLICANT_LOCALITY}} ", "bold": false},
+              {"text": "{{APPLICANT_CITY}} ", "bold": false}    
+            ],
+            "style": "content",
+            "margin": [0, 0, 0, 10]
           },
           {
             "text": [
@@ -229,7 +241,7 @@
                   },
                   {
                     "stack": [
-                      { "text": "IFSC Code", "bold" : true }
+                      { "text": "IFSC CODE", "bold" : true }
                     ],
                     "alignment": "left" 
                   }
@@ -314,6 +326,11 @@
         "bold": true,
         "margin": [0, 5, 0, 5]
       },
+      "termsTitle": {  
+      "fontSize": 16,
+      "bold": true,
+      "margin": [0, 5, 0, 5]
+    },
       "subject": {
         "fontSize": 12,
         "bold": true,
