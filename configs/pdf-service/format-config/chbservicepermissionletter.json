@@ -59,13 +59,26 @@
           },
           {
             "text": [
-              {"text": "Subject: Permission to use the ", "bold": false},
-              {"text": "{{HALL_NAME}}", "bold": false},
-              {"text": " by holding for ", "bold": false},
-              {"text": "{{PURPOSE}}", "bold": false},
-              {"text": " purpose.", "bold": false}
+              {"text": "To,", "bold": false, "margin": [0, 0, 0, 5]},
+              {"text": "{{APPLICANT_NAME}}", "bold": true, "margin": [0, 0, 0, 5]},
+              {"text": "{{APPLICANT_DOOR}} {{APPLICANT_HOUSE_NO}}, ", "bold": false},
+              {"text": "{{APPLICANT_STREET}}, ", "bold": false},
+              {"text": "{{APPLICANT_LOCALITY}}, ", "bold": false},
+              {"text": "{{APPLICANT_CITY}}", "bold": false}
+            ],
+            "style": "content",
+            "margin": [0, 5, 0, 10]
+          },
+          {
+            "text": [
+              {"text": "Subject: Permission to use the ", "bold": true},
+              {"text": "{{HALL_NAME}}", "bold": true},
+              {"text": " by holding for ", "bold": true},
+              {"text": "{{PURPOSE}}", "bold": true},
+              {"text": " purpose.", "bold": true}
             ],
             "style": "subject",
+            "fontSize": 12,
             "margin": [0, 0, 0, 5]
           },
           {
@@ -122,31 +135,31 @@
                 [
                   {
                     "stack": [
-                      { "text": "Rent", "bold": false }
+                      { "text": "Rent", "bold": true }
                     ],
                     "alignment": "left" 
                   },
                   {
                     "stack": [
-                      { "text": "SGST" }
+                      { "text": "Sgst", "bold": true }
                     ],
                     "alignment": "left" 
                   },
                   {
                     "stack": [
-                      { "text": "CGST", "bold": false }
+                      { "text": "Cgst", "bold": true }
                     ],
                     "alignment": "left" 
                   },
                   {
                     "stack": [
-                      { "text": "REFUNDABLE SECURITY" }
+                      { "text": "Refundable Security", "bold": true }
                     ],
                     "alignment": "left" 
                   },
                   {
                     "stack": [
-                      { "text": "TOTAL AMOUNT", "bold": false }
+                      { "text": "Total Amount", "bold": true }
                     ],
                     "alignment": "left" 
                   }
@@ -198,25 +211,25 @@
                 [
                   {
                     "stack": [
-                      { "text": "Applicant Name ", "bold": false }
+                      { "text": "Applicant Name ", "bold": true }
                     ],
                     "alignment": "left" 
                   },
                   {
                     "stack": [
-                      { "text": "A/C No." }
+                      { "text": "A/C No.", "bold": true }
                     ],
                     "alignment": "left" 
                   },
                   {
                     "stack": [
-                      { "text": "Bank Name ", "bold": false }
+                      { "text": "Bank Name ", "bold": true }
                     ],
                     "alignment": "left" 
                   },
                   {
                     "stack": [
-                      { "text": "IFSC CODE" }
+                      { "text": "IFSC CODE", "bold" : true }
                     ],
                     "alignment": "left" 
                   }
@@ -273,12 +286,12 @@
           {
             "text": "DISCLAIMER",
             "style": "termsTitle",
-            "margin": [0, 0, 0, 5] 
+            "margin": [0, 5, 0, 5] 
           },
           {
             "text": "{{DISCLAIMER}}",
             "style": "content",
-            "margin": [0, -12, 0, 5]  
+            "margin": [0, 5, 0, 5]  
           }
         ],
         "alignment": "left",
@@ -302,18 +315,9 @@
         "margin": [0, 5, 0, 5]
       },
       "subject": {
-        "fontSize": 16,
-        "bold": true,
-        "margin": [0, 20, 0, 10]
-      },
-      "termsTitle": {
-        "fontSize": 16,
-        "bold": true,
-        "margin": [0, 10, 0, 5]
-      },
-      "content": {
         "fontSize": 12,
-        "margin": [0, 5, 0, 5]
+        "bold": true,
+        "margin": [0, 0, 0, 5]
       }
     }
   }

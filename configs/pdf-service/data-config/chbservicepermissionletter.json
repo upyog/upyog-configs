@@ -97,6 +97,36 @@
                                 }
                             },
                             {
+                              "variable": "APPLICANT_STREET",
+                              "value": {
+                                  "path": "$.address.streetName"
+                              }
+                          },
+                          {
+                              "variable": "APPLICANT_HOUSE_NO",
+                              "value": {
+                                  "path": "$.address.houseNo"
+                              }
+                          },
+                          {
+                              "variable": "APPLICANT_DOOR",
+                              "value": {
+                                  "path": "$.address.doorNo"
+                              }
+                          },
+                          {
+                              "variable": "APPLICANT_CITY",
+                              "value": {
+                                  "path": "$.address.city"
+                              }
+                          },
+                          {
+                              "variable": "APPLICANT_LOCALITY",
+                              "value": {
+                                  "path": "$.address.locality"
+                              }
+                          }, 
+                            {
                                 "variable": "BANK_NAME",
                                 "value": {
                                     "path": "$.applicantDetail.bankName"
@@ -251,4 +281,3 @@
         ]
     }
   }
-  
