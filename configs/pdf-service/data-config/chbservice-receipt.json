@@ -55,7 +55,6 @@
                 },
                 "localisation": {
                   "required": true,
-                  "prefix": "MODULE",
                   "module": "rainmaker-common"
                 }
               },
@@ -153,6 +152,48 @@
                 }
               },
               {
+                "variable": "SECURITY_DEPOSIT",
+                "value": {
+                  "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[0].amount"
+                }
+              },
+              {
+                "variable": "SGST",
+                "value": {
+                  "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[1].amount"
+                }
+              },
+              {
+                "variable": "CONSERVATION_FEE",
+                "value": {
+                  "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[2].amount"
+                }
+              },
+              {
+                "variable": "ELECTRICITY_CHARGES",
+                "value": {
+                  "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[3].amount"
+                }
+              },
+              {
+                "variable": "CGST",
+                "value": {
+                  "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[4].amount"
+                }
+              },
+              {
+                "variable": "WATER_CHARGES",
+                "value": {
+                  "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[5].amount"
+                }
+              },
+              {
+                "variable": "RENT",
+                "value": {
+                  "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[6].amount"
+                }
+              },
+              {
                 "variable": "payment_receipt",
                 "value": {
                   "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_PAYMENT_RECEIPT"
@@ -179,7 +220,7 @@
               {
                 "variable": "bookingNo",
                 "value": {
-                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_CONSUMER_ID"
+                  "path": "paymentDetails[0].bill.consumerCode"
                 },
                 "localisation": {
                   "required": true,
@@ -468,6 +509,22 @@
                   }
                 ]
               },
+              {
+                "path": "http://chb-services:8080/chb-services/booking/v1/_search",
+                "queryParam": "tenantId=pg.citya",
+                "apiRequest": null,
+                "responseMapping": [
+                  {
+                    "variable": "applicantName",
+                    "value": "hallsBookingApplication[0].applicantDetail.applicantName"
+                  },
+                  {
+                    "variable": "applicantNumber",
+                    "value": "hallsBookingApplication[0].applicantDetail.applicantMobileNo"
+                  }
+                ]
+              },
+              
               {
                 "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
                 "queryParam": "moduleName=tenant&masterName=footer&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}' %26%26 @.service=='{$.paymentDetails[0].businessService}')%5D",

@@ -258,21 +258,35 @@
                                   "value": "Payments[0].totalDue"
                                 },
                                 {
-                                  "variable": "cgst",
-                                  "value": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[2].amount"
-                                },
-                                {
-                                  "variable": "securityDeposit",
+                                  "variable": "SECURITY_DEPOSIT",
                                   "value": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[0].amount"
                                 },
                                 {
-                                  "variable": "sgst",
+                                  "variable": "RENT",
+                                  "value": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[6].amount"
+                                },
+                                {
+                                  "variable": "WATER_CHARGES",
+                                  "value": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[5].amount"
+                                },
+                                {
+                                  "variable": "CONSERVATION_FEE",
+                                  "value": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[2].amount"
+                                },
+                                {
+                                  "variable": "CGST",
+                                  "value": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[4].amount"
+                                },
+                                {
+                                  "variable": "SGST",
                                   "value": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[1].amount"
                                 },
                                 {
-                                  "variable": "rent",
+                                  "variable": "ELECTRICITY_CHARGES",
                                   "value": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[3].amount"
                                 }
+                              
+                                
                                
                               ]
                             }
@@ -286,3 +300,4 @@
         ]
     }
   }
+  
