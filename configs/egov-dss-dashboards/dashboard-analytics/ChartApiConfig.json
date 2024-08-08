@@ -10155,9 +10155,9 @@
       {
         "module": "OBPS",
         "dateRefField": "date",
-        "requestQueryMap": "{\"ward\" : \"ward.keyword\",\"ulb\" : \"ulb.keyword\", \"state\" : \"state.keyword\"}",
+        "requestQueryMap": "{\"ulb\" : \"ulb\", \"state\" : \"state\"}",
         "indexName": "obps-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"month\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"month\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       }
     ],
     "chartType": "line",
@@ -10225,9 +10225,9 @@
       {
         "module": "OBPS",
         "dateRefField": "date",
-        "requestQueryMap": "{\"ward\" : \"ward.keyword\",\"ulb\" : \"ulb.keyword\", \"state\" : \"state.keyword\"}",
+        "requestQueryMap": "{\"ulb\" : \"ulb\", \"state\" : \"state\"}",
         "indexName": "obps-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"Permits Issued\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Permits\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"riskType.keyword\":[\"HIGH\",\"MEDIUM\",\"LOW\"]}}]}},\"aggs\":{\"Total Permits Issued\":{\"sum\":{\"field\":\"permitsIssuedForRiskType\"}}}}}},\"OC Issued\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"ocIssued\":{\"avg\":{\"field\":\"ocIssued\"}}}},\"Total OC Issued\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.ocIssued\"}}}},\"OC Submitted\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"ocSubmitted\":{\"avg\":{\"field\":\"ocSubmitted\"}}}},\"Total OC submitted\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.ocSubmitted\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"Permits Issued\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"intervalvalue\"},\"aggs\":{\"Permits\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"riskType\":[\"HIGH\",\"MEDIUM\",\"LOW\"]}}]}},\"aggs\":{\"Total Permits Issued\":{\"sum\":{\"field\":\"permitsIssuedForRiskType\"}}}}}},\"OC Issued\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"intervalvalue\"},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"ocIssued\":{\"avg\":{\"field\":\"ocIssued\"}}}},\"Total OC Issued\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.ocIssued\"}}}},\"OC Submitted\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"intervalvalue\"},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"ocSubmitted\":{\"avg\":{\"field\":\"ocSubmitted\"}}}},\"Total OC submitted\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.ocSubmitted\"}}}}}}"
       }
     ],
     "chartType": "line",
@@ -15761,8 +15761,8 @@
       {
         "module": "COMMON",
         "indexName": "common-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"status\":\"Live\"}}]}},\"aggs\":{\"stateWiseData\":{\"terms\":{\"field\":\"state\"},\"aggs\":{\"latest\":{\"terms\":{\"field\":\"date\",\"order\":{\"_key\":\"desc\"},\"size\":1},\"aggs\":{\"stateModuleWiseData\":{\"terms\":{\"field\":\"serviceModuleCode\"},\"aggs\":{\"totalCitizensForServiceModuleCount\":{\"sum\":{\"field\":\"totalCitizensCount\"}}}},\"maxCitizens\":{\"max_bucket\":{\"buckets_path\":\"stateModuleWiseData.totalCitizensForServiceModuleCount\"}}}},\"stateCitizensSummary\":{\"max_bucket\":{\"buckets_path\":\"latest.maxCitizens\"}}}},\"TotalCitizens\":{\"sum_bucket\":{\"buckets_path\":\"stateWiseData.stateCitizensSummary\"}}}}}}",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"status\":\"Live\"}}]}},\"aggs\":{\"stateWiseData\":{\"terms\":{\"field\":\"state\"},\"aggs\":{\"latest\":{\"terms\":{\"field\":\"date\",\"order\":{\"_key\":\"desc\"},\"size\":1},\"aggs\":{\"stateModuleWiseData\":{\"terms\":{\"field\":\"serviceModuleCode.keyword\"},\"aggs\":{\"totalCitizensForServiceModuleCount\":{\"sum\":{\"field\":\"totalCitizensCount\"}}}},\"maxCitizens\":{\"max_bucket\":{\"buckets_path\":\"stateModuleWiseData.totalCitizensForServiceModuleCount\"}}}},\"stateCitizensSummary\":{\"max_bucket\":{\"buckets_path\":\"latest.maxCitizens\"}}}},\"TotalCitizens\":{\"sum_bucket\":{\"buckets_path\":\"stateWiseData.stateCitizensSummary\"}}}}}}",
+        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
         "dateRefField": ""
       }
     ],
@@ -18090,7 +18090,7 @@
         "requestQueryMap": "{\"ward\" : \"ward.keyword\",\"ulb\" : \"ulb.keyword\", \"state\" : \"state.keyword\"}",
         "dateRefField": "date",
         "indexName": "birth-cert-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"state \":{\"terms\":{\"field\":\"state.keyword\",\"size\":1000,\"order\":{\"_term\":\"asc\"}},\"aggs\":{\"Birth Total Downloads (Mobile App)\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"boundary.keyword\":[\"mobileApp\"]}}]}},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"numberOfCertificatesDownloadedTodayForBoundary\"}}}},\"Birth Total Downloads (Web)\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"boundary.keyword\":\"web\"}}]}},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"numberOfCertificatesDownloadedTodayForBoundary\"}}}},\"Birth Total Downloads\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"boundary.keyword\":[\"mobileApp\",\"web\"]}}]}},\"aggs\":{\"Total Downloads\":{\"sum\":{\"field\":\"numberOfCertificatesDownloadedTodayForBoundary\"}}}},\"Birth Delayed Registrations\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"boundary.keyword\":\"delayedRegistration\"}}]}},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"numberOfCertificatesDownloadedTodayForBoundary\"}}}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"state \":{\"terms\":{\"field\":\"state\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Birth Total Downloads (Mobile App)\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"boundary\":[\"mobileApp\"]}}]}},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"numberOfCertificatesDownloadedTodayForBoundary\"}}}},\"Birth Total Downloads (Web)\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"boundary\":\"web\"}}]}},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"numberOfCertificatesDownloadedTodayForBoundary\"}}}},\"Birth Total Downloads\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"boundary\":[\"mobileApp\",\"web\"]}}]}},\"aggs\":{\"Total Downloads\":{\"sum\":{\"field\":\"numberOfCertificatesDownloadedTodayForBoundary\"}}}},\"Birth Delayed Registrations\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"boundary\":\"delayedRegistration\"}}]}},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"numberOfCertificatesDownloadedTodayForBoundary\"}}}}}}}}}}"
       }
     ],
     "isMdmsEnabled": false,
@@ -18338,10 +18338,10 @@
     "queries": [
       {
         "module": "DEATH",
-        "requestQueryMap": "{\"ward\" : \"ward.keyword\",\"ulb\" : \"ulb.keyword\", \"state\" : \"state.keyword\"}",
+        "requestQueryMap": "{\"ulb\" : \"ulb\", \"state\" : \"state\"}",
         "dateRefField": "date",
         "indexName": "death-cert-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"state \":{\"terms\":{\"field\":\"state.keyword\",\"size\":1000,\"order\":{\"_term\":\"asc\"}},\"aggs\":{\"Death Total Downloads (Mobile App)\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"boundary.keyword\":[\"mobileApp\"]}}]}},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"numberOfCertificatesDownloadedTodayForBoundary\"}}}},\"Death Total Downloads (Web)\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"boundary.keyword\":\"web\"}}]}},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"numberOfCertificatesDownloadedTodayForBoundary\"}}}},\"Death Total Downloads\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"boundary.keyword\":[\"mobileApp\",\"web\"]}}]}},\"aggs\":{\"Total Downloads\":{\"sum\":{\"field\":\"numberOfCertificatesDownloadedTodayForBoundary\"}}}},\"Death Delayed Registrations\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"boundary.keyword\":\"delayedRegistration\"}}]}},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"numberOfCertificatesDownloadedTodayForBoundary\"}}}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"state \":{\"terms\":{\"field\":\"state\",\"size\":1000,\"order\":{\"_key\":\"asc\"}},\"aggs\":{\"Death Total Downloads (Mobile App)\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"boundary\":[\"mobileApp\"]}}]}},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"numberOfCertificatesDownloadedTodayForBoundary\"}}}},\"Death Total Downloads (Web)\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"boundary\":\"web\"}}]}},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"numberOfCertificatesDownloadedTodayForBoundary\"}}}},\"Death Total Downloads\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"boundary\":[\"mobileApp\",\"web\"]}}]}},\"aggs\":{\"Total Downloads\":{\"sum\":{\"field\":\"numberOfCertificatesDownloadedTodayForBoundary\"}}}},\"Death Delayed Registrations\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"boundary\":\"delayedRegistration\"}}]}},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"numberOfCertificatesDownloadedTodayForBoundary\"}}}}}}}}}}"
       }
     ],
     "isMdmsEnabled": false,
@@ -18598,9 +18598,9 @@
       {
         "module": "DEATH",
         "dateRefField": "date",
-        "requestQueryMap": "{\"ward\" : \"ward.keyword\",\"ulb\" : \"ulb.keyword\", \"state\" : \"state.keyword\"}",
+        "requestQueryMap": "{\"ulb\" : \"ulb\", \"state\" : \"state\"}",
         "indexName": "death-cert-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"downloads\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"downloads\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"numberOfCertificatesDownloadedTodayForChannel\"}}}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"downloads\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"intervalvalue\"},\"aggs\":{\"downloads\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"numberOfCertificatesDownloadedTodayForChannel\"}}}}}}}}}}"
       }
     ],
     "chartType": "line",
@@ -18622,9 +18622,9 @@
       {
         "module": "DEATH",
         "dateRefField": "date",
-        "requestQueryMap": "{\"ward\" : \"ward.keyword\",\"ulb\" : \"ulb.keyword\", \"state\" : \"state.keyword\"}",
+        "requestQueryMap": "{\"ulb\" : \"ulb\", \"state\" : \"state\"}",
         "indexName": "birth-cert-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"downloads\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"downloads\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"numberOfCertificatesDownloadedTodayForChannel\"}}}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"downloads\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"intervalvalue\"},\"aggs\":{\"downloads\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"numberOfCertificatesDownloadedTodayForChannel\"}}}}}}}}}}"
       }
     ],
     "chartType": "line",
@@ -19863,50 +19863,50 @@
       {
         "module": "COMMON",
         "dateRefField": "date",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "tl-national-dashboard",
+        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
+        "indexName": "tl-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "date",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "obps-national-dashboard",
+        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
+        "indexName": "obps-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "date",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "firenoc-national-dashboard",
+        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
+        "indexName": "firenoc-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "date",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "mcollect-national-dashboard",
+        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
+        "indexName": "mcollect-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
       {
         "module": "COMMON",
         "dateRefField": "date",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "ws-national-dashboard",
+        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
+        "indexName": "ws-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
       },
       {
         "module": "COMMON",
         "indexName": "birth-cert-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}",
-        "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
+        "requestQueryMap": "{ \"state\" : \"state\", \"ulb\" : \"ulb\"}",
         "dateRefField": "date"
       },
       {
         "module": "COMMON",
         "indexName": "death-cert-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}",
-        "requestQueryMap": "{ \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
+        "requestQueryMap": "{ \"state\" : \"state\", \"ulb\" : \"ulb\"}",
         "dateRefField": "date"
       }
     ],
@@ -20768,10 +20768,10 @@
     "queries": [
       {
         "module": "Birth",
-        "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
+        "requestQueryMap": "{\"state\" : \"state\", \"ulb\" : \"ulb\"}",
         "dateRefField": "date",
         "indexName": "birth-cert-national-dashboard-*",
-        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"StipulatedDays\"}}],\"must_not\":[{\"match\":{\"StipulatedDays\":0}}]}},\"aggs\":{\"Per_Day_Averages\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"day\",\"format\":\"dd-MM-yyyy\",\"min_doc_count\":1},\"aggs\":{\"Stipulated_Days_for_Birth\":{\"avg\":{\"field\":\"StipulatedDays\"}}}},\"Overall_Average\":{\"avg_bucket\":{\"buckets_path\":\"Per_Day_Averages>Stipulated_Days_for_Birth\"}}}}"
+        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"StipulatedDays\"}}],\"must_not\":[{\"match\":{\"StipulatedDays\":0}}]}},\"aggs\":{\"Per_Day_Averages\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"day\",\"format\":\"dd-MM-yyyy\",\"min_doc_count\":1},\"aggs\":{\"Stipulated_Days_for_Birth\":{\"avg\":{\"field\":\"StipulatedDays\"}}}},\"Overall_Average\":{\"avg_bucket\":{\"buckets_path\":\"Per_Day_Averages>Stipulated_Days_for_Birth\"}}}}"
       }
     ],
     "chartType": "metric",
@@ -20789,10 +20789,10 @@
     "queries": [
       {
         "module": "Death",
-        "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
+        "requestQueryMap": "{\"state\" : \"state\", \"ulb\" : \"ulb\"}",
         "dateRefField": "date",
         "indexName": "death-cert-national-dashboard-*",
-        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"StipulatedDays\"}}],\"must_not\":[{\"match\":{\"StipulatedDays\":0}}]}},\"aggs\":{\"Per_Day_Averages\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"day\",\"format\":\"dd-MM-yyyy\",\"min_doc_count\":1},\"aggs\":{\"Stipulated_Days_for_Death\":{\"avg\":{\"field\":\"StipulatedDays\"}}}},\"Overall_Average\":{\"avg_bucket\":{\"buckets_path\":\"Per_Day_Averages>Stipulated_Days_for_Death\"}}}}"
+        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"StipulatedDays\"}}],\"must_not\":[{\"match\":{\"StipulatedDays\":0}}]}},\"aggs\":{\"Per_Day_Averages\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"day\",\"format\":\"dd-MM-yyyy\",\"min_doc_count\":1},\"aggs\":{\"Stipulated_Days_for_Death\":{\"avg\":{\"field\":\"StipulatedDays\"}}}},\"Overall_Average\":{\"avg_bucket\":{\"buckets_path\":\"Per_Day_Averages>Stipulated_Days_for_Death\"}}}}"
       }
     ],
     "chartType": "metric",
@@ -20831,10 +20831,10 @@
     "queries": [
       {
         "module": "OBPS",
-        "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
+        "requestQueryMap": "{\"state\" : \"state\", \"ulb\" : \"ulb\"}",
         "dateRefField": "date",
         "indexName": "obps-national-dashboard-*",
-        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"StipulatedDays\"}}],\"must_not\":[{\"match\":{\"StipulatedDays\":0}}]}},\"aggs\":{\"Per_Day_Averages\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"day\",\"format\":\"dd-MM-yyyy\",\"min_doc_count\":1},\"aggs\":{\"Stipulated_Days_for_OBPS\":{\"avg\":{\"field\":\"StipulatedDays\"}}}},\"Overall_Average\":{\"avg_bucket\":{\"buckets_path\":\"Per_Day_Averages>Stipulated_Days_for_OBPS\"}}}}"
+        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"StipulatedDays\"}}],\"must_not\":[{\"match\":{\"StipulatedDays\":0}}]}},\"aggs\":{\"Per_Day_Averages\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"day\",\"format\":\"dd-MM-yyyy\",\"min_doc_count\":1},\"aggs\":{\"Stipulated_Days_for_OBPS\":{\"avg\":{\"field\":\"StipulatedDays\"}}}},\"Overall_Average\":{\"avg_bucket\":{\"buckets_path\":\"Per_Day_Averages>Stipulated_Days_for_OBPS\"}}}}"
       }
     ],
     "chartType": "metric",
@@ -22711,9 +22711,9 @@
       {
         "module": "FSM",
         "dateRefField": "date",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
         "indexName": "fsm-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}}}"
       }
     ],
     "chartType": "line",
@@ -22906,9 +22906,9 @@
       {
         "module": "FSM",
         "dateRefField": "date",
-        "requestQueryMap": "{\"ulb\" : \"ulb.keyword\",\"state\":\"state.keyword\"}",
+        "requestQueryMap": "{\"ulb\" : \"ulb\",\"state\":\"state\"}",
         "indexName": "fsm-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"TotalDumped\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"month\"},\"aggs\":{\"Dumped\":{\"sum\":{\"field\":\"totalSludgeDumped\"}}}},\"TotalCapacity\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"month\"},\"aggs\":{\"Dumped\":{\"sum\":{\"field\":\"totalFSTPCapacity\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"TotalDumped\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"month\"},\"aggs\":{\"Dumped\":{\"sum\":{\"field\":\"totalSludgeDumped\"}}}},\"TotalCapacity\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"month\"},\"aggs\":{\"Dumped\":{\"sum\":{\"field\":\"totalFSTPCapacity\"}}}}}}}}"
       }
     ],
     "chartType": "line",
@@ -22932,9 +22932,9 @@
       {
         "module": "FSM",
         "dateRefField": "date",
-        "requestQueryMap": "{\"ulb\" : \"ulb.keyword\",\"state\":\"state.keyword\"}",
+        "requestQueryMap": "{\"ulb\" : \"ulb\",\"state\":\"state\"}",
         "indexName": "fsm-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"TotalDumped\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"month\"},\"aggs\":{\"Dumped\":{\"sum\":{\"field\":\"totalSludgeDumped\"}}}},\"TotalCollected\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"month\"},\"aggs\":{\"Collected\":{\"sum\":{\"field\":\"totalSludgeCollected\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"TotalDumped\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"month\"},\"aggs\":{\"Dumped\":{\"sum\":{\"field\":\"totalSludgeDumped\"}}}},\"TotalCollected\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"month\"},\"aggs\":{\"Collected\":{\"sum\":{\"field\":\"totalSludgeCollected\"}}}}}}}}"
       }
     ],
     "chartType": "line",
