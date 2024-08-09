@@ -14572,7 +14572,7 @@
         "module": "COMMON",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
-        "indexName": "common-national-dashboard",
+        "indexName": "common-national-dashboard-*",
         "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"adjust_pure_negative\":true,\"boost\":1}},\"aggs\":{\"states\":{\"terms\":{\"field\":\"state\",\"size\":100},\"aggs\":{\"latest\":{\"terms\":{\"field\":\"date\",\"order\":{\"_key\":\"desc\"},\"size\":1},\"aggs\":{\"Status\":{\"terms\":{\"field\":\"status\"},\"aggs\":{\"stateModuleWiseData\":{\"terms\":{\"field\":\"serviceModuleCode.keyword\"},\"aggs\":{\"totalUlbsa\":{\"sum\":{\"field\":\"totalUlbCount\"}},\"totalLiveUlbsa\":{\"sum\":{\"field\":\"liveUlbsCountForServiceModuleCode\"}}}},\"totalUlbsss\":{\"max_bucket\":{\"buckets_path\":\"stateModuleWiseData.totalUlbsa\"}},\"totalLiveUlbsss\":{\"max_bucket\":{\"buckets_path\":\"stateModuleWiseData.totalLiveUlbsa\"}}}},\"totalUlbs\":{\"max_bucket\":{\"buckets_path\":\"Status.totalUlbsss\"}},\"liveUlbs\":{\"max_bucket\":{\"buckets_path\":\"Status.totalLiveUlbsss\"}}}}}}}}"
       }
     ],
@@ -14617,7 +14617,7 @@
         "module": "COMMON",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
-        "indexName": "common-national-dashboard",
+        "indexName": "common-national-dashboard-*",
         "aggrQuery": "{\"size\":0,\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"status.keyword\":\"Live\"}},{\"range\":{\"liveUlbsCountForServiceModuleCode\":{\"gte\":1}}}]}},\"aggs\":{\"module\":{\"terms\":{\"field\":\"serviceModuleCode\"},\"aggs\":{\"latest\":{\"terms\":{\"field\":\"date\",\"order\":{\"_key\":\"desc\"},\"size\":1}, \"aggs\": {\"liveUlbPerModule\": {\"sum\": { \"field\": \"liveUlbsCountForServiceModuleCode\"}}}}}}}}}}"
       }
     ],
@@ -14707,7 +14707,7 @@
         "module": "COMMON",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
-        "indexName": "common-national-dashboard",
+        "indexName": "common-national-dashboard-month",
         "aggrQuery": "{\"size\":0,\"query\":{\"bool\":{\"adjust_pure_negative\":true,\"boost\":1}},\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"liveUlbsCount\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"status\":\"Live\"}},{\"range\":{\"liveUlbsCountForServiceModuleCode\":{\"gte\":1}}}]}},\"aggs\":{\"liveUlbsCount\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"1M\"},\"aggs\":{\"stateWiseData\":{\"terms\":{\"field\":\"state\"},\"aggs\":{\"latest\":{\"terms\":{\"field\":\"date\",\"order\":{\"_key\":\"desc\"},\"size\":1},\"aggs\":{\"stateModuleWiseData\":{\"terms\":{\"field\":\"serviceModuleCode\"},\"aggs\":{\"totalLiveUlbsForServiceModuleCount\":{\"sum\":{\"field\":\"liveUlbsCountForServiceModuleCode\"}}}},\"maxUlbsLive\":{\"max_bucket\":{\"buckets_path\":\"stateModuleWiseData.totalLiveUlbsForServiceModuleCount\"}}}},\"stateLiveUlbsSummary\":{\"max_bucket\":{\"buckets_path\":\"latest.maxUlbsLive\"}}}},\"liveUlbsCount\":{\"sum_bucket\":{\"buckets_path\":\"stateWiseData.stateLiveUlbsSummary\"}}}}}}}}}}"
       }
     ],
@@ -15760,7 +15760,7 @@
     "queries": [
       {
         "module": "COMMON",
-        "indexName": "common-national-dashboard",
+        "indexName": "common-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"status\":\"Live\"}}]}},\"aggs\":{\"stateWiseData\":{\"terms\":{\"field\":\"state\"},\"aggs\":{\"latest\":{\"terms\":{\"field\":\"date\",\"order\":{\"_key\":\"desc\"},\"size\":1},\"aggs\":{\"stateModuleWiseData\":{\"terms\":{\"field\":\"serviceModuleCode.keyword\"},\"aggs\":{\"totalCitizensForServiceModuleCount\":{\"sum\":{\"field\":\"totalCitizensCount\"}}}},\"maxCitizens\":{\"max_bucket\":{\"buckets_path\":\"stateModuleWiseData.totalCitizensForServiceModuleCount\"}}}},\"stateCitizensSummary\":{\"max_bucket\":{\"buckets_path\":\"latest.maxCitizens\"}}}},\"TotalCitizens\":{\"sum_bucket\":{\"buckets_path\":\"stateWiseData.stateCitizensSummary\"}}}}}}",
         "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
         "dateRefField": ""
