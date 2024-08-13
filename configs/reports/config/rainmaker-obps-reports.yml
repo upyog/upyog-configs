@@ -602,6 +602,32 @@ ReportDefinitions:
         type: string
         source: obps
         total: false
+      - name: PlotArea
+        label: PlotArea
+        type: string
+        source: obps
+        total: false
+      - name: BlockingReason
+        label: BlockingReason
+        type: string
+        source: obps
+        total: false
+      - name: BlockingDate
+        label: BlockingDate
+        type: string
+        source: obps
+        total: false
+      - name: name
+        label: BlockedBy
+        type: string
+        source: obps
+        total: false
+      - name: UserID
+        label: UserID
+        type: string
+        source: obps
+        total: false
+
     searchParams:
       - name: ulbType
         label: ULBType
@@ -637,17 +663,28 @@ ReportDefinitions:
         searchClause: AND bp.createdTime <= $toDate
 
     query: >-
-      SELECT 
+      SELECT
       bp.additionalDetails->>'District' AS District,
       bp.additionalDetails->>'Ulblisttype' AS UlbType,
       bp.additionalDetails->>'UlbName' AS UlbName,
       bp.applicationno,
       bp.additionalDetails->>'ownerName' AS ApplicantName,
-      to_char(To_timestamp(bp.createdTime / 1000), 'DD/MM/YYYY') as submissiondate,
+      to_char(to_timestamp(bp.createdTime / 1000), 'DD/MM/YYYY') AS submissiondate,
       bd.additionalDetails->>'latitude' AS Latitude,
-      bd.additionalDetails->>'longitude' AS Longitude
-      FROM eg_bpa_buildingplan bp 
-      JOIN eg_bpa_document bd ON bp.id = bd.buildingplanid 
-      WHERE 1=1
-
-    orderby: ORDER BY submissiondate DESC
+      bd.additionalDetails->>'longitude' AS Longitude,
+      bp.additionalDetails->>'area' AS PlotArea,
+      pi.comment AS BlockingReason,
+      to_char(to_timestamp(pi.lastModifiedTime / 1000), 'DD/MM/YYYY') AS BlockingDate,
+      u.name AS name,  
+      u.id AS UserID 
+      FROM
+      eg_bpa_buildingplan bp
+      JOIN
+      eg_bpa_document bd ON bp.id = bd.buildingplanid
+      JOIN
+      eg_wf_processinstance_v2 pi ON bp.applicationno = pi.businessid
+      JOIN
+      eg_user u ON pi.lastmodifiedby = u.uuid  
+      WHERE
+      pi.action = 'BLOCK' 
+    orderby :   ORDER BY submissiondate DESC;
