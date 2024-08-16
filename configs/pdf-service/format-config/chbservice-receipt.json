@@ -101,7 +101,7 @@
                 "style": "receipt-table-value"
               },
               {
-                "text": "{{applicantName}}",
+                "text": "{{payerName}}",
                 "border": [false, false, true, false],
                 "style": "receipt-table"
               }
@@ -113,7 +113,7 @@
                 "style": "receipt-table-value"
               },
               {
-                "text": "{{applicantNumber}}",
+                "text": "{{payerContact}}",
                 "border": [false, false, false, true],
                 "style": "receipt-table"
               },
@@ -226,63 +226,12 @@
             ],
             [
               {
-                "text": "SGST",
+                "text": "RENT",
                 "border": [true, true, false, true],
                 "style": "receipt-table-value-down"
               },
               {
-                "text": "{{SGST}}",
-                "border": [false, true, false, true],
-                "style": "receipt-table-value-down"
-              },
-              {
-                "text": "",
-                "border": [false, true, true, true],
-                "style": "receipt-table-value-down"
-              }
-            ],
-            [
-              {
-                "text": "CONSERVATION FEE",
-                "border": [true, true, false, true],
-                "style": "receipt-table-value-down"
-              },
-              {
-                "text": "{{CONSERVATION_FEE}}",
-                "border": [false, true, false, true],
-                "style": "receipt-table-value-down"
-              },
-              {
-                "text": "",
-                "border": [false, true, true, true],
-                "style": "receipt-table-value-down"
-              }
-            ],
-            [
-              {
-                "text": "ELECTRICITY CHARGES",
-                "border": [true, true, false, true],
-                "style": "receipt-table-value-down"
-              },
-              {
-                "text": "{{ELECTRICITY_CHARGES}}",
-                "border": [false, true, false, true],
-                "style": "receipt-table-value-down"
-              },
-              {
-                "text": "",
-                "border": [false, true, true, true],
-                "style": "receipt-table-value-down"
-              }
-            ],
-            [
-              {
-                "text": "CGST",
-                "border": [true, true, false, true],
-                "style": "receipt-table-value-down"
-              },
-              {
-                "text": "{{CGST}}",
+                "text": "{{RENT}}",
                 "border": [false, true, false, true],
                 "style": "receipt-table-value-down"
               },
@@ -311,12 +260,63 @@
             ],
             [
               {
-                "text": "RENT",
+                "text": "ELECTRICITY CHARGES",
                 "border": [true, true, false, true],
                 "style": "receipt-table-value-down"
               },
               {
-                "text": "{{RENT}}",
+                "text": "{{ELECTRICITY_CHARGES}}",
+                "border": [false, true, false, true],
+                "style": "receipt-table-value-down"
+              },
+              {
+                "text": "",
+                "border": [false, true, true, true],
+                "style": "receipt-table-value-down"
+              }
+            ],
+            [
+              {
+                "text": "CONSERVATION FEE",
+                "border": [true, true, false, true],
+                "style": "receipt-table-value-down"
+              },
+              {
+                "text": "{{CONSERVATION_FEE}}",
+                "border": [false, true, false, true],
+                "style": "receipt-table-value-down"
+              },
+              {
+                "text": "",
+                "border": [false, true, true, true],
+                "style": "receipt-table-value-down"
+              }
+            ],
+            [
+              {
+                "text": "CGST",
+                "border": [true, true, false, true],
+                "style": "receipt-table-value-down"
+              },
+              {
+                "text": "{{CGST}}",
+                "border": [false, true, false, true],
+                "style": "receipt-table-value-down"
+              },
+              {
+                "text": "",
+                "border": [false, true, true, true],
+                "style": "receipt-table-value-down"
+              }
+            ],
+            [
+              {
+                "text": "SGST",
+                "border": [true, true, false, true],
+                "style": "receipt-table-value-down"
+              },
+              {
+                "text": "{{SGST}}",
                 "border": [false, true, false, true],
                 "style": "receipt-table-value-down"
               },
@@ -340,7 +340,7 @@
                 "style": "receipt-table-value-down"
               },
               {
-                "image": "{{qrcodeimage}}",
+                "image": "{{qrcodeImage}}",
                 "style": "receipt-table-value-total-Qr",
                 "border": [false, true, true, true],
                 "width": 72,
@@ -361,7 +361,7 @@
                 "bold": true
               },
               {
-                "text": "{{applicantName}}",
+                "text": "{{payerName}}",
                 "bold": false
               }
             ],
@@ -376,15 +376,6 @@
             ],
             "alignment": "right",
             "margin": [0, 0, -10, 1]
-          }
-        ]
-      },
-      {
-        "stack": [
-          {
-            "text": "{{DISCLAIMER}}",
-            "bold": true,
-            "style": "pt-disclaimer-value"
           }
         ]
       }
@@ -451,17 +442,7 @@
         "fontSize": 12,
         "margin": [-27, 10, -10, 0],
         "color": "#484848"
-      },
-      "pt-disclaimer": {
-        "fontSize": 12,
-        "margin": [-27, 10, -10, 0],
-        "color": "#484848"
-      },
-      "pt-disclaimer-value": {
-        "fontSize": 12,
-        "margin": [0, 0, 0, 0],
-        "color": "#484848"
+      }
       }
     }
   }
-}

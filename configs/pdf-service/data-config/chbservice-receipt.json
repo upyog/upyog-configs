@@ -221,11 +221,6 @@
                 "variable": "bookingNo",
                 "value": {
                   "path": "paymentDetails[0].bill.consumerCode"
-                },
-                "localisation": {
-                  "required": true,
-                  "prefix": null,
-                  "module": "rainmaker-common"
                 }
               },
               {
@@ -517,10 +512,6 @@
                   {
                     "variable": "applicantName",
                     "value": "hallsBookingApplication[0].applicantDetail.applicantName"
-                  },
-                  {
-                    "variable": "applicantNumber",
-                    "value": "hallsBookingApplication[0].applicantDetail.applicantMobileNo"
                   }
                 ]
               },
@@ -557,7 +548,7 @@
           {
             "qrcodeConfig": [
               {
-                "variable": "qrcodeimage",
+                "variable": "qrcodeImage",
                 "value": "/digit-ui/citizen/payment/verification?tenantId={{tenantid}}&receiptNumber={{receiptNo}}"
               }
             ]
