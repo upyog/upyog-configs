@@ -479,34 +479,34 @@ ReportDefinitions:
     query: >-
       WITH selected_data AS (
       SELECT
-      bp.additionalDetails->>'District' AS District,
-      bp.additionalDetails->>'Ulblisttype' AS UlbType,
-      bp.additionalDetails->>'UlbName' AS UlbName,
-      bp.applicationno,
-      bp.additionalDetails->>'ownerName' AS ApplicantName,
-      to_char(to_timestamp(bp.createdTime / 1000), 'DD/MM/YYYY') as submissiondate,
-      CASE
-      WHEN bp.approvaldate IS NOT NULL AND bp.approvaldate > 0 THEN TO_CHAR(TO_TIMESTAMP(bp.approvaldate / 1000), 'DD/MM/YYYY')
-      ELSE ''
-      END AS approval_date,
-      wft.escalated as above_sla,
-      u.name AS name,
-      assignment.designation AS designation
-      FROM 
-      eg_bpa_buildingplan bp 
+       bp.additionalDetails->>'District' AS District,
+       bp.additionalDetails->>'Ulblisttype' AS UlbType,
+       bp.additionalDetails->>'UlbName' AS UlbName,
+       bp.applicationno,
+       bp.additionalDetails->>'ownerName' AS ApplicantName,
+       to_char(to_timestamp(bp.createdTime / 1000), 'DD/MM/YYYY') AS submissiondate,
+       CASE
+           WHEN bp.approvaldate IS NOT NULL AND bp.approvaldate > 0 THEN TO_CHAR(TO_TIMESTAMP(bp.approvaldate / 1000), 'DD/MM/YYYY')
+           ELSE ''
+       END AS approval_date,
+       wft.escalated AS above_sla,
+       u.name AS name,
+       assignment.designation AS designation
+       FROM 
+       eg_bpa_buildingplan bp
+       JOIN 
+       eg_wf_processinstance_v2 wft ON wft.businessid = bp.applicationno
+       JOIN 
+       eg_user u ON u.uuid = (
+           SELECT 
+               MAX(lastmodifiedby)
+           FROM 
+               eg_wf_processinstance_v2
+           WHERE 
+               lastmodifiedby < (SELECT MAX(lastmodifiedby) FROM eg_wf_processinstance_v2)
+       )
       JOIN 
-      eg_wf_processinstance_v2 wft ON wft.businessid = bp.applicationno
-      JOIN 
-      eg_user u ON u.uuid = (
-      SELECT 
-      MAX(lastmodifiedby)
-      FROM 
-      eg_wf_processinstance_v2
-          WHERE 
-            lastmodifiedby < (SELECT MAX(lastmodifiedby) FROM eg_wf_processinstance_v2)
-        )
-      JOIN 
-        eg_hrms_assignment assignment ON assignment.employeeid = u.uuid
+       eg_hrms_assignment assignment ON assignment.employeeid = u.uuid
       )
       SELECT 
       selected_data.District,
@@ -522,8 +522,8 @@ ReportDefinitions:
       FROM 
       selected_data
       LEFT JOIN 
-      (VALUES tbl_def_desig) AS desigmap_def(name,code) ON desigmap_def.code = selected_data.designation
-    orderby: ORDER BY selected_data.submissiondate DESC
+      tbl_def_desig AS desigmap_def ON desigmap_def.code = selected_data.designation
+    orderby: ORDER BY  selected_data.submissiondate DESC
 
   - reportName: ObpsUlbWiseStatusReport
     decryptionPathId: ObpsDailyCollectionReport
