@@ -498,12 +498,18 @@ ReportDefinitions:
        eg_wf_processinstance_v2 wft ON wft.businessid = bp.applicationno
        JOIN 
        eg_user u ON u.uuid = (
-           SELECT 
-               MAX(lastmodifiedby)
-           FROM 
-               eg_wf_processinstance_v2
-           WHERE 
-               lastmodifiedby < (SELECT MAX(lastmodifiedby) FROM eg_wf_processinstance_v2)
+            SELECT
+            createdby
+            FROM
+            eg_wf_processinstance_v2
+            WHERE
+            businessid = bp.applicationno
+            AND createdtime < (
+            SELECT MAX(createdtime) FROM eg_wf_processinstance_v2
+            WHERE
+            businessid = bp.applicationno AND escalated = 't'
+            )
+            ORDER BY createdtime DESC LIMIT 1
        )
       JOIN 
        eg_hrms_assignment assignment ON assignment.employeeid = u.uuid
@@ -521,8 +527,8 @@ ReportDefinitions:
       desigmap_def.name AS designation
       FROM 
       selected_data
-      LEFT JOIN 
-      tbl_def_desig AS desigmap_def ON desigmap_def.code = selected_data.designation
+      INNER JOIN 
+      (VALUES tbl_def_desig) AS desigmap_def(name,code) ON desigmap_def.code::varchar = selected_data.designation
     orderby: ORDER BY  selected_data.submissiondate DESC
 
   - reportName: ObpsUlbWiseStatusReport
