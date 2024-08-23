@@ -780,22 +780,22 @@ serviceMaps:
    queryMaps:
 
      - query: UPDATE eg_pt_property_v2 SET additionaldetails=?,status=?, lastmodifiedby=?, lastmodifiedtime=? WHERE propertyId=? AND tenantId=?;
-       basePath: Properties.*
+       basePath: ProcessInstances.*
        jsonMaps:
        
-         - jsonPath: $.Properties.*.additionalDetails
+         - jsonPath: $.ProcessInstances.*.additionalDetails
            type: JSON
            dbType: JSONB
 
-         - jsonPath: $.Properties.*.status
+         - jsonPath: $.ProcessInstances.*.status
 
-         - jsonPath: $.Properties.*.auditDetails.lastModifiedBy
+         - jsonPath: $.ProcessInstances.*.auditDetails.lastModifiedBy
 
-         - jsonPath: $.Properties.*.auditDetails.lastModifiedTime
+         - jsonPath: $.ProcessInstances.*.auditDetails.lastModifiedTime
 
-         - jsonPath: $.Properties.*.propertyId
+         - jsonPath: $.ProcessInstances.*.propertyId
 
-         - jsonPath: $.Properties.*.tenantId
+         - jsonPath: $.ProcessInstances.*.tenantId
 
 
 
