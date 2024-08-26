@@ -773,29 +773,6 @@ serviceMaps:
 
          - jsonPath: $.Properties[*][?({assessmentNumber} in @.propertyDetails[*].assessmentNumber)].tenantId
 
- - version: 1.0
-   description: Updates pt status for auto escalate
-   fromTopic: pt-auto-escalation
-   isTransaction: true
-   queryMaps:
-
-     - query: UPDATE eg_pt_property_v2 SET additionaldetails=?,status=?, lastmodifiedby=?, lastmodifiedtime=? WHERE propertyId=? AND tenantId=?;
-       basePath: ProcessInstances.*
-       jsonMaps:
-       
-         - jsonPath: $.ProcessInstances.*.additionalDetails
-           type: JSON
-           dbType: JSONB
-
-         - jsonPath: $.ProcessInstances.*.status
-
-         - jsonPath: $.ProcessInstances.*.auditDetails.lastModifiedBy
-
-         - jsonPath: $.ProcessInstances.*.auditDetails.lastModifiedTime
-
-         - jsonPath: $.ProcessInstances.*.propertyId
-
-         - jsonPath: $.ProcessInstances.*.tenantId
 
 
 
