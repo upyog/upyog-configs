@@ -512,6 +512,7 @@ ReportDefinitions:
        )
       JOIN 
        eg_hrms_assignment assignment ON assignment.employeeid = u.uuid
+      WHERE 1=1
       )
       SELECT 
       selected_data.District,
@@ -526,6 +527,7 @@ ReportDefinitions:
       desigmap_def.name AS designation
       FROM 
       selected_data
+      JOIN eg_bpa_buildingplan bp ON selected_data.applicationno = bp.applicationno
       INNER JOIN 
       (VALUES tbl_def_desig) AS desigmap_def(code,name) ON desigmap_def.code = selected_data.designation
       WHERE 1=1 AND selected_data.applicationno IS NOT NULL
