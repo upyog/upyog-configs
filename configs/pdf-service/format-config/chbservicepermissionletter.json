@@ -1,6 +1,22 @@
 {
   "key": "chbpermissionletter",
   "config": {
+    "pageMargins": [40, 40, 40, 40],
+    "background": [
+      {
+        "canvas": [
+          {
+            "type": "rect",
+            "x": 15,
+            "y": 15,
+            "w": 565,
+            "h": 811,
+            "lineWidth": 1,
+            "lineColor": "#000000"
+          }
+        ]
+      }
+    ],
     "defaultStyle": {
       "font": "Cambay"
     },
@@ -70,7 +86,7 @@
               {"text": "{{APPLICANT_NAME}}", "bold": false, "margin": [0, 0, 0, 2]}
             ],
             "style": "content",
-            "margin": [0, 0, 0, 2]
+            "margin": [30, 0, 0, 2]
           },
           {
             "text": [
@@ -80,7 +96,7 @@
               {"text": "{{APPLICANT_CITY}} ", "bold": false}
             ],
             "style": "content",
-            "margin": [0, 0, 0, 5]
+            "margin": [30, 0, 0, 5]
           },
           {
             "text": [
