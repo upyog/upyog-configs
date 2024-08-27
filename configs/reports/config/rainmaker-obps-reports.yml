@@ -390,7 +390,7 @@ ReportDefinitions:
     externalService:
       - entity: $.MdmsRes.common-masters.Designation
         apiURL: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?moduleName=common-masters&masterName=Designation&tenantId=$tenantId
-        keyOrder: name,code
+        keyOrder: code,name
         tableName: tbl_def_desig
     sourceColumns:
       - name: District
@@ -527,8 +527,10 @@ ReportDefinitions:
       desigmap_def.name AS designation
       FROM 
       selected_data
+      JOIN eg_bpa_buildingplan bp ON selected_data.applicationno = bp.applicationno
       INNER JOIN 
-      (VALUES tbl_def_desig) AS desigmap_def(name,code) ON desigmap_def.code::varchar = selected_data.designation
+      (VALUES tbl_def_desig) AS desigmap_def(code,name) ON desigmap_def.code = selected_data.designation
+      WHERE 1=1 AND selected_data.applicationno IS NOT NULL
     orderby: ORDER BY  selected_data.submissiondate DESC
 
   - reportName: ObpsUlbWiseStatusReport
