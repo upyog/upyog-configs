@@ -55,7 +55,6 @@
                 },
                 "localisation": {
                   "required": true,
-                  "prefix": "MODULE",
                   "module": "rainmaker-common"
                 }
               },
@@ -153,6 +152,48 @@
                 }
               },
               {
+                "variable": "SECURITY_DEPOSIT",
+                "value": {
+                  "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[0].amount"
+                }
+              },
+              {
+                "variable": "SGST",
+                "value": {
+                  "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[1].amount"
+                }
+              },
+              {
+                "variable": "CONSERVATION_FEE",
+                "value": {
+                  "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[2].amount"
+                }
+              },
+              {
+                "variable": "ELECTRICITY_CHARGES",
+                "value": {
+                  "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[3].amount"
+                }
+              },
+              {
+                "variable": "CGST",
+                "value": {
+                  "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[4].amount"
+                }
+              },
+              {
+                "variable": "WATER_CHARGES",
+                "value": {
+                  "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[5].amount"
+                }
+              },
+              {
+                "variable": "RENT",
+                "value": {
+                  "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[6].amount"
+                }
+              },
+              {
                 "variable": "payment_receipt",
                 "value": {
                   "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_PAYMENT_RECEIPT"
@@ -179,12 +220,7 @@
               {
                 "variable": "bookingNo",
                 "value": {
-                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_CONSUMER_ID"
-                },
-                "localisation": {
-                  "required": true,
-                  "prefix": null,
-                  "module": "rainmaker-common"
+                  "path": "paymentDetails[0].bill.consumerCode"
                 }
               },
               {
@@ -421,7 +457,7 @@
           {
             "externalAPI": [
               {
-                "path": "http://localhost:8090/egov-mdms-service/v1/_get",
+                "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
                 "queryParam": "moduleName=tenant&masterName=tenants&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}')%5D",
                 "apiRequest": null,
                 "responseMapping": [
@@ -458,7 +494,7 @@
                 ]
               },
               {
-                "path": "http://localhost:8090/egov-mdms-service/v1/_get",
+                "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
                 "queryParam": "moduleName=CHB&masterName=CommunityHalls&tenantId=pg",
                 "apiRequest": null,
                 "responseMapping": [
@@ -469,7 +505,19 @@
                 ]
               },
               {
-                "path": "http://localhost:8090/egov-mdms-service/v1/_get",
+                "path": "http://chb-services:8080/chb-services/booking/v1/_search",
+                "queryParam": "tenantId=pg.citya",
+                "apiRequest": null,
+                "responseMapping": [
+                  {
+                    "variable": "applicantName",
+                    "value": "hallsBookingApplication[0].applicantDetail.applicantName"
+                  }
+                ]
+              },
+              
+              {
+                "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
                 "queryParam": "moduleName=tenant&masterName=footer&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}' %26%26 @.service=='{$.paymentDetails[0].businessService}')%5D",
                 "apiRequest": null,
                 "responseMapping": [
@@ -500,7 +548,7 @@
           {
             "qrcodeConfig": [
               {
-                "variable": "qrcodeimage",
+                "variable": "qrcodeImage",
                 "value": "/digit-ui/citizen/payment/verification?tenantId={{tenantid}}&receiptNumber={{receiptNo}}"
               }
             ]
