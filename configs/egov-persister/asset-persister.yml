@@ -223,7 +223,6 @@ serviceMaps:
                   assetid,
                   applicationno,
                   assignedusername,
-                  employeecode,
                   designation,
                   department,
                   assigneddate,
@@ -232,7 +231,8 @@ serviceMaps:
                   lastModifiedby,
                   createdtime,
                   lastModifiedtime,
-                  isassigned
+                  isassigned,
+                  employeecode
                 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                ON CONFLICT (assetid) 
                DO UPDATE SET
@@ -252,7 +252,6 @@ serviceMaps:
             - jsonPath: $.Asset.applicationNo
             - jsonPath: $.Asset.assetAssignment.assignedUserName
             - jsonPath: $.Asset.assetAssignment.designation
-            - jsonPath: $.Asset.assetAssignment.employeeCode
             - jsonPath: $.Asset.assetAssignment.department
             - jsonPath: $.Asset.assetAssignment.assignedDate
             - jsonPath: $.Asset.assetAssignment.returnDate
@@ -261,6 +260,7 @@ serviceMaps:
             - jsonPath: $.Asset.assetAssignment.auditDetails.createdTime
             - jsonPath: $.Asset.assetAssignment.auditDetails.lastModifiedTime
             - jsonPath: $.Asset.assetAssignment.isAssigned
+            - jsonPath: $.Asset.assetAssignment.employeeCode
 
     
     - version: 1.0
