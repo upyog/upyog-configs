@@ -239,12 +239,6 @@ serviceMaps:
                   assignmentid = EXCLUDED.assignmentid,
                   tenantid = EXCLUDED.tenantid,
                   applicationno = EXCLUDED.applicationno,
-                  assignedusername = EXCLUDED.assignedusername,
-                  employeecode = EXCLUDED.employeecode,
-                  designation = EXCLUDED.designation,
-                  department = EXCLUDED.department,
-                  assigneddate = EXCLUDED.assigneddate,
-                  returnDate = EXCLUDED.returnDate,
                   createdby = EXCLUDED.createdby,
                   lastModifiedby = EXCLUDED.lastModifiedby,
                   createdtime = EXCLUDED.createdtime,
@@ -256,6 +250,11 @@ serviceMaps:
             - jsonPath: $.Asset.tenantId
             - jsonPath: $.Asset.id
             - jsonPath: $.Asset.applicationNo
+            - jsonPath: $.Asset.assetAssignment.assignedUserName
+            - jsonPath: $.Asset.assetAssignment.designation
+            - jsonPath: $.Asset.assetAssignment.employeeCode
+            - jsonPath: $.Asset.assetAssignment.department
+            - jsonPath: $.Asset.assetAssignment.assignedDate
             - jsonPath: $.Asset.assetAssignment.returnDate
             - jsonPath: $.Asset.assetAssignment.auditDetails.createdBy
             - jsonPath: $.Asset.assetAssignment.auditDetails.lastModifiedBy
