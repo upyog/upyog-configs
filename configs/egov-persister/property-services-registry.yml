@@ -582,3 +582,23 @@ serviceMaps:
       - jsonPath: $.Property.auditDetails.createdTime
 
       - jsonPath: $.Property.auditDetails.lastModifiedTime
+
+  - version: 1.0
+    description: Updates pt status for auto escalate
+    fromTopic: pt-auto-escalation
+    isTransaction: true
+    queryMaps:
+
+    - query: UPDATE eg_pt_property SET status=?, lastmodifiedby=?, lastmodifiedtime=? WHERE propertyId=? AND tenantId=?;
+      basePath: ProcessInstances.*
+      jsonMaps:
+
+         - jsonPath: $.ProcessInstances.*.state.applicationStatus
+
+         - jsonPath: $.ProcessInstances.*.auditDetails.lastModifiedBy
+
+         - jsonPath: $.ProcessInstances.*.auditDetails.lastModifiedTime
+
+         - jsonPath: $.ProcessInstances.*.businessId
+
+         - jsonPath: $.ProcessInstances.*.tenantId
