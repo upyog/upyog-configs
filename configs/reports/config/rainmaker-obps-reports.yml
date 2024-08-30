@@ -416,14 +416,8 @@ ReportDefinitions:
         WHEN pi.action = 'BLOCK' THEN 'Y'
         ELSE 'N'
       END AS Blocked,  
-      CASE 
-        WHEN pi.action = 'BLOCK' THEN u.name
-        ELSE ''
-        END AS name,
-        CASE 
-        WHEN pi.action = 'BLOCK' THEN pi.comment
-        ELSE ''
-        END AS BlockingComment,
+      u.name AS name,
+      pi.comment AS BlockingComment,
         to_char(To_timestamp(bp.createdTime / 1000), 'DD/MM/YYYY') AS submissiondate,
       CASE
            WHEN bp.approvaldate IS NOT NULL AND bp.approvaldate > 0 THEN TO_CHAR(TO_TIMESTAMP(bp.approvaldate / 1000), 'DD/MM/YYYY')
@@ -449,7 +443,7 @@ ReportDefinitions:
         WHEN bd.businessservice = 'BPA.NC_SAN_FEE' THEN bd.totalamount 
         ELSE 0 
        END), 0) AS total_fees,
-       bp.status FROM eg_bpa_buildingplan bp JOIN egbs_bill_v1 b ON bp.applicationno = b.consumercode JOIN egbs_billdetail_v1 bd ON b.id = bd.billid JOIN eg_wf_processinstance_v2 pi ON bp.applicationno = pi.businessid JOIN eg_user u ON u.uuid = pi.lastmodifiedby WHERE 1=1
+       bp.status FROM eg_bpa_buildingplan bp JOIN egbs_bill_v1 b ON bp.applicationno = b.consumercode JOIN egbs_billdetail_v1 bd ON b.id = bd.billid JOIN eg_wf_processinstance_v2 pi ON bp.applicationno = pi.businessid LEFT JOIN eg_user u ON u.uuid = pi.lastmodifiedby AND pi.action='BLOCK' WHERE 1=1
 
     groupby: GROUP BY
       bp.additionalDetails->>'District',
