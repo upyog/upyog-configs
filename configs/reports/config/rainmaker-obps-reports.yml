@@ -276,6 +276,21 @@ ReportDefinitions:
         type: string
         source: obps
         total: false
+      - name: Blocked
+        label: Blocked
+        type: string
+        source: obps
+        total: false
+      - name: name
+        label: Blocking Officer
+        type: string
+        source: obps
+        total: false
+      - name: BlockingComment
+        label: Blocking Comment
+        type: string
+        source: obps
+        total: false
       - name: submissiondate
         label: SubmissionDate
         type: string
@@ -296,23 +311,33 @@ ReportDefinitions:
         type: string
         source: obps
         total: false
+      - name: PlotArea
+        label: Plot Area
+        type: string
+        source: obps
+        total: false
       - name: Pay1_Charges
         label: Pay1Charges
         type: string
         source: obps
         total: false
-      - name: Malba_Charges
+      - name: Malba_charges
         label: MalbaCharges
         type: string
         source: obps
         total: false
-      - name: Labour_Cess
+      - name: Labour_cess
         label: LabourCess
         type: string
         source: obps
         total: false
       - name: Water_charges
         label: WaterCharges
+        type: string
+        source: obps
+        total: false
+      - name: Cow_cess
+        label: Cow Cess
         type: string
         source: obps
         total: false
@@ -323,6 +348,26 @@ ReportDefinitions:
         total: false
       - name: Other_charges
         label: OtherCharges
+        type: string
+        source: obps
+        total: false
+      - name: Less_Adjustment
+        label: Less Adjustment
+        type: string
+        source: obps
+        total: false
+      - name: Pay2_Charges
+        label: Pay2Charges
+        type: string
+        source: obps
+        total: false
+      - name: total_fees
+        label: Total Fees
+        type: string
+        source: obps
+        total: false
+      - name: status
+        label: Status
         type: string
         source: obps
         total: false
@@ -361,24 +406,74 @@ ReportDefinitions:
         searchClause: AND bp.createdTime <= $toDate
 
     query: >-
-      SELECT bp.additionalDetails->>'District' AS District,
-            bp.additionalDetails->>'Ulblisttype' AS UlbType,
-            bp.additionalDetails->>'UlbName' AS UlbName,
-            bp.applicationno,
-            bp.additionalDetails->>'ownerName' AS ApplicantName,
-            to_char(To_timestamp(bp.createdTime / 1000), 'DD/MM/YYYY') as submissiondate,
-            TO_CHAR(TO_TIMESTAMP(bp.approvaldate / 1000), 'DD/MM/YYYY') AS approval_date,
-            bd.additionalDetails->>'latitude' AS Latitude,
-            bd.additionalDetails->>'longitude' AS Longitude,
-            bp.additionalDetails->>'P1charges' AS Pay1_Charges,
-            bp.additionalDetails->'selfCertificationCharges'->>'BPA_MALBA_CHARGES' AS Malba_Charges,
-            bp.additionalDetails->'selfCertificationCharges'->>'BPA_LABOUR_CESS' AS Labour_Cess,
-            bp.additionalDetails->'selfCertificationCharges'->>'BPA_WATER_CHARGES' AS Water_charges,
-            bp.additionalDetails->'selfCertificationCharges'->>'BPA_DEVELOPMENT_CHARGES' AS Development_charges,
-            bp.additionalDetails->'selfCertificationCharges'->>'BPA_OTHER_CHARGES' AS Other_charges 
-      FROM eg_bpa_buildingplan bp 
-      JOIN eg_bpa_document bd ON bp.id = bd.buildingplanid 
-      WHERE 1=1
+      SELECT 
+      bp.additionalDetails->>'District' AS District,
+      bp.additionalDetails->>'Ulblisttype' AS UlbType,
+      bp.additionalDetails->>'UlbName' AS UlbName,
+      bp.applicationno,
+      bp.additionalDetails->>'ownerName' AS ApplicantName,
+      CASE
+        WHEN pi.action = 'BLOCK' THEN 'Y'
+        ELSE 'N'
+      END AS Blocked,  
+      CASE 
+        WHEN pi.action = 'BLOCK' THEN u.name
+        ELSE ''
+        END AS name,
+        CASE 
+        WHEN pi.action = 'BLOCK' THEN pi.comment
+        ELSE ''
+        END AS BlockingComment,
+        to_char(To_timestamp(bp.createdTime / 1000), 'DD/MM/YYYY') AS submissiondate,
+      CASE
+           WHEN bp.approvaldate IS NOT NULL AND bp.approvaldate > 0 THEN TO_CHAR(TO_TIMESTAMP(bp.approvaldate / 1000), 'DD/MM/YYYY')
+           ELSE ''
+       END AS approval_date,
+       bd.additionalDetails->>'latitude' AS Latitude,
+       bd.additionalDetails->>'longitude' AS Longitude,
+       bp.additionalDetails->>'area' AS PlotArea,
+       COALESCE(SUM(CASE WHEN bd.businessservice = 'BPA.NC_APP_FEE' THEN bd.totalamount ELSE 0 END), 0) AS Pay1_Charges,
+       bp.additionalDetails->'selfCertificationCharges'->>'BPA_MALBA_CHARGES' AS Malba_charges,
+       bp.additionalDetails->'selfCertificationCharges'->>'BPA_LABOUR_CESS' AS Labour_cess,
+       bp.additionalDetails->'selfCertificationCharges'->>'BPA_WATER_CHARGES' AS Water_charges,
+       bp.additionalDetails->'selfCertificationCharges'->>'BPA_GAUSHALA_CHARGES_CESS' AS Cow_cess,
+       bp.additionalDetails->'selfCertificationCharges'->>'BPA_DEVELOPMENT_CHARGES' AS Development_charges,
+       bp.additionalDetails->'selfCertificationCharges'->>'BPA_OTHER_CHARGES' AS Other_charges,
+       bp.additionalDetails->'selfCertificationCharges'->>'BPA_LESS_ADJUSMENT_PLOT' AS Less_Adjustment,
+       COALESCE(SUM(CASE WHEN bd.businessservice = 'BPA.NC_SAN_FEE' THEN bd.totalamount ELSE 0 END), 0) AS Pay2_Charges,
+       COALESCE(SUM(CASE 
+        WHEN bd.businessservice = 'BPA.NC_APP_FEE' THEN bd.totalamount 
+        ELSE 0 
+       END), 0) +
+       COALESCE(SUM(CASE 
+        WHEN bd.businessservice = 'BPA.NC_SAN_FEE' THEN bd.totalamount 
+        ELSE 0 
+       END), 0) AS total_fees,
+       bp.status FROM eg_bpa_buildingplan bp JOIN egbs_bill_v1 b ON bp.applicationno = b.consumercode JOIN egbs_billdetail_v1 bd ON b.id = bd.billid JOIN eg_wf_processinstance_v2 pi ON bp.applicationno = pi.businessid JOIN eg_user u ON u.uuid = pi.lastmodifiedby WHERE 1=1
+
+    groupby: GROUP BY
+      bp.additionalDetails->>'District',
+      bp.additionalDetails->>'Ulblisttype',
+      bp.additionalDetails->>'UlbName',
+      bp.applicationno,
+      bp.additionalDetails->>'ownerName',
+      to_char(To_timestamp(bp.createdTime / 1000), 'DD/MM/YYYY'),
+      TO_CHAR(TO_TIMESTAMP(bp.approvaldate / 1000), 'DD/MM/YYYY'),
+      bd.additionalDetails->>'latitude',
+      bd.additionalDetails->>'longitude',
+      bp.additionalDetails->>'area',
+      bp.additionalDetails->'selfCertificationCharges'->>'BPA_MALBA_CHARGES',
+      bp.additionalDetails->'selfCertificationCharges'->>'BPA_LABOUR_CESS',
+      bp.additionalDetails->'selfCertificationCharges'->>'BPA_WATER_CHARGES',
+      bp.additionalDetails->'selfCertificationCharges'->>'BPA_GAUSHALA_CHARGES_CESS',
+      bp.additionalDetails->'selfCertificationCharges'->>'BPA_DEVELOPMENT_CHARGES',
+      bp.additionalDetails->'selfCertificationCharges'->>'BPA_OTHER_CHARGES',
+      bp.additionalDetails->'selfCertificationCharges'->>'BPA_LESS_ADJUSMENT_PLOT',
+      bp.status,
+      u.name,
+      pi.comment,
+      pi.action,
+      bp.approvaldate
     orderby: ORDER BY submissiondate DESC
     
   - reportName: ObpsApplicationApprovedAfterTimeframeReport
