@@ -413,11 +413,14 @@ ReportDefinitions:
       bp.applicationno,
       bp.additionalDetails->>'ownerName' AS ApplicantName,
       CASE
-        WHEN pi.action = 'BLOCK' THEN 'Y'
-        ELSE 'N'
+        WHEN pi.action = 'BLOCK' THEN 'YES'
+        ELSE 'NO'
       END AS Blocked,  
       u.name AS name,
-      pi.comment AS BlockingComment,
+      CASE 
+         WHEN pi.action='BLOCK' THEN pi.comment
+         ELSE ''
+      END  AS BlockingComment,
         to_char(To_timestamp(bp.createdTime / 1000), 'DD/MM/YYYY') AS submissiondate,
       CASE
            WHEN bp.approvaldate IS NOT NULL AND bp.approvaldate > 0 THEN TO_CHAR(TO_TIMESTAMP(bp.approvaldate / 1000), 'DD/MM/YYYY')
@@ -568,62 +571,72 @@ ReportDefinitions:
     query: >-
       WITH selected_data AS (
       SELECT
-       bp.additionalDetails->>'District' AS District,
-       bp.additionalDetails->>'Ulblisttype' AS UlbType,
-       bp.additionalDetails->>'UlbName' AS UlbName,
-       bp.applicationno,
-       bp.additionalDetails->>'ownerName' AS ApplicantName,
-       to_char(to_timestamp(bp.createdTime / 1000), 'DD/MM/YYYY') AS submissiondate,
-       CASE
-           WHEN bp.approvaldate IS NOT NULL AND bp.approvaldate > 0 THEN TO_CHAR(TO_TIMESTAMP(bp.approvaldate / 1000), 'DD/MM/YYYY')
-           ELSE ''
+      bp.additionalDetails->>'District' AS District,
+      bp.additionalDetails->>'Ulblisttype' AS UlbType,
+      bp.additionalDetails->>'UlbName' AS UlbName,
+      bp.applicationno,
+      bp.additionalDetails->>'ownerName' AS ApplicantName,
+      to_char(to_timestamp(bp.createdTime / 1000), 'DD/MM/YYYY') AS submissiondate, 
+      CASE 
+       WHEN bp.approvaldate='0' or bp.approvaldate is null THEN '-' 
+       ELSE to_char(to_timestamp(bp.approvaldate / 1000), 'DD/MM/YYYY') 
        END AS approval_date,
-        CASE
-          WHEN  wft.escalated ='t' THEN  'YES' 
-          ELSE 'NO' 
-          END AS above_sla,
-       u.name AS name,
-       assignment.designation AS designation
-       FROM 
+      CASE
+       WHEN  wft.escalated ='t' THEN  'YES'
+       ELSE 'NO'
+       END AS above_sla
+       FROM
        eg_bpa_buildingplan bp
-       JOIN 
-       eg_wf_processinstance_v2 wft ON wft.businessid = bp.applicationno
-       JOIN 
-       eg_user u ON u.uuid = (
-            SELECT
-            createdby
+        JOIN
+         eg_wf_processinstance_v2 wft ON wft.businessid = bp.applicationno
+        WHERE
+          wft.escalated ='t' and bp.status='APPROVED'
+           ORDER BY  bp.applicationno, bp.createdTime DESC
+          ),
+          selected_data_2 AS (
+         SELECT
+         wfpi.businessid,
+         u.name AS user_name,
+         desigmap_def.name AS designation,
+         wfpi.createdtime
+         FROM
+         eg_user u
+         JOIN
+         eg_wf_processinstance_v2 wfpi ON wfpi.createdby = u.uuid
+          JOIN
+          eg_hrms_assignment assignment ON assignment.employeeid = u.uuid
+           INNER JOIN
+           (VALUES tbl_def_desig) AS desigmap_def(code, name) ON desigmap_def.code = assignment.designation
+           WHERE
+            wfpi.businessid IN (SELECT applicationno FROM selected_data)
+             AND wfpi.createdtime < (
+         SELECT MAX(wft2.createdtime)
+         FROM eg_wf_processinstance_v2 wft2
+         WHERE wft2.businessid = wfpi.businessid
+         )  AND escalated = 't'
+         ORDER BY
+         wfpi.createdtime DESC
+         LIMIT 1
+          )
+           SELECT
+           sd.District,
+            sd.UlbType,
+            sd.UlbName,
+            sd.applicationno,
+            sd.ApplicantName,
+            sd.submissiondate,
+            sd.approval_date,
+           sd.above_sla,
+            sdd.user_name,
+             sdd.designation
             FROM
-            eg_wf_processinstance_v2
-            WHERE
-            businessid = bp.applicationno
-            AND createdtime < (
-            SELECT MAX(createdtime) FROM eg_wf_processinstance_v2
-            WHERE
-            businessid = bp.applicationno AND escalated = 't'
-            )
-            ORDER BY createdtime DESC LIMIT 1
-       )
-      JOIN 
-       eg_hrms_assignment assignment ON assignment.employeeid = u.uuid
-      )
-      SELECT 
-      selected_data.District,
-      selected_data.UlbType,
-      selected_data.UlbName,
-      selected_data.applicationno,
-      selected_data.ApplicantName,
-      selected_data.submissiondate,
-      selected_data.approval_date,
-      selected_data.above_sla,
-      selected_data.name,
-      desigmap_def.name AS designation
-      FROM 
-      selected_data
-      JOIN eg_bpa_buildingplan bp ON selected_data.applicationno = bp.applicationno
-      INNER JOIN 
-      (VALUES tbl_def_desig) AS desigmap_def(code,name) ON desigmap_def.code = selected_data.designation
-      WHERE 1=1 AND selected_data.applicationno IS NOT NULL
-    orderby: ORDER BY  selected_data.submissiondate DESC
+             selected_data sd
+              JOIN
+                selected_data_2 sdd ON sdd.businessid = sd.applicationno
+
+                WHERE 1=1
+
+    orderby: ORDER BY sd.submissiondate DESC
 
   - reportName: ObpsUlbWiseStatusReport
     decryptionPathId: ObpsDailyCollectionReport
@@ -703,7 +716,7 @@ ReportDefinitions:
     query: >-
       WITH 
       pending_approval AS (
-      SELECT COUNT(DISTINCT bp.applicationno) AS pending_approval_count
+      SELECT COUNT(*) AS pending_approval_count
       FROM eg_bpa_buildingplan bp
       JOIN eg_wf_processinstance_v2 pi ON pi.businessid = bp.applicationno
       JOIN eg_wf_state_v2 ws ON ws.uuid = pi.status
@@ -712,38 +725,41 @@ ReportDefinitions:
        ),
 
       blocked_applications AS (
-      SELECT COUNT(DISTINCT bp.applicationno) AS blocked_application_count
+      SELECT COUNT(*) AS blocked_application_count
       FROM eg_bpa_buildingplan bp
       JOIN eg_wf_processinstance_v2 pi ON pi.businessid = bp.applicationno
       WHERE pi.action = 'BLOCK'
       ),
 
       approved_verified AS (
-      SELECT COUNT(DISTINCT bp.applicationno) AS approved_verified_count
+      SELECT COUNT(*) AS approved_verified_count
       FROM eg_bpa_buildingplan bp
       JOIN eg_wf_processinstance_v2 pi ON pi.businessid = bp.applicationno
-      JOIN eg_wf_state_v2 ws ON ws.uuid = pi.status
-      WHERE ws.state IN ('APPROVED', 'VERIFIED')
+      WHERE bp.status='APPROVED'
       AND pi.escalated = 'f'
       ),
 
       approved_without_verification AS (
-      SELECT COUNT(DISTINCT bp.applicationno) AS approved_without_verification_count
+      SELECT COUNT(*) AS approved_without_verification_count
       FROM eg_bpa_buildingplan bp
       JOIN eg_wf_processinstance_v2 pi ON pi.businessid = bp.applicationno
-      JOIN eg_wf_state_v2 ws ON ws.uuid = pi.status
-      WHERE ws.state = 'DOC_VERIFICATION_PENDING'
+      WHERE pi.escalated='t' AND bp.status='APPROVED'
        )
 
       SELECT 
         bp.additionalDetails->>'District' AS District, 
         bp.additionalDetails->>'Ulblisttype' AS UlbType, 
         UPPER(bp.additionalDetails->>'UlbName') AS UlbName,
-        COUNT(*) AS count,
-        (SELECT pending_approval_count FROM pending_approval) AS pending_approval_count,
-        (SELECT blocked_application_count FROM blocked_applications) AS blocked_application_count,
-        (SELECT approved_verified_count FROM approved_verified) AS approved_verified_count,
-        (SELECT approved_without_verification_count FROM approved_without_verification) AS approved_without_verification_count
+        (
+          (SELECT pending_approval_count FROM pending_approval) +
+          (SELECT blocked_application_count  FROM blocked_applications) +
+          (SELECT approved_verified_count FROM approved_verified) +
+          (SELECT approved_without_verification_count FROM approved_without_verification)
+        ) AS count,
+      (SELECT pending_approval_count FROM pending_approval) AS pending_approval_count,
+      (SELECT blocked_application_count FROM blocked_applications) AS blocked_application_count,
+      (SELECT approved_verified_count  FROM approved_verified) AS approved_verified_count,
+      (SELECT approved_without_verification_count FROM approved_without_verification) AS approved_without_verification_count
         FROM 
         eg_bpa_buildingplan bp WHERE 1=1
 
