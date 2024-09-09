@@ -633,7 +633,7 @@ ReportDefinitions:
              selected_data sd
               JOIN
                 selected_data_2 sdd ON sdd.businessid = sd.applicationno
-
+                JOIN eg_bpa_buildingplan bp on sdd.businessid = bp.applicationno
                 WHERE 1=1
 
     orderby: ORDER BY sd.submissiondate DESC
