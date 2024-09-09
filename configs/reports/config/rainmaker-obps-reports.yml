@@ -596,7 +596,7 @@ ReportDefinitions:
           selected_data_2 AS (
          SELECT
          wfpi.businessid,
-         u.name AS user_name,
+         u.name AS name,
          desigmap_def.name AS designation,
          wfpi.createdtime
          FROM
@@ -627,7 +627,7 @@ ReportDefinitions:
             sd.submissiondate,
             sd.approval_date,
            sd.above_sla,
-            sdd.user_name,
+            sdd.name,
              sdd.designation
             FROM
              selected_data sd
