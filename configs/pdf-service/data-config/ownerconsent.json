@@ -72,6 +72,24 @@
                   }
                 },
                 {
+                  "variable": "addressOne",
+                  "value": {
+                    "path": "$.applicationData.landInfo.address.street"
+                  }
+                },
+                {
+                  "variable": "email",
+                  "value": {
+                    "path": "$.applicationData.landInfo.owners[0].emailId"
+                  }
+                },
+                {
+                  "variable": "addressTwo",
+                  "value": {
+                    "path": "$.applicationData.landInfo.address.locality.name"
+                  }
+                },
+                {
                   "variable": "architectMobileNumber",
                   "value": {
                     "path": "$.applicationData.additionalDetails.architectMobileNumber"
