@@ -98,15 +98,7 @@
                 "bold": true
               },
               {
-                "text": "{{favourOf}},",
-                "bold": false
-              },
-              {
-                "text": " {{doorNo}}",
-                "bold": false
-              },
-              {
-                "text": " {{locality}}.",
+                "text": " {{ownersWithAddress}}",
                 "bold": false
               }
             ] 
@@ -223,7 +215,7 @@
                   "text":" {{situatedin}}"
                 },
                 {
-                  "text":" {{locality}}.",
+                  "text":" {{doorNo}}, {{street}}, {{city}}, {{locality}}.",
                   "bold":true
                 },
                 {
@@ -285,7 +277,7 @@
     
             },
             {
-              "text":" ({{favourOf}})/",
+              "text":" ({{ownerName}})/",
               "bold":true
             },
             {
@@ -737,7 +729,7 @@
                 
               },
               {
-                "text":" {{profession}} {{stakeholderName}}.",
+                "text":" {{stakeholderName}}({{profession}}).",
                 "bold":true
               },
               {
@@ -778,7 +770,7 @@
                 
               },
               {
-                "text":" {{profession}} {{stakeholderName}} ",
+                "text":" {{stakeholderName}} ({{profession}}) ",
                 "bold":true
               },
               {
@@ -830,7 +822,10 @@
                     "text":"{{SELF_CERTIFIED_BY}}:"
                   },
                   {
-                    "text": " {{profession}}"
+                    "text": " {{stakeholderName}}"
+                  },
+                  {
+                    "text": " ({{profession}})"
                    
                   }
                 ]
@@ -867,7 +862,7 @@
                     "text":"{{DATED}}"
                   },
                   {
-                    "text":" {{submissionDate}}"
+                    "text":" {{formattedSubmissionDate}}"
                   }
                 ]
               }
