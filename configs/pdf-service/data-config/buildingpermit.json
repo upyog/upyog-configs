@@ -43,6 +43,18 @@
                 }
               },
               {
+                "variable": "street",
+                "value": {
+                  "path": "$.landInfo.address.street"
+                }
+              },
+              {
+                "variable": "city",
+                "value": {
+                  "path": "$.landInfo.address.city"
+                }
+              },
+              {
                 "variable": "locality",
                 "value": {
                   "path": "$.landInfo.address.locality.name"
@@ -58,6 +70,12 @@
                 "variable": "holdingNo",
                 "value": {
                   "path": "$.additionalDetails.holdingNo"
+                }
+              },
+              {
+                "variable": "ownerName",
+                "value": {
+                  "path": "$.additionalDetails.ownerName"
                 }
               },
               {
@@ -138,8 +156,13 @@
               {
                 "variable": "ulbType",
                 "value": {
-                  "path": "$.additionalDetails.Ulblisttype"
-                  
+                  "path": "$.additionalDetails.Ulblisttype" 
+                }
+              },
+              {
+                "variable": "ownersWithAddress",
+                "value": {
+                  "path": "$.additionalDetails.ownersWithAddress"  
                 }
               },
               {
