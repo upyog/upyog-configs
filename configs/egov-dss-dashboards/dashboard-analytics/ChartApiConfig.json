@@ -23892,5 +23892,112 @@
 	  "Applications_Pending"
     ],
     "_comment": " "
-  }
+  },
+  "pqmTestCompliance": {
+      "chartName": "DSS_PQM_TEST_COMPLIANCE",
+      "queries": [
+        {
+          "module": "PQM",
+          "indexName": "pqm-service",
+          "aggrQuery": "{\"size\":0,\"aggs\":{\"total_tests\":{\"cardinality\":{\"field\":\"Data.tests.testId.keyword\"}},\"wfStatus_submitted_count\":{\"filter\":{\"term\":{\"Data.tests.wfStatus.keyword\":\"SUBMITTED\"}}}}}",
+          "requestQueryMap": "{\"plantCode\" : \"Data.tests.plantCode.keyword\",\"tenantId\" : \"Data.tests.tenantId\"}",
+          "dateRefField": "Data.tests.@timestamp"
+        }
+      ],
+      "chartType": "metric",
+      "valueType": "percentage",
+      "action": "percentage",
+      "isRoundOff": true,
+      "drillChart": "none",
+      "aggregationPaths": [
+        "wfStatus_submitted_count",
+        "total_tests"
+      ],
+      "insight": {
+        "chartResponseMap": "pqmTestCompliance",
+        "action": "differenceOfNumbers",
+        "upwardIndicator": "positive",
+        "downwardIndicator": "negative",
+        "textMessage": "$indicator$value% than last $insightInterval",
+        "colorCode": "#228B22",
+        "insightInterval": "year",
+        "isRoundOff": true
+      },
+      "_comment": " PQM Percentage of Test Compliance"
+    },
+    "pqmPercentageOfTestResultsMeetingBenchmarks": {
+      "chartName": "DSS_PQM_PERCENTAGE_OF_TEST_RESULTS_MEETING_BENCHMARKS",
+      "queries": [
+        {
+          "module": "PQM",
+          "indexName": "pqm-service",
+          "aggrQuery": "{\"size\":0,\"aggs\":{\"PASSED_TESTS\":{\"filter\":{\"term\":{\"Data.tests.status.keyword\":\"PASS\"}}},\"SUBMITTED_TESTS\":{\"filter\":{\"term\":{\"Data.tests.wfStatus.keyword\":\"SUBMITTED\"}}}}}",
+          "requestQueryMap": "{\"plantCode\" : \"Data.tests.plantCode.keyword\",\"tenantId\" : \"Data.tests.tenantId\"}",
+          "dateRefField": "Data.tests.@timestamp"
+        }
+      ],
+      "chartType": "metric",
+      "valueType": "percentage",
+      "action": "percentage",
+      "isRoundOff": true,
+      "drillChart": "none",
+      "aggregationPaths": [
+        "PASSED_TESTS",
+        "SUBMITTED_TESTS"
+      ],
+      "insight": {
+        "chartResponseMap": "pqmPercentageOfTestResultsMeetingBenchmarks",
+        "action": "differenceOfNumbers",
+        "upwardIndicator": "positive",
+        "downwardIndicator": "negative",
+        "textMessage": "$indicator$value% than last $insightInterval",
+        "colorCode": "#228B22",
+        "insightInterval": "year",
+        "isRoundOff": true
+      },
+      "_comment": " PQM Percentage of Test Results Meeting Benchmarks"
+    },
+    "pqmAlerts": {
+      "chartName": "PQM_ANOMALY_TYPE",
+      "queries": [
+        {
+          "module": "PQM",
+          "requestQueryMap": "{\"plantCode\" : \"Data.pqmAnomalys.plantCode.keyword\",\"tenantId\" : \"Data.pqmAnomalys.tenantId\"}",
+          "dateRefField": "Data.pqmAnomalys.@timestamp",
+          "indexName": "pqm-anomaly-finder",
+          "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Anomaly_type_lab_results\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.pqmAnomalys.anomalyType.keyword\":[\"LAB_RESULTS_NOT_AS_PER_BENCHMARK\"]}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.pqmAnomalys.id.keyword\"}}}},\"Anomaly_type_test_result_not_submitted\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.pqmAnomalys.anomalyType.keyword\":[\"TEST_RESULT_NOT_SUBMITTED\"]}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.pqmAnomalys.id.keyword\"}}}},\"TotalAlerts\":{\"value_count\":{\"field\":\"Data.pqmAnomalys.id.keyword\"}}}}}}"
+        }
+      ],
+      "isMdmsEnabled": true,
+      "isPostResponseHandler": true,
+      "postAggregationTheory": "repsonseToDifferenceOfDates",
+      "chartType": "xtable",
+      "valueType": "number",
+      "drillChart": "xBirthDownloadByUlb",
+      "documentType": "_doc",
+      "action": "",
+      "plotLabel": "DDRs",
+      "excludedColumns": [],
+      "removedFields": [],
+      "computedFields": [],
+      "isRoundOff": true,
+      "aggregationPaths": [
+        "Anomaly_type_test_result_not_submitted",
+        "Anomaly_type_lab_results",
+        "TotalAlerts"
+      ],
+      "pathDataTypeMapping": [
+        {
+          "Anomaly_type_test_result_not_submitted": "number"
+        },
+        {
+          "Anomaly_type_lab_results": "number"
+        },
+        {
+          "TotalAlerts": "number"
+        }
+      ],
+      "insight": {},
+      "_comment": ""
+    }
 }
