@@ -8636,14 +8636,14 @@
         "module": "FSM",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "fsm-national-dashboard-*",
+        "indexName": "fsm-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}"
       },
       {
         "module": "FSM",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "fsm-national-dashboard-*",
+        "indexName": "fsm-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"TotalApplications\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}"
       },
       {
@@ -15707,15 +15707,15 @@
       {
         "module": "FSM",
         "dateRefField": "date",
-        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
-        "indexName": "fsm-national-dashboard-*",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "fsm-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}"
       },
       {
         "module": "FSM",
         "dateRefField": "date",
-        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
-        "indexName": "fsm-national-dashboard-*",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "fsm-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"TotalApplications\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}"
       },
       {
@@ -22446,7 +22446,7 @@
         "module": "FSM",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "fsm-national-dashboard-*",
+        "indexName": "fsm-national-dashboard",
         "aggrQuery": "{\"aggs\": {\"AGGR\": {\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"ulb.keyword\":\"pg.testing\"}},{\"match\":{\"todaysApplications\":\"0\"}}]}},\"aggs\":{\"State\":{\"terms\":{\"field\":\"state.keyword\",\"size\":500},\"aggs\":{\"total\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"total1\":{\"terms\":{\"field\":\"ulb.keyword\"},\"aggs\":{\"total2\":{\"terms\":{\"field\":\"ward.keyword\"},\"aggs\":{\"total3\":{\"avg\":{\"field\":\"todaysApplications\"}}}},\"total4\":{\"sum_bucket\":{\"buckets_path\":\"total2.total3\"}}}},\"total5\":{\"sum_bucket\":{\"buckets_path\":\"total1.total4\"}}}},\"Total Applications\":{\"sum_bucket\":{\"buckets_path\":\"total.total5\"}}}}}}}}"
       }
     ],
@@ -22477,7 +22477,7 @@
         "module": "FSM",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "fsm-national-dashboard-*",
+        "indexName": "fsm-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Sludge Treated\":{\"sum\":{\"field\":\"totalSludgeDumped\"}}}}}}"
       }
     ],
@@ -22508,7 +22508,7 @@
         "module": "FSM",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "fsm-national-dashboard-*",
+        "indexName": "fsm-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Average Collection\":{\"avg\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
       }
     ],
@@ -22539,7 +22539,7 @@
         "module": "FSM",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "fsm-national-dashboard-*",
+        "indexName": "fsm-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
       }
     ],
@@ -22570,14 +22570,14 @@
         "module": "FSM",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "fsm-national-dashboard-*",
+        "indexName": "fsm-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}"
       },
       {
         "module": "FSM",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "fsm-national-dashboard-*",
+        "indexName": "fsm-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"TotalApplications\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}"
       }
     ],
@@ -22601,7 +22601,7 @@
         "module": "FSM",
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
-        "indexName": "fsm-national-dashboard-*",
+        "indexName": "fsm-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"FSM\"}},\"aggs\":{\"Average Citizen Rating\":{\"avg\":{\"field\":\"averageCitizenRating\"}}}}}}"
       }
     ],
@@ -22622,7 +22622,7 @@
         "module": "FSM",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "fsm-national-dashboard-*",
+        "indexName": "fsm-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\": \"state.keyword\"},\"aggs\":{\"Total\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}"
       },
       {
@@ -22656,7 +22656,7 @@
         "module": "FSM",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-        "indexName": "fsm-national-dashboard-*",
+        "indexName": "fsm-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"terms\":{\"field\": \"state.keyword\"},\"aggs\":{\"Total\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}"
       },
       {
@@ -22690,7 +22690,7 @@
         "module": "FSM",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
-        "indexName": "fsm-national-dashboard-*",
+        "indexName": "fsm-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Usage Type\":{\"terms\":{\"field\":\"usageCategory.keyword\",\"size\":1000},\"aggs\":{\"Amount Paid\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}}}"
       }
     ],
@@ -22711,9 +22711,9 @@
       {
         "module": "FSM",
         "dateRefField": "date",
-        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
-        "indexName": "fsm-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}}}"
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "fsm-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}}}"
       }
     ],
     "chartType": "line",
@@ -22736,7 +22736,7 @@
         "module": "FSM",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
-        "indexName": "fsm-national-dashboard-*",
+        "indexName": "fsm-national-dashboard",
         "aggrQuery": "{\"aggs\": {\"AGGR\": {\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"ulb.keyword\":\"pg.testing\"}},{\"match\":{\"todaysApplications\":\"0\"}}]}},\"aggs\":{\"State\":{\"terms\":{\"field\":\"state.keyword\",\"size\":500},\"aggs\":{\"Open_Requests\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total_Requests\",\"com\":\"Closed_Requests\"},\"script\":\"params.att-params.com\"}},\"Closed_Requests\":{\"sum\":{\"field\":\"todaysClosedApplications\"}},\"total\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"total1\":{\"terms\":{\"field\":\"ulb.keyword\"},\"aggs\":{\"total2\":{\"terms\":{\"field\":\"ward.keyword\"},\"aggs\":{\"total3\":{\"avg\":{\"field\":\"todaysApplications\"}}}},\"total4\":{\"sum_bucket\":{\"buckets_path\":\"total2.total3\"}}}},\"total5\":{\"sum_bucket\":{\"buckets_path\":\"total1.total4\"}}}},\"Total_Requests\":{\"sum_bucket\":{\"buckets_path\":\"total.total5\"}},\"SLA_Achieved_Requests\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}},\"Completion_Rate\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total_Requests\",\"com\":\"Closed_Requests\"},\"script\":\"params.com/params.att*100\"}},\"SLA_Achieved\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total_Requests\",\"com\":\"SLA_Achieved_Requests\"},\"script\":\"params.com/params.att*100\"}},\"Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}"
       }
     ],
@@ -22793,7 +22793,7 @@
         "module": "FSM",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
-        "indexName": "fsm-national-dashboard-*",
+        "indexName": "fsm-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"ulb.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"ULB\":{\"terms\":{\"field\":\"ulb.keyword\",\"size\":500},\"aggs\":{\"Open_Requests\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total_Requests\",\"com\":\"Closed_Requests\"},\"script\":\"params.att -  params.com\"}},\"Closed_Requests\":{\"sum\":{\"field\":\"todaysClosedApplications\"}},\"Total_Requests\":{\"sum\":{\"field\":\"todaysApplications\"}},\"SLA_Achieved_Requests\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}},\"Completion_Rate\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total_Requests\",\"com\":\"Closed_Requests\"},\"script\":\"params.com / params.att * 100\"}},\"SLA_Achieved\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total_Requests\",\"com\":\"SLA_Achieved_Requests\"},\"script\":\"params.com / params.att * 100\"}},\"Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}"
       }
     ],
@@ -22850,7 +22850,7 @@
         "module": "FSM",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
-        "indexName": "fsm-national-dashboard-*",
+        "indexName": "fsm-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"ulb.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Ward\":{\"terms\":{\"field\":\"ward.keyword\",\"size\":500},\"aggs\":{\"Open_Requests\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total_Requests\",\"com\":\"Closed_Requests\"},\"script\":\"params.att -  params.com\"}},\"Closed_Requests\":{\"sum\":{\"field\":\"todaysClosedApplications\"}},\"Total_Requests\":{\"sum\":{\"field\":\"todaysApplications\"}},\"SLA_Achieved_Requests\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}},\"Completion_Rate\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total_Requests\",\"com\":\"Closed_Requests\"},\"script\":\"params.com / params.att * 100\"}},\"SLA_Achieved\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total_Requests\",\"com\":\"SLA_Achieved_Requests\"},\"script\":\"params.com / params.att * 100\"}},\"Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}}}"
       }
     ],
@@ -22906,9 +22906,9 @@
       {
         "module": "FSM",
         "dateRefField": "date",
-        "requestQueryMap": "{\"ulb\" : \"ulb\",\"state\":\"state\"}",
-        "indexName": "fsm-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"TotalDumped\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"month\"},\"aggs\":{\"Dumped\":{\"sum\":{\"field\":\"totalSludgeDumped\"}}}},\"TotalCapacity\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"month\"},\"aggs\":{\"Dumped\":{\"sum\":{\"field\":\"totalFSTPCapacity\"}}}}}}}}"
+        "requestQueryMap": "{\"ulb\" : \"ulb.keyword\",\"state\":\"state.keyword\"}",
+        "indexName": "fsm-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"TotalDumped\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"month\"},\"aggs\":{\"Dumped\":{\"sum\":{\"field\":\"totalSludgeDumped\"}}}},\"TotalCapacity\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"month\"},\"aggs\":{\"Dumped\":{\"sum\":{\"field\":\"totalFSTPCapacity\"}}}}}}}}"
       }
     ],
     "chartType": "line",
@@ -22932,9 +22932,9 @@
       {
         "module": "FSM",
         "dateRefField": "date",
-        "requestQueryMap": "{\"ulb\" : \"ulb\",\"state\":\"state\"}",
-        "indexName": "fsm-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"TotalDumped\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"month\"},\"aggs\":{\"Dumped\":{\"sum\":{\"field\":\"totalSludgeDumped\"}}}},\"TotalCollected\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"month\"},\"aggs\":{\"Collected\":{\"sum\":{\"field\":\"totalSludgeCollected\"}}}}}}}}"
+        "requestQueryMap": "{\"ulb\" : \"ulb.keyword\",\"state\":\"state.keyword\"}",
+        "indexName": "fsm-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"TotalDumped\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"month\"},\"aggs\":{\"Dumped\":{\"sum\":{\"field\":\"totalSludgeDumped\"}}}},\"TotalCollected\":{\"date_histogram\":{\"field\":\"date\",\"interval\":\"month\"},\"aggs\":{\"Collected\":{\"sum\":{\"field\":\"totalSludgeCollected\"}}}}}}}}"
       }
     ],
     "chartType": "line",
@@ -23506,8 +23506,8 @@
       {
         "module": "FSM",
         "dateRefField": "date",
-        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
-        "indexName": "fsm-national-dashboard-*",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "fsm-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"TotalApplications\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}"
       },
       {
@@ -23591,8 +23591,8 @@
       {
         "module": "FSM",
         "dateRefField": "date",
-        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
-        "indexName": "fsm-national-dashboard-*",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "fsm-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}"
       }
       
