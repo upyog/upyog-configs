@@ -863,7 +863,7 @@ ReportDefinitions:
         searchClause: AND bp.createdTime <= $toDate
 
     query: >-
-      SELECT
+      SELECT DISTINCT ON (bp.applicationno)
       bp.additionalDetails->>'District' AS District,
       bp.additionalDetails->>'Ulblisttype' AS UlbType,
       bp.additionalDetails->>'UlbName' AS UlbName,
@@ -876,7 +876,7 @@ ReportDefinitions:
       pi.comment AS BlockingReason,
       to_char(to_timestamp(pi.lastModifiedTime / 1000), 'DD/MM/YYYY') AS BlockingDate,
       u.name AS name,  
-      u.id AS UserID 
+      u.id AS UserID
       FROM
       eg_bpa_buildingplan bp
       JOIN
@@ -887,4 +887,11 @@ ReportDefinitions:
       eg_user u ON pi.lastmodifiedby = u.uuid  
       WHERE
       pi.action = 'BLOCK'
-    orderby: ORDER BY submissiondate DESC;
+      AND NOT EXISTS (
+      SELECT 1
+      FROM eg_wf_processinstance_v2 pi_inner
+      WHERE pi_inner.businessid = bp.applicationno
+      AND pi_inner.createdtime > pi.createdtime
+      AND pi_inner.action != 'BLOCK'
+      )
+    orderby: ORDER BY bp.applicationno, submissiondate DESC;
