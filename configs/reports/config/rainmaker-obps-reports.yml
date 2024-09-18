@@ -276,11 +276,6 @@ ReportDefinitions:
         type: string
         source: obps
         total: false
-      - name: Blocked
-        label: Blocked
-        type: string
-        source: obps
-        total: false
       - name: name
         label: Blocking Officer
         type: string
@@ -410,26 +405,22 @@ ReportDefinitions:
       bp.additionalDetails->>'District' AS District,
       bp.additionalDetails->>'Ulblisttype' AS UlbType,
       bp.additionalDetails->>'UlbName' AS UlbName,
-      bp.applicationno,
+      bp.applicationno, 
       bp.additionalDetails->>'ownerName' AS ApplicantName,
       CASE
-        WHEN pi.action = 'BLOCK' THEN 'YES'
-        ELSE 'NO'
-      END AS Blocked,  
-      u.name AS name,
-      CASE 
-         WHEN pi.action='BLOCK' THEN pi.comment
-         ELSE ''
-      END  AS BlockingComment,
-        to_char(To_timestamp(bp.createdTime / 1000), 'DD/MM/YYYY') AS submissiondate,
+        WHEN bp.status = 'BLOCKED' THEN u.name 
+        ELSE NULL
+      END AS name,
       CASE
-           WHEN bp.approvaldate IS NOT NULL AND bp.approvaldate > 0 THEN TO_CHAR(TO_TIMESTAMP(bp.approvaldate / 1000), 'DD/MM/YYYY')
-           ELSE ''
-       END AS approval_date,
-       bd.additionalDetails->>'latitude' AS Latitude,
-       bd.additionalDetails->>'longitude' AS Longitude,
-       bp.additionalDetails->>'area' AS PlotArea,
-       COALESCE(SUM(CASE WHEN bd.businessservice = 'BPA.NC_APP_FEE' THEN bd.totalamount ELSE 0 END), 0) AS Pay1_Charges,
+        WHEN bp.status = 'BLOCKED' THEN pi.comment 
+        ELSE NULL
+      END AS BlockingComment,
+      TO_CHAR(TO_TIMESTAMP(bp.createdTime / 1000), 'DD/MM/YYYY') AS submissiondate,
+      TO_CHAR(TO_TIMESTAMP(bp.approvaldate / 1000), 'DD/MM/YYYY') AS approval_date,
+      doc.additionalDetails->>'latitude' AS Latitude,
+      doc.additionalDetails->>'longitude' AS Longitude,
+      bp.additionalDetails->>'area' AS PlotArea,
+       SUM(CASE WHEN bd.businessservice = 'BPA.NC_APP_FEE' THEN bd.totalamount ELSE 0 END) AS Pay1_Charges,
        bp.additionalDetails->'selfCertificationCharges'->>'BPA_MALBA_CHARGES' AS Malba_charges,
        bp.additionalDetails->'selfCertificationCharges'->>'BPA_LABOUR_CESS' AS Labour_cess,
        bp.additionalDetails->'selfCertificationCharges'->>'BPA_WATER_CHARGES' AS Water_charges,
@@ -437,27 +428,27 @@ ReportDefinitions:
        bp.additionalDetails->'selfCertificationCharges'->>'BPA_DEVELOPMENT_CHARGES' AS Development_charges,
        bp.additionalDetails->'selfCertificationCharges'->>'BPA_OTHER_CHARGES' AS Other_charges,
        bp.additionalDetails->'selfCertificationCharges'->>'BPA_LESS_ADJUSMENT_PLOT' AS Less_Adjustment,
-       COALESCE(SUM(CASE WHEN bd.businessservice = 'BPA.NC_SAN_FEE' THEN bd.totalamount ELSE 0 END), 0) AS Pay2_Charges,
-       COALESCE(SUM(CASE 
-        WHEN bd.businessservice = 'BPA.NC_APP_FEE' THEN bd.totalamount 
-        ELSE 0 
-       END), 0) +
-       COALESCE(SUM(CASE 
-        WHEN bd.businessservice = 'BPA.NC_SAN_FEE' THEN bd.totalamount 
-        ELSE 0 
-       END), 0) AS total_fees,
-       bp.status FROM eg_bpa_buildingplan bp JOIN egbs_bill_v1 b ON bp.applicationno = b.consumercode JOIN egbs_billdetail_v1 bd ON b.id = bd.billid JOIN eg_wf_processinstance_v2 pi ON bp.applicationno = pi.businessid LEFT JOIN eg_user u ON u.uuid = pi.lastmodifiedby AND pi.action='BLOCK' WHERE 1=1
-
+       SUM(CASE WHEN bd.businessservice = 'BPA.NC_SAN_FEE' THEN bd.totalamount ELSE 0 END) AS Pay2_Charges,
+       SUM(CASE WHEN bd.businessservice = 'BPA.NC_APP_FEE' THEN bd.totalamount ELSE 0 END) +
+       SUM(CASE WHEN bd.businessservice = 'BPA.NC_SAN_FEE' THEN bd.totalamount ELSE 0 END) AS  total_fees,
+       bp.status AS status
+       FROM 
+       eg_bpa_buildingplan bp 
+       JOIN eg_bpa_document doc ON bp.id = doc.buildingplanid 
+       AND doc.additionalDetails->>'latitude' IS NOT NULL
+       AND doc.additionalDetails->>'longitude' IS NOT NULL
+      JOIN egbs_billdetail_v1 bd ON bp.applicationno = bd.consumercode
+       LEFT JOIN eg_wf_processinstance_v2 pi ON bp.applicationno = pi.businessid AND bp.status = 'BLOCKED' 
+       LEFT JOIN eg_user u ON pi.lastmodifiedby = u.uuid AND bp.status = 'BLOCKED' 
+       WHERE 1=1
     groupby: GROUP BY
       bp.additionalDetails->>'District',
       bp.additionalDetails->>'Ulblisttype',
       bp.additionalDetails->>'UlbName',
       bp.applicationno,
       bp.additionalDetails->>'ownerName',
-      to_char(To_timestamp(bp.createdTime / 1000), 'DD/MM/YYYY'),
-      TO_CHAR(TO_TIMESTAMP(bp.approvaldate / 1000), 'DD/MM/YYYY'),
-      bd.additionalDetails->>'latitude',
-      bd.additionalDetails->>'longitude',
+      bp.createdTime,
+      bp.approvaldate,
       bp.additionalDetails->>'area',
       bp.additionalDetails->'selfCertificationCharges'->>'BPA_MALBA_CHARGES',
       bp.additionalDetails->'selfCertificationCharges'->>'BPA_LABOUR_CESS',
@@ -466,12 +457,11 @@ ReportDefinitions:
       bp.additionalDetails->'selfCertificationCharges'->>'BPA_DEVELOPMENT_CHARGES',
       bp.additionalDetails->'selfCertificationCharges'->>'BPA_OTHER_CHARGES',
       bp.additionalDetails->'selfCertificationCharges'->>'BPA_LESS_ADJUSMENT_PLOT',
+      doc.additionalDetails->>'latitude',
+      doc.additionalDetails->>'longitude',
       bp.status,
-      u.name,
       pi.comment,
-      pi.action,
-      bp.approvaldate
-
+      u.name
     orderby: ORDER BY submissiondate DESC
 
   - reportName: ObpsApplicationApprovedAfterTimeframeReport
