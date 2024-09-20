@@ -639,37 +639,37 @@ ReportDefinitions:
         type: string
         source: obps
         total: false
-      - name: UlbType
-        label: ULBType
+      - name: ULBName
+        label: Ulb Name
         type: string
         source: obps
         total: false
-      - name: UlbName
-        label: UlbName
-        type: string
-        source: obps
-        total: false
-      - name: count
+      - name: TotalCasesReceived
         label: Total Cases Submitted
         type: number
         source: obps
         total: false
-      - name: approved_verified_count
+      - name: ApprovedApplications
         label: Application approved and Verify by ULB within ten days
         type: number
         source: obps
         total: false
-      - name: approved_without_verification_count
+      - name: ApplicationsApprovedWithinTenDays
+        label: Applications Approved Within Ten Days
+        type: number
+        source: obps
+        total: false
+      - name: ApplicationsApprovedWithoutVerificationWithinTenDays
         label: Application got approved without verification of ULB within ten days
         type: number
         source: obps
         total: false
-      - name: blocked_application_count
+      - name: BlockedApplications
         label: Application blocked by ULB
         type: number
         source: obps
         total: false
-      - name: pending_approval_count
+      - name: ApplicationsPendingForApprovalWithinTenDays
         label: Application pending for Approval within ten days
         type: number
         source: obps
@@ -703,59 +703,42 @@ ReportDefinitions:
         isMandatory: true
         searchClause: AND bp.createdTime <= $toDate
 
-    query: >-
-      WITH 
-      pending_approval AS (
-      SELECT COUNT(*) AS pending_approval_count
-      FROM eg_bpa_buildingplan bp
-      JOIN eg_wf_processinstance_v2 pi ON pi.businessid = bp.applicationno
-      JOIN eg_wf_state_v2 ws ON ws.uuid = pi.status
-      WHERE ws.state = 'PENDINGAPPROVAL'
-      AND pi.escalated = 'f'
-       ),
-
-      blocked_applications AS (
-      SELECT COUNT(*) AS blocked_application_count
-      FROM eg_bpa_buildingplan bp
-      JOIN eg_wf_processinstance_v2 pi ON pi.businessid = bp.applicationno
-      WHERE pi.action = 'BLOCK'
-      ),
-
-      approved_verified AS (
-      SELECT COUNT(*) AS approved_verified_count
-      FROM eg_bpa_buildingplan bp
-      JOIN eg_wf_processinstance_v2 pi ON pi.businessid = bp.applicationno
-      WHERE bp.status='APPROVED'
-      AND pi.escalated = 'f'
-      ),
-
-      approved_without_verification AS (
-      SELECT COUNT(*) AS approved_without_verification_count
-      FROM eg_bpa_buildingplan bp
-      JOIN eg_wf_processinstance_v2 pi ON pi.businessid = bp.applicationno
-      WHERE pi.escalated='t' AND bp.status='APPROVED'
-       )
-
-      SELECT 
-        bp.additionalDetails->>'District' AS District, 
-        bp.additionalDetails->>'Ulblisttype' AS UlbType, 
-        UPPER(bp.additionalDetails->>'UlbName') AS UlbName,
-        (
-          (SELECT pending_approval_count FROM pending_approval) +
-          (SELECT blocked_application_count  FROM blocked_applications) +
-          (SELECT approved_verified_count FROM approved_verified) +
-          (SELECT approved_without_verification_count FROM approved_without_verification)
-        ) AS count,
-      (SELECT pending_approval_count FROM pending_approval) AS pending_approval_count,
-      (SELECT blocked_application_count FROM blocked_applications) AS blocked_application_count,
-      (SELECT approved_verified_count  FROM approved_verified) AS approved_verified_count,
-      (SELECT approved_without_verification_count FROM approved_without_verification) AS approved_without_verification_count
-        FROM 
-        eg_bpa_buildingplan bp WHERE 1=1
-
-    groupby: GROUP BY bp.additionalDetails->>'District', bp.additionalDetails->>'Ulblisttype', bp.additionalDetails->>'UlbName'
-    orderby: ORDER BY District , UlbType , UlbName
-
+    query: >-      
+      SELECT DISTINCT bp.additionalDetails->>'district' AS District,
+      bp.additionalDetails->>'UlbName' AS ULBName, (SELECT COUNT(*) -- Total
+      Cases Received FROM eg_bpa_buildingplan AS c  WHERE c.businessservice =
+      'BPA'  AND c.additionalDetails->>'UlbName' =
+      bp.additionalDetails->>'UlbName') AS TotalCasesReceived,     (SELECT
+      COUNT(*) -- Approved Applications FROM eg_bpa_buildingplan AS b  WHERE
+      b.businessservice = 'BPA'  AND b.status = 'APPROVED'  AND
+      b.additionalDetails->>'UlbName' = bp.additionalDetails->>'UlbName') AS
+      ApprovedApplications, (SELECT COUNT(*) -- Applications Approved within 10
+      days FROM eg_bpa_buildingplan AS d WHERE d.businessservice = 'BPA'  AND
+      d.status = 'APPROVED' AND d.additionalDetails->>'UlbName' =
+      bp.additionalDetails->>'UlbName' AND (d.lastModifiedTime - d.createdTime)
+      <= (10 * 24 * 60 * 60 * 1000)) AS ApplicationsApprovedWithin10Days,
+      (SELECT COUNT(*) -- Applications Approved Without Verification of ULB
+      within 10 days FROM eg_bpa_buildingplan AS e  WHERE e.businessservice =
+      'BPA'  AND e.applicationno IN (SELECT businessid FROM
+      eg_wf_processinstance_v2 WHERE escalated = 'true')  AND
+      e.additionalDetails->>'UlbName' = bp.additionalDetails->>'UlbName' AND
+      (e.lastModifiedTime - e.createdTime) <= (10 * 24 * 60 * 60 * 1000)) AS
+      ApplicationsApprovedWithoutVerificationWithin10Days,   (SELECT
+      COUNT(DISTINCT bp_inner.applicationno) -- Blocked Applications FROM
+      eg_bpa_buildingplan bp_inner JOIN eg_wf_processinstance_v2 pi ON
+      bp_inner.applicationno = pi.businessid WHERE pi.action = 'BLOCK' AND NOT
+      EXISTS ( SELECT 1 FROM eg_wf_processinstance_v2 pi_inner WHERE
+      pi_inner.businessid = bp_inner.applicationno AND pi_inner.createdtime >
+      pi.createdtime AND pi_inner.action != 'BLOCK') AND
+      bp_inner.additionalDetails->>'UlbName' = bp.additionalDetails->>'UlbName')
+      AS BlockedApplications, (SELECT COUNT(*) -- Applications Pending for
+      Approval within Ten days FROM eg_bpa_buildingplan AS f WHERE
+      f.businessservice = 'BPA'  AND f.status != 'APPROVED' AND
+      f.additionalDetails->>'UlbName' = bp.additionalDetails->>'UlbName' AND
+      (EXTRACT(EPOCH FROM NOW()) * 1000 - f.createdTime) <= (10 * 24 * 60 * 60 *
+      1000)) AS ApplicationsPendingForApprovalWithinTenDays
+      FROM eg_bpa_buildingplan bp WHERE bp.businessservice = 'BPA' AND bp.additionalDetails->>'UlbName' IS NOT NULL;
+      
   - reportName: ObpsBlockingCasesDetailsReport
     decryptionPathId: ObpsDailyCollectionReport
     summary: OBPS Blocking Cases Details Report
