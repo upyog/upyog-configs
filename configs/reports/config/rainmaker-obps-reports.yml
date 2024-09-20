@@ -735,7 +735,7 @@ ReportDefinitions:
       f.additionalDetails->>'UlbName' = bp.additionalDetails->>'UlbName' AND
       (EXTRACT(EPOCH FROM NOW()) * 1000 - f.createdTime) <= (10 * 24 * 60 * 60 *
       1000)) AS ApplicationsPendingForApprovalWithinTenDays
-      FROM eg_bpa_buildingplan bp WHERE bp.businessservice = 'BPA' AND bp.additionalDetails->>'UlbName' IS NOT NULL;
+      FROM eg_bpa_buildingplan bp WHERE bp.businessservice = 'BPA' AND bp.additionalDetails->>'UlbName' IS NOT NULL
       
   - reportName: ObpsBlockingCasesDetailsReport
     decryptionPathId: ObpsDailyCollectionReport
