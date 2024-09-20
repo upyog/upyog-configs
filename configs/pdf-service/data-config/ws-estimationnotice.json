@@ -109,6 +109,18 @@
 								}
 							},
 							{
+								"variable": "roadCharge1",
+								"value": {
+									"path": "$.pdfTaxhead[?(@.taxHeadCode == 'WS_ROAD_CUTTING_CHARGE_BERMCUTTINGKATCHA')].estimateAmount"
+								}
+							},
+							{
+								"variable": "roadCharge2",
+								"value": {
+									"path": "$.pdfTaxhead[?(@.taxHeadCode == 'WS_ROAD_CUTTING_CHARGE_BMPREMIXROAD')].estimateAmount"
+								}
+							},
+							{
 								"variable": "oneTimeFee",
 								"value": {
 									"path": "$.pdfTaxhead[?(@.taxHeadCode == 'ONE_TIME_FEE')].estimateAmount"
@@ -151,8 +163,8 @@
 								},
 								"localisation": {
 									"required": true,
-									"prefix": "WS_SERVICE",
-									"module": "rainmaker-common"
+									"prefix": "WS_",
+									"module": "rainmaker-ws"
 								}
 							},
 							{
