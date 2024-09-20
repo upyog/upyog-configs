@@ -705,34 +705,32 @@ ReportDefinitions:
 
     query: >-      
       SELECT DISTINCT bp.additionalDetails->>'district' AS District,
-      bp.additionalDetails->>'UlbName' AS ULBName, (SELECT COUNT(*) -- Total
-      Cases Received FROM eg_bpa_buildingplan AS c  WHERE c.businessservice =
+      bp.additionalDetails->>'UlbName' AS ULBName, (SELECT COUNT(*) 
+      FROM eg_bpa_buildingplan AS c  WHERE c.businessservice =
       'BPA'  AND c.additionalDetails->>'UlbName' =
-      bp.additionalDetails->>'UlbName') AS TotalCasesReceived,     (SELECT
-      COUNT(*) -- Approved Applications FROM eg_bpa_buildingplan AS b  WHERE
+      bp.additionalDetails->>'UlbName') AS TotalCasesReceived,(SELECT
+      COUNT(*) FROM eg_bpa_buildingplan AS b  WHERE
       b.businessservice = 'BPA'  AND b.status = 'APPROVED'  AND
       b.additionalDetails->>'UlbName' = bp.additionalDetails->>'UlbName') AS
-      ApprovedApplications, (SELECT COUNT(*) -- Applications Approved within 10
-      days FROM eg_bpa_buildingplan AS d WHERE d.businessservice = 'BPA'  AND
+      ApprovedApplications, (SELECT COUNT(*) 
+      FROM eg_bpa_buildingplan AS d WHERE d.businessservice = 'BPA' AND
       d.status = 'APPROVED' AND d.additionalDetails->>'UlbName' =
       bp.additionalDetails->>'UlbName' AND (d.lastModifiedTime - d.createdTime)
       <= (10 * 24 * 60 * 60 * 1000)) AS ApplicationsApprovedWithin10Days,
-      (SELECT COUNT(*) -- Applications Approved Without Verification of ULB
-      within 10 days FROM eg_bpa_buildingplan AS e  WHERE e.businessservice =
+      (SELECT COUNT(*) FROM eg_bpa_buildingplan AS e  WHERE e.businessservice =
       'BPA'  AND e.applicationno IN (SELECT businessid FROM
       eg_wf_processinstance_v2 WHERE escalated = 'true')  AND
       e.additionalDetails->>'UlbName' = bp.additionalDetails->>'UlbName' AND
       (e.lastModifiedTime - e.createdTime) <= (10 * 24 * 60 * 60 * 1000)) AS
       ApplicationsApprovedWithoutVerificationWithin10Days,   (SELECT
-      COUNT(DISTINCT bp_inner.applicationno) -- Blocked Applications FROM
+      COUNT(DISTINCT bp_inner.applicationno) FROM
       eg_bpa_buildingplan bp_inner JOIN eg_wf_processinstance_v2 pi ON
       bp_inner.applicationno = pi.businessid WHERE pi.action = 'BLOCK' AND NOT
       EXISTS ( SELECT 1 FROM eg_wf_processinstance_v2 pi_inner WHERE
       pi_inner.businessid = bp_inner.applicationno AND pi_inner.createdtime >
       pi.createdtime AND pi_inner.action != 'BLOCK') AND
       bp_inner.additionalDetails->>'UlbName' = bp.additionalDetails->>'UlbName')
-      AS BlockedApplications, (SELECT COUNT(*) -- Applications Pending for
-      Approval within Ten days FROM eg_bpa_buildingplan AS f WHERE
+      AS BlockedApplications, (SELECT COUNT(*) FROM eg_bpa_buildingplan AS f WHERE
       f.businessservice = 'BPA'  AND f.status != 'APPROVED' AND
       f.additionalDetails->>'UlbName' = bp.additionalDetails->>'UlbName' AND
       (EXTRACT(EPOCH FROM NOW()) * 1000 - f.createdTime) <= (10 * 24 * 60 * 60 *
