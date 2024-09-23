@@ -55,7 +55,7 @@ ReportDefinitions:
       - name: AssetUniqueID
         label: Application Number
         type: string
-        source: obps
+        source: asset
         isMandatory: false
         searchClause: AND bp.applicationno = $applicationNo
       - name: fromDate
