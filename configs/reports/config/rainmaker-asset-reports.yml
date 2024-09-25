@@ -44,12 +44,15 @@ ReportDefinitions:
         source: asset
         showColumn: false
 
-    query: SELECT applicationno AS AssetUniqueID, 
-      classification AS AssetClassification, 
-      parentcategory as parentcategory, 
-      name AS Assetname, 
-      status AS AssetStatus, 
-      Department as Department, 
-      financialyear AS FinancialYear, 
-      createdtime as createdtime
-      FROM eg_asset_assetdetails
+    query: 
+      SELECT b.applicationno AS AssetUniqueID, 
+      b.classification AS AssetClassification, 
+      b.parentcategory as parentcategory, 
+      b.name AS Assetname, 
+      b.status AS AssetStatus, 
+      b.Department as Department, 
+      b.financialyear AS FinancialYear, 
+      b.createdtime as createdtime
+      FROM eg_asset_assetdetails b
+	  orderby: order by b.applicationno asc
+	  
