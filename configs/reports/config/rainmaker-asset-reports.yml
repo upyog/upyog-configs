@@ -6,8 +6,8 @@ ReportDefinitions:
     version: 1.0.0
     moduleName: rainmaker-asset
     sourceColumns:
-      - name: AssetUniqueID
-        label: Asset Unique ID
+      - name: applicationno
+        label: Application No
         type: string
         source: asset
         total: true
@@ -44,7 +44,7 @@ ReportDefinitions:
         source: asset
         showColumn: false
     searchParams:
-      - name: AssetUniqueID
+      - name: applicationno
         label: Application Number
         type: string
         source: asset
@@ -64,7 +64,7 @@ ReportDefinitions:
         searchClause: AND b.createdtime <= $toDate
 
     query: 
-      SELECT b.applicationno AS AssetUniqueID, 
+      SELECT b.applicationno AS applicationno, 
       b.classification AS AssetClassification, 
       b.parentcategory as parentcategory, 
       b.name AS Assetname, 
@@ -74,4 +74,4 @@ ReportDefinitions:
       b.createdtime as createdtime
       FROM eg_asset_assetdetails b
       where 1=1
-    orderby: order by b.applicationno asc
+    
