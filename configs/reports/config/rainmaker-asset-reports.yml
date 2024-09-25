@@ -43,6 +43,25 @@ ReportDefinitions:
         type: string
         source: asset
         showColumn: false
+    searchParams:
+      - name: AssetUniqueID
+        label: Application Number
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND bp.applicationno = $applicationNo
+      - name: fromDate
+        label: FromDate
+        type: epoch
+        source: asset
+        isMandatory: false
+        searchClause: AND createdtime >= $fromDate
+      - name: toDate
+        label: ToDate
+        type: epoch
+        source: asset
+        isMandatory: false
+        searchClause: AND createdtime <= $toDate
 
     query: 
       SELECT b.applicationno AS AssetUniqueID, 
@@ -54,5 +73,5 @@ ReportDefinitions:
       b.financialyear AS FinancialYear, 
       b.createdtime as createdtime
       FROM eg_asset_assetdetails b
-	  orderby: order by b.applicationno asc
+    orderby: order by b.applicationno asc
 	  
