@@ -49,19 +49,19 @@ ReportDefinitions:
         type: string
         source: asset
         isMandatory: false
-        searchClause: AND bp.applicationno = $applicationno
+        searchClause: AND b.applicationno = $applicationno
       - name: fromDate
         label: FromDate
         type: epoch
         source: asset
-        isMandatory: false
-        searchClause: AND createdtime >= $fromDate
+        isMandatory: true
+        searchClause: AND b.createdtime >= $fromDate
       - name: toDate
         label: ToDate
         type: epoch
         source: asset
-        isMandatory: false
-        searchClause: AND createdtime <= $toDate
+        isMandatory: true
+        searchClause: AND b.createdtime <= $toDate
 
     query: 
       SELECT b.applicationno AS AssetUniqueID, 
@@ -73,4 +73,5 @@ ReportDefinitions:
       b.financialyear AS FinancialYear, 
       b.createdtime as createdtime
       FROM eg_asset_assetdetails b
+      where 1=1
     orderby: order by b.applicationno asc
