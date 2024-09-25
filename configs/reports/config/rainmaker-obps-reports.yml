@@ -628,6 +628,127 @@ ReportDefinitions:
 
     orderby: ORDER BY sd.submissiondate DESC
 
+  - reportName: ObpsStatusReport
+    decryptionPathId: ObpsDailyCollectionReport
+    summary: OBPS Status Report
+    version: 1.0.0
+    moduleName: rainmaker-obps
+    sourceColumns:
+      - name: District
+        label: District
+        type: string
+        source: obps
+        total: false
+      - name: ULBName
+        label: Ulb Name
+        type: string
+        source: obps
+        total: false
+      - name: TotalCasesReceived
+        label: Total Cases Submitted
+        type: number
+        source: obps
+        total: false
+      - name: ApprovedApplications
+        label: Application approved and Verify by ULB within ten days
+        type: number
+        source: obps
+        total: false
+      - name: ApplicationsApprovedWithinTenDays
+        label: Applications Approved Within Ten Days
+        type: number
+        source: obps
+        total: false
+      - name: ApplicationsApprovedWithoutVerificationWithinTenDays
+        label: Application got approved without verification of ULB within ten days
+        type: number
+        source: obps
+        total: false
+      - name: BlockedApplications
+        label: Application blocked by ULB
+        type: number
+        source: obps
+        total: false
+      - name: ApplicationsPendingForApprovalWithinTenDays
+        label: Application pending for Approval within ten days
+        type: number
+        source: obps
+        total: false
+      - name: TotalOverallPendingApplications
+        label: Total Overall Pending Applications
+        type: number
+        source: obps
+        total: false
+
+    searchParams:
+      - name: fromDate
+        label: FromDate
+        type: epoch
+        source: obps
+        isMandatory: true
+        searchClause: AND bp.createdTime >= $fromDate
+      - name: toDate
+        label: ToDate
+        type: epoch
+        source: obps
+        isMandatory: true
+        searchClause: AND bp.createdTime <= $toDate
+
+    query: >-      
+      SELECT 
+      COUNT(DISTINCT CASE WHEN bp.businessservice = 'BPA' THEN bp.applicationno END) AS TotalCasesReceived,
+      COUNT(DISTINCT CASE 
+      WHEN bp.businessservice = 'BPA' AND bp.status = 'APPROVED' THEN bp.applicationno 
+      END) AS ApprovedApplications,
+      COUNT(DISTINCT CASE 
+      WHEN bp.businessservice = 'BPA' 
+      AND bp.status = 'APPROVED' 
+      AND (bp.lastModifiedTime - bp.createdTime) <= (10 * 24 * 60 * 60 * 1000) 
+      THEN bp.applicationno 
+      END) AS ApplicationsApprovedWithin10Days,
+      COUNT(DISTINCT CASE 
+      WHEN bp.businessservice = 'BPA' 
+      AND bp.applicationno IN (SELECT businessid 
+      FROM eg_wf_processinstance_v2 
+      WHERE escalated = 'true') 
+      AND (bp.lastModifiedTime - bp.createdTime) <= (10 * 24 * 60 * 60 * 1000) 
+      THEN bp.applicationno 
+      END) AS ApplicationsApprovedWithoutVerificationWithin10Days,
+      COUNT(DISTINCT CASE 
+      WHEN bp.businessservice = 'BPA' 
+      AND EXISTS (SELECT 1 
+      FROM eg_wf_processinstance_v2 pi 
+      WHERE pi.businessid = bp.applicationno 
+      AND pi.action = 'BLOCK' 
+      AND NOT EXISTS (SELECT 1 
+      FROM eg_wf_processinstance_v2 pi_inner 
+      WHERE pi_inner.businessid = bp.applicationno 
+      AND pi_inner.createdtime > pi.createdtime 
+      AND pi_inner.action != 'BLOCK')) 
+      THEN bp.applicationno 
+      END) AS BlockedApplications,
+      COUNT(DISTINCT CASE 
+      WHEN bp.businessservice = 'BPA' 
+      AND bp.status != 'APPROVED' 
+      AND (EXTRACT(EPOCH FROM NOW()) * 1000 - bp.createdTime) <= (10 * 24 * 60 * 60 * 1000) 
+      THEN bp.applicationno 
+      END) AS ApplicationsPendingForApprovalWithinTenDays,
+      (SELECT COUNT(DISTINCT businessid) 
+      FROM eg_wf_processinstance_v2 
+      WHERE action NOT IN ('APPROVE', 'BLOCK') 
+      AND modulename = 'bpa-services'
+      AND NOT EXISTS (
+      SELECT 1 
+      FROM eg_wf_processinstance_v2 pi2 
+      WHERE pi2.businessid = eg_wf_processinstance_v2.businessid 
+      AND pi2.action IN ('APPROVE', 'BLOCK')) 
+      AND tenantid = 'pg.citya') AS TotalOverallPendingApplications
+      FROM eg_bpa_buildingplan bp 
+      WHERE 
+      bp.businessservice = 'BPA' 
+      AND bp.tenantid = $tenantid
+
+
   - reportName: ObpsUlbWiseStatusReport
     decryptionPathId: ObpsDailyCollectionReport
     summary: OBPS ULB Wise Status Report
@@ -676,13 +797,6 @@ ReportDefinitions:
         total: false
 
     searchParams:
-      - name: ulbType
-        label: ULBType
-        type: singlevaluelist
-        source: obps
-        isMandatory: false
-        pattern: "list://Municipal Corporation:Municipal Corporation,Municipal Council:Municipal Council,Nagar Panchayat:Nagar Panchayat,Improvement Trust:Improvement Trust"
-        searchClause: AND bp.additionalDetails->>'Ulblisttype' = $ulbType
       - name: ulbName
         label: ULBName
         type: singlevaluelist
@@ -703,39 +817,37 @@ ReportDefinitions:
         isMandatory: true
         searchClause: AND bp.createdTime <= $toDate
 
-    query: >-      
-      SELECT DISTINCT bp.additionalDetails->>'district' AS District,
-      bp.additionalDetails->>'UlbName' AS ULBName, (SELECT COUNT(*) 
-      FROM eg_bpa_buildingplan AS c  WHERE c.businessservice =
-      'BPA'  AND c.additionalDetails->>'UlbName' =
-      bp.additionalDetails->>'UlbName') AS TotalCasesReceived,(SELECT
-      COUNT(*) FROM eg_bpa_buildingplan AS b  WHERE
-      b.businessservice = 'BPA'  AND b.status = 'APPROVED'  AND
-      b.additionalDetails->>'UlbName' = bp.additionalDetails->>'UlbName') AS
-      ApprovedApplications, (SELECT COUNT(*) 
-      FROM eg_bpa_buildingplan AS d WHERE d.businessservice = 'BPA' AND
-      d.status = 'APPROVED' AND d.additionalDetails->>'UlbName' =
-      bp.additionalDetails->>'UlbName' AND (d.lastModifiedTime - d.createdTime)
-      <= (10 * 24 * 60 * 60 * 1000)) AS ApplicationsApprovedWithin10Days,
-      (SELECT COUNT(*) FROM eg_bpa_buildingplan AS e  WHERE e.businessservice =
-      'BPA'  AND e.applicationno IN (SELECT businessid FROM
-      eg_wf_processinstance_v2 WHERE escalated = 'true')  AND
-      e.additionalDetails->>'UlbName' = bp.additionalDetails->>'UlbName' AND
-      (e.lastModifiedTime - e.createdTime) <= (10 * 24 * 60 * 60 * 1000)) AS
-      ApplicationsApprovedWithoutVerificationWithin10Days,   (SELECT
-      COUNT(DISTINCT bp_inner.applicationno) FROM
-      eg_bpa_buildingplan bp_inner JOIN eg_wf_processinstance_v2 pi ON
-      bp_inner.applicationno = pi.businessid WHERE pi.action = 'BLOCK' AND NOT
-      EXISTS ( SELECT 1 FROM eg_wf_processinstance_v2 pi_inner WHERE
-      pi_inner.businessid = bp_inner.applicationno AND pi_inner.createdtime >
-      pi.createdtime AND pi_inner.action != 'BLOCK') AND
-      bp_inner.additionalDetails->>'UlbName' = bp.additionalDetails->>'UlbName')
-      AS BlockedApplications, (SELECT COUNT(*) FROM eg_bpa_buildingplan AS f WHERE
-      f.businessservice = 'BPA'  AND f.status != 'APPROVED' AND
-      f.additionalDetails->>'UlbName' = bp.additionalDetails->>'UlbName' AND
-      (EXTRACT(EPOCH FROM NOW()) * 1000 - f.createdTime) <= (10 * 24 * 60 * 60 *
-      1000)) AS ApplicationsPendingForApprovalWithinTenDays
-      FROM eg_bpa_buildingplan bp WHERE bp.businessservice = 'BPA' AND bp.additionalDetails->>'UlbName' IS NOT NULL
+    query: >-
+      SELECT 
+      bp.tenantid AS ULBName,
+      bp.additionalDetails->>'district' AS District,
+      COUNT(*) AS TotalCasesReceived,
+      COUNT(CASE WHEN bp.status = 'APPROVED' THEN 1 END) AS ApprovedApplications,
+      COUNT(CASE WHEN bp.status = 'APPROVED' 
+      AND (bp.lastModifiedTime - bp.createdTime) <= (10 * 24 * 60 * 60 * 1000) 
+      THEN 1 END) AS ApplicationsApprovedWithin10Days,
+      COUNT(CASE WHEN bp.status = 'APPROVED' 
+      AND bp.applicationno IN (SELECT businessid FROM eg_wf_processinstance_v2 WHERE escalated = 'true') 
+      AND (bp.lastModifiedTime - bp.createdTime) <= (10 * 24 * 60 * 60 * 1000) 
+      THEN 1 END) AS ApplicationsApprovedWithoutVerificationWithin10Days,
+      COUNT(DISTINCT CASE WHEN pi.action = 'BLOCK' 
+      AND NOT EXISTS (
+      SELECT 1
+      FROM eg_wf_processinstance_v2 pi_inner
+      WHERE pi_inner.businessid = bp.applicationno
+      AND pi_inner.createdtime > pi.createdtime
+      AND pi_inner.action != 'BLOCK') 
+      THEN bp.applicationno END) AS BlockedApplicationsCount,
+      COUNT(CASE WHEN bp.status != 'APPROVED' 
+      AND (EXTRACT(EPOCH FROM NOW()) * 1000 - bp.createdTime) <= (10 * 24 * 60 * 60 * 1000) 
+      THEN 1 END) AS ApplicationsPendingForApprovalWithinTenDays
+      FROM eg_bpa_buildingplan bp
+      LEFT JOIN eg_wf_processinstance_v2 pi ON bp.applicationno = pi.businessid 
+      WHERE bp.businessservice = 'BPA'
+    groupby: GROUP BY 
+      bp.tenantid, bp.additionalDetails->>'district'
+      HAVING bp.additionalDetails->>'district' IS NOT NULL
+
       
   - reportName: ObpsBlockingCasesDetailsReport
     decryptionPathId: ObpsDailyCollectionReport
