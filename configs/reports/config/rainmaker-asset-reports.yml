@@ -44,45 +44,12 @@ ReportDefinitions:
         source: asset
         showColumn: false
 
-    searchParams:
-      - name: parentcategory
-        label: Parent Category
-        type: singlevaluelist
-        source: asset
-        isMandatory: false
-        pattern: "list://Land:Land,Building:Building,Service:Service,IT:IT,Vehicle:Vehicle,Other:Other"
-        searchClause: AND parentcategory = $parentcategory
-      - name: AssetUniqueID
-        label: Application Number
-        type: string
-        source: asset
-        isMandatory: false
-        searchClause: AND bp.applicationno = $applicationNo
-      - name: fromDate
-        label: FromDate
-        type: epoch
-        source: asset
-        isMandatory: false
-        searchClause: AND createdtime >= $fromDate
-      - name: toDate
-        label: ToDate
-        type: epoch
-        source: asset
-        isMandatory: false
-        searchClause: AND createdtime <= $toDate
-      - name: financialyear
-        label: Financial Year
-        type: string
-        source: asset
-        isMandatory: false
-        searchClause: AND createdtime <= $toDate
-
     query: SELECT applicationno AS AssetUniqueID, 
       classification AS AssetClassification, 
-      parentcategory, 
+      parentcategory as parentcategory, 
       name AS Assetname, 
       status AS AssetStatus, 
-      Department, 
+      Department as Department, 
       financialyear AS FinancialYear, 
-      createdtime
+      createdtime as createdtime
       FROM eg_asset_assetdetails
