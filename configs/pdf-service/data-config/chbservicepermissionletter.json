@@ -197,37 +197,24 @@
                             },
                             {
                                 "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
-                                "queryParam": "moduleName=CHB&masterName=CommunityHalls&tenantId=pg",
+                                "queryParam": "moduleName=CHB&masterName=CommunityHalls&tenantId=pg.mohali",
                               "apiRequest": null,
                               "responseMapping": [
                                   {
                                       "variable": "terms",
                                       "value": "$.MdmsRes.CHB.CommunityHalls[0].termsAndCondition"
-                                  },
-                                  {
-                                      "variable": "cancellationPolicy",
-                                      "value": "$.MdmsRes.CHB.CommunityHalls[0].cancellationPolicy"
                                   }
+                                
                               ]
                           },
-                          {
-                            "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
-                            "queryParam": "moduleName=CHB&masterName=CalculationType&tenantId=pg",
-                              "apiRequest": null,
-                              "responseMapping": [
-                                  {
-                                      "variable": "amount",
-                                      "value": "$.MdmsRes.CHB.CalculationType[0].amount"
-                                  }
-                              ]
-                          },
+                         
                           {
                             "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
                             "queryParam": "moduleName=CHB&masterName=CommunityHalls&tenantId=pg.mohali",
                               "apiRequest": null,
                               "responseMapping": [
                                 {
-                                  "variable": "DISCLAIMER",
+                                  "variable": "TERMS",
                                   "value": "$.MdmsRes.CHB.CommunityHalls[0].termsAndCondition"
                                 }
                               ]
@@ -249,8 +236,8 @@
                                 ]
                             },    
                             {
-                              "path": "http://collection-services:8080/collection-services/payments/chb-services/_search",
-                               "queryParam": "tenantId=pg.citya,consumerCode=$.bookingNo",
+                             "path": "http://collection-services:8080/collection-services/payments/chb-services/_search",
+                             "queryParam": "tenantId=pg.mohali,consumerCode=$.bookingNo",
                               "apiRequest": null,
                               "responseMapping": [
                                 {
