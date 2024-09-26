@@ -168,7 +168,7 @@
                     {
                         "externalAPI": [
                             {
-                                "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
+                              "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
                                 "queryParam": "moduleName=tenant&masterName=tenants&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}')%5D",
                                 "apiRequest": null,
                                 "responseMapping": [
@@ -211,8 +211,8 @@
                               ]
                           },
                           {
-                            "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
-                            "queryParam": "moduleName=CHB&masterName=CalculationType&tenantId=pg",
+                              "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
+                              "queryParam": "moduleName=CHB&masterName=CalculationType&tenantId=pg",
                               "apiRequest": null,
                               "responseMapping": [
                                   {
@@ -222,18 +222,18 @@
                               ]
                           },
                           {
-                            "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
-                            "queryParam": "moduleName=CHB&masterName=CommunityHalls&tenantId=pg.mohali",
+                              "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
+                              "queryParam": "moduleName=CHB&masterName=CommunityHalls&tenantId=pg",
                               "apiRequest": null,
                               "responseMapping": [
                                 {
                                   "variable": "DISCLAIMER",
-                                  "value": "$.MdmsRes.CHB.CommunityHalls[0].termsAndCondition"
+                                  "value": "$.MdmsRes.CHB.CommunityHalls[0].disclaimer"
                                 }
                               ]
                             },
                             {
-                                "path": "http://egov-workflow-v2.egov:8080/egov-workflow-v2/egov-wf/process/_search",
+                              "path": "http://egov-workflow-v2.egov:8080/egov-workflow-v2/egov-wf/process/_search",
                                 "queryParam": "businessIds=$.bookingNo,history=true,tenantId=$.tenantId",
                                 "apiRequest": null,
                                 "responseMapping": [
@@ -257,20 +257,37 @@
                                   "variable": "totalAmount",
                                   "value": "Payments[0].totalDue"
                                 },
-                                
                                 {
-                                  "variable": "BOOKING_FEES",
-                                  "value": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[1].amount"
-                                },
-                                {
-                                  "variable": "CGST",
+                                  "variable": "SECURITY_DEPOSIT",
                                   "value": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[0].amount"
                                 },
                                 {
-                                  "variable": "SGST",
+                                  "variable": "RENT",
+                                  "value": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[6].amount"
+                                },
+                                {
+                                  "variable": "WATER_CHARGES",
+                                  "value": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[5].amount"
+                                },
+                                {
+                                  "variable": "CONSERVATION_FEE",
                                   "value": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[2].amount"
+                                },
+                                {
+                                  "variable": "CGST",
+                                  "value": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[4].amount"
+                                },
+                                {
+                                  "variable": "SGST",
+                                  "value": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[1].amount"
+                                },
+                                {
+                                  "variable": "ELECTRICITY_CHARGES",
+                                  "value": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[3].amount"
                                 }
-                            
+                              
+                                
+                               
                               ]
                             }
                             
