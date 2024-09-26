@@ -160,36 +160,13 @@
           },
           {
             "table": {
-              "widths": [90,30,80, 60,100,30,30],
+              "widths": ["*","*","*"],
               "body": [
                 [
+                 
                   {
                     "stack": [
-                      { "text": "SECURITY DEPOSIT", "bold": true, "style": "tableCell" }
-                    ],
-                    "alignment": "left"
-                  },
-                  {
-                    "stack": [
-                      { "text": "RENT", "bold": true, "style": "tableCell" }
-                    ],
-                    "alignment": "left"
-                  },
-                  {
-                    "stack": [
-                      { "text": "WATER CHARGES", "bold": true, "style": "tableCell" }
-                    ],
-                    "alignment": "left"
-                  },
-                  {
-                    "stack": [
-                      { "text": "ELECTRICITY CHARGES", "bold": true, "style": "tableCell" }
-                    ],
-                    "alignment": "left"
-                  },
-                  {
-                    "stack": [
-                      { "text": "CONSERVATION FEE", "bold": true, "style": "tableCell" }
+                      { "text": "Booking Fees", "bold": true, "style": "tableCell" }
                     ],
                     "alignment": "left"
                   },
@@ -207,33 +184,11 @@
                   }
                 ],
                 [
+                 
+
                   {
                     "stack": [
-                      { "text": "{{SECURITY_DEPOSIT}}", "bold": false, "style": "tableCell" }
-                    ],
-                    "alignment": "left"
-                  },
-                  {
-                    "stack": [
-                      { "text": "{{RENT}}", "bold": false, "style": "tableCell" }
-                    ],
-                    "alignment": "left"
-                  },
-                  {
-                    "stack": [
-                      { "text": "{{WATER_CHARGES}}", "bold": false, "style": "tableCell" }
-                    ],
-                    "alignment": "left"
-                  },
-                  {
-                    "stack": [
-                      { "text": "{{ELECTRICITY_CHARGES}}", "style": "tableCell" }
-                    ],
-                    "alignment": "left"
-                  },
-                  {
-                    "stack": [
-                      { "text": "{{CONSERVATION_FEE}}", "bold": false, "style": "tableCell" }
+                      { "text": "{{BOOKING_FEES}}", "bold": false, "style": "tableCell" }
                     ],
                     "alignment": "left"
                   },
@@ -253,6 +208,25 @@
               ]
             }
           },
+          {
+            "stack": [
+              {
+                "text": "Total Amount",
+                "style": "subheader", 
+                "fontSize": 12,
+                "bold": true,
+                "margin": [0, 10, 0, 0]  
+              },
+              {
+                "text": "{{totalAmount}}",  
+                "style": "subheader", 
+                "bold": false, 
+                "alignment": "left",
+                "margin": [0,5, 0, 0]
+              }
+            ]
+          },
+          
           {
             "text": "Bank Details for Refund",
             "style": "subheader",
@@ -325,7 +299,7 @@
             "margin": [0, 10, 0, 5]
           },
           {
-            "text": "{{terms}}",
+            "text": "{{DISCLAIMER}}",
             "style": "content",
             "margin": [0, 5, 0, 5]
           },

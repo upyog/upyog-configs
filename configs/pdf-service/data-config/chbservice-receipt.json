@@ -151,46 +151,26 @@
                   "path": "$.paymentDetails[0].totalDue"
                 }
               },
+             
               {
-                "variable": "SECURITY_DEPOSIT",
+                "variable": "SGST",
                 "value": {
                   "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[0].amount"
                 }
               },
+             
+             
               {
-                "variable": "SGST",
-                "value": {
-                  "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[1].amount"
-                }
-              },
-              {
-                "variable": "CONSERVATION_FEE",
+                "variable": "CGST",
                 "value": {
                   "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[2].amount"
                 }
               },
+            
               {
-                "variable": "ELECTRICITY_CHARGES",
+                "variable": "BOOK",
                 "value": {
-                  "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[3].amount"
-                }
-              },
-              {
-                "variable": "CGST",
-                "value": {
-                  "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[4].amount"
-                }
-              },
-              {
-                "variable": "WATER_CHARGES",
-                "value": {
-                  "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[5].amount"
-                }
-              },
-              {
-                "variable": "RENT",
-                "value": {
-                  "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[6].amount"
+                  "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[1].amount"
                 }
               },
               {
@@ -457,8 +437,8 @@
           {
             "externalAPI": [
               {
-                "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
-                "queryParam": "moduleName=tenant&masterName=tenants&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}')%5D",
+                  "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
+                  "queryParam": "moduleName=tenant&masterName=tenants&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}')%5D",
                 "apiRequest": null,
                 "responseMapping": [
                   {
@@ -494,8 +474,8 @@
                 ]
               },
               {
-                "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
-                "queryParam": "moduleName=CHB&masterName=CommunityHalls&tenantId=pg",
+                  "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
+                  "queryParam": "moduleName=CHB&masterName=CommunityHalls&tenantId=pg",
                 "apiRequest": null,
                 "responseMapping": [
                   {
@@ -505,8 +485,8 @@
                 ]
               },
               {
-                "path": "http://chb-services:8080/chb-services/booking/v1/_search",
-                "queryParam": "tenantId=pg.citya",
+                  "path": "http://chb-services:8080/chb-services/booking/v1/_search",
+                  "queryParam": "tenantId=pg.citya",
                 "apiRequest": null,
                 "responseMapping": [
                   {
@@ -517,8 +497,8 @@
               },
               
               {
-                "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
-                "queryParam": "moduleName=tenant&masterName=footer&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}' %26%26 @.service=='{$.paymentDetails[0].businessService}')%5D",
+                  "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
+                  "queryParam": "moduleName=tenant&masterName=footer&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}' %26%26 @.service=='{$.paymentDetails[0].businessService}')%5D",
                 "apiRequest": null,
                 "responseMapping": [
                   {
