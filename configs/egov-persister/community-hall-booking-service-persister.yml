@@ -72,7 +72,7 @@ serviceMaps:
           - jsonPath: $.hallsBookingApplication.auditDetails.lastModifiedTime
           
        - query: INSERT INTO public.eg_chb_slot_detail(slot_id, booking_id, hall_code, capacity, booking_date, booking_from_time, booking_to_time, status, 
-               createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+               createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?::DATE, ?::TIME, ?::TIME, ?, ?, ?, ?, ?);
          basePath: hallsBookingApplication.bookingSlotDetails.*
          jsonMaps:
           - jsonPath: $.hallsBookingApplication.bookingSlotDetails.*.slotId
