@@ -659,6 +659,13 @@
 								}
 							},
 							{
+								"variable": "propertyId",
+								"value": {
+								  "path": "$.property.propertyId"
+								}
+							},
+
+							{
 								"variable": "ref_message2",
 								"value": {
 									"path": "PDF_STATIC_LABEL_WS_CONSOLIDATED_ESTIMATION_NOTICE_NO"
@@ -694,6 +701,18 @@
 									"module": "rainmaker-common"
 								}
 							},
+							{
+								"variable": "property_id",
+								"value": {
+								  "path": "PDF_STATIC_LABEL_WS_CONSOLIDATED_ACKNOWELDGMENT_PROPERTYID"
+								},
+								"type": "label",
+								"localisation": {
+								  "required": true,
+								  "prefix": null,
+								  "module": "rainmaker-common"
+								}
+							  },
 							{
 								"variable": "order_message1",
 								"value": {
