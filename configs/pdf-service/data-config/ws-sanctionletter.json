@@ -43,6 +43,18 @@
 								}
 							},
 							{
+								"variable": "property_id",
+								"value": {
+									"path": "PDF_STATIC_LABEL_WS_CONSOLIDATED_ACKNOWELDGMENT_PROPERTYID_LABEL"
+								},
+								"type": "label",
+								"localisation": {
+									"required": true,
+									"prefix": null,
+									"module": "rainmaker-common"
+								}
+							},
+							{
 								"variable": "connection_holder_details_label",
 								"value": {
 									"path": "PDF_STATIC_LABEL_WS_CONNECTION_HOLDER_DETAILS"
@@ -291,6 +303,12 @@
 								"variable": "ownerName",
 								"value": {
 									"path": "$.property.owners[0].name"
+								}
+							},
+							{
+								"variable": "propertyId",
+								"value": {
+									"path": "$.property.propertyId"
 								}
 							},
 							{
