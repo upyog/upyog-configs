@@ -237,6 +237,34 @@
 						],
 						[
 							{
+								"text": "{{property_id}}",
+								"style": "ws-sub-table",
+								"alignment": "left",
+								"margin": [
+									20,
+									0,
+									-600,
+									0
+								]
+							},
+							{
+								"text": " {{propertyId}}",
+								"style": "ws-sub-table-value",
+								"alignment": "left",
+								"margin": [
+									155,
+									0,
+									0,
+									0
+								]
+							},
+							{
+								"text": "",
+								"alignment": "right"
+							}
+						],
+						[
+							{
 								"text": "{{user_address}}",
 								"style": "ws-sub-table",
 								"alignment": "left",
@@ -488,17 +516,6 @@
 																			],
 																			[
 																				{
-																					"text": "{{road_charge}}",
-																					"style": "ws-table-row-odd"
-																				},
-																				{
-																					"text": "₹{{totalRoadCharge}}",
-																					"alignment": "right",
-																					"style": "ws-table-row-odd"
-																				}
-																			],
-																			[
-																				{
 																					"text": "{{security_charge}}",
 																					"style": "ws-table-row-even"
 																				},
@@ -508,6 +525,18 @@
 																					"style": "ws-table-row-even"
 																				}
 																			],
+																			[
+																				{
+																					"text": "{{road_charge}}",
+																					"style": "ws-table-row-odd"
+																				},
+																				{
+																					"text": "₹{{totalRoadCharge}}",
+																					"alignment": "right",
+																					"style": "ws-table-row-odd"
+																				}
+																			],
+																			
 																			[
 																				{
 																					"text": "{{tax_cess}}",
