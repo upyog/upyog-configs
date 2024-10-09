@@ -631,7 +631,7 @@
                     },
                     {
                       "variable": "var_owners",                        
-                      "value":"$.Properties[0].owners[?(@.active== true && @.status== 'ACTIVE')]",
+                      "value":"$.Properties[0].additionalDetails.owners[?(@.active== true && @.status== 'ACTIVE')]",
                        "type":"array",
                        "format":{                            
                           "type":"string",
