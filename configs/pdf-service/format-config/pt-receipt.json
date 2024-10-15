@@ -394,7 +394,7 @@
         "layout": {}
       },
       {
-        "text":"OWNER/OCCUPIER INFORMATION",
+        "text":"TRANSFEREE DETAILS",
         "style":"block-head",
         "decoration":"underline"
      },
@@ -429,13 +429,213 @@
       
     ],
     
-    "{{#var_owners}}[{\"text\":\"{{name2}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{mobileNumber}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{fatherOrHusbandName2}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{relationship}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{ownerType}}\",\"style\":\"receipt-tablee\"}]{{/var_owners}}"
+    "{{#var_owners_mutation}}[{\"text\":\"{{name2}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{mobileNumber}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{fatherOrHusbandName2}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{relationship}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{ownerType}}\",\"style\":\"receipt-tablee\"}]{{/var_owners_mutation}}"
 
       
   ]
   },
        "layout": {}
      },
+     {
+      "text":"TRANSFEROR DETAILS",
+      "style":"block-head",
+      "decoration":"underline"
+   },
+   {
+     "style": "next-noc-table",
+     "table": {
+      "widths": [
+        "*","*","*","*","*"
+      ],
+      "body": [
+        
+  [        {
+            "text": "Owner Name",
+            "style": "amounts"
+          },
+    {
+            "text": "Mobile Number",
+            "style": "amounts"
+          },
+    {
+            "text": "Guardian Name",
+            "style": "amounts"
+          },
+    {
+            "text": "Relationship",
+            "style": "amounts"
+          },
+    {
+            "text": "OwnerType",
+            "style": "amounts"
+          }
+    
+  ],
+  
+  "{{#var_owners_original}}[{\"text\":\"{{orginalname}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{orginalmobileNumber}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{orginalfatherOrHusbandName}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{orginalrelationship}}\",\"style\":\"receipt-tablee\"},{\"text\":\"{{orginalownerType}}\",\"style\":\"receipt-tablee\"}]{{/var_owners_original}}"
+
+    
+]
+},
+     "layout": {}
+   },
+   {
+    "text":"AMOUNT TO BE PAID",
+    "style":"block-head",
+    "decoration": "underline"
+  },
+  {
+    "style": "next-noc-table",
+    "table": {
+      "widths": [
+
+        "25%","25%","25%","25%"
+      ],
+      "body": [
+        
+  [     
+    {
+    "text": "Mutation Fee",
+    "style": "amounts"
+  },
+          {
+            "text": "Mutation Penalty",
+            "style": "amounts"
+          },
+    {
+            "text": "Mutation Rebate",
+            "style": "amounts"
+          },
+    {
+            "text": "Total",
+            "style": "amounts"
+          }
+  ],
+  [
+    {
+    "text": "{{mutationFee}}",
+    "border": [
+      true,
+      false,
+      false,
+      true
+    ],
+    "style": "receipt-tablee"
+  },
+  {
+    "text": "{{mutationPenalty}}",
+    "border": [
+      true,
+      false,
+      false,
+      true
+    ],
+    "style": "receipt-tablee"
+  },
+  {
+    "text": "{{mutationRebate}}",
+    "border": [
+      true,
+      false,
+      false,
+      true
+    ],
+    "style": "receipt-tablee"
+  },
+  {
+    "text": "{{amountToBePaid}}",
+    "border": [
+      true,
+      false,
+      true,
+      true
+    ],
+    "style": "receipt-tablee"
+  }
+]
+]
+},
+"layout":{}
+}, 
+{
+  "text":"SUMMARY OF PAID AMOUNT",
+  "style":"block-head",
+  "decoration": "underline"
+},
+{
+  "style": "next-noc-table",
+  "table": {
+    "widths": [
+      "25%","25%","25%","25%"
+    ],
+    "body": [
+      
+      [     
+        {
+        "text": "Mutation Fee",
+        "style": "amounts"
+      },
+              {
+                "text": "Mutation Penalty",
+                "style": "amounts"
+              },
+        {
+                "text": "Mutation Rebate",
+                "style": "amounts"
+              },
+        {
+                "text": "Total",
+                "style": "amounts"
+              }
+      ],
+      [
+        {
+        "text": "{{mutationFeePaid}}",
+        "border": [
+          true,
+          false,
+          false,
+          true
+        ],
+        "style": "receipt-tablee"
+      },
+      {
+        "text": "{{mutationPenaltyPaid}}",
+        "border": [
+          true,
+          false,
+          false,
+          true
+        ],
+        "style": "receipt-tablee"
+      },
+      {
+        "text": "{{mutationRebatePaid}}",
+        "border": [
+          true,
+          false,
+          false,
+          true
+        ],
+        "style": "receipt-tablee"
+      },
+      {
+        "text": "{{paidAmount}}",
+        "border": [
+          true,
+          false,
+          true,
+          true
+        ],
+        "style": "receipt-tablee"
+      }
+    ]
+
+  
+]
+},
+"layout":{}
+},
      
       {
         "style": "next-noc-table",

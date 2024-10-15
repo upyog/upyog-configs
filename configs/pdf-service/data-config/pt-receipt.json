@@ -160,6 +160,56 @@
                 }
               },
               {
+                "variable": "paidAmount", 
+                "value": {
+                  "path": "$.paymentDetails[0].bill.billDetails[0].amountPaid"
+                }
+              },
+
+              {
+                "variable": "amountToBePaid", 
+                "value": {
+                  "path": "$.paymentDetails[0].bill.billDetails[0].amount"
+                }
+              },
+              {
+                "variable": "mutationFee", 
+                "value": {
+                  "path": "$.paymentDetails[0].bill.billDetails[0].billAccountDetails[?(@.taxHeadCode == 'PT_MUTATION_FEE')].amount"
+                }
+              },
+              {
+                "variable": "mutationPenalty", 
+                "value": {
+                  "path": "$.paymentDetails[0].bill.billDetails[0].billAccountDetails[?(@.taxHeadCode == 'PT_MUTATION_PENALTY')].amount"
+                }
+              },
+              {
+                "variable": "mutationRebate", 
+                "value": {
+                  "path": "$.paymentDetails[0].bill.billDetails[0].billAccountDetails[?(@.taxHeadCode == 'PT_MUTATION_REBATE')].amount"
+                }
+              },
+              
+              {
+                "variable": "mutationFeePaid", 
+                "value": {
+                  "path": "$.paymentDetails[0].bill.billDetails[0].billAccountDetails[?(@.taxHeadCode == 'PT_MUTATION_FEE')].adjustedAmount"
+                }
+              },
+              {
+                "variable": "mutationPenaltyPaid", 
+                "value": {
+                  "path": "$.paymentDetails[0].bill.billDetails[0].billAccountDetails[?(@.taxHeadCode == 'PT_MUTATION_PENALTY')].adjustedAmount"
+                }
+              },
+              {
+                "variable": "mutationRebatePaid", 
+                "value": {
+                  "path": "$.paymentDetails[0].bill.billDetails[0].billAccountDetails[?(@.taxHeadCode == 'PT_MUTATION_REBATE')].adjustedAmount"
+                }
+              },
+              {
                 "variable": "payment_receipt",
                 "value": {
                   "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_PAYMENT_RECEIPT"
@@ -433,139 +483,8 @@
                   "prefix": null,
                   "module":"rainmaker-common"
                }
-              },
-              {
-                "variable": "var_bills",                        
-                "value":{
-                  "path":"$.paymentDetails[0].additionalDetails.arrearArray.*"
-                },
-                 "type":"array",
-                 "format":{                            
-                    "type":"string",
-                    "scema":[
-                       {
-                          "variable":"year",
-                          "value":  "year"
-                        
-                        },{
-                          "variable":"tax",
-                          "value":  "tax"
-                        
-                        },{
-                          "variable":"firecess",
-                          "value":  "firecess"
-                        
-                        },{
-                          "variable":"cancercess",
-                          "value":  "cancercess"
-                        
-                        },{
-                          "variable":"penalty",
-                          "value":  "penalty"
-                        
-                        },{
-                          "variable":"interest",
-                          "value":  "interest"
-                        
-                        },{
-                          "variable":"rebate",
-                          "value":  "rebate"
-                        
-                        },
-                        {
-                          "variable":"usage_exemption",
-                          "value":  "usage_exemption"
-                        
-                        },{
-                          "variable":"special_category_exemption",
-                          "value":  "special_category_exemption"
-                        
-                        },{
-                          "variable":"adhoc_penalty",
-                          "value":  "adhoc_penalty"
-                        
-                        },{
-                          "variable":"adhoc_rebate",
-                          "value":  "adhoc_rebate"
-                        
-                        },{
-                          "variable":"roundoff",
-                          "value":  "roundoff"
-                        
-                        },{
-                          "variable":"total",
-                          "value":  "total"
-                        
-                        }
-                       ]
-                } 
-             },
-             {
-              "variable": "var_tax",                        
-              "value":{
-                "path":"$.paymentDetails[0].additionalDetails.taxArray.*"
-              },
-               "type":"array",
-               "format":{                            
-                  "type":"string",
-                  "scema":[
-                     {
-                        "variable":"year",
-                        "value":  "year"
-                      
-                      },{
-                        "variable":"tax",
-                        "value":  "tax"
-                      
-                      },{
-                        "variable":"firecess",
-                        "value":  "firecess"
-                      
-                      },{
-                        "variable":"cancercess",
-                        "value":  "cancercess"
-                      
-                      },{
-                        "variable":"penalty",
-                        "value":  "penalty"
-                      
-                      },{
-                        "variable":"interest",
-                        "value":  "interest"
-                      
-                      },{
-                        "variable":"rebate",
-                        "value":  "rebate"
-                      
-                      },
-                      {
-                        "variable":"usage_exemption",
-                        "value":  "usage_exemption"
-                      
-                      },{
-                        "variable":"special_category_exemption",
-                        "value":  "special_category_exemption"
-                      
-                      },{
-                        "variable":"adhoc_penalty",
-                        "value":  "adhoc_penalty"
-                      
-                      },{
-                        "variable":"adhoc_rebate",
-                        "value":  "adhoc_rebate"
-                      
-                      },{
-                        "variable":"roundoff",
-                        "value":  "roundoff"
-                      
-                      },{
-                        "variable":"total",
-                        "value":  "total"
-                      
-                      }
-                     ]
-              } 
-           }
+              }
+           
             ]
           },
           {
@@ -630,8 +549,8 @@
                       "value":"$.Properties[0].owners[0].emailId"
                     },
                     {
-                      "variable": "var_owners",                        
-                      "value":"$.Properties[0].owners[?(@.active== true && @.status== 'ACTIVE')]",
+                      "variable": "var_owners_mutation",                        
+                      "value":"$.Properties[0].additionalDetails.owners[?(@.status== 'ACTIVE')]",
                        "type":"array",
                        "format":{                            
                           "type":"string",
@@ -658,7 +577,37 @@
                          }
                             ]
                       } 
-                   }
+                   },
+                   {
+                    "variable": "var_owners_original",                        
+                    "value":"$.Properties[0].additionalDetails.owners[?(@.active== true && @.status== 'INACTIVE')]",
+                     "type":"array",
+                     "format":{                            
+                        "type":"string",
+                        "scema":[
+                           {
+                              "variable":"orginalname",
+                              "value":"name"
+                           },
+                           {
+                              "variable":"orginalfatherOrHusbandName",
+                              "value":"fatherOrHusbandName"
+                           },
+                           {
+                            "variable":"orginalmobileNumber",
+                            "value":"mobileNumber"
+                         },
+                         {
+                          "variable":"orginalrelationship",
+                          "value":"relationship"
+                       },
+                         {
+                          "variable":"orginalownerType",
+                          "value":"ownerType"
+                       }
+                          ]
+                    } 
+                 }
 					]
 			  },
               { 
