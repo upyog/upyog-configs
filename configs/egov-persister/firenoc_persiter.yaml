@@ -583,3 +583,23 @@ serviceMaps:
 
           - jsonPath: $.FireNOCs.*.fireNOCDetails.id
                      
+ - version: 1.0
+   description: Updates firenoc status for auto escalate
+   fromTopic: firenoc-auto-escalation
+   isTransaction: true
+   queryMaps:
+
+       - query: UPDATE eg_fn_firenocdetail SET status=?, lastmodifiedby=?, lastmodifiedtime=? WHERE applicationnumber=? AND tenantId=?;
+         basePath: ProcessInstances.*
+         jsonMaps:
+       
+
+          - jsonPath: $.ProcessInstances.*.status
+
+          - jsonPath: $.ProcessInstances.*.auditDetails.lastModifiedBy
+
+          - jsonPath: $.ProcessInstances.*.auditDetails.lastModifiedTime
+
+          - jsonPath: $.ProcessInstances.*.applicationNumber
+
+          - jsonPath: $.ProcessInstances.*.tenantId
