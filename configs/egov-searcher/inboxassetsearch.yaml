@@ -25,6 +25,9 @@ SearchDefinitions:
             jsonPath: $.searchCriteria.tenantId
           - name: asset.id
             isMandatory: false
+            jsonPath: $.searchCriteria.id
+          - name: asset.status
+            isMandatory: false
             jsonPath: $.searchCriteria.status
           - name: asset.applicationNo
             isMandatory: false
@@ -62,6 +65,9 @@ SearchDefinitions:
             isMandatory: true
             jsonPath: $.searchCriteria.tenantId
           - name: asset.id
+            isMandatory: false
+            jsonPath: $.searchCriteria.id
+          - name: asset.status
             isMandatory: false
             jsonPath: $.searchCriteria.status
           - name: asset.applicationNo
