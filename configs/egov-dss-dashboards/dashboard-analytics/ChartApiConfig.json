@@ -9816,7 +9816,7 @@
     "queries": [
       {
         "module": "OBPS",
-        "dateRefField": "",
+        "dateRefField": "date",
         "requestQueryMap": "{\"ward\" : \"ward.keyword\",\"ulb\" : \"ulb.keyword\", \"state\" : \"state.keyword\"}",
         "indexName": "obps-national-dashboard",
         "aggrQuery": "{ \"aggs\": { \"AGGR\": { \"filter\": { \"bool\": { \"must\": [ { \"terms\": { \"riskType.keyword\": [ \"LOW\", \"MEDIUM\",\"HIGH\" ] } } ] } }, \"aggs\": { \"Total Permits Issued\": { \"sum\": { \"field\": \"permitsIssuedForRiskType\" } } } } } }"
