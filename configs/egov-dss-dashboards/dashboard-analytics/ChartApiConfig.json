@@ -9916,7 +9916,7 @@
         "module": "OBPS",
         "dateRefField": "",
         "requestQueryMap": "{\"ward\" : \"ward.keyword\",\"ulb\" : \"ulb.keyword\", \"state\" : \"state.keyword\"}",
-        "indexName": "obps-national-dashboard-*",
+        "indexName": "obps-national-dashboard",
         "aggrQuery": "{ \"aggs\": { \"AGGR\": { \"filter\": { \"bool\": {}}, \"aggs\": { \"Total Permits Issued\": { \"sum\": { \"field\": \"permitsIssuedForRiskType\" } } } } } }"
       }
     ],
