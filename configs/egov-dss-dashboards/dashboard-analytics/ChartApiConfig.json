@@ -9976,7 +9976,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"ward\" : \"ward.keyword\",\"ulb\" : \"ulb.keyword\", \"state\" : \"state.keyword\"}",
         "indexName": "obps-national-dashboard-*",
-        "aggrQuery": "{ \"aggs\": { \"intermediateAggr\": { \"terms\": { \"field\": \"date\" }, \"aggs\":{ \"ocIssued\":{ \"avg\":{ \"field\":\"ocIssued\" } } } }, \"Total OC Issued\": { \"sum_bucket\": { \"buckets_path\": \"intermediateAggr.ocIssued\" } } } }"
+        "aggrQuery": "{ \"aggs\": {  \"Total OC Issued\": { \"sum\": { \"field\": \"ocIssued\" } } } }"
       }
     ],
     "chartType": "metric",
