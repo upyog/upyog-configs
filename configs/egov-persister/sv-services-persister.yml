@@ -180,4 +180,20 @@
           - jsonPath: $.streetVendingDetail.auditDetails.createdTime
 
           - jsonPath: $.streetVendingDetail.auditDetails.lastModifiedTime
+
+  - version: 1.0
+    description: Update Street Vending details
+    fromTopic: update-street-vending
+    isTransaction: true
+    queryMaps:
+      - query: UPDATE public.eg_sv_street_vending_detail SET applicationStatus = ?, lastmodifiedby = ?, lastmodifiedtime = ?  WHERE id=?;
+        basePath: streetVendingDetail.*
+        jsonMaps:
+
+          - jsonPath: $.streetVendingDetail.*.applicationStatus
           
+          - jsonPath: $.streetVendingDetail.*.auditDetails.lastModifiedBy
+          
+          - jsonPath: $.streetVendingDetail.*.auditDetails.lastModifiedTime
+
+          - jsonPath: $.streetVendingDetail.*.id
