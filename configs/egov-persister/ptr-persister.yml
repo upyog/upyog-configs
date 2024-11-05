@@ -154,7 +154,7 @@ serviceMaps:
 
 
     - version: 1.0
-      description: Update Pet registration applications in table
+      description: Update Status for expired application
       fromTopic: expire-ptr-application
       isTransaction: true
       queryMaps:
@@ -166,6 +166,23 @@ serviceMaps:
 
             - jsonPath: $.PetRegistrationApplications.*.applicationnumber
     
+    - version: 1.0
+      description: Update Pet Registration application
+      fromTopic: update-ptr-application
+      isTransaction: true
+      queryMaps:
+        - query: UPDATE eg_ptr_registration SET status = ?, lastmodifiedby = ?, lastmodifiedtime = ?  WHERE id=?;
+          basePath: PetRegistrationApplications.*
+          jsonMaps:
+
+            - jsonPath: $.PetRegistrationApplications.*.status
+
+            - jsonPath: $.PetRegistrationApplications.*.lastModifiedBy
+
+            - jsonPath: $.PetRegistrationApplications.*.lastmodifiedtime
+
+            - jsonPath: $.PetRegistrationApplications.*.id
+
     - version: 1.0
       description: Persists Renew Pet details in tables
       fromTopic: renew-ptr-application
