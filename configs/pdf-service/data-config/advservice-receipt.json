@@ -1,5 +1,5 @@
 {
-  "key": "adv-receipt",
+  "key": "advservice-receipt",
   "DataConfigs": {
     "serviceName": "rainmaker-common",
     "version": "1.0.0",
@@ -55,7 +55,6 @@
                 },
                 "localisation": {
                   "required": true,
-                  "prefix": "MODULE",
                   "module": "rainmaker-common"
                 }
               },
@@ -152,6 +151,28 @@
                   "path": "$.paymentDetails[0].totalDue"
                 }
               },
+             
+              {
+                "variable": "SGST",
+                "value": {
+                  "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[0].amount"
+                }
+              },
+             
+             
+              {
+                "variable": "CGST",
+                "value": {
+                  "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[2].amount"
+                }
+              },
+            
+              {
+                "variable": "BOOKING_FEES",
+                "value": {
+                  "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[1].amount"
+                }
+              },
               {
                 "variable": "payment_receipt",
                 "value": {
@@ -177,14 +198,9 @@
                 }
               },
               {
-                "variable": "consumer_id",
+                "variable": "bookingNo",
                 "value": {
-                  "path": "$.paymentDetails[0].businessService"
-                },
-                "localisation": {
-                  "required": true,
-                  "prefix": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_CONSUMER_ID",
-                  "module": "rainmaker-common"
+                  "path": "paymentDetails[0].bill.consumerCode"
                 }
               },
               {
@@ -284,18 +300,6 @@
                 }
               },
 
-              {
-                "variable": "pending_amount",
-                "value": {
-                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_PENDING_AMOUNT"
-                },
-                "type": "label",
-                "localisation": {
-                  "required": true,
-                  "prefix": null,
-                  "module": "rainmaker-common"
-                }
-              },
               {
                 "variable": "payment_mode",
                 "value": {
@@ -415,18 +419,6 @@
                   "prefix": null,
                   "module": "rainmaker-common"
                 }
-              },
-              {
-                "variable": "excess_amount_paid",
-                "value": {
-                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_EXCESS_AMOUNT_PAID"
-                },
-                "type": "label",
-                "localisation": {
-                  "required": true,
-                  "prefix": null,
-                  "module": "rainmaker-common"
-                }
               }
             ]
           },
@@ -445,7 +437,7 @@
           {
             "externalAPI": [
               {
-                "path": "http://localhost:8080",
+                "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
                 "queryParam": "moduleName=tenant&masterName=tenants&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}')%5D",
                 "apiRequest": null,
                 "responseMapping": [
@@ -481,8 +473,21 @@
                   }
                 ]
               },
+            
               {
-                "path": "http://localhost:8089",
+                "path": "http://adv-services:8080/adv-services/booking/v1/_search",
+                "queryParam": "tenantId=pg.mohali",
+                "apiRequest": null,
+                "responseMapping": [
+                  {
+                    "variable": "applicantName",
+                    "value": "bookingApplication[0].applicantDetail.applicantName"
+                  }
+                ]
+              },
+              
+              {
+                "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
                 "queryParam": "moduleName=tenant&masterName=footer&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}' %26%26 @.service=='{$.paymentDetails[0].businessService}')%5D",
                 "apiRequest": null,
                 "responseMapping": [
@@ -513,8 +518,8 @@
           {
             "qrcodeConfig": [
               {
-                "variable": "qrcodeimage",
-                "value": "/digit-ui/citizen/payment/verification?tenantId={{tenantid}}&receiptNumber={{receiptNo}}"
+                "variable": "qrcodeImage",
+                "value": "digit-ui/citizen/payment/verification?tenantId={{tenantid}}&receiptNumber={{receiptNo}}"
               }
             ]
           }
