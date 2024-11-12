@@ -1,0 +1,144 @@
+{
+  "key": "svcertificate",
+  "DataConfigs": {
+    "serviceName": "rainmaker-common",
+    "version": "1.0.0",
+    "baseKeyPath": "$.SVDetail.*",
+    "entityIdPath": "$.id",
+    "isCommonTableBorderRequired": true,
+    "mappings": [
+      {
+        "mappings": [
+          {
+            "direct": [
+              {
+                "variable": "logoImage",
+                "url": "https://raw.githubusercontent.com/egovernments/egov-web-app/master/web/rainmaker/dev-packages/egov-ui-kit-dev/src/assets/images/pblogo.png",
+                "type": "image"
+              },
+              {
+                "variable": "certificateNo",
+                "value": {
+                  "path": "$.certificateNo"
+                }
+              },
+              {
+                "variable": "tenantId",
+                "value": {
+                  "path": "$.tenantId"
+                }
+              },
+              {
+                "variable": "applicationNo",
+                "value": {
+                  "path": "$.applicationNo"
+                }
+              },
+              {
+                "variable": "applicationDate",
+                "value": {
+                  "path": "$.applicationDate"
+                }
+              },
+              {
+                "variable": "vendingActivity",
+                "value": {
+                  "path": "$.vendingActivity"
+                }
+              },
+              {
+                "variable": "name",
+                "value": {
+                  "path": "$.vendorDetail[0].name"
+                }
+              },
+              {
+                "variable": "dob",
+                "value": {
+                  "path": "$.vendorDetail[0].dob"
+                }
+              },
+              {
+                "variable": "fatherName",
+                "value": {
+                  "path": "$.vendorDetail[0].fatherName"
+                }
+              },
+              {
+                "variable": "mobileNo",
+                "value": {
+                  "path": "$.vendorDetail[0].mobileNo"
+                }
+              },
+              {
+                "variable": "locality",
+                "value": {
+                  "path": "$.addressDetails[0].locality"
+                }
+              },
+              {
+                "variable": "city",
+                "value": {
+                  "path": "$.addressDetails[0].addressId.city"
+                }
+              },
+              {
+                "variable": "validFrom",
+                "value": {
+                  "path": "$.validFrom"
+                }
+              },
+              {
+                "variable": "validTo",
+                "value": {
+                  "path": "$.validTo"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "qrcodeConfig": [
+          {
+            "variable": "qrCode",
+            "value": "{{signedCertificateData}}"
+          }
+        ]
+      },
+      {
+        "externalAPI": [
+          {
+            "path": "http://localhost:8082/egov-mdms-service/v1/_get",
+            "queryParam": "moduleName=tenant&masterName=tenants&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}')%5D",
+            "apiRequest": null,
+            "responseMapping": [
+              {
+                "variable": "address",
+                "value": "$.MdmsRes.tenant.tenants[0].address"
+              },
+              {
+                "variable": "phoneNumber",
+                "value": "$.MdmsRes.tenant.tenants[0].contactNumber"
+              },
+              {
+                "variable": "website",
+                "value": "$.MdmsRes.tenant.tenants[0].domainUrl"
+              },
+              {
+                "variable": "email",
+                "value": "$.MdmsRes.tenant.tenants[0].emailId"
+              },
+              {
+                "variable": "logoImage",
+                "value": "$.MdmsRes.tenant.tenants[0].logoId",
+                "type": "image"
+              }
+              
+        ]
+          }
+        ]
+      }
+    ]
+  }
+}
