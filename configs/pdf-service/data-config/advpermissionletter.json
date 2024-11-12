@@ -4,7 +4,7 @@
     "DataConfigs": {
         "moduleName": "adv-services",
         "version": "1.0.0",
-        "baseKeyPath": "$.Payments[*]",
+        "baseKeyPath": "$.bookingApplication[*]",
         "entityIdPath": "$.id",
         "isCommonTableBorderRequired": true,
         "mappings": [
@@ -49,18 +49,6 @@
                                 }
                             },
                             {
-                                "variable": "Chb_Registration_Certificate",
-                                "value": {
-                                    "path": "PDF_STATIC_LABEL_CHB_REGISTRATION_CERTIFICATE"
-                                },
-                                "type": "label",
-                                "localisation": {
-                                    "required": true,
-                                    "prefix": null,
-                                    "module": "rainmaker-common"
-                                }
-                            },
-                            {
                                 "variable": "bookingNo",
                                 "value": {
                                     "path": "$.bookingNo"
@@ -72,29 +60,23 @@
                                     "path": "$.applicantDetail.applicantName"
                                 }
                             },
-                            {
-                                "variable": "IFSC_CODE",
-                                "value": {
-                                    "path": "$.applicantDetail.ifscCode"
-                                }
-                                
-                            },
+                            
                             {
                               "variable": "BOOKING_DATE",
                               "value": {
-                                  "path": "$.bookingSlotDetails[0].bookingDate" 
+                                  "path": "$.cartDetails[0].bookingDate" 
                               }
                           },
                           {
                               "variable": "BOOKING_FROM_DATE",
                               "value": {
-                                  "path": "$.bookingSlotDetails[0].bookingDate" 
+                                  "path": "$.cartDetails[0].bookingFromTime" 
                               }
                           },
                           {
                               "variable": "BOOKING_TO_DATE",
                               "value": {
-                                  "path": "$.bookingSlotDetails[1].bookingDate"
+                                  "path": "$.cartDetails[0].bookingToTime"
                               }
                           }
   
@@ -103,7 +85,7 @@
                     {
                         "externalAPI": [
                             {
-                                "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
+                                "path": "http://localhost:8082/egov-mdms-service/v1/_get",
                                 "queryParam": "moduleName=tenant&masterName=tenants&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}')%5D",
                                 "apiRequest": null,
                                 "responseMapping": [
@@ -131,7 +113,7 @@
                                 ]
                             },
                             {
-                                "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
+                                "path": "http://localhost:8082/egov-mdms-service/v1/_get",
                                 "queryParam": "moduleName=Advertisement&masterName=AdvServices&tenantId=pg",
                               "apiRequest": null,
                               "responseMapping": [
@@ -143,7 +125,7 @@
                           },
                          
                           {
-                            "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
+                            "path": "http://localhost:8082/egov-mdms-service/v1/_get",
                             "queryParam": "moduleName=Advertisement&masterName=AdvServices&tenantId=pg",
                               "apiRequest": null,
                               "responseMapping": [
@@ -154,7 +136,7 @@
                               ]
                             },
                             {
-                                "path": "http://egov-workflow-v2.egov:8080/egov-workflow-v2/egov-wf/process/_search",
+                                "path": "http://localhost:8079/egov-workflow-v2/egov-wf/process/_search",
                                 "queryParam": "businessIds=$.bookingNo,history=true,tenantId=$.tenantId",
                                 "apiRequest": null,
                                 "responseMapping": [
@@ -170,7 +152,7 @@
                                 ]
                             },    
                             {
-                             "path": "http://collection-services:8080/collection-services/payments/adv-services/_search",
+                             "path": "http://localhost:8078/collection-services/payments/adv-services/_search",
                              "queryParam": "tenantId=pg.mohali,consumerCode=$.bookingNo",
                               "apiRequest": null,
                               "responseMapping": [
