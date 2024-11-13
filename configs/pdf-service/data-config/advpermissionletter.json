@@ -85,7 +85,7 @@
                     {
                         "externalAPI": [
                             {
-                                "path": "http://localhost:8082/egov-mdms-service/v1/_get",
+                                "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
                                 "queryParam": "moduleName=tenant&masterName=tenants&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}')%5D",
                                 "apiRequest": null,
                                 "responseMapping": [
@@ -113,7 +113,7 @@
                                 ]
                             },
                             {
-                                "path": "http://localhost:8082/egov-mdms-service/v1/_get",
+                                "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
                                 "queryParam": "moduleName=Advertisement&masterName=AdvServices&tenantId=pg",
                               "apiRequest": null,
                               "responseMapping": [
@@ -125,7 +125,7 @@
                           },
                          
                           {
-                            "path": "http://localhost:8082/egov-mdms-service/v1/_get",
+                            "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
                             "queryParam": "moduleName=Advertisement&masterName=AdvServices&tenantId=pg",
                               "apiRequest": null,
                               "responseMapping": [
@@ -136,7 +136,7 @@
                               ]
                             },
                             {
-                                "path": "http://localhost:8079/egov-workflow-v2/egov-wf/process/_search",
+                                "path": "http://egov-workflow-v2:8080/egov-workflow-v2/egov-wf/process/_search",
                                 "queryParam": "businessIds=$.bookingNo,history=true,tenantId=$.tenantId",
                                 "apiRequest": null,
                                 "responseMapping": [
@@ -152,7 +152,7 @@
                                 ]
                             },    
                             {
-                             "path": "http://localhost:8078/collection-services/payments/adv-services/_search",
+                             "path": "http://lcollection-services:8080/collection-services/payments/adv-services/_search",
                              "queryParam": "tenantId=pg.mohali,consumerCode=$.bookingNo",
                               "apiRequest": null,
                               "responseMapping": [
