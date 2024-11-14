@@ -159,8 +159,8 @@ serviceMaps:
            - jsonPath: $.bookingApplication.paymentDate
            - jsonPath: $.bookingApplication.auditDetails.lastModifiedBy
            - jsonPath: $.bookingApplication.auditDetails.lastModifiedTime
-           - jsonPath: $.hallsBookingApplication.permissionLetterFilestoreId
-           - jsonPath: $.hallsBookingApplication.paymentReceiptFilestoreId
+           - jsonPath: $.bookingApplication.permissionLetterFilestoreId
+           - jsonPath: $.bookingApplication.paymentReceiptFilestoreId
            - jsonPath: $.bookingApplication.bookingId
 
        - query: UPDATE public.eg_adv_cart_detail SET status=?, lastmodifiedby=?, lastmodifiedtime=? WHERE cart_id=?
