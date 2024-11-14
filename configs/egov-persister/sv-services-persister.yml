@@ -187,15 +187,15 @@
     isTransaction: true
     queryMaps:
       - query: UPDATE public.eg_sv_street_vending_detail SET applicationStatus = ?, lastmodifiedby = ?, lastmodifiedtime = ?, approval_date = ?  WHERE id=?;
-        basePath: streetVendingDetail.*
+        basePath: streetVendingDetail
         jsonMaps:
 
-          - jsonPath: $.streetVendingDetail.*.applicationStatus
+          - jsonPath: $.streetVendingDetail.applicationStatus
           
-          - jsonPath: $.streetVendingDetail.*.auditDetails.lastModifiedBy
+          - jsonPath: $.streetVendingDetail.auditDetails.lastModifiedBy
           
-          - jsonPath: $.streetVendingDetail.*.auditDetails.lastModifiedTime
+          - jsonPath: $.streetVendingDetail.auditDetails.lastModifiedTime
 
-          - jsonPath: $.streetVendingDetail.*.approvalDate
+          - jsonPath: $.streetVendingDetail.approvalDate
 
-          - jsonPath: $.streetVendingDetail.*.id
+          - jsonPath: $.streetVendingDetail.id
