@@ -186,7 +186,7 @@
     fromTopic: update-street-vending
     isTransaction: true
     queryMaps:
-      - query: UPDATE public.eg_sv_street_vending_detail SET applicationStatus = ?, lastmodifiedby = ?, lastmodifiedtime = ?  WHERE id=?;
+      - query: UPDATE public.eg_sv_street_vending_detail SET applicationStatus = ?, lastmodifiedby = ?, lastmodifiedtime = ?, approval_date = ?  WHERE id=?;
         basePath: streetVendingDetail.*
         jsonMaps:
 
@@ -195,5 +195,7 @@
           - jsonPath: $.streetVendingDetail.*.auditDetails.lastModifiedBy
           
           - jsonPath: $.streetVendingDetail.*.auditDetails.lastModifiedTime
+
+          - jsonPath: $.streetVendingDetail.*.approvalDate
 
           - jsonPath: $.streetVendingDetail.*.id
