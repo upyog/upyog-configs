@@ -112,7 +112,7 @@ SearchDefinitions:
          $where
          AND pi.createdtime IN (select max(createdtime) from eg_wf_processinstance_v2 wf where wf.businessid = svd.application_no GROUP BY wf.businessid)
          order by pi.createdtime asc
-          ) result) Count
+          ) result) TotalCount
         groupBy:
         orderBy:
       searchParams:
@@ -136,5 +136,5 @@ SearchDefinitions:
 
       output:
         jsonFormat: {"ResponseInfo": {},"TotalCount": {}}
-        outJsonPath: $.Count
+        outJsonPath: $.TotalCount
         responseInfoPath: $.ResponseInfo
