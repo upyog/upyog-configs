@@ -589,7 +589,7 @@ serviceMaps:
     isTransaction: true
     queryMaps:
 
-    - query: UPDATE eg_pt_property SET status=?, lastmodifiedby=?, lastmodifiedtime=? WHERE propertyId=? AND tenantId=?;
+    - query: UPDATE eg_pt_property SET status=?, lastmodifiedby=?, lastmodifiedtime=? WHERE acknowldgementnumber=? AND tenantId=?;
       basePath: ProcessInstances.*
       jsonMaps:
 

@@ -494,12 +494,12 @@ serviceMaps:
           jsonMaps:
        
 
-            - jsonPath: $.ProcessInstances.*.applicationStatus
+            - jsonPath: $.ProcessInstances.*.state.applicationStatus
 
             - jsonPath: $.ProcessInstances.*.auditDetails.lastModifiedBy
 
             - jsonPath: $.ProcessInstances.*.auditDetails.lastModifiedTime
 
-            - jsonPath: $.ProcessInstances.*.applicationNo
+            - jsonPath: $.ProcessInstances.*.businessId
 
             - jsonPath: $.ProcessInstances.*.tenantId
