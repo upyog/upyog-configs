@@ -589,7 +589,7 @@ serviceMaps:
    isTransaction: true
    queryMaps:
 
-       - query: UPDATE eg_fn_firenocdetail SET status=?, lastmodifiedby=?, lastmodifiedtime=? WHERE applicationnumber=? AND tenantId=?;
+       - query: UPDATE eg_fn_firenocdetail SET status=?, lastmodifiedby=?, lastmodifiedtime=? WHERE applicationnumber=?;
          basePath: ProcessInstances.*
          jsonMaps:
        
@@ -601,5 +601,3 @@ serviceMaps:
           - jsonPath: $.ProcessInstances.*.auditDetails.lastModifiedTime
 
           - jsonPath: $.ProcessInstances.*.businessId
-
-          - jsonPath: $.ProcessInstances.*.tenantId
