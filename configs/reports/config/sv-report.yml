@@ -1,0 +1,93 @@
+ReportDefinitions:
+- reportName: StreetVendingReport
+  decryptionPathId: StreetVendingReport
+  summary: Report for street vending
+  version: 1.0.0
+  moduleName: sv-services
+  sourceColumns:
+  - name: SVAPPLICATIONID
+    label: reports.pt.applicationId
+    type: string
+    source: pt
+    total: false
+  - name: SVCERTIFICATENO
+    label: reports.pt.certificateNo
+    type: string
+    source: pt
+    total: false
+  - name: SVAPPLICATIONSTATUS
+    label: reports.pt.applicationStatus
+    type: string
+    source: pt
+    total: false
+  - name: SVVENDINGACTIVITY
+    label: reports.pt.vendingActivity
+    type: string
+    source: pt
+    showColumn: false 
+  - name: SVVENDINGZONE
+    label: reports.pt.vendingZone
+    type: string
+    source: pt
+    total: true
+  - name: VENDORAPPLICATIONID
+    label: reports.pt.vendorApplicationId
+    type: string
+    source: pt
+    total: false
+  - name: VENDORNAME
+    label: reports.pt.vendorName
+    type: string
+    source: pt
+    total: false
+  - name: ADDRESSLOCALITY
+    label: reports.pt.locality
+    type: string
+    source: pt
+    total: false
+
+  searchParams:
+  # - name: fromDate
+  #   label: reports.pt.fromDate
+  #   type: epoch
+  #   source: pt
+  #   isMandatory: true
+  #   searchClause: AND ed.receiptdate >= $fromDate
+  # - name: toDate
+  #   label: reports.pt.toDate
+  #   type: epoch
+  #   source: pt
+  #   isMandatory: true
+  #   searchClause: AND ed.receiptdate <= $toDate
+  - name: SVAPPLICATIONSTATUS
+    label: applicationStatus
+    type: singlevaluelist
+    pattern: 'list://NEW:New,DEPOSITED:Deposited,DISHONOURED:Dishonoured'
+    source: sv
+    isMandatory: false
+    searchClause: AND SV.APPLICATION_STATUS = $SVAPPLICATIONSTATUS
+  - name: SVCERTIFICATENO
+    label: Application Number
+    type: string
+    source: sv
+    isMandatory: false
+    searchClause: AND SV.CERTIFICATENO = $SVCERTIFICATENO
+ 
+  query: |
+SELECT
+	SV.APPLICATION_ID AS SVAPPLICATIONID,
+	SV.CERTIFICATE_NO AS SVCERTIFICATENO,
+	SV.APPLICATION_STATUS AS SVAPPLICATIONSTATUS,
+	SV.VENDING_ACTIVITY AS SVVENDINGACTIVITY,
+	SV.VENDING_ZONE AS SVVENDINGZONE,
+	VENDOR.APPLICATION_ID AS VENDORAPPLICATIONID,
+	VENDOR.NAME AS VENDORNAME,
+	ADDRESS.LOCALITY AS ADDRESSLOCALITY,
+	ADDRESS.LOCALITY_CODE AS ADDRESSLOCALITYCODE
+FROM
+	EG_SV_STREET_VENDING_DETAIL SV
+	LEFT JOIN EG_SV_VENDOR_DETAIL VENDOR ON SV.APPLICATION_ID = VENDOR.APPLICATION_ID
+	LEFT JOIN EG_SV_ADDRESS_DETAIL ADDRESS ON VENDOR.ID = ADDRESS.VENDOR_ID
+where 1=1
+
+  # orderby: order by SV.CREATEDTIME desc
