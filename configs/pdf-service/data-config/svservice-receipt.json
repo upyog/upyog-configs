@@ -1,3 +1,4 @@
+
 {
   "key": "svservice-receipt",
   "DataConfigs": {
@@ -176,17 +177,7 @@
                   "module": "rainmaker-common"
                 }
               },
-              {
-                "variable": "consumer_id",
-                "value": {
-                  "path": "$.paymentDetails[0].businessService"
-                },
-                "localisation": {
-                  "required": true,
-                  "prefix": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_CONSUMER_ID",
-                  "module": "rainmaker-common"
-                }
-              },
+              
               {
                 "variable": "payment_date",
                 "value": {
@@ -513,7 +504,7 @@
           {
             "qrcodeConfig": [
               {
-                "variable": "qrcodeimage",
+                "variable": "qrcodeImage",
                 "value": "/digit-ui/citizen/payment/verification?tenantId={{tenantid}}&receiptNumber={{receiptNo}}"
               }
             ]

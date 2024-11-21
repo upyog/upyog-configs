@@ -72,7 +72,7 @@
                 "font": "Roboto"
               },
               {
-                "text": "{{consumer_id}}",
+                "text": "Survey Id",
                 "border": [false, true, false, false],
                 "style": "receipt-table-value"
               },
@@ -153,7 +153,7 @@
                 "style": "receipt-table-value"
               },
               {
-                "text": "-",
+                "text": "{{fromPeriod}} to {{toPeriod}} ",
                 "border": [false, true, true, false],
                 "style": "receipt-table"
               }
@@ -165,7 +165,7 @@
                 "style": "receipt-table-value"
               },
               {
-                "text": "-",
+                "text": "{{paidAmount}}",
                 "border": [false, false, false, false],
                 "style": "receipt-table"
               },
@@ -180,28 +180,7 @@
                 "style": "receipt-table"
               }
             ],
-            [
-              {
-                "text": "{{pending_amount}}",
-                "border": [true, false, false, false],
-                "style": "receipt-table-value"
-              },
-              {
-                "text": "-",
-                "border": [false, false, false, false],
-                "style": "receipt-table"
-              },
-              {
-                "text": "{{excess_amount_paid}}",
-                "border": [false, false, false, false],
-                "style": "receipt-table-value"
-              },
-              {
-                "text": "-",
-                "border": [false, false, true, false],
-                "style": "receipt-table"
-              }
-            ],
+           
             [
               {
                 "text": "{{payment_mode}}",
@@ -264,13 +243,14 @@
                 "style": "receipt-table-value-down"
               },
               {
-                "text": "{{totalAmount}}",
+                "text": "₹ {{totalAmount}}",
                 "border": [false, true, false, true],
                 "bold": true,
                 "style": "receipt-table-value-down"
               },
+              
               {
-                "image": "{{qrcodeimage}}",
+                "image": "{{qrcodeImage}}",
                 "style": "receipt-table-value-total-Qr",
                 "border": [false, true, true, true],
                 "width": 72,
