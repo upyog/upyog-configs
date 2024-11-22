@@ -3,91 +3,62 @@ ReportDefinitions:
   decryptionPathId: StreetVendingReport
   summary: Report for street vending
   version: 1.0.0
-  moduleName: sv-services
+  moduleName: sv-report
   sourceColumns:
-  - name: SVAPPLICATIONID
-    label: reports.pt.applicationId
+  - name: svapplicationid
+    label: applicationId
     type: string
-    source: pt
+    source: street-vending
     total: false
-  - name: SVCERTIFICATENO
-    label: reports.pt.certificateNo
+  - name: svcertificateno
+    label: certificateNo
     type: string
-    source: pt
+    source: street-vending
     total: false
-  - name: SVAPPLICATIONSTATUS
-    label: reports.pt.applicationStatus
+  - name: svapplicationstatus
+    label: applicationStatus
     type: string
-    source: pt
+    source: street-vending
     total: false
-  - name: SVVENDINGACTIVITY
-    label: reports.pt.vendingActivity
+  - name: svvendingactivity
+    label: vendingActivity
     type: string
-    source: pt
+    source: street-vending
     showColumn: false 
-  - name: SVVENDINGZONE
-    label: reports.pt.vendingZone
+  - name: svvendingzone
+    label: vendingZone
     type: string
-    source: pt
+    source: street-vending
     total: true
-  - name: VENDORAPPLICATIONID
-    label: reports.pt.vendorApplicationId
+  - name: vendorapplicationid
+    label: vendorApplicationId
     type: string
-    source: pt
+    source: street-vending
     total: false
-  - name: VENDORNAME
-    label: reports.pt.vendorName
+  - name: vendorname
+    label: vendorName
     type: string
-    source: pt
+    source: street-vending
     total: false
-  - name: ADDRESSLOCALITY
-    label: reports.pt.locality
+  - name: addresslocality
+    label: locality
     type: string
-    source: pt
+    source: street-vending
     total: false
 
   searchParams:
-  # - name: fromDate
-  #   label: reports.pt.fromDate
-  #   type: epoch
-  #   source: pt
-  #   isMandatory: true
-  #   searchClause: AND ed.receiptdate >= $fromDate
-  # - name: toDate
-  #   label: reports.pt.toDate
-  #   type: epoch
-  #   source: pt
-  #   isMandatory: true
-  #   searchClause: AND ed.receiptdate <= $toDate
-  - name: SVAPPLICATIONSTATUS
+  - name: svapplicationstatus
     label: applicationStatus
     type: singlevaluelist
     pattern: 'list://NEW:New,DEPOSITED:Deposited,DISHONOURED:Dishonoured'
     source: sv
     isMandatory: false
-    searchClause: AND SV.APPLICATION_STATUS = $SVAPPLICATIONSTATUS
-  - name: SVCERTIFICATENO
+    searchClause: AND sv.application_status = $svapplicationstatus
+  - name: svcertificateno
     label: Application Number
     type: string
     source: sv
     isMandatory: false
-    searchClause: AND SV.CERTIFICATENO = $SVCERTIFICATENO
+    searchClause: AND sv.certificateno = $svcertificateno
  
-  query: |
-SELECT
-	SV.APPLICATION_ID AS SVAPPLICATIONID,
-	SV.CERTIFICATE_NO AS SVCERTIFICATENO,
-	SV.APPLICATION_STATUS AS SVAPPLICATIONSTATUS,
-	SV.VENDING_ACTIVITY AS SVVENDINGACTIVITY,
-	SV.VENDING_ZONE AS SVVENDINGZONE,
-	VENDOR.APPLICATION_ID AS VENDORAPPLICATIONID,
-	VENDOR.NAME AS VENDORNAME,
-	ADDRESS.LOCALITY AS ADDRESSLOCALITY,
-	ADDRESS.LOCALITY_CODE AS ADDRESSLOCALITYCODE
-FROM
-	EG_SV_STREET_VENDING_DETAIL SV
-	LEFT JOIN EG_SV_VENDOR_DETAIL VENDOR ON SV.APPLICATION_ID = VENDOR.APPLICATION_ID
-	LEFT JOIN EG_SV_ADDRESS_DETAIL ADDRESS ON VENDOR.ID = ADDRESS.VENDOR_ID
-where 1=1
-
-  # orderby: order by SV.CREATEDTIME desc
+  query: select sv.application_id as svapplicationid, sv.certificate_no as svcertificateno, sv.application_status as svapplicationstatus, sv.vending_activity as svvendingactivity, sv.vending_zone as svvendingzone, vendor.application_id as vendorapplicationid, vendor.name as vendorname, address.locality as addresslocality, address.locality_code as addresslocalitycode from eg_sv_street_vending_detail sv left join eg_sv_vendor_detail vendor on sv.application_id = vendor.application_id left join eg_sv_address_detail address on vendor.id = address.vendor_id where 1=1
