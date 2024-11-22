@@ -1,4 +1,3 @@
----
 ReportDefinitions:
   - reportName: AssetapplicationReport
     decryptionPathId: ObpsDailyCollectionReport
@@ -32,7 +31,6 @@ ReportDefinitions:
         type: string
         source: asset
         total: false
-        showColumn: false
       - name: FinancialYear
         label: Financial Year
         type: string
@@ -62,16 +60,56 @@ ReportDefinitions:
         source: asset
         isMandatory: true
         searchClause: AND b.createdtime <= $toDate
-
-    query: 
-      SELECT b.applicationno AS applicationno, 
-      b.classification AS AssetClassification, 
-      b.parentcategory as parentcategory, 
-      b.name AS Assetname, 
-      b.status AS AssetStatus, 
-      b.Department as Department, 
-      b.financialyear AS FinancialYear, 
-      b.createdtime as createdtime
-      FROM eg_asset_assetdetails b
-      where 1=1
-    
+    query: >
+      SELECT 
+        b.applicationno AS applicationno, 
+        b.classification AS AssetClassification, 
+        b.parentcategory AS parentcategory, 
+        b.name AS Assetname, 
+        b.status AS AssetStatus,
+        CASE 
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'DEPT_1' THEN 'Street Lights'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'DEPT_2' THEN 'Building & Roads'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'DEPT_4' THEN 'Operation & Maintenance'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'DEPT_5' THEN 'Horticulture'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'DEPT_6' THEN 'Building Branch'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'DEPT_7' THEN 'Citizen service desk'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'DEPT_8' THEN 'Complaint Cell'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'DEPT_9' THEN 'Secretary/General Administration Branch'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'DEPT_10' THEN 'Help Desk'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'DEPT_11' THEN 'Project Branch'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'DEPT_12' THEN 'Birth and Death Branch'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'DEPT_13' THEN 'Tax Branch'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'DEPT_14' THEN 'Civil'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'DEPT_15' THEN 'Engineering Branch (O&M - W&S)'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'DEPT_16' THEN 'Health Branch'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'DEPT_17' THEN 'Tehbazri Branch'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'DEPT_18' THEN 'Engineering Branch'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'DEPT_19' THEN 'Advertisement Branch'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'DEPT_21' THEN 'Sanitation Branch'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'DEPT_24' THEN 'Fire Brigade Department'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'DEPT_25' THEN 'Accounts Branch'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'DEPT_33' THEN 'Property Tax Branch'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'DEPT_34' THEN 'Establishment Branch'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'DEPT_35' THEN 'Works Branch'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'DEPT_38' THEN 'General Branch'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'DEPT_53' THEN 'Architect & Planning (A&P) Branch DEPT'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'DEPT_54' THEN 'Estate Branch'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'DEPT_55' THEN 'Veterinary public health office (V.P.H.O.)'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'DEPT_56' THEN 'Law Branch'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'TRADE_BRANCH' THEN 'Trade License Branch'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'DEPT_LG' THEN 'Legal Branch'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'AGENDA_BRANCH' THEN 'Agenda Branch'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'CARETAKER_BRANCH' THEN 'Caretaker Branch'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'IT_BRANCH' THEN 'IT Branch'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'REVENUE_BRANCH' THEN 'Revenue Branch'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'DEPT_TP' THEN 'Townplanning'
+          WHEN REPLACE(b.department, 'COMMON_MASTERS_DEPARTMENT_', '') = 'DEPT_57' THEN 'Tender Cell'
+          ELSE 'Unknown Department'
+        END AS Department,
+        b.financialyear AS FinancialYear, 
+        b.createdtime AS createdtime
+      FROM 
+        eg_asset_assetdetails b
+      WHERE 
+        1 = 1
