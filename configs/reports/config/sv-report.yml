@@ -1,49 +1,48 @@
 ReportDefinitions:
 - reportName: StreetVendingReport
-  decryptionPathId: StreetVendingReport
+  decryptionPathId: ObpsApplicationStatusReport
   summary: Report for street vending
   version: 1.0.0
   moduleName: sv-report
   sourceColumns:
-  - name: svapplicationid
-    label: applicationId
+  - name: svapplicationno
+    label: Application Number
     type: string
-    source: street-vending
+    source: sv-services
     total: false
   - name: svcertificateno
-    label: certificateNo
+    label: Certificate Number
     type: string
-    source: street-vending
+    source: sv-services
     total: false
   - name: svapplicationstatus
-    label: applicationStatus
+    label: Application Status
     type: string
-    source: street-vending
+    source: sv-services
     total: false
   - name: svvendingactivity
-    label: vendingActivity
+    label: Vending Type
     type: string
-    source: street-vending
-    showColumn: false 
+    source: sv-services
   - name: svvendingzone
-    label: vendingZone
+    label: Vending Zone
     type: string
-    source: street-vending
+    source: sv-services
     total: true
-  - name: vendorapplicationid
-    label: vendorApplicationId
-    type: string
-    source: street-vending
-    total: false
   - name: vendorname
-    label: vendorName
+    label: Vendor Name
     type: string
-    source: street-vending
+    source: sv-services
     total: false
   - name: addresslocality
-    label: locality
+    label: Locality
     type: string
-    source: street-vending
+    source: sv-services
+    total: false
+  - name: approvedby
+    label: Approved By
+    type: string
+    source: sv-services
     total: false
 
   searchParams:
@@ -51,14 +50,14 @@ ReportDefinitions:
     label: Application Status
     type: singlevaluelist
     pattern: 'list://APPLIED:Applied,APPROVED:Approved,REGISTRATIONCOMPLETED:Registration Completed,INSPECTIONPENDING:Inspection Pending,REJECTED:Rejected'
-    source: street-vending
+    source: sv-services
     isMandatory: false
     searchClause: AND sv.application_status = $svapplicationstatus
   # - name: svcertificateno
   #   label: Application Number
   #   type: string
-  #   source: street-vending
+  #   source: sv-services
   #   isMandatory: false
   #   searchClause: AND sv.certificate_no = $svcertificateno
  
-  query: select sv.application_id as svapplicationid, sv.certificate_no as svcertificateno, sv.application_status as svapplicationstatus, sv.vending_activity as svvendingactivity, sv.vending_zone as svvendingzone, vendor.application_id as vendorapplicationid, vendor.name as vendorname, address.locality as addresslocality, address.locality_code as addresslocalitycode from eg_sv_street_vending_detail sv left join eg_sv_vendor_detail vendor on sv.application_id = vendor.application_id left join eg_sv_address_detail address on vendor.id = address.vendor_id where 1=1
+  query: select usr.uuid as uuid, sv.application_no as svapplicationno, sv.certificate_no as svcertificateno, sv.application_status as svapplicationstatus, sv.vending_activity as svvendingactivity, sv.vending_zone as svvendingzone, vendor.application_id as vendorapplicationid, vendor.name as vendorname, address.locality as addresslocality, address.locality_code as addresslocalitycode, case when sv.application_status='APPROVED' then usr.name else '-NA-' end as approvedby from eg_sv_street_vending_detail sv left join eg_sv_vendor_detail vendor on sv.application_id = vendor.application_id left join eg_sv_address_detail address on vendor.id = address.vendor_id left join eg_user usr on sv.lastmodifiedby = usr.uuid
