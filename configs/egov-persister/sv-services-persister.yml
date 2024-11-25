@@ -278,7 +278,7 @@
 
 
           
-      - query: UPDATE public.eg_sv_vendor_detail SET application_id = ?, vendor_id = ?, name = ?, father_name = ?, date_of_birth = ?, email_id = ?, mobile_no = ?, gender = ?, relationship_type = ?, createdby = ?, lastmodifiedby = ?, createdtime = ?, lastmodifiedtime = ? where id = ?;
+      - query: UPDATE public.eg_sv_vendor_detail SET application_id = ?, vendor_id = ?, name = ?, father_name = ?, date_of_birth = ?::DATE, email_id = ?, mobile_no = ?, gender = ?, relationship_type = ?, createdby = ?, lastmodifiedby = ?, createdtime = ?, lastmodifiedtime = ? where id = ?;
         basePath: streetVendingDetail.vendorDetail.*
         jsonMaps:
 
@@ -364,7 +364,7 @@
 
           - jsonPath: $.streetVendingDetail.bankDetail.id
                 
-      - query: UPDATE public.eg_sv_operation_time_detail SET  application_id = ?, day_of_week = ?, from_time = ?, to_time = ?, createdby = ?, lastmodifiedby = ?, createdtime = ?, lastmodifiedtime = ? where id = ?;
+      - query: UPDATE public.eg_sv_operation_time_detail SET  application_id = ?, day_of_week = ?, from_time = ?::TIME, to_time = ?::TIME, createdby = ?, lastmodifiedby = ?, createdtime = ?, lastmodifiedtime = ? where id = ?;
         basePath: streetVendingDetail.vendingOperationTimeDetails.*
         jsonMaps:
 
