@@ -1,12 +1,32 @@
 ReportDefinitions:
 - reportName: StreetVendingReport
-  decryptionPathId: ObpsApplicationStatusReport
+  decryptionPathId: ObpsDailyCollectionReport
   summary: Report for street vending
   version: 1.0.0
   moduleName: sv-report
   sourceColumns:
   - name: svapplicationno
     label: Application Number
+    type: string
+    source: sv-services
+    total: false
+  - name: vendorname
+    label: Vendor Name
+    type: string
+    source: sv-services
+    total: false
+  - name: addresslocality
+    label: Locality
+    type: string
+    source: sv-services
+    total: false
+  - name: svvendingactivity
+    label: Vending Type
+    type: string
+    source: sv-services
+    total: false
+  - name: svvendingzone
+    label: Vending Zone
     type: string
     source: sv-services
     total: false
@@ -17,25 +37,6 @@ ReportDefinitions:
     total: false
   - name: svapplicationstatus
     label: Application Status
-    type: string
-    source: sv-services
-    total: false
-  - name: svvendingactivity
-    label: Vending Type
-    type: string
-    source: sv-services
-  - name: svvendingzone
-    label: Vending Zone
-    type: string
-    source: sv-services
-    total: true
-  - name: vendorname
-    label: Vendor Name
-    type: string
-    source: sv-services
-    total: false
-  - name: addresslocality
-    label: Locality
     type: string
     source: sv-services
     total: false
@@ -53,11 +54,31 @@ ReportDefinitions:
     source: sv-services
     isMandatory: false
     searchClause: AND sv.application_status = $svapplicationstatus
-  # - name: svcertificateno
-  #   label: Application Number
-  #   type: string
-  #   source: sv-services
-  #   isMandatory: false
-  #   searchClause: AND sv.certificate_no = $svcertificateno
+  - name: svvendingzone
+    label: Vending Zone
+    type: singlevaluelist
+    pattern: 'list://TEST_VALUE_ONE:TEST_VALUE_ONE,TEST_VALUE_TWO:TEST_VALUE_TWO'
+    source: sv-services
+    isMandatory: false
+    searchClause: AND sv.vending_zone = $svvendingzone
+  - name: svvendingactivity
+    label: Vending Type
+    type: singlevaluelist
+    pattern: 'list://STATIONARY:Stationary,MOBILE:Mobile'
+    source: sv-services
+    isMandatory: false
+    searchClause: AND sv.vending_activity = $svvendingactivity
+  - name: fromDate
+    label: From Date
+    type: epoch
+    source: sv-services
+    isMandatory: true
+    searchClause: AND sv.createdtime >= $fromDate
+  - name: toDate
+    label: To Date
+    type: epoch
+    source: sv-services
+    isMandatory: true
+    searchClause: AND sv.createdtime  <= $toDate
  
-  query: select usr.uuid as uuid, sv.application_no as svapplicationno, sv.certificate_no as svcertificateno, sv.application_status as svapplicationstatus, sv.vending_activity as svvendingactivity, sv.vending_zone as svvendingzone, vendor.application_id as vendorapplicationid, vendor.name as vendorname, address.locality as addresslocality, address.locality_code as addresslocalitycode, case when sv.application_status='APPROVED' then usr.name else '-NA-' end as approvedby from eg_sv_street_vending_detail sv left join eg_sv_vendor_detail vendor on sv.application_id = vendor.application_id left join eg_sv_address_detail address on vendor.id = address.vendor_id left join eg_user usr on sv.lastmodifiedby = usr.uuid
+  query: select usr.uuid as uuid, sv.application_no as svapplicationno, sv.createdtime as svcreatedtime, sv.certificate_no as svcertificateno, sv.application_status as svapplicationstatus, sv.vending_activity as svvendingactivity, sv.vending_zone as svvendingzone, vendor.application_id as vendorapplicationid, vendor.name as vendorname, address.locality as addresslocality, address.locality_code as addresslocalitycode, case when sv.application_status='APPROVED' then usr.name else '-NA-' end as approvedby from eg_sv_street_vending_detail sv left join eg_sv_vendor_detail vendor on sv.application_id = vendor.application_id left join eg_sv_address_detail address on vendor.id = address.vendor_id left join eg_user usr on sv.lastmodifiedby = usr.uuid
