@@ -256,7 +256,7 @@
 
           - jsonPath: $.streetVendingDetail.applicationId
 
-      - query: UPDATE public.eg_sv_document_detail SET application_id, document_type, filestore_id, createdby, lastmodifiedby, createdtime, lastmodifiedtime where document_detail_id = ?;
+      - query: UPDATE public.eg_sv_document_detail SET application_id = ?, document_type = ?, filestore_id = ?, createdby = ?, lastmodifiedby = ?, createdtime = ?, lastmodifiedtime = ? where document_detail_id = ?;
         basePath: streetVendingDetail.documentDetails.*
         jsonMaps:
           
@@ -278,7 +278,7 @@
 
 
           
-      - query: UPDATE public.eg_sv_vendor_detail SET application_id, vendor_id, name, father_name, date_of_birth, email_id, mobile_no, gender, relationship_type, createdby, lastmodifiedby, createdtime, lastmodifiedtime where = id;
+      - query: UPDATE public.eg_sv_vendor_detail SET application_id = ?, vendor_id = ?, name = ?, father_name = ?, date_of_birth = ?, email_id = ?, mobile_no = ?, gender = ?, relationship_type = ?, createdby = ?, lastmodifiedby = ?, createdtime = ?, lastmodifiedtime = ? where id = ?;
         basePath: streetVendingDetail.vendorDetail.*
         jsonMaps:
 
@@ -310,7 +310,7 @@
 
           - jsonPath: $.streetVendingDetail.vendorDetail.*.id
           
-      - query: UPDATE public.eg_sv_address_detail SET address_type, vendor_id, house_no, address_line_1,  address_line_2, landmark, city, city_code, locality, locality_code, pincode where address_id = ?;
+      - query: UPDATE public.eg_sv_address_detail SET address_type = ?, vendor_id = ?, house_no = ?, address_line_1 = ?,  address_line_2 = ?, landmark = ?, city = ?, city_code = ?, locality = ?, locality_code = ?, pincode = ? where address_id = ?;
         basePath: streetVendingDetail.addressDetails.*
         jsonMaps:
 
@@ -338,7 +338,7 @@
 
           - jsonPath: $.streetVendingDetail.addressDetails.*.addressId
       
-      - query: UPDATE public.eg_sv_bank_detail SET application_id, account_no, ifsc_code, bank_name, bank_branch_name, account_holder_name, createdby, lastmodifiedby, createdtime, lastmodifiedtime where bank_detail_id = ?;
+      - query: UPDATE public.eg_sv_bank_detail SET application_id = ?, account_no = ?, ifsc_code = ?, bank_name = ?, bank_branch_name = ?, account_holder_name = ?, createdby = ?, lastmodifiedby = ?, createdtime = ?, lastmodifiedtime = ? where bank_detail_id = ?;
         basePath: streetVendingDetail.bankDetail
         jsonMaps:
 
@@ -364,7 +364,7 @@
 
           - jsonPath: $.streetVendingDetail.bankDetail.id
                 
-      - query: UPDATE public.eg_sv_operation_time_detail SET  application_id, day_of_week, from_time, to_time, createdby, lastmodifiedby, createdtime, lastmodifiedtime where id = ?;
+      - query: UPDATE public.eg_sv_operation_time_detail SET  application_id = ?, day_of_week = ?, from_time = ?, to_time = ?, createdby = ?, lastmodifiedby = ?, createdtime = ?, lastmodifiedtime = ? where id = ?;
         basePath: streetVendingDetail.vendingOperationTimeDetails.*
         jsonMaps:
 
