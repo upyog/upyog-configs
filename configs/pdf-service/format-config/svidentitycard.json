@@ -1,0 +1,284 @@
+{
+    "key": "svidentitycard",
+    "config": {
+      "defaultStyle": {
+        "font": "Cambay"
+      },
+      "content": [
+        {
+          "style": "noc-head",
+          "table": {
+            "widths": [100, "*", 150],
+            "body": [
+              [
+                {
+                  "image": "{{logoImage}}",
+                  "width": 80,
+                  "height": 45
+                },
+                {
+                  "stack": [
+                    {
+                      "style": "header",
+                      "text": ["IDENTITY CARD"],
+                      "bold": true,
+                      "decoration": "underline"
+                    },
+                    {
+                      "text": "{{address}}"
+                    }
+                  ],
+                  "alignment": "center",
+                  "margin": [0, 30, 0, 20]
+                },
+                {
+                  "stack": [
+                    {
+                      "text": "{{website}}"
+                    },
+                    {
+                      "text": "{{email}} , {{phoneNumber}}"
+                    }
+                  ],
+                  "alignment": "right",
+                  "color": "#484848",
+                  "margin": [-100, 0, -25, 0]
+                }
+              ]
+            ]
+          },
+          "layout": "noBorders"
+        },
+        {
+          "style": "details-body",
+          "table": {
+            "body": [
+              [
+                {
+                  "text": "1. Unique Registration No:",
+                  "bold": true
+                },
+                {
+                  "text": "{{UniqueRegistrationNo}}"
+                },
+                {
+                  "image": "{{familyimage}}",
+                  "width": 150,
+                  "height": 100,
+                  "alignment": "center",
+                  "rowSpan": 3,
+                  "margin": [100, 0, 0, 0]
+                }
+              ],
+              [
+                {
+                  "text": "2. Name of the Applicant:",
+                  "bold": true
+                },
+                {
+                  "text": "{{name}}"
+                },
+                {
+                  "text": ""
+                }
+              ],
+              [
+                {
+                  "text": "3. Address of Applicant:",
+                  "bold": true
+                },
+                {
+                  "stack": [
+                    {
+                      "text": "{{addressLine1}}, {{addressLine2}}"
+                    },
+                    {
+                      "text": "{{locality}}"
+                    },
+                    {
+                      "text": "{{city}}, {{pincode}}"
+                    }
+                  ]
+                },
+                {
+                  "text": ""
+                }
+              ]
+            ]
+          },
+          "layout": "noBorders"
+        },      
+        {
+          "style": "details-body",
+          "table": {
+            "body": [
+              [
+                {
+                  "stack": [
+                    {
+                      "style": "header",
+                      "text": "4. Name of the spouse or dependent child if involved in vending",
+                      "bold": true
+                    }
+                  ]
+                }
+              ]
+            ]
+          },
+          "layout": "noBorders"
+        },
+        {
+          "style": "details-body",
+          "table": {
+            "body": [
+              [
+                {
+                  "stack": [
+                    {
+                      "style": "header",
+                      "text": "with the vendor:",
+                      "bold": true,
+                      "margin": [12, 0, 0, 0]
+                    }
+                  ]
+                },
+                {
+                 "text": "{{name}}"
+                }
+                
+              ]
+            ]
+          },
+          "layout": "noBorders"
+        },
+        {
+          "style": "details-body",
+          "table": {
+            "body": [
+              [
+                {
+                  "stack": [
+                    {
+                      "style": "header",
+                      "text": "5. Date of Birth:",
+                      "bold": true
+                    }
+                  ]
+                },
+                {
+                  "text": "{{dob}}"
+                },
+                {
+                  "text": "Gender:",
+                  "bold": true
+                },
+                {
+                   "text": "{{sex}}"
+                }
+              ]
+            ]
+          },
+          "layout": "noBorders"
+        },
+        {
+          "style": "details-body",
+          "table": {
+            "body": [
+              [
+                {
+                  "stack": [
+                    {
+                      "style": "header",
+                      "text": "Spouse's Date of Birth:",
+                      "bold": true,
+                      "margin": [10, 0, 0, 0]
+                    }
+                  ]
+                },
+                {
+                  "text": "{{dob}}"
+                },
+                {
+                  "text": "Gender:",
+                  "bold": true
+                },
+                {
+                   "text": "{{sex}}"
+                },
+                {
+                  "text": "if involved in vending with the vendor"
+               }
+              ]
+            ]
+          },
+          "layout": "noBorders"
+        },
+        {
+          "style": "details-body",
+          "table": {
+            "body": [
+              [
+                {
+                  "text": "6. Category of Vending:",
+                  "bold": true
+                },
+                {
+                  "text": "{{vendingActivity}}",
+                  "margin": [-40, 0, 0, 0]
+                }
+              ],
+              [
+                {
+                  "text": "7. Address of the Vending Site:",
+                  "bold": true
+                },
+                {
+                  "text": "{{vendingZone}}"
+                }
+              ]
+            ]
+          },
+          "layout": "noBorders"
+        },
+        {
+          "style": "details-body",
+          "table": {
+            "body": [
+              [
+                {
+                  "text": "Date:",
+                  "bold": true,
+                  "margin": [0, 20, 0, 0]
+                },
+                {
+                  "text": "{{validFrom}}",
+                  "margin": [0, 20, 0, 0]
+                }
+              ],
+              [
+                {
+                  "text": "Place:",
+                  "bold": true
+                },
+                {
+                  "text": "{{address}}"
+                }
+              ]
+            ]
+          },
+          "layout": "noBorders"
+        },
+        {
+          "stack": [
+            {
+              "style": "header",
+              "text": ["Signature and Seal of the Office"],
+              "bold": true
+            }
+          ],
+          "alignment": "right",
+          "margin": [0, -20, 0, 0]
+        }
+      ]
+    }
+  }
