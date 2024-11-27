@@ -115,6 +115,12 @@
                    }
                  },
                  {
+                  "variable": "dob1",
+                  "value": {
+                    "path": "$.vendorDetail[1].dob"
+                  }
+                },
+                 {
                    "variable": "mobileNo",
                    "value": {
                      "path": "$.vendorDetail[0].mobileNo"
@@ -161,7 +167,13 @@
                   "value": {
                     "path": "$.vendorDetail[0].gender"
                   }
-                }  
+                },
+                {
+                  "variable": "gender",
+                  "value": {
+                    "path": "$.vendorDetail[1].gender"
+                  }
+                }    
                ]
              },
              {

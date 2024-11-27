@@ -52,31 +52,34 @@
         {
           "style": "details-body",
           "table": {
+            "widths": ["*", "*", "40%"],
             "body": [
               [
                 {
-                  "text": "1. Unique Registration No:",
+                  "text": "1. Registration No:",
                   "bold": true
                 },
                 {
-                  "text": "{{UniqueRegistrationNo}}"
+                  "text": "{{UniqueRegistrationNo}}",
+                  "margin": [-30, 0, 0, 0]
                 },
                 {
                   "image": "{{familyimage}}",
-                  "width": 150,
-                  "height": 100,
+                  "width": 130,
+                  "height": 130,
                   "alignment": "center",
                   "rowSpan": 3,
-                  "margin": [100, 0, 0, 0]
+                  "margin": [20, -20, 0, 0]
                 }
               ],
               [
                 {
-                  "text": "2. Name of the Applicant:",
+                  "text": "2. Applicant Name:",
                   "bold": true
                 },
                 {
-                  "text": "{{name}}"
+                  "text": "{{name}}",
+                  "margin": [-30, 0, 0, 0]
                 },
                 {
                   "text": ""
@@ -84,19 +87,22 @@
               ],
               [
                 {
-                  "text": "3. Address of Applicant:",
+                  "text": "3. Applicant Address:",
                   "bold": true
                 },
                 {
                   "stack": [
                     {
-                      "text": "{{addressLine1}}, {{addressLine2}}"
+                      "text": "{{addressLine1}}, {{addressLine2}}",
+                      "margin": [-30, 0, 0, 0]
                     },
                     {
-                      "text": "{{locality}}"
+                      "text": "{{locality}}",
+                      "margin": [-30, 0, 0, 0]
                     },
                     {
-                      "text": "{{city}}, {{pincode}}"
+                      "text": "{{city}}, {{pincode}}",
+                      "margin": [-30, 0, 0, 0]
                     }
                   ]
                 },
@@ -196,14 +202,14 @@
                   ]
                 },
                 {
-                  "text": "{{dob}}"
+                  "text": "{{dob1}}"
                 },
                 {
                   "text": "Gender:",
                   "bold": true
                 },
                 {
-                   "text": "{{sex}}"
+                   "text": "{{gender}}"
                 },
                 {
                   "text": "if involved in vending with the vendor"
