@@ -173,7 +173,8 @@ ReportDefinitions:
         type: string
         source: asset
         isMandatory: true
-        searchClause: AND b.applicationno = $applicationno
+        pattern: "http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=tenant&masterName=tenants|$.MdmsRes.tenant.tenants.*.code|$.MdmsRes.tenant.tenants.*.name"
+        searchClause: tenantid
       - name: fromDate
         label: FromDate
         type: epoch
@@ -198,4 +199,5 @@ ReportDefinitions:
          financialyear AS Financial_Year, 
          to_timestamp(createdtime / 1000) AS createdtime
          FROM eg_asset_assetdetails
-         where 1=1
+         where 
+         1 = 1
