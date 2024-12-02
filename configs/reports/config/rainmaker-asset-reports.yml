@@ -169,12 +169,12 @@ ReportDefinitions:
         source: asset
         isMandatory: false
       - name: tenantid
-        label: tenantid
-        type: string
+        label: Tenantid
+        type: singlevaluelist
         source: asset
-        isMandatory: true
+        isMandatory: false
         pattern: "http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=tenant&masterName=tenants|$.MdmsRes.tenant.tenants.*.code|$.MdmsRes.tenant.tenants.*.name"
-        searchClause: tenantid
+        searchClause: 'Tenantid' = $tenantid
       - name: fromDate
         label: FromDate
         type: epoch
@@ -188,16 +188,17 @@ ReportDefinitions:
         isMandatory: true
         searchClause: AND b.createdtime <= $toDate
     query: |
-      SELECT 
-         applicationno AS Asset_Unique_ID, 
-         classification AS Asset_Classification, 
-         parentcategory, 
-         name AS Asset_name, 
-         status AS Asset_Status, 
-         Department,
-         tenantid,
-         financialyear AS Financial_Year, 
-         to_timestamp(createdtime / 1000) AS createdtime
-         FROM eg_asset_assetdetails
-         where 
-         1 = 1
+        SELECT 
+        b.applicationno AS applicationno, 
+        b.classification AS AssetClassification, 
+        b.parentcategory AS parentcategory, 
+        b.name AS Assetname, 
+        b.status AS AssetStatus,
+        b.department AS Department,
+        b.financialyear AS FinancialYear, 
+        b.createdtime AS createdtime,
+		    b.tenantid AS Tenantid
+        FROM 
+        eg_asset_assetdetails b
+        WHERE 
+        1 = 1
