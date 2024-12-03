@@ -168,13 +168,14 @@ ReportDefinitions:
         type: string
         source: asset
         isMandatory: false
-      - name: tenantid
-        label: Tenantid
+      - name: ulb
+        label: ULB
         type: singlevaluelist
         source: asset
+        wrapper: true
         isMandatory: false
         pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=tenant&masterName=tenants|$.MdmsRes.tenant.tenants.*.code|$.MdmsRes.tenant.tenants.*.name
-        searchClause: AND b.tenantid = $tenantid     
+        searchClause: AND b.tenantid = $ulb     
       - name: fromDate
         label: FromDate
         type: epoch
