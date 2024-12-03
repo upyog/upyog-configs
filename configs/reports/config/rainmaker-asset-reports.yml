@@ -125,6 +125,11 @@ ReportDefinitions:
         type: string
         source: asset
         total: false
+      - name: bookrefno
+        label: Book Reference No
+        type: string
+        source: asset
+        total: false
       - name: AssetClassification
         label: Asset Classification
         type: string
@@ -146,6 +151,7 @@ ReportDefinitions:
         type: string
         source: asset
         total: false
+        isLocalisationRequired: true
       - name: tenantid
         label: tenantd
         type: string
@@ -190,12 +196,13 @@ ReportDefinitions:
         searchClause: AND b.createdtime <= $toDate
     query: |
         SELECT 
-        b.applicationno AS applicationno, 
+        b.applicationno AS applicationno,
+        b.bookrefno AS bookrefno,
         b.classification AS AssetClassification, 
         b.parentcategory AS parentcategory, 
         b.name AS Assetname, 
         b.status AS AssetStatus,
-        b.department AS Department,
+        CONCAT('COMMON_MASTERS_DEPARTMENT_', b.department) AS Department,
         b.financialyear AS FinancialYear, 
         b.createdtime AS createdtime, b.tenantid AS tenantid
         FROM 
