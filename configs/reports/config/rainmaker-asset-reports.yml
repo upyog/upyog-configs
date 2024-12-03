@@ -173,8 +173,8 @@ ReportDefinitions:
         type: singlevaluelist
         source: asset
         isMandatory: false
-        pattern: "http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=tenant&masterName=tenants|$.MdmsRes.tenant.tenants.*.code|$.MdmsRes.tenant.tenants.*.name"
-        searchClause: AND b.tenantid = $tenantid     
+        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=tenant&masterName=tenants|$.MdmsRes.tenant.tenants.*.code|$.MdmsRes.tenant.tenants.*.name
+        searchClause: AND b.tenantid = $ulb     
       - name: fromDate
         label: FromDate
         type: epoch
@@ -201,3 +201,4 @@ ReportDefinitions:
         eg_asset_assetdetails b
         WHERE 
         1 = 1
+    orderby: ORDER BY b.tenantId asc
