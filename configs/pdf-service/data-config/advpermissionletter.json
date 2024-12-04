@@ -17,7 +17,6 @@
                                 "value": {
                                     "path": "PDF_STATIC_LABEL_CONSOLIDATED_TLCERTIFICATE_MUNICIPAL_CORPORATION"
                                 },
-                                "type": "label",
                                 "localisation": {
                                     "required": true,
                                     "prefix": null,
@@ -60,26 +59,56 @@
                                     "path": "$.applicantDetail.applicantName"
                                 }
                             },
-                            
                             {
                               "variable": "BOOKING_DATE",
                               "value": {
-                                  "path": "$.cartDetails[0].bookingDate" 
+                                  "path": "$.cartDetails[0].bookingDate"
                               }
                           },
                           {
+                            "variable": "LOCATION_BOOKED",
+                            "value": {
+                                "path": "$.cartDetails[0].location"
+                            }
+                        },
+                        {
+                            "variable": "FACE_AREA",
+                            "value": {
+                                "path": "$.cartDetails[0].faceArea"
+                            }
+                        },
+                          {
+                            "variable": "CITY",
+                            "value": {
+                                "path": "$.address.city"
+                            }
+                        },
+                        {
+                            "variable": "LOCALITY",
+                            "value": {
+                                "path": "$.address.locality"
+                            }
+                        },
+                          {
+                            "variable": "AdType",
+                            "value": {
+                               "path": "$.cartDetails[*].addType",
+                               "type": "array-join",
+                               "separator": ", "
+                            }
+                        },
+                          {
                               "variable": "BOOKING_FROM_DATE",
                               "value": {
-                                  "path": "$.cartDetails[0].bookingFromTime" 
+                                  "path": "$.cartDetails[*].bookingFromTime"
                               }
                           },
                           {
                               "variable": "BOOKING_TO_DATE",
                               "value": {
-                                  "path": "$.cartDetails[0].bookingToTime"
+                                  "path": "$.cartDetails[1].bookingDate"
                               }
                           }
-  
                         ]
                     },
                     {
@@ -115,15 +144,14 @@
                             {
                                 "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
                                 "queryParam": "moduleName=Advertisement&masterName=AdvServices&tenantId=pg",
-                              "apiRequest": null,
-                              "responseMapping": [
+                                "apiRequest": null,
+                                "responseMapping": [
                                   {
                                       "variable": "terms",
                                       "value": "$.MdmsRes.Advertisement.AdvServices[0].termsAndCondition"
                                   }
                               ]
                           },
-                         
                           {
                             "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
                             "queryParam": "moduleName=Advertisement&masterName=AdvServices&tenantId=pg",
@@ -160,7 +188,6 @@
                                   "variable": "totalAmount",
                                   "value": "Payments[0].totalDue"
                                 },
-                                
                                 {
                                   "variable": "BOOKING_FEES",
                                   "value": "$.bookingFees"
@@ -173,18 +200,12 @@
                                   "variable": "SGST",
                                   "value": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[2].amount"
                                 }
-                            
                               ]
                             }
-                            
-                            
-                            
                         ]
                     }
                 ]
             }
         ]
     }
-  }
-  
-
+}
