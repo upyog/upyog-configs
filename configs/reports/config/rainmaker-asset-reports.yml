@@ -189,8 +189,14 @@ ReportDefinitions:
         type: string
         source: asset
         total: false
-      - name: status
-        label: Current Status
+      - name: subcategory
+        label: Sub Category 
+        type: string
+        source: asset
+        total: false
+        isLocalisationRequired: true
+      - name: bookValue
+        label: Book Value 
         type: string
         source: asset
         total: false
@@ -199,6 +205,7 @@ ReportDefinitions:
         type: string
         source: asset
         total: false
+        showColumn: false
       - name: assignedusername
         label: Assigned User Name
         type: string
@@ -220,6 +227,11 @@ ReportDefinitions:
         type: string
         source: asset
         showColumn: false 
+      - name: status
+        label: Current Status
+        type: string
+        source: asset
+        total: false
       - name: assigneddate
         label: Assignment Date
         type: epoch
@@ -245,14 +257,21 @@ ReportDefinitions:
         isMandatory: true
         searchClause: AND b.createdtime <= $toDate
     query: >
-      select bb.applicationno as applicationno,
-        b.parentcategory as parentcategory,
-        b.status as status,
-        b.tenantid as tenantid,
-        bb.assignedusername as assignedusername,
+      SELECT 
+        bb.applicationno AS applicationno,
+        b.parentcategory AS parentcategory,
+        b.subcategory AS subcategory,
+        b.additionaldetails::jsonb ->> 'bookValue' AS bookValue, 
+        b.tenantid AS tenantid,
+        bb.assignedusername AS assignedusername,
         CONCAT('COMMON_MASTERS_DEPARTMENT_', b.department) AS department,
-        bb.employeecode as employeecode,
+        bb.employeecode AS employeecode,
         b.createdtime AS createdtime,
-        TO_TIMESTAMP(bb.assigneddate / 1000) AS assigneddate from eg_asset_assignmentdetails bb, eg_asset_assetdetails b
-        where bb.applicationno=b.applicationno
-        and 1=1
+        b.status AS status,
+        TO_TIMESTAMP(bb.assigneddate / 1000) AS assigneddate
+        FROM 
+        eg_asset_assignmentdetails bb
+        JOIN 
+        eg_asset_assetdetails b ON bb.applicationno = b.applicationno
+        WHERE 
+        1=1
