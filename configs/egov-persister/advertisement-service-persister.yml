@@ -1,187 +1,168 @@
 serviceMaps:
- serviceName: adv-services
- mappings:
- - version: 1.0
-   description: Persists advertiement booking details after application is completed advertisement  table
-   fromTopic: save-advertisement-booking
-   isTransaction: true
-   queryMaps:
+  serviceName: adv-services
+  mappings:
+    - version: 1.0
+      description: Persists advertisement booking details after application is completed advertisement table
+      fromTopic: save-advertisement-booking
+      isTransaction: true
+      queryMaps:
+        - query: INSERT INTO public.eg_adv_booking_detail(booking_id, booking_no, payment_date, application_date, tenant_id, booking_status, receipt_no, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: bookingApplication
+          jsonMaps:
+            - jsonPath: $.bookingApplication.bookingId
+            - jsonPath: $.bookingApplication.bookingNo
+            - jsonPath: $.bookingApplication.paymentDate
+            - jsonPath: $.bookingApplication.applicationDate
+            - jsonPath: $.bookingApplication.tenantId
+            - jsonPath: $.bookingApplication.bookingStatus
+            - jsonPath: $.bookingApplication.receiptNo
+            - jsonPath: $.bookingApplication.auditDetails.createdBy
+            - jsonPath: $.bookingApplication.auditDetails.createdTime
+            - jsonPath: $.bookingApplication.auditDetails.lastModifiedBy
+            - jsonPath: $.bookingApplication.auditDetails.lastModifiedTime
 
-       - query: INSERT INTO public.eg_adv_booking_detail(booking_id, booking_no, payment_date, application_date, tenant_id, booking_status, receipt_no, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
-         basePath: bookingApplication
-         jsonMaps:
-          - jsonPath: $.bookingApplication.bookingId
-          
-          - jsonPath: $.bookingApplication.bookingNo
+        - query: INSERT INTO public.eg_adv_cart_detail(cart_id, booking_id, add_type, location, face_area, night_light, booking_date, booking_from_time, booking_to_time, status, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?::DATE, ?::TIME, ?::TIME, ?, ?, ?, ?, ?);
+          basePath: bookingApplication.cartDetails.*
+          jsonMaps:
+            - jsonPath: $.bookingApplication.cartDetails.*.cartId
+            - jsonPath: $.bookingApplication.cartDetails.*.bookingId
+            - jsonPath: $.bookingApplication.cartDetails.*.addType
+            - jsonPath: $.bookingApplication.cartDetails.*.location
+            - jsonPath: $.bookingApplication.cartDetails.*.faceArea
+            - jsonPath: $.bookingApplication.cartDetails.*.nightLight
+            - jsonPath: $.bookingApplication.cartDetails.*.bookingDate
+            - jsonPath: $.bookingApplication.cartDetails.*.bookingFromTime
+            - jsonPath: $.bookingApplication.cartDetails.*.bookingToTime
+            - jsonPath: $.bookingApplication.cartDetails.*.status
+            - jsonPath: $.bookingApplication.auditDetails.createdBy
+            - jsonPath: $.bookingApplication.auditDetails.createdTime
+            - jsonPath: $.bookingApplication.auditDetails.lastModifiedBy
+            - jsonPath: $.bookingApplication.auditDetails.lastModifiedTime
 
-          - jsonPath: $.bookingApplication.paymentDate
-          
-          - jsonPath: $.bookingApplication.applicationDate
+        - query: INSERT INTO public.eg_adv_document_detail(document_detail_id, booking_id, document_type, filestore_id, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: bookingApplication.documents.*
+          jsonMaps:
+            - jsonPath: $.bookingApplication.documents.*.documentDetailId
+            - jsonPath: $.bookingApplication.documents.*.bookingId
+            - jsonPath: $.bookingApplication.documents.*.documentType
+            - jsonPath: $.bookingApplication.documents.*.fileStoreId
+            - jsonPath: $.bookingApplication.auditDetails.createdBy
+            - jsonPath: $.bookingApplication.auditDetails.lastModifiedBy
+            - jsonPath: $.bookingApplication.auditDetails.createdTime
+            - jsonPath: $.bookingApplication.auditDetails.lastModifiedTime
 
-          - jsonPath: $.bookingApplication.tenantId
-          
-          - jsonPath: $.bookingApplication.bookingStatus
-        
-          - jsonPath: $.bookingApplication.receiptNo
+        - query: INSERT INTO public.eg_adv_applicant_detail(applicant_detail_id, booking_id, applicant_name, applicant_email_id, applicant_mobile_no, applicant_alternate_mobile_no, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: bookingApplication.applicantDetail
+          jsonMaps:
+            - jsonPath: $.bookingApplication.applicantDetail.applicantDetailId
+            - jsonPath: $.bookingApplication.applicantDetail.bookingId
+            - jsonPath: $.bookingApplication.applicantDetail.applicantName
+            - jsonPath: $.bookingApplication.applicantDetail.applicantEmailId
+            - jsonPath: $.bookingApplication.applicantDetail.applicantMobileNo
+            - jsonPath: $.bookingApplication.applicantDetail.applicantAlternateMobileNo
+            - jsonPath: $.bookingApplication.applicantDetail.auditDetails.createdBy
+            - jsonPath: $.bookingApplication.applicantDetail.auditDetails.lastModifiedBy
+            - jsonPath: $.bookingApplication.applicantDetail.auditDetails.createdTime
+            - jsonPath: $.bookingApplication.applicantDetail.auditDetails.lastModifiedTime
 
-          - jsonPath: $.bookingApplication.auditDetails.createdBy
-          
-          - jsonPath: $.bookingApplication.auditDetails.createdTime
-          
-          - jsonPath: $.bookingApplication.auditDetails.lastModifiedBy
+        - query: INSERT INTO public.eg_adv_address_detail(address_id, applicant_detail_id, door_no, house_no, street_name, address_line_1, address_line_2, landmark, city, city_code, locality, locality_code, pincode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: bookingApplication.address
+          jsonMaps:
+            - jsonPath: $.bookingApplication.address.addressId
+            - jsonPath: $.bookingApplication.address.applicantDetailId
+            - jsonPath: $.bookingApplication.address.doorNo
+            - jsonPath: $.bookingApplication.address.houseNo
+            - jsonPath: $.bookingApplication.address.streetName
+            - jsonPath: $.bookingApplication.address.addressLine1
+            - jsonPath: $.bookingApplication.address.addressLine2
+            - jsonPath: $.bookingApplication.address.landmark
+            - jsonPath: $.bookingApplication.address.city
+            - jsonPath: $.bookingApplication.address.cityCode
+            - jsonPath: $.bookingApplication.address.locality
+            - jsonPath: $.bookingApplication.address.localityCode
+            - jsonPath: $.bookingApplication.address.pincode
 
-          - jsonPath: $.bookingApplication.auditDetails.lastModifiedTime
-          
-       - query: INSERT INTO public.eg_adv_cart_detail(cart_id, booking_id, add_type, location, face_area, night_light, booking_date, booking_from_time, booking_to_time, status, 
-               createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?::DATE, ?::TIME, ?::TIME, ?, ?, ?, ?, ?);
-         basePath: bookingApplication.cartDetails.*
-         jsonMaps:
-          - jsonPath: $.bookingApplication.cartDetails.*.cartId
-
-          - jsonPath: $.bookingApplication.cartDetails.*.bookingId
-
-          - jsonPath: $.bookingApplication.cartDetails.*.addType
-
-          - jsonPath: $.bookingApplication.cartDetails.*.location
-
-          - jsonPath: $.bookingApplication.cartDetails.*.faceArea
-
-          - jsonPath: $.bookingApplication.cartDetails.*.nightLight
-          
-          - jsonPath: $.bookingApplication.cartDetails.*.bookingDate
-
-          - jsonPath: $.bookingApplication.cartDetails.*.bookingFromTime
-
-          - jsonPath: $.bookingApplication.cartDetails.*.bookingToTime
-
-          - jsonPath: $.bookingApplication.cartDetails.*.status
-
-          - jsonPath: $.bookingApplication.auditDetails.createdBy
-          
-          - jsonPath: $.bookingApplication.auditDetails.createdTime
-
-          - jsonPath: $.bookingApplication.auditDetails.lastModifiedBy
-
-          - jsonPath: $.bookingApplication.auditDetails.lastModifiedTime
-          
-       - query: INSERT INTO public.eg_adv_document_detail(document_detail_id, booking_id, document_type, filestore_id, createdby,
-               lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?);
-         basePath: bookingApplication.documents.*
-         jsonMaps:
-          - jsonPath: $.bookingApplication.documents.*.documentDetailId
-
-          - jsonPath: $.bookingApplication.documents.*.bookingId
-
-          - jsonPath: $.bookingApplication.documents.*.documentType
-
-          - jsonPath: $.bookingApplication.documents.*.fileStoreId
-
-          - jsonPath: $.bookingApplication.auditDetails.createdBy
-
-          - jsonPath: $.bookingApplication.auditDetails.lastModifiedBy
-
-          - jsonPath: $.bookingApplication.auditDetails.createdTime
-
-          - jsonPath: $.bookingApplication.auditDetails.lastModifiedTime
-          
-       - query: INSERT INTO public.eg_adv_applicant_detail(applicant_detail_id, booking_id, applicant_name, applicant_email_id, applicant_mobile_no, applicant_alternate_mobile_no, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
-         basePath: bookingApplication.applicantDetail
-         jsonMaps:
-          - jsonPath: $.bookingApplication.applicantDetail.applicantDetailId
-
-          - jsonPath: $.bookingApplication.applicantDetail.bookingId
-
-          - jsonPath: $.bookingApplication.applicantDetail.applicantName
-
-          - jsonPath: $.bookingApplication.applicantDetail.applicantEmailId
-          
-          - jsonPath: $.bookingApplication.applicantDetail.applicantMobileNo
-
-          - jsonPath: $.bookingApplication.applicantDetail.applicantAlternateMobileNo
-          
-          - jsonPath: $.bookingApplication.applicantDetail.auditDetails.createdBy
-
-          - jsonPath: $.bookingApplication.applicantDetail.auditDetails.lastModifiedBy
-
-          - jsonPath: $.bookingApplication.applicantDetail.auditDetails.createdTime
-
-          - jsonPath: $.bookingApplication.applicantDetail.auditDetails.lastModifiedTime
-       
-       - query: INSERT INTO public.eg_adv_address_detail(address_id, applicant_detail_id, door_no, house_no, street_name, address_line_1, address_line_2, landmark, city, city_code, locality, locality_code, pincode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
-         basePath: bookingApplication.address
-
-         jsonMaps:
-          - jsonPath: $.bookingApplication.address.addressId
-
-          - jsonPath: $.bookingApplication.address.applicantDetailId
-
-          - jsonPath: $.bookingApplication.address.doorNo
-
-          - jsonPath: $.bookingApplication.address.houseNo
-
-          - jsonPath: $.bookingApplication.address.streetName
-
-          - jsonPath: $.bookingApplication.address.addressLine1
-          
-          - jsonPath: $.bookingApplication.address.addressLine2
-
-          - jsonPath: $.bookingApplication.address.landmark
-
-          - jsonPath: $.bookingApplication.address.city
-
-          - jsonPath: $.bookingApplication.address.cityCode
-
-          - jsonPath: $.bookingApplication.address.locality
-
-          - jsonPath: $.bookingApplication.address.localityCode
-
-          - jsonPath: $.bookingApplication.address.pincode
-          
-       - query: INSERT INTO public.eg_adv_booking_detail_audit SELECT * FROM public.eg_adv_booking_detail WHERE booking_id = ?;
-         basePath: bookingApplication
-         jsonMaps:
+        - query: INSERT INTO public.eg_adv_booking_detail_audit SELECT * FROM public.eg_adv_booking_detail WHERE booking_id = ?;
+          basePath: bookingApplication
+          jsonMaps:
             - jsonPath: $.bookingApplication.bookingId
 
-       - query: INSERT INTO public.eg_adv_cart_detail_audit SELECT cart_id, booking_id, booking_date::date, booking_from_time, booking_to_time, add_type, location, face_area, night_light, status, createdby, createdtime, lastmodifiedby, lastmodifiedtime FROM public.eg_adv_cart_detail WHERE cart_id = ?;
-         basePath: bookingApplication.cartDetails.*
-         jsonMaps:
-            - jsonPath: $.bookingApplication.cartDetails.*.cartId            
+        - query: INSERT INTO public.eg_adv_cart_detail_audit SELECT cart_id, booking_id, booking_date::date, booking_from_time, booking_to_time, add_type, location, face_area, night_light, status, createdby, createdtime, lastmodifiedby, lastmodifiedtime FROM public.eg_adv_cart_detail WHERE cart_id = ?;
+          basePath: bookingApplication.cartDetails.*
+          jsonMaps:
+            - jsonPath: $.bookingApplication.cartDetails.*.cartId
 
- - version: 1.0
-   description: Update advertisement booking details after application is changed
-   fromTopic: update-advertisement-booking
-   isTransaction: true
-   queryMaps:
-       - query: UPDATE public.eg_adv_booking_detail SET booking_status= ?, payment_date = ?, lastmodifiedby = ?, lastmodifiedtime = ?, permission_letter_filestore_id = ?, payment_receipt_filestore_id = ? WHERE booking_id = ?;
-         basePath: bookingApplication
-         jsonMaps:
-           - jsonPath: $.bookingApplication.bookingStatus
-           - jsonPath: $.bookingApplication.paymentDate
-           - jsonPath: $.bookingApplication.auditDetails.lastModifiedBy
-           - jsonPath: $.bookingApplication.auditDetails.lastModifiedTime
-           - jsonPath: $.bookingApplication.permissionLetterFilestoreId
-           - jsonPath: $.bookingApplication.paymentReceiptFilestoreId
-           - jsonPath: $.bookingApplication.bookingId
-
-       - query: UPDATE public.eg_adv_cart_detail SET status=?, lastmodifiedby=?, lastmodifiedtime=? WHERE cart_id=?
-         basePath: bookingApplication.cartDetails.*
-         jsonMaps:
-           - jsonPath: $.bookingApplication.cartDetails.*.status
-           - jsonPath: $.bookingApplication.auditDetails.lastModifiedBy
-           - jsonPath: $.bookingApplication.auditDetails.lastModifiedTime
-           - jsonPath: $.bookingApplication.cartDetails.*.cartId
-
-       - query: INSERT INTO public.eg_adv_booking_detail_audit SELECT * FROM public.eg_adv_booking_detail WHERE booking_id = ?;
-         basePath: bookingApplication
-         jsonMaps:
+    - version: 1.0
+      description: Update advertisement booking details after application is changed
+      fromTopic: update-advertisement-booking
+      isTransaction: true
+      queryMaps:
+        - query: UPDATE public.eg_adv_booking_detail SET booking_status = ?, payment_date = ?, lastmodifiedby = ?, lastmodifiedtime = ?, permission_letter_filestore_id = ?, payment_receipt_filestore_id = ? WHERE booking_id = ?;
+          basePath: bookingApplication
+          jsonMaps:
+            - jsonPath: $.bookingApplication.bookingStatus
+            - jsonPath: $.bookingApplication.paymentDate
+            - jsonPath: $.bookingApplication.auditDetails.lastModifiedBy
+            - jsonPath: $.bookingApplication.auditDetails.lastModifiedTime
+            - jsonPath: $.bookingApplication.permissionLetterFilestoreId
+            - jsonPath: $.bookingApplication.paymentReceiptFilestoreId
             - jsonPath: $.bookingApplication.bookingId
 
-       - query: INSERT INTO public.eg_adv_cart_detail_audit SELECT cart_id, booking_id, booking_date::date, booking_from_time, booking_to_time, add_type, location, face_area, night_light, status, createdby, createdtime, lastmodifiedby, lastmodifiedtime FROM public.eg_adv_cart_detail WHERE cart_id = ?;
-         basePath: bookingApplication.cartDetails.*
-         jsonMaps:
-            - jsonPath: $.bookingApplication.cartDetails.*.cartId   
+        - query: UPDATE public.eg_adv_cart_detail SET status = ?, lastmodifiedby = ?, lastmodifiedtime = ? WHERE cart_id = ?;
+          basePath: bookingApplication.cartDetails.*
+          jsonMaps:
+            - jsonPath: $.bookingApplication.cartDetails.*.status
+            - jsonPath: $.bookingApplication.auditDetails.lastModifiedBy
+            - jsonPath: $.bookingApplication.auditDetails.lastModifiedTime
+            - jsonPath: $.bookingApplication.cartDetails.*.cartId
 
+        - query: INSERT INTO public.eg_adv_booking_detail_audit SELECT * FROM public.eg_adv_booking_detail WHERE booking_id = ?;
+          basePath: bookingApplication
+          jsonMaps:
+            - jsonPath: $.bookingApplication.bookingId
 
+        - query: INSERT INTO public.eg_adv_cart_detail_audit SELECT cart_id, booking_id, booking_date::date, booking_from_time, booking_to_time, add_type, location, face_area, night_light, status, createdby, createdtime, lastmodifiedby, lastmodifiedtime FROM public.eg_adv_cart_detail WHERE cart_id = ?;
+          basePath: bookingApplication.cartDetails.*
+          jsonMaps:
+            - jsonPath: $.bookingApplication.cartDetails.*.cartId
 
+    - version: 1.0
+      description: Create Advertisement incomplete draft application
+      fromTopic: create-draft-advertisement
+      isTransaction: true
+      queryMaps:
+        - query: INSERT INTO eg_adv_draft_detail(draft_id, tenant_id, user_uuid, draft_application_data, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, cast(? as jsonb), ?, ?, ?, ?);
+          basePath: advertisementDraftDetail
+          jsonMaps:
+            - jsonPath: $.advertisementDraftDetail.draftId
+            - jsonPath: $.advertisementDraftDetail.tenantId
+            - jsonPath: $.advertisementDraftDetail.auditDetails.createdBy
+            - jsonPath: $.advertisementDraftDetail.draftApplicationData
+            - jsonPath: $.advertisementDraftDetail.auditDetails.createdBy
+            - jsonPath: $.advertisementDraftDetail.auditDetails.lastModifiedBy
+            - jsonPath: $.advertisementDraftDetail.auditDetails.createdTime
+            - jsonPath: $.advertisementDraftDetail.auditDetails.lastModifiedTime
 
- 
+    - version: 1.0
+      description: Update Advertisement incomplete draft application
+      fromTopic: update-draft-advertisement
+      isTransaction: true
+      queryMaps:
+        - query: UPDATE eg_adv_draft_detail SET draft_application_data = cast(? as jsonb), lastmodifiedby = ?, lastmodifiedtime = ? WHERE draft_id = ?;
+          basePath: advertisementDraftDetail
+          jsonMaps:
+            - jsonPath: $.advertisementDraftDetail.draftApplicationData
+            - jsonPath: $.advertisementDraftDetail.auditDetails.lastModifiedBy
+            - jsonPath: $.advertisementDraftDetail.auditDetails.lastModifiedTime
+            - jsonPath: $.advertisementDraftDetail.draftId
+
+    - version: 1.0
+      description: Delete Advertisement incomplete draft application
+      fromTopic: delete-draft-advertisement
+      isTransaction: true
+      queryMaps:
+        - query: delete from eg_adv_draft_detail where draft_id = ?
+          basePath: advertisementDraftDetail
+          jsonMaps:
+
+           - jsonPath: $.advertisementDraftDetail.draftId        
