@@ -36,7 +36,13 @@
                 "stack": [
                   {
                     "style": "header",
-                    "text": "PERMISSION LETTER"
+                    "text": "Community Hall",
+                    "decoration": "underline"
+                  },
+                  {
+                    "style": "header",
+                    "text": "Permission Letter",
+                    "decoration": "underline"
                   }
                 ],
                 "alignment": "center",
@@ -80,12 +86,17 @@
             "margin": [0, 5, 0, 2]
           },
           {
-            "text": "{{APPLICANT_NAME}}",
+            "text": "{{APPLICANT_NAME}},",
             "style": "content",
             "margin": [30, 0, 0, 2]
           },
           {
-            "text": "{{HOUSE_NO}} {{APPLICANT_STREET}} {{APPLICANT_LOCALITY}} {{APPLICANT_CITY}}",
+            "text": "{{APPLICANT_LOCALITY}},",
+            "style": "content",
+            "margin": [30, 0, 0, 5]
+          },
+          {
+            "text": "{{APPLICANT_CITY}}.",
             "style": "content",
             "margin": [30, 0, 0, 5]
           },
@@ -106,17 +117,28 @@
             "margin": [0, 0, 0, 10]
           },
           {
-            "text": "1. Area / Accommodation Booked: {{HALL_NAME}}",
+            "text": [
+              "1. Area / Accommodation Booked: ",
+              { "text": "{{HALL_NAME}}", "bold": true }
+            ],
             "style": "content",
             "margin": [0, 5, 0, 5]
           },
           {
-            "text": "2. Date of Booking: {{BOOKING_DATE}}",
+            "text": [
+              "2. Date of Booking: ",
+              { "text": "{{BOOKING_DATE}}", "bold": true }
+            ],
             "style": "content",
             "margin": [0, 5, 0, 5]
           },
           {
-            "text": "3. Period of Booking from: {{BOOKING_FROM_DATE}} to {{BOOKING_TO_DATE}}",
+            "text": [
+              "3. Period of Booking from: ",
+              { "text": "{{BOOKING_FROM_DATE}}", "bold": true },
+              " to ",
+              { "text": "{{BOOKING_TO_DATE}}", "bold": true }
+            ],
             "style": "content",
             "margin": [0, 5, 0, 5]
           },
@@ -128,7 +150,7 @@
           },
           {
             "table": {
-              "widths": ["*", "*", "*"],
+              "widths": ["*", "*", "*","*"],
               "body": [
                 [
                   {
@@ -145,6 +167,12 @@
                     "text": "SGST",
                     "style": "tableCell",
                     "bold": true
+                  },
+                  {
+                    "text": "Total Amount",
+                    "style": "tableCell",
+                    "bold": true,
+                    "fontSize": 12
                   }
                 ],
                 [
@@ -159,26 +187,16 @@
                   {
                     "text": "{{SGST}}",
                     "style": "tableCell"
+                  },
+                  {
+                    "text": "{{totalAmount}}/-",
+                    "style": "tableCell",
+                    "bold": true,
+                    "fontSize": 11
                   }
                 ]
               ]
             }
-          },
-          {
-            "stack": [
-              {
-                "text": "Total Amount",
-                "style": "subheader",
-                "fontSize": 12,
-                "bold": true,
-                "margin": [0, 10, 0, 0]
-              },
-              {
-                "text": "{{totalAmount}}",
-                "style": "subheader",
-                "margin": [0, 5, 0, 0]
-              }
-            ]
           },
           {
             "text": "Bank Details for Refund",
@@ -240,14 +258,31 @@
             "margin": [0, 10, 0, 5]
           },
           {
-            "text": "{{TERMS}}",
+            "text": "{{terms}}",
             "style": "punjabiText",
             "margin": [0, 5, 0, 5]
           }
         ],
         "alignment": "left",
         "margin": [0, 0, 0, 0]
+      },
+      {
+        "columns": [
+          {
+            "text": "Date:      /      /",
+            "bold": true,
+            "alignment": "left",
+            "margin": [0, 50, 0, 0]
+          },
+          {
+            "text": "Commissioner/EO",
+            "bold": true,
+            "alignment": "right",
+            "margin": [0, 50, 0, 0]
+          }
+        ]
       }
+      
     ],
     "styles": {
       "header": {
