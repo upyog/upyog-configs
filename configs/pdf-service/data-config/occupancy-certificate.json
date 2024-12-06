@@ -43,6 +43,24 @@
                 "type": "date"
               },
               {
+                "variable": "propertyId",
+                "value": {
+                  "path": "$.additionalDetails.propertyID"
+                }
+              },
+              {
+                "variable": "PROPERTY_ID",
+                "value": {
+                  "path": "BPA_PROPERTY_ID"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-bpa"
+                }
+              },
+              {
                 "variable": "permitDate",
                 "value": {
                   "path": "$.edcrDetail[0].permitDate"

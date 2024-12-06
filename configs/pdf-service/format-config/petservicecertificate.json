@@ -6,17 +6,55 @@
     },
     "content": [
       {
-        "style": "header",
-        "text": [
-          "PET CERTIFICATE"
-        ]
+        "style": "noc-head",
+        "table": {
+          "widths": [60, "*", 120],
+          "body": [
+            [
+              {
+                "image": "{{logoImage}}",
+                "width": 80,
+                "height": 45
+              },
+              {
+                "stack": [
+                  {
+                    "style": "header",
+                    "text": ["PET CERTIFICATE"]
+                  }
+                ],
+                "alignment": "left",
+                "margin": [0, 0, 0, 0]
+              },
+              {
+                "stack": [
+                  {
+                    "text": "{{address}}"
+                  },
+
+                  {
+                    "text": " {{website}}"
+                  },
+                  {
+                    "text": "{{email}} , {{phoneNumber}}"
+                  }
+                ],
+                "alignment": "right",
+                "color": "#484848",
+                "margin": [-100, 0, -25, 0]
+              }
+            ]
+          ]
+        },
+        "layout": "noBorders"
       },
 
       {
         "text": "This certifies that: {{Owner_Name}} with mobile Number: {{Owner_Contact}} has registered their Pet in an Urban Local Body with Pet details as follows:",
         "style": "content",
-        "margin": [0, 10, 0, 10]
+        "margin": [0, 50, 0, 10]
       },
+
       {
         "text": "Pet's Name: {{Pet_Name}}",
         "style": "subheader",
@@ -50,26 +88,59 @@
         "margin": [0, 0, 0, 10]
       },
       {
-        "style": "content",
-        "ol": [
-          {
-            "text": "Vaccination Number: {{Vaccine_Number}}",
-            "margin": [0, 5, 0, 5]
-          },
-          {
-            "text": "Vaccination Date: {{Vaccine_Date}}",
-            "margin": [0, 5, 0, 5]
-          },
-          {
-            "text": "Administered by Doctor: {{Doctor_Name}}",
-            "margin": [0, 5, 0, 5]
-          },
-          {
-            "text": "Clinic Name: {{Clinic_Name}}",
-            "margin": [0, 5, 0, 20]
-          }
-        ]
+        "style": "next-noc-table",
+        "table": {
+          "widths": ["25%", "25%", "25%", "25%"],
+          "body": [
+            [
+              {
+                "text": "{{vaccination_number}}",
+                "border": [true, true, false, false],
+                "style": "receipt-table-value"
+              },
+              {
+                "text": "{{Vaccine_Number}}",
+                "border": [false, true, false, false],
+                "style": "receipt-table"
+              },
+              {
+                "text": "{{vaccination_date}}",
+                "border": [false, true, false, false],
+                "style": "receipt-table-value"
+              },
+              {
+                "text": "{{Vaccine_Date}}",
+                "border": [false, true, true, false],
+                "style": "receipt-table"
+              }
+            ],
+            [
+              {
+                "text": "{{doctor_name}}",
+                "border": [true, false, false, true],
+                "style": "receipt-table-value"
+              },
+              {
+                "text": "{{Doctor_Name}}",
+                "border": [false, false, false, true],
+                "style": "receipt-table"
+              },
+              {
+                "text": "{{clinic_name}}",
+                "border": [false, false, false, true],
+                "style": "receipt-table-value"
+              },
+              {
+                "text": "{{Clinic_Name}}",
+                "border": [false, false, true, true],
+                "style": "receipt-table"
+              }
+            ]
+          ]
+        },
+        "layout": {}
       },
+
       {
         "text": "This certificate serves as an acknowledgment of the ownership of the above-mentioned pet and the fulfillment of all registration requirements.",
         "style": "footer"
@@ -77,13 +148,14 @@
     ],
     "styles": {
       "header": {
-        "fontSize": 20,
+        "fontSize": 15,
         "bold": true,
+        "decoration": "underline",
         "alignment": "center",
-        "margin": [0, 20, 0, 20]
+        "margin": [0, 20, 0, 10]
       },
       "subheader": {
-        "fontSize": 16,
+        "fontSize": 14,
         "margin": [0, 0, 0, 10]
       },
       "content": {

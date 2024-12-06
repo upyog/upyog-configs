@@ -73,6 +73,29 @@ serviceMaps:
               type: JSON
               dbType: JSONB
 
+    - version: 1.0
+      description: Update service definition details in service definition table
+      fromTopic: update-service-definition
+      isTransaction: true
+      queryMaps:
+
+        - query: UPDATE eg_service_definition SET isactive = ?, lastmodifiedby = ?, lastmodifiedtime = ?, additionalDetails = ?, code = ? WHERE id = ?
+          basePath: $.ServiceDefinition
+          jsonMaps:
+            - jsonPath: $.ServiceDefinition.isActive
+
+            - jsonPath: $.ServiceDefinition.auditDetails.lastModifiedBy
+
+            - jsonPath: $.ServiceDefinition.auditDetails.lastModifiedTime
+
+            - jsonPath: $.ServiceDefinition.additionalDetails
+              type: JSON
+              dbType: JSONB
+
+            - jsonPath: $.ServiceDefinition.code
+
+            - jsonPath: $.ServiceDefinition.id
+
 
 
 

@@ -49,6 +49,12 @@
                 }
               },
               {
+                "variable": "propertyId",
+                "value": {
+                  "path": "$.additionalDetails.propertyID"
+                }
+              },
+              {
                 "variable": "validityDate",
                 "value": {
                   "path": "$.additionalDetails.validityDate"
@@ -538,6 +544,18 @@
                 "variable": "khataNo",
                 "value": {
                   "path": "$.edcrDetail[0].planDetail.planInformation.khataNo"
+                }
+              },
+              {
+                "variable": "PROPERTY_ID",
+                "value": {
+                  "path": "BPA_PROPERTY_ID"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-bpa"
                 }
               },
               {
