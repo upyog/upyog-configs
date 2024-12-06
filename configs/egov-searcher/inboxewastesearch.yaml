@@ -1,0 +1,79 @@
+SearchDefinitions:
+  moduleName: ewaste-services
+  summary: ewaste Services Inbox API
+  version: 1.0.0
+  definitions:
+    - name: inboxewastesearch
+      query:
+        baseQuery: Select row_to_json(result) from
+          (
+          select DISTINCT(ew.requestId),pi.createdtime from eg_ew_requests as ew
+          INNER JOIN eg_ew_address ewad ON ewad.ewId = ew.id
+          INNER JOIN eg_wf_processinstance_v2 pi ON pi.businessid = ew.requestId
+          LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
+          $where
+          AND pi.createdtime IN (select max(createdtime) from eg_wf_processinstance_v2 wf where wf.businessid = ew.requestId GROUP BY wf.businessid)
+          order by pi.createdtime asc $pagination
+          ) result
+        groupBy:
+        orderBy:
+      searchParams:
+        condition: AND
+        params:
+          - name: ew.tenantid
+            isMandatory: true
+            jsonPath: $.searchCriteria.tenantId
+          - name: ew.id
+            isMandatory: false
+            jsonPath: $.searchCriteria.id
+          - name: ew.requestId
+            isMandatory: false
+            jsonPath: $.searchCriteria.requestId
+          - name: pi.businessservice
+            isMandatory: false
+            jsonPath: $.searchCriteria.businessservice
+        pagination:
+          noOfRecords: $.searchCriteria.noOfRecords
+          offset: $.searchCriteria.offset
+
+      output:
+        jsonFormat: {"ResponseInfo": {},"EwasteApplication": []}
+        outJsonPath: $.EwasteApplication
+        responseInfoPath: $.ResponseInfo
+    - name: inboxewastesearchdesc
+      query:
+        baseQuery: Select row_to_json(result) from
+           (
+          select DISTINCT(ew.requestId),pi.createdtime from eg_ew_requests as ew
+          INNER JOIN eg_ew_address ewad ON ewad.ewId = ew.id
+          INNER JOIN eg_wf_processinstance_v2 pi ON pi.businessid = ew.requestId
+          LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
+          $where
+          AND pi.createdtime IN (select max(createdtime) from eg_wf_processinstance_v2 wf where wf.businessid = ew.requestId GROUP BY wf.businessid)
+          order by pi.createdtime desc $pagination
+          ) result
+        groupBy:
+        orderBy:
+      searchParams:
+        condition: AND
+        params:
+          - name: ew.tenantid
+            isMandatory: true
+            jsonPath: $.searchCriteria.tenantId
+          - name: ew.id
+            isMandatory: false
+            jsonPath: $.searchCriteria.id
+          - name: ew.requestId
+            isMandatory: false
+            jsonPath: $.searchCriteria.requestId
+          - name: pi.businessservice
+            isMandatory: false
+            jsonPath: $.searchCriteria.businessservice
+        pagination:
+          noOfRecords: $.searchCriteria.noOfRecords
+          offset: $.searchCriteria.offset
+
+      output:
+        jsonFormat: {"ResponseInfo": {},"EwasteApplication": []}
+        outJsonPath: $.EwasteApplication
+        responseInfoPath: $.ResponseInfo
