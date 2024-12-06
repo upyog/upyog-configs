@@ -161,7 +161,7 @@
                     {
                         "externalAPI": [
                             {
-                                "path": "http://egov-mdms-servic:8080/egov-mdms-service/v1/_get",
+                                "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
                                 "queryParam": "moduleName=tenant&masterName=tenants&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}')%5D",
                                 "apiRequest": null,
                                 "responseMapping": [
@@ -189,7 +189,7 @@
                                 ]
                             },
                             {
-                                "path": "http://egov-mdms-servic:8080/egov-mdms-service/v1/_get",
+                                "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
                                 "queryParam": "moduleName=CHB&masterName=CommunityHalls&tenantId=pg.mohali",
                                 "apiRequest": null,
                                 "responseMapping": [
@@ -216,7 +216,7 @@
                                 ]
                             },
                             {
-                                "path": "http://collection-services-8080/collection-services/payments/chb-services/_search",
+                                "path": "http://collection-services:8080/collection-services/payments/chb-services/_search",
                                 "queryParam": "tenantId=pg.mohali,consumerCode=$.bookingNo",
                                 "apiRequest": null,
                                 "responseMapping": [
