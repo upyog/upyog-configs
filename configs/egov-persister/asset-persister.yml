@@ -17,20 +17,33 @@ serviceMaps:
                         category,
                         subcategory,
                         department, 
-                        applicationNo, 
+                        applicationNo,
                         approvalNo, 
                         approvalDate, 
                         applicationDate, 
                         status, 
                         additionalDetails,
-                        createdBy, 
+                        createdBy,
                         lastmodifiedBy, 
                         createdTime, 
                         lastmodifiedTime,
                         accountId,
                         financialYear,
-                        sourceOfFinance
-                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+                        sourceOfFinance,
+                        invoiceDate,
+                        invoiceNumber,
+                        purchaseDate,
+                        purchaseOrderNumber,
+                        location,
+                        purchaseCost,
+                        acquisitionCost,
+                        bookValue,
+                        lifeofasset,
+                        modeofpossessionoracquisition,
+                        assetType,
+                        assetUsage,
+                        assetStatus
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: Asset
           jsonMaps:
             - jsonPath: $.Asset.id
@@ -58,6 +71,19 @@ serviceMaps:
             - jsonPath: $.Asset.accountId
             - jsonPath: $.Asset.financialYear
             - jsonPath: $.Asset.sourceOfFinance
+            - jsonPath: $.Asset.invoiceDate
+            - jsonPath: $.Asset.invoiceNumber
+            - jsonPath: $.Asset.purchaseDate
+            - jsonPath: $.Asset.purchaseOrderNumber
+            - jsonPath: $.Asset.location
+            - jsonPath: $.Asset.purchaseCost
+            - jsonPath: $.Asset.acquisitionCost
+            - jsonPath: $.Asset.bookValue
+            - jsonPath: $.Asset.lifeofasset
+            - jsonPath: $.Asset.modeofpossessionoracquisition
+            - jsonPath: $.Asset.assetType
+            - jsonPath: $.Asset.assetUsage
+            - jsonPath: $.Asset.assetStatus
 
 
         - query: INSERT INTO eg_asset_document(documentId, documenttype, fileStoreId, assetid, documentuid, docDetails, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
@@ -157,6 +183,19 @@ serviceMaps:
                     accountId = ?, 
                     financialYear = ?, 
                     sourceOfFinance = ?
+                    invoiceDate = ?,
+                    invoiceNumber = ?,
+                    purchaseDate = ?,
+                    purchaseOrderNumber = ?,
+                    location = ?,
+                    purchaseCost = ?,
+                    acquisitionCost = ?,
+                    bookValue = ?,
+                    lifeofasset = ?,
+                    modeofpossessionoracquisition = ?,
+                    assetType = ?,
+                    assetUsage = ?,
+                    assetStatus = ?
                   WHERE id = ?;
           basePath: Asset
           jsonMaps:
@@ -181,6 +220,19 @@ serviceMaps:
             - jsonPath: $.Asset.accountId
             - jsonPath: $.Asset.financialYear
             - jsonPath: $.Asset.sourceOfFinance
+            - jsonPath: $.Asset.invoiceDate
+            - jsonPath: $.Asset.invoiceNumber
+            - jsonPath: $.Asset.purchaseDate
+            - jsonPath: $.Asset.purchaseOrderNumber
+            - jsonPath: $.Asset.location
+            - jsonPath: $.Asset.purchaseCost
+            - jsonPath: $.Asset.acquisitionCost
+            - jsonPath: $.Asset.bookValue
+            - jsonPath: $.Asset.lifeofasset
+            - jsonPath: $.Asset.modeofpossessionoracquisition
+            - jsonPath: $.Asset.assetType
+            - jsonPath: $.Asset.assetUsage
+            - jsonPath: $.Asset.assetStatus
             - jsonPath: $.Asset.id
 
         - query: INSERT INTO eg_asset_auditdetails SELECT * FROM eg_asset_assetdetails WHERE id = ?;
@@ -202,14 +254,6 @@ serviceMaps:
             - jsonPath: $.Asset.auditDetails.createdBy
             - jsonPath: $.Asset.auditDetails.lastModifiedBy
             - jsonPath: $.Asset.auditDetails.createdTime
-            - jsonPath: $.Asset.auditDetails.lastModifiedTime
-
-            - jsonPath: $.Asset.documents.*.documentType
-            - jsonPath: $.Asset.documents.*.fileStoreId
-            - jsonPath: $.Asset.documents.*.docDetails
-              type: JSON
-              dbType: JSONB
-            - jsonPath: $.Asset.auditDetails.lastModifiedBy
             - jsonPath: $.Asset.auditDetails.lastModifiedTime
 
     - version: 1.0
