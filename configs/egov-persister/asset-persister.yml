@@ -41,8 +41,9 @@ serviceMaps:
                         lifeofasset,
                         modeofpossessionoracquisition,
                         assetType,
-                        assetUsage
-                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+                        assetUsage,
+                        assetStatus
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: Asset
           jsonMaps:
             - jsonPath: $.Asset.id
@@ -82,6 +83,7 @@ serviceMaps:
             - jsonPath: $.Asset.modeofpossessionoracquisition
             - jsonPath: $.Asset.assetType
             - jsonPath: $.Asset.assetUsage
+            - jsonPath: $.Asset.assetStatus
 
 
         - query: INSERT INTO eg_asset_document(documentId, documenttype, fileStoreId, assetid, documentuid, docDetails, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
@@ -192,7 +194,8 @@ serviceMaps:
                     lifeofasset = ?,
                     modeofpossessionoracquisition = ?,
                     assetType = ?,
-                    assetUsage = ?
+                    assetUsage = ?,
+                    assetStatus = ?
                   WHERE id = ?;
           basePath: Asset
           jsonMaps:
@@ -229,6 +232,7 @@ serviceMaps:
             - jsonPath: $.Asset.modeofpossessionoracquisition
             - jsonPath: $.Asset.assetType
             - jsonPath: $.Asset.assetUsage
+            - jsonPath: $.Asset.assetStatus
             - jsonPath: $.Asset.id
 
         - query: INSERT INTO eg_asset_auditdetails SELECT * FROM eg_asset_assetdetails WHERE id = ?;
