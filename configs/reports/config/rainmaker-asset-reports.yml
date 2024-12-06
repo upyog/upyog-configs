@@ -232,11 +232,21 @@ ReportDefinitions:
         type: string
         source: asset
         total: false
+      - name: isassigned
+        label: Is Assigned
+        type: string
+        source: asset
+        total: false 
+      - name: returndate
+        label: Return Date
+        type: epoch
+        source: asset
+        total: false
       - name: assigneddate
         label: Assignment Date
         type: epoch
         source: asset
-        total: true     
+        total: false     
     searchParams:
       - name: applicationno
         label: Application No
@@ -267,7 +277,9 @@ ReportDefinitions:
         CONCAT('COMMON_MASTERS_DEPARTMENT_', b.department) AS department,
         bb.employeecode AS employeecode,
         b.createdtime AS createdtime,
-        b.status AS status,
+        b.status AS status,CASE WHEN bb.isassigned THEN 'Yes' 
+        ELSE 'No' 
+        END AS isassigned,TO_TIMESTAMP(bb.returndate / 1000) AS returndate,
         TO_TIMESTAMP(bb.assigneddate / 1000) AS assigneddate
         FROM 
         eg_asset_assignmentdetails bb
