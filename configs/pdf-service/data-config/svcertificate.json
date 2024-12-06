@@ -1,0 +1,263 @@
+{
+  "key": "svcertificate",
+   "DataConfigs": {
+     "serviceName": "rainmaker-common",
+     "version": "1.0.0",
+     "baseKeyPath": "$.SVDetail.*",
+     "entityIdPath": "$.id",
+     "isCommonTableBorderRequired": true,
+     "mappings": [
+       {
+         "mappings": [
+           {
+             "direct": [
+               {
+                 "variable": "municipal_corporation",
+                 "value": {
+                   "path": "PDF_STATIC_LABEL_CONSOLIDATED_TLCERTIFICATE_MUNICIPAL_CORPORATION"
+                 },
+                 "type": "label",
+                 "localisation": {
+                   "required": true,
+                   "prefix": null,
+                   "module": "rainmaker-sv"
+                 }
+               },
+               {
+                 "variable": "corporation_website",
+                 "value": {
+                   "path": "PDF_STATIC_LABEL_MUTATION_WEBSITE"
+                 },
+                 "type": "label",
+                 "localisation": {
+                   "required": true,
+                   "prefix": null,
+                   "module": "rainmaker-sv"
+                 }
+               },
+               {
+                 "variable": "corporation_email",
+                 "value": {
+                   "path": "PDF_STATIC_LABEL_MUTATION_EMAIL"
+                 },
+                 "type": "label",
+                 "localisation": {
+                   "required": true,
+                   "prefix": null,
+                   "module": "rainmaker-sv"
+                 }
+               },
+               {
+                 "variable": "Certificate_For_Street_Vending",
+                 "value": {
+                   "path": "PDF_STATIC_LABEL_EWASTE_CERTIFICATE"
+                 },
+                 "type": "label",
+                 "localisation": {
+                   "required": true,
+                   "prefix": null,
+                   "module": "rainmaker-sv"
+                 }
+               },
+               {
+                 "variable": "Request_Id",
+                 "value": {
+                   "path": "PDF_STATIC_LABEL_REQUEST_ID_LABEL"
+                 },
+                 "type": "label",
+                 "localisation": {
+                   "required": true,
+                   "prefix": null,
+                   "module": "rainmaker-sv"
+                 }
+               },
+               {
+                 "variable": "Applicant_Name",
+                 "value": {
+                   "path": "PDF_STATIC_LABEL_RECEIPT_OWNER_NAME"
+                 },
+                 "type": "label",
+                 "localisation": {
+                   "required": true,
+                   "prefix": null,
+                   "module": "rainmaker-sv"
+                 }
+               },
+               {
+                 "variable": "Applicant_Contact",
+                 "value": {
+                   "path": "PDF_STATIC_LABEL_RECEIPT_OWNER_CONTACT"
+                 },
+                 "type": "label",
+                 "localisation": {
+                   "required": true,
+                   "prefix": null,
+                   "module": "rainmaker-sv"
+                 }
+               },
+               {
+                 "variable": "Calculated_Amount",
+                 "value": {
+                   "path": "PDF_STATIC_LABEL_CALCULATED_AMOUNT"
+                 },
+                 "type": "label",
+                 "localisation": {
+                   "required": true,
+                   "prefix": null,
+                   "module": "rainmaker-sv"
+                 }
+               },
+               {
+                 "variable": "Final_Amount",
+                 "value": {
+                   "path": "PDF_STATIC_LABEL_FINAL_AMOUNT"
+                 },
+                 "type": "label",
+                 "localisation": {
+                   "required": true,
+                   "prefix": null,
+                   "module": "rainmaker-sv"
+                 }
+               },
+               
+               {
+                 "variable": "Payment_Method",
+                 "value": {
+                   "path": "PDF_STATIC_LABEL_PAYMENT_METHOD"
+                 },
+                 "type": "label",
+                 "localisation": {
+                   "required": true,
+                   "prefix": null,
+                   "module": "rainmaker-sv"
+                 }
+               },
+               
+               {
+                 "variable": "certificateNo",
+                 "value": {
+                   "path": "$.certificateNo"
+                 }
+               },
+               {
+                 "variable": "tenantId",
+                 "value": {
+                   "path": "$.tenantId"
+                 }
+               },
+               {
+                 "variable": "applicationNo",
+                 "value": {
+                   "path": "$.applicationNo"
+                 }
+               },
+               {
+                 "variable": "applicationDate",
+                 "value": {
+                   "path": "$.applicationDate"
+                 }
+               },
+               {
+                 "variable": "vendingActivity",
+                 "value": {
+                   "path": "$.vendingActivity"
+                 }
+               },
+               {
+                 "variable": "name",
+                 "value": {
+                   "path": "$.vendorDetail[0].name"
+                 }
+               },
+               {
+                 "variable": "dob",
+                 "value": {
+                   "path": "$.vendorDetail[0].dob"
+                 }
+               },
+               {
+                 "variable": "fatherName",
+                 "value": {
+                   "path": "$.vendorDetail[0].fatherName"
+                 }
+               },
+               {
+                 "variable": "mobileNo",
+                 "value": {
+                   "path": "$.vendorDetail[0].mobileNo"
+                 }
+               },
+               {
+                 "variable": "locality",
+                 "value": {
+                   "path": "$.addressDetails[0].locality"
+                 }
+               },
+               {
+                 "variable": "city",
+                 "value": {
+                   "path": "$.addressDetails[0].addressId.city"
+                 }
+               },
+               {
+                 "variable": "validFrom",
+                 "value": {
+                   "path": "$.validFrom"
+                 }
+               },
+               {
+                 "variable": "validTo",
+                 "value": {
+                   "path": "$.validTo"
+                 }
+               }
+              
+              
+              
+               
+             
+              
+               
+                         
+               
+               
+             ]
+           },
+           {
+             "externalAPI": [
+               {
+                 "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
+                 "queryParam": "moduleName=tenant&masterName=tenants&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}')%5D",
+                 "apiRequest": null,
+                 "responseMapping": [
+                   {
+                     "variable": "address",
+                     "value": "$.MdmsRes.tenant.tenants[0].address"
+                   },
+                   {
+                     "variable": "phoneNumber",
+                     "value": "$.MdmsRes.tenant.tenants[0].contactNumber"
+                   },
+                   {
+                     "variable": "website",
+                     "value": "$.MdmsRes.tenant.tenants[0].domainUrl"
+                   },
+                   {
+                     "variable": "email",
+                     "value": "$.MdmsRes.tenant.tenants[0].emailId"
+                   },
+                   {
+                     "variable": "logoImage",
+                     "value": "$.MdmsRes.tenant.tenants[0].logoId",
+                     "type": "image"
+                   }
+                 ]
+               }
+             
+             ]
+           }
+         ]
+       }
+     ]
+   }
+ }

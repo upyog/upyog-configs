@@ -1,0 +1,324 @@
+{
+  "key": "chbpermissionletter",
+  "config": {
+    "pageMargins": [40, 40, 40, 40],
+    "background": [
+      {
+        "canvas": [
+          {
+            "type": "rect",
+            "x": 15,
+            "y": 15,
+            "w": 565,
+            "h": 811,
+            "lineWidth": 1,
+            "lineColor": "#000000"
+          }
+        ]
+      }
+    ],
+    "defaultStyle": {
+      "font": "Cambay"
+    },
+    "content": [
+      {
+        "style": "noc-head",
+        "table": {
+          "widths": [100, "*", 200],
+          "body": [
+            [
+              {
+                "image": "{{logoImage}}",
+                "width": 80,
+                "height": 45
+              },
+              {
+                "stack": [
+                  {
+                    "style": "header",
+                    "text": "Community Hall",
+                    "decoration": "underline"
+                  },
+                  {
+                    "style": "header",
+                    "text": "Permission Letter",
+                    "decoration": "underline"
+                  }
+                ],
+                "alignment": "center",
+                "margin": [0, 0, 0, 0]
+              },
+              {
+                "stack": [
+                  {
+                    "text": "{{address}}",
+                    "alignment": "right"
+                  },
+                  {
+                    "text": "{{website}}",
+                    "alignment": "right"
+                  },
+                  {
+                    "text": "{{email}}, {{phoneNumber}}",
+                    "alignment": "right"
+                  }
+                ],
+                "color": "#484848",
+                "margin": [0, 0, 0, 0]
+              }
+            ]
+          ]
+        },
+        "layout": "noBorders"
+      },
+      {
+        "stack": [
+          {
+            "text": "Booking No- {{bookingNo}}",
+            "style": "bookingNo",
+            "fontSize": 12,
+            "alignment": "right",
+            "margin": [0, 10, 0, 0]
+          },
+          {
+            "text": "To,",
+            "style": "content",
+            "margin": [0, 5, 0, 2]
+          },
+          {
+            "text": "{{APPLICANT_NAME}},",
+            "style": "content",
+            "margin": [30, 0, 0, 2]
+          },
+          {
+            "text": "{{APPLICANT_LOCALITY}},",
+            "style": "content",
+            "margin": [30, 0, 0, 5]
+          },
+          {
+            "text": "{{APPLICANT_CITY}}.",
+            "style": "content",
+            "margin": [30, 0, 0, 5]
+          },
+          {
+            "text": "Subject: Permission to use the {{HALL_NAME}} by holding for {{PURPOSE}} purpose.",
+            "style": "subject",
+            "fontSize": 12,
+            "margin": [0, 0, 0, 5]
+          },
+          {
+            "text": "Dear {{APPLICANT_NAME}},",
+            "style": "content",
+            "margin": [0, 0, 0, 10]
+          },
+          {
+            "text": "Permission is hereby accorded to use the {{HALL_NAME}} for {{PURPOSE}} purpose mentioned in your letter.",
+            "style": "content",
+            "margin": [0, 0, 0, 10]
+          },
+          {
+            "text": [
+              "1. Area / Accommodation Booked: ",
+              { "text": "{{HALL_NAME}}", "bold": true }
+            ],
+            "style": "content",
+            "margin": [0, 5, 0, 5]
+          },
+          {
+            "text": [
+              "2. Date of Booking: ",
+              { "text": "{{BOOKING_DATE}}", "bold": true }
+            ],
+            "style": "content",
+            "margin": [0, 5, 0, 5]
+          },
+          {
+            "text": [
+              "3. Period of Booking from: ",
+              { "text": "{{BOOKING_FROM_DATE}}", "bold": true },
+              " to ",
+              { "text": "{{BOOKING_TO_DATE}}", "bold": true }
+            ],
+            "style": "content",
+            "margin": [0, 5, 0, 5]
+          },
+          {
+            "text": "Detailed Amount:",
+            "style": "subheader",
+            "fontSize": 12,
+            "margin": [0, 10, 0, 5]
+          },
+          {
+            "table": {
+              "widths": ["*", "*", "*","*"],
+              "body": [
+                [
+                  {
+                    "text": "Booking Fees",
+                    "style": "tableCell",
+                    "bold": true
+                  },
+                  {
+                    "text": "CGST",
+                    "style": "tableCell",
+                    "bold": true
+                  },
+                  {
+                    "text": "SGST",
+                    "style": "tableCell",
+                    "bold": true
+                  },
+                  {
+                    "text": "Total Amount",
+                    "style": "tableCell",
+                    "bold": true,
+                    "fontSize": 12
+                  }
+                ],
+                [
+                  {
+                    "text": "{{BOOKING_FEES}}",
+                    "style": "tableCell"
+                  },
+                  {
+                    "text": "{{CGST}}",
+                    "style": "tableCell"
+                  },
+                  {
+                    "text": "{{SGST}}",
+                    "style": "tableCell"
+                  },
+                  {
+                    "text": "{{totalAmount}}/-",
+                    "style": "tableCell",
+                    "bold": true,
+                    "fontSize": 11
+                  }
+                ]
+              ]
+            }
+          },
+          {
+            "text": "Bank Details for Refund",
+            "style": "subheader",
+            "fontSize": 12,
+            "margin": [0, 10, 0, 5]
+          },
+          {
+            "table": {
+              "widths": ["*", "*", "*", "*"],
+              "body": [
+                [
+                  {
+                    "text": "Applicant Name",
+                    "style": "tableCell",
+                    "bold": true
+                  },
+                  {
+                    "text": "A/C No.",
+                    "style": "tableCell",
+                    "bold": true
+                  },
+                  {
+                    "text": "Bank Name",
+                    "style": "tableCell",
+                    "bold": true
+                  },
+                  {
+                    "text": "IFSC Code",
+                    "style": "tableCell",
+                    "bold": true
+                  }
+                ],
+                [
+                  {
+                    "text": "{{APPLICANT_NAME}}",
+                    "style": "tableCell"
+                  },
+                  {
+                    "text": "{{ACCOUNT_NUMBER}}",
+                    "style": "tableCell"
+                  },
+                  {
+                    "text": "{{BANK_NAME}}",
+                    "style": "tableCell"
+                  },
+                  {
+                    "text": "{{IFSC_CODE}}",
+                    "style": "tableCell"
+                  }
+                ]
+              ]
+            }
+          },
+          {
+            "text": "TERMS AND CONDITIONS",
+            "style": "termsTitle",
+            "fontSize": 12,
+            "margin": [0, 10, 0, 5]
+          },
+          {
+            "text": "{{terms}}",
+            "style": "punjabiText",
+            "margin": [0, 5, 0, 5]
+          }
+        ],
+        "alignment": "left",
+        "margin": [0, 0, 0, 0]
+      },
+      {
+        "columns": [
+          {
+            "text": "Date:      /      /",
+            "bold": true,
+            "alignment": "left",
+            "margin": [0, 50, 0, 0]
+          },
+          {
+            "text": "Commissioner/EO",
+            "bold": true,
+            "alignment": "right",
+            "margin": [0, 50, 0, 0]
+          }
+        ]
+      }
+      
+    ],
+    "styles": {
+      "header": {
+        "fontSize": 18,
+        "bold": true,
+        "margin": [0, 0, 0, 10]
+      },
+      "bookingNo": {
+        "fontSize": 14,
+        "bold": true,
+        "margin": [0, 0, 0, 5]
+      },
+      "subheader": {
+        "fontSize": 14,
+        "bold": true,
+        "margin": [0, 5, 0, 5]
+      },
+      "termsTitle": {
+        "fontSize": 16,
+        "bold": true,
+        "margin": [0, 5, 0, 5]
+      },
+      "subject": {
+        "fontSize": 12,
+        "bold": true,
+        "margin": [0, 0, 0, 5]
+      },
+      "tableCell": {
+        "fontSize": 9,
+        "margin": [0, 1, 0, 1]
+      },
+      "punjabiText": {
+        "font": "AnmolUni",
+        "fontSize": 10,
+        "margin": [0, 5, 0, 5]
+      }
+    }
+  }
+}

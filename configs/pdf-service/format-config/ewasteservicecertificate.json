@@ -1,0 +1,166 @@
+{
+  "key": "ewasteservicecertificate",
+  "config": {
+    "defaultStyle": {
+      "font": "Cambay"
+    },
+    "content": [
+      {
+        "style": "noc-head",
+        "table": {
+          "widths": [
+            100,
+            "*",
+            150
+          ],
+          "body": [
+            [
+              {
+                "image": "{{logoImage}}",
+                "width": 80,
+                "height": 45
+              },
+              {
+                "stack": [
+                  {
+                    "style": "header",
+                    "text": [
+                      "E-WASTE CERTIFICATE"
+                    ],
+                    "decoration": "underline"
+                  }
+                ],
+                "alignment": "center",
+                "margin": [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              {
+                "stack": [
+                  {
+                    "text": "{{address}}"
+                  },
+                  {
+                    "text": " {{website}}"
+                  },
+                  {
+                    "text": "{{email}} , {{phoneNumber}}"
+                  }
+                ],
+                "alignment": "right",
+                "color": "#484848",
+                "margin": [
+                  -100,
+                  0,
+                  -25,
+                  0
+                ]
+              }
+            ]
+          ]
+        },
+        "layout": "noBorders"
+      },
+      {
+        "text": ["This certifies that: ", { "text": "{{Applicant_Name}}", "bold": true }, " with mobile number: ", { "text": "{{Applicant_Contact}}", "bold": true }, " has disposed off their e-waste through a registered vendor under request id: ", { "text": "{{Request_Id}}", "bold": true }, "."],
+        "style": "content",
+        "margin": [0, 40, 0, 10]
+        },
+      {
+        "text": "Transactional Details:",
+        "style": "subheader",
+        "margin": [
+          0,
+          10,
+          0,
+          5
+        ]
+      },
+      {
+        "columns": [
+          {
+            "width": "50%",
+            "stack": [
+              {
+                "text": [
+                  "Calculated Amount: ",
+                  {
+                    "text": "{{Calculated_Amount}}",
+                    "bold": true
+                  }
+                ],
+                "style": "content"
+              },
+              {
+                "text": [
+                  "Final Amount: ",
+                  {
+                    "text": "{{Final_Amount}}",
+                    "bold": true
+                  }
+                ],
+                "style": "content"
+              },
+              {
+                "text": [
+                  "Pickup Date: ",
+                  {
+                    "text": "{{Approval_Date}}",
+                    "bold": true
+                  }
+                ],
+                "style": "content"
+              },
+              {
+                "text": [
+                  "Payment Method: ",
+                  {
+                    "text": "ONLINE",
+                    "bold": true
+                  }
+                ],
+                "style": "content"
+              }
+            ]
+          }
+        ],
+        "margin": [
+          0,
+          10,
+          0,
+          20
+        ]
+      },
+      {
+        "text": "This is to certify that the e-waste described above has been collected and properly disposed of by the registered vendor. The certificate is issued to acknowledge the successful completion of the e-waste disposal process.",
+        "style": "footer",
+        "margin": [
+          0,
+          20,
+          0,
+          0
+        ]
+      }
+    ],
+    "styles": {
+      "header": {
+        "fontSize": 20,
+        "bold": true
+      },
+      "subheader": {
+        "fontSize": 16,
+        "bold": true
+      },
+      "content": {
+        "fontSize": 14
+      },
+      "footer": {
+        "fontSize": 14,
+        "italics": true
+      }
+    }
+  }
+}
