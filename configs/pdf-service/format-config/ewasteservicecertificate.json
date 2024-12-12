@@ -68,7 +68,7 @@
         "text": ["This certifies that: ", { "text": "{{Applicant_Name}}", "bold": true }, " with mobile number: ", { "text": "{{Applicant_Contact}}", "bold": true }, " has disposed off their e-waste through a registered vendor under request id: ", { "text": "{{Request_Id}}", "bold": true }, "."],
         "style": "content",
         "margin": [0, 40, 0, 10]
-        },
+      },
       {
         "text": "Transactional Details:",
         "style": "subheader",
@@ -86,7 +86,7 @@
             "stack": [
               {
                 "text": [
-                  "Calculated Amount: ",
+                  "System Generated Amount: ",
                   {
                     "text": "{{Calculated_Amount}}",
                     "bold": true
@@ -96,9 +96,9 @@
               },
               {
                 "text": [
-                  "Final Amount: ",
+                  "Final Amount Paid by Vendors: ",
                   {
-                    "text": "{{Final_Amount}}",
+                    "text": "₹ {{Final_Amount}}/-",
                     "bold": true
                   }
                 ],
@@ -123,6 +123,18 @@
                   }
                 ],
                 "style": "content"
+              }
+            ]
+          },
+          {
+            "width": "50%",
+            "stack": [
+              {
+                "image": "{{ewastephoto}}",
+                "width": 200,
+                "height": 150,
+                "margin": [ 0, -30, 0, 0],
+                "alignment": "right"
               }
             ]
           }

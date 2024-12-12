@@ -255,6 +255,19 @@
                     "type": "date"
                   }
                 ]
+              },
+              {
+                "path": "http://egov-filestore:8080/filestore/v1/files/url",
+                "queryParam": "tenantId=pg&fileStoreIds=$.documents[0].filestoreId",
+                "apiRequest": null,
+                "requesttype": "GET",
+                "responseMapping": [
+                  {
+                    "variable": "ewastephoto",
+                    "value": "$.fileStoreIds[0].url",
+                    "type": "image"
+                  }
+                ]
               }
             ]
           }
