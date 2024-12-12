@@ -1,0 +1,254 @@
+{
+  "key": "svcertificate",
+  "config": {
+    "defaultStyle": {
+      "font": "Cambay"
+    },
+    "content": [
+      {
+        "style": "noc-head",
+        "table": {
+          "widths": [100, "*", 150],
+          "body": [
+            [
+              {
+                "image": "{{logoImage}}",
+                "width": 80,
+                "height": 45
+              },
+              {
+                "stack": [
+                  {
+                    "style": "header",
+                    "text": ["CERTIFICATE FOR STREET VENDING"],
+                    "bold":true,
+                    "decoration": "underline"
+                  }
+                ],
+                "alignment": "center",
+                "margin": [0, 0, 0, 0]
+              },
+              {
+                "stack": [
+                  {
+                    "text": "{{address}}"
+                  },
+                  {
+                    "text": "{{website}}"
+                  },
+                  {
+                    "text": "{{email}} , {{phoneNumber}}"
+                  }
+                ],
+                "alignment": "right",
+                "color": "#484848",
+                "margin": [-100, 0, -25, 0]
+              }
+            ]
+          ]
+        },
+        "layout": "noBorders"
+      },
+      {
+        "style": "details-body",
+        "table": {
+          "widths": ["30%", "70%"],
+          "body": [
+            [
+              {
+                "text": "Name of the Vendor: ",
+                "bold": true
+              },
+              {
+                "text": "{{name}}"
+              }
+            ],
+            [
+              {
+                "text": "Father Name: ",
+                "bold": true
+              },
+              {
+                "text": "{{fatherName}}"
+              }
+            ],
+            [
+              {
+                "text": "Date of Birth: ",
+                "bold": true
+              },
+              {
+                "text": "{{dob}}"
+              }
+            ],
+            [
+              {
+                "text": "Address: ",
+                "bold": true
+              },
+              {
+                "text": "{{locality}}"
+              }
+            ],
+            [
+              {
+                "text": "Category of Vending: ",
+                "bold": true
+              },
+              {
+                "text": "{{vendingActivity}}"
+              }
+            ],
+            [
+              {
+                "text": "Certificate No: ",
+                "bold": true
+              },
+              {
+                "text": "{{certificateNo}}"
+              }
+            ],
+            [
+              {
+                "text": "Application Date: ",
+                "bold": true
+              },
+              {
+                "text": "{{applicationDate}}",
+                "type": "date",
+                "format": "dd/MM/yyyy"
+              }
+            ],
+            [
+              {
+                "text": "Mobile No: ",
+                "bold": true
+              },
+              {
+                "text": "{{mobileNo}}"
+              }
+            ],
+            [
+              {
+                "text": "Validity of Certificate: ",
+                "bold": true
+              },
+              {
+                "text": "From: {{validFrom}} to {{validTo}}"
+              }
+            ]
+          ]
+        },
+        "layout": "noBorders"
+      },
+      {
+        "style": "ws-head",
+        "table": {
+          "widths": ["*"],
+          "body": [
+            [
+              {
+                "text": "Terms and Conditions",
+                "style": "footer",
+                "bold": true
+              }
+            ]
+          ]
+        },
+        "layout": "noBorders"
+      },
+      {
+        "style": "ws-head",
+        "table": {
+          "widths": ["*"],
+          "body": [
+            [
+              {
+                "text": "1. The certificate of vending cannot be transferred/leased/rented or sold to others. An undertaking is to be submitted by the street vendor to the Town Vending Committee."
+              }
+            ],
+            [
+              {
+                "text": "2. Street Vendor can sell only those articles of business for which Street Vending Certificate is issued."
+              }
+            ],
+            [
+              {
+                "text": "3. Street Vendor can do his business only at the specified location mentioned on the Street Vending Certificate."
+              }
+            ],
+            [
+              {
+                "text": "4. Certificate of Vending will lapse after the expiry mentioned on the Certificate. It will be the sole responsibility of the Street Vendor to renew the certificate before the expiry."
+              }
+            ],
+            [
+              {
+                "text": "5. If a street vendor to whom this certificate of vending is issued dies, suffers from any permanent disability, or is ill, one of his family members (either spouse or dependent child who is enlisted in the certificate) can do business on his behalf."
+              }
+            ],
+            [
+              {
+                "text": "6. Vendor can do business according to the category mentioned in the Certificate of Vending."
+              }
+            ],
+            [
+              {
+                "text": "7. If a street vendor occupies space on a time-sharing basis, he shall remove his goods and wares every day at the end of the time-sharing period allowed to him."
+              }
+            ],
+            [
+              {
+                "text": "8. Every street vendor shall maintain cleanliness and public hygiene in the vending zones and the adjoining areas. Every street vendor shall maintain civic amenities and public property in the vending zone in good condition and not damage or destroy or cause any damage or destruction to the same."
+              }
+            ],
+            [
+              {
+                "text": "9. Every street vendor shall pay such periodic maintenance charges for the civic amenities and facilities provided in the vending zones as prescribed by the urban local body from time to time."
+              }
+            ],
+            [
+              {
+                "text": "10. This street vending certificate does not confer any temporary, permanent, or perpetual right of carrying out vending activities in the vending zones allotted."
+              }
+            ],
+            [
+              {
+                "text": "11. If a Street Vendor has a grievance or dispute, he may make an application in writing to the committee constituted by the Urban Local Body to solve grievances or disputes."
+              }
+            ]
+          ]
+        },
+        "layout": "noBorders"
+      },
+      {
+        "style": "ws-head",
+        "table": {
+          "widths": ["*"],
+          "body": [
+            [
+              {
+                "text": ""
+              }
+            ]
+          ]
+        },
+        "layout": "noBorders"
+      },
+      {
+        "style": "ws-head",
+        "table": {
+          "widths": ["*"],
+          "body": [
+            [
+              {
+                "text": "."
+              }
+            ]
+          ]
+        },
+        "layout": "noBorders"
+      }
+    ]
+  }
+}

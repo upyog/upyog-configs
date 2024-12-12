@@ -1,0 +1,269 @@
+{
+  "key": "advpermissionletter",
+  "config": {
+    "pageMargins": [40, 40, 40, 40],
+    "background": [
+      {
+        "canvas": [
+          {
+            "type": "rect",
+            "x": 15,
+            "y": 15,
+            "w": 565,
+            "h": 811,
+            "lineWidth": 1,
+            "lineColor": "#000000"
+          }
+        ]
+      }
+    ],
+    "defaultStyle": {
+      "font": "Cambay"
+    },
+    "content": [
+      {
+        "style": "noc-head",
+        "table": {
+          "widths": [100, "*", 200],
+          "body": [
+            [
+              {
+                "image": "{{logoImage}}",
+                "width": 80,
+                "height": 45
+              },
+              {
+                "stack": [
+                  {
+                    "style": "header",
+                    "text": "Advertisement",
+                    "decoration": "underline"
+                  },
+                  {
+                    "style": "header",
+                    "text": "Permission Letter",
+                    "decoration": "underline"
+                  }
+                ],
+                "alignment": "center",
+                "margin": [0, 0, 0, 0]
+              },
+              {
+                "stack": [
+                  {
+                    "text": "{{website}}",
+                    "alignment": "right"
+                  },
+                  {
+                    "text": "{{email}}, {{phoneNumber}}",
+                    "alignment": "right"
+                  }
+                ],
+                "color": "#484848",
+                "margin": [0, 0, 0, 0]
+              }
+            ]
+          ]
+        },
+        "layout": "noBorders"
+      },
+      {
+        "stack": [
+          {
+            "text": "Booking No- {{bookingNo}}",
+            "style": "bookingNo",
+            "fontSize": 12,
+            "alignment": "right",
+            "margin": [0, 10, 0, 0]
+          },
+          {
+            "text": [
+              {"text": "To,", "bold": false, "margin": [0, 0, 0, 2]}
+            ],
+            "style": "content",
+            "margin": [0, 5, 0, 2]
+          },
+          {
+            "text": [
+              {
+                "text": "{{APPLICANT_NAME}}",
+                "bold": false,
+                "margin": [0, 0, 0, 2]
+              }
+            ],
+            "style": "content",
+            "margin": [30, 0, 0, 2]
+          },
+          {
+            "text": [
+              {
+                "text": "{{LOCALITY}},",
+                "bold": false,
+                "margin": [0, 0, 0, 2]
+              }
+            ],
+            "style": "content",
+            "margin": [30, 0, 0, 2]
+          },
+          {
+            "text": [
+              {
+                "text": "{{CITY}}." ,
+                "bold": false,
+                "margin": [0, 0, 0, 2]
+              }
+            ],
+            "style": "content",
+            "margin": [30, 0, 0, 2]
+          },
+          {
+            "text": [
+              {"text": "{{HOUSE_NO}} ", "bold": false},
+              {"text": "{{APPLICANT_STREET}} ", "bold": false},
+              {"text": "{{APPLICANT_LOCALITY}} ", "bold": false},
+              {"text": "{{APPLICANT_CITY}} ", "bold": false}
+            ],
+            "style": "content",
+            "margin": [30, 0, 0, 5]
+          },
+          {
+            "text": [
+              {"text": "Subject: Permission to use the Advertisement Holding ", "bold": true}
+            ],
+            "style": "subject",
+            "fontSize": 12,
+            "margin": [0, 0, 0, 5]
+          },
+          {
+            "text": [
+              {"text": "Dear ", "bold": false},
+              {"text": "{{APPLICANT_NAME}}, ", "bold": false}
+            ],
+            "style": "content",
+            "margin": [0, 0, 0, 10]
+          },
+          {
+            "text": [
+              {"text": "Permission is hereby accorded to use the ", "bold": false},
+              {"text": "{{FACE_AREA}}", "bold": true},
+              {"text": " for the Advertisement purpose.", "bold": false}
+            ],
+            "style": "content",
+            "margin": [0, 0, 0, 10]
+          },
+          {
+            "text": [
+              {"text": "Area Booked: ", "bold": true},
+              {"text": "{{LOCATION_BOOKED}}"}
+            ],
+            "style": "content",
+            "margin": [0, 5, 0, 5]
+          },
+          {
+            "text": [
+              {"text": "Date of Booking: ", "bold": true},
+              {"text": "{{BOOKING_DATE}}"}
+            ],
+            "style": "content",
+            "margin": [0, 5, 0, 5]
+          },
+          {
+            "text": [
+              {"text": "Period of Booking from: ", "bold": true},
+              {"text": "{{BOOKING_DATE}} to {{BOOKING_TO_DATE}}"}
+            ],
+            "style": "content",
+            "margin": [0, 5, 0, 5]
+          },
+          {
+            "text": [
+              {"text": "Ad Type: ", "bold": true},
+              {"text": "{{AdType}}"}
+            ],
+            "style": "content",
+            "margin": [0, 5, 0, 5]
+          },
+          {
+            "table": {
+              "widths": ["*","*","*"],
+              "body": [
+                [
+                  {
+                    "columns": [
+                      { 
+                        "text": "Amount Paid |", 
+                        "bold": true, 
+                        "style": "tableCell" 
+                      },
+                      { 
+                        "text": "{{totalAmount}}/-", 
+                        "bold": false 
+                      }
+                    ],
+                    "alignment": "left"
+                  }
+                ]
+              ]
+            }
+          },
+          {
+            "text": "TERMS AND CONDITIONS",
+            "style": "termsTitle",
+            "fontSize": 12,
+            "margin": [0, 10, 0, 5]
+          },
+          {
+            "text": "{{TERMS}}",
+            "style": "content",
+            "margin": [0, 5, 0, 5]
+          }
+        ],
+        "alignment": "left",
+        "margin": [0, 0, 0, 0]
+      },
+      {
+        "columns": [
+          {
+            "text": "Date:      /      /",
+            "bold": true,
+            "alignment": "left",
+            "margin": [0, 50, 0, 0]
+          },
+          {
+            "text": "Commissioner/EO",
+            "bold": true,
+            "alignment": "right",
+            "margin": [0, 50, 0, 0]
+          }
+        ]
+      }
+    ],
+    "styles": {
+      "header": {
+        "fontSize": 18,
+        "bold": true,
+        "margin": [0, 0, 0, 10]
+      },
+      "bookingNo": {
+        "fontSize": 14,
+        "bold": true,
+        "margin": [0, 0, 0, 5]
+      },
+      "subheader": {
+        "fontSize": 14,
+        "bold": true,
+        "margin": [0, 5, 0, 5]
+      },
+      "termsTitle": {
+        "fontSize": 16,
+        "bold": true,
+        "margin": [0, 5, 0, 5]
+      },
+      "tableCell": {
+        "fontSize": 12,
+        "bold": false,
+        "alignment": "left"
+      }
+    }
+  }
+}

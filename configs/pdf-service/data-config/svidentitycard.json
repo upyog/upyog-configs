@@ -1,0 +1,229 @@
+{
+  "key": "svidentitycard",
+  "DataConfigs": {
+    "serviceName": "rainmaker-common",
+    "version": "1.0.0",
+    "baseKeyPath": "$.SVDetail.*",
+    "entityIdPath": "$.id",
+    "isCommonTableBorderRequired": true,
+    "mappings": [
+      {
+        "mappings": [
+          {
+            "direct": [
+              {
+                "variable": "municipal_corporation",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_TLCERTIFICATE_MUNICIPAL_CORPORATION"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-sv"
+                }
+              },
+              {
+                "variable": "corporation_website",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_MUTATION_WEBSITE"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-sv"
+                }
+              },
+              {
+                "variable": "corporation_email",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_MUTATION_EMAIL"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-sv"
+                }
+              },
+              {
+                "variable": "Applicant_Name",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_RECEIPT_OWNER_NAME"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-sv"
+                }
+              },
+              {
+                "variable": "Applicant_Contact",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_RECEIPT_OWNER_CONTACT"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-sv"
+                }
+              },
+              {
+                "variable": "tenantId",
+                "value": {
+                  "path": "$.tenantId"
+                }
+              },
+              {
+                "variable": "pg",
+                "value": {
+                  "path": "pgcitya"
+                }
+              },
+              {
+                "variable": "certificateNo",
+                "value": {
+                  "path": "$.certificateNo"
+                }
+              },
+              {
+                "variable": "vendingActivity",
+                "value": {
+                  "path": "$.vendingActivity"
+                }
+              },
+              {
+                "variable": "vendingZone",
+                "value": {
+                  "path": "$.vendingZone"
+                }
+              },
+              {
+                "variable": "name",
+                "value": {
+                  "path": "$.vendorDetail[0].name"
+                }
+              },
+              {
+                "variable": "dob",
+                "value": {
+                  "path": "$.vendorDetail[0].dob"
+                }
+              },
+              {
+                "variable": "mobileNo",
+                "value": {
+                  "path": "$.vendorDetail[0].mobileNo"
+                }
+              },
+              {
+                "variable": "locality",
+                "value": {
+                  "path": "$.addressDetails[0].locality"
+                }
+              },
+              {
+                "variable": "validFrom",
+                "value": {
+                  "path": "$.validFrom"
+                }
+              },
+              {
+                "variable": "validTo",
+                "value": {
+                  "path": "$.validTo"
+                }
+              },
+              {
+                "variable": "addressLine1",
+                "value": {
+                  "path": "$.addressDetails[0].addressLine1"
+                }
+              },
+              {
+                "variable": "addressLine2",
+                "value": {
+                  "path": "$.addressDetails[0].addressLine2"
+                }
+              },
+              {
+                "variable": "city",
+                "value": {
+                  "path": "$.addressDetails[0].city"
+                }
+              },
+              {
+                "variable": "pincode",
+                "value": {
+                  "path": "$.addressDetails[0].pincode"
+                }
+              },
+              {
+                "variable": "sex",
+                "value": {
+                  "path": "$.vendorDetail[0].gender"
+                }
+              }
+            ]
+          },
+          {
+            "externalAPI": [
+              {
+                "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
+                "queryParam": "moduleName=tenant&masterName=tenants&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}')%5D",
+                "apiRequest": null,
+                "responseMapping": [
+                  {
+                    "variable": "address",
+                    "value": "$.MdmsRes.tenant.tenants[0].address"
+                  },
+                  {
+                    "variable": "phoneNumber",
+                    "value": "$.MdmsRes.tenant.tenants[0].contactNumber"
+                  },
+                  {
+                    "variable": "website",
+                    "value": "$.MdmsRes.tenant.tenants[0].domainUrl"
+                  },
+                  {
+                    "variable": "email",
+                    "value": "$.MdmsRes.tenant.tenants[0].emailId"
+                  },
+                  {
+                    "variable": "logoImage",
+                    "value": "$.MdmsRes.tenant.tenants[0].logoId",
+                    "type": "image"
+                  }
+                ]
+              },
+              {
+                "path": "http://egov-filestore:8080/filestore/v1/files/url",
+                "queryParam": "tenantId=pg&fileStoreIds=$.documentDetails[3].fileStoreId",
+                "apiRequest": null,
+                "requesttype": "GET",
+                "responseMapping": [
+                  {
+                    "variable": "familyimage",
+                    "value": "$.fileStoreIds[0].url",
+                    "type": "image"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "qrcodeConfig": [
+          {
+            "variable": "qrcodeimage",
+            "value": "/digit-ui/citizen/payment/verification?tenantId={{tenantid}}&receiptNumber={{receiptNo}}"
+          }
+        ]
+      }
+    ]
+  }
+}

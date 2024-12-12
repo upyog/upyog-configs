@@ -1,0 +1,140 @@
+SearchDefinitions:
+  moduleName: sv-services
+  summary: Street Vending Inbox API
+  version: 1.0.0
+  definitions:
+    - name: inboxStreetVendingSearch
+      query:
+        baseQuery: Select row_to_json(result) from
+          (
+         select svd.application_no, svd.createdtime from eg_sv_street_vending_detail svd 
+         inner join eg_wf_processinstance_v2 pi on pi.businessid = svd.application_no
+         LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
+         inner join eg_sv_vendor_detail vendor ON svd.application_id = vendor.application_id
+         $where
+         AND pi.createdtime IN (select max(createdtime) from eg_wf_processinstance_v2 wf where wf.businessid = svd.application_no GROUP BY wf.businessid)
+         order by pi.createdtime asc $pagination
+          ) result
+        groupBy:
+        orderBy:
+      searchParams:
+        condition: AND
+        params:
+          - name: svd.tenantid
+            isMandatory: true
+            jsonPath: $.searchCriteria.tenantId
+          - name: svd.id
+            isMandatory: false
+            jsonPath: $.searchCriteria.id
+          - name: svd.applicationNumber
+            isMandatory: false
+            jsonPath: $.searchCriteria.applicationNumber
+          - name: pi.businessservice
+            isMandatory: false
+            jsonPath: $.searchCriteria.businessservice
+          - name: vendor.mobile_No
+            isMandatory: false
+            jsonPath: $.searchCriteria.mobileNumber
+          - name: svd.vending_type
+            isMandatory: false
+            jsonPath: $.searchCriteria.vendingType
+          - name: svd.vending_zone
+            isMandatory: false
+            jsonPath: $.searchCriteria.vendingZone
+          - name: svd.application_status
+            isMandatory: false
+            jsonPath: $.searchCriteria.status
+          
+        pagination:
+          noOfRecords: $.searchCriteria.noOfRecords
+          offset: $.searchCriteria.offset
+
+      output:
+        jsonFormat: {"ResponseInfo": {},"StreetVending": []}
+        outJsonPath: $.StreetVending
+        responseInfoPath: $.ResponseInfo
+    - name: inboxStreetVendingSearchDesc
+      query:
+        baseQuery: Select row_to_json(result) from
+          (
+         select svd.application_no, svd.createdtime from eg_sv_street_vending_detail svd 
+         inner join eg_wf_processinstance_v2 pi on pi.businessid = svd.application_no
+         LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
+         inner join eg_sv_vendor_detail vendor ON svd.application_id = vendor.application_id
+         $where
+         AND pi.createdtime IN (select max(createdtime) from eg_wf_processinstance_v2 wf where wf.businessid = svd.application_no GROUP BY wf.businessid)
+         order by pi.createdtime desc $pagination
+          ) result
+        groupBy:
+        orderBy:
+      searchParams:
+        condition: AND
+        params:
+          - name: svd.tenantid
+            isMandatory: true
+            jsonPath: $.searchCriteria.tenantId
+          - name: svd.id
+            isMandatory: false
+            jsonPath: $.searchCriteria.id
+          - name: svd.applicationNumber
+            isMandatory: false
+            jsonPath: $.searchCriteria.applicationNumber
+          - name: pi.businessservice
+            isMandatory: false
+            jsonPath: $.searchCriteria.businessservice
+          - name: vendor.mobile_No
+            isMandatory: false
+            jsonPath: $.searchCriteria.mobileNumber
+          - name: svd.vending_type
+            isMandatory: false
+            jsonPath: $.searchCriteria.vendingType
+          - name: svd.vending_zone
+            isMandatory: false
+            jsonPath: $.searchCriteria.vendingZone
+          - name: svd.application_status
+            isMandatory: false
+            jsonPath: $.searchCriteria.status
+        pagination:
+          noOfRecords: $.searchCriteria.noOfRecords
+          offset: $.searchCriteria.offset
+
+      output:
+        jsonFormat: {"ResponseInfo": {},"StreetVending": []}
+        outJsonPath: $.StreetVending
+        responseInfoPath: $.ResponseInfo
+    - name: inboxStreetVendingSearchCount
+      query:
+        baseQuery: SELECT row_to_json(TotalCount) from (SELECT COUNT(result) from
+          (
+           select svd.application_no, svd.createdtime from eg_sv_street_vending_detail svd 
+         inner join eg_wf_processinstance_v2 pi on pi.businessid = svd.application_no
+         LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
+         $where
+         AND pi.createdtime IN (select max(createdtime) from eg_wf_processinstance_v2 wf where wf.businessid = svd.application_no GROUP BY wf.businessid)
+         order by pi.createdtime asc
+          ) result) TotalCount
+        groupBy:
+        orderBy:
+      searchParams:
+        condition: AND
+        params:
+          - name: svd.tenantid
+            isMandatory: true
+            jsonPath: $.searchCriteria.tenantId
+          - name: svd.id
+            isMandatory: false
+            jsonPath: $.searchCriteria.id
+          - name: svd.applicationNumber
+            isMandatory: false
+            jsonPath: $.searchCriteria.applicationNumber
+          - name: pi.businessservice
+            isMandatory: false
+            jsonPath: $.searchCriteria.businessservice
+        pagination:
+          noOfRecords: $.searchCriteria.noOfRecords
+          offset: $.searchCriteria.offset
+
+      output:
+        jsonFormat: {"ResponseInfo": {},"TotalCount": {}}
+        outJsonPath: $.TotalCount
+        responseInfoPath: $.ResponseInfo

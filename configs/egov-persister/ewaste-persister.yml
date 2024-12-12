@@ -1,0 +1,162 @@
+serviceMaps:
+  serviceName: ewaste-services
+  mappings:
+    - version: 1.0
+      description: Persists Ewaste details in tables
+      fromTopic: save-ewaste-request
+      isTransaction: true	
+      queryMaps:
+
+        - query: INSERT INTO eg_ew_requests(id,tenantid,requestId,calculatedAmount,vendorUuid,transactionId,pickUpDate,finalAmount,requestStatus,createdby,lastmodifiedby,createdtime,lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: EwasteApplication.*
+          jsonMaps:
+            - jsonPath: $.EwasteApplication.*.id
+
+            - jsonPath: $.EwasteApplication.*.tenantId
+
+            - jsonPath: $.EwasteApplication.*.requestId
+            
+            - jsonPath: $.EwasteApplication.*.calculatedAmount
+          
+            - jsonPath: $.EwasteApplication.*.vendorUuid
+            
+            - jsonPath: $.EwasteApplication.*.transactionId
+
+            - jsonPath: $.EwasteApplication.*.pickUpDate
+
+            - jsonPath: $.EwasteApplication.*.finalAmount
+
+            - jsonPath: $.EwasteApplication.*.requestStatus
+            
+            - jsonPath: $.EwasteApplication.*.auditDetails.createdBy
+
+            - jsonPath: $.EwasteApplication.*.auditDetails.lastModifiedBy
+
+            - jsonPath: $.EwasteApplication.*.auditDetails.createdTime
+            
+            - jsonPath: $.EwasteApplication.*.auditDetails.lastModifiedTime
+
+        - query: INSERT INTO eg_ew_address(id, tenantid, doorno, latitude, longitude, buildingname, addressid, addressnumber, type, addressline1, addressline2, landmark, street, city, locality, pincode, detail, ewId, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: EwasteApplication.*
+          jsonMaps:
+            - jsonPath: $.EwasteApplication.*.address.id
+
+            - jsonPath: $.EwasteApplication.*.address.tenantId
+
+            - jsonPath: $.EwasteApplication.*.address.doorNo
+
+            - jsonPath: $.EwasteApplication.*.address.latitude
+
+            - jsonPath: $.EwasteApplication.*.address.longitude
+
+            - jsonPath: $.EwasteApplication.*.address.buildingName
+
+            - jsonPath: $.EwasteApplication.*.address.addressId
+
+            - jsonPath: $.EwasteApplication.*.address.addressNumber
+
+            - jsonPath: $.EwasteApplication.*.address.type
+
+            - jsonPath: $.EwasteApplication.*.address.addressLine1
+
+            - jsonPath: $.EwasteApplication.*.address.addressLine2
+
+            - jsonPath: $.EwasteApplication.*.address.landmark
+
+            - jsonPath: $.EwasteApplication.*.address.street
+
+            - jsonPath: $.EwasteApplication.*.address.city
+
+            - jsonPath: $.EwasteApplication.*.address.locality.name
+
+            - jsonPath: $.EwasteApplication.*.address.pincode
+
+            - jsonPath: $.EwasteApplication.*.address.detail
+
+            - jsonPath: $.EwasteApplication.*.id
+
+            - jsonPath: $.EwasteApplication.*.auditDetails.createdBy
+
+            - jsonPath: $.EwasteApplication.*.auditDetails.lastModifiedBy
+
+            - jsonPath: $.EwasteApplication.*.auditDetails.createdTime
+
+            - jsonPath: $.EwasteApplication.*.auditDetails.lastModifiedTime
+            
+        - query: INSERT INTO eg_ew_ewastedetails(id, productId, productName, quantity, price, ewId) VALUES (?, ?, ?, ?, ?, ?);
+          basePath: EwasteApplication.*.ewasteDetails.*
+          jsonMaps:
+            - jsonPath: $.EwasteApplication.*.ewasteDetails.*.id
+
+            - jsonPath: $.EwasteApplication.*.ewasteDetails.*.productId
+
+            - jsonPath: $.EwasteApplication.*.ewasteDetails.*.productName
+
+            - jsonPath: $.EwasteApplication.*.ewasteDetails.*.quantity
+
+            - jsonPath: $.EwasteApplication.*.ewasteDetails.*.price
+
+            - jsonPath: $.EwasteApplication[*][?({id} in @.ewasteDetails[*].id)].id
+
+        - query: INSERT INTO eg_ew_applicantdetails(id, applicantName, mobileNumber, altMobileNumber, emailId, ewId) VALUES (?, ?, ?, ?, ?, ?);
+          basePath: EwasteApplication.*
+          jsonMaps:
+            - jsonPath: $.EwasteApplication.*.applicant.id
+
+            - jsonPath: $.EwasteApplication.*.applicant.applicantName
+
+            - jsonPath: $.EwasteApplication.*.applicant.mobileNumber
+
+            - jsonPath: $.EwasteApplication.*.applicant.altMobileNumber
+
+            - jsonPath: $.EwasteApplication.*.applicant.emailId
+
+            - jsonPath: $.EwasteApplication.*.id
+
+        - query: INSERT INTO eg_ew_ewastedocuments( id, tenantId, documentType, filestoreId, documentUid, ewid, active, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: EwasteApplication.*.documents.*
+          jsonMaps:
+            - jsonPath: $.EwasteApplication.*.id
+
+            - jsonPath: $.EwasteApplication.*.tenantId
+ 
+            - jsonPath: $.EwasteApplication.*.documentType
+
+            - jsonPath: $.EwasteApplication.*.filestoreId
+
+            - jsonPath: $.EwasteApplication.*.documentUid
+            
+            - jsonPath: $.EwasteApplication.*.[?({id} in @.documents[*].id)].id
+             
+            - jsonPath: $.EwasteApplication.*.active
+            
+            - jsonPath: $.EwasteApplication.*.auditDetails.createdBy
+            
+            - jsonPath: $.EwasteApplication.*.auditDetails.lastModifiedBy
+            
+            - jsonPath: $.EwasteApplication.*.auditDetails.createdTime
+            
+            - jsonPath: $.EwasteApplication.*.auditDetails.lastModifiedTime
+  
+    - version: 1.0
+      description: Update Ewaste application request in tables
+      fromTopic: update-ewaste-request
+      isTransaction: true
+      queryMaps:
+        - query: UPDATE eg_ew_requests SET transactionId = ?,pickUpDate = ?, finalAmount = ?, requestStatus = ?, lastmodifiedby = ?, lastmodifiedtime = ?  WHERE id=?;
+          basePath: EwasteApplication.*
+          jsonMaps:
+
+            - jsonPath: $.EwasteApplication.*.transactionId
+           
+            - jsonPath: $.EwasteApplication.*.pickUpDate
+
+            - jsonPath: $.EwasteApplication.*.finalAmount
+
+            - jsonPath: $.EwasteApplication.*.requestStatus
+            
+            - jsonPath: $.EwasteApplication.*.auditDetails.lastModifiedBy
+            
+            - jsonPath: $.EwasteApplication.*.auditDetails.lastModifiedTime
+
+            - jsonPath: $.EwasteApplication.*.id

@@ -1,0 +1,423 @@
+{
+  "key": "asset-report",
+  "DataConfigs": {
+    "serviceName": "rainmaker-common",
+    "version": "1.0.0",
+    "baseKeyPath": "$.Asset.*",
+    "entityIdPath": "$.id",
+    "isCommonTableBorderRequired": true,
+    "mappings": [
+      {
+        "topic": "common-pdf-generation-3",
+        "mappings": [
+          {
+            "direct": [
+
+              {
+                "variable": "asset_receipt",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_ASSET_RECEIPT_ASSET_RECEIPT"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-asset"
+                }
+              },
+
+              {
+                "variable": "asset_book_ref_no",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_ASSET_RECEIPT_ASSET_BOOK_REF_NO"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-asset"
+                }
+              },
+              {
+                "variable": "assetBookRefNo",
+                "value": {
+                  "path": "$.assetBookRefNo"
+                }
+              },
+
+              {
+                "variable": "asset_id",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_ASSET_RECEIPT_ASSET_ID"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-asset"
+                }
+              },
+              {
+                "variable": "applicationNo",
+                "value": {
+                  "path": "$.applicationNo"
+                }
+              },
+
+              {
+                "variable": "asset_creation_date",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_ASSET_RECEIPT_ASSET_CREATION_DATE"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-asset"
+                }
+              },
+              {
+                "variable": "assetCreationDate",
+                "value": {
+                  "path": "$.applicationDate"
+                },
+                "type": "date"
+              },
+
+              {
+                "variable": "asset_name",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_ASSET_RECEIPT_ASSET_NAME"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-asset"
+                }
+              },
+              {
+                "variable": "assetName",
+                "value": {
+                  "path": "$.assetName"
+                }
+              },
+
+              {
+                "variable": "asset_status",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_ASSET_RECEIPT_ASSET_STATUS"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-asset"
+                }
+              },
+              {
+                "variable": "status",
+                "value": {
+                  "path": "$.status"
+                }
+              },
+              
+              {
+                "variable": "asset_current_usage",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_ASSET_RECEIPT_ASSET_CURRENT_USAGE"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-asset"
+                }
+              },
+              {
+                "variable": "assetCurrentUsage",
+                "value": {
+                  "path": "$.assetCurrentUsage"
+                }
+              },
+
+              {
+                "variable": "asset_classification",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_ASSET_RECEIPT_ASSET_CLASSIFICATION"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-asset"
+                }
+              },
+              {
+                "variable": "assetClassification",
+                "value": {
+                  "path": "$.assetClassification"
+                }
+              },
+
+              {
+                "variable": "asset_parent_category",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_ASSET_RECEIPT_ASSET_PARENT_CATEGORY"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-asset"
+                }
+              },
+              {
+                "variable": "assetParentCategory",
+                "value": {
+                  "path": "$.assetParentCategory"
+                }
+              },
+
+              {
+                "variable": "asset_category",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_ASSET_RECEIPT_ASSET_CATEGORY"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-asset"
+                }
+              },
+              {
+                "variable": "assetCategory",
+                "value": {
+                  "path": "$.assetCategory"
+                }
+              },              
+             
+              {
+                "variable": "tenant_id",
+                "value": {
+                  "path": "TENANT_ID"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-common"
+                }
+              },
+              {
+                "variable": "tenantId",
+                "value": {
+                  "path": "$.tenantId"
+                }
+              },
+
+              {
+                "variable": "asset_description",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_ASSET_RECEIPT_ASSET_DESCRIPTION"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-asset"
+                }
+              },
+              {
+                "variable": "description",
+                "value": {
+                  "path": "$.description"
+                }
+              },
+              
+              {
+                "variable": "asset_remarks",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_ASSET_RECEIPT_ASSET_REMARKS"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-asset"
+                }
+              },
+              {
+                "variable": "remarks",
+                "value": {
+                  "path": "$.remarks"
+                }
+              },
+
+              {
+                "variable": "asset_address",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_ASSET_RECEIPT_ASSET_ADDRESS"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-asset"
+                }
+              },
+              {
+                "variable": "addressDetailsDoorNo",
+                "value": {
+                  "path": "$.addressDetails.doorNo"
+                }
+              },
+              {
+                "variable": "addressDetailsAddressLine1",
+                "value": {
+                  "path": "$.addressDetails.addressLine1"
+                }
+              },
+              {
+                "variable": "addressDetailsAddressLine2",
+                "value": {
+                  "path": "$.addressDetails.addressLine2"
+                }
+              },
+              {
+                "variable": "addressDetailsLat",
+                "value": {
+                  "path": "$.addressDetails.latitude"
+                }
+              },
+              {
+                "variable": "addressDetailsLong",
+                "value": {
+                  "path": "$.addressDetails.longitude"
+                }
+              },
+
+
+              {
+                "variable": "generated_by",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_GENERATED_BY"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-common"
+                }
+              },
+
+              {
+                "variable": "commissioner/eo",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_COMMISSIONER_EO"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-common"
+                }
+              },
+
+              {
+                "variable": "no_signature",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_NO_SIGNATURE"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-common"
+                }
+              },
+
+              {
+                "variable": "disclamer",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_DISCLAIMER"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-common"
+                }
+              },
+
+              {
+                "variable": "Municipal_Corporation",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_MDMS_MUNICIPAL_CORPORATION"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-common"
+                }
+              }
+              
+            ]
+          },
+          
+          {
+            "externalAPI": [
+              {
+                "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
+                "queryParam": "moduleName=tenant&masterName=tenants&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}')%5D",
+                "apiRequest": null,
+                "responseMapping": [
+                  {
+                    "variable": "address",
+                    "value": "$.MdmsRes.tenant.tenants[0].address"
+                  },
+                  {
+                    "variable": "phoneNumber",
+                    "value": "$.MdmsRes.tenant.tenants[0].contactNumber"
+                  },
+                  {
+                    "variable": "website",
+                    "value": "$.MdmsRes.tenant.tenants[0].domainUrl"
+                  },
+                  {
+                    "variable": "email",
+                    "value": "$.MdmsRes.tenant.tenants[0].emailId"
+                  },
+                  {
+                    "variable": "logoImage",
+                    "value": "$.MdmsRes.tenant.tenants[0].logoId",
+                    "type": "image"
+                  },
+                  {
+                    "variable": "logo-header",
+                    "value": "$.MdmsRes.tenant.tenants[0].code",
+                    "localisation": {
+                      "required": true,
+                      "prefix": "TENANT_TENANTS",
+                      "module": "rainmaker-common"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "qrcodeConfig": [
+              {
+                "variable": "qrcodeimage",
+                "value": "https://maps.google.com/?q={{addressDetailsLat}},{{addressDetailsLong}}"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

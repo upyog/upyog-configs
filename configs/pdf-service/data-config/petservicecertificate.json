@@ -82,182 +82,186 @@
                 "localisation": {
                   "required": true,
                   "prefix": null,
-                  "module": "rainmaker-common"
-                }
-              },
-              {
-                "variable": "Owner_name",
-                "value": {
-                  "path": "PDF_STATIC_LABEL_RECEIPT_OWNER_NAME"
-                },
-                "type": "label",
-                "localisation": {
-                  "required": true,
-                  "prefix": null,
-                  "module": "rainmaker-common"
-                }
-              },
-              {
-                "variable": "Owner_contact",
-                "value": {
-                  "path": "PDF_STATIC_LABEL_RECEIPT_OWNER_CONTACT"
-                },
-                "type": "label",
-                "localisation": {
-                  "required": true,
-                  "prefix": null,
-                  "module": "rainmaker-common"
-                }
-              },
-              {
-                "variable": "pet_name",
-                "value": {
-                  "path": "PDF_STATIC_LABEL_RECEIPT_DOG_NAME"
-                },
-                "type": "label",
-                "localisation": {
-                  "required": true,
-                  "prefix": null,
-                  "module": "rainmaker-common"
-                }
-              },
-              {
-                "variable": "pet_type",
-                "value": {
-                  "path": "PDF_STATIC_LABEL_RECEIPT_DOG_TYPE"
-                },
-                "type": "label",
-                "localisation": {
-                  "required": true,
-                  "prefix": null,
-                  "module": "rainmaker-common"
-                }
-              },
-              {
-                "variable": "breed_type",
-                "value": {
-                  "path": "PDF_STATIC_LABEL_RECEIPT_BREED_TYPE"
-                },
-                "type": "label",
-                "localisation": {
-                  "required": true,
-                  "prefix": null,
-                  "module": "rainmaker-common"
-                }
-              },
-              {
-                "variable": "doctor_name",
-                "value": {
-                  "path": "PDF_STATIC_LABEL_RECEIPT_PTR_DOCTOR_NAME"
-                },
-                "type": "label",
-                "localisation": {
-                  "required": true,
-                  "prefix": null,
-                  "module": "rainmaker-common"
-                }
-              },
-              {
-                "variable": "clinic_name",
-                "value": {
-                  "path": "PDF_STATIC_LABEL_RECEIPT_PTR_CLINC_NAME"
-                },
-                "type": "label",
-                "localisation": {
-                  "required": true,
-                  "prefix": null,
-                  "module": "rainmaker-common"
-                }
-              },
-              {
-                "variable": "vaccination_date",
-                "value": {
-                  "path": "PDF_STATIC_LABEL_RECEIPT_VACCINATION_DATE"
-                },
-                "type": "label",
-                "localisation": {
-                  "required": true,
-                  "prefix": null,
-                  "module": "rainmaker-common"
-                }
-              },
-              {
-                "variable": "vaccination_number",
-                "value": {
-                  "path": "PDF_STATIC_LABEL_RECEIPT_VACCINATION_NUMBER"
-                },
-                "type": "label",
-                "localisation": {
-                  "required": true,
-                  "prefix": null,
-                  "module": "rainmaker-common"
-                }
-              },
-              {
-                "variable": "Application_Number",
-                "value": {
-                  "path": "$.applicationNumber"
-                }
-              },
-              {
-                "variable": "Owner_Name",
-                "value": {
-                  "path": "$.applicantName"
-                }
-              },
-              {
-                "variable": "Owner_Contact",
-                "value": {
-                  "path": "$.mobileNumber"
-                }
-              },
-              {
-                "variable": "Pet_Type",
-                "value": {
-                  "path": "$.petDetails.petType"
-                }
-              },
-              {
-                "variable": "Breed_Type",
-                "value": {
-                  "path": "$.petDetails.breedType"
-                }
-              },
-              {
-                "variable": "Doctor_Name",
-                "value": {
-                  "path": "$.petDetails.doctorName"
-                }
-              },
-              {
-                "variable": "Clinic_Name",
-                "value": {
-                  "path": "$.petDetails.clinicName"
-                }
-              },
-              {
-                "variable": "Vaccine_Date",
-                "value": {
-                  "path": "$.petDetails.lastVaccineDate"
-                }
-              },
-              {
-                "variable": "Vaccine_Number",
-                "value": {
-                  "path": "$.petDetails.vaccinationNumber"
-                }
-              },
-              {
-                "variable": "Pet_Name",
-                "value": {
-                  "path": "$.petDetails.petName"
-                }
+                  "module":"rainmaker-common"
               }
-            ]
+            }, 
+            {
+              "variable": "Owner_name",
+              "value": {
+                "path": "PDF_STATIC_LABEL_RECEIPT_OWNER_NAME"
+              },
+              "type": "label",
+              "localisation":{
+                "required":true,
+                "prefix": null,
+                "module":"rainmaker-common"
+             }
+            },
+            {
+              "variable": "Owner_contact",
+              "value": {
+                "path": "PDF_STATIC_LABEL_RECEIPT_OWNER_CONTACT"
+              },
+              "type": "label",
+              "localisation":{
+                "required":true,
+                "prefix": null,
+                "module":"rainmaker-common"
+             }
+            },
+            {
+              "variable": "pet_type",
+              "value": {
+                "path": "PDF_STATIC_LABEL_RECEIPT_DOG_TYPE"
+              },
+              "type": "label",
+              "localisation":{
+                "required":true,
+                "prefix": null,
+                "module":"rainmaker-common"
+             }
+            },
+            {
+              "variable": "breed_type",
+              "value": {
+                "path": "PDF_STATIC_LABEL_RECEIPT_BREED_TYPE"
+              },
+              "type": "label",
+              "localisation":{
+                "required":true,
+                "prefix": null,
+                "module":"rainmaker-common"
+             }
+            },
+            {
+              "variable": "doctor_name",
+              "value": {
+                "path": "PDF_STATIC_LABEL_RECEIPT_PTR_DOCTOR_NAME"
+              },
+              "type": "label",
+              "localisation":{
+                "required":true,
+                "prefix": null,
+                "module":"rainmaker-common"
+             }
+            },
+            {
+              "variable": "clinic_name",
+              "value": {
+                "path": "PDF_STATIC_LABEL_RECEIPT_PTR_CLINC_NAME"
+              },
+              "type": "label",
+              "localisation":{
+                "required":true,
+                "prefix": null,
+                "module":"rainmaker-common"
+             }
+            },
+            {
+              "variable": "vaccination_date",
+              "value": {
+                "path": "PDF_STATIC_LABEL_RECEIPT_VACCINATION_DATE"
+              },
+              "type": "label",
+              "localisation":{
+                "required":true,
+                "prefix": null,
+                "module":"rainmaker-common"
+             }
+            },
+            {
+              "variable": "vaccination_number",
+              "value": {
+                "path": "PDF_STATIC_LABEL_RECEIPT_VACCINATION_NUMBER"
+              },
+              "type": "label",
+              "localisation":{
+                "required":true,
+                "prefix": null,
+                "module":"rainmaker-common"
+             }
+            },
+            {
+              "variable": "Application_Number",
+              "value": {
+                "path": "$.applicationNumber"
+              }
           },
           {
-            "externalAPI": [
-              {
+            "variable": "Owner_Name",
+            "value": {
+              "path": "$.applicantName"
+            }
+        },
+          {
+            "variable": "Owner_Contact",
+            "value": {
+              "path": "$.mobileNumber"
+            }
+        },
+      {
+        "variable": "Pet_Type",
+        "value": {
+          "path": "$.petDetails.petType"
+        }
+    },
+    {
+      "variable": "Breed_Type",
+      "value": {
+        "path": "$.petDetails.breedType"
+      }
+    },
+    {
+      "variable": "Doctor_Name",
+      "value": {
+        "path": "$.petDetails.doctorName"
+      }
+    },
+    {
+      "variable": "Clinic_Name",
+      "value": {
+        "path": "$.petDetails.clinicName"
+      }
+    },
+    {
+      "variable": "Vaccine_Date",
+      "value": {
+        "path": "$.petDetails.lastVaccineDate"
+      }
+    },
+    {
+      "variable": "Vaccine_Number",
+      "value": {
+        "path": "$.petDetails.vaccinationNumber"
+      }
+    },
+    {
+      "variable": "Pet_Name",
+      "value": {
+        "path": "$.petDetails.petName"
+      }
+    },
+      {
+      "variable": "Pet_Token",
+      "value": {
+        "path": "$.petToken"
+      }
+    },
+       {
+      "variable": "validityDate",
+      "value": {
+        "path": "$.validityDate"
+      }
+    }   
+    
+    
+
+             
+          ]
+        },
+        {
+          "externalAPI": [     
+            { 
                 "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
                 "queryParam": "moduleName=tenant&masterName=tenants&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}')%5D",
                 "apiRequest": null,
