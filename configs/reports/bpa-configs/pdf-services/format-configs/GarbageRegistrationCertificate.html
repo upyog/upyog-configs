@@ -161,10 +161,8 @@
 					alt="Government of Himachal Pradesh" />
 			</td>
 			<td>
-				<h2 class="header-text"><span th:text="${ulbType}">NA</span>, <span th:text="${ulbName}">NA</span></h2>
+				<h2 class="header-text"><span th:text="${ulbType}">NA</span> <span th:text="${ulbName}">NA</span></h2>
 				<h3 class="service-name">Garbage Registartin Certificate</h3>
-				<!--<span class="license-description">(UNDER SECTION 202 OF Himachal Pradesh Municipal ACT, 1994)</span> <br /> -->
-				<span class="license-description">Issued to: <span th:text="${ownerName}">NA</span></span>
 			</td>
 			<td>
 				<img class="udd-logo"
@@ -175,7 +173,7 @@
 	</table>
 	<table class="license-details">
 		<tr>
-			<td>Garbage Registration ID:</td>
+			<td>Garbage ID:</td>
 			<td><span th:text="${applicationNumber}">NA</span></td>
 
 		</tr>
@@ -184,7 +182,7 @@
 			<td><span th:text="${ownerName}">NA</span></td>
 		</tr>
 		<tr>
-			<td>Licensee Contact No:</td>
+			<td>Contact No:</td>
 			<td><span th:text="${mobileNumber}">NA</span></td>
 		</tr>
 		<tr>
@@ -195,12 +193,6 @@
 			<td>Address:</td>
 			<td><span th:text="${address}">NA</span></td>
 		</tr>
-		<tr>
-			<td>Garbage ID Issuance Date:</td>
-			<td><span th:text="${createdTime}">NA</span></td>
-		</tr>
-
-		
 	</table>
 	<table class="qr-code-table">
 		<tr>
