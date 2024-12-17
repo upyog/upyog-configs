@@ -15376,28 +15376,28 @@
       {
         "module": "PT",
         "dateRefField": "date",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
         "indexName": "pt-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"PT\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}"
       },
       {
         "module": "TL",
         "dateRefField": "date",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
         "indexName": "tl-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"TL\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}}}}}}"
       },
       {
         "module": "W&S",
         "dateRefField": "date",
-        "requestQueryMap": "{\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
+        "requestQueryMap": "{\"ulb\" : \"ulb\",\"ward\" : \"ward\"}",
         "indexName": "ws-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"WS\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
       },
       {
         "module": "OBPS",
         "dateRefField": "date",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
         "indexName": "obps-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"OBPS\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
