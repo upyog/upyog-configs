@@ -15426,7 +15426,7 @@
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"TL\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}}}}}}"
       },
       {
-        "module": "W&S",
+        "module": "WS",
         "dateRefField": "date",
         "requestQueryMap": "{\"ulb\" : \"ulb\",\"ward\" : \"ward\"}",
         "indexName": "ws-national-dashboard-*",
@@ -15442,14 +15442,14 @@
       {
         "module": "FIRENOC",
         "dateRefField": "date",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
         "indexName": "firenoc-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"FNOC\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
       {
-        "module": "MC",
+        "module": "MCOLLECT",
         "dateRefField": "date",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
         "indexName": "mcollect-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"MC\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
