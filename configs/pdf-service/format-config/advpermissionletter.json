@@ -11,7 +11,7 @@
             "y": 15,
             "w": 565,
             "h": 811,
-            "lineWidth": 1,
+            "lineWidth": 1.5,
             "lineColor": "#000000"
           }
         ]
@@ -24,43 +24,43 @@
       {
         "style": "noc-head",
         "table": {
-          "widths": [100, "*", 200],
+          "widths": [60, "*", 120],
           "body": [
             [
               {
                 "image": "{{logoImage}}",
-                "width": 80,
-                "height": 45
+                "width": 40,
+                "height": 50
               },
               {
                 "stack": [
                   {
-                    "style": "header",
-                    "text": "Advertisement",
-                    "decoration": "underline"
+                    "text": "      {{logo-header}} {{Municipal_Corporation}}",
+                    "style": "receipt-logo-header"
                   },
                   {
-                    "style": "header",
-                    "text": "Permission Letter",
-                    "decoration": "underline"
+                    "text": "Advertisement Permission Letter",
+                    "style": "receipt-logo-sub-header"
                   }
                 ],
-                "alignment": "center",
-                "margin": [0, 0, 0, 0]
+                "alignment": "left",
+                "margin": [55, 10, 0, 0]
               },
               {
                 "stack": [
                   {
-                    "text": "{{website}}",
-                    "alignment": "right"
+                    "text": "{{website}}"
                   },
                   {
-                    "text": "{{email}}, {{phoneNumber}}",
-                    "alignment": "right"
+                    "text": "{{email}}"
+                  },
+                  {
+                    "text": "{{phoneNumber}}"
                   }
                 ],
+                "alignment": "right",
                 "color": "#484848",
-                "margin": [0, 0, 0, 0]
+                "margin": [-100, 0, -15, 10]
               }
             ]
           ]
@@ -68,9 +68,10 @@
         "layout": "noBorders"
       },
       {
+        "style": "booking-info",
         "stack": [
           {
-            "text": "Booking No- {{bookingNo}}",
+            "text": "Booking No- {{BOOKING_NO}}",
             "style": "bookingNo",
             "fontSize": 12,
             "alignment": "right",
@@ -93,7 +94,12 @@
             ],
             "style": "content",
             "margin": [30, 0, 0, 2]
-          },
+          }
+        ]
+      },
+      {
+        "style": "locality-info",
+        "stack": [
           {
             "text": [
               {
@@ -108,7 +114,7 @@
           {
             "text": [
               {
-                "text": "{{CITY}}." ,
+                "text": "{{CITY}}.",
                 "bold": false,
                 "margin": [0, 0, 0, 2]
               }
@@ -222,47 +228,137 @@
         "margin": [0, 0, 0, 0]
       },
       {
+        "style": "next-noc-table",
+        "table": {
+          "widths": ["100%", "30%", "50%"],
+          "body": [
+            [
+              {
+                "image": "{{qrcodeImage}}",
+                "style": "receipt-table-value-total-Qr",
+                "border": [false, false, false, false],
+                "width": 72,
+                "height": 72
+              }
+            ]
+          ]
+        },
+        "layout": {}
+      },
+      {
+        "style": "receipt-approver",
         "columns": [
           {
-            "text": "Date:      /      /",
-            "bold": true,
-            "alignment": "left",
-            "margin": [0, 50, 0, 0]
-          },
-          {
-            "text": "Commissioner/EO",
-            "bold": true,
+            "text": [
+              {
+                "text": "{{commissioner/eo}}",
+                "bold": true
+              }
+            ],
             "alignment": "right",
-            "margin": [0, 50, 0, 0]
+            "margin": [0, -60, 10, 1]
           }
         ]
+      },
+      {
+        "style": "no-signature",
+        "text": "{{no_signature}}"
       }
     ],
     "styles": {
-      "header": {
-        "fontSize": 18,
-        "bold": true,
-        "margin": [0, 0, 0, 10]
+      "noc-head": {
+        "margin": [5, -15, 0, 1]
       },
-      "bookingNo": {
+      "receipt-logo-header": {
+        "color": "#000000",
         "fontSize": 14,
         "bold": true,
-        "margin": [0, 0, 0, 5]
+        "letterSpacing": 0.74,
+        "margin": [13, 0, 0, 5]
       },
-      "subheader": {
-        "fontSize": 14,
-        "bold": true,
-        "margin": [0, 5, 0, 5]
-      },
-      "termsTitle": {
+      "receipt-logo-sub-header": {
+        "color": "#000000",
+        "decoration": "underline",
         "fontSize": 16,
         "bold": true,
-        "margin": [0, 5, 0, 5]
+        "letterSpacing": 0.6
       },
-      "tableCell": {
+      "noc-table": {
         "fontSize": 12,
+        "color": "#000000",
+        "margin": [-25, 10, -22, -8]
+      },
+      "next-noc-table": {
+        "fontSize": 12,
+        "color": "#000000",
+        "margin": [-25, 28, -22, -8]
+      },
+      "receipt-table-value": {
+        "color": "#000000",
+        "bold": true,
+        "fontSize": 12,
+        "fontWeight": 500,
+        "margin": [8, 2, 0, 2]
+      },
+      "receipt-table-value-total-Qr": {
+        "alignment": "right",
+        "margin": [0, -650, -5, 0]
+      },
+      "receipt-table-value-down": {
+        "color": "#000000",
         "bold": false,
-        "alignment": "left"
+        "fontSize": 12,
+        "fontWeight": 400,
+        "alignment": "left",
+        "margin": [3, 5, 0, 5]
+      },
+      "receipt-table": {
+        "color": "#000000",
+        "bold": false,
+        "fontSize": 12,
+        "fontWeight": 400,
+        "margin": [-10, 2, 0, 2]
+      },
+      "receipt-approver": {
+        "fontSize": 12,
+        "bold": true,
+        "margin": [-27, 50, -10, 0],
+        "color": "#484848"
+      },
+      "no-signature": {
+        "fontSize": 12,
+        "bold": true,
+        "margin": [5, -60, 20, 0],
+        "color": "#484848"
+      },
+      "pt-disclaimer": {
+        "fontSize": 12,
+        "margin": [-27, 10, -10, 0],
+        "color": "#484848"
+      },
+      "pt-disclaimer-value": {
+        "fontSize": 12,
+        "margin": [2, 3, 0, 0],
+        "color": "#484848"
+      },
+      "bookingNo": {
+        "fontSize": 12,
+        "bold": true,
+        "color": "#000000"
+      },
+      "content": {
+        "fontSize": 12,
+        "color": "#000000"
+      },
+      "subject": {
+        "fontSize": 12,
+        "bold": true,
+        "color": "#000000"
+      },
+      "termsTitle": {
+        "fontSize": 12,
+        "bold": true,
+        "color": "#000000"
       }
     }
   }
