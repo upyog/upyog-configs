@@ -14730,6 +14730,44 @@
     "insight": {},
     "_comment": " "
   },
+  "cumulativenooftransaction": {
+    "chartName": "NURT_NO_OF_TRANSACTION_CUMULATIVE",
+    "queries": [
+      {
+        "module": "PT",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "pt-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"month\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"transactionsForUsageCategory\"}}}}}}}}"
+      },
+      {
+        "module": "TL",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "tl-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"month\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"transactions\"}}}}}}}}"
+      },
+      {
+        "module": "WS",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
+        "indexName": "ws-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"month\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"transactions\"}}}}}}}}"
+      }
+    ],
+    "chartType": "line",
+    "valueType": "amount",
+    "action": "",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "aggregationPaths": [
+      "Collections"
+    ],
+    "isCumulative": true,
+    "interval": "month",
+    "insight": {},
+    "_comment": " "
+  },
   "todaysCollectionOverview": {
     "chartName": "NATIONAL_DSS_TODAYS_COLLECTION",
     "queries": [
