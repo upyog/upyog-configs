@@ -1,211 +1,311 @@
 {
     "key": "advpermissionletter",
-    "documentType": "ADVLETTER",
     "DataConfigs": {
-        "moduleName": "adv-services",
-        "version": "1.0.0",
-        "baseKeyPath": "$.bookingApplication[*]",
-        "entityIdPath": "$.id",
-        "isCommonTableBorderRequired": true,
-        "mappings": [
+      "serviceName": "rainmaker-common",
+      "version": "1.0.0",
+      "baseKeyPath": "$.bookingApplication[*]",
+      "entityIdPath": "$.id",
+      "isCommonTableBorderRequired": true,
+      "mappings": [
+        {
+          "topic": "common-pdf-generation-3",
+          "mappings": [
             {
-                "mappings": [
+              "direct": [
+                {
+                  "variable": "APPLICANT_NAME",
+                  "value": {
+                    "path": "$.applicantDetail.applicantName"
+                  }
+                },
+                {
+                    "variable": "BOOKING_DATE",
+                    "value": {
+                        "path": "$.cartDetails[0].bookingDate"
+                    }
+                },
+                {
+                  "variable": "LOCATION_BOOKED",
+                  "value": {
+                      "path": "$.cartDetails[0].location"
+                  }
+              },
+              {
+                  "variable": "FACE_AREA",
+                  "value": {
+                      "path": "$.cartDetails[0].faceArea"
+                  }
+              },
+                {
+                  "variable": "CITY",
+                  "value": {
+                      "path": "$.address.city"
+                  }
+              },
+              {
+                  "variable": "LOCALITY",
+                  "value": {
+                      "path": "$.address.locality"
+                  }
+              },
+                {
+                  "variable": "AdType",
+                  "value": {
+                     "path": "$.cartDetails[*].addType",
+                     "type": "array-join",
+                     "separator": ", "
+                  }
+              },
+                {
+                    "variable": "BOOKING_FROM_DATE",
+                    "value": {
+                        "path": "$.cartDetails[*].bookingFromTime"
+                    }
+                },
+                {
+                    "variable": "BOOKING_TO_DATE",
+                    "value": {
+                        "path": "$.cartDetails[1].bookingDate"
+                    }
+                },
+                {
+                  "variable": "APPLICANT_NAME",
+                  "value": {
+                    "path": "$.applicantDetail.applicantName"
+                  }
+                 
+                },
+                {
+                  "variable": "BOOKING_NO",
+                  "value": {
+                    "path": "$.bookingNo"
+                  }
+                },
+                {
+                  "variable": "AdType",
+                  "value": {
+                    "path": "$.cartDetails[*].addType"
+                  }
+                },
+                {
+                  "variable": "tenantid",
+                  "value": {
+                    "path": "$.tenantId"
+                  }
+                },
+                {
+                  "variable": "commissioner/eo",
+                  "value": {
+                    "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_COMMISSIONER_EO"
+                  },
+                  "type": "label",
+                  "localisation": {
+                    "required": true,
+                    "prefix": null,
+                    "module": "rainmaker-common"
+                  }
+                },
+                {
+                  "variable": "no_signature",
+                  "value": {
+                    "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_NO_SIGNATURE"
+                  },
+                  "type": "label",
+                  "localisation": {
+                    "required": true,
+                    "prefix": null,
+                    "module": "rainmaker-common"
+                  }
+                },
+                {
+                  "variable": "disclamer",
+                  "value": {
+                    "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_DISCLAIMER"
+                  },
+                  "type": "label",
+                  "localisation": {
+                    "required": true,
+                    "prefix": null,
+                    "module": "rainmaker-common"
+                  }
+                },
+                {
+                  "variable": "to",
+                  "value": {
+                    "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_TO"
+                  },
+                  "type": "label",
+                  "localisation": {
+                    "required": true,
+                    "prefix": null,
+                    "module": "rainmaker-common"
+                  }
+                },
+                {
+                  "variable": "Municipal_Corporation",
+                  "value": {
+                    "path": "PDF_STATIC_LABEL_MDMS_MUNICIPAL_CORPORATION"
+                  },
+                  "type": "label",
+                  "localisation": {
+                    "required": true,
+                    "prefix": null,
+                    "module": "rainmaker-common"
+                  }
+                }
+              ]
+            },
+            {
+              "externalAPI": [
+                {
+                  "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
+                  "queryParam": "moduleName=tenant&masterName=tenants&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}')%5D",
+                  "apiRequest": null,
+                  "responseMapping": [
                     {
-                        "direct": [
-                            {
-                                "variable": "municipal_corportaion",
-                                "value": {
-                                    "path": "PDF_STATIC_LABEL_CONSOLIDATED_TLCERTIFICATE_MUNICIPAL_CORPORATION"
-                                },
-                                "localisation": {
-                                    "required": true,
-                                    "prefix": null,
-                                    "module": "rainmaker-common"
-                                }
-                            },
-                            {
-                                "variable": "corporation_website",
-                                "value": {
-                                    "path": "PDF_STATIC_LABEL_MUTATION_WEBSITE"
-                                },
-                                "type": "label",
-                                "localisation": {
-                                    "required": true,
-                                    "prefix": null,
-                                    "module": "rainmaker-common"
-                                }
-                            },
-                            {
-                                "variable": "corporation_email",
-                                "value": {
-                                    "path": "PDF_STATIC_LABEL_MUTATION_EMAIL"
-                                },
-                                "type": "label",
-                                "localisation": {
-                                    "required": true,
-                                    "prefix": null,
-                                    "module": "rainmaker-common"
-                                }
-                            },
-                            {
-                                "variable": "bookingNo",
-                                "value": {
-                                    "path": "$.bookingNo"
-                                }
-                            },
-                            {
-                                "variable": "APPLICANT_NAME",
-                                "value": {
-                                    "path": "$.applicantDetail.applicantName"
-                                }
-                            },
-                            {
-                              "variable": "BOOKING_DATE",
-                              "value": {
-                                  "path": "$.cartDetails[0].bookingDate"
-                              }
-                          },
-                          {
-                            "variable": "LOCATION_BOOKED",
-                            "value": {
-                                "path": "$.cartDetails[0].location"
-                            }
-                        },
-                        {
-                            "variable": "FACE_AREA",
-                            "value": {
-                                "path": "$.cartDetails[0].faceArea"
-                            }
-                        },
-                          {
-                            "variable": "CITY",
-                            "value": {
-                                "path": "$.address.city"
-                            }
-                        },
-                        {
-                            "variable": "LOCALITY",
-                            "value": {
-                                "path": "$.address.locality"
-                            }
-                        },
-                          {
-                            "variable": "AdType",
-                            "value": {
-                               "path": "$.cartDetails[*].addType",
-                               "type": "array-join",
-                               "separator": ", "
-                            }
-                        },
-                          {
-                              "variable": "BOOKING_FROM_DATE",
-                              "value": {
-                                  "path": "$.cartDetails[*].bookingFromTime"
-                              }
-                          },
-                          {
-                              "variable": "BOOKING_TO_DATE",
-                              "value": {
-                                  "path": "$.cartDetails[1].bookingDate"
-                              }
-                          }
-                        ]
+                      "variable": "address",
+                      "value": "$.MdmsRes.tenant.tenants[0].address"
                     },
                     {
-                        "externalAPI": [
-                            {
-                                "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
-                                "queryParam": "moduleName=tenant&masterName=tenants&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}')%5D",
-                                "apiRequest": null,
-                                "responseMapping": [
-                                    {
-                                        "variable": "address",
-                                        "value": "$.MdmsRes.tenant.tenants[0].address"
-                                    },
-                                    {
-                                        "variable": "phoneNumber",
-                                        "value": "$.MdmsRes.tenant.tenants[0].contactNumber"
-                                    },
-                                    {
-                                        "variable": "website",
-                                        "value": "$.MdmsRes.tenant.tenants[0].domainUrl"
-                                    },
-                                    {
-                                        "variable": "email",
-                                        "value": "$.MdmsRes.tenant.tenants[0].emailId"
-                                    },
-                                    {
-                                        "variable": "logoImage",
-                                        "value": "$.MdmsRes.tenant.tenants[0].logoId",
-                                        "type": "image"
-                                    }
-                                ]
-                            },
-                            {
-                                "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
-                                "queryParam": "moduleName=Advertisement&masterName=AdvServices&tenantId=pg",
-                                "apiRequest": null,
-                                "responseMapping": [
-                                  {
-                                      "variable": "terms",
-                                      "value": "$.MdmsRes.Advertisement.AdvServices[0].termsAndCondition"
-                                  }
-                              ]
-                          },
-                          {
-                            "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
-                            "queryParam": "moduleName=Advertisement&masterName=AdvServices&tenantId=pg",
-                              "apiRequest": null,
-                              "responseMapping": [
-                                {
-                                  "variable": "TERMS",
-                                  "value": "$.MdmsRes.Advertisement.AdvServices[0].termsAndCondition"
-                                }
-                              ]
-                            },
-                            {
-                                "path": "http://egov-workflow-v2:8080/egov-workflow-v2/egov-wf/process/_search",
-                                "queryParam": "businessIds=$.bookingNo,history=true,tenantId=$.tenantId",
-                                "apiRequest": null,
-                                "responseMapping": [
-                                    {
-                                        "variable": "approved_by_value",
-                                        "value": "$.ProcessInstances[?(@.action == 'APPROVE')].assigner.name"
-                                    },
-                                    {
-                                        "variable": "Approval_Date",
-                                        "value": "$.ProcessInstances[?(@.action == 'APPROVE')].auditDetails.lastModifiedTime",
-                                        "type": "date"
-                                    }
-                                ]
-                            },    
-                            {
-                             "path": "http://collection-services:8080/collection-services/payments/adv-services/_search",
-                             "queryParam": "tenantId=pg.mohali,consumerCode=$.bookingNo",
-                              "apiRequest": null,
-                              "responseMapping": [
-                                {
-                                  "variable": "totalAmount",
-                                  "value": "Payments[0].totalDue"
-                                },
-                                {
-                                  "variable": "BOOKING_FEES",
-                                  "value": "$.bookingFees"
-                                },
-                                {
-                                  "variable": "CGST",
-                                  "value": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[0].amount"
-                                },
-                                {
-                                  "variable": "SGST",
-                                  "value": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[2].amount"
-                                }
-                              ]
-                            }
-                        ]
+                      "variable": "phoneNumber",
+                      "value": "$.MdmsRes.tenant.tenants[0].contactNumber"
+                    },
+                    {
+                      "variable": "website",
+                      "value": "$.MdmsRes.tenant.tenants[0].domainUrl"
+                    },
+                    {
+                      "variable": "email",
+                      "value": "$.MdmsRes.tenant.tenants[0].emailId"
+                    },
+                    {
+                      "variable": "logoImage",
+                      "value": "$.MdmsRes.tenant.tenants[0].logoId",
+                      "type": "image"
+                    },
+                    {
+                      "variable": "logo-header",
+                      "value": "$.MdmsRes.tenant.tenants[0].code",
+                      "localisation": {
+                        "required": true,
+                        "prefix": "TENANT_TENANTS",
+                        "module": "rainmaker-common"
+                      }
                     }
-                ]
+                  ]
+                },
+                {
+                    "path": "http://collection-services:8080/collection-services/payments/adv-services/_search",
+                    "queryParam": "tenantId=pg.mohali,consumerCode=$.bookingNo",
+                     "apiRequest": null,
+                     "responseMapping": [
+                       {
+                         "variable": "totalAmount",
+                         "value": "Payments[0].totalDue"
+                       },
+                       {
+                         "variable": "BOOKING_FEES",
+                         "value": "$.bookingFees"
+                       },
+                       {
+                         "variable": "CGST",
+                         "value": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[0].amount"
+                       },
+                       {
+                         "variable": "SGST",
+                         "value": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[2].amount"
+                       }
+                     ]
+                   },
+                {
+                  "path": "http://adv-services:8080/adv-services/booking/v1/_search",
+                  "queryParam": "tenantId=pg.mohali",
+                  "apiRequest": null,
+                  "responseMapping": [
+                    {
+                      "variable": "applicantName",
+                      "value": "bookingApplication[0].applicantDetail.applicantName"
+                    }
+                  ]
+                },
+                {
+                    "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
+                    "queryParam": "moduleName=Advertisement&masterName=AdvServices&tenantId=pg",
+                    "apiRequest": null,
+                    "responseMapping": [
+                      {
+                          "variable": "terms",
+                          "value": "$.MdmsRes.Advertisement.AdvServices[0].termsAndCondition"
+                      }
+                  ]
+              },
+              {
+                "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
+                "queryParam": "moduleName=Advertisement&masterName=AdvServices&tenantId=pg",
+                  "apiRequest": null,
+                  "responseMapping": [
+                    {
+                      "variable": "TERMS",
+                      "value": "$.MdmsRes.Advertisement.AdvServices[0].termsAndCondition"
+                    }
+                  ]
+                },
+                {
+                    "path": "http://egov-workflow-v2:8080/egov-workflow-v2/egov-wf/process/_search",
+                    "queryParam": "businessIds=$.bookingNo,history=true,tenantId=$.tenantId",
+                    "apiRequest": null,
+                    "responseMapping": [
+                        {
+                            "variable": "approved_by_value",
+                            "value": "$.ProcessInstances[?(@.action == 'APPROVE')].assigner.name"
+                        },
+                        {
+                            "variable": "Approval_Date",
+                            "value": "$.ProcessInstances[?(@.action == 'APPROVE')].auditDetails.lastModifiedTime",
+                            "type": "date"
+                        }
+                    ]
+                },
+                {
+                  "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
+                  "queryParam": "moduleName=tenant&masterName=footer&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}' %26%26 @.service=='{$.paymentDetails[0].businessService}')%5D",
+                  "apiRequest": null,
+                  "responseMapping": [
+                    {
+                      "variable": "variable11",
+                      "value": "$.MdmsRes.tenant.footer[0].receiptFooterContent.*",
+                      "type": "array",
+                      "format": {
+                        "type": "string",
+                        "scema": [
+                          {
+                            "variable": "disclaimerContent",
+                            "value": "disclaimer",
+                            "type": "string",
+                            "localisation": {
+                              "required": true,
+                              "prefix": null,
+                              "module": "rainmaker-common"
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "qrcodeConfig": [
+                {
+                  "variable": "qrcodeImage",
+                  "value": "digit-ui/citizen/payment/verification?tenantId={{tenantid}}&receiptNumber={{receiptNo}}"
+                }
+              ]
             }
-        ]
+          ]
+        }
+      ]
     }
-}
+  }
+  

@@ -1,51 +1,52 @@
 ReportDefinitions:
 - reportName: StreetVendingReport
   summary: Daily Register Report for street vending
+  decryptionPathId: ObpsDailyCollectionReport
   version: 1.0.0
   moduleName: sv-report
   sourceColumns:
   - name: svapplicationno
-    label: Application Number
+    label: report.sv-services.svapplicationno 
     type: string
     source: sv-services
     total: false
   - name: vendorname
-    label: Vendor Name
+    label: report.sv-services.vendorname
     type: string
     source: sv-services
     total: false
   - name: addresslocality
-    label: Locality
+    label: report.sv-services.addresslocality
     type: string
     source: sv-services
     total: false
   - name: svvendingactivity
-    label: Vending Type
+    label: report.sv-services.svvendingactivity
     type: string
     source: sv-services
     total: false
   - name: svvendingzone
-    label: Vending Zone
+    label: report.sv-services.svvendingzone
     type: string
     source: sv-services
     total: false
   - name: svcertificateno
-    label: Certificate Number
+    label: report.sv-services.svcertificateno
     type: string
     source: sv-services
     total: false
   - name: svapplicationstatus
-    label: Application Status
+    label: report.sv-services.svapplicationstatus
     type: string
     source: sv-services
     total: false
   - name: approvedby
-    label: Approved By
+    label: report.sv-services.approvedby
     type: string
     source: sv-services
     total: false
   - name: ampaid
-    label: Amount Paid
+    label: report.sv-services.ampaid
     type: string
     source: sv-services
     total: false
