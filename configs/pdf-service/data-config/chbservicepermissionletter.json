@@ -1,5 +1,5 @@
 {
-    "key": "chbservicepermissionletter",
+    "key": "chbpermissionletter",
     "DataConfigs": {
       "serviceName": "rainmaker-common",
       "version": "1.0.0",
@@ -25,17 +25,47 @@
                     }
                 },
                 {
+                  "variable": "PURPOSE",
+                  "value": {
+                      "path": "$.purpose.purpose"
+                  }
+              },
+                {
                   "variable": "LOCATION_BOOKED",
                   "value": {
                       "path": "$.cartDetails[0].location"
                   }
               },
               {
+                "variable": "CODE",
+                "value": {
+                    "path": "$.communityHallName"
+                }
+            },
+              {
                   "variable": "FACE_AREA",
                   "value": {
                       "path": "$.cartDetails[0].faceArea"
                   }
               },
+              {
+                "variable": "AC",
+                "value": {
+                    "path": "$.applicantDetail.accountNumber"
+                }
+            },
+            {
+              "variable": "IFSC",
+              "value": {
+                  "path": "$.applicantDetail.ifscCode"
+              }
+          },
+          {
+            "variable": "BANK",
+            "value": {
+                "path": "$.applicantDetail.bankName"
+            }
+        },
                 {
                   "variable": "CITY",
                   "value": {
@@ -57,17 +87,17 @@
                   }
               },
                 {
-                    "variable": "BOOKING_FROM_DATE",
+                    "variable": "BOOKING_TO_DATE1",
                     "value": {
-                        "path": "$.cartDetails[*].bookingFromTime"
+                        "path": "$.bookingSlotDetails[1].bookingDate"
                     }
                 },
                 {
-                    "variable": "BOOKING_TO_DATE",
-                    "value": {
-                        "path": "$.cartDetails[1].bookingDate"
-                    }
-                },
+                  "variable": "BOOKING_TO_DATE",
+                  "value": {
+                      "path": "$.bookingSlotDetails[0].bookingDate"
+                  }
+              },
                 {
                   "variable": "APPLICANT_NAME",
                   "value": {
