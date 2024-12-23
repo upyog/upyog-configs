@@ -1,22 +1,6 @@
 {
-  "key": "chbpermissionletter",
+  "key": "chbservicepermissionletter",
   "config": {
-    "pageMargins": [40, 40, 40, 40],
-    "background": [
-      {
-        "canvas": [
-          {
-            "type": "rect",
-            "x": 15,
-            "y": 15,
-            "w": 565,
-            "h": 811,
-            "lineWidth": 1,
-            "lineColor": "#000000"
-          }
-        ]
-      }
-    ],
     "defaultStyle": {
       "font": "Cambay"
     },
@@ -24,47 +8,46 @@
       {
         "style": "noc-head",
         "table": {
-          "widths": [100, "*", 200],
+          "widths": [60, "*", 120],
           "body": [
             [
               {
                 "image": "{{logoImage}}",
-                "width": 80,
-                "height": 45
+                "width": 50,
+                "height": 61.25
               },
               {
                 "stack": [
                   {
-                    "style": "header",
-                    "text": "Community Hall",
-                    "decoration": "underline"
+                    "text": "{{logo-header}} {{Municipal_Corporation}}",
+                    "style": "receipt-logo-header"
                   },
                   {
-                    "style": "header",
-                    "text": "Permission Letter",
-                    "decoration": "underline"
+                    "text": "{{payment_receipt}}",
+                    "style": "receipt-logo-sub-header"
                   }
                 ],
-                "alignment": "center",
-                "margin": [0, 0, 0, 0]
+                "alignment": "left",
+                "margin": [0, 10, 0, 0]
               },
               {
                 "stack": [
                   {
-                    "text": "{{address}}",
-                    "alignment": "right"
+                    "text": "{{address}}"
                   },
                   {
-                    "text": "{{website}}",
-                    "alignment": "right"
+                    "text": "{{phoneNumber}}"
                   },
                   {
-                    "text": "{{email}}, {{phoneNumber}}",
-                    "alignment": "right"
+                    "text": "{{website}}"
+                  },
+                  {
+                    "text": "{{email}}"
                   }
                 ],
+                "alignment": "right",
                 "color": "#484848",
-                "margin": [0, 0, 0, 0]
+                "margin": [-100, 0, -25, 0]
               }
             ]
           ]
@@ -74,8 +57,9 @@
       {
         "stack": [
           {
-            "text": "Booking No- {{bookingNo}}",
+            "text": "Booking No- {{BOOKING_NO}}",
             "style": "bookingNo",
+            "bold": true,
             "fontSize": 12,
             "alignment": "right",
             "margin": [0, 10, 0, 0]
@@ -91,12 +75,12 @@
             "margin": [30, 0, 0, 2]
           },
           {
-            "text": "{{APPLICANT_LOCALITY}},",
+            "text": "{{LOCALITY}},",
             "style": "content",
             "margin": [30, 0, 0, 5]
           },
           {
-            "text": "{{APPLICANT_CITY}}.",
+            "text": "{{CITY}}.",
             "style": "content",
             "margin": [30, 0, 0, 5]
           },
@@ -259,7 +243,7 @@
           },
           {
             "text": "{{terms}}",
-            "style": "punjabiText",
+            "style": "content",
             "margin": [0, 5, 0, 5]
           }
         ],
@@ -267,57 +251,135 @@
         "margin": [0, 0, 0, 0]
       },
       {
+        "style": "next-noc-table",
+        "table": {
+          "widths": ["60%", "30%", "10%"],
+          "body": [
+            [
+              {
+                "image": "{{qrcodeImage}}",
+                "style": "receipt-table-value-total-Qr",
+                "border": [false, true, true, true],
+                "width": 72,
+                "height": 72
+              }
+            ]
+          ]
+        },
+        "layout": {}
+      },
+      {
+        "style": "receipt-approver",
         "columns": [
           {
-            "text": "Date:      /      /",
+            "text": [
+              {
+                "text": "{{commissioner/eo}}",
+                "bold": true
+              }
+            ],
+            "alignment": "right",
+            "margin": [0, 0, -10, 1]
+          }
+        ]
+      },
+      {
+        "style": "no-signature",
+        "text": "{{no_signature}}"
+      },
+      {
+        "style": "pt-disclaimer",
+        "stack": [
+          {
+            "text": "{{disclamer}}",
             "bold": true,
-            "alignment": "left",
-            "margin": [0, 50, 0, 0]
+            "style": "pt-disclaimer-value"
           },
           {
-            "text": "Commissioner/EO",
-            "bold": true,
-            "alignment": "right",
-            "margin": [0, 50, 0, 0]
+            "style": "pt-disclaimer-value",
+            "table": {
+              "widths": ["120%", "*", "*", "*"],
+              "body": [
+                "{{#variable11}}[{\"text\":\"{{disclaimerContent}}\",\"border\":[false,false,false,false],\"style\":\"pt-disclaimer-value\"}]{{/variable11}}"
+              ]
+            },
+            "layout": {}
           }
         ]
       }
-      
     ],
     "styles": {
-      "header": {
-        "fontSize": 18,
-        "bold": true,
-        "margin": [0, 0, 0, 10]
+      "noc-head": {
+        "margin": [-30, -30, 0, 1]
       },
-      "bookingNo": {
+      "receipt-logo-header": {
+        "color": "#000000",
         "fontSize": 14,
         "bold": true,
+        "letterSpacing": 0.74,
         "margin": [0, 0, 0, 5]
       },
-      "subheader": {
-        "fontSize": 14,
-        "bold": true,
-        "margin": [0, 5, 0, 5]
+      "receipt-logo-sub-header": {
+        "color": "#000000",
+        "fontSize": 12,
+        "letterSpacing": 0.6
       },
-      "termsTitle": {
-        "fontSize": 16,
-        "bold": true,
-        "margin": [0, 5, 0, 5]
+      "noc-table": {
+        "fontSize": 12,
+        "color": "#000000",
+        "margin": [-25, 10, -22, -8]
       },
-      "subject": {
+      "next-noc-table": {
+        "fontSize": 12,
+        "color": "#000000",
+        "margin": [-25, 28, -22, -8]
+      },
+      "receipt-table-value": {
+        "color": "#000000",
+        "bold": true,
+        "fontSize": 12,
+        "fontWeight": 500,
+        "margin": [8, 2, 0, 2]
+      },
+      "receipt-table-value-total-Qr": {
+        "alignment": "right",
+        "margin": [0, 3, 10, 0]
+      },
+      "receipt-table-value-down": {
+        "color": "#000000",
+        "bold": false,
+        "fontSize": 12,
+        "fontWeight": 400,
+        "alignment": "left",
+        "margin": [3, 5, 0, 5]
+      },
+      "receipt-table": {
+        "color": "#000000",
+        "bold": false,
+        "fontSize": 12,
+        "fontWeight": 400,
+        "margin": [-10, 2, 0, 2]
+      },
+      "receipt-approver": {
         "fontSize": 12,
         "bold": true,
-        "margin": [0, 0, 0, 5]
+        "margin": [-27, 50, -10, 0],
+        "color": "#484848"
       },
-      "tableCell": {
-        "fontSize": 9,
-        "margin": [0, 1, 0, 1]
+      "no-signature": {
+        "fontSize": 12,
+        "margin": [-27, 10, -10, 0],
+        "color": "#484848"
       },
-      "punjabiText": {
-        "font": "AnmolUni",
-        "fontSize": 10,
-        "margin": [0, 5, 0, 5]
+      "pt-disclaimer": {
+        "fontSize": 12,
+        "margin": [-27, 10, -10, 0],
+        "color": "#484848"
+      },
+      "pt-disclaimer-value": {
+        "fontSize": 12,
+        "margin": [2, 3, 0, 0],
+        "color": "#484848"
       }
     }
   }
