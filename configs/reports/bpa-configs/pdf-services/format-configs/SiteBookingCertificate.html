@@ -153,9 +153,9 @@
 			</td>
 			<td>
 				<h2 class="header-text"><span th:text="${ulbType}">NA</span>, <span th:text="${ulbName}">NA</span></h2>
-				<h3 class="service-name">New Trade License</h3>
-				<span class="license-description">(UNDER SECTION 202 OF Himachal Pradesh Municipal ACT, 1994)</span> <br />
-				<span class="license-description">Issued to: <span th:text="${applicationNumber}">NA</span></span>
+				<h3 class="service-name">Permission Confirmation</h3>
+				<span class="license-description">Dates: <span th:text="${fromDate}">NA</span> to <span th:text="${toDate}">NA</span></span> <br />
+				<span class="license-description"><span th:text="${siteName}">NA</span></span>
 			</td>
 			<td>
 				<img class="udd-logo"
@@ -166,45 +166,49 @@
 	</table>
 	<table class="license-details">
 		<tr>
-			<td>Trade License No:</td>
-			<td><span th:text="${applicationNumber}">NA</span></td>
+			<td>Permission Start Date:</td>
+			<td><span th:text="${fromDate}">NA</span></td>
 
 		</tr>
 		<tr>
-			<td>Trade Registration No:</td>
-			<td><span th:text="${fromDate}">NA</span></td>
-		</tr>
-		<tr>
-			<td>Trade Name:</td>
+			<td>Permission End Date:</td>
 			<td><span th:text="${toDate}">NA</span></td>
 		</tr>
 		<tr>
-			<td>Trade Premises Address:</td>
-			<td><span th:text="${siteAddress}">NA</span></td>
-		</tr>
-		<tr>
-			<td>License Issued Date:</td>
-			<td><span th:text="${siteName}">NA</span></td>
-		</tr>
-		<tr>
-			<td>License Validity:</td>
-			<td><span th:text="${pinCode}">NA</span></td>
-		</tr>
-		<tr>
-			<td>Trade Sector Category:</td>
-			<td><span th:text="${siteManagerContact}">NA</span></td>
-		</tr>
-		<tr>
-			<td>Trade Type Category:</td>
-			<td><span th:text="${siteManagerName}">NA</span></td>
-		</tr>
-		<tr>
-			<td>Licensee Name:</td>
+			<td>Site ID:</td>
 			<td><span th:text="${siteId}">NA</span></td>
 		</tr>
 		<tr>
-			<td>Licensee Contact No:</td>
-			<td><span th:text="${applicantName}">NA</span></td>
+			<td>Applied By:</td>
+			<td><span th:text="${siteName}">NA</span></td>
+		</tr>
+		<tr>
+			<td>Mobile No:</td>
+			<td><span th:text="${mobileNumber}">NA</span></td>
+		</tr>
+		<tr>
+			<td>Application Date:</td>
+			<td><span th:text="${createdDate}">NA</span></td>
+		</tr>
+		<tr>
+			<td>Application Status:</td>
+			<td><span th:text="${status}">NA</span></td>
+		</tr>
+		<tr>
+			<td>Per Day Cost :</td>
+			<td><span th:text="${siteCost}">NA</span></td>
+		</tr>
+		<tr>
+			<td>Number of days :</td>
+			<td><span th:text="${periodInDays}">NA</span></td>
+		</tr>
+		<tr>
+			<td>Security Amount  :</td>
+			<td><span th:text="${securityAmount}">NA</span></td>
+		</tr>
+		<tr>
+			<td>Total  :</td>
+			<td><span th:text="${total}">NA</span></td>
 		</tr>
 	</table>
 	<table class="qr-code-table">
@@ -215,6 +219,9 @@
 		</tr>
 	</table>
 
+	<h2 class="terms-condition">Term and Conditions of this License:</h2>
+	<p class="terms-condition-details">
+	</p>
 </body>
 
 </html>
