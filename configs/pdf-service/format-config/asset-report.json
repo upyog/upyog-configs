@@ -13,7 +13,7 @@
             [
               {
                 "image": "{{logoImage}}",
-                "width": 80,
+                "width": 70,
                 "height": 40,
                 "margin": [5, 10, 0, 0]
               },
@@ -21,15 +21,23 @@
                 "stack": [
                   {
                     "text": "{{logo-header}} {{Municipal_Corporation}}",
-                    "style": "receipt-logo-header"
+                    "style": "receipt-logo-header",
+                    "alignment": "left",
+                "fontSize": 14,
+                "bold": true,
+                "margin": [5, 5, 0, 0]
                   },
+                  
                   {
                     "text": "{{asset_receipt}}",
-                    "style": "receipt-logo-sub-header"
+                    "style": "receipt-logo-sub-header",
+                    "alignment": "left",
+                    "fontSize": 16,
+                    "bold": true,
+                    "decoration": "underline",
+                    "margin": [5, 5, 0, 0]
                   }
-                ],
-                "alignment": "left",
-                "margin": [5, 5, 0, 0]
+                ]
               },
               {
                 "stack": [
@@ -45,7 +53,7 @@
                 ],
                 "alignment": "right",
                 "color": "#484848",
-                "margin": [-100, 0, -25, 0]
+                "margin": [-100, 0, -15, 0]
               }
             ]
           ]
@@ -174,7 +182,7 @@
                 "style": "receipt-table-value"
               },
               {
-                "text": "{{tenantId}}",
+                "text": "{{City}}",
                 "border": [false, false, true, false],
                 "style": "receipt-table",
                 "font": "Roboto"
@@ -209,6 +217,89 @@
       {
         "style": "next-noc-table",
         "table": {
+          "widths": ["25%", "25%", "25%", "25%"],
+          "body": [
+            [
+              {
+                "table": {
+                  "body": [
+                    [
+                      {
+                        "text": [
+                          { "text": "Purchase Order Number: ", "bold": true },
+                          { "text": "{{assetPurchaseOrderNumber}}", "bold": false }
+                        ],
+                        "border": [false, false, false, false]
+                      }
+                    ]
+                  ]
+                },
+                "border": [true, true, true, true], 
+                "style": "receipt-table-value-down"
+              },
+              {
+                "table": {
+                  "body": [
+                    [
+                      {
+                        "text": [
+                          { "text": "Book Value: ₹ ", "bold": true },
+                          { "text": "{{assetBookValue}}", "bold": false },
+                          { "text": "/-", "bold": true }
+                        ],
+                        "border": [false, false, false, false]
+                      }
+                    ]
+                  ]
+                },
+                "border": [true, true, true, true], 
+                "style": "receipt-table-value-down"
+              },
+              {
+                "table": {
+                  "body": [
+                    [
+                      {
+                        "text": [
+                          { "text": "Acquisition Cost: ₹ ", "bold": true },
+                          { "text": "{{assetAcquisitionCost}}", "bold": false },
+                          { "text": "/-", "bold": true }
+                        ],
+                        "border": [false, false, false, false]
+                      }
+                    ]
+                  ]
+                },
+                "border": [true, true, true, true], 
+                "style": "receipt-table-value-down"
+              },
+              {
+                "table": {
+                  "body": [
+                    [
+                      {
+                        "text": [
+                          { "text": "Purchase Cost: ₹ ", "bold": true },
+                          { "text": "{{assetPurchaseCost}}", "bold": false },
+                          { "text": "/-", "bold": true }
+                        ],
+                        "border": [false, false, false, false]
+                      }
+                    ]
+                  ]
+                },
+                "border": [true, true, true, true], 
+                "style": "receipt-table-value-down"
+              }
+            ]
+            
+          ]
+        },
+        "layout": {}
+      },      
+      {
+        "style": "next-noc-table",
+        "table": {
           "widths": ["60%", "30%", "10%"],
           "body": [
             [
@@ -224,13 +315,13 @@
                     ],
                     [
                       {
-                        "text": "{{addressDetailsDoorNo}}, {{addressDetailsAddressLine1}},",
+                        "text": "{{addressLine1}}, {{addressLine2}},",
                         "border": [false, false, false, false]
                       }
                     ],
                     [
                       {
-                        "text": "{{addressDetailsAddressLine2}}",
+                        "text": "{{City}}",
                         "border": [false, false, false, false]
                       }
                     ]
