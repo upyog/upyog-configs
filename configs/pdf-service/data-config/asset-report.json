@@ -3,7 +3,7 @@
   "DataConfigs": {
     "serviceName": "rainmaker-common",
     "version": "1.0.0",
-    "baseKeyPath": "$.Asset.*",
+    "baseKeyPath": "$.Assets.*",
     "entityIdPath": "$.id",
     "isCommonTableBorderRequired": true,
     "mappings": [
@@ -137,7 +137,7 @@
               {
                 "variable": "assetCurrentUsage",
                 "value": {
-                  "path": "$.assetCurrentUsage"
+                  "path": "$.assetUsage"
                 }
               },
 
@@ -159,7 +159,24 @@
                   "path": "$.assetClassification"
                 }
               },
-
+              {
+                "variable": "addressLine1",
+                "value": {
+                  "path": "$.addressDetails.addressLine1"
+                }
+              },
+              {
+                "variable": "addressLine2",
+                "value": {
+                  "path": "$.addressDetails.addressLine2"
+                }
+              },
+              {
+                "variable": "City",
+                "value": {
+                  "path": "$.addressDetails.city"
+                }
+              },
               {
                 "variable": "asset_parent_category",
                 "value": {
@@ -197,7 +214,42 @@
                   "path": "$.assetCategory"
                 }
               },              
-             
+              {
+                "variable": "asset_BookValue",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_ASSET_RECEIPT_ASSET_BOOKVALUE"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-asset"
+                }
+              },
+              {
+                "variable": "assetBookValue",
+                "value": {
+                  "path": "$.bookValue"
+                }
+              }, 
+              {
+                "variable": "assetAcquisitionCost",
+                "value": {
+                  "path": "$.acquisitionCost"
+                }
+              }, 
+              {
+                "variable": "assetPurchaseOrderNumber",
+                "value": {
+                  "path": "$.purchaseOrderNumber"
+                }
+              },
+              {
+                "variable": "assetPurchaseCost",
+                "value": {
+                  "path": "$.purchaseCost"
+                }
+              },
               {
                 "variable": "tenant_id",
                 "value": {
