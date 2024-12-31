@@ -38,8 +38,8 @@ serviceMaps:
                         purchaseCost,
                         acquisitionCost,
                         bookValue,
-                        lifeofasset,
-                        modeofpossessionoracquisition,
+                        lifeOfAsset,
+                        modeOfPossessionOrAcquisition,
                         assetType,
                         assetUsage,
                         assetStatus
@@ -79,8 +79,8 @@ serviceMaps:
             - jsonPath: $.Asset.purchaseCost
             - jsonPath: $.Asset.acquisitionCost
             - jsonPath: $.Asset.bookValue
-            - jsonPath: $.Asset.lifeofasset
-            - jsonPath: $.Asset.modeofpossessionoracquisition
+            - jsonPath: $.Asset.lifeOfAsset
+            - jsonPath: $.Asset.modeOfPossessionOrAcquisition
             - jsonPath: $.Asset.assetType
             - jsonPath: $.Asset.assetUsage
             - jsonPath: $.Asset.assetStatus
@@ -191,8 +191,8 @@ serviceMaps:
                     purchaseCost = ?,
                     acquisitionCost = ?,
                     bookValue = ?,
-                    lifeofasset = ?,
-                    modeofpossessionoracquisition = ?,
+                    lifeOfAsset = ?,
+                    modeOfPossessionOrAcquisition = ?,
                     assetType = ?,
                     assetUsage = ?,
                     assetStatus = ?
@@ -228,8 +228,8 @@ serviceMaps:
             - jsonPath: $.Asset.purchaseCost
             - jsonPath: $.Asset.acquisitionCost
             - jsonPath: $.Asset.bookValue
-            - jsonPath: $.Asset.lifeofasset
-            - jsonPath: $.Asset.modeofpossessionoracquisition
+            - jsonPath: $.Asset.lifeOfAsset
+            - jsonPath: $.Asset.modeOfPossessionOrAcquisition
             - jsonPath: $.Asset.assetType
             - jsonPath: $.Asset.assetUsage
             - jsonPath: $.Asset.assetStatus
