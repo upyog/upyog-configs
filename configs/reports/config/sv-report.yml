@@ -1,52 +1,52 @@
 ReportDefinitions:
 - reportName: StreetVendingReport
+  decryptionPathId: TradeLicenseDailyCollectionReport
   summary: Daily Register Report for street vending
-  decryptionPathId: ObpsDailyCollectionReport
   version: 1.0.0
   moduleName: sv-report
   sourceColumns:
   - name: svapplicationno
-    label: report.sv-services.svapplicationno 
+    label: Application Number
     type: string
     source: sv-services
     total: false
   - name: vendorname
-    label: report.sv-services.vendorname
+    label: Vendor Name
     type: string
     source: sv-services
     total: false
   - name: addresslocality
-    label: report.sv-services.addresslocality
+    label: Locality
     type: string
     source: sv-services
     total: false
   - name: svvendingactivity
-    label: report.sv-services.svvendingactivity
+    label: Vending Type
     type: string
     source: sv-services
     total: false
   - name: svvendingzone
-    label: report.sv-services.svvendingzone
+    label: Vending Zone
     type: string
     source: sv-services
     total: false
   - name: svcertificateno
-    label: report.sv-services.svcertificateno
+    label: Certificate Number
     type: string
     source: sv-services
     total: false
   - name: svapplicationstatus
-    label: report.sv-services.svapplicationstatus
+    label: Application Status
     type: string
     source: sv-services
     total: false
   - name: approvedby
-    label: report.sv-services.approvedby
+    label: Approved By
     type: string
     source: sv-services
     total: false
   - name: ampaid
-    label: report.sv-services.ampaid
+    label: Amount Paid
     type: string
     source: sv-services
     total: false
@@ -86,5 +86,4 @@ ReportDefinitions:
     isMandatory: true
     searchClause: AND sv.createdtime  <= $toDate
  
-  query: select usr.uuid as uuid, sv.application_no as svapplicationno, sv.createdtime as svcreatedtime, sv.certificate_no as svcertificateno, sv.application_status as svapplicationstatus, sv.vending_activity as svvendingactivity, sv.vending_zone as svvendingzone, vendor.application_id as vendorapplicationid, vendor.name as vendorname, address.locality as addresslocality, address.locality_code as addresslocalitycode, bill.consumercode as consumercode, pdetail.amountpaid as ampaid, case when sv.application_status='APPROVED' then usr.name else '-NA-' end as approvedby from eg_sv_street_vending_detail sv left join eg_sv_vendor_detail vendor on sv.application_id = vendor.application_id left join eg_sv_address_detail address on vendor.id = address.vendor_id left join eg_user usr on sv.lastmodifiedby = usr.uuid left join egcl_bill bill on sv.application_no = bill.consumercode left join egcl_paymentdetail pdetail on bill.id = pdetail.billid where 1=1
-
+  query: SELECT usr.uuid AS uuid, sv.application_no AS svapplicationno, sv.createdtime AS svcreatedtime, sv.certificate_no AS svcertificateno, sv.application_status AS svapplicationstatus, sv.vending_activity AS svvendingactivity, sv.vending_zone AS svvendingzone, vendor.application_id AS vendorapplicationid, vendor.name AS vendorname, address.locality AS addresslocality, address.locality_code AS addresslocalitycode, bill.consumercode AS consumercode, pdetail.amountpaid AS ampaid, CASE WHEN sv.application_status='APPROVED' THEN usr.name ELSE '-NA-' END AS approvedby FROM eg_sv_street_vending_detail sv LEFT JOIN eg_sv_vendor_detail vendor ON sv.application_id = vendor.application_id LEFT JOIN eg_sv_address_detail address ON vendor.id = address.vendor_id LEFT JOIN eg_user usr ON sv.lastmodifiedby = usr.uuid LEFT JOIN egcl_bill bill ON sv.application_no = bill.consumercode LEFT JOIN egcl_paymentdetail pdetail ON bill.id = pdetail.billid
