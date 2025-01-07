@@ -1,0 +1,183 @@
+serviceMaps:
+  serviceName: asset-services
+  mappings:
+
+    # Create Maintenance Record and Associated Documents
+    - version: 1.0
+      description: Persists maintenance details and associated documents in the asset maintenance table
+      fromTopic: save-asset-maintenance
+      isTransaction: true
+      queryMaps:
+
+        # Insert Maintenance Record
+        - query: |
+            INSERT INTO eg_asset_maintenance (
+              maintenance_id,
+              asset_id,
+              current_life_of_asset,
+              is_warranty_expired,
+              is_amc_expired,
+              warranty_status,
+              amc_details,
+              maintenance_type,
+              payment_type,
+              cost_of_maintenance,
+              vendor,
+              maintenance_cycle,
+              parts_added_or_replaced,
+              additional_details,
+              created_by,
+              created_at,
+              last_modified_by,
+              last_modified_at,
+              post_condition_remarks,
+              pre_condition_remarks,
+              description
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: AssetMaintenance
+          jsonMaps:
+            - jsonPath: $.AssetMaintenance.maintenanceId
+            - jsonPath: $.AssetMaintenance.assetId
+            - jsonPath: $.AssetMaintenance.currentLifeOfAsset
+            - jsonPath: $.AssetMaintenance.isWarrantyExpired
+            - jsonPath: $.AssetMaintenance.isAMCExpired
+            - jsonPath: $.AssetMaintenance.warrantyStatus
+            - jsonPath: $.AssetMaintenance.amcDetails
+            - jsonPath: $.AssetMaintenance.maintenanceType
+            - jsonPath: $.AssetMaintenance.paymentType
+            - jsonPath: $.AssetMaintenance.costOfMaintenance
+            - jsonPath: $.AssetMaintenance.vendor
+            - jsonPath: $.AssetMaintenance.maintenanceCycle
+            - jsonPath: $.AssetMaintenance.partsAddedOrReplaced
+            - jsonPath: $.AssetMaintenance.additionalDetails
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.AssetMaintenance.auditDetails.createdBy
+            - jsonPath: $.AssetMaintenance.auditDetails.createdTime
+            - jsonPath: $.AssetMaintenance.auditDetails.lastModifiedBy
+            - jsonPath: $.AssetMaintenance.auditDetails.lastModifiedTime
+            - jsonPath: $.AssetMaintenance.postConditionRemarks
+            - jsonPath: $.AssetMaintenance.preConditionRemarks
+            - jsonPath: $.AssetMaintenance.description
+
+        # Insert Documents
+        - query: |
+            INSERT INTO eg_asset_documents (
+              document_id,
+              maintenance_id,
+              document_type,
+              file_store_id,
+              document_uid,
+              doc_details,
+              created_by,
+              created_at,
+              last_modified_by,
+              last_modified_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: AssetMaintenance.documents.*
+          jsonMaps:
+            - jsonPath: $.AssetMaintenance.documents.*.documentId
+            - jsonPath: $.AssetMaintenance.maintenanceId
+            - jsonPath: $.AssetMaintenance.documents.*.documentType
+            - jsonPath: $.AssetMaintenance.documents.*.fileStoreId
+            - jsonPath: $.AssetMaintenance.documents.*.documentUid
+            - jsonPath: $.AssetMaintenance.documents.*.docDetails
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.AssetMaintenance.auditDetails.createdBy
+            - jsonPath: $.AssetMaintenance.auditDetails.createdTime
+            - jsonPath: $.AssetMaintenance.auditDetails.lastModifiedBy
+            - jsonPath: $.AssetMaintenance.auditDetails.lastModifiedTime
+
+    # Update Maintenance Record and Associated Documents
+    - version: 1.0
+      description: Updates maintenance details and associated documents in the asset maintenance table
+      fromTopic: update-asset-maintenance
+      isTransaction: true
+      queryMaps:
+
+        # Update Maintenance Record
+        - query: |
+            UPDATE eg_asset_maintenance
+            SET
+              current_life_of_asset = ?,
+              is_warranty_expired = ?,
+              is_amc_expired = ?,
+              warranty_status = ?,
+              amc_details = ?,
+              maintenance_type = ?,
+              payment_type = ?,
+              cost_of_maintenance = ?,
+              vendor = ?,
+              maintenance_cycle = ?,
+              parts_added_or_replaced = ?,
+              additional_details = ?,
+              last_modified_by = ?,
+              last_modified_at = ?,
+              post_condition_remarks = ?,
+              pre_condition_remarks = ?,
+              documents = ?,
+              description = ?
+            WHERE maintenance_id = ?;
+          basePath: AssetMaintenance
+          jsonMaps:
+            - jsonPath: $.AssetMaintenance.currentLifeOfAsset
+            - jsonPath: $.AssetMaintenance.isWarrantyExpired
+            - jsonPath: $.AssetMaintenance.isAMCExpired
+            - jsonPath: $.AssetMaintenance.warrantyStatus
+            - jsonPath: $.AssetMaintenance.amcDetails
+            - jsonPath: $.AssetMaintenance.maintenanceType
+            - jsonPath: $.AssetMaintenance.paymentType
+            - jsonPath: $.AssetMaintenance.costOfMaintenance
+            - jsonPath: $.AssetMaintenance.vendor
+            - jsonPath: $.AssetMaintenance.maintenanceCycle
+            - jsonPath: $.AssetMaintenance.partsAddedOrReplaced
+            - jsonPath: $.AssetMaintenance.additionalDetails
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.AssetMaintenance.auditDetails.lastModifiedBy
+            - jsonPath: $.AssetMaintenance.auditDetails.lastModifiedTime
+            - jsonPath: $.AssetMaintenance.postConditionRemarks
+            - jsonPath: $.AssetMaintenance.preConditionRemarks
+            - jsonPath: $.AssetMaintenance.documents
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.AssetMaintenance.description
+            - jsonPath: $.AssetMaintenance.maintenanceId
+
+        # Update Documents
+        - query: |
+            INSERT INTO eg_asset_documents (
+              document_id,
+              maintenance_id,
+              document_type,
+              file_store_id,
+              document_uid,
+              doc_details,
+              created_by,
+              created_at,
+              last_modified_by,
+              last_modified_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT (document_id)
+            DO UPDATE SET 
+              document_type = EXCLUDED.document_type,
+              file_store_id = EXCLUDED.file_store_id,
+              document_uid = EXCLUDED.document_uid,
+              doc_details = EXCLUDED.doc_details,
+              last_modified_by = EXCLUDED.last_modified_by,
+              last_modified_at = EXCLUDED.last_modified_at;
+          basePath: AssetMaintenance.documents.*
+          jsonMaps:
+            - jsonPath: $.AssetMaintenance.documents.*.documentId
+            - jsonPath: $.AssetMaintenance.maintenanceId
+            - jsonPath: $.AssetMaintenance.documents.*.documentType
+            - jsonPath: $.AssetMaintenance.documents.*.fileStoreId
+            - jsonPath: $.AssetMaintenance.documents.*.documentUid
+            - jsonPath: $.AssetMaintenance.documents.*.docDetails
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.AssetMaintenance.auditDetails.createdBy
+            - jsonPath: $.AssetMaintenance.auditDetails.createdTime
+            - jsonPath: $.AssetMaintenance.auditDetails.lastModifiedBy
+            - jsonPath: $.AssetMaintenance.auditDetails.lastModifiedTime
