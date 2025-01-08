@@ -2,7 +2,7 @@ serviceMaps:
   serviceName: asset-services
   mappings:
 
-    # Create Maintenance Record and Associated Documents
+    # Save Maintenance Record and Associated Documents
     - version: 1.0
       description: Persists maintenance details and associated documents in the asset maintenance table
       fromTopic: save-asset-maintenance
@@ -14,6 +14,7 @@ serviceMaps:
             INSERT INTO eg_asset_maintenance (
               maintenance_id,
               asset_id,
+              tenant_id,
               current_life_of_asset,
               is_warranty_expired,
               is_amc_expired,
@@ -27,9 +28,9 @@ serviceMaps:
               parts_added_or_replaced,
               additional_details,
               created_by,
-              created_at,
+              created_time,
               last_modified_by,
-              last_modified_at,
+              last_modified_time,
               post_condition_remarks,
               pre_condition_remarks,
               description
@@ -38,6 +39,7 @@ serviceMaps:
           jsonMaps:
             - jsonPath: $.AssetMaintenance.maintenanceId
             - jsonPath: $.AssetMaintenance.assetId
+            - jsonPath: $.AssetMaintenance.tenantId
             - jsonPath: $.AssetMaintenance.currentLifeOfAsset
             - jsonPath: $.AssetMaintenance.isWarrantyExpired
             - jsonPath: $.AssetMaintenance.isAMCExpired
@@ -62,18 +64,17 @@ serviceMaps:
 
         # Insert Documents
         - query: |
-            INSERT INTO eg_asset_documents (
-              document_id,
-              maintenance_id,
-              document_type,
-              file_store_id,
-              document_uid,
-              doc_details,
-              created_by,
-              created_at,
-              last_modified_by,
-              last_modified_at
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+            INSERT INTO eg_asset_document (
+              documentid,
+              assetid,
+              documenttype,
+              filestoreid,
+              documentuid,
+              docdetails,
+              createdby,
+              createdtime,
+              lastmodifiedtime
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: AssetMaintenance.documents.*
           jsonMaps:
             - jsonPath: $.AssetMaintenance.documents.*.documentId
@@ -86,7 +87,6 @@ serviceMaps:
               dbType: JSONB
             - jsonPath: $.AssetMaintenance.auditDetails.createdBy
             - jsonPath: $.AssetMaintenance.auditDetails.createdTime
-            - jsonPath: $.AssetMaintenance.auditDetails.lastModifiedBy
             - jsonPath: $.AssetMaintenance.auditDetails.lastModifiedTime
 
     # Update Maintenance Record and Associated Documents
@@ -113,10 +113,9 @@ serviceMaps:
               parts_added_or_replaced = ?,
               additional_details = ?,
               last_modified_by = ?,
-              last_modified_at = ?,
+              last_modified_time = ?,
               post_condition_remarks = ?,
               pre_condition_remarks = ?,
-              documents = ?,
               description = ?
             WHERE maintenance_id = ?;
           basePath: AssetMaintenance
@@ -139,34 +138,29 @@ serviceMaps:
             - jsonPath: $.AssetMaintenance.auditDetails.lastModifiedTime
             - jsonPath: $.AssetMaintenance.postConditionRemarks
             - jsonPath: $.AssetMaintenance.preConditionRemarks
-            - jsonPath: $.AssetMaintenance.documents
-              type: JSON
-              dbType: JSONB
             - jsonPath: $.AssetMaintenance.description
             - jsonPath: $.AssetMaintenance.maintenanceId
 
-        # Update Documents
+        # Upsert Documents (Insert or Update)
         - query: |
-            INSERT INTO eg_asset_documents (
-              document_id,
-              maintenance_id,
-              document_type,
-              file_store_id,
-              document_uid,
-              doc_details,
-              created_by,
-              created_at,
-              last_modified_by,
-              last_modified_at
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            ON CONFLICT (document_id)
-            DO UPDATE SET 
-              document_type = EXCLUDED.document_type,
-              file_store_id = EXCLUDED.file_store_id,
-              document_uid = EXCLUDED.document_uid,
-              doc_details = EXCLUDED.doc_details,
-              last_modified_by = EXCLUDED.last_modified_by,
-              last_modified_at = EXCLUDED.last_modified_at;
+            INSERT INTO eg_asset_document (
+              documentid,
+              assetid,
+              documenttype,
+              filestoreid,
+              documentuid,
+              docdetails,
+              createdby,
+              createdtime,
+              lastmodifiedtime
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT (documentid)
+            DO UPDATE SET
+              documenttype = EXCLUDED.documenttype,
+              filestoreid = EXCLUDED.filestoreid,
+              documentuid = EXCLUDED.documentuid,
+              docdetails = EXCLUDED.docdetails,
+              lastmodifiedtime = EXCLUDED.lastmodifiedtime;
           basePath: AssetMaintenance.documents.*
           jsonMaps:
             - jsonPath: $.AssetMaintenance.documents.*.documentId
@@ -179,5 +173,4 @@ serviceMaps:
               dbType: JSONB
             - jsonPath: $.AssetMaintenance.auditDetails.createdBy
             - jsonPath: $.AssetMaintenance.auditDetails.createdTime
-            - jsonPath: $.AssetMaintenance.auditDetails.lastModifiedBy
             - jsonPath: $.AssetMaintenance.auditDetails.lastModifiedTime
