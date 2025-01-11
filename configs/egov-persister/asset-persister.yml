@@ -403,4 +403,4 @@ serviceMaps:
         - query: INSERT INTO eg_asset_auditdetails SELECT * FROM eg_asset_assetdetails WHERE id = ?;
           basePath: Asset
           jsonMaps:
-        - jsonPath: $.Asset.id
+            - jsonPath: $.Asset.id
