@@ -7,43 +7,43 @@ serviceMaps:
       isTransaction: true
       queryMaps:
         - query: INSERT INTO eg_asset_assetdetails (
-                        id,
-                        tenantId, 
-                        bookRefNo, 
-                        name, 
-                        description, 
-                        classification, 
-                        parentCategory,
-                        category,
-                        subcategory,
-                        department, 
-                        applicationNo,
-                        approvalNo, 
-                        approvalDate, 
-                        applicationDate, 
-                        status, 
-                        additionalDetails,
-                        createdBy,
-                        lastmodifiedBy, 
-                        createdTime, 
-                        lastmodifiedTime,
-                        accountId,
-                        financialYear,
-                        sourceOfFinance,
-                        invoiceDate,
-                        invoiceNumber,
-                        purchaseDate,
-                        purchaseOrderNumber,
-                        location,
-                        purchaseCost,
-                        acquisitionCost,
-                        bookValue,
-                        lifeOfAsset,
-                        modeOfPossessionOrAcquisition,
-                        assetType,
-                        assetUsage,
-                        assetStatus
-                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+            id,
+            tenantId,
+            bookRefNo,
+            name,
+            description,
+            classification,
+            parentCategory,
+            category,
+            subcategory,
+            department,
+            applicationNo,
+            approvalNo,
+            approvalDate,
+            applicationDate,
+            status,
+            additionalDetails,
+            createdBy,
+            lastmodifiedBy,
+            createdTime,
+            lastmodifiedTime,
+            accountId,
+            financialYear,
+            sourceOfFinance,
+            invoiceDate,
+            invoiceNumber,
+            purchaseDate,
+            purchaseOrderNumber,
+            location,
+            purchaseCost,
+            acquisitionCost,
+            bookValue,
+            lifeOfAsset,
+            modeOfPossessionOrAcquisition,
+            assetType,
+            assetUsage,
+            assetStatus
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: Asset
           jsonMaps:
             - jsonPath: $.Asset.id
@@ -103,29 +103,29 @@ serviceMaps:
             - jsonPath: $.Asset.auditDetails.lastModifiedTime
 
         - query: INSERT INTO eg_asset_addressDetails (
-                  addressId,
-                  tenantId,
-                  doorNo,
-                  latitude,
-                  longitude,
-                  addressNumber,
-                  type,
-                  addressLine1,
-                  addressLine2,
-                  landmark,
-                  city,
-                  pincode,
-                  detail,
-                  buildingName,
-                  street,
-                  locality_code,
-                  locality_name,
-                  locality_label,
-                  locality_latitude,
-                  locality_longitude,
-                  locality_materializedPath,
-                  asset_id
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+            addressId,
+            tenantId,
+            doorNo,
+            latitude,
+            longitude,
+            addressNumber,
+            type,
+            addressLine1,
+            addressLine2,
+            landmark,
+            city,
+            pincode,
+            detail,
+            buildingName,
+            street,
+            locality_code,
+            locality_name,
+            locality_label,
+            locality_latitude,
+            locality_longitude,
+            locality_materializedPath,
+            asset_id
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: Asset.addressDetails
           jsonMaps:
             - jsonPath: $.Asset.addressDetails.addressId
@@ -162,41 +162,41 @@ serviceMaps:
       fromTopic: update-asset-assetdetails
       isTransaction: true
       queryMaps:
-        - query:  UPDATE eg_asset_assetdetails 
-                  SET 
-                    bookrefno = ?, 
-                    name = ?, 
-                    description = ?, 
-                    classification = ?, 
-                    parentCategory = ?, 
-                    category = ?, 
-                    subcategory = ?, 
-                    department = ?, 
-                    applicationno = ?, 
-                    approvalNo = ?, 
-                    applicationDate = ?, 
-                    status = ?, 
-                    additionaldetails = ?, 
-                    lastmodifiedby = ?, 
-                    lastmodifiedtime = ?, 
-                    approvalDate = ?, 
-                    accountId = ?, 
-                    financialYear = ?, 
-                    sourceOfFinance = ?,
-                    invoiceDate = ?,
-                    invoiceNumber = ?,
-                    purchaseDate = ?,
-                    purchaseOrderNumber = ?,
-                    location = ?,
-                    purchaseCost = ?,
-                    acquisitionCost = ?,
-                    bookValue = ?,
-                    lifeOfAsset = ?,
-                    modeOfPossessionOrAcquisition = ?,
-                    assetType = ?,
-                    assetUsage = ?,
-                    assetStatus = ?
-                  WHERE id = ?;
+        - query:  UPDATE eg_asset_assetdetails
+            SET
+            bookrefno = ?,
+            name = ?,
+            description = ?,
+            classification = ?,
+            parentCategory = ?,
+            category = ?,
+            subcategory = ?,
+            department = ?,
+            applicationno = ?,
+            approvalNo = ?,
+            applicationDate = ?,
+            status = ?,
+            additionaldetails = ?,
+            lastmodifiedby = ?,
+            lastmodifiedtime = ?,
+            approvalDate = ?,
+            accountId = ?,
+            financialYear = ?,
+            sourceOfFinance = ?,
+            invoiceDate = ?,
+            invoiceNumber = ?,
+            purchaseDate = ?,
+            purchaseOrderNumber = ?,
+            location = ?,
+            purchaseCost = ?,
+            acquisitionCost = ?,
+            bookValue = ?,
+            lifeOfAsset = ?,
+            modeOfPossessionOrAcquisition = ?,
+            assetType = ?,
+            assetUsage = ?,
+            assetStatus = ?
+            WHERE id = ?;
           basePath: Asset
           jsonMaps:
             - jsonPath: $.Asset.assetBookRefNo
@@ -270,38 +270,38 @@ serviceMaps:
       isTransaction: true
       queryMaps:
         - query:  INSERT INTO eg_asset_assignmentdetails(
-                  assignmentid,
-                  tenantid,
-                  assetid,
-                  applicationno,
-                  assignedusername,
-                  designation,
-                  department,
-                  assigneddate,
-                  returnDate,
-                  createdby,
-                  lastModifiedby,
-                  createdtime,
-                  lastModifiedtime,
-                  isassigned,
-                  employeecode
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-               ON CONFLICT (assetid) 
-               DO UPDATE SET
-                  assignmentid = EXCLUDED.assignmentid,
-                  tenantid = EXCLUDED.tenantid,
-                  applicationno = EXCLUDED.applicationno,
-                  assignedusername = EXCLUDED.assignedusername,
-                  employeecode = EXCLUDED.employeecode,
-                  designation = EXCLUDED.designation,
-                  department = EXCLUDED.department,
-                  assigneddate = EXCLUDED.assigneddate,
-                  returnDate = EXCLUDED.returnDate,
-                  createdby = EXCLUDED.createdby,
-                  lastModifiedby = EXCLUDED.lastModifiedby,
-                  createdtime = EXCLUDED.createdtime,
-                  lastModifiedtime = EXCLUDED.lastModifiedtime,
-                  isassigned = EXCLUDED.isassigned;
+            assignmentid,
+            tenantid,
+            assetid,
+            applicationno,
+            assignedusername,
+            designation,
+            department,
+            assigneddate,
+            returnDate,
+            createdby,
+            lastModifiedby,
+            createdtime,
+            lastModifiedtime,
+            isassigned,
+            employeecode
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT (assetid)
+            DO UPDATE SET
+            assignmentid = EXCLUDED.assignmentid,
+            tenantid = EXCLUDED.tenantid,
+            applicationno = EXCLUDED.applicationno,
+            assignedusername = EXCLUDED.assignedusername,
+            employeecode = EXCLUDED.employeecode,
+            designation = EXCLUDED.designation,
+            department = EXCLUDED.department,
+            assigneddate = EXCLUDED.assigneddate,
+            returnDate = EXCLUDED.returnDate,
+            createdby = EXCLUDED.createdby,
+            lastModifiedby = EXCLUDED.lastModifiedby,
+            createdtime = EXCLUDED.createdtime,
+            lastModifiedtime = EXCLUDED.lastModifiedtime,
+            isassigned = EXCLUDED.isassigned;
           basePath: Asset.assetAssignment
           jsonMaps:
             - jsonPath: $.Asset.assetAssignment.assignmentId
@@ -320,24 +320,24 @@ serviceMaps:
             - jsonPath: $.Asset.assetAssignment.isAssigned
             - jsonPath: $.Asset.assetAssignment.employeeCode
 
-    
+
     - version: 1.0
       description: update assignment details in eg_asset_assignmentdetails table
       fromTopic: update-asset-assignmentdetails
       isTransaction: true
       queryMaps:
         - query:  UPDATE eg_asset_assignmentdetails
-                  SET
-                    assignedusername = ?,
-                    employeecode = ?,
-                    designation = ?,
-                    department = ?,
-                    returndate = ?,
-                    lastmodifiedby = ?,
-                    lastmodifiedtime = ?,
-                    isassigned = ?
-                  WHERE
-                    assignmentid = ?;
+            SET
+            assignedusername = ?,
+            employeecode = ?,
+            designation = ?,
+            department = ?,
+            returndate = ?,
+            lastmodifiedby = ?,
+            lastmodifiedtime = ?,
+            isassigned = ?
+            WHERE
+            assignmentid = ?;
           basePath: Asset.assetAssignment
           jsonMaps:
             - jsonPath: $.Asset.assetAssignment.assignedUserName
@@ -354,3 +354,28 @@ serviceMaps:
           basePath: Asset
           jsonMaps:
             - jsonPath: $.Asset.assetAssignment.assignmentId
+
+    - version: 1.0
+      description: Persists asset status changes in the system in eg_asset_assetdetails table
+      fromTopic: update-assetstatus-insystem
+      isTransaction: true
+      queryMaps:
+        - query:  UPDATE eg_asset_assetdetails
+            SET
+            assetStatus = ?,
+            assetUsage = ?,
+            lastModifiedBy = ?,
+            lastModifiedTime = ?
+            WHERE id = ?;
+          basePath: Asset
+          jsonMaps:
+            - jsonPath: $.Asset.assetStatus
+            - jsonPath: $.Asset.assetUsage
+            - jsonPath: $.Asset.auditDetails.lastModifiedBy
+            - jsonPath: $.Asset.auditDetails.lastModifiedTime
+            - jsonPath: $.Asset.id
+
+        - query: INSERT INTO eg_asset_auditdetails SELECT * FROM eg_asset_assetdetails WHERE id = ?;
+          basePath: Asset
+          jsonMaps:
+            - jsonPath: $.Asset.id
