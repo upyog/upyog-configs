@@ -356,31 +356,6 @@ serviceMaps:
             - jsonPath: $.Asset.assetAssignment.assignmentId
 
     - version: 1.0
-      description: Persists asset status changes in the system in eg_asset_assetdetails table
-      fromTopic: update-assetstatus-insystem
-      isTransaction: true
-      queryMaps:
-        - query:  UPDATE eg_asset_assetdetails
-                  SET
-                    assetStatus = ?,
-                    assetUsage = ?,
-                    lastModifiedBy = ?,
-                    lastModifiedTime = ?
-                  WHERE id = ?;
-          basePath: Asset
-          jsonMaps:
-            - jsonPath: $.Asset.assetStatus
-            - jsonPath: $.Asset.assetUsage
-            - jsonPath: $.Asset.auditDetails.lastModifiedBy
-            - jsonPath: $.Asset.auditDetails.lastModifiedTime
-            - jsonPath: $.Asset.id
-
-        - query: INSERT INTO eg_asset_auditdetails SELECT * FROM eg_asset_assetdetails WHERE id = ?;
-          basePath: Asset
-          jsonMaps:
-            - jsonPath: $.Asset.
-
-    - version: 1.0
       description: Persists asset status changes in the system
       fromTopic: update-assetstatus-insystem
       isTransaction: true
