@@ -1,0 +1,164 @@
+serviceMaps:
+  serviceName: asset-services
+  mappings:
+
+    # Create Disposal Record
+    - version: 1.0
+      description: Persists disposal details in the asset disposal table
+      fromTopic: save-asset-disposal
+      isTransaction: true
+      queryMaps:
+        - query: |
+            INSERT INTO eg_asset_disposal_details (
+              disposal_id,
+              asset_id,
+              tenant_id,
+              life_of_asset,
+              current_age_of_asset,
+              is_asset_disposed_in_facility,
+              disposal_date,
+              reason_for_disposal,
+              amount_received,
+              purchaser_name,
+              payment_mode,
+              receipt_number,
+              comments,
+              gl_code,
+              asset_disposal_status,
+              created_by,
+              created_at,
+              updated_by,
+              updated_at,
+              additional_details
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: AssetDisposal
+          jsonMaps:
+            - jsonPath: $.AssetDisposal.disposalId
+            - jsonPath: $.AssetDisposal.assetId
+            - jsonPath: $.AssetDisposal.tenantId
+            - jsonPath: $.AssetDisposal.lifeOfAsset
+            - jsonPath: $.AssetDisposal.currentAgeOfAsset
+            - jsonPath: $.AssetDisposal.isAssetDisposedInFacility
+            - jsonPath: $.AssetDisposal.disposalDate
+            - jsonPath: $.AssetDisposal.reasonForDisposal
+            - jsonPath: $.AssetDisposal.amountReceived
+            - jsonPath: $.AssetDisposal.purchaserName
+            - jsonPath: $.AssetDisposal.paymentMode
+            - jsonPath: $.AssetDisposal.receiptNumber
+            - jsonPath: $.AssetDisposal.comments
+            - jsonPath: $.AssetDisposal.glCode
+            - jsonPath: $.AssetDisposal.assetDisposalStatus
+            - jsonPath: $.AssetDisposal.auditDetails.createdBy
+            - jsonPath: $.AssetDisposal.auditDetails.createdTime
+            - jsonPath: $.AssetDisposal.auditDetails.lastModifiedBy
+            - jsonPath: $.AssetDisposal.auditDetails.lastModifiedTime
+            - jsonPath: $.AssetDisposal.additionalDetails
+              type: JSON
+              dbType: JSONB
+
+        # Insert Documents
+        - query: |
+            INSERT INTO eg_asset_document (
+              documentid,
+              assetid,
+              documenttype,
+              filestoreid,
+              documentuid,
+              docdetails,
+              createdby,
+              createdtime,
+              lastmodifiedtime
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: AssetDisposal.documents.*
+          jsonMaps:
+            - jsonPath: $.AssetDisposal.documents.*.documentId
+            - jsonPath: $.AssetDisposal.disposalId
+            - jsonPath: $.AssetDisposal.documents.*.documentType
+            - jsonPath: $.AssetDisposal.documents.*.fileStoreId
+            - jsonPath: $.AssetDisposal.documents.*.documentUid
+            - jsonPath: $.AssetDisposal.documents.*.docDetails
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.AssetDisposal.auditDetails.createdBy
+            - jsonPath: $.AssetDisposal.auditDetails.createdTime
+            - jsonPath: $.AssetDisposal.auditDetails.lastModifiedTime
+
+    # Update Disposal Record
+    - version: 1.0
+      description: Updates disposal details in the asset disposal table
+      fromTopic: update-asset-disposal
+      isTransaction: true
+      queryMaps:
+        - query: |
+            UPDATE eg_asset_disposal_details
+            SET
+              life_of_asset = ?,
+              current_age_of_asset = ?,
+              is_asset_disposed_in_facility = ?,
+              disposal_date = ?,
+              reason_for_disposal = ?,
+              amount_received = ?,
+              purchaser_name = ?,
+              payment_mode = ?,
+              receipt_number = ?,
+              comments = ?,
+              gl_code = ?,
+              asset_disposal_status = ?,
+              updated_by = ?,
+              updated_at = ?,
+              additional_details = ?
+            WHERE disposal_id = ?;
+          basePath: AssetDisposal
+          jsonMaps:
+            - jsonPath: $.AssetDisposal.lifeOfAsset
+            - jsonPath: $.AssetDisposal.currentAgeOfAsset
+            - jsonPath: $.AssetDisposal.isAssetDisposedInFacility
+            - jsonPath: $.AssetDisposal.disposalDate
+            - jsonPath: $.AssetDisposal.reasonForDisposal
+            - jsonPath: $.AssetDisposal.amountReceived
+            - jsonPath: $.AssetDisposal.purchaserName
+            - jsonPath: $.AssetDisposal.paymentMode
+            - jsonPath: $.AssetDisposal.receiptNumber
+            - jsonPath: $.AssetDisposal.comments
+            - jsonPath: $.AssetDisposal.glCode
+            - jsonPath: $.AssetDisposal.assetDisposalStatus
+            - jsonPath: $.AssetDisposal.auditDetails.lastModifiedBy
+            - jsonPath: $.AssetDisposal.auditDetails.lastModifiedTime
+            - jsonPath: $.AssetDisposal.additionalDetails
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.AssetDisposal.disposalId
+
+        # Upsert Documents (Insert or Update)
+        - query: |
+            INSERT INTO eg_asset_document (
+              documentid,
+              assetid,
+              documenttype,
+              filestoreid,
+              documentuid,
+              docdetails,
+              createdby,
+              createdtime,
+              lastmodifiedtime
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT (documentid)
+            DO UPDATE SET
+              documenttype = EXCLUDED.documenttype,
+              filestoreid = EXCLUDED.filestoreid,
+              documentuid = EXCLUDED.documentuid,
+              docdetails = EXCLUDED.docdetails,
+              lastmodifiedtime = EXCLUDED.lastmodifiedtime;
+          basePath: AssetDisposal.documents.*
+          jsonMaps:
+            - jsonPath: $.AssetDisposal.documents.*.documentId
+            - jsonPath: $.AssetDisposal.disposalId
+            - jsonPath: $.AssetDisposal.documents.*.documentType
+            - jsonPath: $.AssetDisposal.documents.*.fileStoreId
+            - jsonPath: $.AssetDisposal.documents.*.documentUid
+            - jsonPath: $.AssetDisposal.documents.*.docDetails
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.AssetDisposal.auditDetails.createdBy
+            - jsonPath: $.AssetDisposal.auditDetails.createdTime
+            - jsonPath: $.AssetDisposal.auditDetails.lastModifiedTime
