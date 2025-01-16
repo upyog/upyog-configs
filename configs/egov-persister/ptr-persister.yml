@@ -171,15 +171,17 @@ serviceMaps:
       fromTopic: update-ptr-application
       isTransaction: true
       queryMaps:
-        - query: UPDATE eg_ptr_registration SET status = ?, lastmodifiedby = ?, lastmodifiedtime = ?  WHERE id=?;
+        - query: UPDATE eg_ptr_registration SET status = ?, lastmodifiedby = ?, lastmodifiedtime = ?, pettoken = ?  WHERE id=?;
           basePath: PetRegistrationApplications.*
           jsonMaps:
 
             - jsonPath: $.PetRegistrationApplications.*.status
 
-            - jsonPath: $.PetRegistrationApplications.*.lastModifiedBy
+            - jsonPath: $.PetRegistrationApplications.*.auditDetails.lastModifiedBy
 
-            - jsonPath: $.PetRegistrationApplications.*.lastmodifiedtime
+            - jsonPath: $.PetRegistrationApplications.*.auditDetails.lastModifiedTime
+
+            - jsonPath: $.PetRegistrationApplications.*.petToken
 
             - jsonPath: $.PetRegistrationApplications.*.id
 

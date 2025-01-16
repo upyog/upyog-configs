@@ -24,6 +24,10 @@
                 }
               },
               {
+                "variable": "applicationID",
+                "value": "$.applicationId"
+              },
+              {
                 "variable": "corporation_website",
                 "value": {
                   "path": "PDF_STATIC_LABEL_MUTATION_WEBSITE"
@@ -196,12 +200,21 @@
                     "variable": "logoImage",
                     "value": "$.MdmsRes.tenant.tenants[0].logoId",
                     "type": "image"
+                  },
+                  {
+                    "variable": "logo-header",
+                    "value": "$.MdmsRes.tenant.tenants[0].code",
+                    "localisation": {
+                      "required": true,
+                      "prefix": "TENANT_TENANTS",
+                      "module": "rainmaker-common"
+                    }
                   }
                 ]
               },
               {
-                "path": "http://egov-filestore:8080/filestore/v1/files/url",
-                "queryParam": "tenantId=pg&fileStoreIds=$.documentDetails[3].fileStoreId",
+                "path": "http://filestore:8080/filestore/v1/files/url",
+                "queryParam": "tenantId=pg&fileStoreIds=$.documentDetails[?(@.documentType==\"FAMILY.PHOTO.PHOTOGRAPH\" || @.documentType==\"FAMILY.PHOTO.PEHCHANPATRA\")].fileStoreId",
                 "apiRequest": null,
                 "requesttype": "GET",
                 "responseMapping": [
@@ -211,16 +224,65 @@
                     "type": "image"
                   }
                 ]
+              },
+              {
+                  "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
+                  "queryParam": "moduleName=Advertisement&masterName=AdvServices&tenantId=pg",
+                  "apiRequest": null,
+                  "responseMapping": [
+                    {
+                        "variable": "terms",
+                        "value": "$.MdmsRes.Advertisement.AdvServices[0].termsAndCondition"
+                    }
+                ]
+            },
+            {
+              "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
+              "queryParam": "moduleName=Advertisement&masterName=AdvServices&tenantId=pg",
+                "apiRequest": null,
+                "responseMapping": [
+                  {
+                    "variable": "TERMS",
+                    "value": "$.MdmsRes.Advertisement.AdvServices[0].termsAndCondition"
+                  }
+                ]
+              },
+              {
+                "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
+                "queryParam": "moduleName=tenant&masterName=footer&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}' %26%26 @.service=='{$.paymentDetails[0].businessService}')%5D",
+                "apiRequest": null,
+                "responseMapping": [
+                  {
+                    "variable": "variable11",
+                    "value": "$.MdmsRes.tenant.footer[0].receiptFooterContent.*",
+                    "type": "array",
+                    "format": {
+                      "type": "string",
+                      "scema": [
+                        {
+                          "variable": "disclaimerContent",
+                          "value": "disclaimer",
+                          "type": "string",
+                          "localisation": {
+                            "required": true,
+                            "prefix": null,
+                            "module": "rainmaker-common"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
               }
             ]
-          }
-        ]
-      },
-      {
-        "qrcodeConfig": [
+          },
           {
-            "variable": "qrcodeimage",
-            "value": "/digit-ui/citizen/payment/verification?tenantId={{tenantid}}&receiptNumber={{receiptNo}}"
+            "qrcodeConfig": [
+              {
+                "variable": "qrcodeImage",
+                "value": "/digit-ui/citizen/payment/verification?tenantId={{tenantid}}&receiptNumber={{receiptNo}}"
+              }
+            ]
           }
         ]
       }
