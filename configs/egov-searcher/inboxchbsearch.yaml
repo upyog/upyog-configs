@@ -19,15 +19,15 @@ SearchDefinitions:
       searchParams:
         condition: AND
         params:
-          - name: chb.tenantid
+          - name: chb.tenant_id
             isMandatory: true
             jsonPath: $.searchCriteria.tenantId
-          - name: chb.id
-            isMandatory: false
-            jsonPath: $.searchCriteria.id
-          - name: chb.booking_no
+          - name: chb.booking_id
             isMandatory: false
             jsonPath: $.searchCriteria.bookingId
+          - name: chb.booking_no
+            isMandatory: false
+            jsonPath: $.searchCriteria.bookingNo
           - name: pi.businessservice
             isMandatory: false
             jsonPath: $.searchCriteria.businessservice
@@ -55,15 +55,15 @@ SearchDefinitions:
       searchParams:
         condition: AND
         params:
-          - name: chb.tenantid
+          - name: chb.tenant_id
             isMandatory: true
             jsonPath: $.searchCriteria.tenantId
-          - name: chb.id
-            isMandatory: false
-            jsonPath: $.searchCriteria.id
-          - name: chb.booking_no
+          - name: chb.booking_id
             isMandatory: false
             jsonPath: $.searchCriteria.bookingId
+          - name: chb.booking_no
+            isMandatory: false
+            jsonPath: $.searchCriteria.bookingNo
           - name: pi.businessservice
             isMandatory: false
             jsonPath: $.searchCriteria.businessservice
