@@ -271,7 +271,7 @@ ReportDefinitions:
         bb.applicationno AS applicationno,
         b.parentcategory AS parentcategory,
         b.subcategory AS subcategory,
-        b.additionaldetails::jsonb ->> 'bookValue' AS bookValue, 
+        b.bookValue AS bookValue, 
         b.tenantid AS tenantid,
         bb.assignedusername AS assignedusername,
         CONCAT('COMMON_MASTERS_DEPARTMENT_', b.department) AS department,
@@ -286,4 +286,111 @@ ReportDefinitions:
         JOIN 
         eg_asset_assetdetails b ON bb.applicationno = b.applicationno
         WHERE 
+        1=1
+
+  - reportName: AssetDisposalReport
+    decryptionPathId: ObpsDailyCollectionReport
+    summary: Asset Disposal Report
+    version: 1.0.0
+    moduleName: rainmaker-asset
+    sourceColumns:
+      - name: applicationno
+        label: Application No
+        type: string
+        source: asset
+        total: false
+      - name: parentcategory
+        label: Parent Category 
+        type: string
+        source: asset
+        total: false
+      - name: category
+        label: Category 
+        type: string
+        source: asset
+        total: false
+        isLocalisationRequired: true
+      - name: bookValue
+        label: Book Value 
+        type: string
+        source: asset
+        total: false
+      - name: tenantid
+        label: tenantid
+        type: string
+        source: asset
+        total: false
+        showColumn: false
+      - name: department
+        label: Department
+        type: string
+        source: asset
+        total: false
+        isLocalisationRequired: true
+      - name: lifeofasset
+        label: Life of Asset
+        type: string
+        source: asset
+        total: false
+      - name: reasonfordisposal
+        label: Reason for Disposal
+        type: string
+        source: asset
+        showColumn: false 
+      - name: purchasername
+        label: Purchaser Name
+        type: string
+        source: asset
+        total: false
+      - name: amountreceived
+        label: Amount Received
+        type: string
+        source: asset
+        total: false 
+      - name: comments
+        label: Comments
+        type: string
+        source: asset
+        total: false
+      - name: disposaldate
+        label: Disposal Date
+        type: epoch
+        source: asset
+        total: false     
+    searchParams:
+      - name: applicationno
+        label: Application No
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND b.applicationno = $applicationno
+      - name: fromDate
+        label: FromDate
+        type: epoch
+        source: asset
+        isMandatory: true
+        searchClause: AND n.disposal_date >= $fromDate
+      - name: toDate
+        label: ToDate
+        type: epoch
+        source: asset
+        isMandatory: true
+        searchClause: AND n.disposal_date <= $toDate
+    query: >
+      SELECT 
+        b.applicationno AS applicationno,
+        b.parentcategory AS parentcategory,
+        b.bookValue AS bookValue,
+        b.category AS category,
+        b.tenantid AS tenantid,
+        CONCAT('COMMON_MASTERS_DEPARTMENT_', b.department) AS department,
+        n.amount_received as amountreceived,
+        n.reason_for_disposal as reasonfordisposal,
+        n.comments as comments,
+        n.life_of_asset as lifeofasset,
+        n.purchaser_name as purchasename,
+        n.disposal_date as disposaldate
+        FROM 
+        eg_asset_assetdetails b, eg_asset_disposal_details n where b.id=n.asset_id
+        AND 
         1=1
