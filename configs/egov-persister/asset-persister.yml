@@ -42,8 +42,9 @@ serviceMaps:
                         modeOfPossessionOrAcquisition,
                         assetType,
                         assetUsage,
-                        assetStatus
-                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+                        assetStatus,
+                        originalBookValue
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: Asset
           jsonMaps:
             - jsonPath: $.Asset.id
@@ -84,6 +85,7 @@ serviceMaps:
             - jsonPath: $.Asset.assetType
             - jsonPath: $.Asset.assetUsage
             - jsonPath: $.Asset.assetStatus
+            - jsonPath: $.Asset.originalBookValue
 
 
         - query: INSERT INTO eg_asset_document(documentId, documenttype, fileStoreId, assetid, documentuid, docDetails, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
@@ -195,7 +197,8 @@ serviceMaps:
                     modeOfPossessionOrAcquisition = ?,
                     assetType = ?,
                     assetUsage = ?,
-                    assetStatus = ?
+                    assetStatus = ?,
+                    originalBookValue = ?
                   WHERE id = ?;
           basePath: Asset
           jsonMaps:
@@ -233,6 +236,7 @@ serviceMaps:
             - jsonPath: $.Asset.assetType
             - jsonPath: $.Asset.assetUsage
             - jsonPath: $.Asset.assetStatus
+            - jsonPath: $.Asset.originalBookValue
             - jsonPath: $.Asset.id
 
         - query: INSERT INTO eg_asset_auditdetails SELECT * FROM eg_asset_assetdetails WHERE id = ?;
