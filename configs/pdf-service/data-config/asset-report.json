@@ -358,19 +358,11 @@
                 }
               },
               {
-                "variable": "addressDetailsLat",
+                "variable": "location",
                 "value": {
-                  "path": "$.addressDetails.latitude"
+                  "path": "$.location"
                 }
               },
-              {
-                "variable": "addressDetailsLong",
-                "value": {
-                  "path": "$.addressDetails.longitude"
-                }
-              },
-
-
               {
                 "variable": "generated_by",
                 "value": {
@@ -484,7 +476,7 @@
             "qrcodeConfig": [
               {
                 "variable": "qrcodeimage",
-                "value": "https://maps.google.com/?q={{addressDetailsLat}},{{addressDetailsLong}}"
+                "value": "https://maps.google.com/?q={{location}}"
               }
             ]
           }
