@@ -18,8 +18,9 @@ serviceMaps:
               created_at,
               updated_at,
               created_by,
-              updated_by
-            ) VALUES (?, ?::date, ?::date, ?, ?, ?, ?, ?, ?, ?, ?)
+              updated_by,
+              depreciation_method
+            ) VALUES (?, ?::date, ?::date, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ON CONFLICT (asset_id, from_date, to_date) DO NOTHING;
           basePath: DepreciationDetail
           jsonMaps:
@@ -34,6 +35,7 @@ serviceMaps:
             - jsonPath: $.DepreciationDetail.updatedAt
             - jsonPath: $.DepreciationDetail.createdBy
             - jsonPath: $.DepreciationDetail.updatedBy
+            - jsonPath: $.DepreciationDetail.depreciationMethod
 
     - version: 1.0
       description: Updates depreciation details in eg_asset_depreciation_details table
@@ -52,15 +54,17 @@ serviceMaps:
               created_at,
               updated_at,
               created_by,
-              updated_by
-            ) VALUES (?, ?::date, ?::date, ?, ?, ?, ?, ?, ?, ?, ?)
+              updated_by,
+              depreciation_method
+            ) VALUES (?, ?::date, ?::date, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ON CONFLICT (asset_id, from_date, to_date)
             DO UPDATE SET
               depreciation_value = EXCLUDED.depreciation_value,
               book_value = EXCLUDED.book_value,
               rate = EXCLUDED.rate,
               old_book_value = EXCLUDED.old_book_value,
-              updated_at = EXCLUDED.updated_at;
+              updated_at = EXCLUDED.updated_at,
+              depreciation_method = EXCLUDED.depreciation_method;
           basePath: DepreciationDetail
           jsonMaps:
             - jsonPath: $.DepreciationDetail.assetId
@@ -74,3 +78,4 @@ serviceMaps:
             - jsonPath: $.DepreciationDetail.updatedAt
             - jsonPath: $.DepreciationDetail.createdBy
             - jsonPath: $.DepreciationDetail.updatedBy
+            - jsonPath: $.DepreciationDetail.depreciationMethod
