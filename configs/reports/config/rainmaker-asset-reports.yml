@@ -394,3 +394,122 @@ ReportDefinitions:
         eg_asset_assetdetails b, eg_asset_disposal_details n where b.id=n.asset_id
         AND 
         1=1
+        
+  - reportName: AssetMaintenanceReport
+    decryptionPathId: ObpsDailyCollectionReport
+    summary: Asset Maintenance Report
+    version: 1.0.0
+    moduleName: rainmaker-asset
+    sourceColumns:
+      - name: applicationno
+        label: Application No
+        type: string
+        source: asset
+        total: false
+      - name: parentcategory
+        label: Parent Category 
+        type: string
+        source: asset
+        total: false
+      - name: category
+        label: Category 
+        type: string
+        source: asset
+        total: false
+        isLocalisationRequired: true
+      - name: tenantid
+        label: tenantid
+        type: string
+        source: asset
+        total: false
+        showColumn: false
+      - name: department
+        label: Department
+        type: string
+        source: asset
+        total: false
+        isLocalisationRequired: true
+      - name: mantenance_type
+        label: Maintenance Type
+        type: string
+        source: asset
+        total: false
+      - name: cost_of_maintenance
+        label: Cost of Maintenance
+        type: string
+        source: asset
+        showColumn: false 
+      - name: warranty_status
+        label: Warranty Status
+        type: string
+        source: asset
+        total: false
+        isLocalisationRequired: true
+      - name: is_amc_expired
+        label: Is AMC Expired
+        type: string
+        source: asset
+        total: false 
+      - name: payment_type
+        label: Payment Type
+        type: string
+        source: asset
+        total: false
+      - name: vendor
+        label: Vendor
+        type: string
+        source: asset
+        total: false
+      - name: parts_added_or_replaced
+        label: Parts Added or Replaced
+        type: string
+        source: asset
+        total: false
+      - name: created_time
+        label: Created Time
+        type: epoch
+        source: asset
+        total: false  
+      - name: asset_id
+        label: Asset ID
+        type: string
+        source: asset
+        total: false               
+    searchParams:
+      - name: applicationno
+        label: Application No
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND b.applicationno = $applicationno
+      - name: fromDate
+        label: FromDate
+        type: epoch
+        source: asset
+        isMandatory: true
+        searchClause: AND h.created_time >= $fromDate
+      - name: toDate
+        label: ToDate
+        type: epoch
+        source: asset
+        isMandatory: true
+        searchClause: AND h.created_time <= $toDate
+    query: >
+      SELECT    
+      b.applicationno AS applicationno,
+      b.parentcategory AS parentcategory,
+        b.category AS category,
+        b.tenantid AS tenantid,
+        CONCAT('COMMON_MASTERS_DEPARTMENT_', b.department) AS department,
+        h.maintenance_type,
+        h.cost_of_maintenance,
+        h.warranty_status,is_amc_expired,
+        h.payment_type,
+        h.vendor,
+        h.parts_added_or_replaced,
+        h.created_time,
+        h.asset_id
+        FROM 
+        eg_asset_assetdetails b, eg_asset_maintenance h where b.id=h.asset_id
+        AND 
+        1=1   
