@@ -72,7 +72,7 @@ serviceMaps:
           basePath: AssetDisposal.documents.*
           jsonMaps:
             - jsonPath: $.AssetDisposal.documents.*.documentId
-            - jsonPath: $.AssetDisposal.disposalId
+            - jsonPath: $.AssetDisposal.assetid
             - jsonPath: $.AssetDisposal.documents.*.documentType
             - jsonPath: $.AssetDisposal.documents.*.fileStoreId
             - jsonPath: $.AssetDisposal.documents.*.documentUid
@@ -152,7 +152,7 @@ serviceMaps:
           basePath: AssetDisposal.documents.*
           jsonMaps:
             - jsonPath: $.AssetDisposal.documents.*.documentId
-            - jsonPath: $.AssetDisposal.disposalId
+            - jsonPath: $.AssetDisposal.assetid
             - jsonPath: $.AssetDisposal.documents.*.documentType
             - jsonPath: $.AssetDisposal.documents.*.fileStoreId
             - jsonPath: $.AssetDisposal.documents.*.documentUid
