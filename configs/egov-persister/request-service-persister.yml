@@ -58,3 +58,8 @@ serviceMaps:
             - jsonPath: $.waterTankerBookingDetail.address.locality
             - jsonPath: $.waterTankerBookingDetail.address.localityCode
             - jsonPath: $.waterTankerBookingDetail.address.pincode
+
+        - query: INSERT INTO public.upyog_rs_tanker_booking_details_auditdetails SELECT * FROM public.upyog_rs_tanker_booking_details WHERE booking_id = ?;
+          basePath: waterTankerBookingDetail
+          jsonMaps:
+            - jsonPath: $.waterTankerBookingDetail.bookingId    
