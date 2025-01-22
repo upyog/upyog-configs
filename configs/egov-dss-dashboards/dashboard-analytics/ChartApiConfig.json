@@ -10684,7 +10684,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"ulb\" : \"ulb\", \"state\" : \"state\"}",
         "indexName": "firenoc-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"type.keyword\":\"ACTUAL\"}}]}},\"aggs\":{\"Actual Noc's Issued\":{\"sum\":{\"field\":\"nocIssuedTodayForType\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"applicationType.keyword\":\"NEW\"}}]}},\"aggs\":{\"Actual Noc's Issued\":{\"sum\":{\"field\":\"todaysApplicationsForApplicationType\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -10860,7 +10860,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"ulb\" : \"ulb\", \"state\" : \"state\"}",
         "indexName": "firenoc-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"type.keyword\":\"PROVISIONAL\"}}]}},\"aggs\":{\"Provisional Noc's Issued\":{\"sum\":{\"field\":\"nocIssuedTodayForType\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"applicationType.keyword\":\"PROVISIONAL\"}}]}},\"aggs\":{\"Provisional Noc's Issued\":{\"sum\":{\"field\":\"todaysApplicationsForApplicationType\"}}}}}}"
       }
     ],
     "chartType": "metric",
