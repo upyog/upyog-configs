@@ -58,9 +58,9 @@ serviceMaps:
 
         # Insert Documents
         - query: |
-            INSERT INTO eg_asset_document (
+            INSERT INTO eg_asset_disposal_documents (
               documentid,
-              assetid,
+              disposalid,
               documenttype,
               filestoreid,
               documentuid,
@@ -72,7 +72,7 @@ serviceMaps:
           basePath: AssetDisposal.documents.*
           jsonMaps:
             - jsonPath: $.AssetDisposal.documents.*.documentId
-            - jsonPath: $.AssetDisposal.assetId
+            - jsonPath: $.AssetDisposal.disposalId
             - jsonPath: $.AssetDisposal.documents.*.documentType
             - jsonPath: $.AssetDisposal.documents.*.fileStoreId
             - jsonPath: $.AssetDisposal.documents.*.documentUid
@@ -131,9 +131,9 @@ serviceMaps:
 
         # Upsert Documents (Insert or Update)
         - query: |
-            INSERT INTO eg_asset_document (
+            INSERT INTO eg_asset_disposal_documents (
               documentid,
-              assetid,
+              disposalid,
               documenttype,
               filestoreid,
               documentuid,
@@ -152,7 +152,7 @@ serviceMaps:
           basePath: AssetDisposal.documents.*
           jsonMaps:
             - jsonPath: $.AssetDisposal.documents.*.documentId
-            - jsonPath: $.AssetDisposal.assetId
+            - jsonPath: $.AssetDisposal.disposalId
             - jsonPath: $.AssetDisposal.documents.*.documentType
             - jsonPath: $.AssetDisposal.documents.*.fileStoreId
             - jsonPath: $.AssetDisposal.documents.*.documentUid

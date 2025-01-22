@@ -150,6 +150,12 @@
                 }
               },
               {
+                "variable": "businessId",
+                "value": {
+                  "path": "$.workflow.businessId"
+                }
+              },
+              {
                 "variable": "city",
                 "value": {
                   "path": "$.addressDetails[0].city"
@@ -276,7 +282,7 @@
             "qrcodeConfig": [
               {
                 "variable": "qrcodeImage",
-                "value": "/digit-ui/citizen/payment/verification?tenantId={{tenantid}}&receiptNumber={{receiptNo}}"
+                "value": "/digit-ui/citizen/sv/application/{{businessId}}/{{tenantId}}"
               }
             ]
           }

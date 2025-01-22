@@ -34,8 +34,10 @@ serviceMaps:
               post_condition_remarks,
               pre_condition_remarks,
               description,
-              asset_maintenance_status
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+              asset_maintenance_status,
+              asset_maintenance_date,
+              asset_next_maintenance_date
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: AssetMaintenance
           jsonMaps:
             - jsonPath: $.AssetMaintenance.maintenanceId
@@ -63,12 +65,14 @@ serviceMaps:
             - jsonPath: $.AssetMaintenance.preConditionRemarks
             - jsonPath: $.AssetMaintenance.description
             - jsonPath: $.AssetMaintenance.assetMaintenanceStatus
+            - jsonPath: $.AssetMaintenance.assetMaintenanceDate
+            - jsonPath: $.AssetMaintenance.assetNextMaintenanceDate
 
         # Insert Documents
         - query: |
-            INSERT INTO eg_asset_document (
+            INSERT INTO eg_asset_maintenance_documents (
               documentid,
-              assetid,
+              maintenanceid,
               documenttype,
               filestoreid,
               documentuid,
@@ -80,7 +84,7 @@ serviceMaps:
           basePath: AssetMaintenance.documents.*
           jsonMaps:
             - jsonPath: $.AssetMaintenance.documents.*.documentId
-            - jsonPath: $.AssetMaintenance.assetId
+            - jsonPath: $.AssetMaintenance.maintenanceId
             - jsonPath: $.AssetMaintenance.documents.*.documentType
             - jsonPath: $.AssetMaintenance.documents.*.fileStoreId
             - jsonPath: $.AssetMaintenance.documents.*.documentUid
@@ -119,7 +123,9 @@ serviceMaps:
               post_condition_remarks = ?,
               pre_condition_remarks = ?,
               description = ?,
-              asset_maintenance_status = ?
+              asset_maintenance_status = ?,
+              asset_maintenance_date = ?,
+              asset_next_maintenance_date = ?
             WHERE maintenance_id = ?;
           basePath: AssetMaintenance
           jsonMaps:
@@ -143,13 +149,15 @@ serviceMaps:
             - jsonPath: $.AssetMaintenance.preConditionRemarks
             - jsonPath: $.AssetMaintenance.description
             - jsonPath: $.AssetMaintenance.assetMaintenanceStatus
+            - jsonPath: $.AssetMaintenance.assetMaintenanceDate
+            - jsonPath: $.AssetMaintenance.assetNextMaintenanceDate
             - jsonPath: $.AssetMaintenance.maintenanceId
 
         # Upsert Documents (Insert or Update)
         - query: |
-            INSERT INTO eg_asset_document (
+            INSERT INTO eg_asset_maintenance_documents (
               documentid,
-              assetid,
+              maintenanceid,
               documenttype,
               filestoreid,
               documentuid,
@@ -168,7 +176,7 @@ serviceMaps:
           basePath: AssetMaintenance.documents.*
           jsonMaps:
             - jsonPath: $.AssetMaintenance.documents.*.documentId
-            - jsonPath: $.AssetMaintenance.assetId
+            - jsonPath: $.AssetMaintenance.maintenanceId
             - jsonPath: $.AssetMaintenance.documents.*.documentType
             - jsonPath: $.AssetMaintenance.documents.*.fileStoreId
             - jsonPath: $.AssetMaintenance.documents.*.documentUid
