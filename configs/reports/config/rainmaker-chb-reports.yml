@@ -1,0 +1,70 @@
+---
+ReportDefinitions:
+  - reportName: CHBDailyRegisterReport
+    decryptionPathId: ObpsDailyCollectionReport
+    summary: CHB Daily Register Report
+    version: 1.0.0
+    moduleName: rainmaker-CHB
+    sourceColumns:
+      - name: applicant_name
+        label: Applicant Name
+        type: string
+        source: CHB
+        total: false
+      - name: community_hall_code
+        label: Community Hall Name
+        type: string
+        source: CHB
+        total: false
+        isLocalisationRequired: true
+      - name: booking_no
+        label: Booking No.
+        type: string
+        source: CHB
+        total: false
+      - name: amountpaid
+        label: Amount Paid
+        type: string
+        source: CHB
+        total: true
+      - name: booking_date
+        label: Booking Date
+        type: string
+        source: CHB
+        total: false
+      - name: createdtime
+        label: Created Time
+        type: string
+        source: CHB
+        showColumn: false
+    searchParams:
+      - name: booking_no
+        label: Booking Number
+        type: string
+        source: CHB
+        isMandatory: false
+        searchClause: AND b.booking_no = $booking_no
+      - name: fromDate
+        label: FromDate
+        type: epoch
+        source: CHB
+        isMandatory: true
+        searchClause: AND b.createdtime >= $fromDate
+      - name: toDate
+        label: ToDate
+        type: epoch
+        source: CHB
+        isMandatory: true
+        searchClause: AND b.createdtime <= $toDate
+    query: >
+      select a.applicant_name,
+      b.community_hall_code,
+      b.createdtime,
+      b.booking_no,
+      p.amountpaid,
+      h.booking_date,
+      h.status
+      from eg_chb_applicant_detail a, eg_chb_booking_detail b, egcl_paymentdetail p, eg_chb_slot_detail h
+      where a.booking_id=b.booking_id and b.receipt_no=p.receiptnumber and b.booking_id=h.booking_id
+      and 1=1
+ 
