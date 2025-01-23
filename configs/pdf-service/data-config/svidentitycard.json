@@ -78,6 +78,23 @@
                 }
               },
               {
+                "variable": "fathername",
+                "value": {
+                  "path": "$.vendorDetail[0].fatherName"
+                }
+              },
+              {
+                "variable": "vendingZone",
+                "value": {
+                  "path": "$.vendingZone"
+                },
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-common"
+                }
+              },
+              {
                 "variable": "pg",
                 "value": {
                   "path": "pgcitya"
@@ -93,6 +110,12 @@
                 "variable": "vendingActivity",
                 "value": {
                   "path": "$.vendingActivity"
+                }
+              },
+              {
+                "variable": "businessId",
+                "value": {
+                  "path": "$.workflow.businessId"
                 }
               },
               {
@@ -150,12 +173,6 @@
                 }
               },
               {
-                "variable": "businessId",
-                "value": {
-                  "path": "$.workflow.businessId"
-                }
-              },
-              {
                 "variable": "city",
                 "value": {
                   "path": "$.addressDetails[0].city"
@@ -200,7 +217,7 @@
                   },
                   {
                     "variable": "logoImage",
-                    "value": "$.MdmsRes.tenant.tenants[0].logoId",
+                    "value": "$.MdmsRes.tenant.tenants[0].IdCardLogo",
                     "type": "image"
                   },
                   {
@@ -224,28 +241,6 @@
                     "variable": "familyimage",
                     "value": "$.fileStoreIds[0].url",
                     "type": "image"
-                  }
-                ]
-              },
-              {
-                  "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
-                  "queryParam": "moduleName=Advertisement&masterName=AdvServices&tenantId=pg",
-                  "apiRequest": null,
-                  "responseMapping": [
-                    {
-                        "variable": "terms",
-                        "value": "$.MdmsRes.Advertisement.AdvServices[0].termsAndCondition"
-                    }
-                ]
-            },
-            {
-              "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
-              "queryParam": "moduleName=Advertisement&masterName=AdvServices&tenantId=pg",
-                "apiRequest": null,
-                "responseMapping": [
-                  {
-                    "variable": "TERMS",
-                    "value": "$.MdmsRes.Advertisement.AdvServices[0].termsAndCondition"
                   }
                 ]
               },
