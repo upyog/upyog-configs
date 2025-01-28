@@ -1,0 +1,289 @@
+---
+ReportDefinitions:
+  - reportName: AssetapplicationReport
+    decryptionPathId: ObpsDailyCollectionReport
+    summary: Asset Application Report
+    version: 1.0.0
+    moduleName: rainmaker-asset
+    sourceColumns:
+      - name: applicationno
+        label: Application No
+        type: string
+        source: asset
+        total: false
+      - name: AssetClassification
+        label: Asset Classification
+        type: string
+        source: asset
+        total: false
+      - name: parentcategory
+        label: Parent Category
+        type: string
+        source: asset
+        total: false
+      - name: AssetStatus
+        label: Asset Status
+        type: string
+        source: asset
+        isLocalisationRequired: true
+        total: false
+      - name: Department
+        label: Department
+        type: string
+        source: asset
+        total: false
+      - name: FinancialYear
+        label: Financial Year
+        type: string
+        source: asset
+        total: false
+      - name: createdtime
+        label: Created Time
+        type: string
+        source: asset
+        showColumn: false
+    searchParams:
+      - name: applicationno
+        label: Application Number
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND b.applicationno = $applicationno
+      - name: fromDate
+        label: FromDate
+        type: epoch
+        source: asset
+        isMandatory: true
+        searchClause: AND b.createdtime >= $fromDate
+      - name: toDate
+        label: ToDate
+        type: epoch
+        source: asset
+        isMandatory: true
+        searchClause: AND b.createdtime <= $toDate
+    query: >
+      SELECT 
+        b.applicationno AS applicationno,
+        b.bookrefno AS bookrefno,
+        b.classification AS AssetClassification, 
+        b.parentcategory AS parentcategory, 
+        b.name AS Assetname, 
+        b.status AS AssetStatus,
+        CONCAT('COMMON_MASTERS_DEPARTMENT_', b.department) AS Department,
+        b.financialyear AS FinancialYear, 
+        b.createdtime AS createdtime 
+        FROM 
+        eg_asset_assetdetails b
+        WHERE 
+        1 = 1
+  - reportName: AssetapplicationReportULBwise
+    decryptionPathId: ObpsDailyCollectionReport
+    summary: Asset Application Report
+    version: 1.0.0
+    moduleName: rainmaker-asset
+    sourceColumns:
+      - name: applicationno
+        label: Application No
+        type: string
+        source: asset
+        total: false
+      - name: bookrefno
+        label: Book Reference No
+        type: string
+        source: asset
+        total: false
+      - name: AssetClassification
+        label: Asset Classification
+        type: string
+        source: asset
+        total: false
+      - name: parentcategory
+        label: Parent Category
+        type: string
+        source: asset
+        total: false
+      - name: AssetStatus
+        label: Asset Status
+        type: string
+        source: asset
+        isLocalisationRequired: true
+        total: false
+      - name: Department
+        label: Department
+        type: string
+        source: asset
+        total: false
+        isLocalisationRequired: true
+      - name: tenantid
+        label: tenantd
+        type: string
+        source: asset
+        total: false
+        showColumn: true
+      - name: FinancialYear
+        label: Financial Year
+        type: string
+        source: asset
+        total: false
+      - name: createdtime
+        label: Created Time
+        type: string
+        source: asset
+        showColumn: false
+    searchParams:
+      - name: applicationno
+        label: Application Number
+        type: string
+        source: asset
+        isMandatory: false
+      - name: ulb
+        label: ULB
+        type: singlevaluelist
+        source: asset
+        wrapper: true
+        isMandatory: false
+        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=tenant&masterName=tenants|$.MdmsRes.tenant.tenants.*.code|$.MdmsRes.tenant.tenants.*.name
+        searchClause: AND b.tenantid = $ulb     
+      - name: fromDate
+        label: FromDate
+        type: epoch
+        source: asset
+        isMandatory: true
+        searchClause: AND b.createdtime >= $fromDate
+      - name: toDate
+        label: ToDate
+        type: epoch
+        source: asset
+        isMandatory: true
+        searchClause: AND b.createdtime <= $toDate
+    query: |
+        SELECT 
+        b.applicationno AS applicationno,
+        b.bookrefno AS bookrefno,
+        b.classification AS AssetClassification, 
+        b.parentcategory AS parentcategory, 
+        b.name AS Assetname, 
+        b.status AS AssetStatus,
+        CONCAT('COMMON_MASTERS_DEPARTMENT_', b.department) AS Department,
+        b.financialyear AS FinancialYear, 
+        b.createdtime AS createdtime, b.tenantid AS tenantid
+        FROM 
+        eg_asset_assetdetails b
+        WHERE 
+        1 = 1
+    orderby: ORDER BY b.tenantId asc
+
+  - reportName: AssetAssignmentReport
+    decryptionPathId: ObpsDailyCollectionReport
+    summary: Asset Assignment Report
+    version: 1.0.0
+    moduleName: rainmaker-asset
+    sourceColumns:
+      - name: applicationno
+        label: Application No
+        type: string
+        source: asset
+        total: false
+      - name: parentcategory
+        label: Parent Category 
+        type: string
+        source: asset
+        total: false
+      - name: subcategory
+        label: Sub Category 
+        type: string
+        source: asset
+        total: false
+        isLocalisationRequired: true
+      - name: bookValue
+        label: Book Value 
+        type: string
+        source: asset
+        total: false
+      - name: tenantid
+        label: tenantid
+        type: string
+        source: asset
+        total: false
+        showColumn: false
+      - name: assignedusername
+        label: Assigned User Name
+        type: string
+        source: asset
+        total: false
+      - name: department
+        label: Department
+        type: string
+        source: asset
+        total: false
+        isLocalisationRequired: true
+      - name: employeecode
+        label: Employee Code
+        type: string
+        source: asset
+        total: false
+      - name: createdtime
+        label: Created Time
+        type: string
+        source: asset
+        showColumn: false 
+      - name: status
+        label: Current Status
+        type: string
+        source: asset
+        total: false
+      - name: isassigned
+        label: Is Assigned
+        type: string
+        source: asset
+        total: false 
+      - name: returndate
+        label: Return Date
+        type: epoch
+        source: asset
+        total: false
+      - name: assigneddate
+        label: Assignment Date
+        type: epoch
+        source: asset
+        total: false     
+    searchParams:
+      - name: applicationno
+        label: Application No
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND b.applicationno = $applicationno
+      - name: fromDate
+        label: FromDate
+        type: epoch
+        source: asset
+        isMandatory: true
+        searchClause: AND b.createdtime >= $fromDate
+      - name: toDate
+        label: ToDate
+        type: epoch
+        source: asset
+        isMandatory: true
+        searchClause: AND b.createdtime <= $toDate
+    query: >
+      SELECT 
+        bb.applicationno AS applicationno,
+        b.parentcategory AS parentcategory,
+        b.subcategory AS subcategory,
+        b.additionaldetails::jsonb ->> 'bookValue' AS bookValue, 
+        b.tenantid AS tenantid,
+        bb.assignedusername AS assignedusername,
+        CONCAT('COMMON_MASTERS_DEPARTMENT_', b.department) AS department,
+        bb.employeecode AS employeecode,
+        b.createdtime AS createdtime,
+        b.status AS status,CASE WHEN bb.isassigned THEN 'Yes' 
+        ELSE 'No' 
+        END AS isassigned,TO_TIMESTAMP(bb.returndate / 1000) AS returndate,
+        TO_TIMESTAMP(bb.assigneddate / 1000) AS assigneddate
+        FROM 
+        eg_asset_assignmentdetails bb
+        JOIN 
+        eg_asset_assetdetails b ON bb.applicationno = b.applicationno
+        WHERE 
+        1=1

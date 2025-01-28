@@ -1,0 +1,331 @@
+{
+    "key": "chbpermissionletter",
+    "DataConfigs": {
+      "serviceName": "rainmaker-common",
+      "version": "1.0.0",
+      "baseKeyPath": "$.hallsBookingApplication[*]",
+      "entityIdPath": "$.id",
+      "isCommonTableBorderRequired": true,
+      "mappings": [
+        {
+          "topic": "common-pdf-generation-3",
+          "mappings": [
+            {
+              "direct": [
+                {
+                  "variable": "APPLICANT_NAME",
+                  "value": {
+                    "path": "$.applicantDetail.applicantName"
+                  }
+                },
+                {
+                    "variable": "BOOKING_DATE",
+                    "value": {
+                        "path": "$.cartDetails[0].bookingDate"
+                    }
+                },
+                {
+                  "variable": "PURPOSE",
+                  "value": {
+                      "path": "$.purpose.purpose"
+                  }
+              },
+                {
+                  "variable": "LOCATION_BOOKED",
+                  "value": {
+                      "path": "$.cartDetails[0].location"
+                  }
+              },
+              {
+                "variable": "CODE",
+                "value": {
+                    "path": "$.communityHallName"
+                }
+            },
+              {
+                  "variable": "FACE_AREA",
+                  "value": {
+                      "path": "$.cartDetails[0].faceArea"
+                  }
+              },
+              {
+                "variable": "AC",
+                "value": {
+                    "path": "$.applicantDetail.accountNumber"
+                }
+            },
+            {
+              "variable": "IFSC",
+              "value": {
+                  "path": "$.applicantDetail.ifscCode"
+              }
+          },
+          {
+            "variable": "BANK",
+            "value": {
+                "path": "$.applicantDetail.bankName"
+            }
+        },
+                {
+                  "variable": "CITY",
+                  "value": {
+                      "path": "$.address.city"
+                  }
+              },
+              {
+                  "variable": "LOCALITY",
+                  "value": {
+                      "path": "$.address.locality"
+                  }
+              },
+                {
+                  "variable": "AdType",
+                  "value": {
+                     "path": "$.cartDetails[*].addType",
+                     "type": "array-join",
+                     "separator": ", "
+                  }
+              },
+                {
+                    "variable": "BOOKING_TO_DATE1",
+                    "value": {
+                        "path": "$.bookingSlotDetails[1].bookingDate"
+                    }
+                },
+                {
+                  "variable": "BOOKING_TO_DATE",
+                  "value": {
+                      "path": "$.bookingSlotDetails[0].bookingDate"
+                  }
+              },
+                {
+                  "variable": "APPLICANT_NAME",
+                  "value": {
+                    "path": "$.applicantDetail.applicantName"
+                  }
+                 
+                },
+                {
+                  "variable": "BOOKING_NO",
+                  "value": {
+                    "path": "$.bookingNo"
+                  }
+                },
+                {
+                  "variable": "AdType",
+                  "value": {
+                    "path": "$.cartDetails[*].addType"
+                  }
+                },
+                {
+                  "variable": "tenantid",
+                  "value": {
+                    "path": "$.tenantId"
+                  }
+                },
+                {
+                  "variable": "commissioner/eo",
+                  "value": {
+                    "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_COMMISSIONER_EO"
+                  },
+                  "type": "label",
+                  "localisation": {
+                    "required": true,
+                    "prefix": null,
+                    "module": "rainmaker-common"
+                  }
+                },
+                {
+                  "variable": "no_signature",
+                  "value": {
+                    "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_NO_SIGNATURE"
+                  },
+                  "type": "label",
+                  "localisation": {
+                    "required": true,
+                    "prefix": null,
+                    "module": "rainmaker-common"
+                  }
+                },
+                {
+                  "variable": "disclamer",
+                  "value": {
+                    "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_DISCLAIMER"
+                  },
+                  "type": "label",
+                  "localisation": {
+                    "required": true,
+                    "prefix": null,
+                    "module": "rainmaker-common"
+                  }
+                },
+                {
+                  "variable": "to",
+                  "value": {
+                    "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_TO"
+                  },
+                  "type": "label",
+                  "localisation": {
+                    "required": true,
+                    "prefix": null,
+                    "module": "rainmaker-common"
+                  }
+                },
+                {
+                  "variable": "Municipal_Corporation",
+                  "value": {
+                    "path": "PDF_STATIC_LABEL_MDMS_MUNICIPAL_CORPORATION"
+                  },
+                  "type": "label",
+                  "localisation": {
+                    "required": true,
+                    "prefix": null,
+                    "module": "rainmaker-common"
+                  }
+                }
+              ]
+            },
+            {
+              "externalAPI": [
+                {
+                  "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
+                  "queryParam": "moduleName=tenant&masterName=tenants&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}')%5D",
+                  "apiRequest": null,
+                  "responseMapping": [
+                    {
+                      "variable": "address",
+                      "value": "$.MdmsRes.tenant.tenants[0].address"
+                    },
+                    {
+                      "variable": "phoneNumber",
+                      "value": "$.MdmsRes.tenant.tenants[0].contactNumber"
+                    },
+                    {
+                      "variable": "website",
+                      "value": "$.MdmsRes.tenant.tenants[0].domainUrl"
+                    },
+                    {
+                      "variable": "email",
+                      "value": "$.MdmsRes.tenant.tenants[0].emailId"
+                    },
+                    {
+                      "variable": "logoImage",
+                      "value": "$.MdmsRes.tenant.tenants[0].logoId",
+                      "type": "image"
+                    },
+                    {
+                      "variable": "logo-header",
+                      "value": "$.MdmsRes.tenant.tenants[0].code",
+                      "localisation": {
+                        "required": true,
+                        "prefix": "TENANT_TENANTS",
+                        "module": "rainmaker-common"
+                      }
+                    }
+                  ]
+                },
+                {
+                    "path": "http://collection-services:8080/collection-services/payments/chb-services/_search",
+                    "queryParam": "tenantId=pg.mohali,consumerCode=$.bookingNo",
+                    "apiRequest": null,
+                    "responseMapping": [
+                        {
+                            "variable": "totalAmount",
+                            "value": "Payments[0].totalDue"
+                        },
+                        {
+                            "variable": "BOOKING_FEES",
+                            "value": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[1].amount"
+                        },
+                        {
+                            "variable": "CGST",
+                            "value": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[0].amount"
+                        },
+                        {
+                            "variable": "SGST",
+                            "value": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[2].amount"
+                        }
+                     ]
+                   },
+                
+                {
+                    "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
+                    "queryParam": "moduleName=Advertisement&masterName=AdvServices&tenantId=pg",
+                    "apiRequest": null,
+                    "responseMapping": [
+                      {
+                          "variable": "terms",
+                          "value": "$.MdmsRes.Advertisement.AdvServices[0].termsAndCondition"
+                      }
+                  ]
+              },
+              {
+                "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
+                "queryParam": "moduleName=CHB&masterName=CommunityHalls&tenantId=pg.mohali",
+                "apiRequest": null,
+                "responseMapping": [
+                    {
+                        "variable": "terms",
+                        "value": "$.MdmsRes.CHB.CommunityHalls[0].termsAndCondition"
+                    }
+                ]
+            },
+                {
+                    "path": "http://egov-workflow-v2:8080/egov-workflow-v2/egov-wf/process/_search",
+                    "queryParam": "businessIds=$.bookingNo,history=true,tenantId=$.tenantId",
+                    "apiRequest": null,
+                    "responseMapping": [
+                        {
+                            "variable": "approved_by_value",
+                            "value": "$.ProcessInstances[?(@.action == 'APPROVE')].assigner.name"
+                        },
+                        {
+                            "variable": "Approval_Date",
+                            "value": "$.ProcessInstances[?(@.action == 'APPROVE')].auditDetails.lastModifiedTime",
+                            "type": "date"
+                        }
+                    ]
+                },
+                {
+                  "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
+                  "queryParam": "moduleName=tenant&masterName=footer&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}' %26%26 @.service=='{$.paymentDetails[0].businessService}')%5D",
+                  "apiRequest": null,
+                  "responseMapping": [
+                    {
+                      "variable": "variable11",
+                      "value": "$.MdmsRes.tenant.footer[0].receiptFooterContent.*",
+                      "type": "array",
+                      "format": {
+                        "type": "string",
+                        "scema": [
+                          {
+                            "variable": "disclaimerContent",
+                            "value": "disclaimer",
+                            "type": "string",
+                            "localisation": {
+                              "required": true,
+                              "prefix": null,
+                              "module": "rainmaker-common"
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "qrcodeConfig": [
+                {
+                  "variable": "qrcodeImage",
+                  "value": "digit-ui/citizen/payment/verification?tenantId={{tenantid}}&receiptNumber={{receiptNo}}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+  

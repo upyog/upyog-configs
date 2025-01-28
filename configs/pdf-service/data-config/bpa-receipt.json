@@ -50,6 +50,12 @@
                 }
               },
               {
+                "variable": "propertyID", 
+                "value": {
+                  "path": "$.paymentDetails[0].additionalDetails.propertyID"
+                }
+              },
+              {
                 "variable": "total_amount",
                 "value": {
                     "path": "PDF_STATIC_LABEL_CONSOLIDATED_TLAPP_TOTAL_AMOUNT"
@@ -163,6 +169,18 @@
                 "variable": "payment_receipt",
                 "value": {
                   "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_PAYMENT_RECEIPT"
+                },
+                "type": "label",
+                "localisation":{
+                  "required":true,
+                  "prefix": null,
+                  "module":"rainmaker-common"
+               }
+              },
+              {
+                "variable": "PROPERTY_ID",
+                "value": {
+                  "path": "BPA_PROPERTY_ID"
                 },
                 "type": "label",
                 "localisation":{

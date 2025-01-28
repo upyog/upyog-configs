@@ -1,0 +1,278 @@
+{
+  "key": "ewasteservicecertificate",
+  "documentType": "EWCERTIFICATE",
+  "DataConfigs": {
+    "moduleName": "ewaste-services",
+    "version": "1.0.0",
+    "baseKeyPath": "$.EwasteApplication.*",
+    "entityIdPath": "$.id",
+    "isCommonTableBorderRequired": true,
+    "mappings": [
+      {
+        "mappings": [
+          {
+            "direct": [
+              {
+                "variable": "municipal_corporation",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_CONSOLIDATED_TLCERTIFICATE_MUNICIPAL_CORPORATION"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-ew"
+                }
+              },
+              {
+                "variable": "corporation_website",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_MUTATION_WEBSITE"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-ew"
+                }
+              },
+              {
+                "variable": "corporation_email",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_MUTATION_EMAIL"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-ew"
+                }
+              },
+              {
+                "variable": "Ewaste_Certificate",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_EWASTE_CERTIFICATE"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-ew"
+                }
+              },
+              {
+                "variable": "Request_Id",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_REQUEST_ID_LABEL"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-ew"
+                }
+              },
+              {
+                "variable": "Applicant_Name",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_RECEIPT_OWNER_NAME"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-ew"
+                }
+              },
+              {
+                "variable": "Applicant_Contact",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_RECEIPT_OWNER_CONTACT"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-ew"
+                }
+              },
+              {
+                "variable": "Calculated_Amount",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_CALCULATED_AMOUNT"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-ew"
+                }
+              },
+              {
+                "variable": "Final_Amount",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_FINAL_AMOUNT"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-ew"
+                }
+              },
+              {
+                "variable": "Pickup_Date",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_PICKUP_DATE"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-ew"
+                }
+              },
+              {
+                "variable": "Payment_Method",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_PAYMENT_METHOD"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-ew"
+                }
+              },
+              {
+                "variable": "Product_Names",
+                "value": {
+                  "path": "PDF_STATIC_LABEL_PRODUCT_NAMES"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-ew"
+                }
+              },
+              {
+                "variable": "Request_Id",
+                "value": {
+                  "path": "$.requestId"
+                }
+              },
+              {
+                "variable": "Applicant_Name",
+                "value": {
+                  "path": "$.applicant.applicantName"
+                }
+              },
+              {
+                "variable": "Applicant_Contact",
+                "value": {
+                  "path": "$.applicant.mobileNumber"
+                }
+              },
+              {
+                "variable": "Calculated_Amount",
+                "value": {
+                  "path": "$.calculatedAmount"
+                }
+              },
+              {
+                "variable": "Final_Amount",
+                "value": {
+                  "path": "$.finalAmount"
+                }
+              },
+              {
+                "variable": "Pickup_Date",
+                "value": {
+                  "path": "$.pickupDate"
+                }
+              },
+              {
+                "variable": "Payment_Method",
+                "value": {
+                  "path": "$.pickupDate"
+                }
+              },
+              {
+                "array": [
+                  {
+                    "variable": "ewasteDetails",
+                    "path": "$.ewasteDetails"
+                  }
+                ]
+              }            
+              
+              
+            ]
+          },
+          {
+            "externalAPI": [
+              {
+                "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
+                "queryParam": "moduleName=tenant&masterName=tenants&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}')%5D",
+                "apiRequest": null,
+                "responseMapping": [
+                  {
+                    "variable": "address",
+                    "value": "$.MdmsRes.tenant.tenants[0].address"
+                  },
+                  {
+                    "variable": "phoneNumber",
+                    "value": "$.MdmsRes.tenant.tenants[0].contactNumber"
+                  },
+                  {
+                    "variable": "website",
+                    "value": "$.MdmsRes.tenant.tenants[0].domainUrl"
+                  },
+                  {
+                    "variable": "email",
+                    "value": "$.MdmsRes.tenant.tenants[0].emailId"
+                  },
+                  {
+                    "variable": "logoImage",
+                    "value": "$.MdmsRes.tenant.tenants[0].logoId",
+                    "type": "image"
+                  }
+                ]
+              },
+              {
+                "path": "http://egov-workflow-v2.egov:8080/egov-workflow-v2/egov-wf/process/_search",
+                "queryParam": "businessIds=$.requestId,history=true,tenantId=$.tenantId",
+                "apiRequest": null,
+                "responseMapping": [
+                  {
+                    "variable": "approved_by_value",
+                    "value": "$.ProcessInstances[?(@.action == 'COMPLETEREQUEST')].assigner.name"
+                  },
+                  {
+                    "variable": "Approval_Date",
+                    "value": "$.ProcessInstances[?(@.action == 'COMPLETEREQUEST')].auditDetails.lastModifiedTime",
+                    "type": "date"
+                  }
+                ]
+              },
+              {
+                "path": "http://egov-filestore:8080/filestore/v1/files/url",
+                "queryParam": "tenantId=pg&fileStoreIds=$.documents[0].filestoreId",
+                "apiRequest": null,
+                "requesttype": "GET",
+                "responseMapping": [
+                  {
+                    "variable": "ewastephoto",
+                    "value": "$.fileStoreIds[0].url",
+                    "type": "image"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
