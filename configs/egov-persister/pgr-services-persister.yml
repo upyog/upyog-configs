@@ -3,11 +3,12 @@ serviceMaps:
   mappings:
   - version: 1.0
     description: Persists pgr service request in tables
+    name : pgr-services
     fromTopic: save-pgr-request
     isTransaction: true
     queryMaps:
 
-    - query: INSERT INTO eg_pgr_service_v2(id, tenantid, servicecode, servicerequestid, description, accountid, additionaldetails, applicationstatus,priority, source, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?);
+    - query: INSERT INTO eg_pgr_service_v2(id, tenantid, servicecode, servicerequestid, description, accountid, additionaldetails, applicationstatus, source, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
       basePath: service
       jsonMaps:
       - jsonPath: $.service.id
@@ -27,8 +28,6 @@ serviceMaps:
         dbType: JSONB
 
       - jsonPath: $.service.applicationStatus
-      
-      - jsonPath: $.service.priority
 
       - jsonPath: $.service.source
 
@@ -97,7 +96,7 @@ serviceMaps:
     isTransaction: true
     queryMaps:
 
-    - query: UPDATE eg_pgr_service_v2 SET servicecode=?, rating = ?,servicerequestid=?, description=?, accountid=?, additionaldetails=?, applicationstatus=?,priority=?, lastmodifiedby=?, lastmodifiedtime=? WHERE id=?;
+    - query: UPDATE eg_pgr_service_v2 SET servicecode=?, rating = ?,servicerequestid=?, description=?, accountid=?, additionaldetails=?, applicationstatus=?, lastmodifiedby=?, lastmodifiedtime=? WHERE id=?;
       basePath: service
       jsonMaps:
       - jsonPath: $.service.serviceCode
@@ -115,8 +114,6 @@ serviceMaps:
         dbType: JSONB
 
       - jsonPath: $.service.applicationStatus
-      
-      - jsonPath: $.service.priority
 
       - jsonPath: $.service.auditDetails.lastModifiedBy
 
@@ -166,23 +163,3 @@ serviceMaps:
       - jsonPath: $.service.auditDetails.lastModifiedTime
 
       - jsonPath: $.service.address.id
-
-
-  - version: 1.0
-    description: Updates pgr status for auto escalate
-    fromTopic: pgr-auto-escalation
-    isTransaction: true
-    queryMaps:
-
-    - query: UPDATE eg_pgr_service_v2 SET applicationstatus=?, lastmodifiedby=?, lastmodifiedtime=? WHERE serviceRequestId=? AND tenantId=?;
-      basePath: ProcessInstances.*
-      jsonMaps:
-      - jsonPath: $.ProcessInstances.*.state.applicationStatus
-
-      - jsonPath: $.ProcessInstances.*.auditDetails.lastModifiedBy
-
-      - jsonPath: $.ProcessInstances.*.auditDetails.lastModifiedTime
-
-      - jsonPath: $.ProcessInstances.*.businessId
-
-      - jsonPath: $.ProcessInstances.*.tenantId
