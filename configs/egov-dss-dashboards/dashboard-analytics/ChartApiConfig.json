@@ -10596,7 +10596,7 @@
       {
         "module": "FIRENOC",
         "dateRefField": "",
-        "requestQueryMap": "{\"ulb\" : \"ulb\",\"state\" : \"state\"}",
+        "requestQueryMap": "{\"ulb\" : \"ulb.keyword\",\"state\" : \"state.keyword\"}",
         "indexName": "firenoc-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"todaysDate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_key\":\"desc\"},\"size\":1},\"aggs\":{\"Todays Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}},\"lastUpdatedTime\":{\"terms\":{\"field\":\"lastModifiedTime\",\"order\":{\"_key\":\"desc\"},\"size\":1}}}}}}"
       }
@@ -11469,7 +11469,7 @@
         "module": "WS",
         "indexName": "ws-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"todaysDate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_key\":\"desc\"},\"size\":1},\"aggs\":{\"Todays Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}},\"lastUpdatedTime\":{\"terms\":{\"field\":\"lastModifiedTime\",\"order\":{\"_key\":\"desc\"},\"size\":1}}}}}}",
-        "requestQueryMap": "{\"module\" : \"module\", \"state\" : \"state\", \"ulb\" : \"ulb\"}",
+        "requestQueryMap": "{\"module\" : \"module\", \"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": ""
       }
     ],
@@ -12580,7 +12580,7 @@
       {
         "module": "COMMON",
         "dateRefField": "",
-        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "mcollect-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"todaysDate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_key\":\"desc\"},\"size\":1},\"aggs\":{\"Todays Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}},\"lastUpdatedTime\":{\"terms\":{\"field\":\"lastModifiedTime\",\"order\":{\"_key\":\"desc\"},\"size\":1}}}}}}"
       }
@@ -13117,7 +13117,7 @@
       {
         "module": "TL",
         "dateRefField": "",
-        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "tl-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"todaysDate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_key\":\"desc\"},\"size\":1},\"aggs\":{\"Todays Collection\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}}}},\"lastUpdatedTime\":{\"terms\":{\"field\":\"lastModifiedTime\",\"order\":{\"_key\":\"desc\"},\"size\":1}}}}}}"
       }
@@ -23947,5 +23947,27 @@
 	  "Applications_Pending"
     ],
     "_comment": " "
+  },
+	"fsmTodaysCollection": {
+    "chartName": "FSM_TODAYS_COLLECTION",
+    "queries": [
+      {
+        "module": "FSM",
+        "dateRefField": "",
+        "requestQueryMap": "{\"ulb\" : \"ulb.keyword\",\"state\" : \"state.keyword\"}",
+        "indexName": "fsm-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"todaysDate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_key\":\"desc\"},\"size\":1},\"aggs\":{\"Todays Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}},\"lastUpdatedTime\":{\"terms\":{\"field\":\"lastModifiedTime\",\"order\":{\"_key\":\"desc\"},\"size\":1}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "amount",
+    "action": "",
+    "drillChart": "none",
+    "TodaysCollection": true,
+    "aggregationPaths": [
+      "Todays Collection"
+    ],
+    "insight": {},
+    "_comment": "FSM todays collections "
   }
 }
