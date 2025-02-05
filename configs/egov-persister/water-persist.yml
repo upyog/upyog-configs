@@ -457,3 +457,24 @@ serviceMaps:
       - jsonPath: $.WaterConnection.additionalDetails.appCreatedDate      
 
       - jsonPath: $.WaterConnection.id
+      
+ - version: 1.0
+   description: Updates ws status for auto escalate
+   fromTopic: ws-auto-escalation
+   isTransaction: true
+   queryMaps:
+
+    - query: UPDATE eg_ws_connection SET applicationstatus=?, lastmodifiedby=?, lastmodifiedtime=? WHERE applicationno=? AND tenantId=?;
+      basePath: ProcessInstances.*
+      jsonMaps:
+       
+
+      - jsonPath: $.ProcessInstances.*.state.applicationStatus
+
+      - jsonPath: $.ProcessInstances.*.auditDetails.lastModifiedBy
+
+      - jsonPath: $.ProcessInstances.*.auditDetails.lastModifiedTime
+
+      - jsonPath: $.ProcessInstances.*.businessId
+
+      - jsonPath: $.ProcessInstances.*.tenantId
