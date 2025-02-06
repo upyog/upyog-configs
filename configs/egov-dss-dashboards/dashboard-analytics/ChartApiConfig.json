@@ -20530,7 +20530,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "pt-national-dashboard",
-        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"avgDaysForApplicationApproval\"}}],\"must_not\":[{\"match\":{\"avgDaysForApplicationApproval\":0}}]}},\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"PT\"}},\"aggs\":{\"Average Days for Property Tax\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}"
+        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"avgDaysForApplicationApproval\"}}],\"must_not\":[{\"match\":{\"avgDaysForApplicationApproval\":0}}]}},\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"PT\"}},\"aggs\":{\"Average Days for Property Tax\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -20551,7 +20551,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "tl-national-dashboard",
-        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"avgDaysForApplicationApproval\"}}],\"must_not\":[{\"match\":{\"avgDaysForApplicationApproval\":0}}]}},\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"TL\"}},\"aggs\":{\"Average Days to Issue TL\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}"
+        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"avgDaysForApplicationApproval\"}}],\"must_not\":[{\"match\":{\"avgDaysForApplicationApproval\":0}}]}},\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"TL\"}},\"aggs\":{\"Average Days to Issue TL\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -20572,7 +20572,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "birth-cert-national-dashboard",
-        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"avgDaysForApplicationApproval\"}}],\"must_not\":[{\"match\":{\"avgDaysForApplicationApproval\":0}}]}},\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"BIRTH\"}},\"aggs\":{\"Average Days to Issue BIRTH\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}"
+        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"avgDaysForApplicationApproval\"}}],\"must_not\":[{\"match\":{\"avgDaysForApplicationApproval\":0}}]}},\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"BIRTH\"}},\"aggs\":{\"Average Days to Issue BIRTH\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -20593,7 +20593,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "death-cert-national-dashboard",
-        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"avgDaysForApplicationApproval\"}}],\"must_not\":[{\"match\":{\"avgDaysForApplicationApproval\":0}}]}},\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"DEATH\"}},\"aggs\":{\"Average Days to Issue DEATH\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}"
+        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"avgDaysForApplicationApproval\"}}],\"must_not\":[{\"match\":{\"avgDaysForApplicationApproval\":0}}]}},\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"DEATH\"}},\"aggs\":{\"Average Days to Issue DEATH\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -20614,7 +20614,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "ws-national-dashboard",
-        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"avgDaysForApplicationApproval\"}}],\"must_not\":[{\"match\":{\"avgDaysForApplicationApproval\":0}}]}},\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"WS\"}},\"aggs\":{\"Average Days to Issue WS\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}"
+        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"avgDaysForApplicationApproval\"}}],\"must_not\":[{\"match\":{\"avgDaysForApplicationApproval\":0}}]}},\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"WS\"}},\"aggs\":{\"Average Days to Issue WS\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -20635,7 +20635,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "obps-national-dashboard",
-        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"avgDaysForApplicationApproval\"}}],\"must_not\":[{\"match\":{\"avgDaysForApplicationApproval\":0}}]}},\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"OBPS\"}},\"aggs\":{\"Average Days to Issue OBPS\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}"
+        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"avgDaysForApplicationApproval\"}}],\"must_not\":[{\"match\":{\"avgDaysForApplicationApproval\":0}}]}},\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"OBPS\"}},\"aggs\":{\"Average Days to Issue OBPS\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -20656,7 +20656,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "firenoc-national-dashboard",
-        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"avgDaysForApplicationApproval\"}}],\"must_not\":[{\"match\":{\"avgDaysForApplicationApproval\":0}}]}},\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"FIRENOC\"}},\"aggs\":{\"Average Days to Issue FIRENOC\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}"
+        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"avgDaysForApplicationApproval\"}}],\"must_not\":[{\"match\":{\"avgDaysForApplicationApproval\":0}}]}},\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"FIRENOC\"}},\"aggs\":{\"Average Days to Issue FIRENOC\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
       }
     ],
     "chartType": "metric",
