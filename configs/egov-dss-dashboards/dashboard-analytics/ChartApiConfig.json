@@ -11041,7 +11041,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"ulb\" : \"ulb\", \"state\" : \"state\"}",
         "indexName": "firenoc-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"Actual Nocs issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"type.keyword\":\"ACTUAL\"}}]}},\"aggs\":{\"Noc's issued\":{\"terms\":{\"field\":\"state\",\"size\":\"1000\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"tnocIssuedTodayforType\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"Actual Nocs issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"type.keyword\":\"ACTUAL\"}}]}},\"aggs\":{\"Noc's issued\":{\"terms\":{\"field\":\"state\",\"size\":\"1000\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"nocIssuedTodayforType\"}}}}}}}}"
       }
     ],
     "isMdmsEnabled": false,
