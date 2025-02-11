@@ -10861,7 +10861,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"ulb\" : \"ulb\", \"state\" : \"state\"}",
         "indexName": "firenoc-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"type.keyword\":\"PROVISIONAL\"}}]}},\"aggs\":{\"Provisional Noc's Issued\":{\"sum\":{\"field\":\"nocIssuedTodayforType\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"type.keyword\":\"PROVISIONAL\"}}]}},\"aggs\":{\"Provisional Noc's Issued\":{\"sum\":{\"field\":\"nocIssuedTodayForType\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -11005,7 +11005,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"ulb\" : \"ulb\", \"state\" : \"state\"}",
         "indexName": "firenoc-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Provisional Nocs issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"type.keyword\":\"PROVISIONAL\"}}]}},\"aggs\":{\"Noc's issued\":{\"terms\":{\"field\":\"state\",\"size\":\"1000\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"nocIssuedTodayforType\"}}}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Provisional Nocs issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"type.keyword\":\"PROVISIONAL\"}}]}},\"aggs\":{\"Noc's issued\":{\"terms\":{\"field\":\"state\",\"size\":\"1000\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"nocIssuedTodayForType\"}}}}}}}}}}"
       }
     ],
     "isMdmsEnabled": false,
@@ -11041,7 +11041,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"ulb\" : \"ulb\", \"state\" : \"state\"}",
         "indexName": "firenoc-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"Actual Nocs issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"type.keyword\":\"ACTUAL\"}}]}},\"aggs\":{\"Noc's issued\":{\"terms\":{\"field\":\"state\",\"size\":\"1000\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"nocIssuedTodayforType\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"Actual Nocs issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"type.keyword\":\"ACTUAL\"}}]}},\"aggs\":{\"Noc's issued\":{\"terms\":{\"field\":\"state\",\"size\":\"1000\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"nocIssuedTodayForType\"}}}}}}}}"
       }
     ],
     "isMdmsEnabled": false,
@@ -11077,7 +11077,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"ward\" : \"ward.keyword\",\"ulb\" : \"ulb.keyword\", \"state\" : \"state.keyword\"}",
         "indexName": "firenoc-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Provisional Nocs issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"type.keyword\":\"PROVISIONAL\"}}]}},\"aggs\":{\"Noc's issued\":{\"terms\":{\"field\":\"state\",\"size\":\"1000\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"nocIssuedTodayforType\"}}}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Provisional Nocs issued\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"type.keyword\":\"PROVISIONAL\"}}]}},\"aggs\":{\"Noc's issued\":{\"terms\":{\"field\":\"state\",\"size\":\"1000\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"nocIssuedTodayForType\"}}}}}}}}}}"
       }
     ],
     "isMdmsEnabled": false,
@@ -15517,14 +15517,14 @@
       {
         "module": "TL",
         "dateRefField": "date",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
         "indexName": "tl-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysApplications\"}}],\"must_not\":[{\"match\":{\"todaysApplications\":0}}]}},\"aggs\":{\"Total Applications\":{\"sum\":{\"field\":\"todaysApplications\"}}}}}}"
       },
       {
         "module": "FIRENOC",
         "dateRefField": "date",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
         "indexName": "firenoc-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysApplicationsForApplicationType\"}}],\"must_not\":[{\"match\":{\"todaysApplicationsForApplicationType\":0}}]}},\"aggs\":{\"Total Applications\":{\"sum\":{\"field\":\"todaysApplicationsForApplicationType\"}}}}}}"
       },
@@ -15538,35 +15538,35 @@
       {
         "module": "OBPS",
         "indexName": "obps-national-dashboard-*",
+        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
         "aggrQuery": "{\"aggs\":{\"all_matching_docs\":{\"filters\":{\"filters\":{\"all\":{\"match_all\":{}}}},\"aggs\":{\"Total_Applications\":{\"sum\":{\"field\":\"applicationsSubmitted\"}},\"Total_Applications_OC\":{\"sum\":{\"field\":\"ocSubmitted\"}},\"Total Applications\":{\"bucket_script\":{\"buckets_path\":{\"total\":\"Total_Applications\",\"total_oc\":\"Total_Applications_OC\"},\"script\":\"(params.total+params.total_oc)\"}}}}}}",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date"
       },
       {
         "module": "WS",
         "indexName": "ws-national-dashboard-*",
+        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysTotalApplications\"}}],\"must_not\":[{\"match\":{\"todaysTotalApplications\":0}}]}},\"aggs\":{\"Total Applications\":{\"sum\":{\"field\":\"todaysTotalApplications\"}}}}}}",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date"
       },
       {
         "module": "BIRTH",
         "indexName": "birth-cert-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"numberOfCertificatesDownloadedTodayForChannel\"}}],\"must_not\":[{\"match\":{\"numberOfCertificatesDownloadedTodayForChannel\":0}}]}},\"aggs\":{\"Total Applications\":{\"sum\":{\"field\":\"numberOfCertificatesDownloadedTodayForChannel\"}}}}}}",
         "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"numberOfCertificatesDownloadedTodayForChannel\"}}],\"must_not\":[{\"match\":{\"numberOfCertificatesDownloadedTodayForChannel\":0}}]}},\"aggs\":{\"Total Applications\":{\"sum\":{\"field\":\"numberOfCertificatesDownloadedTodayForChannel\"}}}}}}",
         "dateRefField": "date"
       },
       {
         "module": "DEATH",
         "indexName": "death-cert-national-dashboard-*",
+        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"numberOfCertificatesDownloadedTodayForChannel\"}}],\"must_not\":[{\"match\":{\"numberOfCertificatesDownloadedTodayForChannel\":0}}]}},\"aggs\":{\"Total Applications\":{\"sum\":{\"field\":\"numberOfCertificatesDownloadedTodayForChannel\"}}}}}}",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date"
       },
       {
         "module": "FSM",
         "dateRefField": "date",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
         "indexName": "fsm-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysApplications\":0}}]}},\"aggs\":{\"Total Applications\":{\"sum\":{\"field\":\"todaysApplications\"}}}}}}"
       },
@@ -16026,22 +16026,22 @@
       {
         "module": "PT",
         "indexName": "pt-national-dashboard",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysTotalApplications\":0}}]}},\"aggs\":{\"PT\":{\"sum\":{\"field\":\"todaysTotalApplications\"}}}}}}",
         "dateRefField": "date"
       },
       {
         "module": "OBPS",
         "indexName": "obps-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"all_matching_docs\":{\"filters\":{\"filters\":{\"all\":{\"match_all\":{}}}},\"aggs\":{\"Total_Applications\":{\"sum\":{\"field\":\"applicationsSubmitted\"}},\"Total_Applications_OC\":{\"sum\":{\"field\":\"ocSubmitted\"}},\"OBPS\":{\"bucket_script\":{\"buckets_path\":{\"total\":\"Total_Applications\",\"total_oc\":\"Total_Applications_OC\"},\"script\":\"(params.total+params.total_oc)\"}}}}}}",
         "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
+        "aggrQuery": "{\"aggs\":{\"all_matching_docs\":{\"filters\":{\"filters\":{\"all\":{\"match_all\":{}}}},\"aggs\":{\"Total_Applications\":{\"sum\":{\"field\":\"applicationsSubmitted\"}},\"Total_Applications_OC\":{\"sum\":{\"field\":\"ocSubmitted\"}},\"OBPS\":{\"bucket_script\":{\"buckets_path\":{\"total\":\"Total_Applications\",\"total_oc\":\"Total_Applications_OC\"},\"script\":\"(params.total+params.total_oc)\"}}}}}}",
         "dateRefField": "date"
       },
       {
         "module": "WS",
         "indexName": "ws-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysTotalApplications\":0}}]}},\"aggs\":{\"WS\":{\"sum\":{\"field\":\"todaysTotalApplications\"}}}}}}",
         "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysTotalApplications\":0}}]}},\"aggs\":{\"WS\":{\"sum\":{\"field\":\"todaysTotalApplications\"}}}}}}",
         "dateRefField": "date"
       },
       {
@@ -16054,14 +16054,14 @@
       {
         "module": "DEATH",
         "indexName": "death-cert-national-dashboard-*",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"numberOfCertificatesDownloadedTodayForChannel\":0}}]}},\"aggs\":{\"BND\":{\"sum\":{\"field\":\"numberOfCertificatesDownloadedTodayForChannel\"}}}}}}",
         "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"numberOfCertificatesDownloadedTodayForChannel\":0}}]}},\"aggs\":{\"BND\":{\"sum\":{\"field\":\"numberOfCertificatesDownloadedTodayForChannel\"}}}}}}",
         "dateRefField": "date"
       },
       {
         "module": "FSM",
         "dateRefField": "date",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
         "indexName": "fsm-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"todaysApplications\":0}}]}},\"aggs\":{\"FSM\":{\"sum\":{\"field\":\"todaysApplications\"}}}}}}"
       },
@@ -20524,7 +20524,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "pt-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"PT\"}},\"aggs\":{\"Average Days for Property Tax\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
+         "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"avgDaysForApplicationApproval\"}}],\"must_not\":[{\"match\":{\"avgDaysForApplicationApproval\":0}}]}},\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"PT\"}},\"aggs\":{\"Average Days for Property Tax\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -20545,7 +20545,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "tl-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"TL\"}},\"aggs\":{\"Average Days to Issue TL\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
+        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"avgDaysForApplicationApproval\"}}],\"must_not\":[{\"match\":{\"avgDaysForApplicationApproval\":0}}]}},\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"TL\"}},\"aggs\":{\"Average Days to Issue TL\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -20566,7 +20566,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "birth-cert-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"BIRTH\"}},\"aggs\":{\"Average Days to Issue Birth Certificate\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
+        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"avgDaysForApplicationApproval\"}}],\"must_not\":[{\"match\":{\"avgDaysForApplicationApproval\":0}}]}},\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"BIRTH\"}},\"aggs\":{\"Average Days to Issue Birth Certificate\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -20587,7 +20587,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "death-cert-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"DEATH\"}},\"aggs\":{\"Average Days to Issue License\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
+        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"avgDaysForApplicationApproval\"}}],\"must_not\":[{\"match\":{\"avgDaysForApplicationApproval\":0}}]}},\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"DEATH\"}},\"aggs\":{\"Average Days to Issue Death Certificate\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -20608,7 +20608,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "ws-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"WS\"}},\"aggs\":{\"Average Days for WS Connection\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
+        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"avgDaysForApplicationApproval\"}}],\"must_not\":[{\"match\":{\"avgDaysForApplicationApproval\":0}}]}},\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"WS\"}},\"aggs\":{\"Average Days for WS Connection\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -20629,7 +20629,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "obps-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"OBPS\"}},\"aggs\":{\"Average Days for OBPS Certificate\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
+        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"avgDaysForApplicationApproval\"}}],\"must_not\":[{\"match\":{\"avgDaysForApplicationApproval\":0}}]}},\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"OBPS\"}},\"aggs\":{\"Average Days for OBPS Certificate\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -20650,7 +20650,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "firenoc-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"FIRENOC\"}},\"aggs\":{\"Average Days to Issue NOC\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
+        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"avgDaysForApplicationApproval\"}}],\"must_not\":[{\"match\":{\"avgDaysForApplicationApproval\":0}}]}},\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"FIRENOC\"}},\"aggs\":{\"Average Days to Issue NOC\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -23296,7 +23296,7 @@
       {
         "module": "WS",
         "dateRefField": "date",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
         "indexName": "ws-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysClosedApplications\"}}],\"must_not\":[{\"match\":{\"todaysClosedApplications\":0}}]}},\"aggs\":{\"TotalApplications\":{\"terms\":{\"field\":\"state\",\"size\": \"50\",\"order\":{\"Sum\":\"desc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysClosedApplications\"}}}}}}}}"
       }
