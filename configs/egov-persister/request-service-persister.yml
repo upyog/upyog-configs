@@ -63,4 +63,26 @@ serviceMaps:
         - query: INSERT INTO public.upyog_rs_tanker_booking_details_auditdetails SELECT * FROM public.upyog_rs_tanker_booking_details WHERE booking_id = ?;
           basePath: waterTankerBookingDetail
           jsonMaps:
-            - jsonPath: $.waterTankerBookingDetail.bookingId    
+            - jsonPath: $.waterTankerBookingDetail.bookingId
+
+    - version: 1.0
+      description: Update water tanker application detail
+      fromTopic: update-water-tanker-booking
+      isTransaction: true
+      queryMaps:
+        - query: UPDATE public.upyog_rs_tanker_booking_details SET booking_status = ?, vendor_id = ?, vehicle_id = ?, driver_id = ?,  createdby = ?, lastmodifiedby = ?, lastmodifiedtime = ? WHERE booking_id = ?;
+          basePath: waterTankerBookingDetail
+          jsonMaps:
+            - jsonPath: $.waterTankerBookingDetail.bookingStatus
+            - jsonPath: $.waterTankerBookingDetail.vendorId
+            - jsonPath: $.waterTankerBookingDetail.vehicleId
+            - jsonPath: $.waterTankerBookingDetail.driverId
+            - jsonPath: $.waterTankerBookingDetail.auditDetails.createdBy
+            - jsonPath: $.waterTankerBookingDetail.auditDetails.lastModifiedBy
+            - jsonPath: $.waterTankerBookingDetail.auditDetails.lastModifiedTime
+            - jsonPath: $.waterTankerBookingDetail.bookingId
+
+        - query: INSERT INTO public.upyog_rs_tanker_booking_details_auditdetails SELECT * FROM public.upyog_rs_tanker_booking_details WHERE booking_id = ?;
+          basePath: waterTankerBookingDetail
+          jsonMaps:
+            - jsonPath: $.waterTankerBookingDetail.bookingId
