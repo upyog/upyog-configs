@@ -886,6 +886,7 @@
       },
       {
         "module": "MCOLLECT",
+        "module": "MCOLLECT",
         "indexName": "echallan-services",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Citizen Registered\":{\"cardinality\":{\"field\":\"Data.accountId.keyword\"}}}}}}",
         "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"tenantId\" : \"Data.tenantId.keyword\" \r\n}",
@@ -14734,21 +14735,49 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "pt-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"month\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"transactionsForUsageCategory\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"transactionsForUsageCategory\"}}}}}}}}"
       },
       {
         "module": "TL",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "tl-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"month\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"transactions\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"transactions\"}}}}}}}}"
       },
       {
         "module": "WS",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
         "indexName": "ws-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"month\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"transactions\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"transactions\"}}}}}}}}"
+      },
+	  {
+        "module": "FSM",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
+        "indexName": "fsm-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"transactions\"}}}}}}}}"
+      },
+	  {
+        "module": "MCOLLECT",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
+        "indexName": "mcollect-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"numberOfReceiptsForPaymentMode\"}}}}}}}}"
+      },
+	  {
+        "module": "FIRENOC",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
+        "indexName": "firenoc-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"provisionalNOCIssuedForDepartment\"}}}}}}}}"
+      },
+	  {
+        "module": "OBPS",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
+        "indexName": "obps-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}}}}}"
       }
     ],
     "chartType": "line",
