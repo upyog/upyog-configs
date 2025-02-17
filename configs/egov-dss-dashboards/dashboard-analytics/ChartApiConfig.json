@@ -886,7 +886,6 @@
       },
       {
         "module": "MCOLLECT",
-        "module": "MCOLLECT",
         "indexName": "echallan-services",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Citizen Registered\":{\"cardinality\":{\"field\":\"Data.accountId.keyword\"}}}}}}",
         "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"tenantId\" : \"Data.tenantId.keyword\" \r\n}",
