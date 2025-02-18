@@ -216,7 +216,7 @@
         jsonMaps:
           - jsonPath: $.streetVendingDetail.vendorDetail.*.id
 
-      - query: UPDATE public.eg_sv_street_vending_detail SET tenant_id = ?, application_no = ?, application_date = ?, certificate_no = ?, approval_date = ?, application_status = ?, trade_license_no = ?, vending_activity = ?, vending_zone = ?, cart_latitude = ?, cart_longitude = ?, vending_area = ?, vending_license_certificate_id = ?, local_authority_name = ?, disability_status = ?,beneficiary_of_social_schemes = ?, enrollment_id = ?, terms_and_condition = ?, createdby = ?, createdtime = ?, lastmodifiedby = ?, lastmodifiedtime = ?, payment_receipt_id = ?, vending_license_id = ?, validity_date = ?::Date, eligible_to_renew = ?, expire_flag = ? WHERE application_id = ?;
+      - query: UPDATE public.eg_sv_street_vending_detail SET tenant_id = ?, application_no = ?, application_date = ?, certificate_no = ?, approval_date = ?, application_status = ?, trade_license_no = ?, vending_activity = ?, vending_zone = ?, cart_latitude = ?, cart_longitude = ?, vending_area = ?, vending_license_certificate_id = ?, local_authority_name = ?, disability_status = ?,beneficiary_of_social_schemes = ?, enrollment_id = ?, terms_and_condition = ?, createdby = ?, createdtime = ?, lastmodifiedby = ?, lastmodifiedtime = ?, payment_receipt_id = ?, vending_license_id = ?, validity_date = CAST(? AS DATE), eligible_to_renew = ?, expire_flag = ? WHERE application_id = ?;
         basePath: streetVendingDetail
         jsonMaps:
           
