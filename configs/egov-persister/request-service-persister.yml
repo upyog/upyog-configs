@@ -96,17 +96,17 @@ serviceMaps:
       fromTopic: create-mobile-toilet-booking
       isTransaction: true
       queryMaps:
-       - query: INSERT INTO public.upyog_rs_mobile_toilet_booking_details(booking_id, booking_no, tenant_id, no_of_mobile_toilet, requirement_from_date, requirement_to_date, requirement_from_time, requirement_to_time, description, applicant_uuid, vendor_id, vehicle_id, driver_id, booking_createdby, booking_status, createdby, lastModifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?::DATE, ?::DATE, ?::TIME, ?::TIME, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+       - query: INSERT INTO public.upyog_rs_mobile_toilet_booking_details(booking_id, booking_no, tenant_id, no_of_mobile_toilet, delivery_from_date, delivery_to_date, delivery_from_time, delivery_to_time, description, applicant_uuid, vendor_id, vehicle_id, driver_id, booking_createdby, booking_status, createdby, lastModifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?::DATE, ?::DATE, ?::TIME, ?::TIME, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: mobileToiletBookingDetail
           jsonMaps:
             - jsonPath: $.mobileToiletBookingDetail.bookingId
             - jsonPath: $.mobileToiletBookingDetail.bookingNo
             - jsonPath: $.mobileToiletBookingDetail.tenantId
             - jsonPath: $.mobileToiletBookingDetail.noOfMobileToilet
-            - jsonPath: $.mobileToiletBookingDetail.requirementFromDate
-            - jsonPath: $.mobileToiletBookingDetail.requirementToDate
-            - jsonPath: $.mobileToiletBookingDetail.requirementFromTime
-            - jsonPath: $.mobileToiletBookingDetail.requirementToTime
+            - jsonPath: $.mobileToiletBookingDetail.deliveryFromDate
+            - jsonPath: $.mobileToiletBookingDetail.deliveryToDate
+            - jsonPath: $.mobileToiletBookingDetail.deliveryFromTime
+            - jsonPath: $.mobileToiletBookingDetail.deliveryToTime
             - jsonPath: $.mobileToiletBookingDetail.description
             - jsonPath: $.mobileToiletBookingDetail.applicantUuid
             - jsonPath: $.mobileToiletBookingDetail.vendorId
