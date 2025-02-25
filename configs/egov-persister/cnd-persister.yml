@@ -49,10 +49,10 @@ serviceMaps:
             - jsonPath: $.cndApplication.auditDetails.lastModifiedBy
             - jsonPath: $.cndApplication.auditDetails.lastModifiedTime
 
-        - query: INSERT INTO public.ug_cnd_disposal_deposit_centre_detail(facility_center_id, application_id, vehicle_id, vehicle_depot_no, net_weight, gross_weight, dumping_station_name, disposal_date, disposal_type, name_of_disposal_site, created_by, created_time, last_modified_by, last_modified_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO public.ug_cnd_disposal_deposit_centre_detail(disposal_id, application_id, vehicle_id, vehicle_depot_no, net_weight, gross_weight, dumping_station_name, disposal_date, disposal_type, name_of_disposal_site, created_by, created_time, last_modified_by, last_modified_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: cndApplication.facilityCenterDetail
           jsonMaps:
-            - jsonPath: $.cndApplication.facilityCenterDetail.facilityCenterId
+            - jsonPath: $.cndApplication.facilityCenterDetail.disposalId
             - jsonPath: $.cndApplication.applicationId
             - jsonPath: $.cndApplication.facilityCenterDetail.vehicleId
             - jsonPath: $.cndApplication.facilityCenterDetail.vehicleDepotNo
