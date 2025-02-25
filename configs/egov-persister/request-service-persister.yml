@@ -91,12 +91,12 @@ serviceMaps:
             - jsonPath: $.waterTankerBookingDetail.bookingId
 
     
-     - version: 1.0
+    - version: 1.0
       description: Persists mobile toilet booking detail
       fromTopic: create-mobile-toilet-booking
       isTransaction: true
       queryMaps:
-       - query: INSERT INTO public.upyog_rs_mobile_toilet_booking_details(booking_id, booking_no, tenant_id, no_of_mobile_toilet, delivery_from_date, delivery_to_date, delivery_from_time, delivery_to_time, description, applicant_uuid, vendor_id, vehicle_id, driver_id, booking_createdby, booking_status, createdby, lastModifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?::DATE, ?::DATE, ?::TIME, ?::TIME, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO public.upyog_rs_mobile_toilet_booking_details(booking_id, booking_no, tenant_id, no_of_mobile_toilet, delivery_from_date, delivery_to_date, delivery_from_time, delivery_to_time, description, applicant_uuid, vendor_id, vehicle_id, driver_id, booking_createdby, booking_status, createdby, lastModifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?::DATE, ?::DATE, ?::TIME, ?::TIME, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: mobileToiletBookingDetail
           jsonMaps:
             - jsonPath: $.mobileToiletBookingDetail.bookingId
@@ -119,21 +119,7 @@ serviceMaps:
             - jsonPath: $.mobileToiletBookingDetail.auditDetails.createdTime
             - jsonPath: $.mobileToiletBookingDetail.auditDetails.lastModifiedTime
 
-        - query: INSERT INTO public.upyog_rs_applicant_details(applicant_id, booking_id, name, mobile_number,email_id, alternate_number, createdby, lastModifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
-          basePath: mobileToiletBookingDetail.applicantDetail
-          jsonMaps:
-            - jsonPath: $.mobileToiletBookingDetail.applicantDetail.applicantId
-            - jsonPath: $.mobileToiletBookingDetail.applicantDetail.bookingId
-            - jsonPath: $.mobileToiletBookingDetail.applicantDetail.name
-            - jsonPath: $.mobileToiletBookingDetail.applicantDetail.mobileNumber
-            - jsonPath: $.mobileToiletBookingDetail.applicantDetail.emailId
-            - jsonPath: $.mobileToiletBookingDetail.applicantDetail.alternateNumber
-            - jsonPath: $.mobileToiletBookingDetail.auditDetails.createdBy
-            - jsonPath: $.mobileToiletBookingDetail.auditDetails.lastModifiedBy
-            - jsonPath: $.mobileToiletBookingDetail.auditDetails.createdTime
-            - jsonPath: $.mobileToiletBookingDetail.auditDetails.lastModifiedTime
-
-        - query: INSERT INTO public.upyog_rs_address_details(address_id, applicant_id, house_no, address_line_1, address_line_2, street_name, landmark, city, city_code, locality, locality_code, pincode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO public.upyog_rs_mt_address_details(address_id, applicant_id, house_no, address_line_1, address_line_2, street_name, landmark, city, city_code, locality, locality_code, pincode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: mobileToiletBookingDetail.address
           jsonMaps:
             - jsonPath: $.mobileToiletBookingDetail.address.addressId
@@ -149,7 +135,7 @@ serviceMaps:
             - jsonPath: $.mobileToiletBookingDetail.address.localityCode
             - jsonPath: $.mobileToiletBookingDetail.address.pincode
         
-         - query: INSERT INTO public.upyog_rs_mobile_toilet_booking_details_auditdetails SELECT * FROM public.upyog_rs_mobile_toilet_booking_details WHERE booking_id = ?;
+        - query: INSERT INTO public.upyog_rs_mobile_toilet_booking_details_auditdetails SELECT * FROM public.upyog_rs_mobile_toilet_booking_details WHERE booking_id = ?;
           basePath: mobileToiletBookingDetail
           jsonMaps:
             - jsonPath: $.mobileToiletBookingDetail.bookingId
