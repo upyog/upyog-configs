@@ -1,5 +1,5 @@
 serviceMaps:
-  serviceName: cdwm-service
+  serviceName: cnd-service
   mappings:
     - version: 1.0
       description: Persists C&D waste application details
@@ -79,3 +79,19 @@ serviceMaps:
             - jsonPath: $.cndApplication.auditDetails.createdTime
             - jsonPath: $.cndApplication.auditDetails.lastModifiedBy
             - jsonPath: $.cndApplication.auditDetails.lastModifiedTime
+
+    - version: 1.0
+      description: Update CND application detail
+      fromTopic: update-cnd-application
+      isTransaction: true
+      queryMaps:
+        - query: UPDATE public.ug_cnd_application_details SET application_status = ?, vendor_id = ?, vehicle_id = ?, created_by = ?, last_modified_by = ?, last_modified_time = ? WHERE application_id = ?;
+          basePath: cndApplication
+          jsonMaps:
+            - jsonPath: $.cndApplication.applicationStatus
+            - jsonPath: $.cndApplication.vendorId
+            - jsonPath: $.cndApplication.vehicleId
+            - jsonPath: $.cndApplication.auditDetails.createdBy
+            - jsonPath: $.cndApplication.auditDetails.lastModifiedBy
+            - jsonPath: $.cndApplication.auditDetails.lastModifiedTime
+            - jsonPath: $.cndApplication.applicationId
