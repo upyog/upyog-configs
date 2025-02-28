@@ -1,0 +1,77 @@
+SearchDefinitions:
+  moduleName: cnd-service
+  summary: CND Inbox API
+  version: 1.0.0
+  definitions:
+    - name: inboxCNDSearch
+      query:
+        baseQuery: Select row_to_json(result) from
+          (
+          select DISTINCT(ucad.application_number),pi.createdtime from 
+          ug_cnd_application_details as ucad
+          INNER JOIN eg_wf_processinstance_v2 pi ON pi.businessid = ucad.application_number
+          $where
+          AND pi.createdtime IN (select max(createdtime) from eg_wf_processinstance_v2 wf where wf.businessid = ucad.application_number GROUP BY wf.businessid)
+          order by pi.createdtime asc $pagination
+          ) result
+        groupBy:
+        orderBy:
+      searchParams:
+        condition: AND
+        params:
+          - name: ucad.tenant_id
+            isMandatory: true
+            jsonPath: $.searchCriteria.tenantId
+          - name: ucad.application_id
+            isMandatory: false
+            jsonPath: $.searchCriteria.applicationId
+          - name: ucad.application_number
+            isMandatory: false
+            jsonPath: $.searchCriteria.applicationNumber
+          - name: pi.businessservice
+            isMandatory: false
+            jsonPath: $.searchCriteria.businessservice
+        pagination:
+          noOfRecords: $.searchCriteria.noOfRecords
+          offset: $.searchCriteria.offset
+
+      output:
+        jsonFormat: {"ResponseInfo": {},"cndApplicationDetail": []}
+        outJsonPath: $.cndApplicationDetail
+        responseInfoPath: $.ResponseInfo
+    - name: inboxCNDSearchdesc
+      query:
+        baseQuery: Select row_to_json(result) from
+          (
+          select DISTINCT(ucad.application_number),pi.createdtime from 
+          ug_cnd_application_details as ucad
+          INNER JOIN eg_wf_processinstance_v2 pi ON pi.businessid = ucad.application_number
+          $where
+          AND pi.createdtime IN (select max(createdtime) from eg_wf_processinstance_v2 wf where wf.businessid = ucad.application_number GROUP BY wf.businessid)
+          order by pi.createdtime desc $pagination
+          ) result
+        groupBy:
+        orderBy:
+      searchParams:
+        condition: AND
+        params:
+          - name: ucad.tenant_id
+            isMandatory: true
+            jsonPath: $.searchCriteria.tenantId
+          - name: ucad.application_id
+            isMandatory: false
+            jsonPath: $.searchCriteria.applicationId
+          - name: ucad.application_number
+            isMandatory: false
+            jsonPath: $.searchCriteria.applicationNumber
+          - name: pi.businessservice
+            isMandatory: false
+            jsonPath: $.searchCriteria.businessservice
+        pagination:
+          noOfRecords: $.searchCriteria.noOfRecords
+          offset: $.searchCriteria.offset
+
+      output:
+        jsonFormat: {"ResponseInfo": {},"cndApplicationDetail": []}
+        outJsonPath: $.cndApplicationDetail
+        responseInfoPath: $.ResponseInfo
