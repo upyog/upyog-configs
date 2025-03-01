@@ -200,7 +200,7 @@
 	<div class="garbage-details">
 		<p>
 			<span class="text-heading-class">Garbage ID:</span>
-			<span class="garbage-id">XXX-XXX-XXXX-XXX</span>
+			<span class="garbage-id" th:text="${applicationNumber}">NA</span>
 		</p>
 		<div class="citizen-details">
 			<table class="details-table">
@@ -224,8 +224,7 @@
 					th:text="${propertyId}">NA</span>
 			</th>
 			<th class="text-heading-class text-heading-class-address property-id-td">
-				<img class="tag-line" src="http://localhost:908/formBuilder/web/img/tag-line-blue.png"
-					alt="Citizen Seva Tag Line" />
+				<img class="tag-line" src="https://citizenseva.hp.gov.in/hp-udd/user_manual/tag-line-blue.png" alt="Citizen Seva Tag Line"/>
 			</th>
 		</tr>
 	</table>
