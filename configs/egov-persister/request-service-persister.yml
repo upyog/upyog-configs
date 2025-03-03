@@ -89,3 +89,76 @@ serviceMaps:
           basePath: waterTankerBookingDetail
           jsonMaps:
             - jsonPath: $.waterTankerBookingDetail.bookingId
+
+    
+    - version: 1.0
+      description: Persists mobile toilet booking detail
+      fromTopic: create-mobile-toilet-booking
+      isTransaction: true
+      queryMaps:
+        - query: INSERT INTO public.upyog_rs_mobile_toilet_booking_details(booking_id, booking_no, tenant_id, no_of_mobile_toilet, delivery_from_date, delivery_to_date, delivery_from_time, delivery_to_time, description, applicant_uuid, vendor_id, vehicle_id, driver_id, booking_createdby, booking_status, createdby, lastModifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?::DATE, ?::DATE, ?::TIME, ?::TIME, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: mobileToiletBookingDetail
+          jsonMaps:
+            - jsonPath: $.mobileToiletBookingDetail.bookingId
+            - jsonPath: $.mobileToiletBookingDetail.bookingNo
+            - jsonPath: $.mobileToiletBookingDetail.tenantId
+            - jsonPath: $.mobileToiletBookingDetail.noOfMobileToilet
+            - jsonPath: $.mobileToiletBookingDetail.deliveryFromDate
+            - jsonPath: $.mobileToiletBookingDetail.deliveryToDate
+            - jsonPath: $.mobileToiletBookingDetail.deliveryFromTime
+            - jsonPath: $.mobileToiletBookingDetail.deliveryToTime
+            - jsonPath: $.mobileToiletBookingDetail.description
+            - jsonPath: $.mobileToiletBookingDetail.applicantUuid
+            - jsonPath: $.mobileToiletBookingDetail.vendorId
+            - jsonPath: $.mobileToiletBookingDetail.vehicleId
+            - jsonPath: $.mobileToiletBookingDetail.driverId
+            - jsonPath: $.mobileToiletBookingDetail.bookingCreatedBy
+            - jsonPath: $.mobileToiletBookingDetail.bookingStatus
+            - jsonPath: $.mobileToiletBookingDetail.auditDetails.createdBy
+            - jsonPath: $.mobileToiletBookingDetail.auditDetails.lastModifiedBy
+            - jsonPath: $.mobileToiletBookingDetail.auditDetails.createdTime
+            - jsonPath: $.mobileToiletBookingDetail.auditDetails.lastModifiedTime
+
+        - query: INSERT INTO public.upyog_rs_mt_address_details(address_id, applicant_id, house_no, address_line_1, address_line_2, street_name, landmark, city, city_code, locality, locality_code, pincode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: mobileToiletBookingDetail.address
+          jsonMaps:
+            - jsonPath: $.mobileToiletBookingDetail.address.addressId
+            - jsonPath: $.mobileToiletBookingDetail.address.applicantId
+            - jsonPath: $.mobileToiletBookingDetail.address.houseNo
+            - jsonPath: $.mobileToiletBookingDetail.address.addressLine1
+            - jsonPath: $.mobileToiletBookingDetail.address.addressLine2
+            - jsonPath: $.mobileToiletBookingDetail.address.streetName
+            - jsonPath: $.mobileToiletBookingDetail.address.landmark
+            - jsonPath: $.mobileToiletBookingDetail.address.city
+            - jsonPath: $.mobileToiletBookingDetail.address.cityCode
+            - jsonPath: $.mobileToiletBookingDetail.address.locality
+            - jsonPath: $.mobileToiletBookingDetail.address.localityCode
+            - jsonPath: $.mobileToiletBookingDetail.address.pincode
+        
+        - query: INSERT INTO public.upyog_rs_mobile_toilet_booking_details_auditdetails SELECT * FROM public.upyog_rs_mobile_toilet_booking_details WHERE booking_id = ?;
+          basePath: mobileToiletBookingDetail
+          jsonMaps:
+            - jsonPath: $.mobileToiletBookingDetail.bookingId
+
+
+    - version: 1.0
+      description: Update mobile Toilet booking detail
+      fromTopic: update-mobile-toilet-booking
+      isTransaction: true
+      queryMaps:
+        - query: UPDATE public.upyog_rs_mobile_toilet_booking_details SET booking_status = ?, vendor_id = ?, vehicle_id = ?, driver_id = ?,  createdby = ?, lastmodifiedby = ?, lastmodifiedtime = ? WHERE booking_id = ?;
+          basePath: mobileToiletBookingDetail
+          jsonMaps:
+            - jsonPath: $.mobileToiletBookingDetail.bookingStatus
+            - jsonPath: $.mobileToiletBookingDetail.vendorId
+            - jsonPath: $.mobileToiletBookingDetail.vehicleId
+            - jsonPath: $.mobileToiletBookingDetail.driverId
+            - jsonPath: $.mobileToiletBookingDetail.auditDetails.createdBy
+            - jsonPath: $.mobileToiletBookingDetail.auditDetails.lastModifiedBy
+            - jsonPath: $.mobileToiletBookingDetail.auditDetails.lastModifiedTime
+            - jsonPath: $.mobileToiletBookingDetail.bookingId
+
+        - query: INSERT INTO public.upyog_rs_mobile_toilet_booking_details_auditdetails SELECT * FROM public.upyog_rs_mobile_toilet_booking_details WHERE booking_id = ?;
+          basePath: mobileToiletBookingDetail
+          jsonMaps:
+            - jsonPath: $.mobileToiletBookingDetail.bookingId
