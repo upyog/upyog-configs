@@ -6,13 +6,14 @@ serviceMaps:
       fromTopic: save-cnd-application
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO public.ug_cnd_application_details(application_id, tenant_id, application_number, application_type, type_of_construction, deposit_centre_details, applicant_detail_id, requested_pickup_date, application_status, additional_details, house_area, construction_from_date, construction_to_date, property_type, total_waste_quantity, no_of_trips, vehicle_id, vendor_id, pickup_date, completed_on, created_by, created_time, last_modified_by, last_modified_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO public.ug_cnd_application_details(application_id, tenant_id, application_number, application_type, vehicle_type, type_of_construction, deposit_centre_details, applicant_detail_id, requested_pickup_date, application_status, additional_details, house_area, construction_from_date, construction_to_date, property_type, total_waste_quantity, no_of_trips, vehicle_id, vendor_id, pickup_date, completed_on, created_by, created_time, last_modified_by, last_modified_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: cndApplication
           jsonMaps:
             - jsonPath: $.cndApplication.applicationId
             - jsonPath: $.cndApplication.tenantId
             - jsonPath: $.cndApplication.applicationNumber
             - jsonPath: $.cndApplication.applicationType
+            - jsonPath: $.cndApplication.vehicleType
             - jsonPath: $.cndApplication.typeOfConstruction
             - jsonPath: $.cndApplication.depositCentreDetails
             - jsonPath: $.cndApplication.applicantDetailId
