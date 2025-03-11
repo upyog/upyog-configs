@@ -37,7 +37,7 @@ serviceMaps:
             - jsonPath: $.cndApplication.auditDetails.lastModifiedBy
             - jsonPath: $.cndApplication.auditDetails.lastModifiedTime
 
-        - query: INSERT INTO public.ug_cnd_waste_detail(waste_type_id, application_id, quantity, metrics, entered_by_user_type, created_by, created_time, last_modified_by, last_modified_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO public.ug_cnd_waste_detail(waste_type_id, application_id, quantity, metrics, entered_by_user_type, waste_type, created_by, created_time, last_modified_by, last_modified_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: cndApplication.wasteTypeDetails.*
           jsonMaps:
             - jsonPath: $.cndApplication.wasteTypeDetails.*.wasteTypeId
@@ -45,6 +45,7 @@ serviceMaps:
             - jsonPath: $.cndApplication.wasteTypeDetails.*.quantity
             - jsonPath: $.cndApplication.wasteTypeDetails.*.metrics
             - jsonPath: $.cndApplication.wasteTypeDetails.*.enteredByUserType
+            - jsonPath: $.cndApplication.wasteTypeDetails.*.wasteType
             - jsonPath: $.cndApplication.auditDetails.createdBy
             - jsonPath: $.cndApplication.auditDetails.createdTime
             - jsonPath: $.cndApplication.auditDetails.lastModifiedBy
