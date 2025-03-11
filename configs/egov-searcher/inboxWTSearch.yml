@@ -1,9 +1,9 @@
 SearchDefinitions:
   moduleName: request-service
-  summary: Request Service Inbox API
+  summary: Water Tanker Request Service Inbox API
   version: 1.0.0
   definitions:
-    - name: inboxRequestServiceSearch
+    - name: inboxWTSearch
       query:
         baseQuery: Select row_to_json(result) from
           (
@@ -39,7 +39,7 @@ SearchDefinitions:
         jsonFormat: {"ResponseInfo": {},"waterTankerBookingDetail": []}
         outJsonPath: $.waterTankerBookingDetail
         responseInfoPath: $.ResponseInfo
-    - name: inboxRequestServiceSearchdesc
+    - name: inboxWTSearchdesc
       query:
         baseQuery: Select row_to_json(result) from
           (
