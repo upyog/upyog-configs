@@ -9915,10 +9915,10 @@
     "queries": [
       {
         "module": "OBPS",
-        "dateRefField": "",
-        "requestQueryMap": "{\"ward\" : \"ward.keyword\",\"ulb\" : \"ulb.keyword\", \"state\" : \"state.keyword\"}",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"ward\" : \"ward\",\"ulb\" : \"ulb\", \"state\" : \"state\"}",
         "indexName": "obps-national-dashboard-*",
-        "aggrQuery": "{ \"aggs\": { \"AGGR\": { \"filter\": { \"bool\": { \"must\": [ { \"terms\": { \"riskType.keyword\": [ \"LOW\", \"MEDIUM\",\"HIGH\" ] } } ] } }, \"aggs\": { \"Total Permits Issued\": { \"sum\": { \"field\": \"permitsIssuedForRiskType\" } } } } } }"
+        "aggrQuery": "{ \"aggs\": { \"AGGR\": { \"filter\": { \"bool\": {}}, \"aggs\": { \"Total Permits Issued\": { \"sum\": { \"field\": \"permitsIssuedForRiskType\" } } } } } }"
       }
     ],
     "chartType": "metric",
@@ -9946,10 +9946,9 @@
       {
         "module": "OBPS",
         "dateRefField": "date",
-        "requestQueryMap": "{\"ward\" : \"ward.keyword\",\"ulb\" : \"ulb.keyword\", \"state\" : \"state.keyword\"}",
-        "indexName": "obps-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"plansScrutinized\"}}],\"must_not\":[{\"match\":{\"plansScrutinized\":0}}]}},\"aggs\":{\"State\":{\"terms\":{\"field\":\"state.keyword\",\"size\":500},\"aggs\":{\"total\":{\"terms\":{\"field\":\"date\"},\"aggs\":{\"total1\":{\"terms\":{\"field\":\"ulb.keyword\"},\"aggs\":{\"total2\":{\"terms\":{\"field\":\"ward.keyword\"},\"aggs\":{\"total3\":{\"avg\":{\"field\":\"plansScrutinized\"}}}},\"total4\":{\"sum_bucket\":{\"buckets_path\": \"total2.total3\"}}}},\"total5\":{\"sum_bucket\":{\"buckets_path\":\"total1.total4\"}}}},\"Total Plans Scrutinized\":{\"sum_bucket\":{\"buckets_path\":\"total.total5\"}}}}}}}}"
-      }
+        "requestQueryMap": "{\"ward\" : \"ward\",\"ulb\" : \"ulb\", \"state\" : \"state\"}",
+        "indexName": "obps-national-dashboard-*",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"plansScrutinized\"}}],\"must_not\":[{\"match\":{\"plansScrutinized\":0}}]}},\"aggs\":{\"Total Plans Scrutinized\": {\"sum\": {\"field\": \"plansScrutinized\"}}}}}}"      }
     ],
     "chartType": "metric",
     "valueType": "number",
@@ -9976,9 +9975,9 @@
       {
         "module": "OBPS",
         "dateRefField": "date",
-        "requestQueryMap": "{\"ward\" : \"ward.keyword\",\"ulb\" : \"ulb.keyword\", \"state\" : \"state.keyword\"}",
+        "requestQueryMap": "{\"ward\" : \"ward\",\"ulb\" : \"ulb\", \"state\" : \"state\"}",
         "indexName": "obps-national-dashboard-*",
-        "aggrQuery": "{ \"aggs\": { \"intermediateAggr\": { \"terms\": { \"field\": \"date\" }, \"aggs\":{ \"ocIssued\":{ \"avg\":{ \"field\":\"ocIssued\" } } } }, \"Total OC Issued\": { \"sum_bucket\": { \"buckets_path\": \"intermediateAggr.ocIssued\" } } } }"
+        "aggrQuery": "{ \"aggs\": {  \"Total OC Issued\": { \"sum\": { \"field\": \"ocIssued\" } } } }"
       }
     ],
     "chartType": "metric",
