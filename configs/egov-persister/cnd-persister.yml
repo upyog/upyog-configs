@@ -6,7 +6,7 @@ serviceMaps:
       fromTopic: save-cnd-application
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO public.ug_cnd_application_details(application_id, tenant_id, application_number, application_type, vehicle_type, type_of_construction, deposit_centre_details, applicant_detail_id, requested_pickup_date, application_status, additional_details, house_area, construction_from_date, construction_to_date, property_type, total_waste_quantity, no_of_trips, vehicle_id, vendor_id, pickup_date, completed_on, created_by, created_time, last_modified_by, last_modified_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?,  ?::DATE, ?, ?, ?,  ?::DATE,  ?::DATE, ?, ?, ?, ?, ?, ?::DATE, ?::TIME, ?, ?, ?, ?);
+        - query: INSERT INTO public.ug_cnd_application_details(application_id, tenant_id, application_number, application_type, vehicle_type, type_of_construction, deposit_centre_details, applicant_detail_id, requested_pickup_date, application_status, additional_details, house_area, construction_from_date, construction_to_date, property_type, total_waste_quantity, no_of_trips, vehicle_id, vendor_id, pickup_date, completed_on, created_by, created_time, last_modified_by, last_modified_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?,  ?::DATE, ?, ?, ?,  ?::DATE,  ?::DATE, ?, ?, ?, ?, ?,  ?::DATE, ?::TIMESTAMP, ?, ?, ?, ?);
           basePath: cndApplication
           jsonMaps:
             - jsonPath: $.cndApplication.applicationId
@@ -46,24 +46,6 @@ serviceMaps:
             - jsonPath: $.cndApplication.wasteTypeDetails.*.metrics
             - jsonPath: $.cndApplication.wasteTypeDetails.*.enteredByUserType
             - jsonPath: $.cndApplication.wasteTypeDetails.*.wasteType
-            - jsonPath: $.cndApplication.auditDetails.createdBy
-            - jsonPath: $.cndApplication.auditDetails.createdTime
-            - jsonPath: $.cndApplication.auditDetails.lastModifiedBy
-            - jsonPath: $.cndApplication.auditDetails.lastModifiedTime
-
-        - query: INSERT INTO public.ug_cnd_disposal_deposit_centre_detail(disposal_id, application_id, vehicle_id, vehicle_depot_no, net_weight, gross_weight, dumping_station_name, disposal_date, disposal_type, name_of_disposal_site, created_by, created_time, last_modified_by, last_modified_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
-          basePath: cndApplication.facilityCenterDetail
-          jsonMaps:
-            - jsonPath: $.cndApplication.facilityCenterDetail.disposalId
-            - jsonPath: $.cndApplication.applicationId
-            - jsonPath: $.cndApplication.facilityCenterDetail.vehicleId
-            - jsonPath: $.cndApplication.facilityCenterDetail.vehicleDepotNo
-            - jsonPath: $.cndApplication.facilityCenterDetail.netWeight
-            - jsonPath: $.cndApplication.facilityCenterDetail.grossWeight
-            - jsonPath: $.cndApplication.facilityCenterDetail.dumpingStationName
-            - jsonPath: $.cndApplication.facilityCenterDetail.disposalDate
-            - jsonPath: $.cndApplication.facilityCenterDetail.disposalType
-            - jsonPath: $.cndApplication.facilityCenterDetail.nameOfDisposalSite
             - jsonPath: $.cndApplication.auditDetails.createdBy
             - jsonPath: $.cndApplication.auditDetails.createdTime
             - jsonPath: $.cndApplication.auditDetails.lastModifiedBy
