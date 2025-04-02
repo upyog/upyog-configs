@@ -10,6 +10,7 @@ SearchDefinitions:
           select DISTINCT(urstbd.booking_no),pi.createdtime from 
           upyog_rs_tanker_booking_details as urstbd
           INNER JOIN eg_wf_processinstance_v2 pi ON pi.businessid = urstbd.booking_no
+          LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
           $where
           AND pi.createdtime IN (select max(createdtime) from eg_wf_processinstance_v2 wf where wf.businessid = urstbd.booking_no GROUP BY wf.businessid)
           order by pi.createdtime asc $pagination
@@ -22,12 +23,9 @@ SearchDefinitions:
           - name: urstbd.tenant_id
             isMandatory: true
             jsonPath: $.searchCriteria.tenantId
-          - name: urstbd.booking_id
+          - name: pi.status
             isMandatory: false
-            jsonPath: $.searchCriteria.bookingId
-          - name: urstbd.booking_no
-            isMandatory: false
-            jsonPath: $.searchCriteria.bookingNo
+            jsonPath: $.searchCriteria.status
           - name: pi.businessservice
             isMandatory: false
             jsonPath: $.searchCriteria.businessservice
@@ -46,6 +44,7 @@ SearchDefinitions:
           select DISTINCT(urstbd.booking_no),pi.createdtime from 
           upyog_rs_tanker_booking_details as urstbd
           INNER JOIN eg_wf_processinstance_v2 pi ON pi.businessid = urstbd.booking_no
+          LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
           $where
           AND pi.createdtime IN (select max(createdtime) from eg_wf_processinstance_v2 wf where wf.businessid = urstbd.booking_no GROUP BY wf.businessid)
           order by pi.createdtime desc $pagination
@@ -58,12 +57,9 @@ SearchDefinitions:
           - name: urstbd.tenant_id
             isMandatory: true
             jsonPath: $.searchCriteria.tenantId
-          - name: urstbd.booking_id
+          - name: pi.status
             isMandatory: false
-            jsonPath: $.searchCriteria.bookingId
-          - name: urstbd.booking_no
-            isMandatory: false
-            jsonPath: $.searchCriteria.bookingNo
+            jsonPath: $.searchCriteria.status
           - name: pi.businessservice
             isMandatory: false
             jsonPath: $.searchCriteria.businessservice
