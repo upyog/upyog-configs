@@ -71,13 +71,30 @@ serviceMaps:
       fromTopic: update-cnd-application
       isTransaction: true
       queryMaps:
-        - query: UPDATE public.ug_cnd_application_details SET application_status = ?, vendor_id = ?, vehicle_id = ?, created_by = ?, last_modified_by = ?, last_modified_time = ? WHERE application_id = ?;
+        - query: UPDATE public.ug_cnd_application_details SET tenant_id = ?, application_type = ?, vehicle_type = ?, type_of_construction = ?, deposit_centre_details = ?, applicant_detail_id = ?, requested_pickup_date = ?::DATE, application_status = ?, additional_details = ?, house_area = ?, construction_from_date = ?::DATE, construction_to_date = ?::DATE, property_type = ?, total_waste_quantity = ?, no_of_trips = ?, vehicle_id = ?, vendor_id = ?, pickup_date = ?::DATE, completed_on = ?::TIMESTAMP, last_modified_by = ?, last_modified_time = ? WHERE application_id = ?;
           basePath: cndApplication
           jsonMaps:
+            - jsonPath: $.cndApplication.tenantId
+            - jsonPath: $.cndApplication.applicationType
+            - jsonPath: $.cndApplication.vehicleType
+            - jsonPath: $.cndApplication.typeOfConstruction
+            - jsonPath: $.cndApplication.depositCentreDetails
+            - jsonPath: $.cndApplication.applicantDetailId
+            - jsonPath: $.cndApplication.requestedPickupDate
             - jsonPath: $.cndApplication.applicationStatus
-            - jsonPath: $.cndApplication.vendorId
+            - jsonPath: $.cndApplication.additionalDetails
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.cndApplication.houseArea
+            - jsonPath: $.cndApplication.constructionFromDate
+            - jsonPath: $.cndApplication.constructionToDate
+            - jsonPath: $.cndApplication.propertyType
+            - jsonPath: $.cndApplication.totalWasteQuantity
+            - jsonPath: $.cndApplication.noOfTrips
             - jsonPath: $.cndApplication.vehicleId
-            - jsonPath: $.cndApplication.auditDetails.createdBy
+            - jsonPath: $.cndApplication.vendorId
+            - jsonPath: $.cndApplication.pickupDate
+            - jsonPath: $.cndApplication.completedOn
             - jsonPath: $.cndApplication.auditDetails.lastModifiedBy
             - jsonPath: $.cndApplication.auditDetails.lastModifiedTime
             - jsonPath: $.cndApplication.applicationId
