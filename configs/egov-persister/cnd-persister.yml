@@ -98,3 +98,44 @@ serviceMaps:
             - jsonPath: $.cndApplication.auditDetails.lastModifiedBy
             - jsonPath: $.cndApplication.auditDetails.lastModifiedTime
             - jsonPath: $.cndApplication.applicationId
+        - query: UPDATE public.ug_cnd_waste_detail SET quantity = ?, metrics = ?, entered_by_user_type = ?, waste_type = ? WHERE application_id = ? AND waste_type_id = ?;
+          basePath: cndApplication.wasteTypeDetails.*
+          jsonMaps:
+            - jsonPath: $.cndApplication.wasteTypeDetails.*.quantity
+            - jsonPath: $.cndApplication.wasteTypeDetails.*.metrics
+            - jsonPath: $.cndApplication.wasteTypeDetails.*.enteredByUserType
+            - jsonPath: $.cndApplication.wasteTypeDetails.*.wasteType
+            - jsonPath: $.cndApplication.applicationId     
+            - jsonPath: $.cndApplication.wasteTypeDetails.*.wasteTypeId
+        - query: UPDATE public.ug_cnd_document_detail SET document_type = ?, uploaded_by_user_type = ?, file_store_id = ? WHERE application_id = ? AND document_detail_id = ?
+          basePath: cndApplication.documentDetails.*
+          jsonMaps:   
+            - jsonPath: $.cndApplication.documentDetails.*.documentType
+            - jsonPath: $.cndApplication.documentDetails.*.uploadedByUserType
+            - jsonPath: $.cndApplication.documentDetails.*.fileStoreId     
+            - jsonPath: $.cndApplication.applicationId
+            - jsonPath: $.cndApplication.documentDetails.*.documentDetailId
+    - version: 1.0
+      description: Inser CND waste and document detail
+      fromTopic: save-waste-document-application
+      isTransaction: true
+      queryMaps:
+        - query: INSERT INTO public.ug_cnd_waste_detail (application_id, waste_type_id, quantity, metrics, entered_by_user_type, waste_type) 
+              VALUES (?, ?, ?, ?, ?, ?)
+          basePath: cndApplication.wasteTypeDetails.*
+          jsonMaps:
+            - jsonPath: $.cndApplication.applicationId
+            - jsonPath: $.cndApplication.wasteTypeDetails.*.wasteTypeId
+            - jsonPath: $.cndApplication.wasteTypeDetails.*.quantity
+            - jsonPath: $.cndApplication.wasteTypeDetails.*.metrics
+            - jsonPath: $.cndApplication.wasteTypeDetails.*.enteredByUserType
+            - jsonPath: $.cndApplication.wasteTypeDetails.*.wasteType
+        - query: INSERT INTO public.ug_cnd_document_detail (document_detail_id, application_id, document_type, uploaded_by_user_type, file_store_id) 
+              VALUES (?, ?, ?, ?, ?)
+          basePath: cndApplication.documentDetails.*
+          jsonMaps:
+            - jsonPath: $.cndApplication.documentDetails.*.documentDetailId
+            - jsonPath: $.cndApplication.applicationId
+            - jsonPath: $.cndApplication.documentDetails.*.documentType
+            - jsonPath: $.cndApplication.documentDetails.*.uploadedByUserType
+            - jsonPath: $.cndApplication.documentDetails.*.fileStoreId
