@@ -10,6 +10,7 @@ SearchDefinitions:
           select DISTINCT(chb.booking_no),pi.createdtime from 
           eg_chb_booking_detail as chb
           INNER JOIN eg_wf_processinstance_v2 pi ON pi.businessid = chb.booking_no
+          LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
           $where
           AND pi.createdtime IN (select max(createdtime) from eg_wf_processinstance_v2 wf where wf.businessid = chb.booking_no GROUP BY wf.businessid)
           order by pi.createdtime asc $pagination
@@ -22,12 +23,15 @@ SearchDefinitions:
           - name: chb.tenant_id
             isMandatory: true
             jsonPath: $.searchCriteria.tenantId
-          - name: chb.booking_id
-            isMandatory: false
-            jsonPath: $.searchCriteria.bookingId
           - name: chb.booking_no
             isMandatory: false
             jsonPath: $.searchCriteria.bookingNo
+          - name: pi.status
+            isMandatory: false
+            jsonPath: $.searchCriteria.status
+          - name: assg.assignee
+            isMandatory: false
+            jsonPath: $.searchCriteria.assignee
           - name: pi.businessservice
             isMandatory: false
             jsonPath: $.searchCriteria.businessservice
@@ -46,6 +50,7 @@ SearchDefinitions:
           select DISTINCT(chb.booking_no),pi.createdtime from 
           eg_chb_booking_detail as chb
           INNER JOIN eg_wf_processinstance_v2 pi ON pi.businessid = chb.booking_no
+          LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
           $where
           AND pi.createdtime IN (select max(createdtime) from eg_wf_processinstance_v2 wf where wf.businessid = chb.booking_no GROUP BY wf.businessid)
           order by pi.createdtime desc $pagination
@@ -58,12 +63,15 @@ SearchDefinitions:
           - name: chb.tenant_id
             isMandatory: true
             jsonPath: $.searchCriteria.tenantId
-          - name: chb.booking_id
-            isMandatory: false
-            jsonPath: $.searchCriteria.bookingId
           - name: chb.booking_no
             isMandatory: false
             jsonPath: $.searchCriteria.bookingNo
+          - name: pi.status
+            isMandatory: false
+            jsonPath: $.searchCriteria.status
+          - name: assg.assignee
+            isMandatory: false
+            jsonPath: $.searchCriteria.assignee
           - name: pi.businessservice
             isMandatory: false
             jsonPath: $.searchCriteria.businessservice

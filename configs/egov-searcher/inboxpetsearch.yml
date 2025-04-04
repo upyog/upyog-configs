@@ -26,6 +26,9 @@ SearchDefinitions:
           - name: pet.id
             isMandatory: false
             jsonPath: $.searchCriteria.id
+          - name: pi.status
+            isMandatory: false
+            jsonPath: $.searchCriteria.status
           - name: pet.applicationNumber
             isMandatory: false
             jsonPath: $.searchCriteria.applicationNumber
@@ -66,6 +69,9 @@ SearchDefinitions:
           - name: pet.applicationNumber
             isMandatory: false
             jsonPath: $.searchCriteria.applicationNumber
+          - name: pi.status
+            isMandatory: false
+            jsonPath: $.searchCriteria.status
           - name: pi.businessservice
             isMandatory: false
             jsonPath: $.searchCriteria.businessservice
