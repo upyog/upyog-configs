@@ -23,6 +23,9 @@ SearchDefinitions:
           - name: urmt.tenant_id
             isMandatory: true
             jsonPath: $.searchCriteria.tenantId
+          - name: urmt.booking_no
+            isMandatory: false
+            jsonPath: $.searchCriteria.bookingNo
           - name: pi.status
             isMandatory: false
             jsonPath: $.searchCriteria.status
@@ -60,6 +63,9 @@ SearchDefinitions:
           - name: urmt.tenant_id
             isMandatory: true
             jsonPath: $.searchCriteria.tenantId
+          - name: urmt.booking_no
+            isMandatory: false
+            jsonPath: $.searchCriteria.bookingNo
           - name: pi.status
             isMandatory: false
             jsonPath: $.searchCriteria.status
