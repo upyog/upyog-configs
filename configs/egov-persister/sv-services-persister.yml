@@ -668,9 +668,3 @@
         basePath: streetVendingDetail.vendorDetail.*
         jsonMaps:
           - jsonPath: $.streetVendingDetail.vendorDetail.*.id
-      
-      - query: Update public.eg_sv_street_vending_detail SET renewal_status = ? where application_no = ?;
-        basePath: streetVendingDetail
-        jsonMaps:
-          - jsonPath: $.streetVendingDetail.renewalStatus
-          - jsonPath: $.streetVendingDetail.oldApplicationNumber
