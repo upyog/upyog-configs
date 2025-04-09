@@ -10,6 +10,7 @@ SearchDefinitions:
           select DISTINCT(ucad.application_number),pi.createdtime from 
           ug_cnd_application_details as ucad
           INNER JOIN eg_wf_processinstance_v2 pi ON pi.businessid = ucad.application_number
+          LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
           $where
           AND pi.createdtime IN (select max(createdtime) from eg_wf_processinstance_v2 wf where wf.businessid = ucad.application_number GROUP BY wf.businessid)
           order by pi.createdtime asc $pagination
@@ -28,6 +29,12 @@ SearchDefinitions:
           - name: ucad.application_number
             isMandatory: false
             jsonPath: $.searchCriteria.applicationNumber
+          - name: pi.status
+            isMandatory: false
+            jsonPath: $.searchCriteria.status
+          - name: assg.assignee
+            isMandatory: false
+            jsonPath: $.searchCriteria.assignee  
           - name: pi.businessservice
             isMandatory: false
             jsonPath: $.searchCriteria.businessservice
@@ -46,6 +53,7 @@ SearchDefinitions:
           select DISTINCT(ucad.application_number),pi.createdtime from 
           ug_cnd_application_details as ucad
           INNER JOIN eg_wf_processinstance_v2 pi ON pi.businessid = ucad.application_number
+          LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
           $where
           AND pi.createdtime IN (select max(createdtime) from eg_wf_processinstance_v2 wf where wf.businessid = ucad.application_number GROUP BY wf.businessid)
           order by pi.createdtime desc $pagination
@@ -64,6 +72,12 @@ SearchDefinitions:
           - name: ucad.application_number
             isMandatory: false
             jsonPath: $.searchCriteria.applicationNumber
+          - name: pi.status
+            isMandatory: false
+            jsonPath: $.searchCriteria.status
+          - name: assg.assignee
+            isMandatory: false
+            jsonPath: $.searchCriteria.assignee    
           - name: pi.businessservice
             isMandatory: false
             jsonPath: $.searchCriteria.businessservice
