@@ -6,7 +6,7 @@ serviceMaps:
       fromTopic: save-cnd-application
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO public.ug_cnd_application_details(application_id, tenant_id, application_number, application_type, vehicle_type, type_of_construction, deposit_centre_details, applicant_detail_id, address_detail_id, applicant_mobile_number, requested_pickup_date, application_status, additional_details, house_area, construction_from_date, construction_to_date, property_type, total_waste_quantity, no_of_trips, vehicle_id, vendor_id, pickup_date, completed_on, created_by, created_time, last_modified_by, last_modified_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  ?::DATE, ?, ?, ?,  ?::DATE,  ?::DATE, ?, ?, ?, ?, ?,  ?::DATE, ?::TIMESTAMP, ?, ?, ?, ?);
+        - query: INSERT INTO public.ug_cnd_application_details(application_id, tenant_id, application_number, application_type, vehicle_type, type_of_construction, deposit_centre_details, locality, applicant_detail_id, address_detail_id, applicant_mobile_number, requested_pickup_date, application_status, additional_details, house_area, construction_from_date, construction_to_date, property_type, total_waste_quantity, no_of_trips, vehicle_id, vendor_id, pickup_date, completed_on, created_by, created_time, last_modified_by, last_modified_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  ?::DATE, ?, ?, ?,  ?::DATE,  ?::DATE, ?, ?, ?, ?, ?,  ?::DATE, ?::TIMESTAMP, ?, ?, ?, ?);
           basePath: cndApplication
           jsonMaps:
             - jsonPath: $.cndApplication.applicationId
@@ -16,6 +16,7 @@ serviceMaps:
             - jsonPath: $.cndApplication.vehicleType
             - jsonPath: $.cndApplication.typeOfConstruction
             - jsonPath: $.cndApplication.depositCentreDetails
+            - jsonPath: $.cndApplication.locality
             - jsonPath: $.cndApplication.applicantDetailId
             - jsonPath: $.cndApplication.addressDetailId
             - jsonPath: $.cndApplication.applicantMobileNumber
@@ -71,7 +72,7 @@ serviceMaps:
       fromTopic: update-cnd-application
       isTransaction: true
       queryMaps:
-        - query: UPDATE public.ug_cnd_application_details SET tenant_id = ?, application_type = ?, vehicle_type = ?, type_of_construction = ?, deposit_centre_details = ?, requested_pickup_date = ?::DATE, application_status = ?, additional_details = ?, house_area = ?, construction_from_date = ?::DATE, construction_to_date = ?::DATE, property_type = ?, total_waste_quantity = ?, no_of_trips = ?, vehicle_id = ?, vendor_id = ?, pickup_date = ?::DATE, completed_on = ?::TIMESTAMP, last_modified_by = ?, last_modified_time = ? WHERE application_id = ?;
+        - query: UPDATE public.ug_cnd_application_details SET tenant_id = ?, application_type = ?, vehicle_type = ?, type_of_construction = ?, deposit_centre_details = ?, locality = ?, requested_pickup_date = ?::DATE, application_status = ?, additional_details = ?, house_area = ?, construction_from_date = ?::DATE, construction_to_date = ?::DATE, property_type = ?, total_waste_quantity = ?, no_of_trips = ?, vehicle_id = ?, vendor_id = ?, pickup_date = ?::DATE, completed_on = ?::TIMESTAMP, last_modified_by = ?, last_modified_time = ? WHERE application_id = ?;
           basePath: cndApplication
           jsonMaps:
             - jsonPath: $.cndApplication.tenantId
@@ -79,6 +80,7 @@ serviceMaps:
             - jsonPath: $.cndApplication.vehicleType
             - jsonPath: $.cndApplication.typeOfConstruction
             - jsonPath: $.cndApplication.depositCentreDetails
+            - jsonPath: $.cndApplication.locality
             - jsonPath: $.cndApplication.requestedPickupDate
             - jsonPath: $.cndApplication.applicationStatus
             - jsonPath: $.cndApplication.additionalDetails
