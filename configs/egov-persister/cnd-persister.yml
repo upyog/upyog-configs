@@ -67,6 +67,44 @@ serviceMaps:
             - jsonPath: $.cndApplication.auditDetails.lastModifiedBy
             - jsonPath: $.cndApplication.auditDetails.lastModifiedTime
 
+        - query: INSERT INTO public.ug_cnd_disposal_deposit_centre_detail(disposal_id, application_id, vehicle_id, vehicle_depot_no, net_weight, gross_weight, dumping_station_name, disposal_date, disposal_type, name_of_disposal_site, created_by, created_time, last_modified_by, last_modified_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?::TIMESTAMP, ?, ?, ?, ?, ?, ?);
+          basePath: cndApplication.facilityCenterDetail
+          jsonMaps:
+            - jsonPath: $.cndApplication.facilityCenterDetail.disposalId
+            - jsonPath: $.cndApplication.applicationId
+            - jsonPath: $.cndApplication.facilityCenterDetail.vehicleId
+            - jsonPath: $.cndApplication.facilityCenterDetail.vehicleDepotNo
+            - jsonPath: $.cndApplication.facilityCenterDetail.netWeight
+            - jsonPath: $.cndApplication.facilityCenterDetail.grossWeight
+            - jsonPath: $.cndApplication.facilityCenterDetail.dumpingStationName
+            - jsonPath: $.cndApplication.facilityCenterDetail.disposalDate
+            - jsonPath: $.cndApplication.facilityCenterDetail.disposalType
+            - jsonPath: $.cndApplication.facilityCenterDetail.nameOfDisposalSite
+            - jsonPath: $.cndApplication.auditDetails.createdBy
+            - jsonPath: $.cndApplication.auditDetails.createdTime
+            - jsonPath: $.cndApplication.auditDetails.lastModifiedBy
+            - jsonPath: $.cndApplication.auditDetails.lastModifiedTime    
+            
+        - query: INSERT INTO public.ug_cnd_application_details_audit SELECT * FROM public.ug_cnd_application_details WHERE application_id = ?;
+          basePath: cndApplication
+          jsonMaps:
+            - jsonPath: $.cndApplication.applicationId
+
+        - query: INSERT INTO public.ug_cnd_waste_detail_audit SELECT * FROM public.ug_cnd_waste_detail WHERE waste_type_id = ?;
+          basePath: cndApplication.wasteTypeDetails.*
+          jsonMaps:
+            - jsonPath: $.cndApplication.wasteTypeDetails.*.wasteTypeId
+
+        - query: INSERT INTO public.ug_cnd_document_detail_audit SELECT * FROM public.ug_cnd_document_detail WHERE document_detail_id = ?;
+          basePath: cndApplication.documentDetails.*
+          jsonMaps:
+            - jsonPath: $.cndApplication.documentDetails.*.documentDetailId       
+
+        - query: INSERT INTO public.ug_cnd_disposal_deposit_centre_detail_audit SELECT * FROM public.ug_cnd_disposal_deposit_centre_detail WHERE disposal_id = ?;
+          basePath: cndApplication.facilityCenterDetail
+          jsonMaps:
+            - jsonPath: $.cndApplication.facilityCenterDetail.disposalId           
+
     - version: 1.0
       description: Update CND application detail
       fromTopic: update-cnd-application
@@ -115,7 +153,26 @@ serviceMaps:
             - jsonPath: $.cndApplication.documentDetails.*.uploadedByUserType
             - jsonPath: $.cndApplication.documentDetails.*.fileStoreId     
             - jsonPath: $.cndApplication.applicationId
-            - jsonPath: $.cndApplication.documentDetails.*.documentDetailId
+            - jsonPath: $.cndApplication.documentDetails.*.documentDetailId  
+
+        - query: UPDATE  public.ug_cnd_disposal_deposit_centre_detail SET  vehicle_id = ?, vehicle_depot_no = ?, net_weight = ?, gross_weight = ?, dumping_station_name = ?, disposal_date = ?::TIMESTAMP, disposal_type = ?, name_of_disposal_site = ?, created_by = ?, created_time = ?, last_modified_by = ?, last_modified_time = ? where application_id = ? AND disposal_id = ?
+          basePath: cndApplication.facilityCenterDetail
+          jsonMaps:
+            - jsonPath: $.cndApplication.facilityCenterDetail.vehicleId
+            - jsonPath: $.cndApplication.facilityCenterDetail.vehicleDepotNo
+            - jsonPath: $.cndApplication.facilityCenterDetail.netWeight
+            - jsonPath: $.cndApplication.facilityCenterDetail.grossWeight
+            - jsonPath: $.cndApplication.facilityCenterDetail.dumpingStationName
+            - jsonPath: $.cndApplication.facilityCenterDetail.disposalDate
+            - jsonPath: $.cndApplication.facilityCenterDetail.disposalType
+            - jsonPath: $.cndApplication.facilityCenterDetail.nameOfDisposalSite
+            - jsonPath: $.cndApplication.auditDetails.createdBy
+            - jsonPath: $.cndApplication.auditDetails.createdTime
+            - jsonPath: $.cndApplication.auditDetails.lastModifiedBy
+            - jsonPath: $.cndApplication.auditDetails.lastModifiedTime   
+            - jsonPath: $.cndApplication.applicationId 
+            - jsonPath: $.cndApplication.facilityCenterDetail.disposalId    
+
     - version: 1.0
       description: Insert CND waste and document detail
       fromTopic: save-waste-document-application
