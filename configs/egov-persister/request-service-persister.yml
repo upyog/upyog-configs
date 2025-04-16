@@ -6,7 +6,7 @@ serviceMaps:
       fromTopic: create-water-tanker-booking
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO public.upyog_rs_tanker_booking_details(booking_id, booking_no, tenant_id, mobile_number, tanker_type, tanker_quantity, water_quantity, description, applicant_uuid, delivery_date, delivery_time, extra_charge, vendor_id, vehicle_id, driver_id, vehicle_type, vehicle_capacity, booking_createdby, booking_status, locality, locality_code, createdby, lastModifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?::DATE, ?::TIME, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO public.upyog_rs_tanker_booking_details(booking_id, booking_no, tenant_id, mobile_number, tanker_type, tanker_quantity, water_quantity, description, applicant_uuid, delivery_date, delivery_time, extra_charge, vendor_id, vehicle_id, driver_id, vehicle_type, vehicle_capacity, booking_createdby, booking_status, locality_code, createdby, lastModifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?::DATE, ?::TIME, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: waterTankerBookingDetail
           jsonMaps:
             - jsonPath: $.waterTankerBookingDetail.bookingId
@@ -28,7 +28,6 @@ serviceMaps:
             - jsonPath: $.waterTankerBookingDetail.vehicleCapacity
             - jsonPath: $.waterTankerBookingDetail.bookingCreatedBy
             - jsonPath: $.waterTankerBookingDetail.bookingStatus
-            - jsonPath: $.waterTankerBookingDetail.locality
             - jsonPath: $.waterTankerBookingDetail.localityCode
             - jsonPath: $.waterTankerBookingDetail.auditDetails.createdBy
             - jsonPath: $.waterTankerBookingDetail.auditDetails.lastModifiedBy
@@ -99,7 +98,7 @@ serviceMaps:
       fromTopic: create-mobile-toilet-booking
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO public.upyog_rs_mobile_toilet_booking_details(booking_id, booking_no, tenant_id, mobile_number, no_of_mobile_toilet, delivery_from_date, delivery_to_date, delivery_from_time, delivery_to_time, description, applicant_uuid, vendor_id, vehicle_id, driver_id, booking_createdby, booking_status, locality, locality_code, createdby, lastModifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?::DATE, ?::DATE, ?::TIME, ?::TIME, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO public.upyog_rs_mobile_toilet_booking_details(booking_id, booking_no, tenant_id, mobile_number, no_of_mobile_toilet, delivery_from_date, delivery_to_date, delivery_from_time, delivery_to_time, description, applicant_uuid, vendor_id, vehicle_id, driver_id, booking_createdby, booking_status, locality_code, createdby, lastModifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?::DATE, ?::DATE, ?::TIME, ?::TIME, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: mobileToiletBookingDetail
           jsonMaps:
             - jsonPath: $.mobileToiletBookingDetail.bookingId
@@ -118,7 +117,6 @@ serviceMaps:
             - jsonPath: $.mobileToiletBookingDetail.driverId
             - jsonPath: $.mobileToiletBookingDetail.bookingCreatedBy
             - jsonPath: $.mobileToiletBookingDetail.bookingStatus
-            - jsonPath: $.mobileToiletBookingDetail.locality
             - jsonPath: $.mobileToiletBookingDetail.localityCode
             - jsonPath: $.mobileToiletBookingDetail.auditDetails.createdBy
             - jsonPath: $.mobileToiletBookingDetail.auditDetails.lastModifiedBy
