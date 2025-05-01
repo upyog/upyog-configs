@@ -6,12 +6,13 @@ serviceMaps:
       fromTopic: create-water-tanker-booking
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO public.upyog_rs_tanker_booking_details(booking_id, booking_no, tenant_id, tanker_type, tanker_quantity, water_quantity, description, applicant_uuid, delivery_date, delivery_time, extra_charge, vendor_id, vehicle_id, driver_id, vehicle_type, vehicle_capacity, booking_createdby, booking_status, createdby, lastModifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?::DATE, ?::TIME, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO public.upyog_rs_tanker_booking_details(booking_id, booking_no, tenant_id, address_detail_id, tanker_type, tanker_quantity, water_quantity, description, applicant_uuid, delivery_date, delivery_time, extra_charge, vendor_id, vehicle_id, driver_id, vehicle_type, vehicle_capacity, booking_createdby, booking_status, createdby, lastModifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?::DATE, ?::TIME, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: waterTankerBookingDetail
           jsonMaps:
             - jsonPath: $.waterTankerBookingDetail.bookingId
             - jsonPath: $.waterTankerBookingDetail.bookingNo
             - jsonPath: $.waterTankerBookingDetail.tenantId
+            - jsonPath: $.waterTankerBookingDetail.addressDetailId
             - jsonPath: $.waterTankerBookingDetail.tankerType
             - jsonPath: $.waterTankerBookingDetail.tankerQuantity
             - jsonPath: $.waterTankerBookingDetail.waterQuantity
@@ -31,37 +32,6 @@ serviceMaps:
             - jsonPath: $.waterTankerBookingDetail.auditDetails.lastModifiedBy
             - jsonPath: $.waterTankerBookingDetail.auditDetails.createdTime
             - jsonPath: $.waterTankerBookingDetail.auditDetails.lastModifiedTime
-
-        - query: INSERT INTO public.upyog_rs_applicant_details(applicant_id, booking_id, name, mobile_number, gender, email_id, alternate_number, createdby, lastModifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
-          basePath: waterTankerBookingDetail.applicantDetail
-          jsonMaps:
-            - jsonPath: $.waterTankerBookingDetail.applicantDetail.applicantId
-            - jsonPath: $.waterTankerBookingDetail.applicantDetail.bookingId
-            - jsonPath: $.waterTankerBookingDetail.applicantDetail.name
-            - jsonPath: $.waterTankerBookingDetail.applicantDetail.mobileNumber
-            - jsonPath: $.waterTankerBookingDetail.applicantDetail.gender
-            - jsonPath: $.waterTankerBookingDetail.applicantDetail.emailId
-            - jsonPath: $.waterTankerBookingDetail.applicantDetail.alternateNumber
-            - jsonPath: $.waterTankerBookingDetail.auditDetails.createdBy
-            - jsonPath: $.waterTankerBookingDetail.auditDetails.lastModifiedBy
-            - jsonPath: $.waterTankerBookingDetail.auditDetails.createdTime
-            - jsonPath: $.waterTankerBookingDetail.auditDetails.lastModifiedTime
-
-        - query: INSERT INTO public.upyog_rs_address_details(address_id, applicant_id, house_no, address_line_1, address_line_2, street_name, landmark, city, city_code, locality, locality_code, pincode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
-          basePath: waterTankerBookingDetail.address
-          jsonMaps:
-            - jsonPath: $.waterTankerBookingDetail.address.addressId
-            - jsonPath: $.waterTankerBookingDetail.address.applicantId
-            - jsonPath: $.waterTankerBookingDetail.address.houseNo
-            - jsonPath: $.waterTankerBookingDetail.address.addressLine1
-            - jsonPath: $.waterTankerBookingDetail.address.addressLine2
-            - jsonPath: $.waterTankerBookingDetail.address.streetName
-            - jsonPath: $.waterTankerBookingDetail.address.landmark
-            - jsonPath: $.waterTankerBookingDetail.address.city
-            - jsonPath: $.waterTankerBookingDetail.address.cityCode
-            - jsonPath: $.waterTankerBookingDetail.address.locality
-            - jsonPath: $.waterTankerBookingDetail.address.localityCode
-            - jsonPath: $.waterTankerBookingDetail.address.pincode
 
         - query: INSERT INTO public.upyog_rs_tanker_booking_details_auditdetails SELECT * FROM public.upyog_rs_tanker_booking_details WHERE booking_id = ?;
           basePath: waterTankerBookingDetail
@@ -96,12 +66,13 @@ serviceMaps:
       fromTopic: create-mobile-toilet-booking
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO public.upyog_rs_mobile_toilet_booking_details(booking_id, booking_no, tenant_id, mobile_number, no_of_mobile_toilet, delivery_from_date, delivery_to_date, delivery_from_time, delivery_to_time, description, applicant_uuid, vendor_id, vehicle_id, driver_id, booking_createdby, booking_status, locality_code, createdby, lastModifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?::DATE, ?::DATE, ?::TIME, ?::TIME, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO public.upyog_rs_mobile_toilet_booking_details(booking_id, booking_no, tenant_id, address_detail_id, mobile_number, no_of_mobile_toilet, delivery_from_date, delivery_to_date, delivery_from_time, delivery_to_time, description, applicant_uuid, vendor_id, vehicle_id, driver_id, booking_createdby, booking_status, locality_code, createdby, lastModifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?::DATE, ?::DATE, ?::TIME, ?::TIME, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: mobileToiletBookingDetail
           jsonMaps:
             - jsonPath: $.mobileToiletBookingDetail.bookingId
             - jsonPath: $.mobileToiletBookingDetail.bookingNo
             - jsonPath: $.mobileToiletBookingDetail.tenantId
+            - jsonPath: $.mobileToiletBookingDetail.addressDetailId
             - jsonPath: $.mobileToiletBookingDetail.mobileNumber
             - jsonPath: $.mobileToiletBookingDetail.noOfMobileToilet
             - jsonPath: $.mobileToiletBookingDetail.deliveryFromDate
@@ -120,22 +91,6 @@ serviceMaps:
             - jsonPath: $.mobileToiletBookingDetail.auditDetails.lastModifiedBy
             - jsonPath: $.mobileToiletBookingDetail.auditDetails.createdTime
             - jsonPath: $.mobileToiletBookingDetail.auditDetails.lastModifiedTime
-
-        - query: INSERT INTO public.upyog_rs_mt_address_details(address_id, applicant_id, house_no, address_line_1, address_line_2, street_name, landmark, city, city_code, locality, locality_code, pincode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
-          basePath: mobileToiletBookingDetail.address
-          jsonMaps:
-            - jsonPath: $.mobileToiletBookingDetail.address.addressId
-            - jsonPath: $.mobileToiletBookingDetail.address.applicantId
-            - jsonPath: $.mobileToiletBookingDetail.address.houseNo
-            - jsonPath: $.mobileToiletBookingDetail.address.addressLine1
-            - jsonPath: $.mobileToiletBookingDetail.address.addressLine2
-            - jsonPath: $.mobileToiletBookingDetail.address.streetName
-            - jsonPath: $.mobileToiletBookingDetail.address.landmark
-            - jsonPath: $.mobileToiletBookingDetail.address.city
-            - jsonPath: $.mobileToiletBookingDetail.address.cityCode
-            - jsonPath: $.mobileToiletBookingDetail.address.locality
-            - jsonPath: $.mobileToiletBookingDetail.address.localityCode
-            - jsonPath: $.mobileToiletBookingDetail.address.pincode
         
         - query: INSERT INTO public.upyog_rs_mobile_toilet_booking_details_auditdetails SELECT * FROM public.upyog_rs_mobile_toilet_booking_details WHERE booking_id = ?;
           basePath: mobileToiletBookingDetail
