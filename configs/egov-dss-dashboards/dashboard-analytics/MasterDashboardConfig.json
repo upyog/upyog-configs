@@ -10040,6 +10040,36 @@
                   "headers": []
                 }
               ]
+            },
+            {
+              "id": 207,
+              "name": "DSS_STREET_VENDING",
+              "vizType": "module",
+              "moduleLevel": "SV",
+              "ref": {
+                "url": "national-sv",
+                "logoUrl": "",
+                "type": "internal"
+              },
+              "label": "",
+              "charts": [
+                {
+                  "id": "totalStreetVending",  
+                  "name": "NATIONAL_DSS_SV_TOTAL_VENDING",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "nssSvTotalConnection",
+                  "name": "NATIONAL_DSS_SV_TOTAL_CERTIFICATE_IDCARD",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
             }
           ]
       }
@@ -11286,6 +11316,567 @@
                   "chartType": "line",
                   "filter": "",
                   "headers": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "NSS_SV_DASHBOARD",     
+      "id": "national-sv",
+      "isActive": "",
+      "style": "linear",
+      "visualizations": [
+        {
+          "row": 1,
+          "name": "NSS_REVENUE",
+          "vizArray": [
+            {
+              "id": 211,
+              "name": "NSS_NATIONAL_WS_OVERVIEW",
+              "dimensions": {
+                "height": 350,
+                "width": 5
+              },
+              "vizType": "metric-collection",
+              "noUnit": true,
+              "isCollapsible": false,
+              "label": "NSS_OVERVIEW",
+              "charts": [
+                {
+                  "id": "nssWsTargetCollection",
+                  "name": "NSS_WS_TARGET_COLLECTION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "nssWsTargetAchieved",
+                  "name": "NSS_WS_TARGET_ACHIEVED",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "nssWsTotalCollection",
+                  "name": "NSS_WS_TOTAL_COLLECTION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "wstodaysLastYearCollectionv3",
+                  "name": "NATIONAL_DSS_TODAYS_LAST_YEAR_COLLECTION_WS",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": { "title": "TODAY" },
+                  "headers": []
+                },
+                {
+                  "id": "nssWsTodaysCollection",
+                  "name": "NSS_WS_TODAYS_COLLECTION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": { "title": "TODAY" },
+                  "headers": []
+                },
+                {
+                  "id": "avgDaysForWSConnection",
+                  "name": "DSS_AVG_DAYS_FOR_WS_CONNECTION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "StipulatedDaysforWS",
+                  "name": "DSS_STIPULATED_DAYS_FOR_WS",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            },
+            {
+              "id": "212",
+              "name": "NSS_WS_TOTAL_CUMULATIVE_COLLECTION",
+              "dimensions": {
+                "height": 350,
+                "width": 7
+              },
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "nssWsCumulativeCollections",
+                  "name": "Monthly",
+                  "code": "",
+                  "chartType": "line",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 2,
+          "name": "NSS_REVENUE",
+          "vizArray": [
+            {
+              "id": 125,
+              "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_POPULATION",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "performing-metric",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "wstopPerformingStatesRevenue",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_WS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "Revenue"
+                },
+                {
+                  "id": "wstopPerformingStatesRevenuePopulation",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_POPULATION_WS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "Population"
+                },
+                {
+                  "id": "wstopPerformingStatesRevenuePerHousehold",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_HOUSEHOLD_WS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "Household"
+                },
+                {
+                  "id": "wstopPerformingStatesRevenueGDP",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_GDP_WS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "GDP"
+                }
+              ]
+            },
+            {
+              "id": 124,
+              "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_POPULATION",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "performing-metric",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "wsbottomPerformingStatesRevenue",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_WS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "Revenue"
+                },
+                {
+                  "id": "wsbottomPerformingStatesRevenuePopulation",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_POPULATION_WS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "Population"
+                },
+                {
+                  "id": "wsbottomPerformingStatesRevenuePerHousehold",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_HOUSEHOLD_WS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "Household"
+                },
+                {
+                  "id": "wsbottomPerformingStatesRevenueGDP",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_GDP_WS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "GDP"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 3,
+          "name": "NSS_REVENUE",
+          "vizArray": [
+            {
+              "id": 226,
+              "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_SLA_WS",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "performing-metric",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "wstopPerformingStatesSLA",
+                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_SLA_WS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "SLA"
+                }
+              ]
+            },
+            {
+              "id": 227,
+              "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_SLA_WS",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "performing-metric",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "wsbottomPerformingStatesSLA",
+                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_SLA_WS",
+                  "code": "",
+                  "chartType": "bar",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "SLA"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 4,
+          "name": "NSS_REVENUE",
+          "vizArray": [
+            {
+              "id": 223,
+              "name": "NSS_WS_COLLECTION_BY_USAGE",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "nssWsCollectionByUsage",
+                  "name": "NSS_WS_COLLECTION_BY_USAGE",
+                  "code": "",
+                  "chartType": "donut",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            },
+            {
+              "id": 224,
+              "name": "NSS_WS_COLLECTION_BY_CHANNEL",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "chart",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "nssWsCollectionByChannel",
+                  "name": "NSS_WS_COLLECTION_BY_CHANNEL",
+                  "code": "",
+                  "chartType": "donut",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 5,
+          "name": "NSS_REVENUE",
+          "vizArray": [
+            {
+              "id": 231,
+              "name": "NSS_WS_KEY_FY_INDICATORS",
+              "dimensions": {
+                "height": 350,
+                "width": 12
+              },
+              "vizType": "chart",
+              "noUnit": false,
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "nssWsFinancialIndicatorState",
+                  "name": "NSS_WS_DEMAND_COLLECTION_BOUNDARY",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "Boundary"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 6,
+          "name": "NSS_REVENUE",
+          "vizArray": [
+            {
+              "id": 231,
+              "name": "NSS_WS_TAX_HEAD_BOUNDARY",
+              "dimensions": {
+                "height": 350,
+                "width": 12
+              },
+              "vizType": "chart",
+              "label": "",
+              "noUnit": false,
+              "isCollapsible": true,
+              "charts": [
+                {
+                  "id": "nssWsTaxHeadState",
+                  "name": "NSS_WS_TAX_HEAD_BOUNDARY",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "Boundary"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 7,
+          "name": "NSS_SERVICE",
+          "vizArray": [
+            {
+              "id": 231,
+              "name": "NSS_NATIONAL_WS_OVERVIEW",
+              "dimensions": {
+                "height": 350,
+                "width": 12
+              },
+              "vizType": "metric-collection",
+              "label": "",
+              "noUnit": false,
+              "isCollapsible": true,
+              "charts": [
+                {
+                  "id": "nssWsTotalApplications",
+                  "name": "NSS_WS_TOTAL_APPLICATIONS",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "nssWsSLACompliance",
+                  "name": "NSS_WS_SLA_COMPLIANCE",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "nssWsTotalConnection",
+                  "name": "NSS_WS_ACTIVE_CONNECTIONS",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "nssWsActiveMeteredWaterConnection",
+                  "name": "NSS_WS_ACTIVE_METERED_WATER_CONNECTIONS",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "nssWsActiveNonMeteredWaterConnection",
+                  "name": "NSS_WS_ACTIVE_NON_METERED_WATER_CONNECTIONS",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "nssWsActiveSewerageConnection",
+                  "name": "NSS_WS_ACTIVE_SEWERAGE_CONNECTIONS",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "nssWSPendancy",
+                  "name": "NATIONAL_DSS_WS_PENDANCY",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            },
+            {
+              "id": 232,
+              "name": "NSS_WS_CUMULATIVE_CONNECTION",
+              "dimensions": {
+                "height": 350,
+                "width": 7
+              },
+              "vizType": "chart",
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "nssWsCumulativeConnections",
+                  "name": "Monthly",
+                  "code": "",
+                  "chartType": "line",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 8,
+          "name": "NSS_SERVICE",
+          "vizArray": [
+            {
+              "id": 231,
+              "name": "NSS_WS_WATER_CONNECTION_BY_USAGE",
+              "dimensions": {
+                "height": 350,
+                "width": 12
+              },
+              "vizType": "chart",
+              "label": "",
+              "noUnit": false,
+              "isCollapsible": true,
+              "charts": [
+                {
+                  "id": "nssWsWaterConnectionByUsageType",
+                  "name": "",
+                  "code": "",
+                  "chartType": "donut",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            },
+            {
+              "id": 232,
+              "name": "NSS_WS_SEWERAGE_CONNECTION_BY_USAGE",
+              "dimensions": {
+                "height": 350,
+                "width": 12
+              },
+              "vizType": "chart",
+              "label": "",
+              "noUnit": false,
+              "isCollapsible": true,
+              "charts": [
+                {
+                  "id": "nssWsSewerageConnectionByUsageType",
+                  "name": "",
+                  "code": "",
+                  "chartType": "donut",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            },
+            {
+              "id": 233,
+              "name": "NSS_WS_CONNECTION_BY_CHANNEL",
+              "dimensions": {
+                "height": 350,
+                "width": 12
+              },
+              "vizType": "chart",
+              "label": "",
+              "noUnit": false,
+              "isCollapsible": true,
+              "charts": [
+                {
+                  "id": "nssWsConnectionByChannelType",
+                  "name": "NSS_WS_CONNECTION_BY_CHANNEL",
+                  "code": "",
+                  "chartType": "donut",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 9,
+          "name": "NSS_SERVICE",
+          "vizArray": [
+            {
+              "id": 231,
+              "name": "NSS_WS_CONNECTION_AGEING",
+              "dimensions": {
+                "height": 350,
+                "width": 12
+              },
+              "vizType": "chart",
+              "label": "",
+              "noUnit": false,
+              "isCollapsible": true,
+              "charts": [
+                {
+                  "id": "nssWsConnectionAgeingState",
+                  "name": "NSS_WS_CONNECTION_AGEING",
+                  "code": "",
+                  "chartType": "table",
+                  "filter": "",
+                  "headers": [],
+                  "tabName": "Boundary"
                 }
               ]
             }
