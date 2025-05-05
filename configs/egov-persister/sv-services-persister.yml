@@ -7,7 +7,7 @@
     isTransaction: true
     queryMaps:
 
-       - query: INSERT INTO public.eg_sv_street_vending_detail(application_id, tenant_id, application_no, old_application_no, application_date, certificate_no, approval_date, application_status, trade_license_no, vending_activity, vending_zone, cart_latitude, cart_longitude, vending_area, vending_license_certificate_id, local_authority_name, disability_status, renewal_status, beneficiary_of_social_schemes,enrollment_id,terms_and_condition, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+       - query: INSERT INTO public.eg_sv_street_vending_detail(application_id, tenant_id, application_no, old_application_no, application_date, certificate_no, approval_date, application_status, trade_license_no, vending_activity, vending_zone, cart_latitude, cart_longitude, vending_area, vending_license_certificate_id, local_authority_name, disability_status, renewal_status, enrollment_id, terms_and_condition, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
          basePath: streetVendingDetail
          jsonMaps:
           - jsonPath: $.streetVendingDetail.applicationId
@@ -45,8 +45,6 @@
           - jsonPath: $.streetVendingDetail.disabilityStatus
 
           - jsonPath: $.streetVendingDetail.renewalStatus
-          
-          - jsonPath: $.streetVendingDetail.benificiaryOfSocialSchemes
 
           - jsonPath: $.streetVendingDetail.enrollmentId
         
@@ -193,16 +191,16 @@
 
           - jsonPath: $.streetVendingDetail.auditDetails.lastModifiedTime
 
-       - query: INSERT INTO public.eg_sv_street_vending_detail_auditdetails SELECT * FROM public.eg_sv_street_vending_detail WHERE application_id = ?;
-         basePath: streetVendingDetail
+       - query: INSERT INTO public.eg_sv_beneficiary_schemes_detail(id, application_id, scheme_name, enrollment_id) VALUES (?, ?, ?, ?);
+         basePath: streetVendingDetail.benificiaryOfSocialSchemes.*
          jsonMaps:
-          - jsonPath: $.streetVendingDetail.applicationId
+          - jsonPath: $.streetVendingDetail.benificiaryOfSocialSchemes.*.id
 
-       - query: INSERT INTO public.eg_sv_vendor_detail_auditdetails SELECT * FROM public.eg_sv_vendor_detail WHERE id = ?;
-         basePath: streetVendingDetail.vendorDetail.*
-         jsonMaps:
-          - jsonPath: $.streetVendingDetail.vendorDetail.*.id
+          - jsonPath: $.streetVendingDetail.benificiaryOfSocialSchemes.*.applicationId
 
+          - jsonPath: $.streetVendingDetail.benificiaryOfSocialSchemes.*.schemeName
+
+          - jsonPath: $.streetVendingDetail.benificiaryOfSocialSchemes.*.enrollmentId
 
   - version: 1.0
     description: Update Street Vending details
@@ -210,7 +208,60 @@
     isTransaction: true
     queryMaps:
 
-      - query: INSERT INTO public.eg_sv_street_vending_detail_auditdetails SELECT * FROM public.eg_sv_street_vending_detail WHERE application_id = ?;
+      - query: INSERT INTO public.eg_sv_street_vending_detail_auditdetails (
+            application_id,
+            tenant_id,
+            application_no,
+            application_date,
+            certificate_no,
+            approval_date,
+            application_status,
+            trade_license_no,
+            vending_activity,
+            vending_zone,
+            cart_latitude,
+            cart_longitude,
+            vending_area,
+            vending_license_certificate_id,
+            local_authority_name,
+            disability_status,
+            terms_and_condition,
+            createdby,
+            lastmodifiedby,
+            createdtime,
+            lastmodifiedtime,
+            enrollment_id,
+            payment_receipt_id,
+            vending_license_id
+          )
+          SELECT 
+            application_id,
+            tenant_id,
+            application_no,
+            application_date,
+            certificate_no,
+            approval_date,
+            application_status,
+            trade_license_no,
+            vending_activity,
+            vending_zone,
+            cart_latitude,
+            cart_longitude,
+            vending_area,
+            vending_license_certificate_id,
+            local_authority_name,
+            disability_status,
+            terms_and_condition,
+            createdby,
+            lastmodifiedby,
+            createdtime,
+            lastmodifiedtime,
+            enrollment_id,
+            payment_receipt_id,
+            vending_license_id
+          FROM public.eg_sv_street_vending_detail
+          WHERE application_id = ?;
+
         basePath: streetVendingDetail
         jsonMaps:
           - jsonPath: $.streetVendingDetail.applicationId
@@ -220,7 +271,7 @@
         jsonMaps:
           - jsonPath: $.streetVendingDetail.vendorDetail.*.id
 
-      - query: UPDATE public.eg_sv_street_vending_detail SET tenant_id = ?, application_no = ?, old_application_no = ?, application_date = ?, certificate_no = ?, approval_date = ?, application_status = ?, trade_license_no = ?, vending_activity = ?, vending_zone = ?, cart_latitude = ?, cart_longitude = ?, vending_area = ?, vending_license_certificate_id = ?, local_authority_name = ?, disability_status = ?,beneficiary_of_social_schemes = ?, enrollment_id = ?, terms_and_condition = ?, createdby = ?, createdtime = ?, lastmodifiedby = ?, lastmodifiedtime = ?, payment_receipt_id = ?, vending_license_id = ?, validity_date = CAST(? AS DATE), renewal_status = ?, expire_flag = ? WHERE application_id = ?;
+      - query: UPDATE public.eg_sv_street_vending_detail SET tenant_id = ?, application_no = ?, old_application_no = ?, application_date = ?, certificate_no = ?, approval_date = ?, application_status = ?, trade_license_no = ?, vending_activity = ?, vending_zone = ?, cart_latitude = ?, cart_longitude = ?, vending_area = ?, vending_license_certificate_id = ?, local_authority_name = ?, disability_status = ?, enrollment_id = ?, terms_and_condition = ?, createdby = ?, createdtime = ?, lastmodifiedby = ?, lastmodifiedtime = ?, payment_receipt_id = ?, vending_license_id = ?, validity_date = CAST(? AS DATE), renewal_status = ?, expire_flag = ? WHERE application_id = ?;
         basePath: streetVendingDetail
         jsonMaps:
           
@@ -255,8 +306,6 @@
           - jsonPath: $.streetVendingDetail.localAuthorityName
           
           - jsonPath: $.streetVendingDetail.disabilityStatus
-          
-          - jsonPath: $.streetVendingDetail.benificiaryOfSocialSchemes
 
           - jsonPath: $.streetVendingDetail.enrollmentId
         
@@ -417,6 +466,16 @@
           - jsonPath: $.streetVendingDetail.auditDetails.lastModifiedTime
 
           - jsonPath: $.streetVendingDetail.vendingOperationTimeDetails.*.id
+
+      - query: UPDATE public.eg_sv_beneficiary_schemes_detail SET  scheme_name = ?, enrollment_id = ? where id = ?;
+        basePath: streetVendingDetail.benificiaryOfSocialSchemes.*
+        jsonMaps:
+
+          - jsonPath: $.streetVendingDetail.benificiaryOfSocialSchemes.*.schemeName
+
+          - jsonPath: $.streetVendingDetail.benificiaryOfSocialSchemes.*.enrollmentId
+
+          - jsonPath: $.streetVendingDetail.benificiaryOfSocialSchemes.*.id    
 
 
   - version: 1.0
