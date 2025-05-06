@@ -82,7 +82,7 @@
 
 
           
-       - query: INSERT INTO public.eg_sv_vendor_detail(id, application_id, vendor_id, name, father_name, date_of_birth, email_id, mobile_no, gender, relationship_type,user_category ,special_category, is_involved,createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?::DATE, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+       - query: INSERT INTO public.eg_sv_vendor_detail(id, application_id, vendor_id, name, father_name, date_of_birth, email_id, mobile_no, gender, relationship_type,user_category ,special_category, vendor_payment_frequency, is_involved, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?::DATE, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
          basePath: streetVendingDetail.vendorDetail.*
          jsonMaps:
           - jsonPath: $.streetVendingDetail.vendorDetail.*.id
@@ -108,6 +108,8 @@
           - jsonPath: $.streetVendingDetail.vendorDetail.*.userCategory
 
           - jsonPath: $.streetVendingDetail.vendorDetail.*.specialCategory
+
+          - jsonPath: $.streetVendingDetail.vendorDetail.*.vendorPaymentFrequency
 
           - jsonPath: $.streetVendingDetail.vendorDetail.*.isInvolved
 
@@ -358,7 +360,7 @@
 
 
           
-      - query: UPDATE public.eg_sv_vendor_detail SET application_id = ?, vendor_id = ?, name = ?, father_name = ?, date_of_birth = ?::DATE, email_id = ?, mobile_no = ?, gender = ?, relationship_type = ?,user_category = ?,special_category = ?, is_involved = ?, createdby = ?, lastmodifiedby = ?, createdtime = ?, lastmodifiedtime = ? where id = ?;
+      - query: UPDATE public.eg_sv_vendor_detail SET application_id = ?, vendor_id = ?, name = ?, father_name = ?, date_of_birth = ?::DATE, email_id = ?, mobile_no = ?, gender = ?, relationship_type = ?,user_category = ?,special_category = ?, vendor_payment_frequency = ?, is_involved = ?, createdby = ?, lastmodifiedby = ?, createdtime = ?, lastmodifiedtime = ? where id = ?;
         basePath: streetVendingDetail.vendorDetail.*
         jsonMaps:
 
@@ -383,6 +385,8 @@
           - jsonPath: $.streetVendingDetail.vendorDetail.*.userCategory
 
           - jsonPath: $.streetVendingDetail.vendorDetail.*.specialCategory
+
+          - jsonPath: $.streetVendingDetail.vendorDetail.*.vendorPaymentFrequency
 
           - jsonPath: $.streetVendingDetail.vendorDetail.*.isInvolved
 
