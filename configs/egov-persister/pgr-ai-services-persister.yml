@@ -3,11 +3,11 @@ serviceMaps:
   mappings:
   - version: 1.0
     description: Persists pgr service request in tables
-    fromTopic: save-pgr-request
+    fromTopic: save-pgr-ai-request
     isTransaction: true
     queryMaps:
 
-    - query: INSERT INTO eg_pgr_service_v2(id, tenantid, servicecode, servicerequestid, description, accountid, additionaldetails, applicationstatus,priority, source, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?);
+    - query: INSERT INTO ug_pgr_service(id, tenantid, servicecode, servicerequestid, accountid, additionaldetails, applicationstatus,priority, source, createdby, createdtime, lastmodifiedby, lastmodifiedtime, servicetype, inputgrievance) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
       basePath: service
       jsonMaps:
       - jsonPath: $.service.id
@@ -17,8 +17,6 @@ serviceMaps:
       - jsonPath: $.service.serviceCode
 
       - jsonPath: $.service.serviceRequestId
-
-      - jsonPath: $.service.description
 
       - jsonPath: $.service.accountId
 
@@ -40,7 +38,11 @@ serviceMaps:
 
       - jsonPath: $.service.auditDetails.lastModifiedTime
 
-    - query: INSERT INTO eg_pgr_address_v2(id, tenantid, parentid, doorno, plotno, buildingname, street, landmark, city, pincode, locality, district, region, state, country, latitude, longitude, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+      - jsonPath: $.service.serviceType
+
+      - jsonPath: $.service.inputGrievance
+
+    - query: INSERT INTO ug_pgr_address(id, tenantid, parentid, doorno, plotno, buildingname, street, landmark, city, pincode, locality, district, region, state, country, latitude, longitude, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
       basePath: service.address
       jsonMaps:
       - jsonPath: $.service.address.id
@@ -93,11 +95,11 @@ serviceMaps:
 
   - version: 1.0
     description: Updates pgr service request in tables
-    fromTopic: update-pgr-request
+    fromTopic: update-pgr-ai-request
     isTransaction: true
     queryMaps:
 
-    - query: UPDATE eg_pgr_service_v2 SET servicecode=?, rating = ?,servicerequestid=?, description=?, accountid=?, additionaldetails=?, applicationstatus=?,priority=?, lastmodifiedby=?, lastmodifiedtime=? WHERE id=?;
+    - query: UPDATE ug_pgr_service SET servicecode=?, rating = ?,servicerequestid=?, accountid=?, additionaldetails=?, applicationstatus=?,priority=?, lastmodifiedby=?, lastmodifiedtime=? WHERE id=?;
       basePath: service
       jsonMaps:
       - jsonPath: $.service.serviceCode
@@ -105,8 +107,6 @@ serviceMaps:
       - jsonPath: $.service.rating
 
       - jsonPath: $.service.serviceRequestId
-
-      - jsonPath: $.service.description
 
       - jsonPath: $.service.accountId
 
@@ -125,7 +125,7 @@ serviceMaps:
       - jsonPath: $.service.id
 
 
-    - query: UPDATE eg_pgr_address_v2 SET doorno=?, plotno=?, buildingname=?, street=?, landmark=?, city=?, pincode=?, locality=?, district=?, region=?, state=?, country=?, latitude=?, longitude=?,additionaldetails=?, lastmodifiedby=?, lastmodifiedtime=? WHERE id=?;
+    - query: UPDATE ug_pgr_address SET doorno=?, plotno=?, buildingname=?, street=?, landmark=?, city=?, pincode=?, locality=?, district=?, region=?, state=?, country=?, latitude=?, longitude=?,additionaldetails=?, lastmodifiedby=?, lastmodifiedtime=? WHERE id=?;
       basePath: service.address
       jsonMaps:
 
@@ -174,7 +174,7 @@ serviceMaps:
     isTransaction: true
     queryMaps:
 
-    - query: UPDATE eg_pgr_service_v2 SET applicationstatus=?, lastmodifiedby=?, lastmodifiedtime=? WHERE serviceRequestId=? AND tenantId=?;
+    - query: UPDATE ug_pgr_service SET applicationstatus=?, lastmodifiedby=?, lastmodifiedtime=? WHERE serviceRequestId=? AND tenantId=?;
       basePath: ProcessInstances.*
       jsonMaps:
       - jsonPath: $.ProcessInstances.*.state.applicationStatus
