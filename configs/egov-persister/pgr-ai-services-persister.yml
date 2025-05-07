@@ -7,7 +7,7 @@ serviceMaps:
     isTransaction: true
     queryMaps:
 
-    - query: INSERT INTO ug_pgr_service(id, tenantid, servicecode, servicerequestid, accountid, additionaldetails, applicationstatus,priority, source, createdby, createdtime, lastmodifiedby, lastmodifiedtime, servicetype, inputgrievance) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+    - query: INSERT INTO ug_pgr_service(id, tenantid, servicecode, servicetype, inputgrievance, servicerequestid, accountid, additionaldetails, applicationstatus,priority, source, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
       basePath: service
       jsonMaps:
       - jsonPath: $.service.id
@@ -15,6 +15,10 @@ serviceMaps:
       - jsonPath: $.service.tenantId
 
       - jsonPath: $.service.serviceCode
+
+      - jsonPath: $.service.serviceType
+
+      - jsonPath: $.service.inputGrievance
 
       - jsonPath: $.service.serviceRequestId
 
@@ -37,10 +41,6 @@ serviceMaps:
       - jsonPath: $.service.auditDetails.lastModifiedBy
 
       - jsonPath: $.service.auditDetails.lastModifiedTime
-
-      - jsonPath: $.service.serviceType
-
-      - jsonPath: $.service.inputGrievance
 
     - query: INSERT INTO ug_pgr_address(id, tenantid, parentid, doorno, plotno, buildingname, street, landmark, city, pincode, locality, district, region, state, country, latitude, longitude, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
       basePath: service.address
@@ -99,10 +99,12 @@ serviceMaps:
     isTransaction: true
     queryMaps:
 
-    - query: UPDATE ug_pgr_service SET servicecode=?, rating = ?,servicerequestid=?, accountid=?, additionaldetails=?, applicationstatus=?,priority=?, lastmodifiedby=?, lastmodifiedtime=? WHERE id=?;
+    - query: UPDATE ug_pgr_service SET servicecode=?, serviceType=?, rating = ?, servicerequestid=?, accountid=?, additionaldetails=?, applicationstatus=?,priority=?, lastmodifiedby=?, lastmodifiedtime=? WHERE id=?;
       basePath: service
       jsonMaps:
       - jsonPath: $.service.serviceCode
+
+      - jsonPath: $.service.serviceType
 
       - jsonPath: $.service.rating
 
