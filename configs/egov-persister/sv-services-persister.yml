@@ -7,7 +7,7 @@
     isTransaction: true
     queryMaps:
 
-       - query: INSERT INTO public.eg_sv_street_vending_detail(application_id, tenant_id, application_no, old_application_no, application_date, certificate_no, approval_date, application_status, trade_license_no, vending_activity, vending_zone, cart_latitude, cart_longitude, vending_area, vending_license_certificate_id, local_authority_name, disability_status, renewal_status, enrollment_id, terms_and_condition, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+       - query: INSERT INTO public.eg_sv_street_vending_detail(application_id, tenant_id, application_no, old_application_no, application_date, certificate_no, approval_date, application_status, trade_license_no, vending_activity, vending_zone, cart_latitude, cart_longitude, vending_area, vending_license_certificate_id, local_authority_name, disability_status, renewal_status, application_created_by, locality, terms_and_condition, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
          basePath: streetVendingDetail
          jsonMaps:
           - jsonPath: $.streetVendingDetail.applicationId
@@ -46,7 +46,9 @@
 
           - jsonPath: $.streetVendingDetail.renewalStatus
 
-          - jsonPath: $.streetVendingDetail.enrollmentId
+          - jsonPath: $.streetVendingDetail.applicationCreatedBy
+
+          - jsonPath: $.streetVendingDetail.locality
         
           - jsonPath: $.streetVendingDetail.termsAndCondition
           
@@ -80,7 +82,7 @@
 
 
           
-       - query: INSERT INTO public.eg_sv_vendor_detail(id, application_id, vendor_id, name, father_name, date_of_birth, email_id, mobile_no, gender, relationship_type,user_category ,special_category, is_involved,createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?::DATE, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+       - query: INSERT INTO public.eg_sv_vendor_detail(id, application_id, vendor_id, name, father_name, date_of_birth, email_id, mobile_no, gender, relationship_type,user_category ,special_category, vendor_payment_frequency, is_involved, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?::DATE, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
          basePath: streetVendingDetail.vendorDetail.*
          jsonMaps:
           - jsonPath: $.streetVendingDetail.vendorDetail.*.id
@@ -106,6 +108,8 @@
           - jsonPath: $.streetVendingDetail.vendorDetail.*.userCategory
 
           - jsonPath: $.streetVendingDetail.vendorDetail.*.specialCategory
+
+          - jsonPath: $.streetVendingDetail.vendorDetail.*.vendorPaymentFrequency
 
           - jsonPath: $.streetVendingDetail.vendorDetail.*.isInvolved
 
@@ -230,7 +234,8 @@
             lastmodifiedby,
             createdtime,
             lastmodifiedtime,
-            enrollment_id,
+            application_created_by,
+            locality,
             payment_receipt_id,
             vending_license_id
           )
@@ -256,7 +261,8 @@
             lastmodifiedby,
             createdtime,
             lastmodifiedtime,
-            enrollment_id,
+            application_created_by,
+            locality,
             payment_receipt_id,
             vending_license_id
           FROM public.eg_sv_street_vending_detail
@@ -271,7 +277,7 @@
         jsonMaps:
           - jsonPath: $.streetVendingDetail.vendorDetail.*.id
 
-      - query: UPDATE public.eg_sv_street_vending_detail SET tenant_id = ?, application_no = ?, old_application_no = ?, application_date = ?, certificate_no = ?, approval_date = ?, application_status = ?, trade_license_no = ?, vending_activity = ?, vending_zone = ?, cart_latitude = ?, cart_longitude = ?, vending_area = ?, vending_license_certificate_id = ?, local_authority_name = ?, disability_status = ?, enrollment_id = ?, terms_and_condition = ?, createdby = ?, createdtime = ?, lastmodifiedby = ?, lastmodifiedtime = ?, payment_receipt_id = ?, vending_license_id = ?, validity_date = CAST(? AS DATE), renewal_status = ?, expire_flag = ? WHERE application_id = ?;
+      - query: UPDATE public.eg_sv_street_vending_detail SET tenant_id = ?, application_no = ?, old_application_no = ?, application_date = ?, certificate_no = ?, approval_date = ?, application_status = ?, trade_license_no = ?, vending_activity = ?, vending_zone = ?, cart_latitude = ?, cart_longitude = ?, vending_area = ?, vending_license_certificate_id = ?, local_authority_name = ?, disability_status = ?, terms_and_condition = ?, application_created_by = ?, locality = ?, createdby = ?, createdtime = ?, lastmodifiedby = ?, lastmodifiedtime = ?, payment_receipt_id = ?, vending_license_id = ?, validity_date = CAST(? AS DATE), renewal_status = ?, expire_flag = ? WHERE application_id = ?;
         basePath: streetVendingDetail
         jsonMaps:
           
@@ -306,10 +312,11 @@
           - jsonPath: $.streetVendingDetail.localAuthorityName
           
           - jsonPath: $.streetVendingDetail.disabilityStatus
-
-          - jsonPath: $.streetVendingDetail.enrollmentId
-        
           - jsonPath: $.streetVendingDetail.termsAndCondition
+        
+          - jsonPath: $.streetVendingDetail.applicationCreatedBy
+
+          - jsonPath: $.streetVendingDetail.locality
           
           - jsonPath: $.streetVendingDetail.auditDetails.createdBy
           
@@ -353,7 +360,7 @@
 
 
           
-      - query: UPDATE public.eg_sv_vendor_detail SET application_id = ?, vendor_id = ?, name = ?, father_name = ?, date_of_birth = ?::DATE, email_id = ?, mobile_no = ?, gender = ?, relationship_type = ?,user_category = ?,special_category = ?, is_involved = ?, createdby = ?, lastmodifiedby = ?, createdtime = ?, lastmodifiedtime = ? where id = ?;
+      - query: UPDATE public.eg_sv_vendor_detail SET application_id = ?, vendor_id = ?, name = ?, father_name = ?, date_of_birth = ?::DATE, email_id = ?, mobile_no = ?, gender = ?, relationship_type = ?,user_category = ?,special_category = ?, vendor_payment_frequency = ?, is_involved = ?, createdby = ?, lastmodifiedby = ?, createdtime = ?, lastmodifiedtime = ? where id = ?;
         basePath: streetVendingDetail.vendorDetail.*
         jsonMaps:
 
@@ -378,6 +385,8 @@
           - jsonPath: $.streetVendingDetail.vendorDetail.*.userCategory
 
           - jsonPath: $.streetVendingDetail.vendorDetail.*.specialCategory
+
+          - jsonPath: $.streetVendingDetail.vendorDetail.*.vendorPaymentFrequency
 
           - jsonPath: $.streetVendingDetail.vendorDetail.*.isInvolved
 
