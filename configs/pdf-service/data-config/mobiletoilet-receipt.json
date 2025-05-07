@@ -437,7 +437,7 @@
             {
               "externalAPI": [
                 {
-                  "path": "http://egov-mdms-service:8081/egov-mdms-service/v1/_get",
+                  "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
                   "queryParam": "moduleName=tenant&masterName=tenants&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}')%5D",
                   "apiRequest": null,
                   "responseMapping": [
@@ -475,7 +475,7 @@
                 },
               
                 {
-                  "path": "http://request-service:8087/request-service/mobile-toilet/v1/_search",
+                  "path": "http://request-service:8080/request-service/mobile-toilet/v1/_search",
                   "queryParam": "tenantId=pg.mohali",
                   "apiRequest": null,
                   "responseMapping": [
@@ -487,7 +487,7 @@
                 },
                 
                 {
-                  "path": "http://egov-mdms-service:8081/egov-mdms-service/v1/_get",
+                  "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
                   "queryParam": "moduleName=tenant&masterName=footer&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}' %26%26 @.service=='{$.paymentDetails[0].businessService}')%5D",
                   "apiRequest": null,
                   "responseMapping": [
