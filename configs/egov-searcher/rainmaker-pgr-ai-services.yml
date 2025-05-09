@@ -1,0 +1,129 @@
+SearchDefinitions:
+  moduleName: pgr-ai-services
+  summary: Public Grievance Redressal AI Searcher Configs
+  version: 1.0.0
+  definitions:
+    - name: inboxPGRAiSearch
+      query:
+        baseQuery: SELECT row_to_json(result) FROM (
+          SELECT DISTINCT(svc.serviceRequestId), pi.createdtime 
+          FROM ug_pgr_service AS svc
+          INNER JOIN eg_wf_processinstance_v2 pi ON pi.businessid = svc.serviceRequestId
+          LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
+          $where
+          AND pi.createdtime IN (
+            SELECT MAX(createdtime) 
+            FROM eg_wf_processinstance_v2 wf 
+            WHERE wf.businessid = svc.serviceRequestId 
+            GROUP BY wf.businessid
+          )
+          ORDER BY pi.createdtime ASC $pagination
+          ) result
+      searchParams:
+        condition: AND
+        params:
+          - name: svc.tenant_id
+            isMandatory: true
+            jsonPath: $.searchCriteria.tenantId
+          - name: svc.serviceRequestId
+            isMandatory: false
+            jsonPath: $.searchCriteria.serviceRequestId
+          - name: pi.businessservice
+            isMandatory: false
+            jsonPath: $.searchCriteria.businessservice
+          - name: svc.mobile_no
+            isMandatory: false
+            jsonPath: $.searchCriteria.mobileNumber
+          - name: svc.service_code
+            isMandatory: false
+            jsonPath: $.searchCriteria.serviceCode
+          - name: pi.status
+            isMandatory: false
+            jsonPath: $.searchCriteria.status
+        pagination:
+          noOfRecords: $.searchCriteria.noOfRecords
+          offset: $.searchCriteria.offset
+      output:
+        jsonFormat: {"ResponseInfo": {}, "ServiceRequests": []}
+        outJsonPath: $.ServiceRequests
+        responseInfoPath: $.ResponseInfo
+
+    - name: inboxPGRAiSearchDesc
+      query:
+        baseQuery: SELECT row_to_json(result) FROM (
+          SELECT DISTINCT(svc.serviceRequestId), pi.createdtime 
+          FROM ug_pgr_service AS svc
+          INNER JOIN eg_wf_processinstance_v2 pi ON pi.businessid = svc.serviceRequestId
+          LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
+          $where
+          AND pi.createdtime IN (
+            SELECT MAX(createdtime) 
+            FROM eg_wf_processinstance_v2 wf 
+            WHERE wf.businessid = svc.serviceRequestId 
+            GROUP BY wf.businessid
+          )
+          ORDER BY pi.createdtime ASC $pagination
+          ) result
+      searchParams:
+        condition: AND
+        params:
+          - name: svc.tenant_id
+            isMandatory: true
+            jsonPath: $.searchCriteria.tenantId
+          - name: svc.serviceRequestId
+            isMandatory: false
+            jsonPath: $.searchCriteria.serviceRequestId
+          - name: pi.businessservice
+            isMandatory: false
+            jsonPath: $.searchCriteria.businessservice
+          - name: svc.service_code
+            isMandatory: false
+            jsonPath: $.searchCriteria.serviceCode
+          - name: pi.status
+            isMandatory: false
+            jsonPath: $.searchCriteria.status
+        pagination:
+          noOfRecords: $.searchCriteria.noOfRecords
+          offset: $.searchCriteria.offset
+      output:
+        jsonFormat: {"ResponseInfo": {}, "ServiceRequests": []}
+        outJsonPath: $.ServiceRequests
+        responseInfoPath: $.ResponseInfo
+
+    - name: inboxPGRAiSearchCount
+      query:
+        baseQuery: SELECT row_to_json(TotalCount) FROM (
+          SELECT COUNT(result) FROM (
+            SELECT svc.serviceRequestId, svc.createdtime 
+            FROM ug_pgr_service AS svc
+            INNER JOIN eg_wf_processinstance_v2 pi ON pi.businessid = svc.serviceRequestId
+            LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
+            $where
+            AND pi.createdtime IN (
+              SELECT MAX(createdtime) 
+              FROM eg_wf_processinstance_v2 wf 
+              WHERE wf.businessid = svc.serviceRequestId 
+              GROUP BY wf.businessid
+            )
+            ORDER BY pi.createdtime ASC
+          ) result
+          ) TotalCount
+      searchParams:
+        condition: AND
+        params:
+          - name: svc.tenant_id
+            isMandatory: true
+            jsonPath: $.searchCriteria.tenantId
+          - name: svc.serviceRequestId
+            isMandatory: false
+            jsonPath: $.searchCriteria.serviceRequestId
+          - name: pi.businessservice
+            isMandatory: false
+            jsonPath: $.searchCriteria.businessservice
+        pagination:
+          noOfRecords: $.searchCriteria.noOfRecords
+          offset: $.searchCriteria.offset
+      output:
+        jsonFormat: {"ResponseInfo": {}, "TotalCount": {}}
+        outJsonPath: $.TotalCount
+        responseInfoPath: $.ResponseInfo
