@@ -22,7 +22,7 @@ SearchDefinitions:
       searchParams:
         condition: AND
         params:
-          - name: svc.tenant_id
+          - name: svc.tenantid
             isMandatory: true
             jsonPath: $.searchCriteria.tenantId
           - name: svc.serviceRequestId
@@ -31,10 +31,10 @@ SearchDefinitions:
           - name: pi.businessservice
             isMandatory: false
             jsonPath: $.searchCriteria.businessservice
-          - name: svc.mobile_no
+          - name: svc.mobileno
             isMandatory: false
             jsonPath: $.searchCriteria.mobileNumber
-          - name: svc.service_code
+          - name: svc.servicecode
             isMandatory: false
             jsonPath: $.searchCriteria.serviceCode
           - name: pi.status
@@ -67,7 +67,7 @@ SearchDefinitions:
       searchParams:
         condition: AND
         params:
-          - name: svc.tenant_id
+          - name: svc.tenantid
             isMandatory: true
             jsonPath: $.searchCriteria.tenantId
           - name: svc.serviceRequestId
@@ -76,7 +76,7 @@ SearchDefinitions:
           - name: pi.businessservice
             isMandatory: false
             jsonPath: $.searchCriteria.businessservice
-          - name: svc.service_code
+          - name: svc.servicecode
             isMandatory: false
             jsonPath: $.searchCriteria.serviceCode
           - name: pi.status
@@ -111,7 +111,7 @@ SearchDefinitions:
       searchParams:
         condition: AND
         params:
-          - name: svc.tenant_id
+          - name: svc.tenantid
             isMandatory: true
             jsonPath: $.searchCriteria.tenantId
           - name: svc.serviceRequestId
