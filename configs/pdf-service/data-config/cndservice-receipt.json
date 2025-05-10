@@ -114,19 +114,6 @@
                   }
                 },
                 {
-                  "variable": "G8ReceiptNo",
-                  "value": {
-                    "path": "$.paymentDetails[0].manualReceiptNumber"
-                  }
-                },
-                {
-                  "variable": "G8ReceiptDate",
-                  "value": {
-                    "path": "$.paymentDetails[0].manualReceiptDate"
-                  },
-                  "type": "date"
-                },
-                {
                   "variable": "paymentDate",
                   "value": {
                     "path": "$.transactionDate"
@@ -155,7 +142,7 @@
                 {
                   "variable": "SGST",
                   "value": {
-                    "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[0].amount"
+                    "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[0].order"
                   }
                 },
                
@@ -163,14 +150,14 @@
                 {
                   "variable": "CGST",
                   "value": {
-                    "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[2].amount"
+                    "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[0].order"
                   }
                 },
               
                 {
                   "variable": "BOOKING_FEES",
                   "value": {
-                    "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[1].amount"
+                    "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[0].amount"
                   }
                 },
                 {
@@ -264,18 +251,6 @@
                   }
                 },
                 {
-                  "variable": "billing_period",
-                  "value": {
-                    "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_BILLING_PERIOD"
-                  },
-                  "type": "label",
-                  "localisation": {
-                    "required": true,
-                    "prefix": null,
-                    "module": "rainmaker-common"
-                  }
-                },
-                {
                   "variable": "paid_amount",
                   "value": {
                     "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_PAID_AMOUNT"
@@ -325,42 +300,6 @@
                   }
                 },
                 {
-                  "variable": "g8_receipt_no",
-                  "value": {
-                    "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_G8_RECEIPT_NO"
-                  },
-                  "type": "label",
-                  "localisation": {
-                    "required": true,
-                    "prefix": null,
-                    "module": "rainmaker-common"
-                  }
-                },
-                {
-                  "variable": "g8_receipt_date",
-                  "value": {
-                    "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_G8_RECEIPT_DATE"
-                  },
-                  "type": "label",
-                  "localisation": {
-                    "required": true,
-                    "prefix": null,
-                    "module": "rainmaker-common"
-                  }
-                },
-                {
-                  "variable": "generated_by",
-                  "value": {
-                    "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_GENERATED_BY"
-                  },
-                  "type": "label",
-                  "localisation": {
-                    "required": true,
-                    "prefix": null,
-                    "module": "rainmaker-common"
-                  }
-                },
-                {
                   "variable": "commissioner/eo",
                   "value": {
                     "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_COMMISSIONER_EO"
@@ -376,18 +315,6 @@
                   "variable": "no_signature",
                   "value": {
                     "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_NO_SIGNATURE"
-                  },
-                  "type": "label",
-                  "localisation": {
-                    "required": true,
-                    "prefix": null,
-                    "module": "rainmaker-common"
-                  }
-                },
-                {
-                  "variable": "disclamer",
-                  "value": {
-                    "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_DISCLAIMER"
                   },
                   "type": "label",
                   "localisation": {
@@ -419,18 +346,6 @@
                     "prefix": null,
                     "module": "rainmaker-common"
                   }
-                }
-              ]
-            },
-            {
-              "derived": [
-                {
-                  "variable": "pendingAmount",
-                  "formula": "{{dueAmount}}>{{paidAmount}}?{{dueAmount}}-{{paidAmount}}:0"
-                },
-                {
-                  "variable": "excessAmountPaid",
-                  "formula": "{{paidAmount}}>{{dueAmount}}?{{paidAmount}}-{{dueAmount}}:0"
                 }
               ]
             },
@@ -473,21 +388,8 @@
                     }
                   ]
                 },
-              
                 {
-                  "path": "http://cnd-service:8080/cnd-service/v1/_search",
-                  "queryParam": "tenantId=pg.citya",
-                  "apiRequest": null,
-                  "responseMapping": [
-                    {
-                      "variable": "applicantName",
-                      "value": "hallsBookingApplication[0].applicantDetail.applicantName"
-                    }
-                  ]
-                },
-                
-                {
-                  "path": "http://egov-mdms-service:8081/egov-mdms-service/v1/_get",
+                  "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
                   "queryParam": "moduleName=tenant&masterName=footer&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}' %26%26 @.service=='{$.paymentDetails[0].businessService}')%5D",
                   "apiRequest": null,
                   "responseMapping": [

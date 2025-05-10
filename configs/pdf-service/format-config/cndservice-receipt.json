@@ -21,6 +21,11 @@
                     {
                       "text": "{{logo-header}} {{Municipal_Corporation}}",
                       "style": "receipt-logo-header"
+                    },
+                    {
+                      "text": "{{payment_receipt}}",
+                      "bold": true,
+                      "style": "receipt-logo-sub-header"
                     }
                   ],
                   "alignment": "left",
@@ -141,18 +146,6 @@
                 {
                   "text": "CND SERVICES",
                   "border": [false, true, true, false],
-                  "style": "receipt-table"
-                }
-              ],
-              [
-                {
-                  "text": "{{billing_period}}",
-                  "border": [true, false, false, false],
-                  "style": "receipt-table-value"
-                },
-                {
-                  "text": "{{fromPeriod}}-{{toPeriod}}",
-                  "border": [false, false, true, false],
                   "style": "receipt-table"
                 }
               ],
@@ -282,19 +275,6 @@
         {
           "style": "receipt-approver",
           "columns": [
-            {
-              "text": [
-                {
-                  "text": "{{generated_by}}: ",
-                  "bold": true
-                },
-                {
-                  "text": "{{payerName}}",
-                  "bold": false
-                }
-              ],
-              "alignment": "left"
-            },
             {
               "text": [
                 {
