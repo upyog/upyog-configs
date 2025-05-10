@@ -113,19 +113,7 @@
                     "module": "rainmaker-common"
                   }
                 },
-                {
-                  "variable": "G8ReceiptNo",
-                  "value": {
-                    "path": "$.paymentDetails[0].manualReceiptNumber"
-                  }
-                },
-                {
-                  "variable": "G8ReceiptDate",
-                  "value": {
-                    "path": "$.paymentDetails[0].manualReceiptDate"
-                  },
-                  "type": "date"
-                },
+                
                 {
                   "variable": "paymentDate",
                   "value": {
@@ -155,7 +143,7 @@
                 {
                   "variable": "SGST",
                   "value": {
-                    "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[0].amount"
+                    "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[0].order"
                   }
                 },
                
@@ -163,14 +151,14 @@
                 {
                   "variable": "CGST",
                   "value": {
-                    "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[2].amount"
+                    "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[0].order"
                   }
                 },
               
                 {
                   "variable": "BOOKING_FEES",
                   "value": {
-                    "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[1].amount"
+                    "path": "paymentDetails[0].bill.billDetails[0].billAccountDetails[0].amount"
                   }
                 },
                 {
@@ -324,30 +312,7 @@
                     "module": "rainmaker-common"
                   }
                 },
-                {
-                  "variable": "g8_receipt_no",
-                  "value": {
-                    "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_G8_RECEIPT_NO"
-                  },
-                  "type": "label",
-                  "localisation": {
-                    "required": true,
-                    "prefix": null,
-                    "module": "rainmaker-common"
-                  }
-                },
-                {
-                  "variable": "g8_receipt_date",
-                  "value": {
-                    "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_G8_RECEIPT_DATE"
-                  },
-                  "type": "label",
-                  "localisation": {
-                    "required": true,
-                    "prefix": null,
-                    "module": "rainmaker-common"
-                  }
-                },
+                
                 {
                   "variable": "generated_by",
                   "value": {
@@ -473,19 +438,6 @@
                     }
                   ]
                 },
-              
-                {
-                  "path": "http://request-service:8080/request-service/mobile-toilet/v1/_search",
-                  "queryParam": "tenantId=pg.mohali",
-                  "apiRequest": null,
-                  "responseMapping": [
-                    {
-                      "variable": "applicantName",
-                      "value": "hallsBookingApplication[0].applicantDetail.applicantName"
-                    }
-                  ]
-                },
-                
                 {
                   "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
                   "queryParam": "moduleName=tenant&masterName=footer&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}' %26%26 @.service=='{$.paymentDetails[0].businessService}')%5D",
