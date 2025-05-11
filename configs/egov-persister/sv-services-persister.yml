@@ -573,9 +573,9 @@
     fromTopic: update-payment-schedule
     isTransaction: true
     queryMaps:
-      - query: update eg_sv_vendor_payment_schedule SET  status = ? where id = ?
+      - query: update eg_sv_vendor_payment_schedule SET  status = ?, last_payment_date = ?::DATE where id = ?
         basePath: vendorPaymentSchedules.*
         jsonMaps:
          - jsonPath: $.vendorPaymentSchedules.*.status
-
+         - jsonPath: $.vendorPaymentSchedules.*.lastPaymentDate
          - jsonPath: $.vendorPaymentSchedules.*.id             
