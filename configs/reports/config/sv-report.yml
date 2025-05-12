@@ -15,6 +15,7 @@ ReportDefinitions:
     type: string
     source: sv-services
     total: false
+    showColumn: false
   - name: addresslocality
     label: Locality
     type: string
@@ -86,4 +87,6 @@ ReportDefinitions:
     isMandatory: true
     searchClause: AND sv.createdtime  <= $toDate
  
-  query: SELECT usr.uuid AS uuid, sv.application_no AS svapplicationno, sv.createdtime AS svcreatedtime, sv.certificate_no AS svcertificateno, sv.application_status AS svapplicationstatus, sv.vending_activity AS svvendingactivity, sv.vending_zone AS svvendingzone, vendor.application_id AS vendorapplicationid, vendor.name AS vendorname, address.locality AS addresslocality, address.locality_code AS addresslocalitycode, bill.consumercode AS consumercode, pdetail.amountpaid AS ampaid, CASE WHEN sv.application_status='APPROVED' THEN usr.name ELSE '-NA-' END AS approvedby FROM eg_sv_street_vending_detail sv LEFT JOIN eg_sv_vendor_detail vendor ON sv.application_id = vendor.application_id LEFT JOIN eg_sv_address_detail address ON vendor.id = address.vendor_id LEFT JOIN eg_user usr ON sv.lastmodifiedby = usr.uuid LEFT JOIN egcl_bill bill ON sv.application_no = bill.consumercode LEFT JOIN egcl_paymentdetail pdetail ON bill.id = pdetail.billid
+  query: SELECT DISTINCT ON (sv.application_no) usr.uuid AS uuid, sv.application_no AS svapplicationno, sv.createdtime AS svcreatedtime, CASE WHEN sv.certificate_no IS NULL THEN 'Certificate not Generated' ELSE sv.certificate_no END AS svcertificateno, sv.application_status AS svapplicationstatus, sv.vending_activity AS svvendingactivity, sv.vending_zone AS svvendingzone, vendor.application_id AS vendorapplicationid, vendor.name AS vendorname, address.locality AS addresslocality, address.locality_code AS addresslocalitycode, bill.consumercode AS consumercode, pdetail.amountpaid AS ampaid, CASE WHEN sv.application_status = 'APPROVED' THEN usr.name ELSE 'Not Approved Yet' END AS approvedby FROM eg_sv_street_vending_detail sv LEFT JOIN eg_sv_vendor_detail vendor ON sv.application_id = vendor.application_id LEFT JOIN eg_sv_address_detail address ON vendor.id = address.vendor_id LEFT JOIN eg_user usr ON sv.lastmodifiedby = usr.uuid LEFT JOIN egcl_bill bill ON sv.application_no = bill.consumercode LEFT JOIN egcl_paymentdetail pdetail ON bill.id = pdetail.billid
+
+ 
