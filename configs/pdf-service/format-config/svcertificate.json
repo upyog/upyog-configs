@@ -28,23 +28,9 @@
           "body": [
             [
               {
-                "image": "{{logoImage}} {{email}}" ,
+                "image": "{{logoImage}}" ,
                 "width": 40,
                 "height": 50
-              },
-              {
-                "stack": [
-                  {
-                    "text": "{{website}}",
-                    "alignment": "right"
-                  },
-                  {
-                    "text": "{{email}}, {{phoneNumber}}",
-                    "alignment": "right"
-                  }
-                ],
-                "color": "#484848",
-                "margin": [0, 0, 0, 0]
               }
             ]
           ]
@@ -409,35 +395,7 @@
                 "alignment": "right",
                 "bold": true,
                 "margin": [0, 20, 0, 40]
-              },
-      {
-        "style": "ws-head",
-        "table": {
-          "widths": ["*"],
-          "body": [
-            [
-              {
-                "text": ""
               }
-            ]
-          ]
-        },
-        "layout": "noBorders"
-      },
-      {
-        "style": "ws-head",
-        "table": {
-          "widths": ["*"],
-          "body": [
-            [
-              {
-                "text": "."
-              }
-            ]
-          ]
-        },
-        "layout": "noBorders"
-      }
     ],
     "styles": {
       "receipt-logo-header": {
@@ -468,4 +426,4 @@
       
     }
   }
-}
+} 
