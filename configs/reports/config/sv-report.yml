@@ -5,91 +5,83 @@ ReportDefinitions:
   version: 1.0.0
   moduleName: sv-report
   sourceColumns:
-  - name: svapplicationno
-    label: Application Number
+  - name: application_no
+    label: reports.sv.application_no
     type: string
-    source: sv-services
+    source: sv
     total: false
   - name: name
-    label: Name
+    label: reports.sv.name
     type: string
-    source: sv-services
+    source: sv
     total: false
-    showColumn: false
-  - name: addresslocality
-    label: Locality
+  - name: locality
+    label: reports.sv.locality
     type: string
-    source: sv-services
+    source: sv
     total: false
-  - name: svvendingactivity
-    label: Vending Type
+  - name: vending_activity
+    label: reports.sv.vending_activity
     type: string
-    source: sv-services
+    source: sv
     total: false
-    isLocalisationRequired: true
-  - name: svvendingzone
-    label: Vending Zone
+  - name: vending_zone
+    label: reports.sv.vending_zone
     type: string
-    source: sv-services
+    source: sv
     total: false
-    isLocalisationRequired: true
-  - name: svcertificateno
-    label: Certificate Number
+  - name: certificate_no
+    label: reports.sv.certificate_no
     type: string
-    source: sv-services
+    source: sv
     total: false
-  - name: svapplicationstatus
-    label: Application Status
+  - name: application_status
+    label: reports.sv.application_status
     type: string
-    source: sv-services
+    source: sv
     total: false
-    isLocalisationRequired: true
   - name: approvedby
-    label: Approved By
+    label: reports.sv.approvedby
     type: string
-    source: sv-services
+    source: sv
     total: false
-  - name: ampaid
-    label: Amount Paid
+  - name: amountpaid
+    label: amoiuntpaid
     type: string
-    source: sv-services
+    source: sv
     total: false
 
   searchParams:
-  - name: svapplicationstatus
-    label: Application Status
+  - name: application_status
+    label: reports.sv.application_status
     type: singlevaluelist
     pattern: 'list://APPLIED:Applied,APPROVED:Approved,REGISTRATIONCOMPLETED:Registration Completed,INSPECTIONPENDING:Inspection Pending,REJECTED:Rejected'
-    source: sv-services
+    source: sv
     isMandatory: false
-    searchClause: AND sv.application_status = $svapplicationstatus
-  - name: svvendingzone
-    label: Vending Zone
+    searchClause: AND sv.application_status = $application_status
+  - name: vending_zone
+    label: reports.sv.vending_zone
     type: singlevaluelist
     pattern: 'list://TEST_VALUE_ONE:TEST_VALUE_ONE,TEST_VALUE_TWO:TEST_VALUE_TWO'
-    source: sv-services
+    source: sv
     isMandatory: false
-    searchClause: AND sv.vending_zone = $svvendingzone
-  - name: svvendingactivity
-    label: Vending Type
+    searchClause: AND sv.vending_zone = $vending_zone
+  - name: vending_activity
+    label: reports.sv.vending_activity
     type: singlevaluelist
     pattern: 'list://STATIONARY:Stationary,MOBILE:Mobile'
-    source: sv-services
+    source: sv
     isMandatory: false
-    searchClause: AND sv.vending_activity = $svvendingactivity
+    searchClause: AND sv.vending_activity = $vending_activity
   - name: fromDate
     label: From Date
     type: epoch
-    source: sv-services
+    source: sv
     isMandatory: true
     searchClause: AND sv.createdtime >= $fromDate
   - name: toDate
     label: To Date
     type: epoch
-    source: sv-services
+    source: sv
     isMandatory: true
     searchClause: AND sv.createdtime  <= $toDate
- 
-  query: SELECT DISTINCT ON (sv.application_no) usr.uuid AS uuid, sv.application_no AS svapplicationno, sv.createdtime AS svcreatedtime, CASE WHEN sv.certificate_no IS NULL THEN 'Certificate not Generated' ELSE sv.certificate_no END AS svcertificateno, sv.application_status AS svapplicationstatus, sv.vending_activity AS svvendingactivity, sv.vending_zone AS svvendingzone, vendor.application_id AS vendorapplicationid, vendor.name AS vendorname, address.locality AS addresslocality, address.locality_code AS addresslocalitycode, bill.consumercode AS consumercode,CASE WHEN pdetail.amountpaid IS NULL THEN 0 ELSE pdetail.amountpaid END AS ampaid, CASE WHEN sv.application_status = 'APPROVED' THEN usr.name ELSE 'Not Approved Yet' END AS approvedby FROM eg_sv_street_vending_detail sv LEFT JOIN eg_sv_vendor_detail vendor ON sv.application_id = vendor.application_id LEFT JOIN eg_sv_address_detail address ON vendor.id = address.vendor_id LEFT JOIN eg_user usr ON sv.lastmodifiedby = usr.uuid LEFT JOIN egcl_bill bill ON sv.application_no = bill.consumercode LEFT JOIN egcl_paymentdetail pdetail ON bill.id = pdetail.billid
-
- 
