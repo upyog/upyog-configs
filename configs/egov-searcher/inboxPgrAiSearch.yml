@@ -10,6 +10,7 @@ SearchDefinitions:
           FROM ug_pgr_service AS svc
           INNER JOIN eg_wf_processinstance_v2 pi ON pi.businessid = svc.serviceRequestId
           LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
+          INNER JOIN ug_pgr_address AS addr ON addr.parentid = svc.id
           $where
           AND pi.createdtime IN (
             SELECT MAX(createdtime) 
@@ -31,15 +32,21 @@ SearchDefinitions:
           - name: pi.businessservice
             isMandatory: false
             jsonPath: $.searchCriteria.businessservice
-          - name: svc.mobileno
-            isMandatory: false
-            jsonPath: $.searchCriteria.mobileNumber
           - name: svc.servicecode
             isMandatory: false
             jsonPath: $.searchCriteria.serviceCode
           - name: pi.status
             isMandatory: false
-            jsonPath: $.searchCriteria.status
+            jsonPath: $.searchCriteria.applicationStatus
+          - name: pi.assignee
+            isMandatory: false
+            jsonPath: $.searchCriteria.assignee
+          - name: svc.mobileNumber
+            isMandatory: false
+            jsonPath: $.searchCriteria.mobileNumber
+          - name: addr.locality
+            isMandatory: false
+            jsonPath: $.searchCriteria.locality
         pagination:
           noOfRecords: $.searchCriteria.noOfRecords
           offset: $.searchCriteria.offset
@@ -55,6 +62,7 @@ SearchDefinitions:
           FROM ug_pgr_service AS svc
           INNER JOIN eg_wf_processinstance_v2 pi ON pi.businessid = svc.serviceRequestId
           LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
+          INNER JOIN ug_pgr_address AS addr ON addr.parentid = svc.id
           $where
           AND pi.createdtime IN (
             SELECT MAX(createdtime) 
@@ -81,7 +89,16 @@ SearchDefinitions:
             jsonPath: $.searchCriteria.serviceCode
           - name: pi.status
             isMandatory: false
-            jsonPath: $.searchCriteria.status
+            jsonPath: $.searchCriteria.applicationStatus
+          - name: pi.assignee
+            isMandatory: false
+            jsonPath: $.searchCriteria.assignee
+          - name: svc.mobileNumber
+            isMandatory: false
+            jsonPath: $.searchCriteria.mobileNumber
+          - name: addr.locality
+            isMandatory: false
+            jsonPath: $.searchCriteria.locality
         pagination:
           noOfRecords: $.searchCriteria.noOfRecords
           offset: $.searchCriteria.offset
