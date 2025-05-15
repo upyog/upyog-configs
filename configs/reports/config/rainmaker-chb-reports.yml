@@ -7,12 +7,12 @@ ReportDefinitions:
     moduleName: rainmaker-CHB
     sourceColumns:
       - name: applicant_name
-        label: rainmaker.CHB.applicant_name
+        label: rainmaker.CHB.name
         type: string
         source: CHB
         total: false
       - name: applicant_mobile_no
-        label: rainmaker.CHB.applicant_mobile_no
+        label: rainmaker.CHB.mobilenumber
         type: string
         source: CHB
         total: false  
@@ -67,8 +67,8 @@ ReportDefinitions:
         isMandatory: true
         searchClause: AND b.createdtime <= $toDate
     query: >
-      select a.applicant_name as applicant_name,
-      a.applicant_mobile_no as applicant_mobile_no,
+      select a.applicant_name as name,
+      a.applicant_mobile_no as mobilenumber,
       b.community_hall_code as community_hall_code,
       b.createdtime as createdtime,
       b.booking_no as booking_no,
@@ -85,12 +85,12 @@ ReportDefinitions:
     moduleName: rainmaker-CHB
     sourceColumns:
       - name: applicant_name
-        label: rainmaker.CHB.applicant_name
+        label: rainmaker.CHB.name
         type: string
         source: CHB
         total: false
       - name: applicant_mobile_no
-        label: rainmaker.CHB.applicant_mobile_no
+        label: rainmaker.CHB.mobilenumber
         type: string
         source: CHB
         total: false  
@@ -145,8 +145,8 @@ ReportDefinitions:
         isMandatory: true
         searchClause: AND b.createdtime <= $toDate
     query: >
-      select a.applicant_name as applicant_name,
-      a.applicant_mobile_no as applicant_mobile_no,
+      select a.applicant_name as name,
+      a.applicant_mobile_no as mobilenumber,
       b.community_hall_code as community_hall_code,
       b.createdtime as createdtime,
       b.booking_no as booking_no,
