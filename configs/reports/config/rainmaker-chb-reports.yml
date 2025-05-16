@@ -1,18 +1,18 @@
 ---
 ReportDefinitions:
   - reportName: CHBDailyRegisterReport
-    decryptionPathId: TradeLicenseDailyCollectionReport
+    decryptionPathId: CHBReport
     summary: CHB Daily Register Report
     version: 1.0.0
     moduleName: rainmaker-CHB
     sourceColumns:
       - name: applicant_name
-        label: rainmaker.CHB.name
+        label: rainmaker.CHB.applicant_name
         type: string
         source: CHB
         total: false
       - name: applicant_mobile_no
-        label: rainmaker.CHB.mobilenumber
+        label: rainmaker.CHB.applicant_mobile_no
         type: string
         source: CHB
         total: false  
@@ -67,8 +67,8 @@ ReportDefinitions:
         isMandatory: true
         searchClause: AND b.createdtime <= $toDate
     query: >
-      select a.applicant_name as name,
-      a.applicant_mobile_no as mobilenumber,
+      select a.applicant_name as applicant_name,
+      a.applicant_mobile_no as applicant_mobile_no,
       b.community_hall_code as community_hall_code,
       b.createdtime as createdtime,
       b.booking_no as booking_no,
@@ -79,18 +79,18 @@ ReportDefinitions:
       where a.booking_id=b.booking_id and b.receipt_no=p.receiptnumber and b.booking_id=h.booking_id
       and 1=1
   - reportName: CHBRefundReport
-    decryptionPathId: TradeLicenseDailyCollectionReport
+    decryptionPathId: CHBReport
     summary: CHB Refund Report
     version: 1.0.0
     moduleName: rainmaker-CHB
     sourceColumns:
       - name: applicant_name
-        label: rainmaker.CHB.name
+        label: rainmaker.CHB.applicant_name
         type: string
         source: CHB
         total: false
       - name: applicant_mobile_no
-        label: rainmaker.CHB.mobilenumber
+        label: rainmaker.CHB.applicant_mobile_no
         type: string
         source: CHB
         total: false  
@@ -145,8 +145,8 @@ ReportDefinitions:
         isMandatory: true
         searchClause: AND b.createdtime <= $toDate
     query: >
-      select a.applicant_name as name,
-      a.applicant_mobile_no as mobilenumber,
+      select a.applicant_name as applicant_name,
+      a.applicant_mobile_no as applicant_mobile_no,
       b.community_hall_code as community_hall_code,
       b.createdtime as createdtime,
       b.booking_no as booking_no,
