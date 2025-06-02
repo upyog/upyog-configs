@@ -219,9 +219,14 @@
 		</tr>
 	</table>
 
-	<h2 class="terms-condition">Term and Conditions of this License:</h2>
-	<p class="terms-condition-details">
-	</p>
+	 <div class="sign">
+        <img th:src="${signature}" alt="Signature" />
+        <p class="signature-details">
+            Digitally Signed
+            <br />
+            <span th:text="${ulbType}">NA</span>, <span th:text="${ulbName}">NA</span>
+        </p>
+    </div>
 </body>
 
 </html>
