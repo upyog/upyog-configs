@@ -11361,22 +11361,7 @@
                   "filter": "",
                   "headers": []
                 },
-                {
-                  "id": "totalStreetVendingLicenseApplied",
-                  "name": "NSS_SV_TOTAL_LICENSES_APPLIED",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "totalStreetVendingLicenseIssued",
-                  "name": "NSS_SV_TOTAL_LICENSES_ISSUED",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
+                
                 {
                   "id": "percentageLicenseIssuedVsApplied",
                   "name": "NSS_SV_LICENSE_ISSUED_PERCENTAGE",
@@ -11387,7 +11372,7 @@
                 },
                 {
                   "id": "averageTATLicenseIssued",
-                  "name": "NSS_SV_APPLICATIONS_REJECTED",
+                  "name": "NSS_SV_APPLICATIONS_AVERAGE_TAT",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -11395,7 +11380,7 @@
                 },
                 {
                   "id": "licenseByAge_18_30",
-                  "name": "NSS_SV_REJECTION_RATE",
+                  "name": "NSS_SV_LICENCE_BY_AGE18_30",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -11403,7 +11388,7 @@
                 },
                 {
                   "id": "licenseByAge_30_45",
-                  "name": "NSS_SV_FIXED_VENDING_SPOTS_STATE",
+                  "name": "NSS_SV_LICENCE_BY_AGE18_30",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -11411,7 +11396,7 @@
                 },
                 {
                   "id": "licenseByAge_45_60",
-                  "name": "NSS_SV_FIXED_VENDING_SPOTS_ULB",
+                  "name": "NSS_SV_LICENCE_BY_AGE45_60",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -11419,15 +11404,7 @@
                 },
                 {
                   "id": "licenseByAge_60plus",
-                  "name": "NSS_SV_TOTAL_REVENUE_TARGETED",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "licenseByGender",
-                  "name": "NSS_SV_TOTAL_REVENUE_COLLECTED",
+                  "name": "NSS_SV_LICENCE_BY_AGE_60PLUS",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -11435,15 +11412,7 @@
                 },
                 {
                   "id": "typeOfRegistration",
-                  "name": "NSS_SV_TARGET_ACHIEVEMENT_PERCENTAGE",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "numberOfApplicationsRejected",
-                  "name": "NSS_SV_TARGET_ACHIEVEMENT_PERCENTAGE",
+                  "name": "NSS_SV_TYPE_OF_REGISTRATION",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -11451,23 +11420,7 @@
                 },
                 {
                   "id": "rejectionRate",
-                  "name": "NSS_SV_TARGET_ACHIEVEMENT_PERCENTAGE",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "fixedSpotsOfferedByStateUT",
-                  "name": "NSS_SV_TARGET_ACHIEVEMENT_PERCENTAGE",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "fixedSpotsOfferedByULB",
-                  "name": "NSS_SV_TARGET_ACHIEVEMENT_PERCENTAGE",
+                  "name": "NSS_SV_REJECTION_RATE",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -11475,7 +11428,7 @@
                 },
                 {
                   "id": "totalRevenueTargeted",
-                  "name": "NSS_SV_TARGET_ACHIEVEMENT_PERCENTAGE",
+                  "name": "NSS_SV_TARGETED_REVENUE",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -11483,7 +11436,7 @@
                 },
                 {
                   "id": "totalRevenueCollected",
-                  "name": "NSS_SV_TARGET_ACHIEVEMENT_PERCENTAGE",
+                  "name": "NSS_SV_TOTAL_REVENUE_COLLECTED",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -11499,7 +11452,7 @@
                 },
                 {
                   "id": "totalUrbanHouseholds",
-                  "name": "NSS_SV_TARGET_ACHIEVEMENT_PERCENTAGE",
+                  "name": "NSS_SV_TOTAL_URBAN_HOUSEHOLDS",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -11806,56 +11759,24 @@
               "isCollapsible": true,
               "charts": [
                 {
-                  "id": "nssWsTotalApplications",
-                  "name": "NSS_WS_TOTAL_APPLICATIONS",
+                  "id": "totalStreetVendingLicenseIssued",
+                  "name": "NSS_SV_TOTAL_LICENSES_ISSUED",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
                   "headers": []
                 },
-                {
-                  "id": "nssWsSLACompliance",
-                  "name": "NSS_WS_SLA_COMPLIANCE",
+{
+                  "id": "licenseByGender",
+                  "name": "NSS_SV_LICENSE_BY_GENDER",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
                   "headers": []
                 },
-                {
-                  "id": "nssWsTotalConnection",
-                  "name": "NSS_WS_ACTIVE_CONNECTIONS",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "nssWsActiveMeteredWaterConnection",
-                  "name": "NSS_WS_ACTIVE_METERED_WATER_CONNECTIONS",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "nssWsActiveNonMeteredWaterConnection",
-                  "name": "NSS_WS_ACTIVE_NON_METERED_WATER_CONNECTIONS",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "nssWsActiveSewerageConnection",
-                  "name": "NSS_WS_ACTIVE_SEWERAGE_CONNECTIONS",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "nssWSPendancy",
-                  "name": "NATIONAL_DSS_WS_PENDANCY",
+ {
+                  "id": "numberOfApplicationsRejected",
+                  "name": "NSS_SV_APPLICATIONS_REJECTED",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
