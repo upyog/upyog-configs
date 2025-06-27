@@ -5608,7 +5608,7 @@
                 }
               ]
             },
-			{
+			      {
               "id": 515,
               "name": "NATIONAL_DSS_FSM_COLLECTION_BY_USAGE_TYPE",
               "dimensions": {
@@ -10011,7 +10011,7 @@
                 }
               ]
             },
-			 {
+			      {
               "id": 206,
               "name": "NURT_FSSM",
               "vizType": "module",
@@ -10054,16 +10054,16 @@
               "label": "",
               "charts": [
                 {
-                  "id": "totalStreetVending",  
-                  "name": "NATIONAL_DSS_SV_TOTAL_VENDING",
+                  "id": "svtotalCollection",
+                  "name": "NATIONAL_DSS_TOTAL_COLLECTION_SV",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
                   "headers": []
                 },
                 {
-                  "id": "nssSvTotalConnection",
-                  "name": "NATIONAL_DSS_SV_TOTAL_CERTIFICATE_IDCARD",
+                  "id": "totalStreetVending",  
+                  "name": "NATIONAL_DSS_SV_TOTAL_VENDING",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -11346,7 +11346,15 @@
               "label": "NSS_OVERVIEW",
               "charts": [
                 {
-                  "id": "totalStreetVendors",
+                  "id": "svtotalCollection",
+                  "name": "NSS_SV_TOTAL_COLLECTION",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
+                {
+                  "id": "svTotalStreetVendors",
                   "name": "NSS_SV_TOTAL_VENDORS",
                   "code": "",
                   "chartType": "metric",
@@ -11361,17 +11369,16 @@
                   "filter": "",
                   "headers": []
                 },
-                
                 {
-                  "id": "percentageLicenseIssuedVsApplied",
-                  "name": "NSS_SV_LICENSE_ISSUED_PERCENTAGE",
+                  "id": "eventDurationGraph",
+                  "name": "NSS_SV_TOTAL_VENDING_APPLIED",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
                   "headers": []
                 },
                 {
-                  "id": "averageTATLicenseIssued",
+                  "id": "dssSlaAchievedOverview",
                   "name": "NSS_SV_APPLICATIONS_AVERAGE_TAT",
                   "code": "",
                   "chartType": "metric",
@@ -11379,39 +11386,7 @@
                   "headers": []
                 },
                 {
-                  "id": "licenseByAge_18_30",
-                  "name": "NSS_SV_LICENCE_BY_AGE18_30",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "licenseByAge_30_45",
-                  "name": "NSS_SV_LICENCE_BY_AGE18_30",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "licenseByAge_45_60",
-                  "name": "NSS_SV_LICENCE_BY_AGE45_60",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "licenseByAge_60plus",
-                  "name": "NSS_SV_LICENCE_BY_AGE_60PLUS",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "typeOfRegistration",
+                  "id": "svTypeOfRegistration",
                   "name": "NSS_SV_TYPE_OF_REGISTRATION",
                   "code": "",
                   "chartType": "metric",
@@ -11419,40 +11394,8 @@
                   "headers": []
                 },
                 {
-                  "id": "rejectionRate",
+                  "id": "svRejectionRate",
                   "name": "NSS_SV_REJECTION_RATE",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "totalRevenueTargeted",
-                  "name": "NSS_SV_TARGETED_REVENUE",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "totalRevenueCollected",
-                  "name": "NSS_SV_TOTAL_REVENUE_COLLECTED",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "targetAchievementPercentage",
-                  "name": "NSS_SV_TARGET_ACHIEVEMENT_PERCENTAGE",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-                {
-                  "id": "totalUrbanHouseholds",
-                  "name": "NSS_SV_TOTAL_URBAN_HOUSEHOLDS",
                   "code": "",
                   "chartType": "metric",
                   "filter": "",
@@ -11472,7 +11415,7 @@
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "nssWsCumulativeCollections",
+                  "id": "svtotalCollection",
                   "name": "Monthly",
                   "code": "",
                   "chartType": "line",
@@ -11488,100 +11431,23 @@
           "name": "NSS_REVENUE",
           "vizArray": [
             {
-              "id": 125,
-              "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_POPULATION",
+              "id": 213,
+              "name": "DSS_SV_LICENSE_BY_AGE_GROUP",
               "dimensions": {
                 "height": 250,
                 "width": 4
               },
-              "vizType": "performing-metric",
-              "noUnit": false,
+              "vizType": "chart",
+              "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "wstopPerformingStatesRevenue",
-                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_WS",
+                  "id": "svLicenseByAgeGroup",
+                  "name": "DSS_SV_LICENSE_BY_AGE_GROUP",
                   "code": "",
-                  "chartType": "bar",
+                  "chartType": "donut",
                   "filter": "",
-                  "headers": [],
-                  "tabName": "Revenue"
-                },
-                {
-                  "id": "wstopPerformingStatesRevenuePopulation",
-                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_POPULATION_WS",
-                  "code": "",
-                  "chartType": "bar",
-                  "filter": "",
-                  "headers": [],
-                  "tabName": "Population"
-                },
-                {
-                  "id": "wstopPerformingStatesRevenuePerHousehold",
-                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_HOUSEHOLD_WS",
-                  "code": "",
-                  "chartType": "bar",
-                  "filter": "",
-                  "headers": [],
-                  "tabName": "Household"
-                },
-                {
-                  "id": "wstopPerformingStatesRevenueGDP",
-                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_REVENUE_GDP_WS",
-                  "code": "",
-                  "chartType": "bar",
-                  "filter": "",
-                  "headers": [],
-                  "tabName": "GDP"
-                }
-              ]
-            },
-            {
-              "id": 124,
-              "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_POPULATION",
-              "dimensions": {
-                "height": 250,
-                "width": 4
-              },
-              "vizType": "performing-metric",
-              "noUnit": false,
-              "isCollapsible": false,
-              "charts": [
-                {
-                  "id": "wsbottomPerformingStatesRevenue",
-                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_WS",
-                  "code": "",
-                  "chartType": "bar",
-                  "filter": "",
-                  "headers": [],
-                  "tabName": "Revenue"
-                },
-                {
-                  "id": "wsbottomPerformingStatesRevenuePopulation",
-                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_POPULATION_WS",
-                  "code": "",
-                  "chartType": "bar",
-                  "filter": "",
-                  "headers": [],
-                  "tabName": "Population"
-                },
-                {
-                  "id": "wsbottomPerformingStatesRevenuePerHousehold",
-                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_HOUSEHOLD_WS",
-                  "code": "",
-                  "chartType": "bar",
-                  "filter": "",
-                  "headers": [],
-                  "tabName": "Household"
-                },
-                {
-                  "id": "wsbottomPerformingStatesRevenueGDP",
-                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_REVENUE_GDP_WS",
-                  "code": "",
-                  "chartType": "bar",
-                  "filter": "",
-                  "headers": [],
-                  "tabName": "GDP"
+                  "headers": []
                 }
               ]
             }
@@ -11592,58 +11458,8 @@
           "name": "NSS_REVENUE",
           "vizArray": [
             {
-              "id": 226,
-              "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_SLA_WS",
-              "dimensions": {
-                "height": 250,
-                "width": 4
-              },
-              "vizType": "performing-metric",
-              "noUnit": false,
-              "isCollapsible": false,
-              "charts": [
-                {
-                  "id": "wstopPerformingStatesSLA",
-                  "name": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_SLA_WS",
-                  "code": "",
-                  "chartType": "bar",
-                  "filter": "",
-                  "headers": [],
-                  "tabName": "SLA"
-                }
-              ]
-            },
-            {
-              "id": 227,
-              "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_SLA_WS",
-              "dimensions": {
-                "height": 250,
-                "width": 4
-              },
-              "vizType": "performing-metric",
-              "noUnit": false,
-              "isCollapsible": false,
-              "charts": [
-                {
-                  "id": "wsbottomPerformingStatesSLA",
-                  "name": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_SLA_WS",
-                  "code": "",
-                  "chartType": "bar",
-                  "filter": "",
-                  "headers": [],
-                  "tabName": "SLA"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "row": 4,
-          "name": "NSS_REVENUE",
-          "vizArray": [
-            {
-              "id": 223,
-              "name": "NSS_WS_COLLECTION_BY_USAGE",
+              "id": 214,
+              "name": "DSS_SV_FIXED_SPOTS",
               "dimensions": {
                 "height": 250,
                 "width": 4
@@ -11653,18 +11469,24 @@
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "nssWsCollectionByUsage",
-                  "name": "NSS_WS_COLLECTION_BY_USAGE",
+                  "id": "svFixedSpotsOverview",
+                  "name": "DSS_SV_FIXED_SPOTS",
                   "code": "",
                   "chartType": "donut",
                   "filter": "",
                   "headers": []
                 }
               ]
-            },
+            }
+          ]
+        },
+        {
+          "row": 3,
+          "name": "NSS_REVENUE",
+          "vizArray": [
             {
-              "id": 224,
-              "name": "NSS_WS_COLLECTION_BY_CHANNEL",
+              "id": 215,
+              "name": "NSS_SV_TARGET_REVENUE",
               "dimensions": {
                 "height": 250,
                 "width": 4
@@ -11674,234 +11496,12 @@
               "isCollapsible": false,
               "charts": [
                 {
-                  "id": "nssWsCollectionByChannel",
-                  "name": "NSS_WS_COLLECTION_BY_CHANNEL",
+                  "id": "targetAchieved",
+                  "name": "NSS_SV_TARGET_REVENUE",
                   "code": "",
                   "chartType": "donut",
                   "filter": "",
                   "headers": []
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "row": 5,
-          "name": "NSS_REVENUE",
-          "vizArray": [
-            {
-              "id": 231,
-              "name": "NSS_WS_KEY_FY_INDICATORS",
-              "dimensions": {
-                "height": 350,
-                "width": 12
-              },
-              "vizType": "chart",
-              "noUnit": false,
-              "isCollapsible": false,
-              "charts": [
-                {
-                  "id": "nssWsFinancialIndicatorState",
-                  "name": "NSS_WS_DEMAND_COLLECTION_BOUNDARY",
-                  "code": "",
-                  "chartType": "table",
-                  "filter": "",
-                  "headers": [],
-                  "tabName": "Boundary"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "row": 6,
-          "name": "NSS_REVENUE",
-          "vizArray": [
-            {
-              "id": 231,
-              "name": "NSS_WS_TAX_HEAD_BOUNDARY",
-              "dimensions": {
-                "height": 350,
-                "width": 12
-              },
-              "vizType": "chart",
-              "label": "",
-              "noUnit": false,
-              "isCollapsible": true,
-              "charts": [
-                {
-                  "id": "nssWsTaxHeadState",
-                  "name": "NSS_WS_TAX_HEAD_BOUNDARY",
-                  "code": "",
-                  "chartType": "table",
-                  "filter": "",
-                  "headers": [],
-                  "tabName": "Boundary"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "row": 7,
-          "name": "NSS_SERVICE",
-          "vizArray": [
-            {
-              "id": 231,
-              "name": "NSS_NATIONAL_WS_OVERVIEW",
-              "dimensions": {
-                "height": 350,
-                "width": 12
-              },
-              "vizType": "metric-collection",
-              "label": "",
-              "noUnit": false,
-              "isCollapsible": true,
-              "charts": [
-                {
-                  "id": "totalStreetVendingLicenseIssued",
-                  "name": "NSS_SV_TOTAL_LICENSES_ISSUED",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
-{
-                  "id": "licenseByGender",
-                  "name": "NSS_SV_LICENSE_BY_GENDER",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                },
- {
-                  "id": "numberOfApplicationsRejected",
-                  "name": "NSS_SV_APPLICATIONS_REJECTED",
-                  "code": "",
-                  "chartType": "metric",
-                  "filter": "",
-                  "headers": []
-                }
-              ]
-            },
-            {
-              "id": 232,
-              "name": "NSS_WS_CUMULATIVE_CONNECTION",
-              "dimensions": {
-                "height": 350,
-                "width": 7
-              },
-              "vizType": "chart",
-              "isCollapsible": false,
-              "charts": [
-                {
-                  "id": "nssWsCumulativeConnections",
-                  "name": "Monthly",
-                  "code": "",
-                  "chartType": "line",
-                  "filter": "",
-                  "headers": []
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "row": 8,
-          "name": "NSS_SERVICE",
-          "vizArray": [
-            {
-              "id": 231,
-              "name": "NSS_WS_WATER_CONNECTION_BY_USAGE",
-              "dimensions": {
-                "height": 350,
-                "width": 12
-              },
-              "vizType": "chart",
-              "label": "",
-              "noUnit": false,
-              "isCollapsible": true,
-              "charts": [
-                {
-                  "id": "nssWsWaterConnectionByUsageType",
-                  "name": "",
-                  "code": "",
-                  "chartType": "donut",
-                  "filter": "",
-                  "headers": []
-                }
-              ]
-            },
-            {
-              "id": 232,
-              "name": "NSS_WS_SEWERAGE_CONNECTION_BY_USAGE",
-              "dimensions": {
-                "height": 350,
-                "width": 12
-              },
-              "vizType": "chart",
-              "label": "",
-              "noUnit": false,
-              "isCollapsible": true,
-              "charts": [
-                {
-                  "id": "nssWsSewerageConnectionByUsageType",
-                  "name": "",
-                  "code": "",
-                  "chartType": "donut",
-                  "filter": "",
-                  "headers": []
-                }
-              ]
-            },
-            {
-              "id": 233,
-              "name": "NSS_WS_CONNECTION_BY_CHANNEL",
-              "dimensions": {
-                "height": 350,
-                "width": 12
-              },
-              "vizType": "chart",
-              "label": "",
-              "noUnit": false,
-              "isCollapsible": true,
-              "charts": [
-                {
-                  "id": "nssWsConnectionByChannelType",
-                  "name": "NSS_WS_CONNECTION_BY_CHANNEL",
-                  "code": "",
-                  "chartType": "donut",
-                  "filter": "",
-                  "headers": []
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "row": 9,
-          "name": "NSS_SERVICE",
-          "vizArray": [
-            {
-              "id": 231,
-              "name": "NSS_WS_CONNECTION_AGEING",
-              "dimensions": {
-                "height": 350,
-                "width": 12
-              },
-              "vizType": "chart",
-              "label": "",
-              "noUnit": false,
-              "isCollapsible": true,
-              "charts": [
-                {
-                  "id": "nssWsConnectionAgeingState",
-                  "name": "NSS_WS_CONNECTION_AGEING",
-                  "code": "",
-                  "chartType": "table",
-                  "filter": "",
-                  "headers": [],
-                  "tabName": "Boundary"
                 }
               ]
             }
