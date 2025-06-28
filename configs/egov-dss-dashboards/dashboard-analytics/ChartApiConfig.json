@@ -53,7 +53,7 @@
     "insight": {},
     "_comment": ""
   },
-  "totalStreetVendingZones": {
+  "eventDurationGraph": {
     "chartName": "DSS_EVENT_DURATION_GRAPH",
     "queries": [
       {
@@ -62,13 +62,6 @@
         "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"tenantId\" : \"Data.service.tenantId.keyword\"}",
         "indexName": "pgr-services",
         "aggrQuery": "{\"aggs\":{\"Event Average Turn Around Time\":{\"date_histogram\":{\"field\":\"Data.@timestamp\",\"interval\":\"month\"},\"aggs\":{\"average_time\":{\"avg\":{\"script\":{\"source\":\"(doc['Data.service.auditDetails.lastModifiedTime'].value - doc['Data.service.auditDetails.createdTime'].value)/(3600*1000)\"}}}}}}}"
-      },
-      {
-        "module": "SV",
-        "dateRefField": "timestamp",
-        "requestQueryMap": "{\"wardId\":\"ward\", \"tenantId\": \"ulb\"}",
-        "indexName": "street-vending",
-        "aggrQuery": "{\"aggs\":{\"Monthly License Applied\":{\"date_histogram\":{\"field\":\"timestamp\",\"calendar_interval\":\"month\"},\"aggs\":{\"totalApplied\":{\"sum\":{\"field\":\"totalStreetVendingLicenseApplied\"}}}}}"
       }
     ],
     "chartType": "line",
@@ -283,13 +276,6 @@
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.paymentDetails.bill.status.keyword\":[\"Cancelled\"]}}],\"must\":[{\"terms\":{\"dataObject.paymentDetails.businessService.keyword\":[\"WS\",\"WS.ONE_TIME_FEE\",\"SW.ONE_TIME_FEE\",\"SW\"]}}]}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"dataObject.paymentDetails.totalAmountPaid\"}}}}}}",
         "requestQueryMap": "{\"wardId\" : \"dataObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\",\"tenantId\" : \"dataObject.tenantId\", \"district\" : \"dataObject.tenantData.city.districtCode\" }",
         "dateRefField": "dataObject.paymentDetails.receiptDate"
-      },
-      {
-        "module": "SV",
-        "indexName": "sv-national-dashboard",
-        "requestQueryMap": "{\"wardId\" : \"ward\", \"district\" : \"district\", \"tenantId\" : \"ulb\"}",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"state.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Revenue Collected\":{\"sum\":{\"field\":\"totalRevenueCollected\"}},\"Revenue Targeted\":{\"sum\":{\"field\":\"totalRevenueTargeted\"}},\"Target Achievement %\":{\"avg\":{\"field\":\"targetAchievementPercentage\"}}}}}}",
-        "dateRefField": "timestamp"
       }
     ],
     "chartType": "metric",
@@ -374,13 +360,6 @@
         "requestQueryMap": "{\"wardId\" : \"domainObject.ward.name.keyword\",\"module\" : \"dataObject.paymentDetails.businessService.keyword\", \"tenantId\" : \"dataObject.tenantId.keyword\"}",
         "indexName": "dss-collection_v2",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"dataObject.tenantId.keyword\":\"pg.testing\"}},{\"terms\":{\"dataObject.paymentDetails.bill.status.keyword\":[\"Cancelled\"]}}],\"must\":[{\"terms\":{\"dataObject.paymentDetails.businessService.keyword\":[\"BIRTH_CERT\",\"DEATH_CERT\"]}}]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"dataObject.paymentDetails.receiptDate\",\"interval\":\"intervalvalue\"},\"aggs\":{\"Collections\":{\"sum\":{\"field\":\"dataObject.paymentDetails.bill.billDetails.amountPaid\"}}}}}}}}"
-      },
-      {
-        "module": "SV",
-        "indexName": "sv-national-dashboard",
-        "requestQueryMap": "{\"wardId\" : \"ward\", \"district\" : \"district\", \"tenantId\" : \"ulb\"}",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"state.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Revenue Collected\":{\"sum\":{\"field\":\"totalRevenueCollected\"}},\"Revenue Targeted\":{\"sum\":{\"field\":\"totalRevenueTargeted\"}},\"Target Achievement %\":{\"avg\":{\"field\":\"targetAchievementPercentage\"}}}}}}",
-        "dateRefField": "timestamp"
       }
     ],
     "chartType": "line",
@@ -859,13 +838,6 @@
         "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"tenantId\" : \"Data.tenantId\" \r\n}",
         "aggrQuery": "{\"aggs\":{\"BPA\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Closed With In Sla\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.businessService.keyword\":[\"BPA_OC\",\"BPA\",\"BPA_LOW\"]}},{\"term\":{\"Data.status.keyword\":\"APPROVED\"}},{\"script\":{\"script\":{\"source\":\"doc['Data.auditDetails.lastModifiedTime'].value-doc['Data.auditDetails.createdTime'].value<params.threshold\",\"lang\":\"painless\",\"params\":{\"threshold\":172800000}}}}]}},\"aggs\":{\"count\":{\"terms\":{\"field\":\"Data.tenantId.keyword\"},\"aggs\":{\"tenant_count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"Total Applications\":{\"terms\":{\"field\":\"Data.tenantId.keyword\"},\"aggs\":{\"tenant_count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}}}}",
         "dateRefField": "Data.@timestamp"
-      },
-      {
-        "module": "SV",
-        "indexName": "sv-national-dashboard",
-        "requestQueryMap": "{\"wardId\" : \"ward\", \"district\" : \"district\", \"tenantId\" : \"ulb\"}",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"state.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Average TAT\":{\"avg\":{\"field\":\"averageTATLicenseIssued\"}}}}}}",
-        "dateRefField": "timestamp"
       }
     ],
     "chartType": "metric",
@@ -8806,7 +8778,7 @@
         "indexName": "pt-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"paymentChannelType.keyword\":\"Digital\"}}]}},\"aggs\":{\"Collection Online\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
       },
- {
+      {
         "module": "PT",
         "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
         "dateRefField": "",
@@ -10451,7 +10423,7 @@
         "requestQueryMap": "{\"state\" : \"state\",\"ward\" : \"ward\"}",
         "dateRefField": "date",
         "indexName": "obps-national-dashboard-*",
-	"aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"State\":{\"terms\":{\"field\":\"state\",\"size\":1000},\"aggs\":{\"Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}},\"Total_Plans_Scrutinized_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"plansScrutinized\":{\"sum\":{\"field\":\"plansScrutinized\"}}}},\"Total_Plans_Scrutinized\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.plansScrutinized\"}}}},\"Total_Applications_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"applicationsSubmitted\":{\"sum\":{\"field\":\"applicationsSubmitted\"}}}},\"Total_Applications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.applicationsSubmitted\"}}}},\"Total_Permits_Issued\":{\"sum\":{\"field\":\"permitsIssuedForRiskType\"}},\"Average_Days_To_Issue_Permit_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"averageDaysToIssuePermit\":{\"avg\":{\"field\":\"averageDaysToIssuePermit\"}}}},\"Average_Days_To_Issue_Permit\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.averageDaysToIssuePermit\"}}}},\"SLA_Compliance_Permit_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"slaCompliancePermit\":{\"avg\":{\"field\":\"slaCompliancePermit\"}}}},\"SLA_Compliance_Permit\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.slaCompliancePermit\"}}}},\"Total_OC_Scrutinized_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"ocPlansScrutinized\":{\"sum\":{\"field\":\"ocPlansScrutinized\"}}}},\"Total_OC_Scrutinized\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.ocPlansScrutinized\"}}}},\"Total_OC_Submitted_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"ocSubmitted\":{\"sum\":{\"field\":\"ocSubmitted\"}}}},\"Total_OC_Submitted\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.ocSubmitted\"}}}},\"Total_OC_Issued_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"ocIssued\":{\"sum\":{\"field\":\"ocIssued\"}}}},\"Total_OC_Issued\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.ocIssued\"}}}}}}}}}}"      }
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"State\":{\"terms\":{\"field\":\"state\",\"size\":1000},\"aggs\":{\"Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}},\"Total_Plans_Scrutinized_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"plansScrutinized\":{\"sum\":{\"field\":\"plansScrutinized\"}}}},\"Total_Plans_Scrutinized\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.plansScrutinized\"}}}},\"Total_Applications_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"applicationsSubmitted\":{\"sum\":{\"field\":\"applicationsSubmitted\"}}}},\"Total_Applications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.applicationsSubmitted\"}}}},\"Total_Permits_Issued\":{\"sum\":{\"field\":\"permitsIssuedForRiskType\"}},\"Average_Days_To_Issue_Permit_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"averageDaysToIssuePermit\":{\"avg\":{\"field\":\"averageDaysToIssuePermit\"}}}},\"Average_Days_To_Issue_Permit\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.averageDaysToIssuePermit\"}}}},\"SLA_Compliance_Permit_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"slaCompliancePermit\":{\"avg\":{\"field\":\"slaCompliancePermit\"}}}},\"SLA_Compliance_Permit\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.slaCompliancePermit\"}}}},\"Total_OC_Scrutinized_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"ocPlansScrutinized\":{\"sum\":{\"field\":\"ocPlansScrutinized\"}}}},\"Total_OC_Scrutinized\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.ocPlansScrutinized\"}}}},\"Total_OC_Submitted_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"ocSubmitted\":{\"sum\":{\"field\":\"ocSubmitted\"}}}},\"Total_OC_Submitted\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.ocSubmitted\"}}}},\"Total_OC_Issued_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"ocIssued\":{\"sum\":{\"field\":\"ocIssued\"}}}},\"Total_OC_Issued\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.ocIssued\"}}}}}}}}}}"      }
     ],
     "isMdmsEnabled": false,
     "filterKeys": [
@@ -10515,8 +10487,8 @@
         "module": "OBPS",
         "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\",\"ward\" : \"ward\"}",
         "dateRefField": "date",
-         "indexName": "obps-national-dashboard-*",
-	 "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"ULBs\":{\"terms\":{\"field\":\"ulb\",\"size\":1000},\"aggs\":{\"Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}},\"Total_Plans_Scrutinized_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"plansScrutinized\":{\"sum\":{\"field\":\"plansScrutinized\"}}}},\"Total_Plans_Scrutinized\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.plansScrutinized\"}}}},\"Total_Applications_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"applicationsSubmitted\":{\"sum\":{\"field\":\"applicationsSubmitted\"}}}},\"Total_Applications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.applicationsSubmitted\"}}}},\"Total_Permits_Issued\":{\"sum\":{\"field\":\"permitsIssuedForRiskType\"}},\"Average_Days_To_Issue_Permit_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"averageDaysToIssuePermit\":{\"avg\":{\"field\":\"averageDaysToIssuePermit\"}}}},\"Average_Days_To_Issue_Permit\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.averageDaysToIssuePermit\"}}}},\"SLA_Compliance_Permit_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"slaCompliancePermit\":{\"avg\":{\"field\":\"slaCompliancePermit\"}}}},\"SLA_Compliance_Permit\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.slaCompliancePermit\"}}}},\"Total_OC_Scrutinized_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"ocPlansScrutinized\":{\"sum\":{\"field\":\"ocPlansScrutinized\"}}}},\"Total_OC_Scrutinized\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.ocPlansScrutinized\"}}}},\"Total_OC_Submitted_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"ocSubmitted\":{\"sum\":{\"field\":\"ocSubmitted\"}}}},\"Total_OC_Submitted\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.ocSubmitted\"}}}},\"Total_OC_Issued_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"ocIssued\":{\"sum\":{\"field\":\"ocIssued\"}}}},\"Total_OC_Issued\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.ocIssued\"}}}}}}}}}} "      }
+        "indexName": "obps-national-dashboard-*",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"ULBs\":{\"terms\":{\"field\":\"ulb\",\"size\":1000},\"aggs\":{\"Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}},\"Total_Plans_Scrutinized_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"plansScrutinized\":{\"sum\":{\"field\":\"plansScrutinized\"}}}},\"Total_Plans_Scrutinized\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.plansScrutinized\"}}}},\"Total_Applications_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"applicationsSubmitted\":{\"sum\":{\"field\":\"applicationsSubmitted\"}}}},\"Total_Applications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.applicationsSubmitted\"}}}},\"Total_Permits_Issued\":{\"sum\":{\"field\":\"permitsIssuedForRiskType\"}},\"Average_Days_To_Issue_Permit_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"averageDaysToIssuePermit\":{\"avg\":{\"field\":\"averageDaysToIssuePermit\"}}}},\"Average_Days_To_Issue_Permit\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.averageDaysToIssuePermit\"}}}},\"SLA_Compliance_Permit_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"slaCompliancePermit\":{\"avg\":{\"field\":\"slaCompliancePermit\"}}}},\"SLA_Compliance_Permit\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.slaCompliancePermit\"}}}},\"Total_OC_Scrutinized_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"ocPlansScrutinized\":{\"sum\":{\"field\":\"ocPlansScrutinized\"}}}},\"Total_OC_Scrutinized\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.ocPlansScrutinized\"}}}},\"Total_OC_Submitted_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"ocSubmitted\":{\"sum\":{\"field\":\"ocSubmitted\"}}}},\"Total_OC_Submitted\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.ocSubmitted\"}}}},\"Total_OC_Issued_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"ocIssued\":{\"sum\":{\"field\":\"ocIssued\"}}}},\"Total_OC_Issued\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.ocIssued\"}}}}}}}}}} "      }
     ],
     "isMdmsEnabled": false,
     "filterKeys": [
@@ -10581,7 +10553,7 @@
         "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\",\"ward\" : \"ward\"}",
         "dateRefField": "date",
         "indexName": "obps-national-dashboard-ward",
-	"aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Ward\":{\"terms\":{\"field\":\"ward\",\"size\":1000},\"aggs\":{\"Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}},\"Total_Plans_Scrutinized_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"plansScrutinized\":{\"sum\":{\"field\":\"plansScrutinized\"}}}},\"Total_Plans_Scrutinized\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.plansScrutinized\"}}}},\"Total_Applications_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"applicationsSubmitted\":{\"sum\":{\"field\":\"applicationsSubmitted\"}}}},\"Total_Applications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.applicationsSubmitted\"}}}},\"Total_Permits_Issued\":{\"sum\":{\"field\":\"permitsIssuedForRiskType\"}},\"Average_Days_To_Issue_Permit_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"averageDaysToIssuePermit\":{\"avg\":{\"field\":\"averageDaysToIssuePermit\"}}}},\"Average_Days_To_Issue_Permit\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.averageDaysToIssuePermit\"}}}},\"SLA_Compliance_Permit_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"slaCompliancePermit\":{\"avg\":{\"field\":\"slaCompliancePermit\"}}}},\"SLA_Compliance_Permit\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.slaCompliancePermit\"}}}},\"Total_OC_Scrutinized_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"ocPlansScrutinized\":{\"sum\":{\"field\":\"ocPlansScrutinized\"}}}},\"Total_OC_Scrutinized\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.ocPlansScrutinized\"}}}},\"Total_OC_Submitted_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"ocSubmitted\":{\"sum\":{\"field\":\"ocSubmitted\"}}}},\"Total_OC_Submitted\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.ocSubmitted\"}}}},\"Total_OC_Issued\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"ocIssued\":{\"sum\":{\"field\":\"ocIssued\"}}}},\"Total_OC_Issued\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.ocIssued\"}}}}}}}}}}"      }
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Ward\":{\"terms\":{\"field\":\"ward\",\"size\":1000},\"aggs\":{\"Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}},\"Total_Plans_Scrutinized_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"plansScrutinized\":{\"sum\":{\"field\":\"plansScrutinized\"}}}},\"Total_Plans_Scrutinized\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.plansScrutinized\"}}}},\"Total_Applications_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"applicationsSubmitted\":{\"sum\":{\"field\":\"applicationsSubmitted\"}}}},\"Total_Applications\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.applicationsSubmitted\"}}}},\"Total_Permits_Issued\":{\"sum\":{\"field\":\"permitsIssuedForRiskType\"}},\"Average_Days_To_Issue_Permit_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"averageDaysToIssuePermit\":{\"avg\":{\"field\":\"averageDaysToIssuePermit\"}}}},\"Average_Days_To_Issue_Permit\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.averageDaysToIssuePermit\"}}}},\"SLA_Compliance_Permit_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"slaCompliancePermit\":{\"avg\":{\"field\":\"slaCompliancePermit\"}}}},\"SLA_Compliance_Permit\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.slaCompliancePermit\"}}}},\"Total_OC_Scrutinized_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"ocPlansScrutinized\":{\"sum\":{\"field\":\"ocPlansScrutinized\"}}}},\"Total_OC_Scrutinized\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.ocPlansScrutinized\"}}}},\"Total_OC_Submitted_1\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"ocSubmitted\":{\"sum\":{\"field\":\"ocSubmitted\"}}}},\"Total_OC_Submitted\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.ocSubmitted\"}}}},\"Total_OC_Issued\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"intermediateAggr\":{\"terms\":{\"field\":\"date\",\"size\":366},\"aggs\":{\"ocIssued\":{\"sum\":{\"field\":\"ocIssued\"}}}},\"Total_OC_Issued\":{\"sum_bucket\":{\"buckets_path\":\"intermediateAggr.ocIssued\"}}}}}}}}}}"      }
     ],
     "isMdmsEnabled": false,
     "chartType": "table",
@@ -14793,28 +14765,28 @@
         "indexName": "ws-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"transactions\"}}}}}}}}"
       },
-	  {
+      {
         "module": "FSM",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
         "indexName": "fsm-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"transactions\"}}}}}}}}"
       },
-	  {
+      {
         "module": "MCOLLECT",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
         "indexName": "mcollect-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"numberOfReceiptsForPaymentMode\"}}}}}}}}"
       },
-	  {
+      {
         "module": "FIRENOC",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
         "indexName": "firenoc-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"intervalvalue\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"provisionalNOCIssuedForDepartment\"}}}}}}}}"
       },
-	  {
+      {
         "module": "OBPS",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\",\"ward\" : \"ward.keyword\"}",
@@ -14913,42 +14885,42 @@
       {
         "module": "PT",
         "dateRefField": "date",
-	"indexName": "pt-national-dashboard-*",
+        "indexName": "pt-national-dashboard-*",
         "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysCollectionForUsageCategory\"}}],\"must_not\":[{\"match\":{\"todaysCollectionForUsageCategory\":0}}]}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}"
       },
       {
         "module": "TL",
         "dateRefField": "date",
-	"indexName": "tl-national-dashboard-*",
+        "indexName": "tl-national-dashboard-*",
         "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysCollectionForTradeType\"}}],\"must_not\":[{\"match\":{\"todaysCollectionForTradeType\":0}}]}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForTradeType\"}}}}}}"
       },
       {
         "module": "OBPS",
         "dateRefField": "date",
-	 "indexName": "obps-national-dashboard-*",
+        "indexName": "obps-national-dashboard-*",
         "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysCollectionForPaymentMode\"}}],\"must_not\":[{\"match\":{\"todaysCollectionForPaymentMode\":0}}]}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
       {
         "module": "FIRENOC",
         "dateRefField": "date",
-	"indexName": "firenoc-national-dashboard-*",
+        "indexName": "firenoc-national-dashboard-*",
         "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysCollectionForPaymentMode\"}}],\"must_not\":[{\"match\":{\"todaysCollectionForPaymentMode\":0}}]}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
       {
         "module": "MCOLLECT",
         "dateRefField": "date",
-	"indexName": "mcollect-national-dashboard-*",
+        "indexName": "mcollect-national-dashboard-*",
         "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysCollectionForPaymentMode\"}}],\"must_not\":[{\"match\":{\"todaysCollectionForPaymentMode\":0}}]}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}}}}}}"
       },
       {
         "module": "WS",
         "dateRefField": "date",
-	"indexName": "ws-national-dashboard-*",
+        "indexName": "ws-national-dashboard-*",
         "requestQueryMap": "{ \"state\" : \"state\", \"ulb\" : \"ulb\"}",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}],\"must_not\":[{\"match\":{\"todaysCollectionForPaymentChannelType\":0}}]}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForPaymentChannelType\"}}}}}}"
       },
@@ -15582,7 +15554,7 @@
       "isRoundOff": true
     }
   },
- "totalApplicationsOverview": {
+  "totalApplicationsOverview": {
     "chartName": "NATIONAL_DSS_TOTAL_APPLICATIONS",
     "queries": [
       {
@@ -15675,7 +15647,7 @@
       "isRoundOff": true
     }
   },
-    "closedApplicationOverview": {
+  "closedApplicationOverview": {
     "chartName": "NATIONAL_DSS_CLOSED_APPLICATION",
     "queries": [
       {
@@ -15713,7 +15685,7 @@
         "indexName": "tl-national-dashboard-*",
         "aggrQuery":"{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysApprovedApplications\"}}],\"must_not\":[{\"match\":{\"todaysApprovedApplications\":0}}]}},\"aggs\":{\"Total Applications\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}}}"
       },
-	   {
+      {
         "module": "PGR",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
@@ -15914,7 +15886,7 @@
     ],
     "_comment": " totalApplication is the chartId"
   },
-"totalApplication&ClosedApplicationOverview": {
+  "totalApplication&ClosedApplicationOverview": {
     "chartName": "NATIONAL_DSS_TOTAL_APPLICATION_&_CLOSED_APPLICATION",
     "queries": [
       {
@@ -16164,10 +16136,10 @@
       "OBPS",
       "FNOC",
       "BND",
-	  "FSM",
-	  "MCOLLECT",
-	  "PGR"
-	  
+      "FSM",
+      "MCOLLECT",
+      "PGR"
+
     ],
     "insight": {},
     "_comment": " totalApplication is the chartId"
@@ -19276,7 +19248,7 @@
         "indexName": "pt-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"ND_Total_Collection\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}},\"No of properties paid\":{\"sum\":{\"field\":\"noOfPropertiesPaidToday\"}}}}}}"
       },
-	  {
+      {
         "module": "OBPS",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
@@ -20597,7 +20569,7 @@
         "requestQueryMap": "{\"state\" : \"state.keyword\", \"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "pt-national-dashboard",
-         "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"avgDaysForApplicationApproval\"}}],\"must_not\":[{\"match\":{\"avgDaysForApplicationApproval\":0}}]}},\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"PT\"}},\"aggs\":{\"Average Days for Property Tax\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
+        "aggrQuery": "{\"query\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"avgDaysForApplicationApproval\"}}],\"must_not\":[{\"match\":{\"avgDaysForApplicationApproval\":0}}]}},\"aggs\":{\"AGGR\":{\"filter\":{\"term\":{\"module.keyword\":\"PT\"}},\"aggs\":{\"Average Days for Property Tax\":{\"avg\":{\"field\":\"avgDaysForApplicationApproval\"}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -21134,7 +21106,7 @@
     ],
     "_comment": " "
   },
-   "TotalRevenuePerHouseholdOverview": {
+  "TotalRevenuePerHouseholdOverview": {
     "chartName": "DSS_TOTAL_REVENUE_PER_HOUSEHOLD_OVERVIEW",
     "queries": [
       {
@@ -21144,7 +21116,7 @@
         "indexName": "pt-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysCollectionForUsageCategory\"}}],\"must_not\":[{\"match\":{\"todaysCollectionForUsageCategory\":0}}]}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"todaysCollectionForUsageCategory\"}}}}}}"
       },
-	   {
+      {
         "module": "TL",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
@@ -22727,28 +22699,8 @@
     },
     "_comment": " "
   },
-    "svTypeOfRegistration": {
-    "chartName": "DSS_SV_TYPE_OF_REGISTRATION",
-    "queries": [
-      {
-        "module": "SV",
-        "indexName": "sv-national-dashboard",
-        "requestQueryMap": "{\"wardId\":\"ward\", \"district\":\"district\", \"tenantId\":\"ulb\"}",
-        "dateRefField": "timestamp",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Type Of Registration\":{\"sum\":{\"field\":\"typeOfRegistration\"}}}}}}"
-      }
-    ],
-    "chartType": "metric",
-    "valueType": "number",
-    "drillChart": "none",
-    "documentType": "_doc",
-    "action": "",
-    "aggregationPaths": ["Type Of Registration"],
-    "insight": {},
-    "_comment": "SV type of registration metric"
-  },
   "svTotalStreetVendors": {
-  "chartName": "DSS_SV_TOTAL_STREET_VENDORS",
+    "chartName": "DSS_SV_TOTAL_STREET_VENDORS",
     "queries": [
       {
         "module": "SV",
@@ -22767,64 +22719,176 @@
     "insight": {},
     "_comment": "SV total registered vendors"
   },
+  "svTotalVendingZones": {
+    "chartName": "DSS_SV_TOTAL_VENDING_ZONES",
+    "queries": [
+      {
+        "module": "SV",
+        "indexName": "sv-national-dashboard",
+        "requestQueryMap": "{\"wardId\": \"ward\", \"district\": \"district\", \"tenantId\": \"ulb\"}",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Vending Zones\":{\"sum\":{\"field\":\"numberOfVendingZones\"}}}}}}",
+        "dateRefField": "timestamp"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Total Vending Zones"
+    ],
+    "insight": {},
+    "_comment": "KPI tile for total number of street vending zones"
+  },
 
   "svtotalCollection": {
-  "chartName": "NATIONAL_DSS_TOTAL_COLLECTION_SV",
-  "queries": [
-    {
-      "module": "SV",
-      "dateRefField": "timestamp",
-      "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
-      "indexName": "sv-national-dashboard",
-      "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Revenue Collected\":{\"sum\":{\"field\":\"totalRevenueCollected\"}},\"Revenue Target\":{\"sum\":{\"field\":\"totalRevenueTargeted\"}},\"Target Achievement %\":{\"avg\":{\"field\":\"targetAchievementPercentage\"}}}}}}"
-    }
+    "chartName": "NATIONAL_DSS_TOTAL_COLLECTION_SV",
+    "queries": [
+      {
+        "module": "SV",
+        "dateRefField": "timestamp",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "sv-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Revenue Collected\":{\"sum\":{\"field\":\"totalRevenueCollected\"}}}}}}"
+      }
     ],
-      "chartType": "metric",
-      "valueType": "Amount",
-      "drillChart": "none",
-      "documentType": "_doc",
-      "action": "",
-      "aggregationPaths": [
-        "Revenue Collected",
-        "Revenue Target",
-        "Target Achievement %"
-      ],
-      "insight": {
-        "chartResponseMap": "svtotalCollection",
-        "action": "differenceOfNumbers",
-        "upwardIndicator": "positive",
-        "downwardIndicator": "negative",
-        "textMessage": "$indicator$value% than last $insightInterval",
-        "colorCode": "#228B22",
-        "insightInterval": "year",
-        "isRoundOff": true
-      },
-      "_comment": "SV revenue collection with target"
+    "chartType": "metric",
+    "valueType": "Amount",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Revenue Collected"
+    ],
+    "insight": {
+      "chartResponseMap": "svtotalCollection",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "year",
+      "isRoundOff": true
+    },
+    "_comment": "SV revenue collection with target"
+  },
+  "svTotalCollectionForLines": {
+    "chartName": "NATIONAL_DSS_TOTAL_COLLECTION_SV_FOR_LINES",
+    "queries": [
+      {
+        "module": "SV",
+        "dateRefField": "timestamp",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "sv-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"timestamp\",\"calendar_interval\":\"month\"},\"aggs\":{\"Revenue Collected\":{\"sum\":{\"field\":\"totalRevenueCollected\"}}}}}}"
+      }
+    ],
+    "chartType": "line",
+    "valueType": "amount",
+    "action": "",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "aggregationPaths": [
+      "Collections"
+    ],
+    "isCumulative": true,
+    "interval": "month",
+    "insight": {},
+    "_comment": "SV Total Cumulative Collection over months"
+  },
+  "svTotalLicensesApplied": {
+    "chartName": "DSS_SV_TOTAL_LICENSES_APPLIED",
+    "queries": [
+      {
+        "module": "SV",
+        "dateRefField": "timestamp",
+        "requestQueryMap": "{\"wardId\": \"ward\", \"tenantId\": \"ulb\"}",
+        "indexName": "sv-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Licenses Applied\":{\"sum\":{\"field\":\"totalStreetVendingLicenseApplied\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Total Licenses Applied"
+    ],
+    "insight": {},
+    "_comment": "KPI tile for total SV license applications"
+  },
+  "svAverageTAT": {
+    "chartName": "DSS_SV_AVERAGE_TAT_LICENSE_ISSUED",
+    "queries": [
+      {
+        "module": "SV",
+        "indexName": "sv-national-dashboard",
+        "requestQueryMap": "{\"wardId\" : \"ward\", \"district\" : \"district\", \"tenantId\" : \"ulb\"}",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"state.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Average TAT\":{\"avg\":{\"field\":\"averageTATLicenseIssued\"}}}}}}",
+        "dateRefField": "timestamp"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Average TAT"
+    ],
+    "insight": {},
+    "_comment": "KPI tile for SV Average Turnaround Time"
   },
   "svLicenseByAgeGroup": {
     "chartName": "DSS_SV_LICENSE_BY_AGE_GROUP",
-      "queries": [
-        {
-          "module": "SV",
-          "indexName": "sv-national-dashboard",
-          "requestQueryMap": "{\"wardId\" : \"ward\", \"district\" : \"district\", \"tenantId\" : \"ulb\"}",
-          "dateRefField": "timestamp",
-          "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"state.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"18-30\":{\"sum\":{\"field\":\"licenseByAge_18_30\"}},\"30-45\":{\"sum\":{\"field\":\"licenseByAge_30_45\"}},\"45-60\":{\"sum\":{\"field\":\"licenseByAge_45_60\"}},\"60+\":{\"sum\":{\"field\":\"licenseByAge_60plus\"}}}}}}"
-        }
-      ],
-      "chartType": "pie",
-      "valueType": "number",
-      "drillChart": "none",
-      "documentType": "_doc",
-      "action": "",
-      "aggregationPaths": [
-        "18-30",
-        "30-45",
-        "45-60",
-        "60+"
-      ],
-      "insight": {},
-      "_comment": "SV license distribution by age"
+    "queries": [
+      {
+        "module": "SV",
+        "indexName": "sv-national-dashboard",
+        "requestQueryMap": "{\"wardId\" : \"ward\", \"district\" : \"district\", \"tenantId\" : \"ulb\"}",
+        "dateRefField": "timestamp",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"state.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Age Group 18-30\":{\"sum\":{\"field\":\"licenseByAge_18_30\"}},\"Age Group 30-45\":{\"sum\":{\"field\":\"licenseByAge_30_45\"}},\"Age Group 45-60\":{\"sum\":{\"field\":\"licenseByAge_45_60\"}},\"Age Group 60+\":{\"sum\":{\"field\":\"licenseByAge_60plus\"}}}}}}"
+      }
+    ],
+    "chartType": "pie",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Age Group 18-30",
+      "Age Group 30-45",
+      "Age Group 45-60",
+      "Age Group 60+"
+    ],
+    "insight": {},
+    "_comment": "SV license distribution by age"
+  },
+  "svallCollection": {
+    "chartName": "DSS_SV_REVENUE_COLLECTED_TARGETED_ACHIEVEMNET",
+    "queries": [
+      {
+        "module": "SV",
+        "dateRefField": "timestamp",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "sv-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Revenue Collected\":{\"sum\":{\"field\":\"totalRevenueCollected\"}},\"Revenue Target\":{\"sum\":{\"field\":\"totalRevenueTargeted\"}},\"Target Achievement %\":{\"avg\":{\"field\":\"targetAchievementPercentage\"}}}}}}"
+      }
+    ],
+    "chartType": "pie",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Revenue Collected",
+      "Revenue Target",
+      "Target Achievement %"
+    ],
+    "insight": {},
+    "_comment": "SV license distribution by age"
   },
   "svFixedSpotsOverview": {
     "chartName": "DSS_SV_FIXED_SPOTS",
@@ -22850,7 +22914,7 @@
     "_comment": "SV vending spots offered by State/ULB"
   },
   "svRejectionRate": {
-  "chartName": "DSS_SV_REJECTION_RATE",
+    "chartName": "DSS_SV_REJECTION_RATE",
     "queries": [
       {
         "module": "SV",
@@ -23536,7 +23600,7 @@
   "RevenuePerPopulation": {
     "chartName": "DSS_REVENUE_PER_POPULATION",
     "queries": [
-	 {
+      {
         "module": "PT",
         "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
@@ -23612,7 +23676,7 @@
     ],
     "_comment": " "
   },
-   "firenoctopPerformingStatesSLA": {
+  "firenoctopPerformingStatesSLA": {
     "chartName": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_SLA_FIRENOC",
     "queries": [
       {
@@ -23646,7 +23710,7 @@
     "insight": {},
     "_comment": " TOP Performing States for SLA"
   },
-   "firenocbottomPerformingStatesSLA": {
+  "firenocbottomPerformingStatesSLA": {
     "chartName": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_SLA_FIRENOC",
     "queries": [
       {
@@ -23663,7 +23727,7 @@
         "indexName": "firenoc-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysApprovedApplications\"}}],\"must_not\":[{\"match\":{\"todaysApprovedApplications\":0}}]}},\"aggs\":{\"TotalApplications\":{\"terms\":{\"field\":\"state\",\"size\": \"50\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}}}}}"
       }
-      
+
     ],
     "chartType": "perform",
     "valueType": "percentage",
@@ -23681,7 +23745,7 @@
     "insight": {},
     "_comment": " Bottom Performing States for GDPwise Revenue"
   },
-   "obpstopPerformingStatesSLA": {
+  "obpstopPerformingStatesSLA": {
     "chartName": "NATIONAL_DSS_TOP_3_PERFORMING_STATES_SLA_OBPS",
     "queries": [
       {
@@ -23715,7 +23779,7 @@
     "insight": {},
     "_comment": " TOP Performing States for SLA"
   },
-   "obpsbottomPerformingStatesSLA": {
+  "obpsbottomPerformingStatesSLA": {
     "chartName": "NATIONAL_DSS_BOTTOM_3_PERFORMING_STATES_SLA_OBPS",
     "queries": [
       {
@@ -23732,7 +23796,7 @@
         "indexName": "obps-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"todaysApprovedApplications\"}}],\"must_not\":[{\"match\":{\"todaysApprovedApplications\":0}}]}},\"aggs\":{\"TotalApplications\":{\"terms\":{\"field\":\"state.keyword\",\"size\": \"50\",\"order\":{\"Sum\":\"asc\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}}}}}"
       }
-      
+
     ],
     "chartType": "perform",
     "valueType": "percentage",
@@ -23753,7 +23817,7 @@
   "totalApprovedApplications": {
     "chartName": "NATIONAL_DSS_APPROVED_APPLICATIONS",
     "queries": [
-     
+
       {
         "module": "PT",
         "dateRefField": "date",
@@ -23761,7 +23825,7 @@
         "indexName": "pt-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"TotalApplications\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}"
       },
-     
+
       {
         "module": "OBPS",
         "dateRefField": "date",
@@ -23769,7 +23833,7 @@
         "indexName": "obps-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"TotalApplications\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}"
       },
-      
+
       {
         "module": "WS",
         "dateRefField": "date",
@@ -23777,7 +23841,7 @@
         "indexName": "ws-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"TotalApplications\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}"
       },
-      
+
       {
         "module": "TL",
         "dateRefField": "date",
@@ -23785,7 +23849,7 @@
         "indexName": "tl-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"TotalApplications\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}"
       },
-     
+
       {
         "module": "FIRENOC",
         "dateRefField": "",
@@ -23793,7 +23857,7 @@
         "indexName": "firenoc-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"TotalApplications\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}"
       },
-      
+
       {
         "module": "BIRTH",
         "dateRefField": "date",
@@ -23801,7 +23865,7 @@
         "indexName": "birth-cert-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"TotalApplications\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}"
       },
-      
+
       {
         "module": "DEATH",
         "dateRefField": "date",
@@ -23809,7 +23873,7 @@
         "indexName": "death-cert-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"TotalApplications\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}}}}"
       },
-     
+
       {
         "module": "FSM",
         "dateRefField": "date",
@@ -23846,7 +23910,7 @@
         "indexName": "pt-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}"
       },
-      
+
       {
         "module": "OBPS",
         "dateRefField": "date",
@@ -23854,7 +23918,7 @@
         "indexName": "obps-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}"
       },
-      
+
       {
         "module": "WS",
         "dateRefField": "date",
@@ -23862,7 +23926,7 @@
         "indexName": "ws-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}"
       },
-     
+
       {
         "module": "TL",
         "dateRefField": "date",
@@ -23870,7 +23934,7 @@
         "indexName": "tl-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}"
       },
-      
+
       {
         "module": "FIRENOC",
         "dateRefField": "date",
@@ -23878,7 +23942,7 @@
         "indexName": "firenoc-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}"
       },
-      
+
       {
         "module": "BIRTH",
         "dateRefField": "date",
@@ -23886,7 +23950,7 @@
         "indexName": "birth-cert-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}"
       },
-      
+
       {
         "module": "DEATH",
         "dateRefField": "date",
@@ -23894,7 +23958,7 @@
         "indexName": "death-cert-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}"
       },
-      
+
       {
         "module": "FSM",
         "dateRefField": "date",
@@ -23902,7 +23966,7 @@
         "indexName": "fsm-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"ApplicationsApprovedwithinSLA\":{\"sum\":{\"field\":\"todaysApprovedApplicationsWithinSLA\"}}}}"
       }
-      
+
     ],
     "chartType": "metric",
     "valueType": "number",
@@ -23912,8 +23976,8 @@
     "isRoundOff": true,
     "aggregationPaths": [
       "ApplicationsApprovedwithinSLA"
-	  ],
-    
+    ],
+
     "_comment": " SLA Achieved Percentage "
   },
   "nssTLPendancy": {
@@ -24058,28 +24122,28 @@
         "indexName": "obps-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"all_matching_docs\":{\"filters\":{\"filters\":{\"all\":{\"match_all\":{}}}},\"aggs\":{\"Total_Closed_Applications\":{\"sum\":{\"field\":\"todaysClosedApplicationsPermit\"}},\"Total_Closed_Applications_OC\":{\"sum\":{\"field\":\"todaysClosedApplicationsOC\"}},\"Total_Applications\":{\"sum\":{\"field\":\"applicationsSubmitted\"}},\"Total_Applications_OC\":{\"sum\":{\"field\":\"ocSubmitted\"}},\"Applications_Pending\":{\"bucket_script\":{\"buckets_path\":{\"total\":\"Total_Applications\",\"total_oc\":\"Total_Applications_OC\",\"closed\":\"Total_Closed_Applications\",\"closed_oc\":\"Total_Closed_Applications_OC\"},\"script\":\"(params.total+params.total_oc-params.closed_oc-params.closed)\"}}}}}}"
       },
-	   {
+      {
         "module": "WS",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "ws-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"all_matching_docs\":{\"filters\":{\"filters\":{\"all\":{\"match_all\":{}}}},\"aggs\":{\"Total_Closed_Applications\":{\"sum\":{\"field\":\"todaysClosedApplications\"}},\"Total_Applications\":{\"sum\":{\"field\":\"todaysTotalApplications\"}},\"Applications_Pending\":{\"bucket_script\":{\"buckets_path\":{\"total\":\"Total_Applications\",\"closed\":\"Total_Closed_Applications\"},\"script\":\"(params.total-params.closed)\"}}}}}}"
       },
-	  {
+      {
         "module": "FIRENOC",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "firenoc-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"all_matching_docs\":{\"filters\":{\"filters\":{\"all\":{\"match_all\":{}}}},\"aggs\":{\"Total_Closed_Applications\":{\"sum\":{\"field\":\"todaysClosedApplications\"}},\"Total_Applications\":{\"sum\":{\"field\":\"todaysApplicationsForApplicationType  \"}},\"Applications_Pending\":{\"bucket_script\":{\"buckets_path\":{\"total\":\"Total_Applications\",\"closed\":\"Total_Closed_Applications\"},\"script\":\"(params.total-params.closed)\"}}}}}}"
       },
-	   {
+      {
         "module": "TL",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
         "indexName": "tl-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"all_matching_docs\":{\"filters\":{\"filters\":{\"all\":{\"match_all\":{}}}},\"aggs\":{\"Total_Closed_Applications\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}},\"Total_Applications\":{\"sum\":{\"field\":\"todaysApplications\"}},\"Applications_Pending\":{\"bucket_script\":{\"buckets_path\":{\"total\":\"Total_Applications\",\"closed\":\"Total_Closed_Applications\"},\"script\":\"(params.total-params.closed)\"}}}}}}"
       },
-	  {
+      {
         "module": "PT",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "date",
@@ -24109,77 +24173,77 @@
         "indexName": "obps-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"pendingApplicationsBeyondTimeline\"}}],\"must_not\":[{\"match\":{\"pendingApplicationsBeyondTimeline\":0}}]}},\"aggs\":{\"todaysDate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_term\":\"desc\"},\"size\":1},\"aggs\":{\"Beyond SLA Application\":{\"sum\":{\"field\":\"pendingApplicationsBeyondTimeline\"}}}},\"lastUpdatedTime\":{\"terms\":{\"field\":\"lastModifiedTime\",\"order\":{\"_term\":\"desc\"},\"size\":1}}}}}}"
       },
-	  {
+      {
         "module": "PGR",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "pgr-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"pendingApplicationsBeyondTimeline\"}}],\"must_not\":[{\"match\":{\"pendingApplicationsBeyondTimeline\":0}}]}},\"aggs\":{\"todaysDate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_term\":\"desc\"},\"size\":1},\"aggs\":{\"Beyond SLA Application\":{\"sum\":{\"field\":\"pendingApplicationsBeyondTimeline\"}}}},\"lastUpdatedTime\":{\"terms\":{\"field\":\"lastModifiedTime\",\"order\":{\"_term\":\"desc\"},\"size\":1}}}}}}"
       },
-	   {
+      {
         "module": "WS",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "ws-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"pendingApplicationsBeyondTimeline\"}}],\"must_not\":[{\"match\":{\"pendingApplicationsBeyondTimeline\":0}}]}},\"aggs\":{\"todaysDate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_term\":\"desc\"},\"size\":1},\"aggs\":{\"Beyond SLA Application\":{\"sum\":{\"field\":\"pendingApplicationsBeyondTimeline\"}}}},\"lastUpdatedTime\":{\"terms\":{\"field\":\"lastModifiedTime\",\"order\":{\"_term\":\"desc\"},\"size\":1}}}}}}"
       },
-	  {
+      {
         "module": "FIRENOC",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "firenoc-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"pendingApplicationsBeyondTimeline\"}}],\"must_not\":[{\"match\":{\"pendingApplicationsBeyondTimeline\":0}}]}},\"aggs\":{\"todaysDate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_term\":\"desc\"},\"size\":1},\"aggs\":{\"Beyond SLA Application\":{\"sum\":{\"field\":\"pendingApplicationsBeyondTimeline\"}}}},\"lastUpdatedTime\":{\"terms\":{\"field\":\"lastModifiedTime\",\"order\":{\"_term\":\"desc\"},\"size\":1}}}}}}"
       },
-	   {
+      {
         "module": "TL",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "tl-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"pendingApplicationsBeyondTimeline\"}}],\"must_not\":[{\"match\":{\"pendingApplicationsBeyondTimeline\":0}}]}},\"aggs\":{\"todaysDate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_term\":\"desc\"},\"size\":1},\"aggs\":{\"Beyond SLA Application\":{\"sum\":{\"field\":\"pendingApplicationsBeyondTimeline\"}}}},\"lastUpdatedTime\":{\"terms\":{\"field\":\"lastModifiedTime\",\"order\":{\"_term\":\"desc\"},\"size\":1}}}}}}"
       },
-	  {
+      {
         "module": "PT",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "pt-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must\":[{\"exists\":{\"field\":\"pendingApplicationsBeyondTimeline\"}}],\"must_not\":[{\"match\":{\"pendingApplicationsBeyondTimeline\":0}}]}},\"aggs\":{\"todaysDate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_term\":\"desc\"},\"size\":1},\"aggs\":{\"Beyond SLA Application\":{\"sum\":{\"field\":\"pendingApplicationsBeyondTimeline\"}}}},\"lastUpdatedTime\":{\"terms\":{\"field\":\"lastModifiedTime\",\"order\":{\"_term\":\"desc\"},\"size\":1}}}}}}"
       },
-	        {
+      {
         "module": "OBPS",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "obps-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"all_matching_docs\":{\"filters\":{\"filters\":{\"all\":{\"match_all\":{}}}},\"aggs\":{\"Total_Closed_Applications\":{\"sum\":{\"field\":\"todaysClosedApplicationsPermit\"}},\"Total_Closed_Applications_OC\":{\"sum\":{\"field\":\"todaysClosedApplicationsOC\"}},\"Total_Applications\":{\"sum\":{\"field\":\"applicationsSubmitted\"}},\"Total_Applications_OC\":{\"sum\":{\"field\":\"ocSubmitted\"}},\"Applications_Pending\":{\"bucket_script\":{\"buckets_path\":{\"total\":\"Total_Applications\",\"total_oc\":\"Total_Applications_OC\",\"closed\":\"Total_Closed_Applications\",\"closed_oc\":\"Total_Closed_Applications_OC\"},\"script\":\"(params.total+params.total_oc-params.closed_oc-params.closed)\"}}}}}}"
       },
-	   {
+      {
         "module": "WS",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "ws-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"all_matching_docs\":{\"filters\":{\"filters\":{\"all\":{\"match_all\":{}}}},\"aggs\":{\"Total_Closed_Applications\":{\"sum\":{\"field\":\"todaysClosedApplications\"}},\"Total_Applications\":{\"sum\":{\"field\":\"todaysTotalApplications\"}},\"Applications_Pending\":{\"bucket_script\":{\"buckets_path\":{\"total\":\"Total_Applications\",\"closed\":\"Total_Closed_Applications\"},\"script\":\"(params.total-params.closed)\"}}}}}}"
       },
-	  {
+      {
         "module": "FIRENOC",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "firenoc-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"all_matching_docs\":{\"filters\":{\"filters\":{\"all\":{\"match_all\":{}}}},\"aggs\":{\"Total_Closed_Applications\":{\"sum\":{\"field\":\"todaysClosedApplications\"}},\"Total_Applications\":{\"sum\":{\"field\":\"todaysApplicationsForApplicationType  \"}},\"Applications_Pending\":{\"bucket_script\":{\"buckets_path\":{\"total\":\"Total_Applications\",\"closed\":\"Total_Closed_Applications\"},\"script\":\"(params.total-params.closed)\"}}}}}}"
       },
-	   {
+      {
         "module": "TL",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "tl-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"all_matching_docs\":{\"filters\":{\"filters\":{\"all\":{\"match_all\":{}}}},\"aggs\":{\"Total_Closed_Applications\":{\"sum\":{\"field\":\"todaysApprovedApplications\"}},\"Total_Applications\":{\"sum\":{\"field\":\"todaysApplications\"}},\"Applications_Pending\":{\"bucket_script\":{\"buckets_path\":{\"total\":\"Total_Applications\",\"closed\":\"Total_Closed_Applications\"},\"script\":\"(params.total-params.closed)\"}}}}}}"
       },
-	  {
+      {
         "module": "PT",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
         "indexName": "pt-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"all_matching_docs\":{\"filters\":{\"filters\":{\"all\":{\"match_all\":{}}}},\"aggs\":{\"Total_Closed_Applications\":{\"sum\":{\"field\":\"todaysClosedApplications\"}},\"Total_Applications\":{\"sum\":{\"field\":\"todaysTotalApplications\"}},\"Applications_Pending\":{\"bucket_script\":{\"buckets_path\":{\"total\":\"Total_Applications\",\"closed\":\"Total_Closed_Applications\"},\"script\":\"(params.total-params.closed)\"}}}}}}"
       },
-	  	  {
+      {
         "module": "PGR",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "dateRefField": "",
@@ -24196,11 +24260,11 @@
     "isRoundOff": true,
     "aggregationPaths": [
       "Beyond SLA Application",
-	  "Applications_Pending"
+      "Applications_Pending"
     ],
     "_comment": " "
   },
-	"fsmTodaysCollection": {
+  "fsmTodaysCollection": {
     "chartName": "FSM_TODAYS_COLLECTION",
     "queries": [
       {
@@ -24224,110 +24288,110 @@
   },
 
   "pqmTestCompliance": {
-      "chartName": "DSS_PQM_TEST_COMPLIANCE",
-      "queries": [
-        {
-          "module": "PQM",
-          "indexName": "pqm-service",
-          "aggrQuery": "{\"size\":0,\"aggs\":{\"total_tests\":{\"cardinality\":{\"field\":\"Data.tests.testId.keyword\"}},\"wfStatus_submitted_count\":{\"filter\":{\"term\":{\"Data.tests.wfStatus.keyword\":\"SUBMITTED\"}}}}}",
-          "requestQueryMap": "{\"plantCode\" : \"Data.tests.plantCode.keyword\",\"tenantId\" : \"Data.tests.tenantId\"}",
-          "dateRefField": "Data.tests.@timestamp"
-        }
-      ],
-      "chartType": "metric",
-      "valueType": "percentage",
-      "action": "percentage",
-      "isRoundOff": true,
-      "drillChart": "none",
-      "aggregationPaths": [
-        "wfStatus_submitted_count",
-        "total_tests"
-      ],
-      "insight": {
-        "chartResponseMap": "pqmTestCompliance",
-        "action": "differenceOfNumbers",
-        "upwardIndicator": "positive",
-        "downwardIndicator": "negative",
-        "textMessage": "$indicator$value% than last $insightInterval",
-        "colorCode": "#228B22",
-        "insightInterval": "year",
-        "isRoundOff": true
-      },
-      "_comment": " PQM Percentage of Test Compliance"
+    "chartName": "DSS_PQM_TEST_COMPLIANCE",
+    "queries": [
+      {
+        "module": "PQM",
+        "indexName": "pqm-service",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"total_tests\":{\"cardinality\":{\"field\":\"Data.tests.testId.keyword\"}},\"wfStatus_submitted_count\":{\"filter\":{\"term\":{\"Data.tests.wfStatus.keyword\":\"SUBMITTED\"}}}}}",
+        "requestQueryMap": "{\"plantCode\" : \"Data.tests.plantCode.keyword\",\"tenantId\" : \"Data.tests.tenantId\"}",
+        "dateRefField": "Data.tests.@timestamp"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "percentage",
+    "action": "percentage",
+    "isRoundOff": true,
+    "drillChart": "none",
+    "aggregationPaths": [
+      "wfStatus_submitted_count",
+      "total_tests"
+    ],
+    "insight": {
+      "chartResponseMap": "pqmTestCompliance",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "year",
+      "isRoundOff": true
     },
-    "pqmPercentageOfTestResultsMeetingBenchmarks": {
-      "chartName": "DSS_PQM_PERCENTAGE_OF_TEST_RESULTS_MEETING_BENCHMARKS",
-      "queries": [
-        {
-          "module": "PQM",
-          "indexName": "pqm-service",
-          "aggrQuery": "{\"size\":0,\"aggs\":{\"PASSED_TESTS\":{\"filter\":{\"term\":{\"Data.tests.status.keyword\":\"PASS\"}}},\"SUBMITTED_TESTS\":{\"filter\":{\"term\":{\"Data.tests.wfStatus.keyword\":\"SUBMITTED\"}}}}}",
-          "requestQueryMap": "{\"plantCode\" : \"Data.tests.plantCode.keyword\",\"tenantId\" : \"Data.tests.tenantId\"}",
-          "dateRefField": "Data.tests.@timestamp"
-        }
-      ],
-      "chartType": "metric",
-      "valueType": "percentage",
-      "action": "percentage",
-      "isRoundOff": true,
-      "drillChart": "none",
-      "aggregationPaths": [
-        "PASSED_TESTS",
-        "SUBMITTED_TESTS"
-      ],
-      "insight": {
-        "chartResponseMap": "pqmPercentageOfTestResultsMeetingBenchmarks",
-        "action": "differenceOfNumbers",
-        "upwardIndicator": "positive",
-        "downwardIndicator": "negative",
-        "textMessage": "$indicator$value% than last $insightInterval",
-        "colorCode": "#228B22",
-        "insightInterval": "year",
-        "isRoundOff": true
-      },
-      "_comment": " PQM Percentage of Test Results Meeting Benchmarks"
+    "_comment": " PQM Percentage of Test Compliance"
+  },
+  "pqmPercentageOfTestResultsMeetingBenchmarks": {
+    "chartName": "DSS_PQM_PERCENTAGE_OF_TEST_RESULTS_MEETING_BENCHMARKS",
+    "queries": [
+      {
+        "module": "PQM",
+        "indexName": "pqm-service",
+        "aggrQuery": "{\"size\":0,\"aggs\":{\"PASSED_TESTS\":{\"filter\":{\"term\":{\"Data.tests.status.keyword\":\"PASS\"}}},\"SUBMITTED_TESTS\":{\"filter\":{\"term\":{\"Data.tests.wfStatus.keyword\":\"SUBMITTED\"}}}}}",
+        "requestQueryMap": "{\"plantCode\" : \"Data.tests.plantCode.keyword\",\"tenantId\" : \"Data.tests.tenantId\"}",
+        "dateRefField": "Data.tests.@timestamp"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "percentage",
+    "action": "percentage",
+    "isRoundOff": true,
+    "drillChart": "none",
+    "aggregationPaths": [
+      "PASSED_TESTS",
+      "SUBMITTED_TESTS"
+    ],
+    "insight": {
+      "chartResponseMap": "pqmPercentageOfTestResultsMeetingBenchmarks",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "year",
+      "isRoundOff": true
     },
-    "pqmAlerts": {
-      "chartName": "PQM_ANOMALY_TYPE",
-      "queries": [
-        {
-          "module": "PQM",
-          "requestQueryMap": "{\"plantCode\" : \"Data.pqmAnomalys.plantCode.keyword\",\"tenantId\" : \"Data.pqmAnomalys.tenantId\"}",
-          "dateRefField": "Data.pqmAnomalys.@timestamp",
-          "indexName": "pqm-anomaly-finder",
-          "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Anomaly_type_lab_results\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.pqmAnomalys.anomalyType.keyword\":[\"LAB_RESULTS_NOT_AS_PER_BENCHMARK\"]}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.pqmAnomalys.id.keyword\"}}}},\"Anomaly_type_test_result_not_submitted\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.pqmAnomalys.anomalyType.keyword\":[\"TEST_RESULT_NOT_SUBMITTED\"]}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.pqmAnomalys.id.keyword\"}}}},\"TotalAlerts\":{\"value_count\":{\"field\":\"Data.pqmAnomalys.id.keyword\"}}}}}}"
-        }
-      ],
-      "isMdmsEnabled": true,
-      "isPostResponseHandler": true,
-      "postAggregationTheory": "repsonseToDifferenceOfDates",
-      "chartType": "xtable",
-      "valueType": "number",
-      "drillChart": "xBirthDownloadByUlb",
-      "documentType": "_doc",
-      "action": "",
-      "plotLabel": "DDRs",
-      "excludedColumns": [],
-      "removedFields": [],
-      "computedFields": [],
-      "isRoundOff": true,
-      "aggregationPaths": [
-        "Anomaly_type_test_result_not_submitted",
-        "Anomaly_type_lab_results",
-        "TotalAlerts"
-      ],
-      "pathDataTypeMapping": [
-        {
-          "Anomaly_type_test_result_not_submitted": "number"
-        },
-        {
-          "Anomaly_type_lab_results": "number"
-        },
-        {
-          "TotalAlerts": "number"
-        }
-      ],
-      "insight": {},
-      "_comment": ""
-    }
+    "_comment": " PQM Percentage of Test Results Meeting Benchmarks"
+  },
+  "pqmAlerts": {
+    "chartName": "PQM_ANOMALY_TYPE",
+    "queries": [
+      {
+        "module": "PQM",
+        "requestQueryMap": "{\"plantCode\" : \"Data.pqmAnomalys.plantCode.keyword\",\"tenantId\" : \"Data.pqmAnomalys.tenantId\"}",
+        "dateRefField": "Data.pqmAnomalys.@timestamp",
+        "indexName": "pqm-anomaly-finder",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Anomaly_type_lab_results\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.pqmAnomalys.anomalyType.keyword\":[\"LAB_RESULTS_NOT_AS_PER_BENCHMARK\"]}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.pqmAnomalys.id.keyword\"}}}},\"Anomaly_type_test_result_not_submitted\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.pqmAnomalys.anomalyType.keyword\":[\"TEST_RESULT_NOT_SUBMITTED\"]}}]}},\"aggs\":{\"Count\":{\"value_count\":{\"field\":\"Data.pqmAnomalys.id.keyword\"}}}},\"TotalAlerts\":{\"value_count\":{\"field\":\"Data.pqmAnomalys.id.keyword\"}}}}}}"
+      }
+    ],
+    "isMdmsEnabled": true,
+    "isPostResponseHandler": true,
+    "postAggregationTheory": "repsonseToDifferenceOfDates",
+    "chartType": "xtable",
+    "valueType": "number",
+    "drillChart": "xBirthDownloadByUlb",
+    "documentType": "_doc",
+    "action": "",
+    "plotLabel": "DDRs",
+    "excludedColumns": [],
+    "removedFields": [],
+    "computedFields": [],
+    "isRoundOff": true,
+    "aggregationPaths": [
+      "Anomaly_type_test_result_not_submitted",
+      "Anomaly_type_lab_results",
+      "TotalAlerts"
+    ],
+    "pathDataTypeMapping": [
+      {
+        "Anomaly_type_test_result_not_submitted": "number"
+      },
+      {
+        "Anomaly_type_lab_results": "number"
+      },
+      {
+        "TotalAlerts": "number"
+      }
+    ],
+    "insight": {},
+    "_comment": ""
+  }
 }
