@@ -15505,6 +15505,13 @@
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"BND\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}",
         "requestQueryMap": "{ \"state\" : \"state\", \"ulb\" : \"ulb\"}",
         "dateRefField": "date"
+      },
+      {
+        "module": "SV",
+        "dateRefField": "timestamp",
+        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
+        "indexName": "sv-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"SV\":{\"sum\":{\"field\":\"totalRevenueCollected\"}}}}}}"
       }
     ],
     "chartType": "pie",
@@ -15519,7 +15526,8 @@
       "OBPS",
       "FNOC",
       "MC",
-      "BND"
+      "BND",
+      "SV"
     ],
     "insight": {},
     "_comment": " "
@@ -16122,6 +16130,13 @@
         "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
         "indexName": "pgr-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.service.tenantId.keyword\":\"pg.testing\"}},{\"term\":{\"todaysComplaintsForStatus\":0}}]}},\"aggs\":{\"PGR\":{\"sum\":{\"field\":\"todaysComplaintsForStatus\"}}}}}}"
+      },
+      {
+        "module": "SV",
+        "indexName": "sv-national-dashboard",
+        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"totalStreetVendingLicenseApplied\":0}}]}},\"aggs\":{\"SV\":{\"sum\":{\"field\":\"totalStreetVendingLicenseApplied\"}}}}}}",
+        "dateRefField": "date"
       }
     ],
     "chartType": "pie",
@@ -16138,7 +16153,8 @@
       "BND",
       "FSM",
       "MCOLLECT",
-      "PGR"
+      "PGR",
+      "SV"
 
     ],
     "insight": {},
@@ -22781,7 +22797,7 @@
         "dateRefField": "timestamp",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "sv-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"timestamp\",\"calendar_interval\":\"month\"},\"aggs\":{\"Revenue Collected\":{\"sum\":{\"field\":\"totalRevenueCollected\"}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"month\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"totalRevenueCollected\"}}}}}}"
       }
     ],
     "chartType": "line",
@@ -22865,6 +22881,51 @@
     ],
     "insight": {},
     "_comment": "SV license distribution by age"
+  },
+  "svLicenseByGender": {
+    "chartName": "DSS_SV_LICENSE_BY_GENDER",
+    "queries": [
+      {
+        "module": "SV",
+        "indexName": "sv-national-dashboard",
+        "requestQueryMap": "{\"wardId\" : \"ward\", \"district\" : \"district\", \"tenantId\" : \"ulb\"}",
+        "dateRefField": "timestamp",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"state.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Male\":{\"sum\":{\"field\":\"totalLicenseAppliedbyMale\"}},\"Female\":{\"sum\":{\"field\":\"totalLicenseAppliedbyFemale\"}}}}}}"
+      }
+    ],
+    "chartType": "pie",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Male",
+      "Female"
+    ],
+    "insight": {},
+    "_comment": "SV license distribution by gender"
+  },
+  "svRegistrationByVendingType": {
+    "chartName": "DSS_SV_REGISTRATION_BY_VENDING_TYPE",
+    "queries": [
+      {
+        "module": "SV",
+        "indexName": "sv-national-dashboard",
+        "requestQueryMap": "{\"wardId\" : \"ward\", \"district\" : \"district\", \"tenantId\" : \"ulb\"}",
+        "dateRefField": "timestamp",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"state.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"vendingType\":{\"terms\":{\"field\":\"vendingType.keyword\",\"size\":10},\"aggs\":{\"Total Registrations\":{\"sum\":{\"field\":\"registrationTypeForVendingType\"}}}}}}}}"
+      }
+    ],
+    "chartType": "pie",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "vendingType"
+    ],
+    "insight": {},
+    "_comment": "SV registration distribution by vending type"
   },
   "svallCollection": {
     "chartName": "DSS_SV_REVENUE_COLLECTED_TARGETED_ACHIEVEMNET",

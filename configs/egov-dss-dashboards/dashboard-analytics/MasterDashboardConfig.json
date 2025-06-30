@@ -11446,20 +11446,19 @@
             },
             {
               "id": 215,
-              "name": "NSS_WS_TOTAL_CUMULATIVE_COLLECTION",
+              "name": "DSS_SV_LICENSE_BY_AGE_GROUP",
               "dimensions": {
-                "height": 350,
-                "width": 7
+                "height": 250,
+                "width": 4
               },
               "vizType": "chart",
-              "noUnit": true,
               "isCollapsible": false,
               "charts": [
                 {
                   "id": "svLicenseByAgeGroup",
                   "name": "DSS_SV_LICENSE_BY_AGE_GROUP",
                   "code": "",
-                  "chartType": "donut",
+                  "chartType": "horizontalBar",
                   "filter": "",
                   "headers": []
                 }
@@ -11480,6 +11479,51 @@
                   "id": "svallCollection",
                   "name": "DSS_SV_REVENUE_COLLECTED_TARGETED_ACHIEVEMNET",
                   "code": "",
+                  "chartType": "donut",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 3,
+          "name": "NSS_REVENUE",
+          "vizArray": [
+            {
+              "id": 217,
+              "name": "DSS_SV_REGISTRATION_BY_VENDING_TYPE",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "chart",
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "svRegistrationByVendingType",
+                  "name": "DSS_SV_REGISTRATION_BY_VENDING_TYPE",
+                  "code": "",
+                  "chartType": "donut",
+                  "filter": "",
+                  "headers": []
+                }
+              ]
+            },
+            {
+              "id": 218,
+              "name": "DSS_SV_LICENSE_BY_GENDER",
+              "dimensions": {
+                "height": 250,
+                "width": 4
+              },
+              "vizType": "chart",
+              "isCollapsible": false,
+              "charts": [
+                {
+                  "id": "svLicenseByGender",
+                  "name": "DSS_SV_LICENSE_BY_GENDER",
                   "chartType": "donut",
                   "filter": "",
                   "headers": []
