@@ -22722,7 +22722,7 @@
         "module": "SV",
         "indexName": "sv-national-dashboard",
         "requestQueryMap": "{\"wardId\":\"ward\", \"district\":\"district\", \"tenantId\":\"ulb\"}",
-        "dateRefField": "timestamp",
+        "dateRefField": "date",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Vendors\":{\"sum\":{\"field\":\"totalStreetVendors\"}}}}}}"
       }
     ],
@@ -22735,6 +22735,28 @@
     "insight": {},
     "_comment": "SV total registered vendors"
   },
+  "svTotalLicensesIssued": {
+    "chartName": "DSS_SV_TOTAL_LICENSES_ISSUED",
+    "queries": [
+      {
+        "module": "SV",
+        "indexName": "sv-national-dashboard",
+        "requestQueryMap": "{\"wardId\" : \"ward\", \"district\" : \"district\", \"tenantId\" : \"ulb\"}",
+        "dateRefField": "date",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"state.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"TotalLicensesIssued\":{\"sum\":{\"field\":\"totalStreetVendingLicenseIssued\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "TotalLicensesIssued"
+    ],
+    "insight": {},
+    "_comment": "SV total number of licenses issued"
+  },
   "svTotalVendingZones": {
     "chartName": "DSS_SV_TOTAL_VENDING_ZONES",
     "queries": [
@@ -22743,7 +22765,7 @@
         "indexName": "sv-national-dashboard",
         "requestQueryMap": "{\"wardId\": \"ward\", \"district\": \"district\", \"tenantId\": \"ulb\"}",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Vending Zones\":{\"sum\":{\"field\":\"numberOfVendingZones\"}}}}}}",
-        "dateRefField": "timestamp"
+        "dateRefField": "date"
       }
     ],
     "chartType": "metric",
@@ -22763,7 +22785,7 @@
     "queries": [
       {
         "module": "SV",
-        "dateRefField": "timestamp",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "sv-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Revenue Collected\":{\"sum\":{\"field\":\"totalRevenueCollected\"}}}}}}"
@@ -22818,7 +22840,7 @@
     "queries": [
       {
         "module": "SV",
-        "dateRefField": "timestamp",
+        "dateRefField": "date",
         "requestQueryMap": "{\"wardId\": \"ward\", \"tenantId\": \"ulb\"}",
         "indexName": "sv-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Licenses Applied\":{\"sum\":{\"field\":\"totalStreetVendingLicenseApplied\"}}}}}}"
@@ -22843,7 +22865,7 @@
         "indexName": "sv-national-dashboard",
         "requestQueryMap": "{\"wardId\" : \"ward\", \"district\" : \"district\", \"tenantId\" : \"ulb\"}",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"state.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Average TAT\":{\"avg\":{\"field\":\"averageTATLicenseIssued\"}}}}}}",
-        "dateRefField": "timestamp"
+        "dateRefField": "date"
       }
     ],
     "chartType": "metric",
@@ -22864,7 +22886,7 @@
         "module": "SV",
         "indexName": "sv-national-dashboard",
         "requestQueryMap": "{\"wardId\" : \"ward\", \"district\" : \"district\", \"tenantId\" : \"ulb\"}",
-        "dateRefField": "timestamp",
+        "dateRefField": "date",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"state.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Age Group 18-30\":{\"sum\":{\"field\":\"licenseByAge_18_30\"}},\"Age Group 30-45\":{\"sum\":{\"field\":\"licenseByAge_30_45\"}},\"Age Group 45-60\":{\"sum\":{\"field\":\"licenseByAge_45_60\"}},\"Age Group 60+\":{\"sum\":{\"field\":\"licenseByAge_60plus\"}}}}}}"
       }
     ],
@@ -22889,7 +22911,7 @@
         "module": "SV",
         "indexName": "sv-national-dashboard",
         "requestQueryMap": "{\"wardId\" : \"ward\", \"district\" : \"district\", \"tenantId\" : \"ulb\"}",
-        "dateRefField": "timestamp",
+        "dateRefField": "date",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"state.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Male\":{\"sum\":{\"field\":\"totalLicenseAppliedbyMale\"}},\"Female\":{\"sum\":{\"field\":\"totalLicenseAppliedbyFemale\"}}}}}}"
       }
     ],
@@ -22912,7 +22934,7 @@
         "module": "SV",
         "indexName": "sv-national-dashboard",
         "requestQueryMap": "{\"wardId\" : \"ward\", \"district\" : \"district\", \"tenantId\" : \"ulb\"}",
-        "dateRefField": "timestamp",
+        "dateRefField": "date",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"state.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"vendingType\":{\"terms\":{\"field\":\"vendingType.keyword\",\"size\":10},\"aggs\":{\"Total Registrations\":{\"sum\":{\"field\":\"registrationTypeForVendingType\"}}}}}}}}"
       }
     ],
@@ -22932,7 +22954,7 @@
     "queries": [
       {
         "module": "SV",
-        "dateRefField": "timestamp",
+        "dateRefField": "date",
         "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
         "indexName": "sv-national-dashboard",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Revenue Collected\":{\"sum\":{\"field\":\"totalRevenueCollected\"}},\"Revenue Target\":{\"sum\":{\"field\":\"totalRevenueTargeted\"}},\"Target Achievement %\":{\"avg\":{\"field\":\"targetAchievementPercentage\"}}}}}}"
@@ -22958,7 +22980,7 @@
         "module": "SV",
         "indexName": "sv-national-dashboard",
         "requestQueryMap": "{\"wardId\" : \"ward\", \"district\" : \"district\", \"tenantId\" : \"ulb\"}",
-        "dateRefField": "timestamp",
+        "dateRefField": "date",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"State-Offered Spots\":{\"sum\":{\"field\":\"fixedSpotsOfferedByStateUT\"}},\"ULB-Offered Spots\":{\"sum\":{\"field\":\"fixedSpotsOfferedByULB\"}}}}}}"
       }
     ],
@@ -22981,7 +23003,7 @@
         "module": "SV",
         "indexName": "sv-national-dashboard",
         "requestQueryMap": "{\"wardId\":\"ward\", \"district\":\"district\", \"tenantId\":\"ulb\"}",
-        "dateRefField": "timestamp",
+        "dateRefField": "date",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Rejection Rate\":{\"avg\":{\"field\":\"rejectionRate\"}}}}}}"
       }
     ],
