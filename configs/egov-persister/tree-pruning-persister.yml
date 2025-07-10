@@ -3,7 +3,7 @@ serviceMaps:
   mappings:
     - version: 1.0
       description: Persists tree pruning application detail
-      fromTopic: create-tree-pruning-booking
+      fromTopic: create-tree-pruning-booking-with-user-details
       isTransaction: true
       queryMaps:
         - query: INSERT INTO public.upyog_tp_tree_pruning_booking_detail(booking_id, booking_no, tenant_id, applicant_uuid, reason_for_pruning, latitude, longitude, payment_date, application_date, booking_createdby, booking_status, address_detail_id, payment_receipt_filestore_id, mobile_number, locality_code, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
@@ -48,7 +48,7 @@ serviceMaps:
 
     - version: 1.0
       description: Persists tree pruning application detail
-      fromTopic: create-tree-pruning-booking-isprofiledisabled
+      fromTopic: create-tree-pruning-booking
       isTransaction: true
       queryMaps:
         - query: INSERT INTO public.upyog_tp_tree_pruning_booking_detail(booking_id, booking_no, tenant_id, applicant_uuid, reason_for_pruning, latitude, longitude, payment_date, application_date, booking_createdby, booking_status, address_detail_id, payment_receipt_filestore_id, mobile_number, locality_code, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
