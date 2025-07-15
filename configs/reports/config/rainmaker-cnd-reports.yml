@@ -1,0 +1,103 @@
+ReportDefinitions:
+  - reportName: CNDApplicationReport
+    decryptionPathId: Trcnd.LicenseDailyCollectionReport
+    summary: CND Application Report
+    version: 1.0.0
+    moduleName: rainmaker-CND
+    sourceColumns:
+      - name: tenant_id
+        label: reports.cnd.tenant_id
+        type: string
+        source: cnd
+        total: false
+      - name: application_number
+        label: reports.cnd.application_number
+        type: string
+        source: cnd
+        total: true
+      - name: application_type
+        label: reports.cnd.application_type
+        type: string
+        source: cnd
+        total: false
+        isLocalisationRequired: true
+      - name: type_of_construction
+        label: reports.cnd.type_of_construction
+        type: string
+        source: cnd
+        total: false
+        isLocalisationRequired: true
+      - name: requested_pickup_date
+        label: reports.cnd.requested_pickup_date
+        type: date
+        source: cnd
+        total: false
+      - name: pickup_date
+        label: reports.cnd.pickup_date
+        type: date
+        source: cnd
+        total: false
+      - name: application_status
+        label: reports.cnd.application_status
+        type: string
+        source: cnd
+        total: false
+        isLocalisationRequired: true
+      - name: house_area
+        label: reports.cnd.house_area
+        type: string
+        source: cnd
+        total: false
+      - name: construction_to_date
+        label: reports.cnd.construction_to_date
+        type: date
+        source: cnd
+        total: false
+      - name: construction_from_date
+        label: reports.cnd.construction_from_date
+        type: date
+        source: cnd
+        total: false
+      - name: property_type
+        label: reports.cnd.property_type
+        type: string
+        source: cnd
+        total: false
+        isLocalisationRequired: true
+      - name: total_waste_quantity
+        label: reports.cnd.total_waste_quantity
+        type: number
+        source: cnd
+        total: true
+
+
+    searchParams:
+      - name: application_status
+        label: reports.cnd.application_status
+        type: singlevaluelist
+        pattern: 'list://COMPLETED:Completed,APPROVED:Approved,APPLIED:Applied,REJECTED:Rejected'
+        source: cnd
+        isMandatory: false
+        searchClause: AND cnd.application_status = $application_status
+      - name: type_of_construction
+        label: reports.cnd.type_of_construction
+        type: singlevaluelist
+        pattern: 'list://OLD_BUILDING_DEMOLITION:Old Building Demolition,NEW_CONSTRUCTION:New Construction,RENOVATION:Renovation'
+        source: cnd
+        isMandatory: false
+        searchClause: AND cnd.type_of_construction = $type_of_construction
+      - name: fromDate
+        label: reports.cnd.fromDate
+        type: epoch
+        source: cnd
+        isMandatory: true
+        searchClause: AND cnd.created_time >= '1750755813381'
+      - name: toDate
+        label: reports.cnd.toDate
+        type: epoch
+        source: cnd
+        isMandatory: true
+        searchClause: AND cnd.created_time <= '1751449937951'
+
+    query: |
+      SELECT cnd.tenant_id AS tenant_id, cnd.application_number AS application_number, cnd.application_type AS application_type, cnd.type_of_construction AS type_of_construction, TO_CHAR(cnd.requested_pickup_date, 'YYYY-MM-DD') AS requested_pickup_date, TO_CHAR(cnd.pickup_date, 'YYYY-MM-DD') AS pickup_date, cnd.application_status AS application_status, cnd.house_area AS house_area, TO_CHAR(cnd.construction_to_date, 'YYYY-MM-DD') AS construction_to_date, TO_CHAR(cnd.construction_from_date, 'YYYY-MM-DD') AS construction_from_date, cnd.property_type AS property_type, cnd.total_waste_quantity AS total_waste_quantity, cnd.created_time AS created_time FROM ug_cnd_application_details cnd WHERE 1=1
