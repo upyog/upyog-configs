@@ -1,13 +1,13 @@
 ---
 ReportDefinitions:
   - reportName: CHBDailyRegisterReport
-    decryptionPathId: CHBReport
+    decryptionPathId: TradeLicenseDailyCollectionReport
     summary: CHB Daily Register Report
     version: 1.0.0
     moduleName: rainmaker-CHB
     sourceColumns:
       - name: applicant_name
-        label: rainmaker.CHB.applicant_name
+        label: rainmaker.CHB.name
         type: string
         source: CHB
         total: false
@@ -79,13 +79,13 @@ ReportDefinitions:
       where a.booking_id=b.booking_id and b.receipt_no=p.receiptnumber and b.booking_id=h.booking_id
       and 1=1
   - reportName: CHBRefundReport
-    decryptionPathId: CHBReport
+    decryptionPathId: TradeLicenseDailyCollectionReport
     summary: CHB Refund Report
     version: 1.0.0
     moduleName: rainmaker-CHB
     sourceColumns:
       - name: applicant_name
-        label: rainmaker.CHB.applicant_name
+        label: rainmaker.CHB.name
         type: string
         source: CHB
         total: false
