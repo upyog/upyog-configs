@@ -117,6 +117,24 @@
                 }
               },
               {
+                "variable": "contact", 
+                "value": {
+                  "path": "$.paymentDetails[0].additionalDetails.contact"
+                }
+              },
+              {
+                "variable": "applicantName", 
+                "value": {
+                  "path": "$.paymentDetails[0].additionalDetails.name"
+                }
+              },
+              {
+                "variable": "idType", 
+                "value": {
+                  "path": "$.paymentDetails[0].additionalDetails.idType"
+                }
+              },
+              {
                 "variable": "paymentMode", 
                 "value": {
                   "path": "$.paymentMode"
