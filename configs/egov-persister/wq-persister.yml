@@ -1,0 +1,32 @@
+serviceMaps:
+ serviceName: Water Quality Service
+ mappings:
+ - version: 1.0
+   name: WaterQualityService
+   description: create water quality sample and test application
+   fromTopic: save-wq-application
+   isTransaction: true
+   queryMaps:
+    - query: INSERT INTO eg_wq_application (id, tenantid, applicationno, type, applicationdetails, createdby, createdtime) VALUES (?, ?, ?, ?, ?, ?, ?);
+      basePath: $.Application
+      jsonMaps:
+       - jsonPath: $.Application.id
+       
+       - jsonPath: $.Application.tenantId
+
+       - jsonPath: $.Application.applicationNo
+
+       - jsonPath: $.Application.type
+       
+       - jsonPath: $.Application.applicationDetails
+         type: JSON
+         dbType: JSONB
+         
+       - jsonPath: $.Application.createdBy
+       
+       - jsonPath: $.Application.createdTime
+
+
+
+      
+ 
