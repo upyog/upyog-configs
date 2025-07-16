@@ -531,13 +531,31 @@
               {
                 "variable": "plotNo",
                 "value": {
-                  "path": "$.edcrDetail[0].planDetail.planInformation.plotNo"
+                  "path": "$.additionalDetails.plotNo"
+                }
+              },
+              {
+                "variable": "propertyId",
+                "value": {
+                  "path": "$.additionalDetails.propertyID"
+                }
+              },
+              {
+                "variable": "PROPERTY_ID",
+                "value": {
+                  "path": "BPA_PROPERTY_ID"
+                },
+                "type": "label",
+                "localisation": {
+                  "required": true,
+                  "prefix": null,
+                  "module": "rainmaker-bpa"
                 }
               },
               {
                 "variable": "khataNo",
                 "value": {
-                  "path": "$.edcrDetail[0].planDetail.planInformation.khataNo"
+                  "path": "$.additionalDetails.khataNo"
                 }
               },
               {
