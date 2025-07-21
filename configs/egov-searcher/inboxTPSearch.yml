@@ -8,7 +8,7 @@ SearchDefinitions:
         baseQuery: Select row_to_json(result) from
           (
           select DISTINCT(urtp.booking_no),pi.createdtime from 
-          upyog_tp_tree_pruning_booking_detail as urtp
+          upyog_rs_tree_pruning_booking_detail as urtp
           INNER JOIN eg_wf_processinstance_v2 pi ON pi.businessid = urtp.booking_no
           LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
           $where
@@ -48,7 +48,7 @@ SearchDefinitions:
         baseQuery: Select row_to_json(result) from
           (
           select DISTINCT(urtp.booking_no),pi.createdtime from 
-          upyog_tp_tree_pruning_booking_detail as urtp
+          upyog_rs_tree_pruning_booking_detail as urtp
           INNER JOIN eg_wf_processinstance_v2 pi ON pi.businessid = urtp.booking_no
           LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
           $where
