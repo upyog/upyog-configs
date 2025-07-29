@@ -129,7 +129,7 @@ serviceMaps:
             - jsonPath: $.waterTankerBookingDetail.auditDetails.lastModifiedTime
             - jsonPath: $.waterTankerBookingDetail.bookingId
 
-        - query: INSERT INTO public.upyog_rs_water_tanker_booking_details_auditdetails SELECT * FROM public.upyog_rs_tanker_booking_details WHERE booking_id = ?;
+        - query: INSERT INTO public.upyog_rs_water_tanker_booking_details_auditdetails SELECT * FROM public.upyog_rs_water_tanker_booking_details WHERE booking_id = ?;
           basePath: waterTankerBookingDetail
           jsonMaps:
             - jsonPath: $.waterTankerBookingDetail.bookingId
