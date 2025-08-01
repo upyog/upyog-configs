@@ -6,7 +6,7 @@ serviceMaps:
       fromTopic: save-cnd-application-with-profile
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO public.ug_cnd_application_details(application_id, tenant_id, application_number, application_type, vehicle_type, type_of_construction, deposit_centre_details, locality, applicant_detail_id, address_detail_id, applicant_mobile_number, requested_pickup_date, application_status, additional_details, house_area, construction_from_date, construction_to_date, property_type, total_waste_quantity, no_of_trips, vehicle_id, vendor_id, pickup_date, completed_on, created_by, created_time, last_modified_by, last_modified_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  ?::DATE, ?, ?, ?,  ?::DATE,  ?::DATE, ?, ?, ?, ?, ?,  ?::DATE, ?::TIMESTAMP, ?, ?, ?, ?);
+        - query: INSERT INTO public.ug_cnd_application_details(application_id, tenant_id, application_number, application_type, vehicle_type, type_of_construction, deposit_centre_details, locality, applicant_detail_id, address_detail_id, applicant_mobile_number, requested_pickup_date, application_status, additional_details, house_area, construction_from_date, construction_to_date, property_type, total_waste_quantity, no_of_trips, vehicle_id, vendor_id, pickup_date, completed_on, created_by, created_time, last_modified_by, last_modified_time, created_by_usertype) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  ?::DATE, ?, ?, ?,  ?::DATE,  ?::DATE, ?, ?, ?, ?, ?,  ?::DATE, ?::TIMESTAMP, ?, ?, ?, ?, ?);
           basePath: cndApplication
           jsonMaps:
             - jsonPath: $.cndApplication.applicationId
@@ -39,6 +39,7 @@ serviceMaps:
             - jsonPath: $.cndApplication.auditDetails.createdTime
             - jsonPath: $.cndApplication.auditDetails.lastModifiedBy
             - jsonPath: $.cndApplication.auditDetails.lastModifiedTime
+            - jsonPath: $.cndApplication.createdByUserType
 
         - query: INSERT INTO public.ug_cnd_waste_detail(waste_type_id, application_id, quantity, metrics, entered_by_user_type, waste_type, created_by, created_time, last_modified_by, last_modified_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: cndApplication.wasteTypeDetails.*
@@ -110,7 +111,7 @@ serviceMaps:
       fromTopic: save-cnd-application
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO public.ug_cnd_application_details(application_id, tenant_id, application_number, application_type, vehicle_type, type_of_construction, deposit_centre_details, locality, applicant_detail_id, address_detail_id, applicant_mobile_number, requested_pickup_date, application_status, additional_details, house_area, construction_from_date, construction_to_date, property_type, total_waste_quantity, no_of_trips, vehicle_id, vendor_id, pickup_date, completed_on, created_by, created_time, last_modified_by, last_modified_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  ?::DATE, ?, ?, ?,  ?::DATE,  ?::DATE, ?, ?, ?, ?, ?,  ?::DATE, ?::TIMESTAMP, ?, ?, ?, ?);
+        - query: INSERT INTO public.ug_cnd_application_details(application_id, tenant_id, application_number, application_type, vehicle_type, type_of_construction, deposit_centre_details, locality, applicant_detail_id, address_detail_id, applicant_mobile_number, requested_pickup_date, application_status, additional_details, house_area, construction_from_date, construction_to_date, property_type, total_waste_quantity, no_of_trips, vehicle_id, vendor_id, pickup_date, completed_on, created_by, created_time, last_modified_by, last_modified_time, created_by_usertype) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,  ?::DATE, ?, ?, ?,  ?::DATE,  ?::DATE, ?, ?, ?, ?, ?,  ?::DATE, ?::TIMESTAMP, ?, ?, ?, ?, ?);
           basePath: cndApplication
           jsonMaps:
             - jsonPath: $.cndApplication.applicationId
@@ -143,6 +144,7 @@ serviceMaps:
             - jsonPath: $.cndApplication.auditDetails.createdTime
             - jsonPath: $.cndApplication.auditDetails.lastModifiedBy
             - jsonPath: $.cndApplication.auditDetails.lastModifiedTime
+            - jsonPath: $.cndApplication.createdByUserType
 
         - query: INSERT INTO public.ug_cnd_applicant_details(application_id, name_of_applicant, mobile_number, email_id, alternate_mobile_number, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: cndApplication.applicantDetail
