@@ -5488,6 +5488,14 @@
                   "filter": "",
                   "headers": []
                 },
+		       {
+                  "id": "fsmTodaysCollection",
+                  "name": "NATIONAL_DSS_TOTAL_COLLECTION_FSM",
+                  "code": "",
+                  "chartType": "metric",
+                  "filter": "",
+                  "headers": []
+                },
                 {
                   "id": "slaComplainceFSM",
                   "name": "NATIONAL_DSS_SLA_COMPLAINCE_FSM",
@@ -9731,7 +9739,29 @@
                 "filter": "",
                 "headers": []
               }]
-            }
+            },
+			{
+              "id": 1111,
+              "name": "NURT_NO_OF_TRANSACTION_CUMULATIVE",
+              "dimensions": {
+                  "height": 350,
+                  "width": 7
+              },
+              "vizType": "chart",
+              "label": "",
+              "noUnit": true,
+              "isCollapsible": false,
+              "charts": [
+                  {
+                      "id": "cumulativenooftransaction",
+                      "name": "NURT_NO_OF_TRANSACTION_CUMULATIVE",
+                      "code": "",
+                      "chartType": "line",
+                      "filter": "",
+                      "headers": []
+                  }
+              ]
+          }
           ]
         },
         {

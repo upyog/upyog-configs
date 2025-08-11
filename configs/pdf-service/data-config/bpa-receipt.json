@@ -117,6 +117,24 @@
                 }
               },
               {
+                "variable": "contact", 
+                "value": {
+                  "path": "$.paymentDetails[0].additionalDetails.contact"
+                }
+              },
+              {
+                "variable": "applicantName", 
+                "value": {
+                  "path": "$.paymentDetails[0].additionalDetails.name"
+                }
+              },
+              {
+                "variable": "idType", 
+                "value": {
+                  "path": "$.paymentDetails[0].additionalDetails.idType"
+                }
+              },
+              {
                 "variable": "paymentMode", 
                 "value": {
                   "path": "$.paymentMode"
@@ -599,7 +617,7 @@
             "qrcodeConfig": [
                 {
                     "variable": "qrcodeimage",
-                    "value": "/digit-ui/citizen/payment/verification?tenantId={{tenantid}}&receiptNumber={{receiptNo}}"
+                    "value": "upyog-ui/citizen/payment/verification?tenantId={{tenantid}}&receiptNumber={{receiptNo}}"
                 }
             ]
         }
