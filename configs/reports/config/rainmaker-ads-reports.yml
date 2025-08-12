@@ -1,0 +1,80 @@
+---
+ReportDefinitions:
+- reportName: AdvApplicationReport
+  decryptionPathId: ObpsDailyCollectionReport
+  summary: Adv Application Report
+  version: 1.0.0
+  moduleName: rainmaker-ads
+  sourceColumns:
+  - name: booking_no
+    label: Booking No
+    type: string
+    source: ads
+    total: false
+  - name: applicantion_date
+    label: Application Date
+    type: string
+    source: ads
+    total: false
+  - name: tenant_id
+    label: ULB
+    type: string
+    source: ads
+    total: false
+  - name: booking_status
+    label: Status
+    type: string
+    source: ads
+    total: false
+    isLocalisationRequired: true
+  - name: createdtime
+    label: createdtime
+    type: string
+    source: ads
+    total: false
+    showColumn: false
+  - name: applicant_name
+    label: Name
+    type: string
+    source: ads
+    total: false
+  - name: applicant_mobile_no
+    label: Mobile No    
+    type: string
+    source: ads
+    total: false
+  - name: locality
+    label: Locality
+    type: string
+    source: ads
+    total: false
+  searchParams:
+  - name: fromDate
+    label: From Date
+    type: epoch
+    source: ads
+    isMandatory: false
+    searchClause: AND wf.createdtime >= $fromDate
+  - name: toDate
+    label: To Date
+    type: epoch
+    source: ads
+    isMandatory: false
+    searchClause: AND wf.createdtime  <= $toDate
+  query: |
+    SELECT 
+    wf.booking_no,
+    TO_CHAR(TO_TIMESTAMP(wf.application_date / 1000), 'YYYY-MM-DD HH24:MI:SS') AS application_date,
+    wf.tenant_id,
+    wf.booking_status,
+    wf.createdtime,
+    ap.applicant_name,
+    ap.applicant_mobile_no,
+    ad.locality
+    FROM 
+    eg_adv_booking_detail wf
+    JOIN 
+    eg_adv_applicant_detail ap ON wf.booking_id = ap.booking_id
+    JOIN 
+    eg_adv_address_detail ad ON ad.applicant_detail_id = ap.applicant_detail_id 
+    WHERE 1=1
