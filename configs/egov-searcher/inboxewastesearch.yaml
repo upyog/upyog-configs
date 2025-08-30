@@ -29,6 +29,9 @@ SearchDefinitions:
           - name: ew.requestId
             isMandatory: false
             jsonPath: $.searchCriteria.requestId
+          - name: pi.status
+            isMandatory: false
+            jsonPath: $.searchCriteria.status
           - name: pi.businessservice
             isMandatory: false
             jsonPath: $.searchCriteria.businessservice
@@ -63,6 +66,9 @@ SearchDefinitions:
           - name: ew.id
             isMandatory: false
             jsonPath: $.searchCriteria.id
+          - name: pi.status
+            isMandatory: false
+            jsonPath: $.searchCriteria.status
           - name: ew.requestId
             isMandatory: false
             jsonPath: $.searchCriteria.requestId

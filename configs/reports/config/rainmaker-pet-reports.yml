@@ -1,0 +1,109 @@
+---
+ReportDefinitions:
+- reportName: PetReport
+  summary: Fetches pet data based on provided search parameters
+  version: 1.0.0
+  moduleName: rainmaker-pet
+  sourceColumns:
+  - name: ptenantId
+    label: ULB
+    type: string
+    source: pet
+    total: false
+  - name: papplicationNumber
+    label: ApplicationNumber
+    type: string
+    source: pet
+    total: false
+  - name: papplicantName
+    label: ApplicantName
+    type: string
+    source: pet
+    total: false
+  - name: pemailId
+    label: EmailId
+    type: string
+    source: pet
+    total: false
+  - name: pmobilenumber
+    label: Mobilenumber
+    type: stringarray
+    source: pet
+    total: false
+  - name: ptpetName
+    label: PetName
+    type: string
+    source: pet
+    total: false
+  - name: ptpetType
+    label: PetType
+    type: string
+    source: pet
+    total: false
+  - name: ptbreedType
+    label: BreedType
+    type: string
+    source: pet
+    total: false
+  - name: ptpetAge
+    label: PetAge
+    type: string
+    source: pet
+    total: false
+  - name: ptpetgender
+    label: PetGender
+    type: string
+    source: pet
+    total: false
+  - name: ptclinicname
+    label: ClinicName
+    type: string
+    source: pet
+    total: false
+  - name: ptdoctorname
+    label: DoctorName
+    type: string
+    source: pet
+    total: false
+  - name: ptlastvaccinedate
+    label: LastVaccineDate
+    type: string
+    source: pet
+    total: false
+  - name: ptvaccinationnumber
+    label: VaccinationNumber
+    type: string
+    source: pet
+    total: false
+  searchParams:
+  - name: ptenantid
+    label: ULB
+    type: singlevaluelist
+    pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=tenant&masterName=tenants|$.MdmsRes.tenant.tenants.*.code|$.MdmsRes.tenant.tenants.*.name
+    source: pet
+    isMandatory: false
+    searchClause: AND ptr.tenantid = $ptenantid
+  - name: fromDate
+    label: From Date
+    type: epoch
+    source: pet
+    isMandatory: false
+    searchClause: AND ptr.createdTime >= $fromDate
+  - name: toDate
+    label: To Date
+    type: epoch
+    source: pet
+    isMandatory: false
+    searchClause: AND ptr.createdTime  <= $toDate 
+  - name: status
+    label: Status
+    type: singlevaluelist
+    source: pet
+    isMandatory: false
+    searchClause: AND wfapplicationstatus = $status
+    pattern: 'list://REGISTRATIONCOMPLETED:REGISTRATIONCOMPLETED,REJECTED:REJECTED'
+
+  query: |
+    SELECT ptr.tenantid AS ptenantid, ptr.applicationnumber AS papplicationnumber, TO_CHAR(TO_TIMESTAMP(ptr.createdtime/1000), 'DD/MM/YYYY') AS pcreatedtime, ptr.applicantname AS papplicantname, ptr.mobilenumber AS pmobilenumber, ptr.emailid AS pemailid, pet.petname AS ptpetname, pet.pettype AS ptpettype, pet.breedtype AS ptbreedtype, pet.petage AS ptpetage, pet.petgender AS ptpetgender, pet.clinicname AS ptclinicname, pet.doctorname AS ptdoctorname, pet.lastvaccinedate AS ptlastvaccinedate, pet.vaccinationnumber as ptvaccinationnumber FROM eg_ptr_registration ptr LEFT JOIN eg_ptr_petdetails pet ON ptr.id = pet.petdetailsid LEFT JOIN (SELECT pi.businessid, MAX(pi.lastmodifiedtime) AS lastmodifiedtime, MAX(stat.applicationstatus) AS wfapplicationstatus FROM eg_wf_processinstance_v2 pi LEFT JOIN eg_wf_state_v2 stat ON stat.uuid = pi.status WHERE pi.businessservice IN ('ptr') GROUP BY pi.businessid) pidso ON pidso.businessid = ptr.applicationnumber WHERE pidso.businessid IS NOT NULL
+  
+  orderby: ORDER BY papplicationNumber desc

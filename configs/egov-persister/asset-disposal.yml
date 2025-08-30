@@ -58,9 +58,9 @@ serviceMaps:
 
         # Insert Documents
         - query: |
-            INSERT INTO eg_asset_document (
+            INSERT INTO eg_asset_disposal_documents (
               documentid,
-              assetid,
+              disposalid,
               documenttype,
               filestoreid,
               documentuid,
@@ -131,9 +131,9 @@ serviceMaps:
 
         # Upsert Documents (Insert or Update)
         - query: |
-            INSERT INTO eg_asset_document (
+            INSERT INTO eg_asset_disposal_documents (
               documentid,
-              assetid,
+              disposalid,
               documenttype,
               filestoreid,
               documentuid,
