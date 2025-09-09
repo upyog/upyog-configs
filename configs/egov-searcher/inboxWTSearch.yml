@@ -1,18 +1,18 @@
 SearchDefinitions:
-  moduleName: pet-services
-  summary: Pet Services Inbox API
+  moduleName: request-service.water_tanker
+  summary: Water Tanker Request Service Inbox API
   version: 1.0.0
   definitions:
-    - name: inboxpetsearch
+    - name: inboxWTSearch
       query:
         baseQuery: Select row_to_json(result) from
           (
-          select DISTINCT(pet.applicationNumber),pi.createdtime from eg_ptr_registration as pet
-          INNER JOIN eg_ptr_address ptadd ON ptadd.registrationId = pet.id
-          INNER JOIN eg_wf_processinstance_v2 pi ON pi.businessid = pet.applicationNumber
+          select DISTINCT(urstbd.booking_no),pi.createdtime from 
+          upyog_rs_water_tanker_booking_details as urstbd
+          INNER JOIN eg_wf_processinstance_v2 pi ON pi.businessid = urstbd.booking_no
           LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
           $where
-          AND pi.createdtime IN (select max(createdtime) from eg_wf_processinstance_v2 wf where wf.businessid = pet.applicationNumber GROUP BY wf.businessid)
+          AND pi.createdtime IN (select max(createdtime) from eg_wf_processinstance_v2 wf where wf.businessid = urstbd.booking_no GROUP BY wf.businessid)
           order by pi.createdtime asc $pagination
           ) result
         groupBy:
@@ -20,18 +20,18 @@ SearchDefinitions:
       searchParams:
         condition: AND
         params:
-          - name: pet.tenantid
+          - name: urstbd.tenant_id
             isMandatory: true
             jsonPath: $.searchCriteria.tenantId
-          - name: pet.id
+          - name: urstbd.booking_no
             isMandatory: false
-            jsonPath: $.searchCriteria.id
+            jsonPath: $.searchCriteria.bookingNo
           - name: pi.status
             isMandatory: false
             jsonPath: $.searchCriteria.status
-          - name: pet.applicationNumber
+          - name: assg.assignee
             isMandatory: false
-            jsonPath: $.searchCriteria.applicationNumber
+            jsonPath: $.searchCriteria.assignee
           - name: pi.businessservice
             isMandatory: false
             jsonPath: $.searchCriteria.businessservice
@@ -40,19 +40,19 @@ SearchDefinitions:
           offset: $.searchCriteria.offset
 
       output:
-        jsonFormat: {"ResponseInfo": {},"PetRegistrationApplications": []}
-        outJsonPath: $.PetRegistrationApplications
+        jsonFormat: {"ResponseInfo": {},"waterTankerBookingDetail": []}
+        outJsonPath: $.waterTankerBookingDetail
         responseInfoPath: $.ResponseInfo
-    - name: inboxpetsearchdesc
+    - name: inboxWTSearchdesc
       query:
         baseQuery: Select row_to_json(result) from
-           (
-          select DISTINCT(pet.applicationNumber),pi.createdtime from eg_ptr_registration as pet
-          INNER JOIN eg_ptr_address ptadd ON ptadd.registrationId = pet.id
-          INNER JOIN eg_wf_processinstance_v2 pi ON pi.businessid = pet.applicationNumber
+          (
+          select DISTINCT(urstbd.booking_no),pi.createdtime from 
+          upyog_rs_water_tanker_booking_details as urstbd
+          INNER JOIN eg_wf_processinstance_v2 pi ON pi.businessid = urstbd.booking_no
           LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
           $where
-          AND pi.createdtime IN (select max(createdtime) from eg_wf_processinstance_v2 wf where wf.businessid = pet.applicationNumber GROUP BY wf.businessid)
+          AND pi.createdtime IN (select max(createdtime) from eg_wf_processinstance_v2 wf where wf.businessid = urstbd.booking_no GROUP BY wf.businessid)
           order by pi.createdtime desc $pagination
           ) result
         groupBy:
@@ -60,18 +60,18 @@ SearchDefinitions:
       searchParams:
         condition: AND
         params:
-          - name: pet.tenantid
+          - name: urstbd.tenant_id
             isMandatory: true
             jsonPath: $.searchCriteria.tenantId
-          - name: pet.id
+          - name: urstbd.booking_no
             isMandatory: false
-            jsonPath: $.searchCriteria.id
-          - name: pet.applicationNumber
-            isMandatory: false
-            jsonPath: $.searchCriteria.applicationNumber
+            jsonPath: $.searchCriteria.bookingNo
           - name: pi.status
             isMandatory: false
             jsonPath: $.searchCriteria.status
+          - name: assg.assignee
+            isMandatory: false
+            jsonPath: $.searchCriteria.assignee
           - name: pi.businessservice
             isMandatory: false
             jsonPath: $.searchCriteria.businessservice
@@ -80,6 +80,6 @@ SearchDefinitions:
           offset: $.searchCriteria.offset
 
       output:
-        jsonFormat: {"ResponseInfo": {},"PetRegistrationApplications": []}
-        outJsonPath: $.PetRegistrationApplications
+        jsonFormat: {"ResponseInfo": {},"waterTankerBookingDetail": []}
+        outJsonPath: $.waterTankerBookingDetail
         responseInfoPath: $.ResponseInfo

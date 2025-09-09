@@ -43,8 +43,9 @@ serviceMaps:
                         assetType,
                         assetUsage,
                         assetStatus,
-                        originalBookValue
-                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+                        originalBookValue,
+                        assetAssignable
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?);
           basePath: Asset
           jsonMaps:
             - jsonPath: $.Asset.id
@@ -86,6 +87,7 @@ serviceMaps:
             - jsonPath: $.Asset.assetUsage
             - jsonPath: $.Asset.assetStatus
             - jsonPath: $.Asset.originalBookValue
+            - jsonPath: $.Asset.assetAssignable
 
 
         - query: INSERT INTO eg_asset_document(documentId, documenttype, fileStoreId, assetid, documentuid, docDetails, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
