@@ -1,62 +1,67 @@
 ---
 ReportDefinitions:
 - reportName: AdvApplicationReport
-  decryptionPathId: ObpsDailyCollectionReport
+  decryptionPathId: StateTradeLicenseCancelledRegistryReport
   summary: Adv Application Report
   version: 1.0.0
   moduleName: rainmaker-ads
   sourceColumns:
   - name: booking_no
-    label: Booking No
+    label: rainmaker.ads.booking_no
     type: string
     source: ads
     total: false
   - name: applicantion_date
-    label: Application Date
+    label: rainmaker.ads.application_date
     type: string
     source: ads
     total: false
   - name: tenant_id
-    label: ULB
+    label: rainmaker.ads.tenant_id
     type: string
     source: ads
     total: false
   - name: booking_status
-    label: Status
+    label: rainmaker.ads.booking_status
     type: string
     source: ads
     total: false
     isLocalisationRequired: true
   - name: createdtime
-    label: createdtime
+    label: rainmaker.ads.createdtime
     type: string
     source: ads
     total: false
     showColumn: false
-  - name: applicant_name
-    label: Name
+  - name: name
+    label: rainmaker.ads.name
     type: string
     source: ads
     total: false
-  - name: applicant_mobile_no
-    label: Mobile No    
+  - name: mobileNumber
+    label: rainmaker.ads.mobileNumber   
     type: string
     source: ads
     total: false
   - name: locality
-    label: Locality
+    label: rainmaker.ads.locality
+    type: string
+    source: ads
+    total: false
+  - name: amountpaid
+    label: rainmaker.ads.amountpaid
     type: string
     source: ads
     total: false
   searchParams:
   - name: fromDate
-    label: From Date
+    label: rainmaker.ads.fromDate
     type: epoch
     source: ads
     isMandatory: false
     searchClause: AND wf.createdtime >= $fromDate
   - name: toDate
-    label: To Date
+    label: rainmaker.ads.toDate
     type: epoch
     source: ads
     isMandatory: false
@@ -68,13 +73,30 @@ ReportDefinitions:
     wf.tenant_id,
     wf.booking_status,
     wf.createdtime,
-    ap.applicant_name,
-    ap.applicant_mobile_no,
-    ad.locality
-    FROM 
-    eg_adv_booking_detail wf
-    JOIN 
-    eg_adv_applicant_detail ap ON wf.booking_id = ap.booking_id
-    JOIN 
-    eg_adv_address_detail ad ON ad.applicant_detail_id = ap.applicant_detail_id 
+    ap.applicant_name AS name,
+    ap.applicant_mobile_no AS mobileNumber,
+    ad.locality,
+    COALESCE(p.amountpaid, 0) AS amountpaid
+    FROM eg_adv_booking_detail wf
+    JOIN eg_adv_applicant_detail ap 
+    ON wf.booking_id = ap.booking_id
+    JOIN eg_adv_address_detail ad 
+    ON ad.applicant_detail_id = ap.applicant_detail_id
+    LEFT JOIN (
+      SELECT abd.booking_no,
+             SUM(pd.amountpaid) AS amountpaid
+      FROM public.egcl_paymentdetail pd
+      JOIN public.egcl_bill b
+        ON pd.billid = b.id
+      JOIN public.eg_adv_booking_detail abd
+        ON b.consumercode = abd.booking_no
+      WHERE pd.businessservice = 'adv-services'
+      GROUP BY abd.booking_no
+        ) p
+    ON wf.booking_no = p.booking_no
     WHERE 1=1
+groupby: 
+    GROUP BY wf.booking_no, wf.application_date, wf.tenant_id, wf.booking_status,
+    wf.createdtime, ap.applicant_name, ap.applicant_mobile_no, ad.locality, p.amountpaid
+orderby: 
+    ORDER BY wf.booking_no ASC
