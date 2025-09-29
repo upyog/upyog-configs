@@ -7,7 +7,7 @@ ReportDefinitions:
     moduleName: rainmaker-asset
     sourceColumns:
       - name: applicationno
-        label: Application No
+        label: Asset Unique ID
         type: string
         source: asset
         total: false
@@ -44,22 +44,52 @@ ReportDefinitions:
         showColumn: false
     searchParams:
       - name: applicationno
-        label: Application Number
+        label: Asset Unique ID
         type: string
         source: asset
         isMandatory: false
         searchClause: AND b.applicationno = $applicationno
+      - name: AssetClassification
+        label: Asset Classification
+        type: singlevaluelist
+        pattern: 'list://MOVABLE:Movable,IMMOVABLE:Imovable' 
+        source: asset
+        isMandatory: false
+      - name: parentcategory
+        label: Parent Category
+        type: singlevaluelist
+        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=ASSET&masterName=assetParentCategory|$.MdmsRes.ASSET.assetParentCategory.*.code|$.MdmsRes.ASSET.assetParentCategory.*.name
+        source: asset
+        isMandatory: false 
+      - name: AssetStatus
+        label: Asset Status
+        type: singlevaluelist
+        pattern: 'list://REJECTED:Rejected,APPROVED:Approved,INITIATED:Initiated,VERIFIED:Verified' 
+        source: asset
+        isMandatory: false
+      - name: Department
+        label: Department
+        type: singlevaluelist
+        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=common-masters&masterName=Department|$.MdmsRes.common-masters.Department.*.code|$.MdmsRes.common-masters.Department.*.name 
+        source: asset
+        isMandatory: false  
+      - name: AssetClassification
+        label: Asset Classification
+        type: singlevaluelist
+        pattern: 'list://MOVABLE:Movable,IMMOVABLE:Imovable' 
+        source: asset
+        isMandatory: false   
       - name: fromDate
         label: FromDate
         type: epoch
         source: asset
-        isMandatory: true
+        isMandatory: false
         searchClause: AND b.createdtime >= $fromDate
       - name: toDate
         label: ToDate
         type: epoch
         source: asset
-        isMandatory: true
+        isMandatory: false
         searchClause: AND b.createdtime <= $toDate
     query: >
       SELECT 
@@ -83,7 +113,7 @@ ReportDefinitions:
     moduleName: rainmaker-asset
     sourceColumns:
       - name: applicationno
-        label: Application No
+        label: Asset Unique ID
         type: string
         source: asset
         total: false
@@ -132,7 +162,7 @@ ReportDefinitions:
         showColumn: false
     searchParams:
       - name: applicationno
-        label: Application Number
+        label: Asset Unique ID
         type: string
         source: asset
         isMandatory: false
@@ -180,7 +210,7 @@ ReportDefinitions:
     moduleName: rainmaker-asset
     sourceColumns:
       - name: applicationno
-        label: Application No
+        label: Asset Unique ID
         type: string
         source: asset
         total: false
@@ -249,7 +279,7 @@ ReportDefinitions:
         total: false     
     searchParams:
       - name: applicationno
-        label: Application No
+        label: Asset Unique ID
         type: string
         source: asset
         isMandatory: false
@@ -258,13 +288,13 @@ ReportDefinitions:
         label: FromDate
         type: epoch
         source: asset
-        isMandatory: true
+        isMandatory: false
         searchClause: AND b.createdtime >= $fromDate
       - name: toDate
         label: ToDate
         type: epoch
         source: asset
-        isMandatory: true
+        isMandatory: false
         searchClause: AND b.createdtime <= $toDate
     query: >
       SELECT 
@@ -295,7 +325,7 @@ ReportDefinitions:
     moduleName: rainmaker-asset
     sourceColumns:
       - name: applicationno
-        label: Application No
+        label: Asset Unique ID
         type: string
         source: asset
         total: false
@@ -359,7 +389,7 @@ ReportDefinitions:
         total: false     
     searchParams:
       - name: applicationno
-        label: Application No
+        label: Asset Unique ID
         type: string
         source: asset
         isMandatory: false
@@ -368,13 +398,13 @@ ReportDefinitions:
         label: FromDate
         type: epoch
         source: asset
-        isMandatory: true
+        isMandatory: false
         searchClause: AND n.disposal_date >= $fromDate
       - name: toDate
         label: ToDate
         type: epoch
         source: asset
-        isMandatory: true
+        isMandatory: false
         searchClause: AND n.disposal_date <= $toDate
     query: >
       SELECT 
@@ -402,7 +432,7 @@ ReportDefinitions:
     moduleName: rainmaker-asset
     sourceColumns:
       - name: applicationno
-        label: Application No
+        label: Asset Unique ID
         type: string
         source: asset
         total: false
@@ -477,7 +507,7 @@ ReportDefinitions:
         total: false               
     searchParams:
       - name: applicationno
-        label: Application No
+        label: Asset Unique ID
         type: string
         source: asset
         isMandatory: false
@@ -486,13 +516,13 @@ ReportDefinitions:
         label: FromDate
         type: epoch
         source: asset
-        isMandatory: true
+        isMandatory: false
         searchClause: AND h.created_time >= $fromDate
       - name: toDate
         label: ToDate
         type: epoch
         source: asset
-        isMandatory: true
+        isMandatory: false
         searchClause: AND h.created_time <= $toDate
     query: >
       SELECT    
