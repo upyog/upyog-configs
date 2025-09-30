@@ -16,11 +16,18 @@ ReportDefinitions:
         type: string
         source: asset
         total: false
+        isLocalisationRequired: true
       - name: parentcategory
         label: Parent Category
         type: string
         source: asset
         total: false
+      - name: subcategory
+        label: Sub Category
+        type: string
+        source: asset
+        total: false
+        isLocalisationRequired: true
       - name: AssetStatus
         label: Asset Status
         type: string
@@ -32,6 +39,7 @@ ReportDefinitions:
         type: string
         source: asset
         total: false
+        isLocalisationRequired: true
       - name: FinancialYear
         label: Financial Year
         type: string
@@ -52,33 +60,35 @@ ReportDefinitions:
       - name: AssetClassification
         label: Asset Classification
         type: singlevaluelist
-        pattern: 'list://MOVABLE:Movable,IMMOVABLE:Imovable' 
+        pattern: 'list://MOVABLE:Movable,IMMOVABLE:Immovable'
         source: asset
+        wrapper: true
         isMandatory: false
+        searchClause: AND b.classification = $AssetClassification
       - name: parentcategory
         label: Parent Category
         type: singlevaluelist
-        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=ASSET&masterName=assetParentCategory|$.MdmsRes.ASSET.assetParentCategory.*.code|$.MdmsRes.ASSET.assetParentCategory.*.name
+        pattern: 'list://LAND:Land,BUILDING:Building,SERVICE:Service,IT:IT,VEHICLE:Vehicle,OTHER:Other'
         source: asset
-        isMandatory: false 
+        wrapper: true
+        isMandatory: false
+        searchClause: AND b.parentcategory = $parentcategory
       - name: AssetStatus
         label: Asset Status
         type: singlevaluelist
         pattern: 'list://REJECTED:Rejected,APPROVED:Approved,INITIATED:Initiated,VERIFIED:Verified' 
         source: asset
+        wrapper: true
         isMandatory: false
+        searchClause: AND b.status = $AssetStatus
       - name: Department
         label: Department
         type: singlevaluelist
-        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=common-masters&masterName=Department|$.MdmsRes.common-masters.Department.*.code|$.MdmsRes.common-masters.Department.*.name 
+        pattern: 'list://DEPT_1:Street Lights,DEPT_2:Building & Roads,DEPT_3:Health & Sanitation,DEPT_4:Operation & Maintenance,DEPT_5:Horticulture,DEPT_6:Building Branch,DEPT_7:Citizen service desk,DEPT_8:Complaint Cell,DEPT_9:Executive Branch,DEPT_10:Others,DEPT_11:Project Branch,DEPT_12:Birth and Death Branch,DEPT_13:Tax Branch,DEPT_14:Civil,DEPT_15:Engineering Branch (O&M - W&S),DEPT_16:Health Branch,DEPT_17:Tehbazri Branch,DEPT_18:Engineering Branch,DEPT_19:Advertisement Branch,DEPT_21:Sanitation Branch,DEPT_24:Fire Brigade Department,DEPT_25:Accounts Branch,DEPT_33:Property Tax Branch,DEPT_34:Establishment Branch,DEPT_35:Works Branch,DEPT_38:General Branch,DEPT_53:Architect & Planning (A&P) Branch DEPT,DEPT_54:Estate Branch,DEPT_55:Veterinary public health office (V.P.H.O.),DEPT_56:Law Branch,TRADE_BRANCH:Trade License Branch,DEPT_LG:Legal Branch,AGENDA_BRANCH:Agenda Branch,CARETAKER_BRANCH:Caretaker Branch,IT_BRANCH:IT Branch,DEPT_TP:Townplanning,DEPT_57:Tender Cell'
         source: asset
-        isMandatory: false  
-      - name: AssetClassification
-        label: Asset Classification
-        type: singlevaluelist
-        pattern: 'list://MOVABLE:Movable,IMMOVABLE:Imovable' 
-        source: asset
-        isMandatory: false   
+        wrapper: true
+        isMandatory: false
+        searchClause: AND b.department = $Department
       - name: fromDate
         label: FromDate
         type: epoch
@@ -97,6 +107,7 @@ ReportDefinitions:
         b.bookrefno AS bookrefno,
         b.classification AS AssetClassification, 
         b.parentcategory AS parentcategory, 
+        b.subcategory AS subcategory,
         b.name AS Assetname, 
         b.status AS AssetStatus,
         CONCAT('COMMON_MASTERS_DEPARTMENT_', b.department) AS Department,
@@ -132,6 +143,12 @@ ReportDefinitions:
         type: string
         source: asset
         total: false
+      - name: subcategory
+        label: Sub Category
+        type: string
+        source: asset
+        total: false
+        isLocalisationRequired: true
       - name: AssetStatus
         label: Asset Status
         type: string
@@ -166,25 +183,58 @@ ReportDefinitions:
         type: string
         source: asset
         isMandatory: false
+        searchClause: AND b.applicationno = $applicationno
+      - name: AssetClassification
+        label: Asset Classification
+        type: singlevaluelist
+        pattern: 'list://MOVABLE:Movable,IMMOVABLE:Immovable'
+        source: asset
+        wrapper: true
+        isMandatory: false
+        searchClause: AND b.classification = $AssetClassification
+      - name: parentcategory
+        label: Parent Category
+        type: singlevaluelist
+        pattern: 'list://LAND:Land,BUILDING:Building,SERVICE:Service,IT:IT,VEHICLE:Vehicle,OTHER:Other'
+        source: asset
+        wrapper: true
+        isMandatory: false
+        searchClause: AND b.parentcategory = $parentcategory
+      - name: AssetStatus
+        label: Asset Status
+        type: singlevaluelist
+        pattern: 'list://REJECTED:Rejected,APPROVED:Approved,INITIATED:Initiated,VERIFIED:Verified' 
+        source: asset
+        wrapper: true
+        isMandatory: false
+        searchClause: AND b.status = $AssetStatus
+      - name: Department
+        label: Department
+        type: singlevaluelist
+        pattern: 'list://DEPT_1:Street Lights,DEPT_2:Building & Roads,DEPT_3:Health & Sanitation,DEPT_4:Operation & Maintenance,DEPT_5:Horticulture,DEPT_6:Building Branch,DEPT_7:Citizen service desk,DEPT_8:Complaint Cell,DEPT_9:Executive Branch,DEPT_10:Others,DEPT_11:Project Branch,DEPT_12:Birth and Death Branch,DEPT_13:Tax Branch,DEPT_14:Civil,DEPT_15:Engineering Branch (O&M - W&S),DEPT_16:Health Branch,DEPT_17:Tehbazri Branch,DEPT_18:Engineering Branch,DEPT_19:Advertisement Branch,DEPT_21:Sanitation Branch,DEPT_24:Fire Brigade Department,DEPT_25:Accounts Branch,DEPT_33:Property Tax Branch,DEPT_34:Establishment Branch,DEPT_35:Works Branch,DEPT_38:General Branch,DEPT_53:Architect & Planning (A&P) Branch DEPT,DEPT_54:Estate Branch,DEPT_55:Veterinary public health office (V.P.H.O.),DEPT_56:Law Branch,TRADE_BRANCH:Trade License Branch,DEPT_LG:Legal Branch,AGENDA_BRANCH:Agenda Branch,CARETAKER_BRANCH:Caretaker Branch,IT_BRANCH:IT Branch,DEPT_TP:Townplanning,DEPT_57:Tender Cell'
+        source: asset
+        wrapper: true
+        isMandatory: false
+        searchClause: AND b.department = $Department
       - name: ulb
         label: ULB
         type: singlevaluelist
         source: asset
         wrapper: true
         isMandatory: false
-        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=tenant&masterName=tenants|$.MdmsRes.tenant.tenants.*.code|$.MdmsRes.tenant.tenants.*.name
+        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=tenant&masterName=tenants|$.MdmsRes.tenant.tenants.*.code|$.MdmsRes.tenant.tenants.*.city.name
         searchClause: AND b.tenantid = $ulb     
       - name: fromDate
         label: FromDate
         type: epoch
         source: asset
-        isMandatory: true
+        isMandatory: false
         searchClause: AND b.createdtime >= $fromDate
       - name: toDate
         label: ToDate
         type: epoch
         source: asset
-        isMandatory: true
+        isMandatory: false
         searchClause: AND b.createdtime <= $toDate
     query: |
         SELECT 
@@ -192,6 +242,7 @@ ReportDefinitions:
         b.bookrefno AS bookrefno,
         b.classification AS AssetClassification, 
         b.parentcategory AS parentcategory, 
+        b.subcategory AS subcategory,
         b.name AS Assetname, 
         b.status AS AssetStatus,
         CONCAT('COMMON_MASTERS_DEPARTMENT_', b.department) AS Department,
@@ -236,6 +287,11 @@ ReportDefinitions:
         source: asset
         total: false
         showColumn: false
+      - name: employeecode
+        label: Employee Code
+        type: string
+        source: asset
+        total: false
       - name: assignedusername
         label: Assigned User Name
         type: string
@@ -247,11 +303,6 @@ ReportDefinitions:
         source: asset
         total: false
         isLocalisationRequired: true
-      - name: employeecode
-        label: Employee Code
-        type: string
-        source: asset
-        total: false
       - name: createdtime
         label: Created Time
         type: string
@@ -262,6 +313,7 @@ ReportDefinitions:
         type: string
         source: asset
         total: false
+        isLocalisationRequired: true
       - name: isassigned
         label: Is Assigned
         type: string
@@ -284,6 +336,38 @@ ReportDefinitions:
         source: asset
         isMandatory: false
         searchClause: AND b.applicationno = $applicationno
+      - name: AssetClassification
+        label: Asset Classification
+        type: singlevaluelist
+        pattern: 'list://MOVABLE:Movable,IMMOVABLE:Immovable'
+        source: asset
+        wrapper: true
+        isMandatory: false
+        searchClause: AND b.classification = $AssetClassification
+      - name: parentcategory
+        label: Parent Category
+        type: singlevaluelist
+        pattern: 'list://LAND:Land,BUILDING:Building,SERVICE:Service,IT:IT,VEHICLE:Vehicle,OTHER:Other'
+        source: asset
+        wrapper: true
+        isMandatory: false
+        searchClause: AND b.parentcategory = $parentcategory
+      - name: AssetStatus
+        label: Asset Status
+        type: singlevaluelist
+        pattern: 'list://REJECTED:Rejected,APPROVED:Approved,INITIATED:Initiated,VERIFIED:Verified' 
+        source: asset
+        wrapper: true
+        isMandatory: false
+        searchClause: AND b.status = $AssetStatus
+      - name: Department
+        label: Department
+        type: singlevaluelist
+        pattern: 'list://DEPT_1:Street Lights,DEPT_2:Building & Roads,DEPT_3:Health & Sanitation,DEPT_4:Operation & Maintenance,DEPT_5:Horticulture,DEPT_6:Building Branch,DEPT_7:Citizen service desk,DEPT_8:Complaint Cell,DEPT_9:Executive Branch,DEPT_10:Others,DEPT_11:Project Branch,DEPT_12:Birth and Death Branch,DEPT_13:Tax Branch,DEPT_14:Civil,DEPT_15:Engineering Branch (O&M - W&S),DEPT_16:Health Branch,DEPT_17:Tehbazri Branch,DEPT_18:Engineering Branch,DEPT_19:Advertisement Branch,DEPT_21:Sanitation Branch,DEPT_24:Fire Brigade Department,DEPT_25:Accounts Branch,DEPT_33:Property Tax Branch,DEPT_34:Establishment Branch,DEPT_35:Works Branch,DEPT_38:General Branch,DEPT_53:Architect & Planning (A&P) Branch DEPT,DEPT_54:Estate Branch,DEPT_55:Veterinary public health office (V.P.H.O.),DEPT_56:Law Branch,TRADE_BRANCH:Trade License Branch,DEPT_LG:Legal Branch,AGENDA_BRANCH:Agenda Branch,CARETAKER_BRANCH:Caretaker Branch,IT_BRANCH:IT Branch,DEPT_TP:Townplanning,DEPT_57:Tender Cell'
+        source: asset
+        wrapper: true
+        isMandatory: false
+        searchClause: AND b.department = $Department
       - name: fromDate
         label: FromDate
         type: epoch
@@ -329,11 +413,13 @@ ReportDefinitions:
         type: string
         source: asset
         total: false
+        isLocalisationRequired: true
       - name: parentcategory
         label: Parent Category 
         type: string
         source: asset
         total: false
+        isLocalisationRequired: true
       - name: category
         label: Category 
         type: string
@@ -344,7 +430,7 @@ ReportDefinitions:
         label: Book Value 
         type: string
         source: asset
-        total: false
+        total: true
       - name: tenantid
         label: tenantid
         type: string
@@ -376,7 +462,7 @@ ReportDefinitions:
         label: Amount Received
         type: string
         source: asset
-        total: false 
+        total: true 
       - name: comments
         label: Comments
         type: string
@@ -394,6 +480,38 @@ ReportDefinitions:
         source: asset
         isMandatory: false
         searchClause: AND b.applicationno = $applicationno
+      - name: AssetClassification
+        label: Asset Classification
+        type: singlevaluelist
+        pattern: 'list://MOVABLE:Movable,IMMOVABLE:Immovable'
+        source: asset
+        wrapper: true
+        isMandatory: false
+        searchClause: AND b.classification = $AssetClassification
+      - name: parentcategory
+        label: Parent Category
+        type: singlevaluelist
+        pattern: 'list://LAND:Land,BUILDING:Building,SERVICE:Service,IT:IT,VEHICLE:Vehicle,OTHER:Other'
+        source: asset
+        wrapper: true
+        isMandatory: false
+        searchClause: AND b.parentcategory = $parentcategory
+      - name: AssetStatus
+        label: Asset Status
+        type: singlevaluelist
+        pattern: 'list://REJECTED:Rejected,APPROVED:Approved,INITIATED:Initiated,VERIFIED:Verified' 
+        source: asset
+        wrapper: true
+        isMandatory: false
+        searchClause: AND b.status = $AssetStatus
+      - name: Department
+        label: Department
+        type: singlevaluelist
+        pattern: 'list://DEPT_1:Street Lights,DEPT_2:Building & Roads,DEPT_3:Health & Sanitation,DEPT_4:Operation & Maintenance,DEPT_5:Horticulture,DEPT_6:Building Branch,DEPT_7:Citizen service desk,DEPT_8:Complaint Cell,DEPT_9:Executive Branch,DEPT_10:Others,DEPT_11:Project Branch,DEPT_12:Birth and Death Branch,DEPT_13:Tax Branch,DEPT_14:Civil,DEPT_15:Engineering Branch (O&M - W&S),DEPT_16:Health Branch,DEPT_17:Tehbazri Branch,DEPT_18:Engineering Branch,DEPT_19:Advertisement Branch,DEPT_21:Sanitation Branch,DEPT_24:Fire Brigade Department,DEPT_25:Accounts Branch,DEPT_33:Property Tax Branch,DEPT_34:Establishment Branch,DEPT_35:Works Branch,DEPT_38:General Branch,DEPT_53:Architect & Planning (A&P) Branch DEPT,DEPT_54:Estate Branch,DEPT_55:Veterinary public health office (V.P.H.O.),DEPT_56:Law Branch,TRADE_BRANCH:Trade License Branch,DEPT_LG:Legal Branch,AGENDA_BRANCH:Agenda Branch,CARETAKER_BRANCH:Caretaker Branch,IT_BRANCH:IT Branch,DEPT_TP:Townplanning,DEPT_57:Tender Cell'
+        source: asset
+        wrapper: true
+        isMandatory: false
+        searchClause: AND b.department = $Department
       - name: fromDate
         label: FromDate
         type: epoch
@@ -410,7 +528,7 @@ ReportDefinitions:
       SELECT 
         b.applicationno AS applicationno,
         b.parentcategory AS parentcategory,
-        b.bookValue AS bookValue,
+        CONCAT(COALESCE(b.bookValue, 0)) AS bookValue,
         b.category AS category,
         b.tenantid AS tenantid,
         CONCAT('COMMON_MASTERS_DEPARTMENT_', b.department) AS department,
@@ -418,7 +536,7 @@ ReportDefinitions:
         n.reason_for_disposal as reasonfordisposal,
         n.comments as comments,
         n.life_of_asset as lifeofasset,
-        n.purchaser_name as purchasename,
+        n.purchaser_name as purchasername,
         n.disposal_date as disposaldate
         FROM 
         eg_asset_assetdetails b, eg_asset_disposal_details n where b.id=n.asset_id
@@ -459,11 +577,12 @@ ReportDefinitions:
         source: asset
         total: false
         isLocalisationRequired: true
-      - name: mantenance_type
+      - name: maintenance_type
         label: Maintenance Type
         type: string
         source: asset
         total: false
+        isLocalisationRequired: true
       - name: cost_of_maintenance
         label: Cost of Maintenance
         type: string
@@ -485,6 +604,7 @@ ReportDefinitions:
         type: string
         source: asset
         total: false
+        isLocalisationRequired: true
       - name: vendor
         label: Vendor
         type: string
@@ -499,11 +619,6 @@ ReportDefinitions:
         label: Created Time
         type: epoch
         source: asset
-        total: false  
-      - name: asset_id
-        label: Asset ID
-        type: string
-        source: asset
         total: false               
     searchParams:
       - name: applicationno
@@ -512,6 +627,38 @@ ReportDefinitions:
         source: asset
         isMandatory: false
         searchClause: AND b.applicationno = $applicationno
+      - name: AssetClassification
+        label: Asset Classification
+        type: singlevaluelist
+        pattern: 'list://MOVABLE:Movable,IMMOVABLE:Immovable'
+        source: asset
+        wrapper: true
+        isMandatory: false
+        searchClause: AND b.classification = $AssetClassification
+      - name: parentcategory
+        label: Parent Category
+        type: singlevaluelist
+        pattern: 'list://LAND:Land,BUILDING:Building,SERVICE:Service,IT:IT,VEHICLE:Vehicle,OTHER:Other'
+        source: asset
+        wrapper: true
+        isMandatory: false
+        searchClause: AND b.parentcategory = $parentcategory
+      - name: AssetStatus
+        label: Asset Status
+        type: singlevaluelist
+        pattern: 'list://REJECTED:Rejected,APPROVED:Approved,INITIATED:Initiated,VERIFIED:Verified' 
+        source: asset
+        wrapper: true
+        isMandatory: false
+        searchClause: AND b.status = $AssetStatus
+      - name: Department
+        label: Department
+        type: singlevaluelist
+        pattern: 'list://DEPT_1:Street Lights,DEPT_2:Building & Roads,DEPT_3:Health & Sanitation,DEPT_4:Operation & Maintenance,DEPT_5:Horticulture,DEPT_6:Building Branch,DEPT_7:Citizen service desk,DEPT_8:Complaint Cell,DEPT_9:Executive Branch,DEPT_10:Others,DEPT_11:Project Branch,DEPT_12:Birth and Death Branch,DEPT_13:Tax Branch,DEPT_14:Civil,DEPT_15:Engineering Branch (O&M - W&S),DEPT_16:Health Branch,DEPT_17:Tehbazri Branch,DEPT_18:Engineering Branch,DEPT_19:Advertisement Branch,DEPT_21:Sanitation Branch,DEPT_24:Fire Brigade Department,DEPT_25:Accounts Branch,DEPT_33:Property Tax Branch,DEPT_34:Establishment Branch,DEPT_35:Works Branch,DEPT_38:General Branch,DEPT_53:Architect & Planning (A&P) Branch DEPT,DEPT_54:Estate Branch,DEPT_55:Veterinary public health office (V.P.H.O.),DEPT_56:Law Branch,TRADE_BRANCH:Trade License Branch,DEPT_LG:Legal Branch,AGENDA_BRANCH:Agenda Branch,CARETAKER_BRANCH:Caretaker Branch,IT_BRANCH:IT Branch,DEPT_TP:Townplanning,DEPT_57:Tender Cell'
+        source: asset
+        wrapper: true
+        isMandatory: false
+        searchClause: AND b.department = $Department
       - name: fromDate
         label: FromDate
         type: epoch
@@ -533,12 +680,12 @@ ReportDefinitions:
         CONCAT('COMMON_MASTERS_DEPARTMENT_', b.department) AS department,
         h.maintenance_type,
         h.cost_of_maintenance,
-        h.warranty_status,is_amc_expired,
+        h.warranty_status,
+        CASE WHEN h.is_amc_expired = true THEN 'Yes' ELSE 'No' END as is_amc_expired,
         h.payment_type,
         h.vendor,
         h.parts_added_or_replaced,
-        h.created_time,
-        h.asset_id
+        h.created_time
         FROM 
         eg_asset_assetdetails b, eg_asset_maintenance h where b.id=h.asset_id
         AND 
