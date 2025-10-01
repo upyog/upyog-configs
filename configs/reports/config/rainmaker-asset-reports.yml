@@ -764,6 +764,11 @@ ReportDefinitions:
     version: 1.0.0
     moduleName: rainmaker-asset
     sourceColumns:
+      - name: applicationno
+        label: Asset Unique ID 
+        type: string
+        source: asset
+        total: false
       - name: assetname
         label: Asset Name
         type: string
@@ -794,17 +799,17 @@ ReportDefinitions:
         label: Cost of Acquiring Land
         type: string
         source: asset
-        total: false
+        total: true
       - name: improvementcost
         label: Cost of Improvement
         type: string
         source: asset
-        total: false
+        total: true
       - name: totalcost
         label: Total Cost
         type: string
         source: asset
-        total: false
+        total: true
       - name: fromwhomacquired
         label: From Whom Acquired
         type: string
@@ -841,7 +846,8 @@ ReportDefinitions:
         isMandatory: false
         searchClause: AND a.createdtime <= $toDate
     query: >
-      SELECT 
+      SELECT
+        a.applicationno,
         a.name as assetname,
         a.additionaldetails->>'landStatus' AS landstatus,
         CONCAT(
@@ -866,7 +872,7 @@ ReportDefinitions:
             ELSE
                 a.additionaldetails->>'modeOfPossessionOrAcquisition'
         END AS modeofpossessionoracquisition,
-        a.remarks
+        a.additionaldetails->>'remarks' AS remarks
       FROM 
         eg_asset_assetdetails a
       LEFT JOIN 
