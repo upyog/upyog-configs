@@ -40,6 +40,11 @@ ReportDefinitions:
         source: asset
         total: false
         isLocalisationRequired: true
+      - name: lifeofasset
+        label: Life of Asset
+        type: string
+        source: asset
+        total: false
       - name: FinancialYear
         label: Financial Year
         type: string
@@ -107,6 +112,7 @@ ReportDefinitions:
         b.bookrefno AS bookrefno,
         b.classification AS AssetClassification, 
         b.parentcategory AS parentcategory, 
+        b.lifeofasset AS lifeofasset, 
         b.subcategory AS subcategory,
         b.name AS Assetname, 
         b.status AS AssetStatus,
@@ -161,6 +167,11 @@ ReportDefinitions:
         source: asset
         total: false
         isLocalisationRequired: true
+      - name: lifeofasset
+        label: Life of Asset
+        type: string
+        source: asset
+        total: false
       - name: tenantid
         label: tenantd
         type: string
@@ -243,6 +254,7 @@ ReportDefinitions:
         b.classification AS AssetClassification, 
         b.parentcategory AS parentcategory, 
         b.subcategory AS subcategory,
+        b.lifeofasset AS lifeofasset, 
         b.name AS Assetname, 
         b.status AS AssetStatus,
         CONCAT('COMMON_MASTERS_DEPARTMENT_', b.department) AS Department,
@@ -690,3 +702,174 @@ ReportDefinitions:
         eg_asset_assetdetails b, eg_asset_maintenance h where b.id=h.asset_id
         AND 
         1=1   
+  - reportName: AssetCountReport
+    decryptionPathId: ObpsDailyCollectionReport
+    summary: Asset Count Report
+    version: 1.0.0
+    moduleName: rainmaker-asset
+    sourceColumns:
+      - name: parentcategory
+        label: Parent Category
+        type: string
+        source: asset
+        total: false
+      - name: total_applications
+        label: Asset Count
+        type: number
+        source: asset
+        total: true
+      - name: total_originalbookvalue
+        label: Asset Book Value
+        type: number
+        source: asset
+        total: true
+    searchParams:
+      - name: parentcategory
+        label: Parent Category
+        type: singlevaluelist
+        pattern: 'list://LAND:Land,BUILDING:Building,SERVICE:Service,IT:IT,VEHICLE:Vehicle,OTHER:Other'
+        source: asset
+        wrapper: true
+        isMandatory: false
+        searchClause: AND a.parentcategory = $parentcategory
+      - name: fromDate
+        label: FromDate
+        type: epoch
+        source: asset
+        isMandatory: false
+        searchClause: AND created_time >= $fromDate
+      - name: toDate
+        label: ToDate
+        type: epoch
+        source: asset
+        isMandatory: false
+        searchClause: AND created_time <= $toDate
+    query: >
+      SELECT 
+        a.parentcategory as parentcategory,
+        COUNT(*) AS total_applications,
+        SUM(a.originalbookvalue) AS total_originalbookvalue
+      FROM 
+        eg_asset_assetdetails a
+      WHERE 
+        1=1
+    groupby:  
+       GROUP BY parentcategory
+    orderby: 
+        ORDER BY total_originalbookvalue DESC
+        
+  - reportName: LandReport
+    decryptionPathId: ObpsDailyCollectionReport
+    summary: Land Assets Report
+    version: 1.0.0
+    moduleName: rainmaker-asset
+    sourceColumns:
+      - name: assetname
+        label: Asset Name
+        type: string
+        source: asset
+        total: false
+      - name: landstatus
+        label: LeaseholdFreehold
+        type: string
+        source: asset
+        total: false
+        isLocalisationRequired: true
+      - name: location
+        label: Location
+        type: string
+        source: asset
+        total: false
+      - name: area
+        label: Area
+        type: string
+        source: asset
+        total: false
+      - name: acquisitiondate
+        label: Date of Acquisition
+        type: epoch
+        source: asset
+        total: false
+      - name: costofacquiringland
+        label: Cost of Acquiring Land
+        type: string
+        source: asset
+        total: false
+      - name: improvementcost
+        label: Cost of Improvement
+        type: string
+        source: asset
+        total: false
+      - name: totalcost
+        label: Total Cost
+        type: string
+        source: asset
+        total: false
+      - name: fromwhomacquired
+        label: From Whom Acquired
+        type: string
+        source: asset
+        total: false
+      - name: currentuse
+        label: Current Usage
+        type: string
+        source: asset
+        total: false
+        isLocalisationRequired: true
+      - name: modeofpossessionoracquisition
+        label: Mode of Acquisition
+        type: string
+        source: asset
+        total: false
+        isLocalisationRequired: true
+      - name: remarks
+        label: Remarks
+        type: string
+        source: asset
+        total: false
+    searchParams:
+      - name: fromDate
+        label: FromDate
+        type: epoch
+        source: asset
+        isMandatory: false
+        searchClause: AND a.createdtime >= $fromDate
+      - name: toDate
+        label: ToDate
+        type: epoch
+        source: asset
+        isMandatory: false
+        searchClause: AND a.createdtime <= $toDate
+    query: >
+      SELECT 
+        a.name as assetname,
+        a.additionaldetails->>'landStatus' AS landstatus,
+        CONCAT(
+            COALESCE(addr.addressline1, ''), ' ', 
+            COALESCE(addr.addressline2, ''), ' ', 
+            COALESCE(addr.city, ''), ' ', 
+            COALESCE(addr.pincode, '')
+        ) AS location,
+        a.additionaldetails->>'area' AS area,
+        CASE WHEN a.additionaldetails->>'acquistionDate' IS NOT NULL 
+             THEN TO_TIMESTAMP(a.additionaldetails->>'acquistionDate', 'YYYY-MM-DD') 
+             ELSE NULL END AS acquisitiondate,
+        a.acquisitioncost AS costofacquiringland,
+        a.additionaldetails->>'improvementCost' AS improvementcost,
+        (COALESCE(a.originalbookvalue::numeric, 0) + COALESCE((a.additionaldetails->>'improvementCost')::numeric, 0)) AS totalcost,
+        a.additionaldetails->>'fromWhomDeedTaken' AS fromwhomacquired,
+        a.additionaldetails->>'howAssetBeingUsed' AS currentuse,
+        CASE 
+            WHEN a.additionaldetails->'modeOfPossessionOrAcquisition' IS NULL THEN NULL
+            WHEN a.additionaldetails->'modeOfPossessionOrAcquisition'->>'code' IS NOT NULL THEN 
+                a.additionaldetails->'modeOfPossessionOrAcquisition'->>'code'
+            ELSE
+                a.additionaldetails->>'modeOfPossessionOrAcquisition'
+        END AS modeofpossessionoracquisition,
+        a.remarks
+      FROM 
+        eg_asset_assetdetails a
+      LEFT JOIN 
+        eg_asset_addressdetails addr ON a.id = addr.asset_id
+      WHERE 
+        a.parentcategory = 'LAND'
