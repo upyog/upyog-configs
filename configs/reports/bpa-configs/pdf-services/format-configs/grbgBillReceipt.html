@@ -339,7 +339,6 @@
 					<th>Sr. No</th>
 					<th>Owner/Tenant Name</th>
 					<th>Property Type</th>
-					<th>Garbage ID</th>
 					<th>Unit</th>
 					<th>Value</th>
 					<th>Arrear</th>
@@ -358,7 +357,6 @@
 							<td><span th:text="allSerialNo">NA</span></td>
 							<td><span th:text="allOwnerNames">NA</span></td>
 							<td><span th:text="allPropertyTypes">NA</span></td>
-							<td><span th:text="allGrbgAccounts">NA</span></td>
 							<td><span th:text="allUnits">NA</span></td>
 							<td><span th:text="allGrbgTaxs">NA</span></td>
 							<td><span th:text="allArrears">NA</span></td>
@@ -383,10 +381,10 @@
 				</tr>
 			</table>
 		</div>
-		<div class="terms">
+		<!-- <div class="terms">
 			<strong>Pay through QR Code:</strong><br />
 			<img class="qr-code" th:src="${qrCodeText}" src="/qr.png" alt="QR Code" />
-		</div>
+		</div> -->
 		<div class="footer">
 		   <p>This receipt has been generated electronically and does not require a physical signature. | Generated on 
 		      <span th:text="${#dates.format(#dates.createNow(), 'dd.MM.yyyy')}"></span>
