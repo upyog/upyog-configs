@@ -673,13 +673,6 @@
         "dateRefField": "Data.dateofissue"
       },
       {
-        "module": "SV",
-        "indexName": "sv-national-dashboard",
-        "requestQueryMap": "{\"wardId\" : \"ward\", \"district\" : \"district\", \"tenantId\" : \"ulb\"}",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"state.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Total Application\":{\"sum\":{\"field\":\"totalStreetVendingLicenseApplied\"}}}}}}",
-        "dateRefField": "timestamp"
-      },
-      {
         "module": "FINANCE",
         "indexName": "dss-finance-dashboard",
         "requestQueryMap": "{\"wardId\" : \"ward\", \"district\" : \"district\", \"tenantId\" : \"ulb\"}",
@@ -15516,13 +15509,6 @@
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"BND\":{\"sum\":{\"field\":\"todaysCollectionForChannel\"}}}}}}",
         "requestQueryMap": "{ \"state\" : \"state\", \"ulb\" : \"ulb\"}",
         "dateRefField": "date"
-      },
-      {
-        "module": "SV",
-        "dateRefField": "timestamp",
-        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
-        "indexName": "sv-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"SV\":{\"sum\":{\"field\":\"totalRevenueCollected\"}}}}}}"
       }
     ],
     "chartType": "pie",
@@ -15537,8 +15523,7 @@
       "OBPS",
       "FNOC",
       "MC",
-      "BND",
-      "SV"
+      "BND"
     ],
     "insight": {},
     "_comment": " "
@@ -16141,13 +16126,6 @@
         "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
         "indexName": "pgr-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.service.tenantId.keyword\":\"pg.testing\"}},{\"term\":{\"todaysComplaintsForStatus\":0}}]}},\"aggs\":{\"PGR\":{\"sum\":{\"field\":\"todaysComplaintsForStatus\"}}}}}}"
-      },
-      {
-        "module": "SV",
-        "indexName": "sv-national-dashboard",
-        "requestQueryMap": "{\"state\" : \"state\",\"ulb\" : \"ulb\"}",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"match\":{\"totalStreetVendingLicenseApplied\":0}}]}},\"aggs\":{\"SV\":{\"sum\":{\"field\":\"totalStreetVendingLicenseApplied\"}}}}}}",
-        "dateRefField": "date"
       }
     ],
     "chartType": "pie",
@@ -16164,8 +16142,7 @@
       "BND",
       "FSM",
       "MCOLLECT",
-      "PGR",
-      "SV"
+      "PGR"
 
     ],
     "insight": {},
@@ -24584,5 +24561,6 @@
     "insight": {},
     "_comment": "SV license rejection rate"
   }
+
 
 }
