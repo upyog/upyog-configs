@@ -849,7 +849,11 @@ ReportDefinitions:
       SELECT
         a.applicationno,
         a.name as assetname,
-        a.additionaldetails->>'landStatus' AS landstatus,
+        CASE 
+      WHEN jsonb_typeof(a.additionaldetails->'landStatus') = 'object' 
+       THEN a.additionaldetails->'landStatus'->>'value'
+      ELSE a.additionaldetails->>'landStatus'
+      END AS landstatus,
         CONCAT(
             COALESCE(addr.addressline1, ''), ' ', 
             COALESCE(addr.addressline2, ''), ' ', 
