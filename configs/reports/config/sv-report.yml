@@ -1,94 +1,107 @@
 ReportDefinitions:
 - reportName: StreetVendingReport
-  decryptionPathId: TradeLicenseDailyCollectionReport
+  decryptionPathId: StateTradeLicenseCancelledRegistryReport
   summary: Daily Register Report for street vending
   version: 1.0.0
   moduleName: sv-report
   sourceColumns:
   - name: application_no
-    label: reports.sv.application_no
+    label: rainamker.sv.application_no
     type: string
     source: sv
     total: false
   - name: name
-    label: reports.sv.name
+    label: rainmaker.sv.name
     type: string
     source: sv
     total: false
   - name: locality
-    label: reports.sv.locality
+    label: rainmaker.sv.locality
     type: string
     source: sv
     total: false
     isLocalisationRequired: true
   - name: vending_activity
-    label: reports.sv.vending_activity
+    label: rainmaker.sv.vedning_activity
     type: string
     source: sv
     total: false
     isLocalisationRequired: true
   - name: vending_zone
-    label: reports.sv.vending_zone
+    label: rainmaker.sv.vending_zone
     type: string
     source: sv
     total: false
     isLocalisationRequired: true
-  - name: certificate_no
-    label: reports.sv.certificate_no
+  - name: svcertificateno
+    label: rainmaker.sv.certificate_no
     type: string
     source: sv
     total: false
   - name: application_status
-    label: reports.sv.application_status
+    label: rainmaker.sv.application_status
     type: string
     source: sv
     total: false
     isLocalisationRequired: true
-  - name: name
-    label: reports.sv.approvername
+  - name: approvedby
+    label: rainmaker.sv.approvedby
     type: string
     source: sv
     total: false
-    showColumn: false
   - name: amountpaid
-    label: amoiuntpaid
+    label: rainmaker.sv.amountpaid
     type: string
     source: sv
     total: false
 
   searchParams:
   - name: application_status
-    label: reports.sv.application_status
+    label: rainmaker.sv.application_status
     type: singlevaluelist
     pattern: 'list://APPLIED:Applied,APPROVED:Approved,REGISTRATIONCOMPLETED:Registration Completed,INSPECTIONPENDING:Inspection Pending,REJECTED:Rejected'
     source: sv
     isMandatory: false
     searchClause: AND sv.application_status = $application_status
   - name: vending_zone
-    label: reports.sv.vending_zone
+    label: rainmaker.sv.vending_zone
     type: singlevaluelist
     pattern: 'list://TEST_VALUE_ONE:TEST_VALUE_ONE,TEST_VALUE_TWO:TEST_VALUE_TWO'
     source: sv
     isMandatory: false
     searchClause: AND sv.vending_zone = $vending_zone
   - name: vending_activity
-    label: reports.sv.vending_activity
+    label: rainmaker.sv.vending_activity
     type: singlevaluelist
     pattern: 'list://STATIONARY:Stationary,MOBILE:Mobile'
     source: sv
     isMandatory: false
     searchClause: AND sv.vending_activity = $vending_activity
   - name: fromDate
-    label: reports.sv.fromDate
+    label: From Date
     type: epoch
     source: sv
-    isMandatory: true
-    searchClause: AND sv.createdtime >= $fromDate
+    isMandatory: false
+    searchClause: AND sv.createdtime >= $fromate
   - name: toDate
-    label: reports.sv.toDate
+    label: To Date
     type: epoch
     source: sv
-    isMandatory: true
+    isMandatory: false
     searchClause: AND sv.createdtime  <= $toDate
  
-  query: SELECT DISTINCT ON (sv.application_no) usr.uuid AS uuid, sv.application_no AS application_no, sv.createdtime AS createdtime, CASE WHEN sv.certificate_no IS NULL THEN 'Certificate not Generated' ELSE sv.certificate_no END AS certificate_no, sv.application_status AS application_status, sv.vending_activity AS vending_activity, sv.vending_zone AS vending_zone, vendor.application_id AS application_id, vendor.name AS name, address.locality AS locality, address.locality_code AS locality_code, bill.consumercode AS consumercode, pdetail.amountpaid AS amountpaid, CASE WHEN sv.application_status = 'APPROVED' THEN usr.name ELSE 'Not Approved Yet' END AS name FROM eg_sv_street_vending_detail sv LEFT JOIN eg_sv_vendor_detail vendor ON sv.application_id = vendor.application_id LEFT JOIN eg_sv_address_detail address ON vendor.id = address.vendor_id LEFT JOIN eg_user usr ON sv.lastmodifiedby = usr.uuid LEFT JOIN egcl_bill bill ON sv.application_no = bill.consumercode LEFT JOIN egcl_paymentdetail pdetail ON bill.id = pdetail.billid
+  query: SELECT DISTINCT ON (sv.application_no) usr.uuid AS uuid, sv.application_no AS application_no, sv.createdtime AS createdtime, CASE WHEN sv.certificate_no IS NULL THEN 'Certificate not Generated' ELSE sv.certificate_no END AS svcertificateno, sv.application_status AS application_status, sv.vending_activity AS vending_activity, sv.vending_zone AS vending_zone, vendor.application_id AS application_id, vendor_user.name AS name, address.locality AS locality, address.locality_code AS locality_code, bill.consumercode AS consumercode, pdetail.amountpaid AS amountpaid, CASE WHEN sv.application_status = 'APPROVED' THEN usr.name ELSE 'Not Approved Yet' END AS approvedby FROM eg_sv_street_vending_detail sv LEFT JOIN eg_sv_vendor_detail vendor ON sv.application_id = vendor.application_id LEFT JOIN eg_user vendor_user ON vendor.name = vendor_user.name LEFT JOIN eg_sv_address_detail address ON vendor.id = address.vendor_id LEFT JOIN eg_user usr ON sv.lastmodifiedby = usr.uuid LEFT JOIN egcl_bill bill ON sv.application_no = bill.consumercode LEFT JOIN egcl_paymentdetail pdetail ON bill.id = pdetail.billid
+
+- reportName: Streetuser
+  decryptionPathId: StateTradeLicenseCancelledRegistryReport
+  summary: Daily Register Report for street vending
+  version: 1.0.0
+  moduleName: sv-report
+  sourceColumns:
+  - name: name
+    label: name
+    type: string
+    source: sv-services
+    total: false
+ 
+  query: SELECT name as name from eg_user
