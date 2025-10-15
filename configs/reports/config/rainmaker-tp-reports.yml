@@ -1,0 +1,132 @@
+---
+ReportDefinitions:
+  - reportName: treePruningRequestRegister
+    decryptionPathId: ObpsDailyCollectionReport
+    summary: Tree Pruning Request Register Report
+    version: 1.0.0
+    moduleName: rainmaker-tp
+    sourceColumns:
+      - name: bookingno
+        label: Booking No
+        type: string
+        source: tp
+        total: false
+      - name: tenantid
+        label: Tenant ID
+        type: string
+        source: tp
+        total: false
+        showColumn: false
+      - name: reasonofpruning
+        label: Reason for Pruning
+        type: string
+        source: tp
+        total: false
+      - name: latitude
+        label: Latitude
+        type: string
+        source: tp
+        total: false
+      - name: longitude
+        label: Longitude
+        type: string
+        source: tp
+        total: false
+      - name: applicationdate
+        label: Application Date
+        type: epoch
+        source: tp
+        total: false
+      - name: status
+        label: Status
+        type: string
+        source: tp
+        total: false
+        isLocalisationRequired: true
+      - name: mobilenumber
+        label: Mobile Number
+        type: string
+        source: tp
+        total: false
+      - name: name
+        label: Applicant Name
+        type: string
+        source: tp
+        total: false
+      - name: address
+        label: Address
+        type: string
+        source: tp
+        total: false
+      - name: completiondate
+        label: Completion Date
+        type: string
+        source: tp
+        total: false
+    searchParams:
+      - name: bookingno
+        label: Booking No
+        type: string
+        source: tp
+        isMandatory: false
+        searchClause: AND tp.booking_no = $bookingno
+      - name: mobilenumber
+        label: Mobile Number
+        type: string
+        source: tp
+        isMandatory: false
+        searchClause: AND tp.mobile_number = $mobilenumber
+      - name: status
+        label: Status
+        type: singlevaluelist
+        pattern: 'list://BOOKING_CREATED:Booking Created,PAYMENT_PENDING:Payment Pending,TREE_PRUNING_SERVICE_COMPLETED:Service Completed'
+        source: tp
+        wrapper: true
+        isMandatory: false
+        searchClause: AND tp.booking_status = $status
+      - name: fromDate
+        label: From Date
+        type: epoch
+        source: tp
+        isMandatory: false
+        searchClause: AND tp.application_date >= $fromDate
+      - name: toDate
+        label: To Date
+        type: epoch
+        source: tp
+        isMandatory: false
+        searchClause: AND tp.application_date <= $toDate
+    query: >
+      SELECT 
+        tp.booking_no AS bookingno,
+        tp.tenant_id AS tenantid,
+        tp.reason_for_pruning AS reasonofpruning,
+        tp.latitude,
+        tp.longitude,
+        tp.application_date AS applicationdate,
+        tp.booking_status AS status,
+        tp.mobile_number AS mobilenumber,
+        INITCAP(a.name) AS name,
+        CONCAT(
+          COALESCE(addr.house_no, ''), ' ',
+          COALESCE(addr.address_line_1, ''), ' ',
+          COALESCE(addr.address_line_2, ''), ' ',
+          COALESCE(addr.street_name, ''), ' ',
+          COALESCE(addr.city, ''), ' ',
+          COALESCE(addr.locality, '')
+        ) AS address,
+        CASE 
+          WHEN tp.booking_status = 'TREE_PRUNING_SERVICE_COMPLETED' 
+          THEN TO_CHAR(TO_TIMESTAMP(tp.lastmodifiedtime / 1000), 'DD-MM-YYYY HH24:MI:SS')
+          ELSE NULL
+        END AS completiondate
+      FROM 
+        upyog_rs_tree_pruning_booking_detail tp
+      JOIN 
+        upyog_rs_tree_pruning_applicant_details a 
+        ON tp.booking_id = a.booking_id
+      JOIN 
+        upyog_rs_tree_pruning_address_details addr 
+        ON a.applicant_id = addr.applicant_id
+      WHERE 
+        1=1

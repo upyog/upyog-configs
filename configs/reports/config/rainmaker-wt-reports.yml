@@ -1,0 +1,141 @@
+---
+ReportDefinitions:
+  - reportName: waterTankerRequestReport
+    decryptionPathId: ObpsDailyCollectionReport
+    summary: Water Tanker Request Report
+    version: 1.0.0
+    moduleName: rainmaker-wt
+    sourceColumns:
+      - name: booking_no
+        label: Booking No
+        type: string
+        source: wt
+        total: false
+      - name: tenant_id
+        label: Tenant ID
+        type: string
+        source: wt
+        total: false
+        showColumn: false
+      - name: mobile_number
+        label: Mobile Number
+        type: string
+        source: wt
+        total: false
+      - name: name
+        label: Applicant Name
+        type: string
+        source: wt
+        total: false
+      - name: tanker_type
+        label: Tanker Type
+        type: string
+        source: wt
+        total: false
+        isLocalisationRequired: true
+      - name: tanker_quantity
+        label: Tanker Quantity
+        type: number
+        source: wt
+        total: false
+      - name: water_quantity
+        label: Water Quantity
+        type: number
+        source: wt
+        total: false
+      - name: water_type
+        label: Water Type
+        type: string
+        source: wt
+        total: false
+        isLocalisationRequired: true
+      - name: booking_status
+        label: Status
+        type: string
+        source: wt
+        total: false
+        isLocalisationRequired: true
+      - name: address
+        label: Address
+        type: string
+        source: wt
+        total: false
+      - name: delivery_date
+        label: Delivery Date
+        type: string
+        source: wt
+        total: false
+      - name: createdtime
+        label: Created Time
+        type: epoch
+        source: wt
+        total: false
+        showColumn: false
+    searchParams:
+      - name: booking_no
+        label: Booking No
+        type: string
+        source: wt
+        isMandatory: false
+        searchClause: AND wt.booking_no = $booking_no
+      - name: mobile_number
+        label: Mobile Number
+        type: string
+        source: wt
+        isMandatory: false
+        searchClause: AND wt.mobile_number = $mobile_number
+      - name: booking_status
+        label: Status
+        type: singlevaluelist
+        pattern: 'list://BOOKING_CREATED:Booking Created,APPROVED:Approved,PENDING_FOR_VEHICLE_DRIVER_ASSIGN:Pending Assignment,IN_TRANSIT:In Transit,TANKER_DELIVERED:Delivered'
+        source: wt
+        wrapper: true
+        isMandatory: false
+        searchClause: AND wt.booking_status = $booking_status
+      - name: fromDate
+        label: From Date
+        type: epoch
+        source: wt
+        isMandatory: false
+        searchClause: AND wt.createdtime >= $fromDate
+      - name: toDate
+        label: To Date
+        type: epoch
+        source: wt
+        isMandatory: false
+        searchClause: AND wt.createdtime <= $toDate
+    query: >
+      SELECT 
+        wt.booking_no,
+        wt.tenant_id,
+        wt.mobile_number,
+        INITCAP(a.name) AS name,
+        wt.tanker_type,
+        wt.tanker_quantity,
+        wt.water_quantity,
+        wt.water_type,
+        wt.booking_status,
+        CONCAT(
+          COALESCE(addr.house_no, ''), ' ',
+          COALESCE(addr.address_line_1, ''), ' ',
+          COALESCE(addr.address_line_2, ''), ' ',
+          COALESCE(addr.street_name, ''), ' ',
+          COALESCE(addr.city, ''), ' ',
+          COALESCE(addr.locality, '')
+        ) AS address,
+        CASE 
+          WHEN wt.booking_status = 'TANKER_DELIVERED' 
+          THEN TO_CHAR(TO_TIMESTAMP(wt.lastmodifiedtime / 1000), 'DD-MM-YYYY HH24:MI:SS')
+          ELSE NULL
+        END AS delivery_date,
+        wt.createdtime
+      FROM 
+        upyog_rs_water_tanker_booking_details wt
+      JOIN 
+        upyog_rs_water_tanker_applicant_details a 
+        ON wt.booking_id = a.booking_id
+      JOIN 
+        upyog_rs_water_tanker_address_details addr 
+        ON a.applicant_id = addr.applicant_id
+      WHERE 
+        1=1

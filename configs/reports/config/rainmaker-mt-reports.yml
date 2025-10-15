@@ -1,0 +1,122 @@
+---
+ReportDefinitions:
+  - reportName: MobileToiletRequestRegister
+    decryptionPathId: ObpsDailyCollectionReport
+    summary: Mobile Toilet Request Register Report
+    version: 1.0.0
+    moduleName: rainmaker-mt
+    sourceColumns:
+      - name: bookingno
+        label: Booking No
+        type: string
+        source: mt
+        total: false
+      - name: tenantid
+        label: Tenant ID
+        type: string
+        source: mt
+        total: false
+        showColumn: false
+        isLocalisationRequired: true
+      - name: mobilenumber
+        label: Mobile Number
+        type: string
+        source: mt
+        total: false
+      - name: name
+        label: Applicant Name
+        type: string
+        source: mt
+        total: false
+      - name: noofmobiletoilet
+        label: No of Mobile Toilets
+        type: number
+        source: mt
+        total: false
+      - name: status
+        label: Status
+        type: string
+        source: mt
+        total: false
+        isLocalisationRequired: true
+      - name: address
+        label: Address
+        type: string
+        source: mt
+        total: false
+      - name: deliverydate
+        label: Delivery Date
+        type: string
+        source: mt
+        total: false
+      - name: createdtime
+        label: Created Time
+        type: epoch
+        source: mt
+        total: false
+        showColumn: false
+    searchParams:
+      - name: bookingno
+        label: Booking No
+        type: string
+        source: mt
+        isMandatory: false
+        searchClause: AND mt.booking_no = $bookingno
+      - name: mobilenumber
+        label: Mobile Number
+        type: string
+        source: mt
+        isMandatory: false
+        searchClause: AND mt.mobile_number = $mobilenumber
+      - name: status
+        label: Status
+        type: singlevaluelist
+        pattern: 'list://BOOKING_CREATED:Booking Created,APPROVED:Approved,MOBILE_TOILET_DELIVERED:Delivered'
+        source: mt
+        wrapper: true
+        isMandatory: false
+        searchClause: AND mt.booking_status = $status
+      - name: fromDate
+        label: From Date
+        type: epoch
+        source: mt
+        isMandatory: false
+        searchClause: AND mt.createdtime >= $fromDate
+      - name: toDate
+        label: To Date
+        type: epoch
+        source: mt
+        isMandatory: false
+        searchClause: AND mt.createdtime <= $toDate
+    query: >
+      SELECT 
+        mt.booking_no AS bookingno,
+        mt.tenant_id AS tenantid,
+        mt.mobile_number AS mobilenumber,
+        INITCAP(mta.name) AS name,
+        mt.no_of_mobile_toilet AS noofmobiletoilet,
+        mt.booking_status AS status,
+        CONCAT(
+          COALESCE(a.house_no, ''), ' ',
+          COALESCE(a.address_line_1, ''), ' ',
+          COALESCE(a.address_line_2, ''), ' ',
+          COALESCE(a.street_name, ''), ' ',
+          COALESCE(a.city, ''), ' ',
+          COALESCE(a.locality, '')
+        ) AS address,
+        CASE 
+          WHEN mt.booking_status = 'MOBILE_TOILET_DELIVERED' 
+          THEN TO_CHAR(TO_TIMESTAMP(mt.lastmodifiedtime / 1000), 'DD-MM-YYYY HH24:MI:SS')
+          ELSE NULL
+        END AS deliverydate,
+        mt.createdtime as createdtime
+      FROM 
+        upyog_rs_mobile_toilet_booking_details mt
+      JOIN 
+        upyog_rs_mobile_toilet_applicant_details mta 
+        ON mt.booking_id = mta.booking_id
+      JOIN 
+        upyog_rs_mobile_toilet_address_details a 
+        ON mta.applicant_id = a.applicant_id
+      WHERE 
+        1=1
