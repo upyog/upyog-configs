@@ -883,3 +883,149 @@ ReportDefinitions:
         eg_asset_addressdetails addr ON a.id = addr.asset_id
       WHERE 
         a.parentcategory = 'LAND'
+        
+  - reportName: DetailedBuildingAssetsReport
+    decryptionPathId: ObpsDailyCollectionReport
+    summary: Detailed Building Assets Report
+    version: 1.0.0
+    moduleName: rainmaker-asset
+    sourceColumns:
+      - name: AssetID
+        label: Asset ID
+        type: string
+        source: asset
+      - name: location
+        label: Location
+        type: string
+        source: asset
+      - name: length
+        label: Length
+        type: string
+        source: asset
+      - name: breadth
+        label: Breadth
+        type: string
+        source: asset
+      - name: height
+        label: Height
+        type: string
+        source: asset
+      - name: floors
+        label: No of floors
+        type: string
+        source: asset
+      - name: carpet_area
+        label: Total carpet area (Sqft)
+        type: string
+        source: asset
+      - name: land_area
+        label: Plot Area
+        type: string
+        source: asset
+      - name: dateOfPossession
+        label: Date of Possession
+        type: epoch
+        source: asset
+      - name: dateOfConstruction
+        label: Date of Construction
+        type: epoch
+        source: asset
+      - name: construction_cost
+        label: Construction Cost
+        type: number
+        source: asset
+        total: true
+      - name: improvement
+        label: Any Improvements
+        type: string
+        source: asset
+      - name: improvement_date
+        label: Improvement Date
+        type: epoch
+        source: asset
+      - name: improvement_cost
+        label: Improvement Cost
+        type: number
+        source: asset
+        total: true
+      - name: total_cost
+        label: Total Cost
+        type: number
+        source: asset
+        total: true
+      - name: depreciation
+        label: Depreciation Method
+        type: string
+        source: asset
+        isLocalisationRequired: true
+      - name: from_whom_acquired
+        label: From Whom Deed Taken
+        type: string
+        source: asset
+      - name: modeofacquisition
+        label: Mode of Acquisition
+        type: string
+        source: asset
+        isLocalisationRequired: true
+      - name: current_use
+        label: Asset Usage
+        type: string
+        source: asset
+        isLocalisationRequired: true
+      - name: market_value
+        label: Market Rate
+        type: number
+        source: asset
+        total: true
+    searchParams:
+      - name: fromDate
+        label: From Date
+        type: epoch
+        source: asset
+        isMandatory: false
+        searchClause: AND b.createdtime >= $fromDate
+      - name: toDate
+        label: To Date
+        type: epoch
+        source: asset
+        isMandatory: false
+        searchClause: AND b.createdtime <= $toDate
+    query: >
+      SELECT
+        b.applicationno as AssetID,
+        CONCAT(
+          COALESCE(addr.addressline1, ''), ' ',
+          COALESCE(addr.addressline2, ''), ' ',
+          COALESCE(addr.city, ''), ' ',
+          COALESCE(addr.pincode, '')
+        ) AS location,
+        split_part(b.additionaldetails->>'dimensions', 'x', 1) AS length,
+        split_part(b.additionaldetails->>'dimensions', 'x', 2) AS breadth,
+        split_part(b.additionaldetails->>'dimensions', 'x', 3) AS height,
+        b.additionaldetails->>'floorNo' AS floors,
+        b.additionaldetails->>'totalCarpetArea' AS carpet_area,
+        b.additionaldetails->>'plotArea' AS land_area,
+        CASE WHEN b.additionaldetails->>'dateOfPossession' IS NOT NULL
+             THEN TO_TIMESTAMP(b.additionaldetails->>'dateOfPossession', 'YYYY-MM-DD')
+             ELSE NULL END AS dateOfPossession,
+        CASE WHEN b.additionaldetails->>'dateOfConstruction' IS NOT NULL
+             THEN TO_TIMESTAMP(b.additionaldetails->>'dateOfConstruction', 'YYYY-MM-DD')
+             ELSE NULL END AS dateOfConstruction,
+        COALESCE(b.acquisitioncost, 0) AS construction_cost,
+        COALESCE(b.additionaldetails->'anyImprovements'->>'code') AS improvement,
+        CASE WHEN b.additionaldetails->>'improvementDate' IS NOT NULL
+             THEN TO_TIMESTAMP(b.additionaldetails->>'improvementDate', 'YYYY-MM-DD')
+             ELSE NULL END AS improvement_date,
+        COALESCE((b.additionaldetails->>'improvementCost')::numeric, 0) AS improvement_cost,
+        (COALESCE(b.acquisitioncost, 0) + COALESCE((b.additionaldetails->>'improvementCost')::numeric, 0)) AS total_cost,
+        COALESCE((b.additionaldetails->'depriciationMethod'->>'code')) AS depreciation,
+        b.additionaldetails->>'fromWhomDeedTaken' AS from_whom_acquired,
+        b.additionaldetails->'modeOfPossessionOrAcquisition'->>'code' AS modeofacquisition,
+        b.additionaldetails->'assetUsage'->>'code' AS current_use,
+        COALESCE((b.additionaldetails->>'marketRate')::numeric, 0) AS market_value
+        FROM
+        eg_asset_assetdetails b
+        LEFT JOIN
+        eg_asset_addressdetails addr ON b.id = addr.asset_id
+        WHERE
+        b.parentcategory = 'BUILDING'
