@@ -58,34 +58,33 @@
       {
         "text": "Pet's Name: {{Pet_Name}}",
         "style": "subheader",
-        "margin": [0, 0, 0, 10]
+        "margin": [0, 0, 0, 1]
       },
       {
         "text": "Pet's Token: {{Pet_Token}}",
         "style": "subheader",
-        "margin": [0, 0, 0, 10]
+        "margin": [0, 0, 0, 1]
       },
       {
-        "text": "Validity Date: {{Validity_Date}}",
+        "text": "Validity Date: {{validityDate}}",
         "style": "subheader",
-        "margin": [0, 0, 0, 10]
+        "margin": [0, 0, 0, 1]
       },
-
-
       {
         "text": "Pet's Type: {{Pet_Type}}",
         "style": "subheader",
-        "margin": [0, 0, 0, 10]
+        "margin": [0, 0, 0, 1]
       },
       {
         "text": "Breed Type: {{Breed_Type}}",
         "style": "subheader",
-        "margin": [0, 0, 0, 20]
+        "margin": [0, 0, 0, 10]
       },
       {
         "text": "Vaccination Details:",
         "style": "subheader",
-        "margin": [0, 0, 0, 10]
+        "margin": [0, 0, 0, 1],
+        "bold": true
       },
       {
         "style": "next-noc-table",
@@ -141,11 +140,17 @@
         "layout": {}
       },
       {
+        "text": "Pet Photo:",
+        "style": "subheader",
+        "margin": [0, 5, 0, 0],
+        "bold": true
+      },
+      {
         "table": {
           "body": [
             [
               {
-                "image": "{{familyimage}}",
+                "image": "{{petphoto}}",
                 "width": 75,
                 "height": 85,
                 "alignment": "left",

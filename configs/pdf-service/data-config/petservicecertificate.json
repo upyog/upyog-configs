@@ -251,13 +251,17 @@
       "variable": "validityDate",
       "value": {
         "path": "$.validityDate"
+      },
+      "type": "date",
+      "format": "DD/MM/YYYY"
+    },
+    {
+      "variable": "petPhotoFileStoreId",
+      "value": {
+        "path": "$.documents[?(@.documentType=='PET.PETPHOTO')].filestoreId"
       }
-    }   
-    
-    
-
-             
-          ]
+    }  
+        ]
         },
         {
           "externalAPI": [     
@@ -319,12 +323,12 @@
         },
         {
           "path": "http://egov-filestore:8080/filestore/v1/files/url",
-          "queryParam": "tenantId=pg&fileStoreIds=$.documents[3].fileStoreId",
+          "queryParam": "tenantId=pg&fileStoreIds=$.documents[?(@.documentType=='PET.PETPHOTO')].filestoreId",
           "apiRequest": null,
           "requesttype": "GET",
           "responseMapping": [
             {
-              "variable": "familyimage",
+              "variable": "petphoto",
               "value": "$.fileStoreIds[0].url",
               "type": "image"
             }
