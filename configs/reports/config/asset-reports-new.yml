@@ -1,0 +1,1163 @@
+---
+ReportDefinitions:
+  - reportName: AssetSummaryReport
+    summary: Asset Summary Report
+    version: 1.0.0
+    moduleName: rainmaker-asset
+    sourceColumns:
+      - name: category
+        label: Classification
+        type: string
+        source: asset
+      - name: parentcategory
+        label: Parent Category
+        type: string
+        source: asset
+      - name: activeassetscount
+        label: Active Assets Count
+        type: number
+        source: asset
+        total: true
+      - name: activeassetprice
+        label: Active Asset Price
+        type: number
+        source: asset
+        total: true
+      - name: disposedassetscount
+        label: Disposed Assets Count
+        type: number
+        source: asset
+        total: true
+      - name: disposalprice
+        label: Disposal Price
+        type: number
+        source: asset
+        total: true
+    query: >
+      SELECT
+          a.classification as category,
+          a.parentcategory as parentcategory,
+          COUNT(*) AS activeassetscount,
+          SUM(a.acquisitioncost) AS activeassetprice,
+          COUNT(d.disposal_id) AS disposedassetscount,
+          COALESCE(SUM(d.amount_received), 0) AS disposalprice
+      FROM 
+          eg_asset_assetdetails a
+      LEFT JOIN 
+          eg_asset_disposal_details d ON a.id = d.asset_id
+      WHERE 1=1
+    groupby: GROUP BY a.classification, a.parentcategory
+    orderby: ORDER BY activeassetprice DESC
+
+  - reportName: OfficeWiseAssetsReport
+    summary: Office Wise Assets Report
+    version: 1.0.0
+    moduleName: rainmaker-asset
+    sourceColumns:
+      - name: division
+        label: Division
+        type: string
+        source: asset
+      - name: district
+        label: District
+        type: string
+        source: asset
+      - name: office
+        label: Office (ULB)
+        type: string
+        source: asset
+      - name: immovable_land
+        label: Immovable / Land
+        type: number
+        source: asset
+        total: true
+      - name: immovable_building
+        label: Immovable / Building
+        type: number
+        source: asset
+        total: true
+      - name: immovable_service
+        label: Immovable / Service
+        type: number
+        source: asset
+        total: true
+      - name: immovable_roads
+        label: Immovable / Roads
+        type: number
+        source: asset
+        total: true
+      - name: immovable_bridges
+        label: Immovable / Bridges
+        type: number
+        source: asset
+        total: true
+      - name: immovable_talab
+        label: Immovable / Talab
+        type: number
+        source: asset
+        total: true
+      - name: immovable_nali
+        label: Immovable / Nali
+        type: number
+        source: asset
+        total: true
+      - name: immovable_nala
+        label: Immovable / NALA
+        type: number
+        source: asset
+        total: true
+      - name: immovable_others
+        label: Immovable / Others
+        type: number
+        source: asset
+        total: true
+      - name: movable_computer
+        label: Movable / Computer & Printers
+        type: number
+        source: asset
+        total: true
+      - name: movable_vehicle
+        label: Movable / Vehicle
+        type: number
+        source: asset
+        total: true
+      - name: movable_other
+        label: Movable / Other
+        type: number
+        source: asset
+        total: true
+      - name: movable_furniture
+        label: Movable / Furniture
+        type: number
+        source: asset
+        total: true
+      - name: movable_ac
+        label: Movable / Air Conditioner
+        type: number
+        source: asset
+        total: true
+      - name: movable_generator
+        label: Movable / Generator
+        type: number
+        source: asset
+        total: true
+      - name: movable_stationery
+        label: Movable / Stationery
+        type: number
+        source: asset
+        total: true
+      - name: movable_electricals
+        label: Movable / Electricals Items
+        type: number
+        source: asset
+        total: true
+      - name: movable_chemical
+        label: Movable / Chemical Items
+        type: number
+        source: asset
+        total: true
+    searchParams:
+      - name: fromDate
+        label: From Date
+        type: epoch
+        source: asset
+        isMandatory: false
+        searchClause: AND a.createdtime >= $fromDate
+      - name: toDate
+        label: To Date
+        type: epoch
+        source: asset
+        isMandatory: false
+        searchClause: AND a.createdtime <= $toDate
+    query: >
+      SELECT
+        a.division,
+        a.district,
+        a.tenantid as office,
+        COUNT(CASE WHEN a.parentcategory = 'LAND' THEN 1 END) as immovable_land,
+        COUNT(CASE WHEN a.parentcategory = 'BUILDING' THEN 1 END) as immovable_building,
+        COUNT(CASE WHEN a.parentcategory = 'SERVICE' THEN 1 END) as immovable_service,
+        COUNT(CASE WHEN a.parentcategory = 'ROADS' THEN 1 END) as immovable_roads,
+        COUNT(CASE WHEN a.parentcategory = 'BRIDGES' THEN 1 END) as immovable_bridges,
+        COUNT(CASE WHEN a.parentcategory = 'TALAB' THEN 1 END) as immovable_talab,
+        COUNT(CASE WHEN a.parentcategory = 'NALI' THEN 1 END) as immovable_nali,
+        COUNT(CASE WHEN a.parentcategory = 'NALA' THEN 1 END) as immovable_nala,
+        COUNT(CASE WHEN a.parentcategory = 'OTHERS' THEN 1 END) as immovable_others,
+        COUNT(CASE WHEN a.parentcategory = 'COMPUTER_&_PRINTERS' THEN 1 END) as movable_computer,
+        COUNT(CASE WHEN a.parentcategory = 'VEHICLE' THEN 1 END) as movable_vehicle,
+        COUNT(CASE WHEN a.parentcategory = 'OTHER' THEN 1 END) as movable_other,
+        COUNT(CASE WHEN a.parentcategory = 'FURNITURE' THEN 1 END) as movable_furniture,
+        COUNT(CASE WHEN a.parentcategory = 'AIR_CONDITIONER' THEN 1 END) as movable_ac,
+        COUNT(CASE WHEN a.parentcategory = 'GENERATOR' THEN 1 END) as movable_generator,
+        COUNT(CASE WHEN a.parentcategory = 'STATIONERY' THEN 1 END) as movable_stationery,
+        COUNT(CASE WHEN a.parentcategory = 'ELECTRICALS_ITEMS' THEN 1 END) as movable_electricals,
+        COUNT(CASE WHEN a.parentcategory = 'CHEMICAL_ITEMS' THEN 1 END) as movable_chemical
+      FROM eg_asset_assetdetails a
+      WHERE 1=1
+    groupby: GROUP BY a.division, a.district, a.tenantid
+    orderby: ORDER BY a.division, a.district
+
+  - reportName: HierarchicalAssetDataReport
+    summary: Hierarchical Asset Data Report
+    version: 1.0.0
+    moduleName: rainmaker-asset
+    sourceColumns:
+      - name: ulb
+        label: ULB
+        type: string
+        source: asset
+        linkedReport:
+          reportName: HierarchicalAssetDataReport
+          linkedColumn: "/report/rainmaker-asset/HierarchicalAssetDataReport/_get?ulb={ulb}"
+      - name: entries
+        label: Entries
+        type: number
+        source: asset
+        total: true
+      - name: qty
+        label: Qty
+        type: number
+        source: asset
+        total: true
+      - name: acquisitioncost
+        label: Acquisition Cost
+        type: number
+        source: asset
+        total: true
+    searchParams:
+      - name: level
+        label: Drill Level
+        type: string
+        source: asset
+        isMandatory: false
+        defaultValue: "1"
+      - name: ulb
+        label: ULB
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.tenantid = $ulb
+      - name: classification
+        label: Classification
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.classification = $classification
+      - name: category
+        label: Category
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.parentcategory = $category
+      - name: fromDate
+        label: From Date
+        type: epoch
+        source: asset
+        isMandatory: false
+        searchClause: AND a.createdtime >= $fromDate
+      - name: toDate
+        label: To Date
+        type: epoch
+        source: asset
+        isMandatory: false
+        searchClause: AND a.createdtime <= $toDate
+    query: >
+      -- If level=2 (drill into a specific ULB), return classification counts
+      -- Otherwise (default level=1) return counts grouped by ULB (tenantid)
+      SELECT
+        CASE WHEN '$level' = '2' THEN a.classification ELSE a.tenantid END AS group_key,
+        CASE WHEN '$level' = '2' THEN a.classification ELSE NULL END AS classification,
+        CASE WHEN '$level' = '2' THEN NULL ELSE a.tenantid END AS ulb,
+        COUNT(*) as entries,
+        COUNT(*) as qty,
+        SUM(COALESCE(a.acquisitioncost, 0)) as acquisitioncost
+      FROM eg_asset_assetdetails a
+      WHERE 1=1
+      -- backend will substitute $ulb if provided via searchParams; keep existing searchClauses active
+    groupby: GROUP BY CASE WHEN '$level' = '2' THEN a.classification ELSE a.tenantid END
+    orderby: ORDER BY group_key
+
+  - reportName: VehicleReport
+    summary: Vehicle Report
+    version: 1.0.0
+    moduleName: rainmaker-asset
+    sourceColumns:
+      - name: asset_id
+        label: Asset ID
+        type: string
+        source: asset
+      - name: category
+        label: Category
+        type: string
+        source: asset
+      - name: asset_name
+        label: Asset Name
+        type: string
+        source: asset
+      - name: attributes
+        label: Attributes
+        type: string
+        source: asset
+      - name: acquisition_cost
+        label: Acquisition Cost
+        type: number
+        source: asset
+        total: true
+      - name: acquisition_date
+        label: Acquisition Date
+        type: epoch
+        source: asset
+      - name: office
+        label: Office
+        type: string
+        source: asset
+      - name: asset_description
+        label: Asset Description
+        type: string
+        source: asset
+      - name: entry_datetime
+        label: Entry Datetime
+        type: epoch
+        source: asset
+    searchParams:
+      - name: division
+        label: Division
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.division = $division
+      - name: district
+        label: District
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.district = $district
+      - name: ulb
+        label: ULB
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.tenantid = $ulb
+      - name: subcategory
+        label: Sub Category
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.subcategory = $subcategory
+      - name: budgethead
+        label: Budget Head
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.budgethead = $budgethead
+      - name: fromDate
+        label: From Date
+        type: epoch
+        source: asset
+        isMandatory: false
+        searchClause: AND a.createdtime >= $fromDate
+      - name: toDate
+        label: To Date
+        type: epoch
+        source: asset
+        isMandatory: false
+        searchClause: AND a.createdtime <= $toDate
+    query: >
+      SELECT
+        a.applicationno as asset_id,
+        a.parentcategory as category,
+        a.name as asset_name,
+        CASE 
+          WHEN a.additionaldetails IS NOT NULL THEN 
+            CONCAT(
+              '1. Brand: ', COALESCE(a.additionaldetails->>'brand', 'N/A'), ' | ',
+              '2. Registration: ', COALESCE(a.additionaldetails->>'registrationNumber', 'N/A'), ' | ',
+              '3. Engine: ', COALESCE(a.additionaldetails->>'engineNumber', 'N/A'), ' | ',
+              '4. Chasis: ', COALESCE(a.additionaldetails->>'chasisNumber', 'N/A'), ' | ',
+              '5. Usage: ', COALESCE(a.additionaldetails->'vehicleUsageType'->>'name', 'N/A'), ' | ',
+              '6. Budget Head: ', COALESCE(a.additionaldetails->'budgetHead'->>'name', 'N/A')
+            )
+          ELSE 'No attributes available'
+        END as attributes,
+        COALESCE(a.acquisitioncost, 0) as acquisition_cost,
+        a.purchasedate as acquisition_date,
+        a.tenantid as office,
+        COALESCE(a.description, '') as asset_description,
+        a.createdtime as entry_datetime
+      FROM eg_asset_assetdetails a
+      WHERE a.parentcategory = 'VEHICLE'
+    orderby: ORDER BY a.createdtime DESC
+
+  - reportName: LandReport
+    summary: Land Report
+    version: 1.0.0
+    moduleName: rainmaker-asset
+    sourceColumns:
+      - name: asset_id
+        label: Asset ID
+        type: string
+        source: asset
+      - name: category
+        label: Category
+        type: string
+        source: asset
+      - name: asset_name
+        label: Asset Name
+        type: string
+        source: asset
+      - name: attributes
+        label: Attributes
+        type: string
+        source: asset
+      - name: acquisition_cost
+        label: Acquisition Cost
+        type: number
+        source: asset
+        total: true
+      - name: purchase_date
+        label: Purchase Date
+        type: epoch
+        source: asset
+      - name: office
+        label: Office
+        type: string
+        source: asset
+      - name: asset_description
+        label: Asset Description
+        type: string
+        source: asset
+      - name: entry_datetime
+        label: Entry Datetime
+        type: epoch
+        source: asset
+    searchParams:
+      - name: division
+        label: Division
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.division = $division
+      - name: district
+        label: District
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.district = $district
+      - name: ulb
+        label: ULB
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.tenantid = $ulb
+      - name: subcategory
+        label: Sub Category
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.subcategory = $subcategory
+      - name: budgethead
+        label: Budget Head
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.budgethead = $budgethead
+      - name: fromDate
+        label: From Date
+        type: epoch
+        source: asset
+        isMandatory: false
+        searchClause: AND a.createdtime >= $fromDate
+      - name: toDate
+        label: To Date
+        type: epoch
+        source: asset
+        isMandatory: false
+        searchClause: AND a.createdtime <= $toDate
+    query: >
+      SELECT
+        a.applicationno as asset_id,
+        a.parentcategory as category,
+        a.name as asset_name,
+        CASE 
+          WHEN a.additionaldetails IS NOT NULL THEN 
+            CONCAT(
+              '1. Use of Property: ', COALESCE(a.additionaldetails->>'useOfProperty', 'N/A'), ' | ',
+              '2. Owned By: ', COALESCE(a.additionaldetails->'ownedBy'->>'name', 'N/A'), ' | ',
+              '3. Latitude: ', COALESCE(a.additionaldetails->>'latitude', 'N/A'), ' | ',
+              '4. Longitude: ', COALESCE(a.additionaldetails->>'longitude', 'N/A'), ' | ',
+              '5. Litigation: ', COALESCE(a.additionaldetails->>'litigation', 'N/A'), ' | ',
+              '6. Gata Sankhya: ', COALESCE(a.additionaldetails->>'gataSankhya', 'N/A'), ' | ',
+              '7. Land Restriction Status: ', COALESCE(a.additionaldetails->'landRestrictionStatus'->>'name', 'N/A'), ' | ',
+              '8. Land Ownership Type: ', COALESCE(a.additionaldetails->'landOwnershipType'->>'name', 'N/A'), ' | ',
+              '9. Area in Square Meter: ', COALESCE(a.additionaldetails->>'areaInSquareMeter', 'N/A')
+            )
+          ELSE 'No attributes available'
+        END as attributes,
+        COALESCE(a.acquisitioncost, 0) as acquisition_cost,
+        a.purchasedate as purchase_date,
+        a.tenantid as office,
+        COALESCE(a.description, '') as asset_description,
+        a.createdtime as entry_datetime
+      FROM eg_asset_assetdetails a
+      WHERE a.parentcategory = 'LAND'
+    orderby: ORDER BY a.createdtime DESC
+
+  - reportName: BuildingReport
+    summary: Building Report
+    version: 1.0.0
+    moduleName: rainmaker-asset
+    sourceColumns:
+      - name: asset_id
+        label: Asset ID
+        type: string
+        source: asset
+      - name: category
+        label: Category
+        type: string
+        source: asset
+      - name: asset_name
+        label: Asset Name
+        type: string
+        source: asset
+      - name: attributes
+        label: Attributes
+        type: string
+        source: asset
+      - name: acquisition_cost
+        label: Acquisition Cost
+        type: number
+        source: asset
+        total: true
+      - name: purchase_date
+        label: Purchase Date
+        type: epoch
+        source: asset
+      - name: office
+        label: Office
+        type: string
+        source: asset
+      - name: asset_description
+        label: Asset Description
+        type: string
+        source: asset
+      - name: entry_datetime
+        label: Entry Datetime
+        type: epoch
+        source: asset
+    searchParams:
+      - name: division
+        label: Division
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.division = $division
+      - name: district
+        label: District
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.district = $district
+      - name: ulb
+        label: ULB
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.tenantid = $ulb
+      - name: subcategory
+        label: Sub Category
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.subcategory = $subcategory
+      - name: budgethead
+        label: Budget Head
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.budgethead = $budgethead
+      - name: fromDate
+        label: From Date
+        type: epoch
+        source: asset
+        isMandatory: false
+        searchClause: AND a.createdtime >= $fromDate
+      - name: toDate
+        label: To Date
+        type: epoch
+        source: asset
+        isMandatory: false
+        searchClause: AND a.createdtime <= $toDate
+    query: >
+      SELECT
+        a.applicationno as asset_id,
+        a.parentcategory as category,
+        a.name as asset_name,
+        CASE 
+          WHEN a.additionaldetails IS NOT NULL THEN 
+            CONCAT(
+              '1. Brand: ', COALESCE(a.additionaldetails->>'brand', 'N/A'), ' | ',
+              '2. Model: ', COALESCE(a.additionaldetails->>'model', 'N/A'), ' | ',
+              '3. Serial Number: ', COALESCE(a.additionaldetails->>'serialNumber', 'N/A'), ' | ',
+              '4. Warranty: ', COALESCE(a.additionaldetails->>'warranty', 'N/A'), ' | ',
+              '5. Condition: ', COALESCE(a.additionaldetails->>'condition', 'N/A')
+            )
+          ELSE 'No attributes available'
+        END as attributes,
+        COALESCE(a.acquisitioncost, 0) as acquisition_cost,
+        a.purchasedate as purchase_date,
+        a.tenantid as office,
+        COALESCE(a.description, '') as asset_description,
+        a.createdtime as entry_datetime
+      FROM eg_asset_assetdetails a
+      WHERE a.parentcategory = 'BUILDING'
+    orderby: ORDER BY a.createdtime DESC
+
+  - reportName: RoadsReport
+    summary: Roads Report
+    version: 1.0.0
+    moduleName: rainmaker-asset
+    sourceColumns:
+      - name: asset_id
+        label: Asset ID
+        type: string
+        source: asset
+      - name: category
+        label: Category
+        type: string
+        source: asset
+      - name: asset_name
+        label: Asset Name
+        type: string
+        source: asset
+      - name: attributes
+        label: Attributes
+        type: string
+        source: asset
+      - name: acquisition_cost
+        label: Acquisition Cost
+        type: number
+        source: asset
+        total: true
+      - name: purchase_date
+        label: Purchase Date
+        type: epoch
+        source: asset
+      - name: office
+        label: Office
+        type: string
+        source: asset
+      - name: asset_description
+        label: Asset Description
+        type: string
+        source: asset
+      - name: entry_datetime
+        label: Entry Datetime
+        type: epoch
+        source: asset
+    searchParams:
+      - name: division
+        label: Division
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.division = $division
+      - name: district
+        label: District
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.district = $district
+      - name: ulb
+        label: ULB
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.tenantid = $ulb
+      - name: subcategory
+        label: Sub Category
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.subcategory = $subcategory
+      - name: budgethead
+        label: Budget Head
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.budgethead = $budgethead
+      - name: fromDate
+        label: From Date
+        type: epoch
+        source: asset
+        isMandatory: false
+        searchClause: AND a.createdtime >= $fromDate
+      - name: toDate
+        label: To Date
+        type: epoch
+        source: asset
+        isMandatory: false
+        searchClause: AND a.createdtime <= $toDate
+    query: >
+      SELECT
+        a.applicationno as asset_id,
+        a.parentcategory as category,
+        a.name as asset_name,
+        CASE 
+          WHEN a.additionaldetails IS NOT NULL THEN 
+            CONCAT(
+              '1. Length: ', COALESCE(a.additionaldetails->>'length', 'N/A'), ' | ',
+              '2. Width: ', COALESCE(a.additionaldetails->>'width', 'N/A'), ' | ',
+              '3. Surface Type: ', COALESCE(a.additionaldetails->>'surfaceType', 'N/A'), ' | ',
+              '4. Condition: ', COALESCE(a.additionaldetails->>'condition', 'N/A'), ' | ',
+              '5. Maintenance Status: ', COALESCE(a.additionaldetails->>'maintenanceStatus', 'N/A')
+            )
+          ELSE 'No attributes available'
+        END as attributes,
+        COALESCE(a.acquisitioncost, 0) as acquisition_cost,
+        a.purchasedate as purchase_date,
+        a.tenantid as office,
+        COALESCE(a.description, '') as asset_description,
+        a.createdtime as entry_datetime
+      FROM eg_asset_assetdetails a
+      WHERE a.parentcategory = 'ROADS'
+    orderby: ORDER BY a.createdtime DESC
+
+  - reportName: ComputerPrinterReport
+    summary: Computer & Printer Report
+    version: 1.0.0
+    moduleName: rainmaker-asset
+    sourceColumns:
+      - name: asset_id
+        label: Asset ID
+        type: string
+        source: asset
+      - name: category
+        label: Category
+        type: string
+        source: asset
+      - name: asset_name
+        label: Asset Name
+        type: string
+        source: asset
+      - name: attributes
+        label: Attributes
+        type: string
+        source: asset
+      - name: acquisition_cost
+        label: Acquisition Cost
+        type: number
+        source: asset
+        total: true
+      - name: purchase_date
+        label: Purchase Date
+        type: epoch
+        source: asset
+      - name: office
+        label: Office
+        type: string
+        source: asset
+      - name: asset_description
+        label: Asset Description
+        type: string
+        source: asset
+      - name: entry_datetime
+        label: Entry Datetime
+        type: epoch
+        source: asset
+    searchParams:
+      - name: division
+        label: Division
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.division = $division
+      - name: district
+        label: District
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.district = $district
+      - name: ulb
+        label: ULB
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.tenantid = $ulb
+      - name: subcategory
+        label: Sub Category
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.subcategory = $subcategory
+      - name: budgethead
+        label: Budget Head
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.budgethead = $budgethead
+      - name: fromDate
+        label: From Date
+        type: epoch
+        source: asset
+        isMandatory: false
+        searchClause: AND a.createdtime >= $fromDate
+      - name: toDate
+        label: To Date
+        type: epoch
+        source: asset
+        isMandatory: false
+        searchClause: AND a.createdtime <= $toDate
+    query: >
+      SELECT
+        a.applicationno as asset_id,
+        a.parentcategory as category,
+        a.name as asset_name,
+        CASE 
+          WHEN a.additionaldetails IS NOT NULL THEN 
+            CONCAT(
+              '1. Brand: ', COALESCE(a.additionaldetails->>'brand', 'N/A'), ' | ',
+              '2. Model: ', COALESCE(a.additionaldetails->>'model', 'N/A'), ' | ',
+              '3. Serial Number: ', COALESCE(a.additionaldetails->>'serialNumber', 'N/A'), ' | ',
+              '4. Processor: ', COALESCE(a.additionaldetails->>'processor', 'N/A'), ' | ',
+              '5. RAM: ', COALESCE(a.additionaldetails->>'ram', 'N/A')
+            )
+          ELSE 'No attributes available'
+        END as attributes,
+        COALESCE(a.acquisitioncost, 0) as acquisition_cost,
+        a.purchasedate as purchase_date,
+        a.tenantid as office,
+        COALESCE(a.description, '') as asset_description,
+        a.createdtime as entry_datetime
+      FROM eg_asset_assetdetails a
+      WHERE a.parentcategory = 'COMPUTER_&_PRINTERS'
+    orderby: ORDER BY a.createdtime DESC
+
+  - reportName: FurnitureReport
+    summary: Furniture Report
+    version: 1.0.0
+    moduleName: rainmaker-asset
+    sourceColumns:
+      - name: asset_id
+        label: Asset ID
+        type: string
+        source: asset
+      - name: category
+        label: Category
+        type: string
+        source: asset
+      - name: asset_name
+        label: Asset Name
+        type: string
+        source: asset
+      - name: attributes
+        label: Attributes
+        type: string
+        source: asset
+      - name: acquisition_cost
+        label: Acquisition Cost
+        type: number
+        source: asset
+        total: true
+      - name: purchase_date
+        label: Purchase Date
+        type: epoch
+        source: asset
+      - name: office
+        label: Office
+        type: string
+        source: asset
+      - name: asset_description
+        label: Asset Description
+        type: string
+        source: asset
+      - name: entry_datetime
+        label: Entry Datetime
+        type: epoch
+        source: asset
+    searchParams:
+      - name: division
+        label: Division
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.division = $division
+      - name: district
+        label: District
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.district = $district
+      - name: ulb
+        label: ULB
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.tenantid = $ulb
+      - name: subcategory
+        label: Sub Category
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.subcategory = $subcategory
+      - name: budgethead
+        label: Budget Head
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.budgethead = $budgethead
+      - name: fromDate
+        label: From Date
+        type: epoch
+        source: asset
+        isMandatory: false
+        searchClause: AND a.createdtime >= $fromDate
+      - name: toDate
+        label: To Date
+        type: epoch
+        source: asset
+        isMandatory: false
+        searchClause: AND a.createdtime <= $toDate
+    query: >
+      SELECT
+        a.applicationno as asset_id,
+        a.parentcategory as category,
+        a.name as asset_name,
+        CASE 
+          WHEN a.additionaldetails IS NOT NULL THEN 
+            CONCAT(
+              '1. Material: ', COALESCE(a.additionaldetails->>'material', 'N/A'), ' | ',
+              '2. Color: ', COALESCE(a.additionaldetails->>'color', 'N/A'), ' | ',
+              '3. Dimensions: ', COALESCE(a.additionaldetails->>'dimensions', 'N/A'), ' | ',
+              '4. Condition: ', COALESCE(a.additionaldetails->>'condition', 'N/A'), ' | ',
+              '5. Warranty: ', COALESCE(a.additionaldetails->>'warranty', 'N/A')
+            )
+          ELSE 'No attributes available'
+        END as attributes,
+        COALESCE(a.acquisitioncost, 0) as acquisition_cost,
+        a.purchasedate as purchase_date,
+        a.tenantid as office,
+        COALESCE(a.description, '') as asset_description,
+        a.createdtime as entry_datetime
+      FROM eg_asset_assetdetails a
+      WHERE a.parentcategory = 'FURNITURE'
+    orderby: ORDER BY a.createdtime DESC
+
+  - reportName: AirConditionerReport
+    summary: Air Conditioner Report
+    version: 1.0.0
+    moduleName: rainmaker-asset
+    sourceColumns:
+      - name: asset_id
+        label: Asset ID
+        type: string
+        source: asset
+      - name: category
+        label: Category
+        type: string
+        source: asset
+      - name: asset_name
+        label: Asset Name
+        type: string
+        source: asset
+      - name: attributes
+        label: Attributes
+        type: string
+        source: asset
+      - name: acquisition_cost
+        label: Acquisition Cost
+        type: number
+        source: asset
+        total: true
+      - name: purchase_date
+        label: Purchase Date
+        type: epoch
+        source: asset
+      - name: office
+        label: Office
+        type: string
+        source: asset
+      - name: asset_description
+        label: Asset Description
+        type: string
+        source: asset
+      - name: entry_datetime
+        label: Entry Datetime
+        type: epoch
+        source: asset
+    searchParams:
+      - name: division
+        label: Division
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.division = $division
+      - name: district
+        label: District
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.district = $district
+      - name: ulb
+        label: ULB
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.tenantid = $ulb
+      - name: subcategory
+        label: Sub Category
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.subcategory = $subcategory
+      - name: budgethead
+        label: Budget Head
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.budgethead = $budgethead
+      - name: fromDate
+        label: From Date
+        type: epoch
+        source: asset
+        isMandatory: false
+        searchClause: AND a.createdtime >= $fromDate
+      - name: toDate
+        label: To Date
+        type: epoch
+        source: asset
+        isMandatory: false
+        searchClause: AND a.createdtime <= $toDate
+    query: >
+      SELECT
+        a.applicationno as asset_id,
+        a.parentcategory as category,
+        a.name as asset_name,
+        CASE 
+          WHEN a.additionaldetails IS NOT NULL THEN 
+            CONCAT(
+              '1. Brand: ', COALESCE(a.additionaldetails->>'brand', 'N/A'), ' | ',
+              '2. Model: ', COALESCE(a.additionaldetails->>'model', 'N/A'), ' | ',
+              '3. Capacity: ', COALESCE(a.additionaldetails->>'capacity', 'N/A'), ' | ',
+              '4. Energy Rating: ', COALESCE(a.additionaldetails->>'energyRating', 'N/A'), ' | ',
+              '5. Installation Date: ', COALESCE(a.additionaldetails->>'installationDate', 'N/A')
+            )
+          ELSE 'No attributes available'
+        END as attributes,
+        COALESCE(a.acquisitioncost, 0) as acquisition_cost,
+        a.purchasedate as purchase_date,
+        a.tenantid as office,
+        COALESCE(a.description, '') as asset_description,
+        a.createdtime as entry_datetime
+      FROM eg_asset_assetdetails a
+      WHERE a.parentcategory = 'AIR_CONDITIONER'
+    orderby: ORDER BY a.createdtime DESC
+
+  - reportName: GeneratorReport
+    summary: Generator Report
+    version: 1.0.0
+    moduleName: rainmaker-asset
+    sourceColumns:
+      - name: asset_id
+        label: Asset ID
+        type: string
+        source: asset
+      - name: category
+        label: Category
+        type: string
+        source: asset
+      - name: asset_name
+        label: Asset Name
+        type: string
+        source: asset
+      - name: attributes
+        label: Attributes
+        type: string
+        source: asset
+      - name: acquisition_cost
+        label: Acquisition Cost
+        type: number
+        source: asset
+        total: true
+      - name: purchase_date
+        label: Purchase Date
+        type: epoch
+        source: asset
+      - name: office
+        label: Office
+        type: string
+        source: asset
+      - name: asset_description
+        label: Asset Description
+        type: string
+        source: asset
+      - name: entry_datetime
+        label: Entry Datetime
+        type: epoch
+        source: asset
+    searchParams:
+      - name: division
+        label: Division
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.division = $division
+      - name: district
+        label: District
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.district = $district
+      - name: ulb
+        label: ULB
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.tenantid = $ulb
+      - name: subcategory
+        label: Sub Category
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.subcategory = $subcategory
+      - name: budgethead
+        label: Budget Head
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND a.budgethead = $budgethead
+      - name: fromDate
+        label: From Date
+        type: epoch
+        source: asset
+        isMandatory: false
+        searchClause: AND a.createdtime >= $fromDate
+      - name: toDate
+        label: To Date
+        type: epoch
+        source: asset
+        isMandatory: false
+        searchClause: AND a.createdtime <= $toDate
+    query: >
+      SELECT
+        a.applicationno as asset_id,
+        a.parentcategory as category,
+        a.name as asset_name,
+        CASE 
+          WHEN a.additionaldetails IS NOT NULL THEN 
+            CONCAT(
+              '1. Brand: ', COALESCE(a.additionaldetails->>'brand', 'N/A'), ' | ',
+              '2. Model: ', COALESCE(a.additionaldetails->>'model', 'N/A'), ' | ',
+              '3. Capacity: ', COALESCE(a.additionaldetails->>'capacity', 'N/A'), ' | ',
+              '4. Fuel Type: ', COALESCE(a.additionaldetails->>'fuelType', 'N/A'), ' | ',
+              '5. Installation Date: ', COALESCE(a.additionaldetails->>'installationDate', 'N/A')
+            )
+          ELSE 'No attributes available'
+        END as attributes,
+        COALESCE(a.acquisitioncost, 0) as acquisition_cost,
+        a.purchasedate as purchase_date,
+        a.tenantid as office,
+        COALESCE(a.description, '') as asset_description,
+        a.createdtime as entry_datetime
+      FROM eg_asset_assetdetails a
+      WHERE a.parentcategory = 'GENERATOR'
+    orderby: ORDER BY a.createdtime DESC
