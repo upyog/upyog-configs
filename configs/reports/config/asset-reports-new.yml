@@ -1,5 +1,79 @@
 ---
 ReportDefinitions:
+  - reportName: HierarchicalAssetDataReport
+    summary: Hierarchical Asset Data Report
+    version: 1.0.0
+    moduleName: rainmaker-asset
+    sourceColumns:
+      - name: tenantid
+        label: ULB
+        type: string
+        source: asset
+        total: false
+      - name: classification
+        label: Classification
+        type: string
+        source: asset
+        total: false
+      - name: parentcategory
+        label: Parent Category
+        type: string
+        source: asset
+        total: false
+      - name: category
+        label: Category
+        type: string
+        source: asset
+        total: false
+      - name: entries
+        label: Entries
+        type: number
+        source: asset
+        total: true
+      - name: acquisitioncost
+        label: Acquisition Cost
+        type: number
+        source: asset
+        total: true
+    searchParams:
+      - name: tenantid
+        label: ULB
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND tenantid = $tenantid
+      - name: classification
+        label: Classification
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND classification = $classification
+      - name: parentcategory
+        label: Parent Category
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND parentcategory = $parentcategory
+      - name: category
+        label: Category
+        type: string
+        source: asset
+        isMandatory: false
+        searchClause: AND category = $category
+    query: >
+      SELECT 
+        tenantid,
+        classification,
+        parentcategory,
+        category,
+        COUNT(*) AS entries, 
+        SUM(COALESCE(acquisitioncost, 0)) AS acquisitioncost
+      FROM 
+        eg_asset_assetdetails
+      WHERE 1=1
+      GROUP BY tenantid, classification, parentcategory, category
+      ORDER BY tenantid, classification, parentcategory, category
+      
   - reportName: AssetSummaryReport
     summary: Asset Summary Report
     version: 1.0.0
@@ -48,7 +122,7 @@ ReportDefinitions:
       WHERE 1=1
     groupby: GROUP BY a.classification, a.parentcategory
     orderby: ORDER BY activeassetprice DESC
-
+    
   - reportName: OfficeWiseAssetsReport
     summary: Office Wise Assets Report
     version: 1.0.0
@@ -196,86 +270,6 @@ ReportDefinitions:
       WHERE 1=1
     groupby: GROUP BY a.division, a.district, a.tenantid
     orderby: ORDER BY a.division, a.district
-
-  - reportName: HierarchicalAssetDataReport
-    summary: Hierarchical Asset Data Report
-    version: 1.0.0
-    moduleName: rainmaker-asset
-    sourceColumns:
-      - name: ulb
-        label: ULB
-        type: string
-        source: asset
-        linkedReport:
-          reportName: HierarchicalAssetDataReport
-          linkedColumn: "/report/rainmaker-asset/HierarchicalAssetDataReport/_get?ulb={ulb}"
-      - name: entries
-        label: Entries
-        type: number
-        source: asset
-        total: true
-      - name: qty
-        label: Qty
-        type: number
-        source: asset
-        total: true
-      - name: acquisitioncost
-        label: Acquisition Cost
-        type: number
-        source: asset
-        total: true
-    searchParams:
-      - name: level
-        label: Drill Level
-        type: string
-        source: asset
-        isMandatory: false
-        defaultValue: "1"
-      - name: ulb
-        label: ULB
-        type: string
-        source: asset
-        isMandatory: false
-        searchClause: AND a.tenantid = $ulb
-      - name: classification
-        label: Classification
-        type: string
-        source: asset
-        isMandatory: false
-        searchClause: AND a.classification = $classification
-      - name: category
-        label: Category
-        type: string
-        source: asset
-        isMandatory: false
-        searchClause: AND a.parentcategory = $category
-      - name: fromDate
-        label: From Date
-        type: epoch
-        source: asset
-        isMandatory: false
-        searchClause: AND a.createdtime >= $fromDate
-      - name: toDate
-        label: To Date
-        type: epoch
-        source: asset
-        isMandatory: false
-        searchClause: AND a.createdtime <= $toDate
-    query: >
-      -- If level=2 (drill into a specific ULB), return classification counts
-      -- Otherwise (default level=1) return counts grouped by ULB (tenantid)
-      SELECT
-        CASE WHEN '$level' = '2' THEN a.classification ELSE a.tenantid END AS group_key,
-        CASE WHEN '$level' = '2' THEN a.classification ELSE NULL END AS classification,
-        CASE WHEN '$level' = '2' THEN NULL ELSE a.tenantid END AS ulb,
-        COUNT(*) as entries,
-        COUNT(*) as qty,
-        SUM(COALESCE(a.acquisitioncost, 0)) as acquisitioncost
-      FROM eg_asset_assetdetails a
-      WHERE 1=1
-      -- backend will substitute $ulb if provided via searchParams; keep existing searchClauses active
-    groupby: GROUP BY CASE WHEN '$level' = '2' THEN a.classification ELSE a.tenantid END
-    orderby: ORDER BY group_key
 
   - reportName: VehicleReport
     summary: Vehicle Report
