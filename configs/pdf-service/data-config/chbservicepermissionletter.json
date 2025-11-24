@@ -89,7 +89,7 @@
                 {
                     "variable": "BOOKING_TO_DATE1",
                     "value": {
-                        "path": "$.bookingSlotDetails[(@.length-1)].bookingDate"
+                        "path": "$.bookingSlotDetails[1].bookingDate"
                     }
                 },
                 {
@@ -226,7 +226,7 @@
                 },
                 {
                     "path": "http://collection-services:8080/collection-services/payments/chb-services/_search",
-                    "queryParam": "tenantId=pg,consumerCode=$.bookingNo",
+                    "queryParam": "tenantId=pg.mohali,consumerCode=$.bookingNo",
                     "apiRequest": null,
                     "responseMapping": [
                         {
