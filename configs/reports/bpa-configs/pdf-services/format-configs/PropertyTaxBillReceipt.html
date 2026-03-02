@@ -211,6 +211,8 @@
          margin-right: auto;
          /* Center the QR code */
          }
+         .copyrightText {
+         text-align: center;}
       </style>
    </head>
    <body>
@@ -430,10 +432,14 @@
                </li>
 			   <li>Bill generation and data accuracy are the responsibility of the concerned ULB. For any discrepancy, please contact the  <span th:text="${ulbType}"> NA </span>,<span th:text="${ulbName}"> NA </span> ULB office.
 			   </li>
-			   <li>This receipt has been generated electronically and does not require a physical signature. | Generated on 
-			                     
-               <span th:text="${#dates.format(#dates.createNow(), 'dd.MM.yyyy')}"></span>
-			   </li>
+			   <li>This receipt has been generated electronically and does not require a physical signature. | Generated on </li>
+            <li th:if="${ulbName == 'Solan'}">
+               Conservancy Tax prior to 04.08.2022 shall be paid separately at the office as it is not included in arrears, and if already paid up to that date, the notice may be ignored
+            </li>
+            <span th:text="${#dates.format(#dates.createNow(), 'dd.MM.yyyy')}"
+                  style="display:block; text-align:center;">
+            </span>
+               <!-- <span th:text="${#dates.format(#dates.createNow(), 'dd.MM.yyyy')}" style="text-align: center;"></span> -->
             </ul>
          </div>
       </div>
