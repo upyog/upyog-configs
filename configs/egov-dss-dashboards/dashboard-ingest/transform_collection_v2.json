@@ -10,14 +10,14 @@
       "paidBy": "paidBy",
       "payer": "payer",
       "paymentDetails": {
-        "$i": {
+        "*": {
           "businessService": "paymentDetails.businessService",
           "receiptType": "paymentDetails.receiptType",
           "totalDue": "paymentDetails.totalDue",
           "receiptDate": "paymentDetails.receiptDate",
           "bill": {
             "billDetails": {
-              "$j": {
+              "*": {
                 "boundary": "paymentDetails.bill.billDetails.boundary",
                 "amount": "paymentDetails.bill.billDetails.amount",
                 "fromPeriod": "paymentDetails.bill.billDetails.fromPeriod",
