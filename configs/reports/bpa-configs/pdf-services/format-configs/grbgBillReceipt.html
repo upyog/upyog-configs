@@ -248,7 +248,7 @@
                   <td align="center">
                      <h1>Garbage Collection Bill</h1>
                   </td>
-                  <td align="right"><strong>Financial Year:</strong> <br /><span>2025-26</span></td>
+                  <td align="right"><strong>Financial Year:</strong> <br /><span th:text="${finYear}">NA</span></td>
                </tr>
             </table>
          </div>
@@ -271,10 +271,18 @@
                            <th>Bill Due Date</th>
                            <td><span th:text="${billDueDate}">NA</span></td>
                         </tr>
+						<tr>
+						     <th>Total Amount</th>
+						     <td><span th:text="${totalAmount}">NA</span></td>
+						</tr>
                         <tr>
                            <th>Amount Due (INR)</th>
-                           <td><span class="highlight"><span th:text="${totalTax}"> NA </span></span></td>
+                           <td><span class="highlight"><span th:text="${amountDue}"> NA </span></span></td>
                         </tr>
+						<tr>
+						   <th>Amount Paid (INR)</th>
+						   <td><span class="highlight"><span th:text="${amountPaid}"> NA </span></span></td>
+						</tr>
                         <tr>
                            <th>Period</th>
                            <td><span th:text="${from}">NA</span> - <span th:text="${to}">NA</span></td>
@@ -303,6 +311,10 @@
                            <th>Owner Name</th>
                            <td><span th:text="${ownerOrOccupier}">NA</span></td>
                         </tr>
+						<tr>
+							<th>Father</th>
+							<td><span th:text="${fatherOrHusbandName}">NA</span></td>
+						</tr>
 						<tr>
 						    <th>Mobile No</th>
 						    <td><span th:text="${mobileNo}">NA</span></td>
