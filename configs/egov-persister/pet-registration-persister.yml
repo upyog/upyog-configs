@@ -7,7 +7,7 @@ serviceMaps:
    fromTopic: save-ptr-application
    isTransaction: true
    queryMaps:
-    - query: INSERT INTO eg_ptr_registration (id, tenantid, applicationnumber, applicantname,fathername, mobilenumber, emailid, aadharnumber,createdby, lastmodifiedby, createdtime, lastmodifiedtime, additionaldetail, status, is_banned_pet) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+    - query: INSERT INTO eg_ptr_registration (id, tenantid, applicationnumber, applicantname,fathername, mobilenumber, emailid, aadharnumber,createdby, lastmodifiedby, createdtime, lastmodifiedtime, additionaldetail, status, is_banned_pet, applicationType) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 
       basePath: PetRegistrationApplications.*
       jsonMaps:
@@ -43,6 +43,8 @@ serviceMaps:
        - jsonPath: $.PetRegistrationApplications.*.status
 
        - jsonPath: $.PetRegistrationApplications.*.isBannedPet
+       
+       - jsonPath: $.PetRegistrationApplications.*.applicationType
 
     
     
@@ -323,4 +325,3 @@ serviceMaps:
        - jsonPath: $.PetRegistrationApplications.*.auditDetails.lastModifiedTime
 
        - jsonPath: $.PetRegistrationApplications.*.documents.*.id
-
