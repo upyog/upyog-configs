@@ -103,15 +103,36 @@
 						}
 					},
 					{
+						"variable": "fatherOrHusbandName",
+						"value": {
+						   "path": "$.fatherOrHusbandName"
+						}
+					},
+					{
 						"variable": "totalTax",
 						"value": {
 							"path": "$.totalTax"
-						}
+					}
 					},
 					{
 						"variable": "billGeneratedDate",
 						"value": {
 							"path": "$.billGeneratedDate"
+					}
+					},
+					{
+					  "variable": "amountDue",
+					  "value": { "path": "$.amountDue" 
+				  		}
+					},
+					{
+					  "variable": "amountPaid",
+					  "value": { "path": "$.amountPaid" 
+				  		}
+					},
+					{
+						"variable": "totalAmount",
+						"value": { "path": "$.totalAmount" 
 						}
 					},
 					{
@@ -130,6 +151,12 @@
 						"variable": "oldGarbageId",
 						"value": {
 							"path": "$.oldGarbageId"
+						}
+					},
+					{
+						"variable": "fatherOrHusbandName",
+						"value": {
+								"path": "$.fatherOrHusbandName"
 						}
 					}
 				]
