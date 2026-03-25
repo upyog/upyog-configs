@@ -1,0 +1,266 @@
+SearchDefinitions:
+  moduleName: ndc-services
+  summary: NDC Inbox Search API
+  version: 1.0.0
+  definitions:
+    - name: inboxndcsearch
+      query:
+        baseQuery: >
+          SELECT row_to_json(result) FROM (
+             SELECT DISTINCT 
+               a.uuid AS uuid,
+               a.applicationno,
+               a.applicationstatus,
+               a.active,a.reason,
+               a.createdby AS a_createdby,
+               a.lastmodifiedby AS a_lastmodifiedby,
+               a.createdtime AS a_createdtime,
+               a.lastmodifiedtime AS a_lastmodifiedtime,
+               pi.businessservice AS wf_businessservice,
+               pi.status AS wf_status,
+               pi.createdby AS wf_createdby,
+               pi.lastmodifiedby AS wf_lastmodifiedby,
+               assg.assignee AS wf_assignee
+             FROM eg_ndc_application a
+             INNER JOIN eg_wf_processinstance_v2 pi ON pi.businessid = a.applicationno AND pi.latest = TRUE
+             INNER JOIN eg_ndc_owner ownerinfo ON ownerinfo.ndcapplicationuuid = a.uuid
+             LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
+             $where
+             ORDER BY a_createdtime ASC
+             $pagination
+           ) result
+      searchParams:
+        condition: AND
+        params:
+          - name: a.tenantid
+            isMandatory: true
+            jsonPath: $.searchCriteria.tenantId
+          - name: a.uuid
+            isMandatory: false
+            jsonPath: $.searchCriteria.uuid
+          - name: a.applicationno
+            isMandatory: false
+            jsonPath: $.searchCriteria.applicationNo
+          - name: a.applicationstatus
+            isMandatory: false
+            jsonPath: $.searchCriteria.status
+          - name: a.active
+            isMandatory: false
+            jsonPath: $.searchCriteria.active
+          - name: pi.businessservice
+            isMandatory: false
+            jsonPath: $.searchCriteria.businessservice
+          - name: pi.status
+            isMandatory: false
+            jsonPath: $.searchCriteria.wfStatus
+          - name: assg.assignee
+            isMandatory: false
+            jsonPath: $.searchCriteria.assignee
+          - name: a.createdtime
+            isMandatory: false
+            jsonPath: $.searchCriteria.fromDate
+          - name: a.createdtime
+            isMandatory: false
+            jsonPath: $.searchCriteria.toDate
+          - name: ownerinfo.uuid
+            isMandatory: false
+            jsonPath: $.searchCriteria.userid
+
+        pagination:
+          noOfRecords: $.searchCriteria.noOfRecords
+          offset: $.searchCriteria.offset
+      output:
+        jsonFormat: {"ResponseInfo": {}, "Applications": []}
+        outJsonPath: $.Applications
+        responseInfoPath: $.ResponseInfo
+
+    - name: inboxndcsearchcount
+      query:
+        baseQuery: >
+          SELECT row_to_json(t) from (
+          SELECT COUNT(DISTINCT a.uuid) AS count
+           FROM eg_ndc_application a
+           INNER JOIN eg_wf_processinstance_v2 pi ON pi.businessid = a.applicationno AND pi.latest = TRUE
+           LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
+           $where
+           )t
+      searchParams:
+        condition: AND
+        params:
+          - name: a.tenantid
+            isMandatory: true
+            jsonPath: $.searchCriteria.tenantId
+          - name: a.uuid
+            isMandatory: false
+            jsonPath: $.searchCriteria.uuid
+          - name: a.applicationno
+            isMandatory: false
+            jsonPath: $.searchCriteria.applicationNo
+          - name: a.applicationstatus
+            isMandatory: false
+            jsonPath: $.searchCriteria.status
+          - name: a.active
+            isMandatory: false
+            jsonPath: $.searchCriteria.active
+          - name: pi.businessservice
+            isMandatory: false
+            jsonPath: $.searchCriteria.businessservice
+          - name: pi.status
+            isMandatory: false
+            jsonPath: $.searchCriteria.wfStatus
+          - name: assg.assignee
+            isMandatory: false
+            jsonPath: $.searchCriteria.assignee
+          - name: a.createdtime
+            isMandatory: false
+            jsonPath: $.searchCriteria.fromDate
+          - name: a.createdtime
+            isMandatory: false
+            jsonPath: $.searchCriteria.toDate
+        pagination:
+          noOfRecords: $.searchCriteria.noOfRecords
+          offset: $.searchCriteria.offset
+      output:
+        jsonFormat: {"ResponseInfo": {}, "TotalCount": {}}
+        outJsonPath: $.TotalCount
+        responseInfoPath: $.ResponseInfo
+
+    - name: inboxndcsearchdesc
+      query:
+        baseQuery: >
+          SELECT row_to_json(result)
+           FROM (
+             SELECT DISTINCT a.uuid AS uuid,
+               a.tenantid,
+               a.applicationno,
+               a.applicationstatus,
+               a.active,a.reason,
+               a.createdby AS a_createdby,
+               a.lastmodifiedby AS a_lastmodifiedby,
+               a.createdtime AS a_createdtime,
+               a.lastmodifiedtime AS a_lastmodifiedtime,
+               pi.businessservice AS wf_businessservice,
+               pi.status AS wf_status,
+               assg.assignee AS wf_assignee
+             FROM eg_ndc_application a
+             INNER JOIN eg_wf_processinstance_v2 pi ON pi.businessid = a.applicationno AND pi.latest = TRUE
+             INNER JOIN eg_ndc_owner ownerinfo ON ownerinfo.ndcapplicationuuid = a.uuid
+             LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
+             $where
+             ORDER BY a_createdtime DESC
+             $pagination
+           ) result
+      searchParams:
+        condition: AND
+        params:
+          - name: a.tenantid
+            isMandatory: true
+            jsonPath: $.searchCriteria.tenantId
+          - name: a.uuid
+            isMandatory: false
+            jsonPath: $.searchCriteria.uuid
+          - name: a.applicationno
+            isMandatory: false
+            jsonPath: $.searchCriteria.applicationNo
+          - name: a.applicationstatus
+            isMandatory: false
+            jsonPath: $.searchCriteria.status
+          - name: a.active
+            isMandatory: false
+            jsonPath: $.searchCriteria.active
+          - name: pi.businessservice
+            isMandatory: false
+            jsonPath: $.searchCriteria.businessservice
+          - name: pi.status
+            isMandatory: false
+            jsonPath: $.searchCriteria.wfStatus
+          - name: assg.assignee
+            isMandatory: false
+            jsonPath: $.searchCriteria.assignee
+          - name: a.createdtime
+            isMandatory: false
+            jsonPath: $.searchCriteria.fromDate
+          - name: a.createdtime
+            isMandatory: false
+            jsonPath: $.searchCriteria.toDate
+          - name: ownerinfo.uuid
+            isMandatory: false
+            jsonPath: $.searchCriteria.userid
+        pagination:
+          noOfRecords: $.searchCriteria.noOfRecords
+          offset: $.searchCriteria.offset
+      output:
+        jsonFormat: {"ResponseInfo": {}, "Applications": []}
+        outJsonPath: $.Applications
+        responseInfoPath: $.ResponseInfo
+
+
+    - name: inboxndcsearchall
+      query:
+        baseQuery: >
+          SELECT row_to_json(result) FROM (
+            SELECT DISTINCT
+              a.uuid AS uuid,
+              a.applicationno,
+              a.tenantid,
+              a.applicationstatus,
+              a.active,a.reason,
+              a.createdby AS a_createdby,
+              a.lastmodifiedby AS a_lastmodifiedby,
+              a.createdtime AS a_createdtime,
+              a.lastmodifiedtime AS a_lastmodifiedtime,
+              pi.businessservice AS wf_businessservice,
+
+              pi.status AS wf_status,
+              pi.createdby AS wf_createdby,
+              pi.lastmodifiedby AS wf_lastmodifiedby,
+              assg.assignee AS wf_assignee
+            FROM eg_ndc_application a
+            INNER JOIN eg_wf_processinstance_v2 pi ON pi.businessid = a.applicationno AND pi.latest = TRUE
+            LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
+            $where
+            ORDER BY a_createdtime DESC
+          ) result
+      searchParams:
+        condition: AND
+        params:
+          - name: a.tenantid
+            isMandatory: true
+            jsonPath: $.searchCriteria.tenantId
+          - name: a.uuid
+            isMandatory: false
+            jsonPath: $.searchCriteria.uuid
+          - name: a.applicationno
+            isMandatory: false
+            jsonPath: $.searchCriteria.applicationNo
+          - name: a.applicationstatus
+            isMandatory: false
+            jsonPath: $.searchCriteria.status
+          - name: assg.assignee
+            isMandatory: false
+            jsonPath: $.searchCriteria.assignee
+          - name: a.active
+            isMandatory: false
+            jsonPath: $.searchCriteria.active
+          - name: pi.businessservice
+            isMandatory: false
+            jsonPath: $.searchCriteria.businessservice
+          - name: pi.status
+            isMandatory: false
+            jsonPath: $.searchCriteria.wfStatus
+          - name: assg.assignee
+            isMandatory: false
+            jsonPath: $.searchCriteria.assignee
+          - name: a.createdtime
+            isMandatory: false
+            jsonPath: $.searchCriteria.fromDate
+          - name: a.createdtime
+            isMandatory: false
+            jsonPath: $.searchCriteria.toDate
+        pagination:
+          noOfRecords: $.searchCriteria.noOfRecords
+          offset: $.searchCriteria.offset
+      output:
+        jsonFormat: {"ResponseInfo": {}, "Applications": []}
+        outJsonPath: $.Applications
+        responseInfoPath: $.ResponseInfo
