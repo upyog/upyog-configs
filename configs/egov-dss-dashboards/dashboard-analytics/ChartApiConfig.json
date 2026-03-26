@@ -4651,16 +4651,16 @@
       {
         "module": "WS",
         "indexName": "water-services",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Closed With In Sla\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.applicationStatus.keyword\":[\"CONNECTION_ACTIVATED\",\"REJECTED\"]}},{\"script\":{\"script\":{\"source\":\"if (doc['Data.auditDetails.lastModifiedTime'].size() == 0 || doc['Data.auditDetails.createdTime'].size() == 0) { return false; } return doc['Data.auditDetails.lastModifiedTime'].value - doc['Data.auditDetails.createdTime'].value < params.threshold;\",\"lang\":\"painless\",\"params\":{\"threshold\":172800000}}}}]}},\"aggs\":{\"count\":{\"terms\":{\"field\":\"Data.tenantId.keyword\"},\"aggs\":{\"tenant_count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"Total Applications\":{\"terms\":{\"field\":\"Data.tenantId.keyword\"},\"aggs\":{\"tenant_count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}}}}",
-        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"tenantId\" : \"Data.tenantId.keyword\" \r\n}",
-        "dateRefField": "Data.history.auditDetails.createdTime"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Closed With In Sla\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.applicationStatus.keyword\":[\"CONNECTION_ACTIVATED\",\"REJECTED\"]}},{\"script\":{\"script\":{\"source\":\"if (doc['Data.auditDetails.lastModifiedTime'].size() == 0 || doc['Data.auditDetails.createdTime'].size() == 0) { return false; } return doc['Data.auditDetails.lastModifiedTime'].value - doc['Data.auditDetails.createdTime'].value < params.threshold;\",\"lang\":\"painless\",\"params\":{\"threshold\":172800000}}}}]}},\"Total Applications\":{\"terms\":{\"field\":\"Data.tenantId.keyword\"},\"aggs\":{\"tenant_count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}}}}",
+        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"tenantId\" : \"Data.tenantId.keyword\"}",
+        "dateRefField": "Data.auditDetails.createdTime"
       },
       {
         "module": "WS",
         "indexName": "sewerage-services",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Closed With In Sla\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.applicationStatus.keyword\":[\"CONNECTION_ACTIVATED\",\"REJECTED\"]}},{\"script\":{\"script\":{\"source\":\"if (doc['Data.auditDetails.lastModifiedTime'].size() == 0 || doc['Data.auditDetails.createdTime'].size() == 0) { return false; } return doc['Data.auditDetails.lastModifiedTime'].value - doc['Data.auditDetails.createdTime'].value < params.threshold;\",\"lang\":\"painless\",\"params\":{\"threshold\":172800000}}}}]}},\"aggs\":{\"count\":{\"terms\":{\"field\":\"Data.tenantId.keyword\"},\"aggs\":{\"tenant_count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"Total Applications\":{\"terms\":{\"field\":\"Data.tenantId.keyword\"},\"aggs\":{\"tenant_count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}}}}",
-        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"tenantId\" : \"Data.tenantId.keyword\" \r\n}",
-        "dateRefField": "Data.history.auditDetails.createdTime"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Closed With In Sla\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.applicationStatus.keyword\":[\"CONNECTION_ACTIVATED\",\"REJECTED\"]}},{\"script\":{\"script\":{\"source\":\"if (doc['Data.auditDetails.lastModifiedTime'].size() == 0 || doc['Data.auditDetails.createdTime'].size() == 0) { return false; } return doc['Data.auditDetails.lastModifiedTime'].value - doc['Data.auditDetails.createdTime'].value < params.threshold;\",\"lang\":\"painless\",\"params\":{\"threshold\":172800000}}}}]}},\"Total Applications\":{\"terms\":{\"field\":\"Data.tenantId.keyword\"},\"aggs\":{\"tenant_count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}}}}",
+        "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"tenantId\" : \"Data.tenantId.keyword\"}",
+        "dateRefField": "Data.auditDetails.createdTime"
       }
     ],
     "translateTenantCode": false,
