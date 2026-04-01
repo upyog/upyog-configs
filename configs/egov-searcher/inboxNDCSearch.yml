@@ -27,7 +27,7 @@ SearchDefinitions:
              LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
              $where
              AND pi.createdtime IN (select max(createdtime) from eg_wf_processinstance_v2 wf where wf.businessid = a.applicationno GROUP BY wf.businessid)
-             order by a.createdtime asc $pagination
+             order by a_createdtime asc $pagination
            ) result
       searchParams:
         condition: AND
@@ -77,15 +77,16 @@ SearchDefinitions:
     - name: inboxndcsearchcount
       query:
         baseQuery: >
-          SELECT row_to_json(t) from (
-          SELECT COUNT(DISTINCT a.uuid) AS count
-           FROM eg_ndc_application a
-           INNER JOIN eg_wf_processinstance_v2 pi ON pi.businessid = a.applicationno
-           LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
-           $where
-           AND pi.createdtime IN (select max(createdtime) from eg_wf_processinstance_v2 wf where wf.businessid = a.applicationno GROUP BY wf.businessid)
-           order by a.createdtime asc
-           )t
+          SELECT row_to_json(TotalCount) from (SELECT COUNT(result) from
+          (
+          select DISTINCT(a.applicationno) as applicationno,a.createdtime as createdtime from eg_ndc_application a
+          INNER JOIN eg_wf_processinstance_v2 pi ON pi.businessid = a.applicationno
+          LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
+          $where
+          AND pi.createdtime IN (select max(createdtime) from eg_wf_processinstance_v2 wf where wf.businessid = a.applicationno GROUP BY wf.businessid)
+          order by a.createdtime asc
+          ) result) TotalCount
+
       searchParams:
         condition: AND
         params:
@@ -150,7 +151,7 @@ SearchDefinitions:
              LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
              $where
              AND pi.createdtime IN (select max(createdtime) from eg_wf_processinstance_v2 wf where wf.businessid = a.applicationno GROUP BY wf.businessid)
-             order by a.createdtime desc $pagination
+             order by a_createdtime desc $pagination
            ) result
       searchParams:
         condition: AND
@@ -222,7 +223,7 @@ SearchDefinitions:
             LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
             $where
             AND pi.createdtime IN (select max(createdtime) from eg_wf_processinstance_v2 wf where wf.businessid = a.applicationno GROUP BY wf.businessid)
-            order by a.createdtime desc
+            order by a_createdtime desc
           ) result
       searchParams:
         condition: AND
