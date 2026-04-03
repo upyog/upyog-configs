@@ -145,3 +145,76 @@ serviceMaps:
       - jsonPath: $.TransactionDump.auditDetails.lastModifiedTime
 
       - jsonPath: $.TransactionDump.txnId
+
+  - version: 1.0
+    name: pg-service-refund
+    description: Persists refund transactions
+    fromTopic: save-pg-refund-txns
+    isTransaction: true
+    queryMaps:
+    - query: INSERT INTO eg_pg_transaction_refund (id, tenant_id, refund_id, original_txn_id, service_code, original_amount, refund_amount, gateway_txn_id, gateway, gateway_status_code, gateway_status_msg, status, additional_details, created_by, created_time, last_updated_by, last_updated_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+      basePath: Refund
+      jsonMaps:
+
+      - jsonPath: $.Refund.id
+
+      - jsonPath: $.Refund.tenantId
+
+      - jsonPath: $.Refund.refundId
+
+      - jsonPath: $.Refund.originalTxnId
+
+      - jsonPath: $.Refund.serviceCode
+
+      - jsonPath: $.Refund.originalAmount
+
+      - jsonPath: $.Refund.refundAmount
+
+      - jsonPath: $.Refund.gatewayTxnId
+
+      - jsonPath: $.Refund.gateway
+
+      - jsonPath: $.Refund.gatewayStatusCode
+
+      - jsonPath: $.Refund.gatewayStatusMsg
+
+      - jsonPath: $.Refund.status
+
+      - jsonPath: $.Refund.additionalDetails
+        type: JSON
+        dbType: JSONB
+
+      - jsonPath: $.Refund.auditDetails.createdBy
+
+      - jsonPath: $.Refund.auditDetails.createdTime
+
+      - jsonPath: $.Refund.auditDetails.lastUpdatedBy
+
+      - jsonPath: $.Refund.auditDetails.lastUpdatedTime
+
+  - version: 1.0
+    name: pg-service-refund
+    description: Update refund transaction
+    fromTopic: update-pg-refund-txns
+    isTransaction: true
+    queryMaps:
+
+    - query: UPDATE eg_pg_transaction_refund SET gateway_status_code=?, gateway_status_msg=?, status=?, last_updated_by=?, last_updated_time=? WHERE refund_id=? AND tenant_id=?;
+
+      basePath: Refund
+      jsonMaps:
+
+      - jsonPath: $.Refund.gatewayStatusCode
+
+      - jsonPath: $.Refund.gatewayStatusMsg
+
+      - jsonPath: $.Refund.status
+
+      - jsonPath: $.Refund.auditDetails.lastUpdatedBy
+
+      - jsonPath: $.Refund.auditDetails.lastUpdatedTime
+
+      - jsonPath: $.Refund.refundId
+
+      - jsonPath: $.Refund.tenantId
