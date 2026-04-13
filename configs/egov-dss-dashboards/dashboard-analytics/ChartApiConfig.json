@@ -7385,7 +7385,7 @@
       },
       {
         "postAggregationTheory": "repsonseToDifferenceOfDates",
-        "actionName": "PercentageComputedField",
+        "actionName": "PercentageComputedFiewald",
         "fields": [
           "Total Collection",
           "Target Collection"
@@ -13028,10 +13028,10 @@
     "queries": [
       {
         "module": "COMMON",
-        "requestQueryMap": "{\"state\" : \"state.keyword\",  \"ulb\" : \"ulb.keyword\", \"ward\" : \"ward.keyword\"}",
+        "requestQueryMap": "{\"state\" : \"state\",  \"ulb\" : \"ulb\", \"ward\" : \"ward\"}",
         "dateRefField": "date",
-        "indexName": "mcollect-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Ward\":{\"terms\":{\"field\":\"ward.keyword\",\"size\":\"1000\"},  \"aggs\":{\"Total_Receipts\":{\"sum\":{\"field\":\"numberOfReceiptsForPaymentMode\"}},\"MC_TOTAL_COLLECTION\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}},\"Total_Challans\":{\"sum\":{\"field\":\"numberOfChallansForChallanStatus\"}} }}}}}}"
+        "indexName": "mcollect-national-dashboard-*",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[]}},\"aggs\":{\"Ward\":{\"terms\":{\"field\":\"ward\",\"size\":\"1000\"},  \"aggs\":{\"Total_Receipts\":{\"sum\":{\"field\":\"numberOfReceiptsForPaymentMode\"}},\"MC_TOTAL_COLLECTION\":{\"sum\":{\"field\":\"todaysCollectionForPaymentMode\"}},\"Total_Challans\":{\"sum\":{\"field\":\"numberOfChallansForChallanStatus\"}} }}}}}}"
       }
     ],
     "isMdmsEnabled": false,
@@ -24584,5 +24584,6 @@
     "insight": {},
     "_comment": "SV license rejection rate"
   }
+
 
 }
