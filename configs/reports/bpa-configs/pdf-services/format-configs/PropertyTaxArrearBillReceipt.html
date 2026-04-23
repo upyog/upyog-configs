@@ -242,7 +242,11 @@
             <table>
                <tr>
                   <td colspan="2">
-                     <h1>Property Tax - Bill Receipt</h1>
+					<h1 th:text="${paymentStatus == 'Success' or paymentStatus == 'Partially Paid'} 
+										    ? 'Property Tax - Bill Receipt' 
+										    : 'Property Collection Bill'">
+										    Property Tax - Bill Receipt
+					</h1>
                   </td>
                </tr>
                <tr>
