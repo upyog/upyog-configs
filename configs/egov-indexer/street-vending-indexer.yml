@@ -1,0 +1,185 @@
+ServiceMaps:
+  serviceName: Street Vending Service
+  version: 1.0.0
+  mappings:
+    - topic: create-street-vending
+      configKey: INDEX
+      indexes:
+        - name: street-vending
+          type: general
+          id: $.streetVendingDetail.applicationId
+          isBulk: false
+          timeStampField: $.streetVendingDetail.auditDetails.createdTime
+          jsonPath: $
+          customJsonMapping:
+            indexMapping: {"Data":{"applicationId":"","tenantId":"","applicationNo":"","applicationStatus":"","vendingActivity":"","vendingZone":"","locality":"","vendorDetail":[],"addressDetails":[],"auditDetails":{},"tenantData":{},"@timestamp":"timestamp"}}
+            fieldMapping:
+              - inJsonPath: $.streetVendingDetail.applicationId
+                outJsonPath: $.Data.applicationId
+              - inJsonPath: $.streetVendingDetail.tenantId
+                outJsonPath: $.Data.tenantId
+              - inJsonPath: $.streetVendingDetail.applicationNo
+                outJsonPath: $.Data.applicationNo
+              - inJsonPath: $.streetVendingDetail.applicationStatus
+                outJsonPath: $.Data.applicationStatus
+              - inJsonPath: $.streetVendingDetail.vendingActivity
+                outJsonPath: $.Data.vendingActivity
+              - inJsonPath: $.streetVendingDetail.vendingZone
+                outJsonPath: $.Data.vendingZone
+              - inJsonPath: $.streetVendingDetail.locality
+                outJsonPath: $.Data.locality
+              - inJsonPath: $.streetVendingDetail.vendorDetail
+                outJsonPath: $.Data.vendorDetail
+              - inJsonPath: $.streetVendingDetail.addressDetails
+                outJsonPath: $.Data.addressDetails
+              - inJsonPath: $.streetVendingDetail.auditDetails
+                outJsonPath: $.Data.auditDetails
+              - inJsonPath: $.@timestamp
+                outJsonPath: $.Data.@timestamp
+            mdmsMapping:
+              - path: http://egov-mdms-service:8080/egov-mdms-service/v1/_search
+                moduleName: tenant
+                masterName: tenants
+                tenantId: pg
+                filter: "[?(@.code == $tenant)]"
+                filterMapping:
+                  - variable: $tenant
+                    valueJsonpath: $.streetVendingDetail.tenantId
+                uriResponseMapping:
+                  - inJsonPath: $.MdmsRes.tenant.tenants
+                    outJsonPath: $.Data.tenantData
+
+        - name: street-vending-enriched
+          type: general
+          id: $.streetVendingDetail.applicationId
+          isBulk: false
+          timeStampField: $.streetVendingDetail.auditDetails.createdTime
+          jsonPath: $
+          customJsonMapping:
+            indexMapping: {"Data":{"applicationId":"","tenantId":"","applicationNo":"","applicationStatus":"","vendingActivity":"","vendingZone":"","locality":"","vendorDetail":[],"addressDetails":[],"auditDetails":{},"tenantData":{},"@timestamp":"timestamp"}}
+            fieldMapping:
+              - inJsonPath: $.streetVendingDetail.applicationId
+                outJsonPath: $.Data.applicationId
+              - inJsonPath: $.streetVendingDetail.tenantId
+                outJsonPath: $.Data.tenantId
+              - inJsonPath: $.streetVendingDetail.applicationNo
+                outJsonPath: $.Data.applicationNo
+              - inJsonPath: $.streetVendingDetail.applicationStatus
+                outJsonPath: $.Data.applicationStatus
+              - inJsonPath: $.streetVendingDetail.vendingActivity
+                outJsonPath: $.Data.vendingActivity
+              - inJsonPath: $.streetVendingDetail.vendingZone
+                outJsonPath: $.Data.vendingZone
+              - inJsonPath: $.streetVendingDetail.locality
+                outJsonPath: $.Data.locality
+              - inJsonPath: $.streetVendingDetail.vendorDetail
+                outJsonPath: $.Data.vendorDetail
+              - inJsonPath: $.streetVendingDetail.addressDetails
+                outJsonPath: $.Data.addressDetails
+              - inJsonPath: $.streetVendingDetail.auditDetails
+                outJsonPath: $.Data.auditDetails
+              - inJsonPath: $.@timestamp
+                outJsonPath: $.Data.@timestamp
+            mdmsMapping:
+              - path: http://egov-mdms-service:8080/egov-mdms-service/v1/_search
+                moduleName: tenant
+                masterName: tenants
+                tenantId: pg
+                filter: "[?(@.code == $tenant)]"
+                filterMapping:
+                  - variable: $tenant
+                    valueJsonpath: $.streetVendingDetail.tenantId
+                uriResponseMapping:
+                  - inJsonPath: $.MdmsRes.tenant.tenants
+                    outJsonPath: $.Data.tenantData
+
+    - topic: update-street-vending
+      configKey: INDEX
+      indexes:
+        - name: street-vending
+          type: general
+          id: $.streetVendingDetail.applicationId
+          isBulk: false
+          timeStampField: $.streetVendingDetail.auditDetails.lastModifiedTime
+          jsonPath: $
+          customJsonMapping:
+            indexMapping: {"Data":{"applicationId":"","tenantId":"","applicationNo":"","applicationStatus":"","vendingActivity":"","vendingZone":"","locality":"","vendorDetail":[],"addressDetails":[],"auditDetails":{},"tenantData":{},"@timestamp":"timestamp"}}
+            fieldMapping:
+              - inJsonPath: $.streetVendingDetail.applicationId
+                outJsonPath: $.Data.applicationId
+              - inJsonPath: $.streetVendingDetail.tenantId
+                outJsonPath: $.Data.tenantId
+              - inJsonPath: $.streetVendingDetail.applicationNo
+                outJsonPath: $.Data.applicationNo
+              - inJsonPath: $.streetVendingDetail.applicationStatus
+                outJsonPath: $.Data.applicationStatus
+              - inJsonPath: $.streetVendingDetail.vendingActivity
+                outJsonPath: $.Data.vendingActivity
+              - inJsonPath: $.streetVendingDetail.vendingZone
+                outJsonPath: $.Data.vendingZone
+              - inJsonPath: $.streetVendingDetail.locality
+                outJsonPath: $.Data.locality
+              - inJsonPath: $.streetVendingDetail.vendorDetail
+                outJsonPath: $.Data.vendorDetail
+              - inJsonPath: $.streetVendingDetail.addressDetails
+                outJsonPath: $.Data.addressDetails
+              - inJsonPath: $.streetVendingDetail.auditDetails
+                outJsonPath: $.Data.auditDetails
+              - inJsonPath: $.@timestamp
+                outJsonPath: $.Data.@timestamp
+            mdmsMapping:
+              - path: http://egov-mdms-service:8080/egov-mdms-service/v1/_search
+                moduleName: tenant
+                masterName: tenants
+                tenantId: pg
+                filter: "[?(@.code == $tenant)]"
+                filterMapping:
+                  - variable: $tenant
+                    valueJsonpath: $.streetVendingDetail.tenantId
+                uriResponseMapping:
+                  - inJsonPath: $.MdmsRes.tenant.tenants
+                    outJsonPath: $.Data.tenantData
+
+        - name: street-vending-enriched
+          type: general
+          id: $.streetVendingDetail.applicationId
+          isBulk: false
+          timeStampField: $.streetVendingDetail.auditDetails.lastModifiedTime
+          jsonPath: $
+          customJsonMapping:
+            indexMapping: {"Data":{"applicationId":"","tenantId":"","applicationNo":"","applicationStatus":"","vendingActivity":"","vendingZone":"","locality":"","vendorDetail":[],"addressDetails":[],"auditDetails":{},"tenantData":{},"@timestamp":"timestamp"}}
+            fieldMapping:
+              - inJsonPath: $.streetVendingDetail.applicationId
+                outJsonPath: $.Data.applicationId
+              - inJsonPath: $.streetVendingDetail.tenantId
+                outJsonPath: $.Data.tenantId
+              - inJsonPath: $.streetVendingDetail.applicationNo
+                outJsonPath: $.Data.applicationNo
+              - inJsonPath: $.streetVendingDetail.applicationStatus
+                outJsonPath: $.Data.applicationStatus
+              - inJsonPath: $.streetVendingDetail.vendingActivity
+                outJsonPath: $.Data.vendingActivity
+              - inJsonPath: $.streetVendingDetail.vendingZone
+                outJsonPath: $.Data.vendingZone
+              - inJsonPath: $.streetVendingDetail.locality
+                outJsonPath: $.Data.locality
+              - inJsonPath: $.streetVendingDetail.vendorDetail
+                outJsonPath: $.Data.vendorDetail
+              - inJsonPath: $.streetVendingDetail.addressDetails
+                outJsonPath: $.Data.addressDetails
+              - inJsonPath: $.streetVendingDetail.auditDetails
+                outJsonPath: $.Data.auditDetails
+              - inJsonPath: $.@timestamp
+                outJsonPath: $.Data.@timestamp
+            mdmsMapping:
+              - path: http://egov-mdms-service:8080/egov-mdms-service/v1/_search
+                moduleName: tenant
+                masterName: tenants
+                tenantId: pg
+                filter: "[?(@.code == $tenant)]"
+                filterMapping:
+                  - variable: $tenant
+                    valueJsonpath: $.streetVendingDetail.tenantId
+                uriResponseMapping:
+                  - inJsonPath: $.MdmsRes.tenant.tenants
+                    outJsonPath: $.Data.tenantData
