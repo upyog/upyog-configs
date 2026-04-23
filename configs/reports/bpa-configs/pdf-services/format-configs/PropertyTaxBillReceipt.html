@@ -212,7 +212,12 @@
          /* Center the QR code */
          }
          .copyrightText {
-         text-align: center;}
+         text-align: center;
+		 }
+		 .bold-dark-text {
+		     font-weight: 700;
+		     color: #000000;
+		 }
       </style>
    </head>
    <body>
@@ -244,7 +249,11 @@
             <table>
                <tr>
                   <td colspan="2">
-                     <h1>Property Tax - Bill Receipt</h1>
+					<h1 th:text="${paymentStatus == 'Success' or paymentStatus == 'Partially Paid'} 
+					    ? 'Property Tax - Bill Receipt' 
+					    : 'Property Collection Bill'">
+					    Property Tax - Bill Receipt
+					</h1>
                   </td>
                </tr>
                <tr>
@@ -434,15 +443,17 @@
                <li>Merely paying and processing a Property Tax does not confer any right or imply any statement 
                   regarding the regularization or ownership of the property.
                </li>
-			   <li>Bill generation and data accuracy are the responsibility of the concerned ULB. For any discrepancy, please contact the  <span th:text="${ulbType}"> NA </span>,<span th:text="${ulbName}"> NA </span> ULB office.
+			   <li class="bold-dark-text">Bill generation and data accuracy are the responsibility of the concerned ULB. For any discrepancy, please contact the  <span th:text="${ulbType}"> NA </span>,<span th:text="${ulbName}"> NA </span> ULB office.
 			   </li>
-			   <li>This receipt has been generated electronically and does not require a physical signature. | Generated on </li>
+			   <li>This receipt has been generated electronically and does not require a physical signature. | Generated on 
+				<span th:text="${#dates.format(#dates.createNow(), 'dd.MM.yyyy')}"
+				                 style="text-align:center;">
+				           </span>
+			   </li>
             <li th:if="${ulbName == 'Solan'}">
                Conservancy Tax prior to 04.08.2022 shall be paid separately at the office as it is not included in arrears, and if already paid up to that date, the notice may be ignored
             </li>
-            <span th:text="${#dates.format(#dates.createNow(), 'dd.MM.yyyy')}"
-                  style="display:block; text-align:center;">
-            </span>
+           
                <!-- <span th:text="${#dates.format(#dates.createNow(), 'dd.MM.yyyy')}" style="text-align: center;"></span> -->
             </ul>
          </div>

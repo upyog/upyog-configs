@@ -213,6 +213,10 @@
          text-align: center;
          font-weight: bold;
          }
+		 .bold-dark-text {
+		 font-weight: 700;
+		 color: #000000;
+		 }
       </style>
    </head>
    <body>
@@ -246,7 +250,11 @@
                <tr>
                   <td><strong>Bill No:</strong><span th:text="${billNo}">NA</span></td>
                   <td align="center">
-                     <h1>Garbage Collection Bill</h1>
+					<h1 th:text="${amountPaid > 0} 
+					    ? 'Garbage Collection Bill Receipt' 
+					    : 'Garbage Collection Bill'">
+					    Garbage Collection Bill
+					</h1>
                   </td>
                   <td align="right"><strong>Financial Year:</strong> <br /><span th:text="${finYear}">NA</span></td>
                </tr>
@@ -408,7 +416,7 @@
                   Merely paying and processing a Garbage Collection does not confer any right or imply any statement 
                   regarding the regularization or ownership of the property.
                </li>
-               <li>
+               <li class="bold-dark-text">
                  Bill generation and data accuracy are the responsibility of the concerned ULB. For any discrepancy, please contact the  <span th:text="${ulbType}"> NA </span>,<span th:text="${ulbName}"> NA </span> ULB office.
                </li>
                <li>
