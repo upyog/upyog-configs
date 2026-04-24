@@ -4649,16 +4649,16 @@
     "chartName": "DSS_WS_SLA_COMPLIANCE",
     "queries": [
       {
-        "module": "WS",
+        "module": "W&S",
         "indexName": "water-services",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Closed With In Sla\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.applicationStatus.keyword\":[\"CONNECTION_ACTIVATED\",\"REJECTED\"]}},{\"script\":{\"script\":{\"source\":\"if (doc['Data.auditDetails.lastModifiedTime'].size() == 0 || doc['Data.auditDetails.createdTime'].size() == 0) { return false; } return doc['Data.auditDetails.lastModifiedTime'].value - doc['Data.auditDetails.createdTime'].value < params.threshold;\",\"lang\":\"painless\",\"params\":{\"threshold\":172800000}}}}]}},\"Total Applications\":{\"terms\":{\"field\":\"Data.tenantId.keyword\"},\"aggs\":{\"tenant_count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}}}}",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Closed With In Sla\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.applicationStatus.keyword\":[\"CONNECTION_ACTIVATED\",\"REJECTED\"]}},{\"script\":{\"script\":{\"source\":\"if (doc['Data.auditDetails.lastModifiedTime'].size() == 0 || doc['Data.auditDetails.createdTime'].size() == 0) { return false; } return doc['Data.auditDetails.lastModifiedTime'].value - doc['Data.auditDetails.createdTime'].value < params.threshold;\",\"lang\":\"painless\",\"params\":{\"threshold\":172800000}}}}]}},\"aggs\":{\"count\":{\"terms\":{\"field\":\"Data.tenantId.keyword\"},\"aggs\":{\"tenant_count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"Total Applications\":{\"terms\":{\"field\":\"Data.tenantId.keyword\"},\"aggs\":{\"tenant_count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}}}}",
         "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"tenantId\" : \"Data.tenantId.keyword\"}",
         "dateRefField": "Data.auditDetails.createdTime"
       },
       {
-        "module": "WS",
+        "module": "W&S",
         "indexName": "sewerage-services",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Closed With In Sla\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.applicationStatus.keyword\":[\"CONNECTION_ACTIVATED\",\"REJECTED\"]}},{\"script\":{\"script\":{\"source\":\"if (doc['Data.auditDetails.lastModifiedTime'].size() == 0 || doc['Data.auditDetails.createdTime'].size() == 0) { return false; } return doc['Data.auditDetails.lastModifiedTime'].value - doc['Data.auditDetails.createdTime'].value < params.threshold;\",\"lang\":\"painless\",\"params\":{\"threshold\":172800000}}}}]}},\"Total Applications\":{\"terms\":{\"field\":\"Data.tenantId.keyword\"},\"aggs\":{\"tenant_count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}}}}",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Closed With In Sla\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"Data.applicationStatus.keyword\":[\"CONNECTION_ACTIVATED\",\"REJECTED\"]}},{\"script\":{\"script\":{\"source\":\"if (doc['Data.auditDetails.lastModifiedTime'].size() == 0 || doc['Data.auditDetails.createdTime'].size() == 0) { return false; } return doc['Data.auditDetails.lastModifiedTime'].value - doc['Data.auditDetails.createdTime'].value < params.threshold;\",\"lang\":\"painless\",\"params\":{\"threshold\":172800000}}}}]}},\"aggs\":{\"count\":{\"terms\":{\"field\":\"Data.tenantId.keyword\"},\"aggs\":{\"tenant_count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}},\"Total Applications\":{\"terms\":{\"field\":\"Data.tenantId.keyword\"},\"aggs\":{\"tenant_count\":{\"value_count\":{\"field\":\"Data.tenantId.keyword\"}}}}}}}}",
         "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\",\"tenantId\" : \"Data.tenantId.keyword\"}",
         "dateRefField": "Data.auditDetails.createdTime"
       }
@@ -4689,7 +4689,7 @@
     "chartName": "DSS_WS_ACTIVE_METERED_WATER_CONNECTIONS",
     "queries": [
       {
-        "module": "WS",
+        "module": "W&S",
         "indexName": "water-services",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.applicationStatus.keyword\":\"REJECTED\"}}],\"must\":[{\"terms\":{\"Data.applicationStatus.keyword\":[\"CONNECTION_ACTIVATED\"]}},{\"terms\":{\"Data.connectionType.keyword\":[\"Metered\"]}}]}},\"aggs\":{\"Active Metered Water Connections\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
         "requestQueryMap": "{\"tenantId\" : \"Data.tenantId.keyword\", \"wardId\" : \"Data.ward.name.keyword\"}",
@@ -4720,7 +4720,7 @@
     "chartName": "DSS_WS_ACTIVE_NON_METERED_WATER_CONNECTIONS",
     "queries": [
       {
-        "module": "WS",
+        "module": "W&S",
         "indexName": "water-services",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.applicationStatus.keyword\":\"REJECTED\"}}],\"must\":[{\"terms\":{\"Data.applicationStatus.keyword\":[\"CONNECTION_ACTIVATED\"]}},{\"terms\":{\"Data.connectionType.keyword\":[\"Non Metered\"]}}]}},\"aggs\":{\"Active Non-Metered Water Connections\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
         "requestQueryMap": "{\"tenantId\" : \"Data.tenantId.keyword\", \"wardId\" : \"Data.ward.name.keyword\"}",
@@ -4751,7 +4751,7 @@
     "chartName": "DSS_WS_ACTIVE_SEWERAGE_CONNECTIONS",
     "queries": [
       {
-        "module": "WS",
+        "module": "W&S",
         "indexName": "sewerage-services",
         "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.applicationStatus.keyword\":\"REJECTED\"}}],\"must\":[{\"terms\":{\"Data.applicationStatus.keyword\":[\"CONNECTION_ACTIVATED\"]}}]}},\"aggs\":{\"Active Sewerage Connections\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}",
         "requestQueryMap": "{\"tenantId\" : \"Data.tenantId.keyword\", \"wardId\" : \"Data.ward.name.keyword\"}",
@@ -4812,7 +4812,7 @@
         "dateRefField": "Data.connectionExecutionDate",
         "requestQueryMap": "{\"tenantId\" : \"Data.tenantId.keyword\", \"wardId\" : \"Data.ward.name.keyword\"}",
         "indexName": "water-services",
-        "aggrQuery": "{\"aggs\":{\"Water Connections\":{\"date_histogram\":{\"field\":\"Data.connectionExecutionDate\",\"calendar_interval \":\"intervalvalue\"},\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.applicationStatus.keyword\":\"REJECTED\"}}],\"must\":[{\"terms\":{\"Data.applicationStatus.keyword\":[\"CONNECTION_ACTIVATED\"]}}]}},\"aggs\":{\"Total Connections\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"Water Connections\":{\"date_histogram\":{\"field\":\"Data.connectionExecutionDate\",\"calendar_interval\":\"intervalvalue\"},\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.applicationStatus.keyword\":\"REJECTED\"}}],\"must\":[{\"terms\":{\"Data.applicationStatus.keyword\":[\"CONNECTION_ACTIVATED\"]}}]}},\"aggs\":{\"Total Connections\":{\"value_count\":{\"field\":\"Data.id.keyword\"}}}}}}}}"
       },
       {
         "module": "W&S",
@@ -5348,7 +5348,7 @@
         "dateRefField": "Data.vehicleTrip.@timestamp",
         "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \"tenantId\" : \"Data.tenantData.code\" ,  \"district\" : \"Data.tenantData.city.districtCode\"}",
         "indexName": "vehicletrip",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.fsm.tenantId.keyword\":\"pg.testing\"}}],\"must\":[{\"term\":{\"Data.vehicleTrip.applicationStatus.keyword\":\"DISPOSED\"}}]}},\"aggs\":{\"Total Sludge Disposed\":{\"date_histogram\":{\"field\":\"Data.vehicleTrip.@timestamp\",\"interval\":\"intervalvalue\"},\"aggs\":{\"totalSludgeDisposedFromGP\":{\"filter\":{\"terms\":{\"Data.fsm.address.additionalDetails.boundaryType.keyword\":[\"GP\"]}},\"aggs\":{\"Sludge Disposed\":{\"sum\":{\"field\":\"Data.vehicleTrip.volumeCarried\"}}}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.fsm.tenantId.keyword\":\"pg.testing\"}}],\"must\":[{\"term\":{\"Data.vehicleTrip.applicationStatus.keyword\":\"DISPOSED\"}}]}},\"aggs\":{\"Total Sludge Disposed\":{\"date_histogram\":{\"field\":\"Data.vehicleTrip.@timestamp\",\"calendar_interval\":\"intervalvalue\"},\"aggs\":{\"totalSludgeDisposedFromGP\":{\"filter\":{\"terms\":{\"Data.fsm.address.additionalDetails.boundaryType.keyword\":[\"GP\"]}},\"aggs\":{\"Sludge Disposed\":{\"sum\":{\"field\":\"Data.vehicleTrip.volumeCarried\"}}}}}}}}}}"
       }
     ],
     "chartType": "line",
@@ -5673,7 +5673,7 @@
         "dateRefField": "Data.vehicleTrip.@timestamp",
         "requestQueryMap": "{\"wardId\" : \"Data.ward.name.keyword\", \"tenantId\" : \"Data.tenantData.code\" ,  \"district\" : \"Data.tenantData.city.districtCode\"}",
         "indexName": "vehicletrip",
-        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.vehicleTrip.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Septage Dumped At Plant\":{\"date_histogram\":{\"field\":\"Data.vehicleTrip.@timestamp\",\"calendar_interval\":\"month\"},\"aggs\":{\"Count\":{\"sum\":{\"script\":{\"source\":\"if (doc['Data.vehicleTrip.volumeCarried'].size() == 0) { return 0; } else { return doc['Data.vehicleTrip.volumeCarried'].value / 1000.0; }\"}}}}},\"Septage Collected\":{\"date_histogram\":{\"field\":\"Data.vehicleTrip.@timestamp\",\"calendar_interval\":\"month\"},\"aggs\":{\"Count\":{\"sum\":{\"script\":{\"source\":\"if (doc['Data.vehicleTrip.tripDetails.volume'].size() == 0) { return 0; } else { return doc['Data.vehicleTrip.tripDetails.volume'].value / 1000.0; }\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{\"must_not\":[{\"term\":{\"Data.vehicleTrip.tenantId.keyword\":\"pg.testing\"}}]}},\"aggs\":{\"Septage Dumped At Plant\":{\"date_histogram\":{\"field\":\"Data.vehicleTrip.@timestamp\",\"calendar_interval\":\"month\"},\"aggs\":{\"Count\":{\"sum\":{\"script\":{\"source\":\"if (doc['Data.vehicleTrip.volumeCarried'].size() == 0) { return 0; } else { return doc['Data.vehicleTrip.volumeCarried'].value / 1000.0; }\"}}}}},\"Septage Collected\":{\"date_histogram\":{\"field\":\"Data.vehicleTrip.@timestamp\",\"calendar_interval\":\"month\"},\"aggs\":{\"Count\":{\"sum\":{\"script\":{\"source\":\"if (doc['Data.vehicleTrip.tripDetails.volume'].size() == 0) { return 0; } else { return doc['Data.vehicleTrip.tripDetails.volume'].value / 1000.0; }\"}}}}}}}}}"
       }
     ],
     "chartType": "line",
