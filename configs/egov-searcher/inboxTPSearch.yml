@@ -83,3 +83,44 @@ SearchDefinitions:
         jsonFormat: {"ResponseInfo": {},"treePruningBookingDetails": []}
         outJsonPath: $.treePruningBookingDetails
         responseInfoPath: $.ResponseInfo
+
+    - name: inboxTPSearchCount
+      query:
+        baseQuery: SELECT row_to_json(TotalCount) from (SELECT COUNT(result) from
+          (
+          select urtp.booking_no, pi.createdtime from 
+          upyog_rs_tree_pruning_booking_detail urtp
+          INNER JOIN eg_wf_processinstance_v2 pi ON pi.businessid = urtp.booking_no
+          LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
+          $where
+          AND pi.createdtime IN (select max(createdtime) from eg_wf_processinstance_v2 wf where wf.businessid = urtp.booking_no GROUP BY wf.businessid)
+          order by pi.createdtime asc
+          ) result) TotalCount
+        groupBy:
+        orderBy:
+      searchParams:
+        condition: AND
+        params:
+          - name: urtp.tenant_id
+            isMandatory: true
+            jsonPath: $.searchCriteria.tenantId
+          - name: urtp.booking_no
+            isMandatory: false
+            jsonPath: $.searchCriteria.bookingNo
+          - name: pi.status
+            isMandatory: false
+            jsonPath: $.searchCriteria.status
+          - name: assg.assignee
+            isMandatory: false
+            jsonPath: $.searchCriteria.assignee
+          - name: pi.businessservice
+            isMandatory: false
+            jsonPath: $.searchCriteria.businessservice
+        pagination:
+          noOfRecords: $.searchCriteria.noOfRecords
+          offset: $.searchCriteria.offset
+
+      output:
+        jsonFormat: {"ResponseInfo": {},"TotalCount": {}}
+        outJsonPath: $.TotalCount
+        responseInfoPath: $.ResponseInfo
