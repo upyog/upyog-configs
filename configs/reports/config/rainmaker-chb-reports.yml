@@ -156,81 +156,81 @@ ReportDefinitions:
       from eg_chb_applicant_detail a, eg_chb_booking_detail b, egcl_paymentdetail p, eg_chb_slot_detail h
       where a.booking_id=b.booking_id and b.receipt_no=p.receiptnumber and b.booking_id=h.booking_id and h.status='REFUNDAPPROVED'
       and 1=1
-- reportName: PaymentRefundReport
-  decryptionPathId: DailyRefundCollectionReport
-  summary: Payment Refund Report
-  version: 1.0.0
-  moduleName: rainmaker-pg
-  sourceColumns:
-    - name: transactionnumber
-      label: rainmaker.pg.transactionnumber
-      type: string
-      source: PG
-      total: false
-    - name: tenantid
-      label: rainmaker.pg.tenant
-      type: string
-      source: PG
-      total: false
-    - name: totalamountpaid
-      label: rainmaker.pg.amount
-      type: string
-      source: PG
-      total: true
-    - name: paymentmode
-      label: rainmaker.pg.paymentmode
-      type: string
-      source: PG
-      total: false
-    - name: instrumentstatus
-      label: rainmaker.pg.instrumentstatus
-      type: string
-      source: PG
-      total: false
-    - name: paidby
-      label: rainmaker.pg.paidby
-      type: string
-      source: PG
-      total: false
-    - name: mobilenumber
-      label: rainmaker.pg.mobile
-      type: string
-      source: PG
-      total: false
-    - name: createdtime
-      label: rainmaker.pg.createdtime
-      type: string
-      source: PG
-      showColumn: false
-  searchParams:
-    - name: transactionnumber
-      label: rainmaker.pg.transactionnumber
-      type: string
-      source: PG
-      isMandatory: false
-      searchClause: AND p.transactionnumber = $transactionnumber
-    - name: fromDate
-      label: rainmaker.pg.fromDate
-      type: epoch
-      source: PG
-      isMandatory: true
-      searchClause: AND p.createdtime >= $fromDate
-    - name: toDate
-      label: rainmaker.pg.toDate
-      type: epoch
-      source: PG
-      isMandatory: true
-      searchClause: AND p.createdtime <= $toDate
-  query: >
-    select 
-      p.transactionnumber,
-      p.tenantid,
-      p.totalamountpaid,
-      p.paymentmode,
-      p.instrumentstatus,
-      p.paidby,
-      p.mobilenumber,
-      p.createdtime
-    FROM egcl_payment p
-    WHERE p.instrumentstatus = 'REFUNDED'
-    AND 1=1
+  - reportName: PaymentRefundReport
+    decryptionPathId: DailyRefundCollectionReport
+    summary: Payment Refund Report
+    version: 1.0.0
+    moduleName: rainmaker-pg
+    sourceColumns:
+      - name: transactionnumber
+        label: rainmaker.pg.transactionnumber
+        type: string
+        source: PG
+        total: false
+      - name: tenantid
+        label: rainmaker.pg.tenant
+        type: string
+        source: PG
+        total: false
+      - name: totalamountpaid
+        label: rainmaker.pg.amount
+        type: string
+        source: PG
+        total: true
+      - name: paymentmode
+        label: rainmaker.pg.paymentmode
+        type: string
+        source: PG
+        total: false
+      - name: instrumentstatus
+        label: rainmaker.pg.instrumentstatus
+        type: string
+        source: PG
+        total: false
+      - name: paidby
+        label: rainmaker.pg.paidby
+        type: string
+        source: PG
+        total: false
+      - name: mobilenumber
+        label: rainmaker.pg.mobile
+        type: string
+        source: PG
+        total: false
+      - name: createdtime
+        label: rainmaker.pg.createdtime
+        type: string
+        source: PG
+        showColumn: false
+    searchParams:
+      - name: transactionnumber
+        label: rainmaker.pg.transactionnumber
+        type: string
+        source: PG
+        isMandatory: false
+        searchClause: AND p.transactionnumber = $transactionnumber
+      - name: fromDate
+        label: rainmaker.pg.fromDate
+        type: epoch
+        source: PG
+        isMandatory: true
+        searchClause: AND p.createdtime >= $fromDate
+      - name: toDate
+        label: rainmaker.pg.toDate
+        type: epoch
+        source: PG
+        isMandatory: true
+        searchClause: AND p.createdtime <= $toDate
+    query: >
+      select 
+        p.transactionnumber,
+        p.tenantid,
+        p.totalamountpaid,
+        p.paymentmode,
+        p.instrumentstatus,
+        p.paidby,
+        p.mobilenumber,
+        p.createdtime
+      FROM egcl_payment p
+      WHERE p.instrumentstatus = 'REFUNDED'
+      AND 1=1
