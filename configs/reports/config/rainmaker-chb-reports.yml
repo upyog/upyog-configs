@@ -165,60 +165,60 @@ ReportDefinitions:
       - name: transactionnumber
         label: rainmaker.CHB.transactionnumber
         type: string
-        source: PG
+        source: CHB
         total: false
       - name: tenantid
         label: rainmaker.CHB.tenant
         type: string
-        source: PG
+        source: CHB
         total: false
       - name: totalamountpaid
         label: rainmaker.CHB.amount
         type: string
-        source: PG
+        source: CHB
         total: true
       - name: paymentmode
         label: rainmaker.CHB.paymentmode
         type: string
-        source: PG
+        source: CHB
         total: false
       - name: instrumentstatus
         label: rainmaker.CHB.instrumentstatus
         type: string
-        source: PG
+        source: CHB
         total: false
       - name: paidby
         label: rainmaker.CHB.paidby
         type: string
-        source: PG
+        source: CHB
         total: false
       - name: mobilenumber
         label: rainmaker.CHB.mobile
         type: string
-        source: PG
+        source: CHB
         total: false
       - name: createdtime
         label: rainmaker.CHB.createdtime
         type: string
-        source: PG
+        source: CHB
         showColumn: false
     searchParams:
       - name: transactionnumber
         label: rainmaker.CHB.transactionnumber
         type: string
-        source: PG
+        source: CHB
         isMandatory: false
         searchClause: AND p.transactionnumber = $transactionnumber
       - name: fromDate
         label: rainmaker.CHB.fromDate
         type: epoch
-        source: PG
+        source: CHB
         isMandatory: true
         searchClause: AND p.createdtime >= $fromDate
       - name: toDate
         label: rainmaker.CHB.toDate
         type: epoch
-        source: PG
+        source: CHB
         isMandatory: true
         searchClause: AND p.createdtime <= $toDate
     query: >
