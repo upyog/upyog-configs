@@ -157,66 +157,66 @@ ReportDefinitions:
       where a.booking_id=b.booking_id and b.receipt_no=p.receiptnumber and b.booking_id=h.booking_id and h.status='REFUNDAPPROVED'
       and 1=1
   - reportName: PaymentRefundReport
-    decryptionPathId: DailyRefundCollectionReport
+    decryptionPathId: TradeLicenseDailyCollectionReport
     summary: Payment Refund Report
     version: 1.0.0
-    moduleName: rainmaker-pg
+    moduleName: rainmaker-CHB
     sourceColumns:
       - name: transactionnumber
-        label: rainmaker.pg.transactionnumber
+        label: rainmaker.CHB.transactionnumber
         type: string
         source: PG
         total: false
       - name: tenantid
-        label: rainmaker.pg.tenant
+        label: rainmaker.CHB.tenant
         type: string
         source: PG
         total: false
       - name: totalamountpaid
-        label: rainmaker.pg.amount
+        label: rainmaker.CHB.amount
         type: string
         source: PG
         total: true
       - name: paymentmode
-        label: rainmaker.pg.paymentmode
+        label: rainmaker.CHB.paymentmode
         type: string
         source: PG
         total: false
       - name: instrumentstatus
-        label: rainmaker.pg.instrumentstatus
+        label: rainmaker.CHB.instrumentstatus
         type: string
         source: PG
         total: false
       - name: paidby
-        label: rainmaker.pg.paidby
+        label: rainmaker.CHB.paidby
         type: string
         source: PG
         total: false
       - name: mobilenumber
-        label: rainmaker.pg.mobile
+        label: rainmaker.CHB.mobile
         type: string
         source: PG
         total: false
       - name: createdtime
-        label: rainmaker.pg.createdtime
+        label: rainmaker.CHB.createdtime
         type: string
         source: PG
         showColumn: false
     searchParams:
       - name: transactionnumber
-        label: rainmaker.pg.transactionnumber
+        label: rainmaker.CHB.transactionnumber
         type: string
         source: PG
         isMandatory: false
         searchClause: AND p.transactionnumber = $transactionnumber
       - name: fromDate
-        label: rainmaker.pg.fromDate
+        label: rainmaker.CHB.fromDate
         type: epoch
         source: PG
         isMandatory: true
         searchClause: AND p.createdtime >= $fromDate
       - name: toDate
-        label: rainmaker.pg.toDate
+        label: rainmaker.CHB.toDate
         type: epoch
         source: PG
         isMandatory: true
