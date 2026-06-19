@@ -38,7 +38,7 @@ serviceMaps:
    isTransaction: true
    queryMaps:
 
-       - query: INSERT INTO public.eg_chb_booking_detail(booking_id, booking_no, payment_date, application_date, tenant_id, community_hall_code, booking_status, special_category, purpose, purpose_description, receipt_no, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+       - query: INSERT INTO public.eg_chb_booking_detail(booking_id, booking_no, payment_date, application_date, tenant_id,venue_type, venue_code, booking_status, special_category, purpose, purpose_description, receipt_no, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?);
          basePath: hallsBookingApplication
          jsonMaps:
           - jsonPath: $.hallsBookingApplication.bookingId
@@ -50,8 +50,10 @@ serviceMaps:
           - jsonPath: $.hallsBookingApplication.applicationDate
 
           - jsonPath: $.hallsBookingApplication.tenantId
-          
-          - jsonPath: $.hallsBookingApplication.communityHallCode
+
+          - jsonPath: $.hallsBookingApplication.venueType
+
+          - jsonPath: $.hallsBookingApplication.venueCode
           
           - jsonPath: $.hallsBookingApplication.bookingStatus
         
@@ -71,7 +73,7 @@ serviceMaps:
 
           - jsonPath: $.hallsBookingApplication.auditDetails.lastModifiedTime
           
-       - query: INSERT INTO public.eg_chb_slot_detail(slot_id, booking_id, hall_code, capacity, booking_date, booking_from_time, booking_to_time, status, 
+       - query: INSERT INTO public.eg_chb_slot_detail(slot_id, booking_id, code, capacity, booking_date, booking_from_time, booking_to_time, status, 
                createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?::DATE, ?::TIME, ?::TIME, ?, ?, ?, ?, ?);
          basePath: hallsBookingApplication.bookingSlotDetails.*
          jsonMaps:
@@ -79,7 +81,7 @@ serviceMaps:
 
           - jsonPath: $.hallsBookingApplication.bookingSlotDetails.*.bookingId
 
-          - jsonPath: $.hallsBookingApplication.bookingSlotDetails.*.hallCode
+          - jsonPath: $.hallsBookingApplication.bookingSlotDetails.*.code
 
           - jsonPath: $.hallsBookingApplication.bookingSlotDetails.*.capacity
           
