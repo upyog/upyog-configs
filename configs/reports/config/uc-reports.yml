@@ -942,7 +942,7 @@ ReportDefinitions:
       - name: ulb
         label: ULB
         type: singlevaluelist
-        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=pg&moduleName=tenant&masterName=nationalInfo|$.MdmsRes.tenant.nationalInfo.*.code|$.MdmsRes.tenant.nationalInfo.*.name
+        pattern: "http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=pg&moduleName=tenant&masterName=nationalInfo|$.MdmsRes.tenant.nationalInfo[?(@.stateCode=='$State')].code|$.MdmsRes.tenant.nationalInfo[?(@.stateCode=='$State')].name"
         source: uc
         wrapper: true
         isMandatory: false
