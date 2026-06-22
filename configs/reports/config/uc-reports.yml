@@ -916,7 +916,7 @@ ReportDefinitions:
         source: uc
         total: false
       - name: module
-        label: module
+        label: Module
         type: string
         source: uc
         total: false
@@ -926,29 +926,29 @@ ReportDefinitions:
         source: uc
         total: false
       - name: date
-        label: date
+        label: Date
         type: string
         source: uc
         total: false
     searchParams:
-      - name: State
+      - name: state
         label: State
         type: singlevaluelist
         pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=pg&moduleName=tenant&masterName=nationalInfoUser|$.MdmsRes.tenant.nationalInfoUser.*.stateCode|$.MdmsRes.tenant.nationalInfoUser.*.stateCode
         source: uc
         wrapper: true
         isMandatory: false
-        searchClause: AND data.state = $State
+        searchClause: AND data.state = $state
       - name: ulb
         label: ULB
         type: singlevaluelist
-        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=pg&moduleName=tenant&masterName=nationalInfo|$.MdmsRes.tenant.nationalInfo[?(@.stateCode=='$State')].code|$.MdmsRes.tenant.nationalInfo[?(@.stateCode=='$State')].name
+        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=pg&moduleName=tenant&masterName=nationalInfo|$.MdmsRes.tenant.nationalInfo.*.code|$.MdmsRes.tenant.nationalInfo.*.name
         source: uc
         wrapper: true
         isMandatory: false
         searchClause: AND data.ulb = $ulb
       - name: module
-        label: module
+        label: Module
         type: singlevaluelist
         pattern: 'list://FIRENOC:FIRENOC,FSM:FSM,MCOLLECT:MCOLLECT,OBPS:OBPS,PGR:PGR,PT:PT,TL:TL,WS:WS'
         source: fsm
