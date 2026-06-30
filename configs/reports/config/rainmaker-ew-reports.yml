@@ -1,0 +1,92 @@
+ReportDefinitions:
+  - reportName: eWasteRegisterReport
+    decryptionPathId: eWasteRegisterReport
+    summary: Report is used to view eWaste Register details.
+    version: 1.0.0
+    moduleName: rainmaker-ew
+
+    sourceColumns:
+      - name: requestid
+        label: REPORT_EW_RESULT_REQUESTID
+        type: string
+        source: ew
+        total: false
+
+      - name: requeststatus
+        label: REPORT_EW_RESULT_REQUESTSTATUS
+        type: string
+        source: ew
+        total: false
+
+      - name: productname
+        label: REPORT_EW_RESULT_PRODUCTNAME
+        type: string
+        source: ew
+        total: false
+
+      - name: quantity
+        label: REPORT_EW_RESULT_QUANTITY
+        type: string
+        source: ew
+        total: false
+
+      - name: price
+        label: REPORT_EW_RESULT_PRICE
+        type: string
+        source: ew
+        total: true
+
+      - name: applicantname
+        label: REPORT_EW_RESULT_APPLICANTNAME
+        type: string
+        source: ew
+        total: false
+
+      - name: mobilenumber
+        label: REPORT_EW_RESULT_MOBILENUMBER
+        type: string
+        source: ew
+        total: false
+
+    searchParams:
+      - name: fromDate
+        label: REPORTS_EW_PARAM_FROMDATE
+        type: epoch
+        source: ew
+        isMandatory: false
+        searchClause: AND ew.createdtime >= $fromDate
+
+      - name: toDate
+        label: REPORTS_EW_PARAM_TODATE
+        type: epoch
+        source: ew
+        isMandatory: false
+        searchClause: AND ew.createdtime <= $toDate
+
+      - name: requestStatus
+        label: REPORTS_EW_PARAM_REQUESTSTATUS
+        type: singlevaluelist
+        pattern: 'list://REQUESTREJECTED:REQUESTREJECTED,PRODUCTVERIFIED:PRODUCTVERIFIED,REQUESTCREATED:REQUESTCREATED,REQUESTCOMPLETED:REQUESTCOMPLETED,COMPLETIONPENDING:COMPLETIONPENDING,INWORKFLOW:INWORKFLOW,NEWREQUEST:NEWREQUEST'
+        source: ew
+        wrapper: true
+        isMandatory: false
+        searchClause: AND ew.requeststatus = $requestStatus
+
+    query: |
+      SELECT
+          ew.requestid,
+          ew.requeststatus,
+          ed.productname,
+          ed.quantity,
+          ed.price,
+          ap.applicantname,
+          ap.mobilenumber
+      FROM eg_ew_requests ew
+      INNER JOIN eg_ew_ewastedetails ed
+          ON ew.id = ed.ewid
+      INNER JOIN eg_ew_applicantdetails ap
+          ON ap.ewid = ew.id
+      WHERE ew.tenantid = $tenantid
+
+    orderby: |
+      ORDER BY ew.createdtime DESC
