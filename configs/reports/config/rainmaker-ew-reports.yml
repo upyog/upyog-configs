@@ -1,49 +1,48 @@
 ReportDefinitions:
   - reportName: eWasteRegisterReport
-    decryptionPathId: eWasteRegisterReport
     summary: Report is used to view eWaste Register details.
     version: 1.0.0
     moduleName: rainmaker-ew
 
     sourceColumns:
       - name: requestid
-        label: REPORT_EW_RESULT_REQUESTID
+        label: Request ID
         type: string
         source: ew
         total: false
 
       - name: requeststatus
-        label: REPORT_EW_RESULT_REQUESTSTATUS
+        label: Request Status
         type: string
         source: ew
         total: false
 
       - name: productname
-        label: REPORT_EW_RESULT_PRODUCTNAME
+        label: Product Name
         type: string
         source: ew
         total: false
 
       - name: quantity
-        label: REPORT_EW_RESULT_QUANTITY
+        label: Quantity
         type: string
         source: ew
         total: false
 
       - name: price
-        label: REPORT_EW_RESULT_PRICE
+        label: Price
         type: string
         source: ew
         total: true
 
       - name: applicantname
-        label: REPORT_EW_RESULT_APPLICANTNAME
+        label: Applicant Name
         type: string
         source: ew
         total: false
 
       - name: mobilenumber
-        label: REPORT_EW_RESULT_MOBILENUMBER
+        label: Mobile Number
         type: string
         source: ew
         total: false
@@ -64,9 +63,9 @@ ReportDefinitions:
         searchClause: AND ew.createdtime <= $toDate
 
       - name: requestStatus
-        label: REPORTS_EW_PARAM_REQUESTSTATUS
+        label: Request Status
         type: singlevaluelist
-        pattern: 'list://REQUESTREJECTED:REQUESTREJECTED,PRODUCTVERIFIED:PRODUCTVERIFIED,REQUESTCREATED:REQUESTCREATED,REQUESTCOMPLETED:REQUESTCOMPLETED,COMPLETIONPENDING:COMPLETIONPENDING,INWORKFLOW:INWORKFLOW,NEWREQUEST:NEWREQUEST'
+        pattern: 'list://REQUESTREJECTED:Request Rejected,PRODUCTVERIFIED:Product Verified,REQUESTCREATED:Request Created,REQUESTCOMPLETED:Request Completed,COMPLETIONPENDING:Completion Pending,INWORKFLOW:In Workflow,NEWREQUEST:New Request'
         source: ew
         wrapper: true
         isMandatory: false
