@@ -1,0 +1,157 @@
+ServiceMaps:
+  serviceName: egov-ndc-services
+  version: 1.0.0
+  mappings:
+    - topic: save-ndc-application
+      configKey: INDEX
+      indexes:
+        - name: ndc-application
+          type: general
+          id: $.uuid
+          isBulk: true
+          timeStampField: $.auditDetails.createdTime
+          jsonPath: $.Applications.*
+          customJsonMapping:
+            indexMapping: {"Data":{"uuid":"uuid","tenantId":"tenantId","owners":[],"applicationno":"applicationno",
+                                   "applicationStatus":"applicationStatus","active":"active",
+                                   "createdby":"createdby","lastmodifiedby":"lastmodifiedby","createdtime":"createdtime",
+                                   "lastmodifiedtime":"lastmodifiedtime","action":"action","details":[],"documents:[]","reason":"reason"}}
+            fieldMapping:
+              - inJsonPath: $.uuid
+                outJsonPath: $.Data.uuid
+              - inJsonPath: $.applicationNo
+                outJsonPath: $.Data.applicationno
+              - inJsonPath: $.tenantId
+                outJsonPath: $.Data.tenantId
+              - inJsonPath: $.owners
+                outJsonPath: $.Data.owners
+              - inJsonPath: $.applicationStatus
+                outJsonPath: $.Data.applicationStatus
+              - inJsonPath: $.active
+                outJsonPath: $.Data.active
+              - inJsonPath: $.auditDetails.createdBy
+                outJsonPath: $.Data.createdby
+              - inJsonPath: $.auditDetails.lastModifiedBy
+                outJsonPath: $.Data.lastmodifiedby
+              - inJsonPath: $.auditDetails.createdTime
+                outJsonPath: $.Data.createdtime
+              - inJsonPath: $.auditDetails.lastModifiedTime
+                outJsonPath: $.Data.lastmodifiedtime
+              - inJsonPath: $.action
+                outJsonPath: $.Data.action
+              - inJsonPath: $.NdcDetails
+                outJsonPath: $.Data.details
+              - inJsonPath: $.Documents
+                outJsonPath: $.Data.documents
+              - inJsonPath: $.reason
+                outJsonPath: $.Data.reason
+
+    - topic: update-ndc-application
+      configKey: INDEX
+      indexes:
+        - name: ndc-application
+          type: general
+          id: $.uuid, $.tenantId
+          isBulk: true
+          timeStampField: $.auditDetails.lastModifiedTime
+          jsonPath: $.Applications.*
+          customJsonMapping:
+            indexMapping: { "Data": { "uuid": "uuid","tenantId": "tenantId","owners": [ ],"applicationno": "applicationno",
+                                      "applicationStatus": "applicationStatus","active": "active",
+                                      "createdby": "createdby","lastmodifiedby": "lastmodifiedby","createdtime": "createdtime",
+                                      "lastmodifiedtime": "lastmodifiedtime","action": "action","details": [ ],"documents:[]","reason": "reason" } }
+            fieldMapping:
+              - inJsonPath: $.uuid
+                outJsonPath: $.Data.uuid
+              - inJsonPath: $.applicationNo
+                outJsonPath: $.Data.applicationno
+              - inJsonPath: $.tenantId
+                outJsonPath: $.Data.tenantId
+              - inJsonPath: $.owners
+                outJsonPath: $.Data.owners
+              - inJsonPath: $.applicationStatus
+                outJsonPath: $.Data.applicationStatus
+              - inJsonPath: $.active
+                outJsonPath: $.Data.active
+              - inJsonPath: $.auditDetails.createdBy
+                outJsonPath: $.Data.createdby
+              - inJsonPath: $.auditDetails.lastModifiedBy
+                outJsonPath: $.Data.lastmodifiedby
+              - inJsonPath: $.auditDetails.createdTime
+                outJsonPath: $.Data.createdtime
+              - inJsonPath: $.auditDetails.lastModifiedTime
+                outJsonPath: $.Data.lastmodifiedtime
+              - inJsonPath: $.action
+                outJsonPath: $.Data.action
+              - inJsonPath: $.NdcDetails
+                outJsonPath: $.Data.details
+              - inJsonPath: $.Documents
+                outJsonPath: $.Data.documents
+              - inJsonPath: $.reason
+                outJsonPath: $.Data.reason
+
+    - topic: delete-ndc-application
+      configKey: INDEX
+      indexes:
+        - name: ndc-application
+          type: general
+          id: $.uuid, $.tenantId
+          isBulk: false
+          timeStampField: $.auditDetails.lastModifiedTime
+          jsonPath: $
+          customJsonMapping:
+            indexMapping: {"Data":{"uuid":"uuid","active":"active","lastmodifiedby":
+              "lastmodifiedby","lastmodifiedtime":"lastmodifiedtime"}}
+            fieldMapping:
+              - inJsonPath: $.uuid
+                outJsonPath: $.Data.uuid
+              - inJsonPath: $.active
+                outJsonPath: $.Data.active
+              - inJsonPath: $.auditDetails.lastModifiedBy
+                outJsonPath: $.Data.lastmodifiedby
+              - inJsonPath: $.auditDetails.lastModifiedTime
+                outJsonPath: $.Data.lastmodifiedtime
+
+    - topic: ndc-application-legacyIndex
+      configKey: LEGACYINDEX
+      indexes:
+        - name: ndc-application
+          type: general
+          id: $.uuid
+          isBulk: true
+          timeStampField: $.auditDetails.createdTime
+          jsonPath: $.Applications.*
+          customJsonMapping:
+            indexMapping: { "Data": { "uuid": "uuid","tenantId": "tenantId","owners": [ ],"applicationno": "applicationno",
+                                      "applicationStatus": "applicationStatus","active": "active",
+                                      "createdby": "createdby","lastmodifiedby": "lastmodifiedby","createdtime": "createdtime",
+                                      "lastmodifiedtime": "lastmodifiedtime","action": "action","details": [ ],"documents:[]","reason": "reason" } }
+            fieldMapping:
+              - inJsonPath: $.uuid
+                outJsonPath: $.Data.uuid
+              - inJsonPath: $.applicationNo
+                outJsonPath: $.Data.applicationno
+              - inJsonPath: $.tenantId
+                outJsonPath: $.Data.tenantId
+              - inJsonPath: $.owners
+                outJsonPath: $.Data.owners
+              - inJsonPath: $.applicationStatus
+                outJsonPath: $.Data.applicationStatus
+              - inJsonPath: $.active
+                outJsonPath: $.Data.active
+              - inJsonPath: $.auditDetails.createdBy
+                outJsonPath: $.Data.createdby
+              - inJsonPath: $.auditDetails.lastModifiedBy
+                outJsonPath: $.Data.lastmodifiedby
+              - inJsonPath: $.auditDetails.createdTime
+                outJsonPath: $.Data.createdtime
+              - inJsonPath: $.auditDetails.lastModifiedTime
+                outJsonPath: $.Data.lastmodifiedtime
+              - inJsonPath: $.action
+                outJsonPath: $.Data.action
+              - inJsonPath: $.NdcDetails
+                outJsonPath: $.Data.details
+              - inJsonPath: $.Documents
+                outJsonPath: $.Data.documents
+              - inJsonPath: $.reason
+                outJsonPath: $.Data.reason

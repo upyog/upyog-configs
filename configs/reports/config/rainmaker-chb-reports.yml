@@ -69,7 +69,7 @@ ReportDefinitions:
     query: >
       select a.applicant_name as applicant_name,
       a.applicant_mobile_no as applicant_mobile_no,
-      b.community_hall_code as community_hall_code,
+      b.venue_code as community_hall_code,
       b.createdtime as createdtime,
       b.booking_no as booking_no,
       p.amountpaid as amountpaid,
@@ -147,7 +147,7 @@ ReportDefinitions:
     query: >
       select a.applicant_name as name,
       a.applicant_mobile_no as mobileNumber,
-      b.community_hall_code as community_hall_code,
+      b.venue_code as community_hall_code,
       b.createdtime as createdtime,
       b.booking_no as booking_no,
       p.amountpaid as amountpaid,
