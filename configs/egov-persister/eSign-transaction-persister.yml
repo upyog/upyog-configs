@@ -1,0 +1,45 @@
+serviceMaps:
+  serviceName: PaymentGateway
+  mappings:
+    - version: 1.0
+      name: requester-services-dx
+      description: Persists transactions
+      fromTopic: save-tl-esign-txns
+      isTransaction: true
+      queryMaps:
+        - query: INSERT INTO eg_tl_esignedfilestore (txn_id,tenant_Id, consumercode, filestore_id,  module,created_time, created_by, last_modified_time, last_modified_by) VALUES ( ?, ?, ?, ?, ?, ? ,?, ? , ?);
+          basePath: Transaction
+          jsonMaps: 
+          - jsonPath: $.Transaction.txnId
+
+          - jsonPath: $.Transaction.tenantId
+
+          - jsonPath: $.Transaction.consumerCode
+
+          - jsonPath: $.Transaction.fileStoreId
+
+          - jsonPath: $.Transaction.module
+
+          - jsonPath: $.Transaction.createdTime
+
+          - jsonPath: $.Transaction.createdBy
+
+          - jsonPath: $.Transaction.lastModifiedTime
+
+          - jsonPath: $.Transaction.lastModifiedBy
+
+
+    - version: 1.0
+      description: Update transaction
+      fromTopic: update-tl-esign-txns
+      isTransaction: true
+      queryMaps:
+        - query: >
+            UPDATE eg_tl_esignedfilestore SET signed_filestore_id=?, last_modified_time=? WHERE txn_id=?;
+          basePath: Transaction
+          jsonMaps:
+          - jsonPath: $.Transaction.signedFilestoreId
+
+          - jsonPath: $.Transaction.lastModifiedTime
+
+          - jsonPath: $.Transaction.txnId
