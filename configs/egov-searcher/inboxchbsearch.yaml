@@ -7,9 +7,13 @@ SearchDefinitions:
       query:
         baseQuery: Select row_to_json(result) from
           (
-            select DISTINCT chb.booking_no,
-          chb.booking_status, chb.createdtime from eg_chb_booking_detail as chb
-          $where order by chb.createdtime asc $pagination 
+          select DISTINCT(chb.booking_no),pi.createdtime from 
+          eg_chb_booking_detail as chb
+          INNER JOIN eg_wf_processinstance_v2 pi ON pi.businessid = chb.booking_no
+          LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
+          $where
+          AND pi.createdtime IN (select max(createdtime) from eg_wf_processinstance_v2 wf where wf.businessid = chb.booking_no GROUP BY wf.businessid)
+          order by pi.createdtime asc $pagination
           ) result
         groupBy:
         orderBy:
@@ -22,6 +26,15 @@ SearchDefinitions:
           - name: chb.booking_no
             isMandatory: false
             jsonPath: $.searchCriteria.bookingNo
+          - name: pi.status
+            isMandatory: false
+            jsonPath: $.searchCriteria.status
+          - name: assg.assignee
+            isMandatory: false
+            jsonPath: $.searchCriteria.assignee
+          - name: pi.businessservice
+            isMandatory: false
+            jsonPath: $.searchCriteria.businessservice
         pagination:
           noOfRecords: $.searchCriteria.noOfRecords
           offset: $.searchCriteria.offset
@@ -33,9 +46,14 @@ SearchDefinitions:
     - name: inboxchbsearchdesc
       query:
         baseQuery: Select row_to_json(result) from
-         ( select DISTINCT chb.booking_no,
-          chb.booking_status, chb.createdtime from eg_chb_booking_detail as chb
-          $where order by chb.createdtime desc $pagination 
+          (
+          select DISTINCT(chb.booking_no),pi.createdtime from 
+          eg_chb_booking_detail as chb
+          INNER JOIN eg_wf_processinstance_v2 pi ON pi.businessid = chb.booking_no
+          LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
+          $where
+          AND pi.createdtime IN (select max(createdtime) from eg_wf_processinstance_v2 wf where wf.businessid = chb.booking_no GROUP BY wf.businessid)
+          order by pi.createdtime desc $pagination
           ) result
         groupBy:
         orderBy:
@@ -48,6 +66,15 @@ SearchDefinitions:
           - name: chb.booking_no
             isMandatory: false
             jsonPath: $.searchCriteria.bookingNo
+          - name: pi.status
+            isMandatory: false
+            jsonPath: $.searchCriteria.status
+          - name: assg.assignee
+            isMandatory: false
+            jsonPath: $.searchCriteria.assignee
+          - name: pi.businessservice
+            isMandatory: false
+            jsonPath: $.searchCriteria.businessservice
         pagination:
           noOfRecords: $.searchCriteria.noOfRecords
           offset: $.searchCriteria.offset
