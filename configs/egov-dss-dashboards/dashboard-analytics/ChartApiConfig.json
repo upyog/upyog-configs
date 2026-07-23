@@ -24583,6 +24583,356 @@
     "aggregationPaths": ["Rejection Rate"],
     "insight": {},
     "_comment": "SV license rejection rate"
+  },
+  "ptrTotalCollection": {
+    "chartName": "NATIONAL_DSS_TOTAL_COLLECTION_PTR",
+    "queries": [
+      {
+        "module": "PTR",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"state\" : \"state.keyword\",\"ulb\" : \"ulb.keyword\"}",
+        "indexName": "ptr-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"totalCollection\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "Amount",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Total Collection"
+    ],
+    "insight": {
+      "chartResponseMap": "ptrTotalCollection",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "year",
+      "isRoundOff": true
+    },
+    "_comment": "PTR total revenue collection"
+  },
+  "ptrTotalPetRegistration": {
+    "chartName": "NATIONAL_DSS_TOTAL_REGISTRATION_PTR",
+    "queries": [
+      {
+        "module": "PTR",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"state\":\"state.keyword\",\"ulb\":\"ulb.keyword\"}",
+        "indexName": "ptr-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Pet Registration\":{\"sum\":{\"field\":\"totalPetRegistration\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Total Pet Registration"
+    ],
+    "insight": {
+      "chartResponseMap": "ptrTotalPetRegistration",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "year",
+      "isRoundOff": true
+    },
+    "_comment": "PTR total pet registrations"
+  },
+  "ptrPreviousYearRevenue": {
+    "chartName": "NATIONAL_DSS_PREVIOUS_YEAR_REVENUE_PTR",
+    "queries": [
+      {
+        "module": "PTR",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"state\":\"state.keyword\",\"ulb\":\"ulb.keyword\"}",
+        "indexName": "ptr-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Previous Year Revenue\":{\"sum\":{\"field\":\"previousYearRevenue\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "Amount",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Previous Year Revenue"
+    ],
+    "insight": {
+      "chartResponseMap": "ptrPreviousYearRevenue",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "year",
+      "isRoundOff": true
+    },
+    "_comment": "PTR previous year revenue"
+  },
+  "ptrCurrentFYCollection": {
+    "chartName": "NATIONAL_DSS_CURRENT_FY_COLLECTION_PTR",
+    "queries": [
+      {
+        "module": "PTR",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"state\":\"state.keyword\",\"ulb\":\"ulb.keyword\"}",
+        "indexName": "ptr-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Current FY Collection\":{\"sum\":{\"field\":\"currentFYCollection\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "Amount",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Current FY Collection"
+    ],
+    "insight": {
+      "chartResponseMap": "ptrCurrentFYCollection",
+      "action": "differenceOfNumbers",
+      "upwardIndicator": "positive",
+      "downwardIndicator": "negative",
+      "textMessage": "$indicator$value% than last $insightInterval",
+      "colorCode": "#228B22",
+      "insightInterval": "year",
+      "isRoundOff": true
+    },
+    "_comment": "PTR current FY collection"
+  },
+  "ptrTotalPetRegistrations": {
+    "chartName": "NATIONAL_DSS_TOTAL_REGISTRATION_PTR",
+    "queries": [
+      {
+        "module": "PTR",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"state\":\"state.keyword\",\"ulb\":\"ulb.keyword\"}",
+        "indexName": "ptr-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Total Pet Registration\":{\"sum\":{\"field\":\"totalPetRegistration\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Total Pet Registration"
+    ]
+  },
+  "ptrTotalApprovedPetRegistration": {
+    "chartName": "NATIONAL_DSS_APPROVED_REGISTRATION_PTR",
+    "queries": [
+      {
+        "module": "PTR",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"state\":\"state.keyword\",\"ulb\":\"ulb.keyword\"}",
+        "indexName": "ptr-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Approved Pet Registration\":{\"sum\":{\"field\":\"totalApprovedPetRegistration\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Approved Pet Registration"
+    ]
+  },
+  "ptrRenewalRate": {
+    "chartName": "NATIONAL_DSS_RENEWAL_RATE_PTR",
+    "queries": [
+      {
+        "module": "PTR",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"state\":\"state.keyword\",\"ulb\":\"ulb.keyword\"}",
+        "indexName": "ptr-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Renewal Rate\":{\"avg\":{\"field\":\"renewalRate\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "percentage",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Renewal Rate"
+    ]
+  },
+  "ptrTotalEstimatedUnregisterPet": {
+    "chartName": "NATIONAL_DSS_UNREGISTERED_PET_ESTIMATE_PTR",
+    "queries": [
+      {
+        "module": "PTR",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"state\":\"state.keyword\",\"ulb\":\"ulb.keyword\"}",
+        "indexName": "ptr-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Estimated Unregistered Pets\":{\"sum\":{\"field\":\"totalEstimatedUnregisterPet\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Estimated Unregistered Pets"
+    ]
+  },
+  "ptrComplaintSLA": {
+    "chartName": "NATIONAL_DSS_COMPLAINT_SLA_PTR",
+    "queries": [
+      {
+        "module": "PTR",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"state\":\"state.keyword\",\"ulb\":\"ulb.keyword\"}",
+        "indexName": "ptr-national-dashboard",
+        "aggrQuery":"{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"State\":{\"terms\":{\"field\":\"module\"},\"aggs\":{\"Test\":{\"terms\":{\"field\":\"module\"},\"aggs\":{\"Resolved_Complaints\":{\"sum\":{\"field\":\"totalComplaintsResolved\"}},\"Total_Complaints\":{\"sum\":{\"field\":\"totalComplaintsRegistered\"}}}},\"Resolved Complaints\":{\"sum_bucket\":{\"buckets_path\":\"Test.Resolved_Complaints\"}},\"Total Complaints\":{\"sum_bucket\":{\"buckets_path\":\"Test.Total_Complaints\"}},\"Complaint SLA\":{\"bucket_script\":{\"buckets_path\":{\"att\":\"Total Complaints\",\"com\":\"Resolved Complaints\"},\"script\":\"params.att>0 ? (params.com/params.att)*100 : 0\"}}}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "percentage",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Complaint SLA"
+    ]
+  },
+  "ptrVaccinationPercentage": {
+    "chartName": "NATIONAL_DSS_VACCINATION_PERCENTAGE_PTR",
+    "queries": [
+      {
+        "module": "PTR",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"state\":\"state.keyword\",\"ulb\":\"ulb.keyword\"}",
+        "indexName": "ptr-national-dashboard",
+        "aggrQuery":"{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"State\":{\"terms\":{\"field\":\"module\"},\"aggs\":{\"Test\":{\"terms\":{\"field\":\"module\"},\"aggs\":{\"Vaccinated\":{\"sum\":{\"field\":\"totalVaccinatedPet\"}},\"Registered\":{\"sum\":{\"field\":\"totalPetRegistration\"}}}},\"Vaccinated Pets\":{\"sum_bucket\":{\"buckets_path\":\"Test.Vaccinated\"}},\"Registered Pets\":{\"sum_bucket\":{\"buckets_path\":\"Test.Registered\"}},\"Vaccination Percentage\":{\"bucket_script\":{\"buckets_path\":{\"vaccinated\":\"Vaccinated Pets\",\"registered\":\"Registered Pets\"},\"script\":\"params.registered>0 ? (params.vaccinated/params.registered)*100 : 0\"}}}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "percentage",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Vaccination Percentage"
+    ]
+  },
+  "ptrRabiesFreeCertifiedPet": {
+    "chartName": "NATIONAL_DSS_RABIES_FREE_CERTIFIED_PTR",
+    "queries": [
+      {
+        "module": "PTR",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"state\":\"state.keyword\",\"ulb\":\"ulb.keyword\"}",
+        "indexName": "ptr-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"Rabies Free Certified Pets\":{\"sum\":{\"field\":\"totalRabiesFreeCertifiedPet\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Rabies Free Certified Pets"
+    ]
+  },
+  "ptrRevenueTargetAchievement": {
+    "chartName": "NATIONAL_DSS_REVENUE_TARGET_ACHIEVEMENT_PTR",
+    "queries": [
+      {
+        "module": "PTR",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"state\":\"state.keyword\",\"ulb\":\"ulb.keyword\"}",
+        "indexName": "ptr-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"State\":{\"terms\":{\"field\":\"module\"},\"aggs\":{\"Test\":{\"terms\":{\"field\":\"module\"},\"aggs\":{\"Total Collection\":{\"sum\":{\"field\":\"totalCollection\"}},\"Previous Year Revenue\":{\"sum\":{\"field\":\"previousYearRevenue\"}}}},\"Total Collection\":{\"sum_bucket\":{\"buckets_path\":\"Test.Total Collection\"}},\"Previous Year Revenue\":{\"sum_bucket\":{\"buckets_path\":\"Test.Previous Year Revenue\"}},\"Revenue Target Achievement\":{\"bucket_script\":{\"buckets_path\":{\"collection\":\"Total Collection\",\"previous\":\"Previous Year Revenue\"},\"script\":\"params.previous>0 ? (params.collection/params.previous)*100 : 0\"}}}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "percentage",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Revenue Target Achievement"
+    ]
+  },
+  "ptrTotalCollectionForLines": {
+    "chartName": "NATIONAL_DSS_TOTAL_COLLECTION_PTR_FOR_LINES",
+    "queries": [
+      {
+        "module": "PTR",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"state\":\"state.keyword\",\"ulb\":\"ulb.keyword\"}",
+        "indexName": "ptr-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"Collections\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"month\"},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"totalCollection\"}}}}}}"
+      }
+    ],
+    "chartType": "line",
+    "valueType": "amount",
+    "action": "",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "aggregationPaths": [
+      "Collections"
+    ],
+    "isCumulative": true,
+    "interval": "month",
+    "insight": {},
+    "_comment": "PTR Total Cumulative Collection over months"
+  },
+  "ptrRegistrationCompleted": {
+    "chartName": "NATIONAL_DSS_PTR_REGISTRATION_COMPLETED",
+    "queries": [
+      {
+        "module": "PTR",
+        "indexName": "ptr-national-dashboard",
+        "requestQueryMap": "{\"state\":\"state.keyword\",\"ulb\":\"ulb.keyword\"}",
+        "dateRefField": "date",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"registration\":{\"terms\":{\"field\":\"registration.keyword\",\"size\":10},\"aggs\":{\"Total Registrations\":{\"sum\":{\"field\":\"registrationCompletedForRegistration\"}}}}}}}}"
+      }
+    ],
+    "chartType": "pie",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "registration"
+    ]
+  },
+  "ptrTransactionsByPaymentChannel": {
+    "chartName": "NATIONAL_DSS_PTR_TRANSACTIONS_BY_PAYMENT_CHANNEL",
+    "queries": [
+      {
+        "module": "PTR",
+        "indexName": "ptr-national-dashboard",
+        "requestQueryMap": "{\"state\":\"state.keyword\",\"ulb\":\"ulb.keyword\"}",
+        "dateRefField": "date",
+        "aggrQuery": "{\"aggs\":{\"AGGR\":{\"filter\":{\"bool\":{}},\"aggs\":{\"paymentChannelType\":{\"terms\":{\"field\":\"paymentChannelType.keyword\",\"size\":10},\"aggs\":{\"Total Transactions\":{\"sum\":{\"field\":\"transactionsForPaymentChannelType\"}}}}}}}}"
+      }
+    ],
+    "chartType": "pie",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "paymentChannelType"
+    ],
+    "insight": {},
+    "_comment": "PTR Transactions by Payment Channel"
   }
 
 }
