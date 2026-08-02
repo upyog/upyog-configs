@@ -8,8 +8,8 @@ SearchDefinitions:
         baseQuery: Select row_to_json(result) from
           (
           select DISTINCT(urgc.application_no),pi.createdtime from 
-          eg_grbg_application as urgc
-          INNER JOIN eg_grbg_account as acc ON acc.garbage_id = urgc.garbage_id
+          ug_grbg_application as urgc
+          INNER JOIN ug_grbg_account as acc ON acc.garbage_id = urgc.garbage_id
           INNER JOIN eg_wf_processinstance_v2 pi ON pi.businessid = urgc.application_no
           LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
           $where
@@ -49,8 +49,8 @@ SearchDefinitions:
         baseQuery: Select row_to_json(result) from
           (
           select DISTINCT(urgc.application_no),pi.createdtime from 
-          eg_grbg_application as urgc
-          INNER JOIN eg_grbg_account as acc ON acc.garbage_id = urgc.garbage_id
+          ug_grbg_application as urgc
+          INNER JOIN ug_grbg_account as acc ON acc.garbage_id = urgc.garbage_id
           INNER JOIN eg_wf_processinstance_v2 pi ON pi.businessid = urgc.application_no
           LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
           $where
@@ -91,8 +91,8 @@ SearchDefinitions:
         baseQuery: SELECT row_to_json(TotalCount) from (SELECT COUNT(result) from
           (
           select urgc.application_no, pi.createdtime from 
-          eg_grbg_application urgc
-          INNER JOIN eg_grbg_account as acc ON acc.garbage_id = urgc.garbage_id
+          ug_grbg_application urgc
+          INNER JOIN ug_grbg_account as acc ON acc.garbage_id = urgc.garbage_id
           INNER JOIN eg_wf_processinstance_v2 pi ON pi.businessid = urgc.application_no
           LEFT JOIN eg_wf_assignee_v2 assg ON pi.id = assg.processinstanceid
           $where
