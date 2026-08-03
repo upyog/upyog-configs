@@ -120,3 +120,53 @@ serviceMaps:
             - jsonPath: $.Mdms.auditDetails.createdTime
             - jsonPath: $.Mdms.auditDetails.lastModifiedTime
             - jsonPath: $.Mdms.operation
+            
+        # ---------------------- SCHEMA DELETE ----------------------
+
+    - version: 1.0
+      description: Deletes the schema definition
+      fromTopic: delete-mdms-schema
+      isTransaction: true
+      queryMaps:
+
+        - query: INSERT INTO eg_mdms_schema_definition_audit
+            (id, tenantid, code, description, definition, isactive, createdby, lastmodifiedby, createdtime, lastmodifiedtime, operation)
+            SELECT id, tenantid, code, description, definition, isactive, createdby, lastmodifiedby, createdtime, lastmodifiedtime, 'DELETE'
+            FROM eg_mdms_schema_definition
+            WHERE tenantid = ? AND code = ?;
+          basePath: $
+          jsonMaps:
+            - jsonPath: $.tenantId
+            - jsonPath: $.code
+
+        - query: DELETE FROM eg_mdms_schema_definition
+            WHERE tenantid = ? AND code = ?;
+          basePath: $
+          jsonMaps:
+            - jsonPath: $.tenantId
+            - jsonPath: $.code 
+            
+        # ---------------------- MDMS DELETE ----------------------
+
+    - version: 1.0
+      description: Deletes mdms data
+      fromTopic: delete-mdms-data
+      isTransaction: true
+      queryMaps:
+
+        - query: INSERT INTO eg_mdms_data_audit
+            (id, tenantid, uniqueidentifier, schemacode, data, isactive, createdby, lastmodifiedby, createdtime, lastmodifiedtime, operation)
+            SELECT id, tenantid, uniqueidentifier, schemacode, data, isactive, createdby, lastmodifiedby, createdtime, lastmodifiedtime, 'DELETE'
+            FROM eg_mdms_data
+            WHERE tenantid = ? AND schemacode = ?;
+          basePath: $
+          jsonMaps:
+            - jsonPath: $.Mdms.tenantId
+            - jsonPath: $.Mdms.schemaCode
+
+        - query: DELETE FROM eg_mdms_data
+            WHERE tenantid = ? AND schemacode = ?;
+          basePath: $
+          jsonMaps:
+            - jsonPath: $.Mdms.tenantId
+            - jsonPath: $.Mdms.schemaCode            
