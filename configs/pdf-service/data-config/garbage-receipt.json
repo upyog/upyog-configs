@@ -91,9 +91,24 @@
                 }
               },
               {
+                "variable": "billingRows",
+                "value": {
+                  "path": "$.paymentDetails[0].bill.billDetails"
+                },
+                "type": "function",
+                "format": "return type.map(function(detail) {\n  var accounts = Array.isArray(detail.billAccountDetails) ? detail.billAccountDetails : [];\n\n  function getAmount(taxHeadCode) {\n    var account = accounts.find(function(item) {\n      return item && item.taxHeadCode === taxHeadCode;\n    });\n\n    return account && account.amount !== null && account.amount !== undefined\n      ? account.amount\n      : 0;\n  }\n\n  function formatDate(value) {\n    if (value === null || value === undefined || value === 0) {\n      return \"NA\";\n    }\n\n    var date = new Date(value);\n\n    if (isNaN(date.getTime())) {\n      return \"NA\";\n    }\n\n    return date.toLocaleDateString(\"en-GB\", {\n      day: \"2-digit\",\n      month: \"2-digit\",\n      year: \"numeric\",\n      timeZone: \"Asia/Kolkata\"\n    });\n  }\n\n  return {\n    rowFromPeriod: formatDate(detail.fromPeriod),\n    rowToPeriod: formatDate(detail.toPeriod),\n    rowRegAmt: getAmount(\"GC_RENTAL_FEE\"),\n    rowRebAmt: getAmount(\"GC_REBATE_FEE\"),\n    rowPenAmt: getAmount(\"GC_PENALTY_FEE\")\n  };\n});"
+              },
+              {
                 "variable": "fromPeriod",
                 "value": {
                   "path": "$.paymentDetails[0].bill.billDetails[0].fromPeriod"
+                },
+                "type": "date"
+              },
+              {
+                "variable": "toPeriod",
+                "value": {
+                  "path": "$.paymentDetails[0].bill.billDetails[0].toPeriod"
                 },
                 "type": "date"
               },
@@ -410,43 +425,6 @@
                 }
               },
               {
-                "variable": "registrationAmount",
-                "value": {
-                  "path": "$.paymentDetails[0].bill.billDetails[0].billAccountDetails[1].amount"
-                }
-              },
-              {
-                "variable": "rebateAmount",
-                "value": {
-                  "path": "$.paymentDetails[0].bill.billDetails[0].billAccountDetails[0].amount"
-                }
-              },
-              {
-                "variable": "toPeriod2",
-                "value": {
-                  "path": "$.paymentDetails[0].bill.billDetails[1].toPeriod"
-                },
-                "type": "date"
-              },
-              {
-                "variable": "registrationAmount2",
-                "value": {
-                  "path": "$.paymentDetails[0].bill.billDetails[1].billAccountDetails[1].amount"
-                }
-              },
-              {
-                "variable": "rebateAmount2",
-                "value": {
-                  "path": "$.paymentDetails[0].bill.billDetails[1].billAccountDetails[0].amount"
-                }
-              },
-              {
-                "variable": "penaltyAmount2",
-                "value": {
-                  "path": "$.paymentDetails[0].bill.billDetails[1].billAccountDetails[2].amount"
-                }
-              },
-              {
                 "variable": "registration_amount",
                 "value": {
                   "path": "PDF_STATIC_LABEL_CONSOLIDATED_RECEIPT_REGISTRATION_AMOUNT"
@@ -481,13 +459,6 @@
                   "prefix": null,
                   "module": "rainmaker-gc"
                 }
-              },
-              {
-                "variable": "fromPeriod2",
-                "value": {
-                  "path": "$.paymentDetails[0].bill.billDetails[1].fromPeriod"
-                },
-                "type": "date"
               }
             ]
           },
