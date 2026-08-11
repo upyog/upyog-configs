@@ -25972,7 +25972,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\":\"state\",\"ulb\":\"ulb\"}",
         "indexName": "chb-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"Bookings\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"month\"},\"aggs\":{\"Approved Bookings\":{\"filter\":{\"term\":{\"bookingStatus.keyword\":\"Approved\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"bookingsForBookingStatus\"}}}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"Bookings\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"month\"},\"aggs\":{\"Approved Bookings\":{\"filter\":{\"term\":{\"bookingStatus.keyword\":\"BOOKED\"}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"bookingsForBookingStatus\"}}}}}}}}"
       }
     ],
     "chartType": "line",
@@ -25986,7 +25986,7 @@
     "isCumulative": false,
     "interval": "month",
     "insight": {},
-    "_comment": "Monthly Approved Bookings"
+    "_comment": "Monthly BOOKED bookings"
   },
   "chbTotalCollections": {
     "chartName": "NSS_CHB_TOTAL_COLLECTIONS",
