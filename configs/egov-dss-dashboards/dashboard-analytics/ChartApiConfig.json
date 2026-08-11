@@ -25811,7 +25811,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\":\"state\",\"ulb\":\"ulb\"}",
         "indexName": "chb-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"Module\":{\"terms\":{\"field\":\"module\"},\"aggs\":{\"Cancelled\":{\"filter\":{\"term\":{\"bookingStatus.keyword\":\"Cancelled\"}},\"aggs\":{\"Cancelled Bookings\":{\"sum\":{\"field\":\"bookingsForBookingStatus\"}}}},\"todaysDate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_key\":\"desc\"},\"size\":1}},\"lastUpdatedTime\":{\"terms\":{\"field\":\"lastModifiedTime\",\"order\":{\"_key\":\"desc\"},\"size\":1}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"Module\":{\"terms\":{\"field\":\"module\"},\"aggs\":{\"Cancelled\":{\"filter\":{\"term\":{\"bookingStatus.keyword\":\"CANCELLED\"}},\"aggs\":{\"Cancelled Bookings\":{\"sum\":{\"field\":\"bookingsForBookingStatus\"}}}},\"todaysDate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_key\":\"desc\"},\"size\":1}},\"lastUpdatedTime\":{\"terms\":{\"field\":\"lastModifiedTime\",\"order\":{\"_key\":\"desc\"},\"size\":1}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -25834,7 +25834,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\":\"state\",\"ulb\":\"ulb\"}",
         "indexName": "chb-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"Module\":{\"terms\":{\"field\":\"module\"},\"aggs\":{\"Approved\":{\"filter\":{\"term\":{\"bookingStatus.keyword\":\"Approved\"}},\"aggs\":{\"Approved Bookings\":{\"sum\":{\"field\":\"bookingsForBookingStatus\"}}}},\"Total Applications\":{\"sum\":{\"field\":\"totalApplicationReceived\"}},\"Approval Rate\":{\"bucket_script\":{\"buckets_path\":{\"approved\":\"Approved>Approved Bookings\",\"applications\":\"Total Applications\"},\"script\":\"params.applications > 0 ? (params.approved / params.applications) * 100 : 0\"}},\"todaysDate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_key\":\"desc\"},\"size\":1}},\"lastUpdatedTime\":{\"terms\":{\"field\":\"lastModifiedTime\",\"order\":{\"_key\":\"desc\"},\"size\":1}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"Module\":{\"terms\":{\"field\":\"module\"},\"aggs\":{\"Approved\":{\"filter\":{\"term\":{\"bookingStatus.keyword\":\"BOOKED\"}},\"aggs\":{\"Approved Bookings\":{\"sum\":{\"field\":\"bookingsForBookingStatus\"}}}},\"Total Applications\":{\"sum\":{\"field\":\"totalApplicationReceived\"}},\"Approval Rate\":{\"bucket_script\":{\"buckets_path\":{\"approved\":\"Approved>Approved Bookings\",\"applications\":\"Total Applications\"},\"script\":\"params.applications > 0 ? (params.approved / params.applications) * 100 : 0\"}},\"todaysDate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_key\":\"desc\"},\"size\":1}},\"lastUpdatedTime\":{\"terms\":{\"field\":\"lastModifiedTime\",\"order\":{\"_key\":\"desc\"},\"size\":1}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -25880,7 +25880,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\":\"state\",\"ulb\":\"ulb\"}",
         "indexName": "chb-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"Module\":{\"terms\":{\"field\":\"module\"},\"aggs\":{\"Approved\":{\"filter\":{\"term\":{\"bookingStatus.keyword\":\"Approved\"}},\"aggs\":{\"Approved Bookings\":{\"sum\":{\"field\":\"bookingsForBookingStatus\"}}}},\"Cancelled\":{\"filter\":{\"term\":{\"bookingStatus.keyword\":\"Cancelled\"}},\"aggs\":{\"Cancelled Bookings\":{\"sum\":{\"field\":\"bookingsForBookingStatus\"}}}},\"Cancellation Rate\":{\"bucket_script\":{\"buckets_path\":{\"approved\":\"Approved>Approved Bookings\",\"cancelled\":\"Cancelled>Cancelled Bookings\"},\"script\":\"params.approved > 0 ? (params.cancelled / params.approved) * 100 : 0\"}},\"todaysDate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_key\":\"desc\"},\"size\":1}},\"lastUpdatedTime\":{\"terms\":{\"field\":\"lastModifiedTime\",\"order\":{\"_key\":\"desc\"},\"size\":1}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"Module\":{\"terms\":{\"field\":\"module\"},\"aggs\":{\"Approved\":{\"filter\":{\"term\":{\"bookingStatus.keyword\":\"BOOKED\"}},\"aggs\":{\"Approved Bookings\":{\"sum\":{\"field\":\"bookingsForBookingStatus\"}}}},\"Cancelled\":{\"filter\":{\"term\":{\"bookingStatus.keyword\":\"CANCELLED\"}},\"aggs\":{\"Cancelled Bookings\":{\"sum\":{\"field\":\"bookingsForBookingStatus\"}}}},\"Cancellation Rate\":{\"bucket_script\":{\"buckets_path\":{\"approved\":\"Approved>Approved Bookings\",\"cancelled\":\"Cancelled>Cancelled Bookings\"},\"script\":\"params.approved > 0 ? (params.cancelled / params.approved) * 100 : 0\"}},\"todaysDate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_key\":\"desc\"},\"size\":1}},\"lastUpdatedTime\":{\"terms\":{\"field\":\"lastModifiedTime\",\"order\":{\"_key\":\"desc\"},\"size\":1}}}}}}"
       }
     ],
     "chartType": "metric",
@@ -25903,7 +25903,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\":\"state\",\"ulb\":\"ulb\"}",
         "indexName": "chb-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"Module\":{\"terms\":{\"field\":\"module\"},\"aggs\":{\"Approved\":{\"filter\":{\"term\":{\"bookingStatus.keyword\":\"Approved\"}},\"aggs\":{\"Approved Bookings\":{\"sum\":{\"field\":\"bookingsForBookingStatus\"}}}},\"Total Collections\":{\"sum\":{\"field\":\"totalCollections\"}},\"Average Revenue Per Booking\":{\"bucket_script\":{\"buckets_path\":{\"approved\":\"Approved>Approved Bookings\",\"collections\":\"Total Collections\"},\"script\":\"params.approved > 0 ? params.collections / params.approved : 0\"}},\"todaysDate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_key\":\"desc\"},\"size\":1}},\"lastUpdatedTime\":{\"terms\":{\"field\":\"lastModifiedTime\",\"order\":{\"_key\":\"desc\"},\"size\":1}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"Module\":{\"terms\":{\"field\":\"module\"},\"aggs\":{\"Approved\":{\"filter\":{\"term\":{\"bookingStatus.keyword\":\"BOOKED\"}},\"aggs\":{\"Approved Bookings\":{\"sum\":{\"field\":\"bookingsForBookingStatus\"}}}},\"Total Collections\":{\"sum\":{\"field\":\"totalCollections\"}},\"Average Revenue Per Booking\":{\"bucket_script\":{\"buckets_path\":{\"approved\":\"Approved>Approved Bookings\",\"collections\":\"Total Collections\"},\"script\":\"params.approved > 0 ? params.collections / params.approved : 0\"}},\"todaysDate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_key\":\"desc\"},\"size\":1}},\"lastUpdatedTime\":{\"terms\":{\"field\":\"lastModifiedTime\",\"order\":{\"_key\":\"desc\"},\"size\":1}}}}}}"
       }
     ],
     "chartType": "metric",
