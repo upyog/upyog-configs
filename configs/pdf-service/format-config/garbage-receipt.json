@@ -257,7 +257,7 @@
                 "style": "info-label"
               },
               {
-                "text": "{{fromPeriod}} to {{toPeriod2}}",
+                "text": "{{fromPeriod}} to {{toPeriod}}",
                 "border": [
                   false,
                   true,
@@ -408,90 +408,7 @@
                 "style": "billing-header"
               }
             ],
-            [
-              {
-                "text": "{{fromPeriod}}",
-                "border": [
-                  true,
-                  false,
-                  false,
-                  false
-                ],
-                "style": "billing-date"
-              },
-              {
-                "text": "₹ {{registrationAmount}}",
-                "border": [
-                  false,
-                  false,
-                  false,
-                  false
-                ],
-                "style": "billing-amount"
-              },
-              {
-                "text": "₹ {{rebateAmount}}",
-                "border": [
-                  false,
-                  false,
-                  false,
-                  false
-                ],
-                "style": "billing-amount"
-              },
-              {
-                "text": "₹ 0",
-                "border": [
-                  false,
-                  false,
-                  true,
-                  false
-                ],
-                "style": "billing-amount"
-              }
-            ],
-            [
-              {
-                "text": "{{fromPeriod2}}",
-                "border": [
-                  true,
-                  false,
-                  false,
-                  true
-                ],
-                "style": "billing-date"
-              },
-              {
-                "text": "₹ {{registrationAmount2}}",
-                "border": [
-                  false,
-                  false,
-                  false,
-                  true
-                ],
-                "style": "billing-amount"
-              },
-              {
-                "text": "₹ {{rebateAmount2}}",
-                "border": [
-                  false,
-                  false,
-                  false,
-                  true
-                ],
-                "style": "billing-amount"
-              },
-              {
-                "text": "₹ {{penaltyAmount2}}",
-                "border": [
-                  false,
-                  false,
-                  true,
-                  true
-                ],
-                "style": "billing-amount"
-              }
-            ]
+            "{{#billingRows}}[{\"text\":\"{{rowFromPeriod}} to {{rowToPeriod}}\",\"border\":[true,false,false,true],\"style\":\"billing-date\"},{\"text\":\"₹ {{rowRegAmt}}\",\"border\":[false,false,false,true],\"style\":\"billing-amount\"},{\"text\":\"₹ {{rowRebAmt}}\",\"border\":[false,false,false,true],\"style\":\"billing-amount\"},{\"text\":\"₹ {{rowPenAmt}}\",\"border\":[false,false,true,true],\"style\":\"billing-amount\"}]{{/billingRows}}"
           ]
         },
         "layout": {}
@@ -583,31 +500,6 @@
       {
         "style": "signature",
         "text": "{{no_signature}}"
-      },
-      {
-        "style": "disclaimer",
-        "stack": [
-          {
-            "text": "{{disclamer}}",
-            "bold": true,
-            "style": "pt-disclaimer-value"
-          },
-          {
-            "style": "pt-disclaimer-value",
-            "table": {
-              "widths": [
-                "120%",
-                "*",
-                "*",
-                "*"
-              ],
-              "body": [
-                "{{#variable11}}[{\"text\":\"{{disclaimerContent}}\",\"border\":[false,false,false,false],\"style\":\"pt-disclaimer-value\"}]{{/variable11}}"
-              ]
-            },
-            "layout": {}
-          }
-        ]
       }
     ],
     "styles": {
