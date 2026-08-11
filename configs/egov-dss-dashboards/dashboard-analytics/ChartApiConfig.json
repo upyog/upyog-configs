@@ -25757,7 +25757,7 @@
     "TodaysCollection": true,
     "postAggregationTheory": "TodaysCollection"
   },
-  "chbApprovedBooking": {
+ "chbApprovedBooking": {
     "chartName": "NSS_CHB_APPROVED_BOOKING",
     "queries": [
       {
@@ -25765,7 +25765,7 @@
         "dateRefField": "date",
         "requestQueryMap": "{\"state\":\"state\",\"ulb\":\"ulb\"}",
         "indexName": "chb-national-dashboard",
-        "aggrQuery": "{\"aggs\":{\"Module\":{\"terms\":{\"field\":\"module\"},\"aggs\":{\"Approved\":{\"filter\":{\"term\":{\"bookingStatus.keyword\":\"Approved\"}},\"aggs\":{\"Approved Bookings\":{\"sum\":{\"field\":\"bookingsForBookingStatus\"}}}},\"todaysDate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_key\":\"desc\"},\"size\":1}},\"lastUpdatedTime\":{\"terms\":{\"field\":\"lastModifiedTime\",\"order\":{\"_key\":\"desc\"},\"size\":1}}}}}}"
+        "aggrQuery": "{\"aggs\":{\"Module\":{\"terms\":{\"field\":\"module\"},\"aggs\":{\"Approved\":{\"filter\":{\"term\":{\"bookingStatus.keyword\":\"BOOKED\"}},\"aggs\":{\"Approved Bookings\":{\"sum\":{\"field\":\"bookingsForBookingStatus\"}}}},\"todaysDate\":{\"terms\":{\"field\":\"date\",\"order\":{\"_key\":\"desc\"},\"size\":1}},\"lastUpdatedTime\":{\"terms\":{\"field\":\"lastModifiedTime\",\"order\":{\"_key\":\"desc\"},\"size\":1}}}}}}"
       }
     ],
     "chartType": "metric",
