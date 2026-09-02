@@ -26011,5 +26011,51 @@
     ],
     "insight": {},
     "_comment": "Booking Status Distribution (Approved, Rejected, Cancelled)"
+  },
+  "financeRevenueSurplusDeficit": {
+    "chartName": "NSS_FIN_REVENUE_SURPLUS_DEFICIT",
+    "queries": [
+      {
+        "module": "FIN",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"state\":\"state\",\"ulb\":\"ulb\"}",
+        "indexName": "finance-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"Module\":{\"terms\":{\"field\":\"module\"},\"aggs\":{\"Total Revenue Collected\":{\"sum\":{\"field\":\"totalRevenueCollected\"}},\"Total Current Expenditure\":{\"sum\":{\"field\":\"totalCurrentExpenditure\"}},\"Revenue Surplus Deficit\":{\"bucket_script\":{\"buckets_path\":{\"revenue\":\"Total Revenue Collected\",\"expenditure\":\"Total Current Expenditure\"},\"script\":\"params.revenue - params.expenditure\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "number",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Revenue Surplus Deficit"
+    ],
+    "isRoundOff": false,
+    "TodaysCollection": false,
+    "postAggregationTheory": "TodaysCollection"
+  },
+  "financeSelfRelianceScore": {
+    "chartName": "NSS_FIN_SELF_RELIANCE_SCORE",
+    "queries": [
+      {
+        "module": "FIN",
+        "dateRefField": "date",
+        "requestQueryMap": "{\"state\":\"state\",\"ulb\":\"ulb\"}",
+        "indexName": "finance-national-dashboard",
+        "aggrQuery": "{\"aggs\":{\"Module\":{\"terms\":{\"field\":\"module\"},\"aggs\":{\"Own Source Revenue\":{\"sum\":{\"field\":\"ownSourceRevenue\"}},\"Total Revenue Collected\":{\"sum\":{\"field\":\"totalRevenueCollected\"}},\"Self Reliance Score\":{\"bucket_script\":{\"buckets_path\":{\"osr\":\"Own Source Revenue\",\"revenue\":\"Total Revenue Collected\"},\"script\":\"params.revenue > 0 ? (params.osr / params.revenue) * 100 : 0\"}}}}}}"
+      }
+    ],
+    "chartType": "metric",
+    "valueType": "percentage",
+    "drillChart": "none",
+    "documentType": "_doc",
+    "action": "",
+    "aggregationPaths": [
+      "Self Reliance Score"
+    ],
+    "isRoundOff": false,
+    "TodaysCollection": false,
+    "postAggregationTheory": "TodaysCollection"
   }
 }
