@@ -567,3 +567,255 @@ ReportDefinitions:
          inner join message ms on bp.tenantid = ms.code 
          INNER JOIN egbs_billdetail_v1 bd ON bp.applicationno = bd.consumercode where 1=1
   groupby: GROUP BY bp.tenantid,ms.message
+
+- reportName: MisLabourDepartmentPaymentReport
+  decryptionPathId: MisLabourDepartmentPaymentReport
+  summary: Fetches detailed payment and fee breakdown data based on search parameters
+  version: 1.0.0
+  moduleName: rainmaker-bpa
+
+  sourceColumns:
+    - name: application_no
+      label: Application No
+      type: string
+      source: bpa
+    - name: name
+      label: Owner Name
+      type: string
+      source: bpa
+    - name: date_of_submission
+      label: Date of Submission
+      type: string
+      source: bpa
+    - name: kary_type
+      label: Occupancy / Work Type
+      type: string
+      source: bpa
+    - name: sthapna_pata
+      label: Address
+      type: string
+      source: bpa
+    - name: ulb
+      label: ULB
+      type: string
+      source: bpa
+    - name: proposal_no
+      label: Proposal No
+      type: string
+      source: bpa
+    - name: construction_area
+      label: Construction Area
+      type: string
+      source: bpa
+    - name: estimated_cess
+      label: Estimated Cess
+      type: number
+      source: bpa
+    - name: transaction_id
+      label: Gateway Transaction ID
+      type: string
+      source: bpa
+    - name: transaction_ref_no
+      label: Bank Reference No
+      type: string
+      source: bpa
+    - name: cess_amount
+      label: Cess Amount
+      type: number
+      source: bpa
+    - name: transaction_date
+      label: Transaction Date
+      type: string
+      source: bpa
+    - name: payment_status
+      label: Payment Status
+      type: string
+      source: bpa
+    - name: receipt_no
+      label: Receipt / Txn ID
+      type: string
+      source: bpa
+    - name: ulb_code
+      label: ULB Code
+      type: string
+      source: bpa
+    - name: ulb_name
+      label: ULB Name
+      type: string
+      source: bpa
+    - name: road_blockage_charges
+      label: Road Blockage Charges
+      type: number
+      source: bpa
+    - name: development_charges
+      label: Development Charges
+      type: number
+      source: bpa
+    - name: sub_tax_labor_tax
+      label: Labour Cess / Sub-Tax
+      type: number
+      source: bpa
+    - name: building_permission_fees_nhnew
+      label: Building Permission Fees (nhnew)
+      type: number
+      source: bpa
+    - name: post_fees_building_permission_non_high_rise_new
+      label: Post Fees - Building Permission Non High Rise New
+      type: number
+      source: bpa
+    - name: boundry_wall
+      label: Boundary Wall
+      type: number
+      source: bpa
+    - name: other_charges
+      label: Other Charges
+      type: number
+      source: bpa
+    - name: building_permission_fees_non_high_rise_new
+      label: Building Permission Fees (Non High Rise New)
+      type: number
+      source: bpa
+    - name: other_building_permission_fee
+      label: Other Fee of Building Permission
+      type: number
+      source: bpa
+    - name: penalty
+      label: Penalty
+      type: number
+      source: bpa
+    - name: electricity_connection
+      label: Electricity Connection
+      type: number
+      source: bpa
+    - name: total_amount
+      label: Total Amount
+      type: number
+      source: bpa
+
+  searchParams:
+    - name: ulb
+      label: ULB
+      type: singlevaluelist
+      pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=tenant&masterName=tenants|$.MdmsRes.tenant.tenants.*.code|$.MdmsRes.tenant.tenants.*.name
+      source: bpa
+      wrapper: true
+      isMandatory: true
+      searchClause: AND ept.tenant_id = $ulb
+    - name: fromDate
+      label: From Date
+      type: epoch
+      source: bpa
+      isMandatory: false
+      searchClause: AND ept.last_modified_time >= $fromDate
+    - name: toDate
+      label: To Date
+      type: epoch
+      source: bpa
+      isMandatory: false
+      searchClause: AND ept.last_modified_time <= $toDate
+
+  query: >
+    WITH payment_details AS (
+        SELECT
+            ept.consumer_code AS application_no,
+            TO_CHAR(TO_TIMESTAMP(ept.last_modified_time / 1000), 'DD/MM/YYYY') AS date_of_submission,
+            ela.occupancy AS kary_type,
+            ela.address AS sthapna_pata,
+            ept.tenant_id AS ulb,
+            (ept.tenant_id || '_' || ebb.applicationno) AS proposal_no,
+            ela.builtuparea AS construction_area,
+            SUM(fd.amount) AS estimated_cess,
+            ept.gateway_txn_id AS transaction_id,
+            (ebbd.txn_response #>> '{}')::jsonb ->> 'bank_ref_no' AS transaction_ref_no,
+            SUM(fd.amount) AS cess_amount,
+            TO_CHAR(TO_TIMESTAMP(ept.last_modified_time / 1000), 'DD/MM/YYYY') AS transaction_date,
+            ept.txn_status AS payment_status,
+            ept.txn_id AS receipt_no,
+            ept.tenant_id AS ulb_code,
+            ept.tenant_id AS ulb_name
+        FROM eg_pg_transactions ept
+        JOIN eg_pg_transactions_dump ebbd ON ept.txn_id = ebbd.txn_id
+        JOIN eg_bpa_buildingplan ebb ON ept.consumer_code = ebb.applicationno
+        JOIN eg_land_address ela ON ela.landinfoid = ebb.landid
+        JOIN fee_details fd ON fd.bill_id = ept.bill_id
+            AND UPPER(fd.charges_type_name) LIKE '%LAB%'
+            AND UPPER(fd.feetype) LIKE '%POST%'
+        WHERE 1 = 1
+        GROUP BY
+            ept.consumer_code,
+            ept.last_modified_time,
+            ela.occupancy,
+            ela.address,
+            ept.tenant_id,
+            ebb.applicationno,
+            ela.builtuparea,
+            ept.gateway_txn_id,
+            ebbd.txn_response,
+            ept.txn_status,
+            ept.txn_id
+    ),
+    fee_summary AS (
+        SELECT
+            fd.application_no,
+            bp.createdtime,
+            Citizenuser.name AS name,
+            SUM(CASE WHEN charges_type_name = 'Road Blockage Charges' THEN amount END) AS road_blockage_charges,
+            SUM(CASE WHEN charges_type_name = 'Development Charges' THEN amount END) AS development_charges,
+            SUM(CASE WHEN charges_type_name IN ('Sub-Tax (Labor Tax)', 'Sub-Tax(Karmakar)Fees', 'Labour Cess') THEN amount END) AS sub_tax_labor_tax,
+            SUM(CASE WHEN charges_type_name = 'Building Permission Fees(nhnew)' THEN amount END) AS building_permission_fees_nhnew,
+            SUM(CASE WHEN charges_type_name IN ('Post Fees-Building Permission(Non High Rise New)', 'Post Fees-Building Permission Non High Rise New', 'Post Fees - Building Permission (Non High Rise New)', 'Post Fees - Building Permission Non High Rise New') THEN amount END) AS post_fees_building_permission_non_high_rise_new,
+            SUM(CASE WHEN charges_type_name = 'Boundry Wall' THEN amount END) AS boundry_wall,
+            SUM(CASE WHEN charges_type_name = 'Other Charges' THEN amount END) AS other_charges,
+            SUM(CASE WHEN charges_type_name = 'Building Permission Fees(Non High Rise New)' THEN amount END) AS building_permission_fees_non_high_rise_new,
+            SUM(CASE WHEN charges_type_name = 'Other Fees of Building Permission' THEN amount END) AS other_building_permission_fee,
+            SUM(CASE WHEN charges_type_name = 'Penalty' THEN amount END) AS penalty,
+            SUM(CASE WHEN charges_type_name = 'Electricity Connection' THEN amount END) AS electricity_connection,
+            SUM(amount) AS total_amount
+        FROM fee_details fd
+        INNER JOIN eg_bpa_buildingplan bp ON fd.application_no = bp.applicationno
+        INNER JOIN eg_land_ownerinfo ownerinfo ON bp.landid = ownerinfo.landinfoid
+        INNER JOIN eg_land_address adr ON bp.landid = adr.landinfoid
+        INNER JOIN eg_user Citizenuser ON ownerinfo.uuid = Citizenuser.uuid
+        INNER JOIN eg_user usr ON usr.uuid = bp.createdby
+        WHERE fd.feetype LIKE '%Post%'
+        GROUP BY
+            Citizenuser.name,
+            fd.application_no,
+            bp.createdtime,
+            bp.status
+    )
+    SELECT
+        pd.application_no,
+        fs.name,
+        pd.date_of_submission,
+        pd.kary_type,
+        pd.sthapna_pata,
+        pd.ulb,
+        pd.proposal_no,
+        pd.construction_area,
+        pd.estimated_cess,
+        pd.transaction_id,
+        pd.transaction_ref_no,
+        pd.cess_amount,
+        pd.transaction_date,
+        pd.payment_status,
+        pd.receipt_no,
+        pd.ulb_code,
+        pd.ulb_name,
+        fs.road_blockage_charges,
+        fs.development_charges,
+        fs.sub_tax_labor_tax,
+        fs.building_permission_fees_nhnew,
+        fs.post_fees_building_permission_non_high_rise_new,
+        fs.boundry_wall,
+        fs.other_charges,
+        fs.building_permission_fees_non_high_rise_new,
+        fs.other_building_permission_fee,
+        fs.penalty,
+        fs.electricity_connection,
+        fs.total_amount
+    FROM payment_details pd 
+    LEFT JOIN fee_summary fs ON pd.application_no = fs.application_no
+
+  groupby: ""
+  orderby: ORDER BY pd.application_no
