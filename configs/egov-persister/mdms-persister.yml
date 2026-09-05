@@ -180,12 +180,15 @@ serviceMaps:
       isTransaction: true
       queryMaps:
 
-        - query: INSERT INTO ug_theme_config (id, tenantid, themetype, status, config, isactive, workflowid, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?::uuid, ?, ?,'DEFAULT', ?, ?, NULL, ?, ?, ?, ?);
+        - query: INSERT INTO ug_theme_config (id, tenantid, themetype, themename, status,       config, isactive, workflowid, createdby, createdtime, lastmodifiedby,               lastmodifiedtime)
+            VALUES (?::uuid, ?, ?, ?, ?, ?, ?, NULL, ?, ?, ?, ?);
           basePath: $
           jsonMaps:
             - jsonPath: $.id
             - jsonPath: $.tenantId
             - jsonPath: $.themeType
+            - jsonPath: $.themeName
+            - jsonPath: $.status
             - jsonPath: $.config
               type: JSON
               dbType: JSONB
@@ -196,9 +199,9 @@ serviceMaps:
             - jsonPath: $.lastModifiedTime
             
         - query: INSERT INTO ug_theme_config_audit
-            (id, tenantid, themetype, config, isactive, status, workflowid,
-             createdby, createdtime, lastmodifiedby, lastmodifiedtime, operation)
-            VALUES (?::uuid, ?, ?, ?, ?, 'DEFAULT', NULL, ?, ?, ?, ?, 'CREATE');
+            (id, tenantid, themetype, themename, config, isactive, status, workflowid,
+            createdby, createdtime, lastmodifiedby, lastmodifiedtime, operation)
+            VALUES (?::uuid, ?, ?, ?, ?, ?, ?, NULL, ?, ?, ?, ?, 'CREATE');
 
           basePath: $
 
@@ -206,10 +209,12 @@ serviceMaps:
             - jsonPath: $.id
             - jsonPath: $.tenantId
             - jsonPath: $.themeType
+            - jsonPath: $.themeName
             - jsonPath: $.config
               type: JSON
               dbType: JSONB
             - jsonPath: $.isActive
+            - jsonPath: $.status
             - jsonPath: $.createdBy
             - jsonPath: $.createdTime
             - jsonPath: $.lastModifiedBy
@@ -226,12 +231,13 @@ serviceMaps:
       isTransaction: true
       queryMaps:
 
-        - query: INSERT INTO ug_theme_config (id, tenantid, themetype, status, config, isactive, workflowid, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?::uuid, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO ug_theme_config (id, tenantid, themetype, themename, status, config, isactive, workflowid, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?::uuid, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: $
           jsonMaps:
             - jsonPath: $.id
             - jsonPath: $.tenantId
             - jsonPath: $.themeType
+            - jsonPath: $.themeName
             - jsonPath: $.status
             - jsonPath: $.config
               type: JSON
@@ -245,9 +251,9 @@ serviceMaps:
 
 
         - query: INSERT INTO ug_theme_config_audit
-            (id, tenantid, themetype, config, isactive, status, workflowid,
+            (id, tenantid, themetype, themename, config, isactive, status, workflowid,
              createdby, createdtime, lastmodifiedby, lastmodifiedtime, operation)
-            VALUES (?::uuid, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'UPDATE');
+            VALUES (?::uuid, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'UPDATE');
 
           basePath: $
 
@@ -255,6 +261,7 @@ serviceMaps:
             - jsonPath: $.id
             - jsonPath: $.tenantId
             - jsonPath: $.themeType
+            - jsonPath: $.themeName
             - jsonPath: $.config
               type: JSON
               dbType: JSONB
@@ -274,30 +281,14 @@ serviceMaps:
       isTransaction: true
       queryMaps:
 
-        # Expire previous approved theme before approving new theme
-        - query: UPDATE ug_theme_config
-            SET status='EXPIRED',
-                isactive=false,
-                lastmodifiedtime=?
-            WHERE tenantid=?
-            AND themetype=?
-            AND status='APPROVED';
-
-          basePath: $
-
-          jsonMaps:
-            - jsonPath: $.lastModifiedTime
-            - jsonPath: $.tenantId
-            - jsonPath: $.themeType
-
-
         # Store workflow status change in audit table
         - query: INSERT INTO ug_theme_config_audit
-            (id, tenantid, themetype, config, isactive, status, workflowid,
+            (id, tenantid, themetype, themename, config, isactive, status, workflowid,
              createdby, createdtime, lastmodifiedby, lastmodifiedtime, operation)
             SELECT gen_random_uuid(),
                    tenantid,
                    themetype,
+                   themename,
                    config,
                    isactive,
                    ?,
