@@ -1,83 +1,318 @@
 serviceMaps:
   serviceName: Mdms-Service
+
   mappings:
+
+    # ---------------------- SCHEMA CREATE ----------------------
+
     - version: 1.0
       description: Persists the schema definition
       fromTopic: save-mdms-schema-definition
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO eg_mdms_schema_definition (id ,tenantid, code, description, definition, isactive, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+        - query: INSERT INTO eg_mdms_schema_definition (id, tenantid, code, description, definition, isactive, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: $.SchemaDefinition
           jsonMaps:
             - jsonPath: $.SchemaDefinition.id
-
             - jsonPath: $.SchemaDefinition.tenantId
-
             - jsonPath: $.SchemaDefinition.code
-
             - jsonPath: $.SchemaDefinition.description
-
             - jsonPath: $.SchemaDefinition.definition
               type: JSON
               dbType: JSONB
-
             - jsonPath: $.SchemaDefinition.isActive
-
             - jsonPath: $.SchemaDefinition.auditDetails.createdBy
-
             - jsonPath: $.SchemaDefinition.auditDetails.lastModifiedBy
-
             - jsonPath: $.SchemaDefinition.auditDetails.createdTime
-
             - jsonPath: $.SchemaDefinition.auditDetails.lastModifiedTime
 
+        - query: INSERT INTO eg_mdms_schema_definition_audit (id, tenantid, code, description, definition, isactive, createdby, lastmodifiedby, createdtime, lastmodifiedtime, operation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: $.SchemaDefinition
+          jsonMaps:
+            - jsonPath: $.SchemaDefinition.id
+            - jsonPath: $.SchemaDefinition.tenantId
+            - jsonPath: $.SchemaDefinition.code
+            - jsonPath: $.SchemaDefinition.description
+            - jsonPath: $.SchemaDefinition.definition
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.SchemaDefinition.isActive
+            - jsonPath: $.SchemaDefinition.auditDetails.createdBy
+            - jsonPath: $.SchemaDefinition.auditDetails.lastModifiedBy
+            - jsonPath: $.SchemaDefinition.auditDetails.createdTime
+            - jsonPath: $.SchemaDefinition.auditDetails.lastModifiedTime
+            - jsonPath: $.SchemaDefinition.operation
+
+    # ---------------------- MDMS CREATE ----------------------
 
     - version: 1.0
       description: Persists the mdms data
       fromTopic: save-mdms-data
       isTransaction: true
       queryMaps:
+
         - query: INSERT INTO eg_mdms_data (id, tenantid, uniqueidentifier, schemacode, data, isactive, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: $.Mdms
           jsonMaps:
             - jsonPath: $.Mdms.id
-
             - jsonPath: $.Mdms.tenantId
-
             - jsonPath: $.Mdms.uniqueIdentifier
-
             - jsonPath: $.Mdms.schemaCode
-
             - jsonPath: $.Mdms.data
               type: JSON
               dbType: JSONB
-
             - jsonPath: $.Mdms.isActive
-
             - jsonPath: $.Mdms.auditDetails.createdBy
-
             - jsonPath: $.Mdms.auditDetails.lastModifiedBy
-
             - jsonPath: $.Mdms.auditDetails.createdTime
-
             - jsonPath: $.Mdms.auditDetails.lastModifiedTime
+
+        - query: INSERT INTO eg_mdms_data_audit (id, tenantid, uniqueidentifier, schemacode, data, isactive, createdby, lastmodifiedby, createdtime, lastmodifiedtime, operation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: $.Mdms
+          jsonMaps:
+            - jsonPath: $.Mdms.id
+            - jsonPath: $.Mdms.tenantId
+            - jsonPath: $.Mdms.uniqueIdentifier
+            - jsonPath: $.Mdms.schemaCode
+            - jsonPath: $.Mdms.data
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.Mdms.isActive
+            - jsonPath: $.Mdms.auditDetails.createdBy
+            - jsonPath: $.Mdms.auditDetails.lastModifiedBy
+            - jsonPath: $.Mdms.auditDetails.createdTime
+            - jsonPath: $.Mdms.auditDetails.lastModifiedTime
+            - jsonPath: $.Mdms.operation
+
+    # ---------------------- MDMS UPDATE ----------------------
 
     - version: 1.0
       description: Updates the mdms data
       fromTopic: update-mdms-data
       isTransaction: true
       queryMaps:
+
         - query: UPDATE eg_mdms_data SET data = ?, isActive = ?, lastModifiedBy = ?, lastModifiedTime = ? WHERE id = ?;
           basePath: $.Mdms
           jsonMaps:
             - jsonPath: $.Mdms.data
               type: JSON
               dbType: JSONB
-
             - jsonPath: $.Mdms.isActive
-
             - jsonPath: $.Mdms.auditDetails.lastModifiedBy
-
             - jsonPath: $.Mdms.auditDetails.lastModifiedTime
-
             - jsonPath: $.Mdms.id
+
+        - query: INSERT INTO eg_mdms_data_audit (id, tenantid, uniqueidentifier, schemacode, data, isactive, createdby, lastmodifiedby, createdtime, lastmodifiedtime, operation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: $.Mdms
+          jsonMaps:
+            - jsonPath: $.Mdms.id
+            - jsonPath: $.Mdms.tenantId
+            - jsonPath: $.Mdms.uniqueIdentifier
+            - jsonPath: $.Mdms.schemaCode
+            - jsonPath: $.Mdms.data
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.Mdms.isActive
+            - jsonPath: $.Mdms.auditDetails.createdBy
+            - jsonPath: $.Mdms.auditDetails.lastModifiedBy
+            - jsonPath: $.Mdms.auditDetails.createdTime
+            - jsonPath: $.Mdms.auditDetails.lastModifiedTime
+            - jsonPath: $.Mdms.operation
+            
+        # ---------------------- SCHEMA DELETE ----------------------
+
+    - version: 1.0
+      description: Deletes the schema definition
+      fromTopic: delete-mdms-schema
+      isTransaction: true
+      queryMaps:
+
+        - query: INSERT INTO eg_mdms_schema_definition_audit
+            (id, tenantid, code, description, definition, isactive, createdby, lastmodifiedby, createdtime, lastmodifiedtime, operation)
+            SELECT id, tenantid, code, description, definition, isactive, createdby, lastmodifiedby, createdtime, lastmodifiedtime, 'DELETE'
+            FROM eg_mdms_schema_definition
+            WHERE tenantid = ? AND code = ?;
+          basePath: $
+          jsonMaps:
+            - jsonPath: $.tenantId
+            - jsonPath: $.code
+
+        - query: DELETE FROM eg_mdms_schema_definition
+            WHERE tenantid = ? AND code = ?;
+          basePath: $
+          jsonMaps:
+            - jsonPath: $.tenantId
+            - jsonPath: $.code 
+            
+        # ---------------------- MDMS DELETE ----------------------
+
+    - version: 1.0
+      description: Deletes mdms data
+      fromTopic: delete-mdms-data
+      isTransaction: true
+      queryMaps:
+
+        - query: INSERT INTO eg_mdms_data_audit
+            (id, tenantid, uniqueidentifier, schemacode, data, isactive, createdby, lastmodifiedby, createdtime, lastmodifiedtime, operation)
+            SELECT id, tenantid, uniqueidentifier, schemacode, data, isactive, createdby, lastmodifiedby, createdtime, lastmodifiedtime, 'DELETE'
+            FROM eg_mdms_data
+            WHERE tenantid = ? AND schemacode = ?;
+          basePath: $
+          jsonMaps:
+            - jsonPath: $.Mdms.tenantId
+            - jsonPath: $.Mdms.schemaCode
+
+        - query: DELETE FROM eg_mdms_data
+            WHERE tenantid = ? AND schemacode = ?;
+          basePath: $
+          jsonMaps:
+            - jsonPath: $.Mdms.tenantId
+            - jsonPath: $.Mdms.schemaCode   
+            
+            
+                # ---------------------- THEME CONFIG CREATE ----------------------
+
+    - version: 1.0
+      description: Persists the theme configuration
+      fromTopic: save-theme-config
+      isTransaction: true
+      queryMaps:
+
+        - query: INSERT INTO ug_theme_config (id, tenantid, themetype, themename, status,       config, isactive, workflowid, createdby, createdtime, lastmodifiedby,               lastmodifiedtime)
+            VALUES (?::uuid, ?, ?, ?, ?, ?, ?, NULL, ?, ?, ?, ?);
+          basePath: $
+          jsonMaps:
+            - jsonPath: $.id
+            - jsonPath: $.tenantId
+            - jsonPath: $.themeType
+            - jsonPath: $.themeName
+            - jsonPath: $.status
+            - jsonPath: $.config
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.isActive
+            - jsonPath: $.createdBy
+            - jsonPath: $.createdTime
+            - jsonPath: $.lastModifiedBy
+            - jsonPath: $.lastModifiedTime
+            
+        - query: INSERT INTO ug_theme_config_audit
+            (id, tenantid, themetype, themename, config, isactive, status, workflowid,
+            createdby, createdtime, lastmodifiedby, lastmodifiedtime, operation)
+            VALUES (?::uuid, ?, ?, ?, ?, ?, ?, NULL, ?, ?, ?, ?, 'CREATE');
+
+          basePath: $
+
+          jsonMaps:
+            - jsonPath: $.id
+            - jsonPath: $.tenantId
+            - jsonPath: $.themeType
+            - jsonPath: $.themeName
+            - jsonPath: $.config
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.isActive
+            - jsonPath: $.status
+            - jsonPath: $.createdBy
+            - jsonPath: $.createdTime
+            - jsonPath: $.lastModifiedBy
+            - jsonPath: $.lastModifiedTime
+
+
+  
+            
+               # ---------------------- THEME CONFIG UPDATE ----------------------
+
+    - version: 1.0
+      description: Creates pending theme configuration
+      fromTopic: save-theme-config-staging
+      isTransaction: true
+      queryMaps:
+
+        - query: INSERT INTO ug_theme_config (id, tenantid, themetype, themename, status, config, isactive, workflowid, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?::uuid, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: $
+          jsonMaps:
+            - jsonPath: $.id
+            - jsonPath: $.tenantId
+            - jsonPath: $.themeType
+            - jsonPath: $.themeName
+            - jsonPath: $.status
+            - jsonPath: $.config
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.isActive
+            - jsonPath: $.workflowId
+            - jsonPath: $.createdBy
+            - jsonPath: $.createdTime
+            - jsonPath: $.lastModifiedBy
+            - jsonPath: $.lastModifiedTime
+
+
+        - query: INSERT INTO ug_theme_config_audit
+            (id, tenantid, themetype, themename, config, isactive, status, workflowid,
+             createdby, createdtime, lastmodifiedby, lastmodifiedtime, operation)
+            VALUES (?::uuid, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'UPDATE');
+
+          basePath: $
+
+          jsonMaps:
+            - jsonPath: $.id
+            - jsonPath: $.tenantId
+            - jsonPath: $.themeType
+            - jsonPath: $.themeName
+            - jsonPath: $.config
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.isActive
+            - jsonPath: $.status
+            - jsonPath: $.workflowId
+            - jsonPath: $.createdBy
+            - jsonPath: $.createdTime
+            - jsonPath: $.lastModifiedBy
+            - jsonPath: $.lastModifiedTime
+            
+            # ---------------------- THEME CONFIG STATUS UPDATE ----------------------
+
+    - version: 1.0
+      description: Updates the theme configuration workflow status
+      fromTopic: update-theme-config-status
+      isTransaction: true
+      queryMaps:
+
+        # Store workflow status change in audit table
+        - query: INSERT INTO ug_theme_config_audit
+            (id, tenantid, themetype, themename, config, isactive, status, workflowid,
+             createdby, createdtime, lastmodifiedby, lastmodifiedtime, operation)
+            SELECT gen_random_uuid(),
+                   tenantid,
+                   themetype,
+                   themename,
+                   config,
+                   isactive,
+                   ?,
+                   workflowid,
+                   createdby,
+                   createdtime,
+                   lastmodifiedby,
+                   lastmodifiedtime,
+                   'APPROVE'
+            FROM ug_theme_config
+            WHERE id=?::uuid;
+
+          basePath: $
+
+          jsonMaps:
+            - jsonPath: $.status
+            - jsonPath: $.id
+
+
+        - query: UPDATE ug_theme_config SET status = ?, workflowid = ?, lastmodifiedby = ?, lastmodifiedtime = ? WHERE id = ?::uuid;
+          basePath: $
+          jsonMaps:
+            - jsonPath: $.status
+            - jsonPath: $.workflowId
+            - jsonPath: $.lastModifiedBy
+            - jsonPath: $.lastModifiedTime
+            - jsonPath: $.id
