@@ -1,0 +1,212 @@
+serviceMaps:
+  serviceName: refund-services
+
+  mappings:
+    - version: 1.0
+      description: Create refund
+      fromTopic: save-refund
+      isTransaction: true
+
+      queryMaps:
+        - query: >
+            INSERT INTO eg_refund (
+              id,
+              refund_no,
+              tenant_id,
+              module_name,
+              business_service,
+              consumer_code,
+              payment_id,
+              applicant_name,
+              mobile_number,
+              refund_category,
+              refund_reason,
+              payment_mode_original,
+              amount_paid,
+              refund_amount,
+              refund_mode,
+              status,
+              sanction_ref,
+              finance_approval_date,
+              gateway_refund_id,
+              beneficiary_details,
+              additional_details,
+              created_by,
+              created_time,
+              last_modified_by,
+              last_modified_time,
+              file_store_id
+            )
+            VALUES (
+              ?, ?, ?, ?, ?, ?, ?,
+              ?, ?, ?, ?, ?, ?, ?,
+              ?, ?, ?, ?, ?, ?::jsonb,
+              ?::jsonb, ?, ?, ?, ?, ?
+            );
+
+          basePath: Refund
+          jsonMaps:
+            - jsonPath: $.Refund.id
+            - jsonPath: $.Refund.refundNo
+            - jsonPath: $.Refund.tenantId
+            - jsonPath: $.Refund.moduleName
+            - jsonPath: $.Refund.businessService
+            - jsonPath: $.Refund.consumerCode
+            - jsonPath: $.Refund.paymentId
+            - jsonPath: $.Refund.applicantName
+            - jsonPath: $.Refund.mobileNumber
+            - jsonPath: $.Refund.refundCategory
+            - jsonPath: $.Refund.refundReason
+            - jsonPath: $.Refund.paymentModeOriginal
+            - jsonPath: $.Refund.amountPaid
+            - jsonPath: $.Refund.refundAmount
+            - jsonPath: $.Refund.refundMode
+            - jsonPath: $.Refund.status
+            - jsonPath: $.Refund.sanctionRef
+            - jsonPath: $.Refund.financeApprovalDate
+            - jsonPath: $.Refund.gatewayRefundId
+            - jsonPath: $.Refund.beneficiaryDetails
+            - jsonPath: $.Refund.additionalDetails
+            - jsonPath: $.Refund.auditDetails.createdBy
+            - jsonPath: $.Refund.auditDetails.createdTime
+            - jsonPath: $.Refund.auditDetails.lastModifiedBy
+            - jsonPath: $.Refund.auditDetails.lastModifiedTime
+            - jsonPath: $.Refund.fileStoreId
+
+    - version: 1.0
+      description: Update refund
+      fromTopic: update-refund
+      isTransaction: true
+
+      queryMaps:
+        - query: >
+            UPDATE eg_refund
+            SET
+              refund_no = ?,
+              tenant_id = ?,
+              module_name = ?,
+              business_service = ?,
+              consumer_code = ?,
+              payment_id = ?,
+              applicant_name = ?,
+              mobile_number = ?,
+              refund_category = ?,
+              refund_reason = ?,
+              payment_mode_original = ?,
+              amount_paid = ?,
+              refund_amount = ?,
+              refund_mode = ?,
+              status = ?,
+              sanction_ref = ?,
+              finance_approval_date = ?,
+              gateway_refund_id = ?,
+              beneficiary_details = ?::jsonb,
+              additional_details = ?::jsonb,
+              last_modified_by = ?,
+              last_modified_time = ?,
+              file_store_id = ?
+            WHERE id = ?;
+
+          basePath: Refund
+          jsonMaps:
+            - jsonPath: $.Refund.refundNo
+            - jsonPath: $.Refund.tenantId
+            - jsonPath: $.Refund.moduleName
+            - jsonPath: $.Refund.businessService
+            - jsonPath: $.Refund.consumerCode
+            - jsonPath: $.Refund.paymentId
+            - jsonPath: $.Refund.applicantName
+            - jsonPath: $.Refund.mobileNumber
+            - jsonPath: $.Refund.refundCategory
+            - jsonPath: $.Refund.refundReason
+            - jsonPath: $.Refund.paymentModeOriginal
+            - jsonPath: $.Refund.amountPaid
+            - jsonPath: $.Refund.refundAmount
+            - jsonPath: $.Refund.refundMode
+            - jsonPath: $.Refund.status
+            - jsonPath: $.Refund.sanctionRef
+            - jsonPath: $.Refund.financeApprovalDate
+            - jsonPath: $.Refund.gatewayRefundId
+            - jsonPath: $.Refund.beneficiaryDetails
+            - jsonPath: $.Refund.additionalDetails
+            - jsonPath: $.Refund.auditDetails.lastModifiedBy
+            - jsonPath: $.Refund.auditDetails.lastModifiedTime
+            - jsonPath: $.Refund.fileStoreId
+            - jsonPath: $.Refund.id
+            
+    - version: 1.0
+      description: Create refund audit log
+      fromTopic: save-refund-audit
+      isTransaction: true
+
+      queryMaps:
+        - query: >
+            INSERT INTO eg_refund_audit (
+              id,
+              refund_id,
+              refund_no,
+              tenant_id,
+              module_name,
+              business_service,
+              consumer_code,
+              payment_id,
+              applicant_name,
+              mobile_number,
+              refund_category,
+              refund_reason,
+              payment_mode_original,
+              amount_paid,
+              refund_amount,
+              refund_mode,
+              status,
+              sanction_ref,
+              finance_approval_date,
+              gateway_refund_id,
+              file_store_id,
+              beneficiary_details,
+              additional_details,
+              created_by,
+              created_time,
+              last_modified_by,
+              last_modified_time,
+              audit_created_time,
+              workflow_action
+            )
+            VALUES (
+              ?, ?, ?, ?, ?, ?, ?,
+              ?, ?, ?, ?, ?, ?, ?,
+              ?, ?, ?, ?, ?, ?, ?,
+              ?::jsonb, ?::jsonb, ?, ?, ?, ?, ?, ?
+            );
+
+          basePath: RefundAudit
+          jsonMaps:
+            - jsonPath: $.RefundAudit.id
+            - jsonPath: $.RefundAudit.refundId
+            - jsonPath: $.RefundAudit.refundNo
+            - jsonPath: $.RefundAudit.tenantId
+            - jsonPath: $.RefundAudit.moduleName
+            - jsonPath: $.RefundAudit.businessService
+            - jsonPath: $.RefundAudit.consumerCode
+            - jsonPath: $.RefundAudit.paymentId
+            - jsonPath: $.RefundAudit.applicantName
+            - jsonPath: $.RefundAudit.mobileNumber
+            - jsonPath: $.RefundAudit.refundCategory
+            - jsonPath: $.RefundAudit.refundReason
+            - jsonPath: $.RefundAudit.paymentModeOriginal
+            - jsonPath: $.RefundAudit.amountPaid
+            - jsonPath: $.RefundAudit.refundAmount
+            - jsonPath: $.RefundAudit.refundMode
+            - jsonPath: $.RefundAudit.status
+            - jsonPath: $.RefundAudit.sanctionRef
+            - jsonPath: $.RefundAudit.financeApprovalDate
+            - jsonPath: $.RefundAudit.gatewayRefundId
+            - jsonPath: $.RefundAudit.fileStoreId
+            - jsonPath: $.RefundAudit.beneficiaryDetails
+            - jsonPath: $.RefundAudit.additionalDetails
+            - jsonPath: $.RefundAudit.createdBy
+            - jsonPath: $.RefundAudit.createdTime
+            - jsonPath: $.RefundAudit.lastModifiedBy
+            - jsonPath: $.RefundAudit.lastModifiedTime
+            - jsonPath: $.RefundAudit.auditCreatedTime
+            - jsonPath: $.RefundAudit.workflowAction
