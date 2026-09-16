@@ -78,7 +78,7 @@ serviceMaps:
       isTransaction: true
 
       queryMaps:
-        - query: INSERT INTO eg_rs_refund_audit (id,refund_id,refund_no,tenant_id,module_name,business_service,consumer_code,payment_id,applicant_name,mobile_number,refund_category,refund_reason,payment_mode_original,amount_paid,refund_amount,refund_mode,status,sanction_ref,finance_approval_date,gateway_refund_id,file_store_id,beneficiary_details,additional_details,created_by,created_time,last_modified_by,last_modified_time,audit_created_time,workflow_action) VALUES (?::uuid, ?::uuid, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?,?::jsonb, ?::jsonb, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO public.eg_rs_refund_audit (id,refund_id,refund_no,tenant_id,module_name,business_service,consumer_code,payment_id,applicant_name,mobile_number,refund_category,refund_reason,payment_mode_original,amount_paid,refund_amount,refund_mode,status,sanction_ref,finance_approval_date,gateway_refund_id,file_store_id,beneficiary_details,additional_details,created_by,created_time,last_modified_by,last_modified_time,audit_created_time,workflow_action) VALUES (?::uuid, ?::uuid, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?,?::jsonb, ?::jsonb, ?, ?, ?, ?, ?, ?);
           basePath: refundAudit
           jsonMaps:
             - jsonPath: $.refundAudit.id
