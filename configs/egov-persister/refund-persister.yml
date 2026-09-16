@@ -8,42 +8,7 @@ serviceMaps:
       isTransaction: true
 
       queryMaps:
-        - query: >
-            INSERT INTO eg_refund (
-              id,
-              refund_no,
-              tenant_id,
-              module_name,
-              business_service,
-              consumer_code,
-              payment_id,
-              applicant_name,
-              mobile_number,
-              refund_category,
-              refund_reason,
-              payment_mode_original,
-              amount_paid,
-              refund_amount,
-              refund_mode,
-              status,
-              sanction_ref,
-              finance_approval_date,
-              gateway_refund_id,
-              beneficiary_details,
-              additional_details,
-              created_by,
-              created_time,
-              last_modified_by,
-              last_modified_time,
-              file_store_id
-            )
-            VALUES (
-              ?, ?, ?, ?, ?, ?, ?,
-              ?, ?, ?, ?, ?, ?, ?,
-              ?, ?, ?, ?, ?, ?::jsonb,
-              ?::jsonb, ?, ?, ?, ?, ?
-            );
-
+        - query: INSERT INTO eg_refund (id,refund_no,tenant_id,module_name,business_service,consumer_code,payment_id,applicant_name,mobile_number,refund_category,refund_reason,payment_mode_original,amount_paid,refund_amount,refund_mode,status,sanction_ref,finance_approval_date,gateway_refund_id,beneficiary_details,additional_details,created_by,created_time,last_modified_by,last_modified_time,file_store_id) VALUES (?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?::jsonb,?::jsonb, ?, ?, ?, ?, ?);
           basePath: Refund
           jsonMaps:
             - jsonPath: $.Refund.id
@@ -79,34 +44,7 @@ serviceMaps:
       isTransaction: true
 
       queryMaps:
-        - query: >
-            UPDATE eg_refund
-            SET
-              refund_no = ?,
-              tenant_id = ?,
-              module_name = ?,
-              business_service = ?,
-              consumer_code = ?,
-              payment_id = ?,
-              applicant_name = ?,
-              mobile_number = ?,
-              refund_category = ?,
-              refund_reason = ?,
-              payment_mode_original = ?,
-              amount_paid = ?,
-              refund_amount = ?,
-              refund_mode = ?,
-              status = ?,
-              sanction_ref = ?,
-              finance_approval_date = ?,
-              gateway_refund_id = ?,
-              beneficiary_details = ?::jsonb,
-              additional_details = ?::jsonb,
-              last_modified_by = ?,
-              last_modified_time = ?,
-              file_store_id = ?
-            WHERE id = ?;
-
+        - query: UPDATE eg_refund SET refund_no = ?,tenant_id = ?,module_name = ?,business_service = ?,consumer_code = ?,payment_id = ?,applicant_name = ?,mobile_number = ?,refund_category = ?,refund_reason = ?,payment_mode_original = ?,amount_paid = ?,refund_amount = ?,refund_mode = ?,status = ?,sanction_ref = ?,finance_approval_date = ?,gateway_refund_id = ?,beneficiary_details = ?::jsonb,additional_details = ?::jsonb,last_modified_by = ?,last_modified_time = ?,file_store_id = ? WHERE id = ?;
           basePath: Refund
           jsonMaps:
             - jsonPath: $.Refund.refundNo
@@ -140,45 +78,7 @@ serviceMaps:
       isTransaction: true
 
       queryMaps:
-        - query: >
-            INSERT INTO eg_refund_audit (
-              id,
-              refund_id,
-              refund_no,
-              tenant_id,
-              module_name,
-              business_service,
-              consumer_code,
-              payment_id,
-              applicant_name,
-              mobile_number,
-              refund_category,
-              refund_reason,
-              payment_mode_original,
-              amount_paid,
-              refund_amount,
-              refund_mode,
-              status,
-              sanction_ref,
-              finance_approval_date,
-              gateway_refund_id,
-              file_store_id,
-              beneficiary_details,
-              additional_details,
-              created_by,
-              created_time,
-              last_modified_by,
-              last_modified_time,
-              audit_created_time,
-              workflow_action
-            )
-            VALUES (
-              ?, ?, ?, ?, ?, ?, ?,
-              ?, ?, ?, ?, ?, ?, ?,
-              ?, ?, ?, ?, ?, ?, ?,
-              ?::jsonb, ?::jsonb, ?, ?, ?, ?, ?, ?
-            );
-
+        - query: INSERT INTO eg_refund_audit (id,refund_id,refund_no,tenant_id,module_name,business_service,consumer_code,payment_id,applicant_name,mobile_number,refund_category,refund_reason,payment_mode_original,amount_paid,refund_amount,refund_mode,status,sanction_ref,finance_approval_date,gateway_refund_id,file_store_id,beneficiary_details,additional_details,created_by,created_time,last_modified_by,last_modified_time,audit_created_time,workflow_action) VALUES (?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?,?::jsonb, ?::jsonb, ?, ?, ?, ?, ?, ?);
           basePath: RefundAudit
           jsonMaps:
             - jsonPath: $.RefundAudit.id
