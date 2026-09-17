@@ -104,9 +104,9 @@ serviceMaps:
             - jsonPath: $.refundAudit.fileStoreId
             - jsonPath: $.refundAudit.beneficiaryDetails
             - jsonPath: $.refundAudit.additionalDetails
-            - jsonPath: $.refundAudit.createdBy
-            - jsonPath: $.refundAudit.createdTime
-            - jsonPath: $.refundAudit.lastModifiedBy
-            - jsonPath: $.refundAudit.lastModifiedTime
+            - jsonPath: $.refundAudit.auditDetails.createdBy
+            - jsonPath: $.refundAudit.auditDetails.createdTime
+            - jsonPath: $.refundAudit.auditDetails.lastModifiedBy
+            - jsonPath: $.refundAudit.auditDetails.lastModifiedTime
             - jsonPath: $.refundAudit.auditCreatedTime
             - jsonPath: $.refundAudit.workflowAction
