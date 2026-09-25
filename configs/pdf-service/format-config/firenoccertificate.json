@@ -1,0 +1,698 @@
+{
+  "key": "firenoccertificate",
+  "config": {
+    "pageSize": "A4",
+
+    "pageMargins": [
+      30,
+      25,
+      30,
+      35
+    ],
+
+    "defaultStyle": {
+      "font": "Cambay",
+      "fontSize": 9,
+      "lineHeight": 1.15
+    },
+
+    "content": [
+      {
+        "columns": [
+          {
+            "width": 60,
+            "image": "{{logoImage}}",
+            "fit": [
+              55,
+              55
+            ],
+            "alignment": "left"
+          },
+          {
+            "width": "*",
+            "stack": [
+              {
+                "text": "{{ulbName}}",
+                "style": "ulbName"
+              },
+              {
+                "text": "FIRE NOC CERTIFICATE",
+                "style": "certificateTitle"
+              },
+              {
+                "text": "Urban Local Body / Fire Services",
+                "style": "certificateSubtitle"
+              }
+            ],
+            "margin": [
+              5,
+              2,
+              5,
+              0
+            ]
+          },
+          {
+            "width": 65,
+            "image": "{{qrCode}}",
+            "fit": [
+              60,
+              60
+            ],
+            "alignment": "right"
+          }
+        ],
+        "margin": [
+          0,
+          0,
+          0,
+          10
+        ]
+      },
+
+      {
+        "canvas": [
+          {
+            "type": "line",
+            "x1": 0,
+            "y1": 0,
+            "x2": 535,
+            "y2": 0,
+            "lineWidth": 1
+          }
+        ],
+        "margin": [
+          0,
+          0,
+          0,
+          10
+        ]
+      },
+
+      {
+        "table": {
+          "widths": [
+            "*",
+            "*"
+          ],
+          "body": [
+            [
+              {
+                "stack": [
+                  {
+                    "text": "FIRE NOC NUMBER",
+                    "style": "label"
+                  },
+                  {
+                    "text": "{{fireNOCNumber}}",
+                    "style": "primaryValue"
+                  }
+                ]
+              },
+              {
+                "stack": [
+                  {
+                    "text": "APPLICATION NUMBER",
+                    "style": "label"
+                  },
+                  {
+                    "text": "{{applicationNo}}",
+                    "style": "primaryValue"
+                  }
+                ]
+              }
+            ],
+            [
+              {
+                "stack": [
+                  {
+                    "text": "DATE OF ISSUE",
+                    "style": "label"
+                  },
+                  {
+                    "text": "{{issuedDate}}",
+                    "style": "value"
+                  }
+                ]
+              },
+              {
+                "stack": [
+                  {
+                    "text": "VALID TILL",
+                    "style": "label"
+                  },
+                  {
+                    "text": "{{validityDate}}",
+                    "style": "value"
+                  }
+                ]
+              }
+            ]
+          ]
+        },
+        "layout": "lightHorizontalLines",
+        "margin": [
+          0,
+          0,
+          0,
+          15
+        ]
+      },
+
+      {
+        "text": "NOC DETAILS",
+        "style": "sectionHeading"
+      },
+
+      {
+        "table": {
+          "widths": [
+            "*",
+            "*",
+            "*"
+          ],
+          "body": [
+            [
+              {
+                "text": "NOC Type",
+                "style": "tableHeader"
+              },
+              {
+                "text": "Application Status",
+                "style": "tableHeader"
+              },
+              {
+                "text": "Applicable Fire Station",
+                "style": "tableHeader"
+              }
+            ],
+            [
+              {
+                "text": "{{fireNOCType}}",
+                "style": "tableValue"
+              },
+              {
+                "text": "{{applicationStatus}}",
+                "style": "tableValue"
+              },
+              {
+                "text": "{{firestationId}}",
+                "style": "tableValue"
+              }
+            ],
+            [
+              {
+                "text": "Financial Year",
+                "style": "tableHeader"
+              },
+              {
+                "text": "Valid From",
+                "style": "tableHeader"
+              },
+              {
+                "text": "Valid Till",
+                "style": "tableHeader"
+              }
+            ],
+            [
+              {
+                "text": "{{financialYear}}",
+                "style": "tableValue"
+              },
+              {
+                "text": "{{validFrom}}",
+                "style": "tableValue"
+              },
+              {
+                "text": "{{validityDate}}",
+                "style": "tableValue"
+              }
+            ]
+          ]
+        },
+        "layout": "lightHorizontalLines",
+        "margin": [
+          0,
+          5,
+          0,
+          15
+        ]
+      },
+
+      {
+        "text": "PROPERTY DETAILS",
+        "style": "sectionHeading"
+      },
+
+      {
+        "table": {
+          "widths": [
+            "*",
+            "*",
+            "*",
+            "*"
+          ],
+          "body": [
+            [
+              {
+                "text": "Property Type",
+                "style": "tableHeader"
+              },
+              {
+                "text": "Building Name",
+                "style": "tableHeader"
+              },
+              {
+                "text": "Building Usage",
+                "style": "tableHeader"
+              },
+              {
+                "text": "Building Height",
+                "style": "tableHeader"
+              }
+            ],
+            [
+              {
+                "text": "{{buildingType}}",
+                "style": "tableValue"
+              },
+              {
+                "text": "{{buildingName}}",
+                "style": "tableValue"
+              },
+              {
+                "text": "{{usageType}}",
+                "style": "tableValue"
+              },
+              {
+                "text": "{{heightOfBuilding}}",
+                "style": "tableValue"
+              }
+            ],
+            [
+              {
+                "text": "Built-up Area",
+                "style": "tableHeader"
+              },
+              {
+                "text": "Plot Size",
+                "style": "tableHeader"
+              },
+              {
+                "text": "No. of Floors",
+                "style": "tableHeader"
+              },
+              {
+                "text": "No. of Basements",
+                "style": "tableHeader"
+              }
+            ],
+            [
+              {
+                "text": "{{builtUpArea}}",
+                "style": "tableValue"
+              },
+              {
+                "text": "{{plotSize}}",
+                "style": "tableValue"
+              },
+              {
+                "text": "{{noOfFloors}}",
+                "style": "tableValue"
+              },
+              {
+                "text": "{{noOfBasements}}",
+                "style": "tableValue"
+              }
+            ]
+          ]
+        },
+        "layout": "lightHorizontalLines",
+        "margin": [
+          0,
+          5,
+          0,
+          15
+        ]
+      },
+
+      {
+        "text": "PROPERTY LOCATION DETAILS",
+        "style": "sectionHeading"
+      },
+
+      {
+        "table": {
+          "widths": [
+            "*",
+            "*",
+            "*",
+            "*"
+          ],
+          "body": [
+            [
+              {
+                "text": "City",
+                "style": "tableHeader"
+              },
+              {
+                "text": "Door / House No.",
+                "style": "tableHeader"
+              },
+              {
+                "text": "Building / Company Name",
+                "style": "tableHeader"
+              },
+              {
+                "text": "Pincode",
+                "style": "tableHeader"
+              }
+            ],
+            [
+              {
+                "text": "{{city}}",
+                "style": "tableValue"
+              },
+              {
+                "text": "{{doorNo}}",
+                "style": "tableValue"
+              },
+              {
+                "text": "{{buildingCompanyName}}",
+                "style": "tableValue"
+              },
+              {
+                "text": "{{pincode}}",
+                "style": "tableValue"
+              }
+            ],
+            [
+              {
+                "text": "Street Name",
+                "style": "tableHeader"
+              },
+              {
+                "text": "Locality / Mohalla",
+                "style": "tableHeader"
+              },
+              {
+                "text": "Latitude",
+                "style": "tableHeader"
+              },
+              {
+                "text": "Longitude",
+                "style": "tableHeader"
+              }
+            ],
+            [
+              {
+                "text": "{{street}}",
+                "style": "tableValue"
+              },
+              {
+                "text": "{{locality}}",
+                "style": "tableValue"
+              },
+              {
+                "text": "{{latitude}}",
+                "style": "tableValue"
+              },
+              {
+                "text": "{{longitude}}",
+                "style": "tableValue"
+              }
+            ]
+          ]
+        },
+        "layout": "lightHorizontalLines",
+        "margin": [
+          0,
+          5,
+          0,
+          15
+        ]
+      },
+
+      {
+        "text": "APPLICANT INFORMATION",
+        "style": "sectionHeading"
+      },
+
+      {
+        "table": {
+          "widths": [
+            "*",
+            "*",
+            "*",
+            "*"
+          ],
+          "body": [
+            [
+              {
+                "text": "Applicant Name",
+                "style": "tableHeader"
+              },
+              {
+                "text": "Father / Husband Name",
+                "style": "tableHeader"
+              },
+              {
+                "text": "Mobile Number",
+                "style": "tableHeader"
+              },
+              {
+                "text": "Email ID",
+                "style": "tableHeader"
+              }
+            ],
+            [
+              {
+                "text": "{{applicantName}}",
+                "style": "tableValue"
+              },
+              {
+                "text": "{{fatherOrHusbandName}}",
+                "style": "tableValue"
+              },
+              {
+                "text": "{{mobileNumber}}",
+                "style": "tableValue"
+              },
+              {
+                "text": "{{emailId}}",
+                "style": "tableValue"
+              }
+            ],
+            [
+              {
+                "text": "Ownership Type",
+                "style": "tableHeader"
+              },
+              {
+                "text": "Correspondence Address",
+                "style": "tableHeader",
+                "colSpan": 3
+              },
+              {},
+              {}
+            ],
+            [
+              {
+                "text": "{{ownershipType}}",
+                "style": "tableValue"
+              },
+              {
+                "text": "{{correspondenceAddress}}",
+                "style": "tableValue",
+                "colSpan": 3
+              },
+              {},
+              {}
+            ]
+          ]
+        },
+        "layout": "lightHorizontalLines",
+        "margin": [
+          0,
+          5,
+          0,
+          18
+        ]
+      },
+
+      {
+        "text": "CERTIFICATE VALIDITY",
+        "style": "sectionHeading"
+      },
+
+      {
+        "text": [
+          {
+            "text": "This Fire Noc is issued in respect of Application No. "
+          },
+          {
+            "text": "{{applicationNo}}",
+            "bold": true
+          },
+          {
+            "text": " and Fire NOC No. "
+          },
+          {
+            "text": "{{fireNOCNumber}}",
+            "bold": true
+          },
+          {
+            "text": ". The certificate is valid from "
+          },
+          {
+            "text": "{{validFrom}}",
+            "bold": true
+          },
+          {
+            "text": " till "
+          },
+          {
+            "text": "{{validityDate}}",
+            "bold": true
+          },
+          {
+            "text": ", subject to compliance with applicable fire safety norms and conditions."
+          }
+        ],
+        "alignment": "justify",
+        "margin": [
+          0,
+          5,
+          0,
+          20
+        ]
+      },
+
+      {
+        "columns": [
+          {
+            "width": "*",
+            "stack": [
+              {
+                "text": "This is a digitally generated certificate.",
+                "style": "digitalNote"
+              },
+              {
+                "text": "The QR code may be scanned for verification of certificate details.",
+                "style": "digitalNote"
+              }
+            ]
+          },
+          {
+            "width": 180,
+            "stack": [
+              {
+                "text": "Approved By",
+                "alignment": "right",
+                "style": "label"
+              },
+              {
+                "text": "{{approvedBy}}",
+                "alignment": "right",
+                "style": "approvalName"
+              },
+              {
+                "text": "Authorised Signatory",
+                "alignment": "right",
+                "style": "digitalNote"
+              }
+            ]
+          }
+        ],
+        "margin": [
+          0,
+          10,
+          0,
+          10
+        ]
+      }
+    ],
+
+    "footer": "(function(currentPage, pageCount) { return { columns: [ { text: 'UPYOG | Fire NOC Certificate', alignment: 'left', margin: [30, 0, 0, 0], fontSize: 7 }, { text: 'Digitally Generated Certificate', alignment: 'center', fontSize: 7 }, { text: 'Page ' + currentPage.toString() + ' of ' + pageCount, alignment: 'right', margin: [0, 0, 30, 0], fontSize: 7 } ] }; })",
+
+    "styles": {
+      "ulbName": {
+        "fontSize": 16,
+        "bold": true,
+        "alignment": "center"
+      },
+
+      "certificateTitle": {
+        "fontSize": 18,
+        "bold": true,
+        "alignment": "center",
+        "margin": [
+          0,
+          3,
+          0,
+          2
+        ]
+      },
+
+      "certificateSubtitle": {
+        "fontSize": 8,
+        "alignment": "center"
+      },
+
+      "sectionHeading": {
+        "fontSize": 10,
+        "bold": true,
+        "margin": [
+          0,
+          5,
+          0,
+          4
+        ]
+      },
+
+      "label": {
+        "fontSize": 7,
+        "bold": true
+      },
+
+      "primaryValue": {
+        "fontSize": 10,
+        "bold": true
+      },
+
+      "value": {
+        "fontSize": 9,
+        "bold": true
+      },
+
+      "tableHeader": {
+        "fontSize": 7,
+        "bold": true
+      },
+
+      "tableValue": {
+        "fontSize": 8,
+        "margin": [
+          0,
+          2,
+          0,
+          2
+        ]
+      },
+
+      "digitalNote": {
+        "fontSize": 7
+      },
+
+      "approvalName": {
+        "fontSize": 10,
+        "bold": true,
+        "margin": [
+          0,
+          5,
+          0,
+          2
+        ]
+      }
+    }
+  }
+}

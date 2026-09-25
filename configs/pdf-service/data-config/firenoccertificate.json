@@ -1,0 +1,288 @@
+{
+  "key": "firenoccertificate",
+  "DataConfigs": {
+    "serviceName": "rainmaker-noc",
+    "version": "1.0.0",
+    "baseKeyPath": "$.FireNOCs.*",
+    "entityIdPath": "$.applicationNumber",
+    "isCommonTableBorderRequired": true,
+    "mappings": [
+      {
+        "mappings": [
+          {
+            "direct": [
+              {
+                "variable": "applicationNo",
+                "value": {
+                  "path": "$.applicationNumber"
+                }
+              },
+              {
+                "variable": "fireNOCNumber",
+                "value": {
+                  "path": "$.fireNOCNumber"
+                }
+              },
+              {
+                "variable": "tenantId",
+                "value": {
+                  "path": "$.tenantId"
+                }
+              },
+              {
+                "variable": "applicationDate",
+                "value": {
+                  "path": "$.fireNOCDetails.applicationDate"
+                },
+                "type": "date"
+              },
+              {
+                "variable": "issuedDate",
+                "value": {
+                  "path": "$.fireNOCDetails.issuedDate"
+                },
+                "type": "date"
+              },
+              {
+                "variable": "validFrom",
+                "value": {
+                  "path": "$.fireNOCDetails.validFrom"
+                },
+                "type": "date"
+              },
+              {
+                "variable": "validityDate",
+                "value": {
+                  "path": "$.fireNOCDetails.validTo"
+                },
+                "type": "date"
+              },
+              {
+                "variable": "fireNOCType",
+                "value": {
+                  "path": "$.fireNOCDetails.fireNOCType"
+                }
+              },
+              {
+                "variable": "firestationId",
+                "value": {
+                  "path": "$.fireNOCDetails.firestationId"
+                },
+                "localisation": {
+                    "required": true,
+                    "prefix": null,
+                    "module": "rainmaker-noc"
+                }
+              },
+              {
+                "variable": "buildingType",
+                "value": {
+                  "path": "$.fireNOCDetails.noOfBuildings"
+                }
+              },
+              {
+                "variable": "buildingName",
+                "value": {
+                  "path": "$.fireNOCDetails.buildings[0].name"
+                }
+              },
+              {
+                "variable": "usageType",
+                "value": {
+                  "path": "$.fireNOCDetails.buildings[0].usageType"
+                },
+                "localisation": {
+                    "required": true,
+                    "prefix": null,
+                    "module": "rainmaker-noc"
+                }
+              },
+              {
+                "variable": "heightOfBuilding",
+                "value": {
+                  "path": "$.fireNOCDetails.buildings[0].uoms[?(@.code=='HEIGHT_OF_BUILDING')].value"
+                }
+              },
+              {
+                "variable": "noOfFloors",
+                "value": {
+                  "path": "$.fireNOCDetails.buildings[0].uoms[?(@.code=='NO_OF_FLOORS')].value"
+                }
+              },
+              {
+                "variable": "noOfBasements",
+                "value": {
+                  "path": "$.fireNOCDetails.buildings[0].uoms[?(@.code=='NO_OF_BASEMENTS')].value"
+                }
+              },
+              {
+                "variable": "plotSize",
+                "value": {
+                  "path": "$.fireNOCDetails.buildings[0].uoms[?(@.code=='PLOT_SIZE')].value"
+                }
+              },
+              {
+                "variable": "builtUpArea",
+                "value": {
+                  "path": "$.fireNOCDetails.buildings[0].uoms[?(@.code=='BUILTUP_AREA')].value"
+                }
+              },
+              {
+                "variable": "doorNo",
+                "value": {
+                  "path": "$.fireNOCDetails.propertyDetails.address.doorNo"
+                }
+              },
+              {
+                "variable": "city",
+                "value": {
+                  "path": "$.fireNOCDetails.propertyDetails.address.city"
+                }
+              },
+              {
+                "variable": "buildingCompanyName",
+                "value": {
+                  "path": "$.fireNOCDetails.propertyDetails.address.buildingName"
+                }
+              },
+              {
+                "variable": "street",
+                "value": {
+                  "path": "$.fireNOCDetails.propertyDetails.address.street"
+                }
+              },
+              {
+                "variable": "locality",
+                "value": {
+                  "path": "$.fireNOCDetails.propertyDetails.address.locality.code"
+                }
+              },
+              {
+                "variable": "pincode",
+                "value": {
+                  "path": "$.fireNOCDetails.propertyDetails.address.pincode"
+                }
+              },
+              {
+                "variable": "latitude",
+                "value": {
+                  "path": "$.fireNOCDetails.propertyDetails.address.latitude"
+                }
+              },
+              {
+                "variable": "longitude",
+                "value": {
+                  "path": "$.fireNOCDetails.propertyDetails.address.longitude"
+                }
+              },
+              {
+                "variable": "applicantName",
+                "value": {
+                  "path": "$.fireNOCDetails.applicantDetails.owners[0].name"
+                }
+              },
+              {
+                "variable": "fatherOrHusbandName",
+                "value": {
+                  "path": "$.fireNOCDetails.applicantDetails.owners[0].fatherOrHusbandName"
+                }
+              },
+              {
+                "variable": "mobileNumber",
+                "value": {
+                  "path": "$.fireNOCDetails.applicantDetails.owners[0].mobileNumber"
+                }
+              },
+              {
+                "variable": "emailId",
+                "value": {
+                  "path": "$.fireNOCDetails.applicantDetails.owners[0].emailId"
+                }
+              },
+              {
+                "variable": "ownershipType",
+                "value": {
+                  "path": "$.fireNOCDetails.applicantDetails.ownerShipType"
+                },
+                "localisation": {
+                    "required": true,
+                    "prefix": null,
+                    "module": "rainmaker-noc"
+                }
+              },
+              {
+                "variable": "correspondenceAddress",
+                "value": {
+                  "path": "$.fireNOCDetails.applicantDetails.owners[0].addresses[0].address"
+                }
+              },
+              {
+                "variable": "applicationStatus",
+                "value": {
+                  "path": "$.fireNOCDetails.status"
+                }
+              },
+              {
+                "variable": "financialYear",
+                "value": {
+                  "path": "$.fireNOCDetails.financialYear"
+                }
+              },
+              {
+                "variable": "createdDate",
+                "value": {
+                  "path": "$.auditDetails.createdTime"
+                },
+                "type": "date"
+              }
+            ]
+          },
+          {
+            "externalAPI": [
+              {
+                "path": "http://egov-workflow-v2.egov:8080/egov-workflow-v2/egov-wf/process/_search",
+                "queryParam": "tenantId=$.tenantId,businessIds=$.applicationNumber,history=true",
+                "apiRequest": null,
+                "responseMapping": [
+                  {
+                    "variable": "approvedBy",
+                    "value": "$.ProcessInstances[?(@.action=='APPROVE')].assigner.name",
+                    "isUpperCaseRequired": true
+                  }
+                ]
+              },
+              {
+                "path": "http://egov-mdms-service:8080/egov-mdms-service/v1/_get",
+                "queryParam": "moduleName=tenant&masterName=tenants&tenantId=pg&filter=%5B?(@.code=='{$.tenantId}')%5D",
+                "apiRequest": null,
+                "responseMapping": [
+                  {
+                    "variable": "logoImage",
+                    "value": "$.MdmsRes.tenant.tenants[0].logoId",
+                    "type": "image"
+                  },
+                  {
+                    "variable": "ulbName",
+                    "value": "$.MdmsRes.tenant.tenants[0].name"
+                  },
+                  {
+                    "variable": "ulbCode",
+                    "value": "$.MdmsRes.tenant.tenants[0].code"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "qrcodeConfig": [
+              {
+                "variable": "qrCode",
+                "value": "Fire NOC Number: {{fireNOCNumber}}, Application Number: {{applicationNo}}, Applicant: {{applicantName}}, NOC Type: {{fireNOCType}}, Issued Date: {{issuedDate}}, Valid Till: {{validityDate}}, Approved By: {{approvedBy}}"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,91 @@
+ReportDefinitions:
+  - reportName: eWasteRegisterReport
+    summary: Report is used to view eWaste Register details.
+    version: 1.0.0
+    moduleName: rainmaker-ew
+
+    sourceColumns:
+      - name: requestid
+        label: Request ID
+        type: string
+        source: ew
+        total: false
+
+      - name: requeststatus
+        label: Request Status
+        type: string
+        source: ew
+        total: false
+
+      - name: productname
+        label: Product Name
+        type: string
+        source: ew
+        total: false
+
+      - name: quantity
+        label: Quantity
+        type: string
+        source: ew
+        total: false
+
+      - name: price
+        label: Price
+        type: string
+        source: ew
+        total: true
+
+      - name: applicantname
+        label: Applicant Name
+        type: string
+        source: ew
+        total: false
+
+      - name: mobilenumber
+        label: Mobile Number
+        type: string
+        source: ew
+        total: false
+
+    searchParams:
+      - name: fromDate
+        label: REPORTS_EW_PARAM_FROMDATE
+        type: epoch
+        source: ew
+        isMandatory: false
+        searchClause: AND ew.createdtime >= $fromDate
+
+      - name: toDate
+        label: REPORTS_EW_PARAM_TODATE
+        type: epoch
+        source: ew
+        isMandatory: false
+        searchClause: AND ew.createdtime <= $toDate
+
+      - name: requestStatus
+        label: Request Status
+        type: singlevaluelist
+        pattern: 'list://REQUESTREJECTED:Request Rejected,PRODUCTVERIFIED:Product Verified,REQUESTCREATED:Request Created,REQUESTCOMPLETED:Request Completed,COMPLETIONPENDING:Completion Pending,INWORKFLOW:In Workflow,NEWREQUEST:New Request'
+        source: ew
+        wrapper: true
+        isMandatory: false
+        searchClause: AND ew.requeststatus = $requestStatus
+
+    query: |
+      SELECT
+          ew.requestid,
+          ew.requeststatus,
+          ed.productname,
+          ed.quantity,
+          ed.price,
+          ap.applicantname,
+          ap.mobilenumber
+      FROM eg_ew_requests ew
+      INNER JOIN eg_ew_ewastedetails ed
+          ON ew.id = ed.ewid
+      INNER JOIN eg_ew_applicantdetails ap
+          ON ap.ewid = ew.id
+      WHERE ew.tenantid = $tenantid
+
+    orderby: |
+      ORDER BY ew.createdtime DESC

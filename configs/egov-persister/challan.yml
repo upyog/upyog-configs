@@ -1,0 +1,172 @@
+serviceMaps:
+  serviceName: challan-generation
+  mappings:
+    - version: 1.0.0
+      description: Persists challan details in eg_challan table
+      fromTopic: save-challan-generation
+      isTransaction: true
+      queryMaps:
+
+        - query: INSERT INTO eg_challan( id, accountid, tenantid, challanNo, businessService, referenceId, applicationStatus, taxPeriodFrom, taxPeriodTo, additionalDetail, createdby, lastmodifiedby, createdtime, lastmodifiedtime, description, filestoreid, challanstatus, offence_type_name, offence_category_name, offence_subcategory_name, challan_amount) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET accountid = EXCLUDED.accountid, tenantid = EXCLUDED.tenantid, challanNo = EXCLUDED.challanNo, businessService = EXCLUDED.businessService, referenceId = EXCLUDED.referenceId, applicationStatus = EXCLUDED.applicationStatus, taxPeriodFrom = EXCLUDED.taxPeriodFrom, taxPeriodTo = EXCLUDED.taxPeriodTo, additionalDetail = EXCLUDED.additionalDetail, lastmodifiedby = EXCLUDED.lastmodifiedby, lastmodifiedtime = EXCLUDED.lastmodifiedtime, description = EXCLUDED.description, filestoreid = EXCLUDED.filestoreid, challanstatus = EXCLUDED.challanstatus, offence_type_name = EXCLUDED.offence_type_name, offence_category_name = EXCLUDED.offence_category_name, offence_subcategory_name = EXCLUDED.offence_subcategory_name, challan_amount = EXCLUDED.challan_amount;
+          basePath: Challan
+          jsonMaps:
+            - jsonPath: $.Challan.id
+            - jsonPath: $.Challan.citizen.uuid
+            - jsonPath: $.Challan.tenantId
+            - jsonPath: $.Challan.challanNo
+            - jsonPath: $.Challan.businessService
+            - jsonPath: $.Challan.referenceId
+            - jsonPath: $.Challan.applicationStatus
+            - jsonPath: $.Challan.taxPeriodFrom
+            - jsonPath: $.Challan.taxPeriodTo
+            - jsonPath: $.Challan.additionalDetail
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.Challan.auditDetails.createdBy
+            - jsonPath: $.Challan.auditDetails.lastModifiedBy
+            - jsonPath: $.Challan.auditDetails.createdTime
+            - jsonPath: $.Challan.auditDetails.lastModifiedTime
+            - jsonPath: $.Challan.description
+            - jsonPath: $.Challan.filestoreid
+            - jsonPath: $.Challan.challanStatus
+            - jsonPath: $.Challan.offenceTypeName
+            - jsonPath: $.Challan.offenceCategoryName
+            - jsonPath: $.Challan.offenceSubCategoryName
+            - jsonPath: $.Challan.challanAmount
+
+        - query: INSERT INTO eg_challan_citizen (uuid, tenantid, challanid, primaryrole, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (uuid, challanid) DO UPDATE SET tenantid = EXCLUDED.tenantid, primaryrole = EXCLUDED.primaryrole, lastmodifiedby = EXCLUDED.lastmodifiedby, lastmodifiedtime = EXCLUDED.lastmodifiedtime;
+          basePath: Challan.citizen
+          jsonMaps:
+            - jsonPath: $.Challan.citizen.uuid
+            - jsonPath: $.Challan.citizen.tenantId
+            - jsonPath: $.Challan.id
+            - jsonPath: $.Challan.citizen.primaryrole
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.Challan.citizen.createdBy
+            - jsonPath: $.Challan.citizen.createdDate
+            - jsonPath: $.Challan.citizen.lastModifiedBy
+            - jsonPath: $.Challan.citizen.lastModifiedDate
+
+        - query: INSERT INTO eg_challanAddress( id, tenantid, doorno, plotNo, street, buildingName, latitude, longitude, locality, district, landmark, city, pincode, region, state, country, detail, addressId, addressNumber, type, addressLine1, addressLine2, challanId, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET tenantid = EXCLUDED.tenantid, doorno = EXCLUDED.doorno, plotNo = EXCLUDED.plotNo, street = EXCLUDED.street, buildingName = EXCLUDED.buildingName, latitude = EXCLUDED.latitude, longitude = EXCLUDED.longitude, locality = EXCLUDED.locality, district = EXCLUDED.district, landmark = EXCLUDED.landmark, city = EXCLUDED.city, pincode = EXCLUDED.pincode, region = EXCLUDED.region, state = EXCLUDED.state, country = EXCLUDED.country, detail = EXCLUDED.detail, addressId = EXCLUDED.addressId, addressNumber = EXCLUDED.addressNumber, type = EXCLUDED.type, addressLine1 = EXCLUDED.addressLine1, addressLine2 = EXCLUDED.addressLine2, challanId = EXCLUDED.challanId, lastmodifiedby = EXCLUDED.lastmodifiedby, lastmodifiedtime = EXCLUDED.lastmodifiedtime;
+          basePath: Challan.address
+          jsonMaps:
+            - jsonPath: $.Challan.address.id
+            - jsonPath: $.Challan.address.tenantId
+            - jsonPath: $.Challan.address.doorNo
+            - jsonPath: $.Challan.address.plotNo
+            - jsonPath: $.Challan.address.street
+            - jsonPath: $.Challan.address.buildingName
+            - jsonPath: $.Challan.address.latitude
+            - jsonPath: $.Challan.address.longitude
+            - jsonPath: $.Challan.address.localityCode
+            - jsonPath: $.Challan.address.district
+            - jsonPath: $.Challan.address.landmark
+            - jsonPath: $.Challan.address.city
+            - jsonPath: $.Challan.address.pincode
+            - jsonPath: $.Challan.address.region
+            - jsonPath: $.Challan.address.state
+            - jsonPath: $.Challan.address.country
+            - jsonPath: $.Challan.address.detail
+            - jsonPath: $.Challan.address.addressId
+            - jsonPath: $.Challan.address.addressNumber
+            - jsonPath: $.Challan.address.type
+            - jsonPath: $.Challan.address.addressLine1
+            - jsonPath: $.Challan.address.addressLine2
+            - jsonPath: $.Challan.id
+            - jsonPath: $.Challan.auditDetails.createdBy
+            - jsonPath: $.Challan.auditDetails.lastModifiedBy
+            - jsonPath: $.Challan.auditDetails.createdTime
+            - jsonPath: $.Challan.auditDetails.lastModifiedTime
+
+        - query: INSERT INTO public.eg_challan_document_detail(document_detail_id, challan_id, document_type, filestore_id, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (document_detail_id) DO UPDATE SET challan_id = EXCLUDED.challan_id, document_type = EXCLUDED.document_type, filestore_id = EXCLUDED.filestore_id, lastmodifiedby = EXCLUDED.lastmodifiedby, lastmodifiedtime = EXCLUDED.lastmodifiedtime;
+          basePath: Challan.documents.*
+          jsonMaps:
+            - jsonPath: $.Challan.documents.*.documentDetailId
+            - jsonPath: $.Challan.documents.*.challanId
+            - jsonPath: $.Challan.documents.*.documentType
+            - jsonPath: $.Challan.documents.*.fileStoreId
+            - jsonPath: $.Challan.documents.*.auditDetails.createdBy
+            - jsonPath: $.Challan.documents.*.auditDetails.lastModifiedBy
+            - jsonPath: $.Challan.documents.*.auditDetails.createdTime
+            - jsonPath: $.Challan.documents.*.auditDetails.lastModifiedTime
+
+
+    - version: 1.0.0
+      description: Update Challan details in eg_challan table
+      fromTopic: update-challan-generation
+      isTransaction: true
+      queryMaps:
+
+        - query: UPDATE eg_challan SET applicationStatus = ?, taxPeriodFrom = ?, taxPeriodTo = ?, lastmodifiedby = ?, lastmodifiedtime = ?, description = ?, additionalDetail = ?, filestoreid = ?, receiptnumber = ?, challanstatus = ?, offence_type_name = ?, offence_category_name = ?, offence_subcategory_name = ?, challan_amount = ? WHERE id = ?;
+          basePath: Challan
+          jsonMaps:
+            - jsonPath: $.Challan.applicationStatus
+            - jsonPath: $.Challan.taxPeriodFrom
+            - jsonPath: $.Challan.taxPeriodTo
+            - jsonPath: $.Challan.auditDetails.lastModifiedBy
+            - jsonPath: $.Challan.auditDetails.lastModifiedTime
+            - jsonPath: $.Challan.description
+            - jsonPath: $.Challan.additionalDetail
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.Challan.filestoreid
+            - jsonPath: $.Challan.receiptNumber
+            - jsonPath: $.Challan.challanStatus
+            - jsonPath: $.Challan.offenceTypeName
+            - jsonPath: $.Challan.offenceCategoryName
+            - jsonPath: $.Challan.offenceSubCategoryName
+            - jsonPath: $.Challan.challanAmount
+            - jsonPath: $.Challan.id
+
+        - query: UPDATE eg_challanAddress SET tenantid = ?, doorno = ?, plotNo = ?, street = ?, buildingName = ?, latitude = ?, longitude = ?, locality = ?, district = ?, landmark = ?, city = ?, pincode = ?, region = ?, state = ?, country = ?, detail = ?, addressId = ?, addressNumber = ?, type = ?, addressLine1 = ?, addressLine2 = ?, challanId = ?, lastmodifiedby = ?, lastmodifiedtime = ? WHERE id = ?;
+          basePath: Challan.address
+          jsonMaps:
+            - jsonPath: $.Challan.address.tenantId
+            - jsonPath: $.Challan.address.doorNo
+            - jsonPath: $.Challan.address.plotNo
+            - jsonPath: $.Challan.address.street
+            - jsonPath: $.Challan.address.buildingName
+            - jsonPath: $.Challan.address.latitude
+            - jsonPath: $.Challan.address.longitude
+            - jsonPath: $.Challan.address.localityCode
+            - jsonPath: $.Challan.address.district
+            - jsonPath: $.Challan.address.landmark
+            - jsonPath: $.Challan.address.city
+            - jsonPath: $.Challan.address.pincode
+            - jsonPath: $.Challan.address.region
+            - jsonPath: $.Challan.address.state
+            - jsonPath: $.Challan.address.country
+            - jsonPath: $.Challan.address.detail
+            - jsonPath: $.Challan.address.addressId
+            - jsonPath: $.Challan.address.addressNumber
+            - jsonPath: $.Challan.address.type
+            - jsonPath: $.Challan.address.addressLine1
+            - jsonPath: $.Challan.address.addressLine2
+            - jsonPath: $.Challan.id
+            - jsonPath: $.Challan.auditDetails.lastModifiedBy
+            - jsonPath: $.Challan.auditDetails.lastModifiedTime
+            - jsonPath: $.Challan.address.id
+
+        - query: UPDATE eg_challan_citizen SET primaryrole = ?, lastmodifiedby = ?, lastmodifiedtime = ? WHERE uuid = ? AND tenantid = ?;
+          basePath: Challan.citizen
+          jsonMaps:
+            - jsonPath: $.Challan.citizen.primaryrole
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.Challan.citizen.lastModifiedBy
+            - jsonPath: $.Challan.citizen.lastModifiedDate
+            - jsonPath: $.Challan.citizen.uuid
+            - jsonPath: $.Challan.citizen.tenantId
+
+        - query: INSERT INTO public.eg_challan_document_detail(document_detail_id, challan_id, document_type, filestore_id, createdby, lastmodifiedby, createdtime, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (document_detail_id) DO UPDATE SET challan_id = EXCLUDED.challan_id, document_type = EXCLUDED.document_type, filestore_id = EXCLUDED.filestore_id, lastmodifiedby = EXCLUDED.lastmodifiedby, lastmodifiedtime = EXCLUDED.lastmodifiedtime;
+          basePath: Challan.documents.*
+          jsonMaps:
+            - jsonPath: $.Challan.documents.*.documentDetailId
+            - jsonPath: $.Challan.documents.*.challanId
+            - jsonPath: $.Challan.documents.*.documentType
+            - jsonPath: $.Challan.documents.*.fileStoreId
+            - jsonPath: $.Challan.documents.*.auditDetails.createdBy
+            - jsonPath: $.Challan.documents.*.auditDetails.lastModifiedBy
+            - jsonPath: $.Challan.documents.*.auditDetails.createdTime
+            - jsonPath: $.Challan.documents.*.auditDetails.lastModifiedTime

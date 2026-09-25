@@ -37,13 +37,10 @@ SearchDefinitions:
             jsonPath: $.searchCriteria.serviceCode
           - name: pi.status
             isMandatory: false
-            jsonPath: $.searchCriteria.applicationStatus
+            jsonPath: $.searchCriteria.status
           - name: pi.assignee
             isMandatory: false
             jsonPath: $.searchCriteria.assignee
-          - name: svc.mobileNumber
-            isMandatory: false
-            jsonPath: $.searchCriteria.mobileNumber
           - name: addr.locality
             isMandatory: false
             jsonPath: $.searchCriteria.locality
@@ -89,13 +86,10 @@ SearchDefinitions:
             jsonPath: $.searchCriteria.serviceCode
           - name: pi.status
             isMandatory: false
-            jsonPath: $.searchCriteria.applicationStatus
+            jsonPath: $.searchCriteria.status
           - name: pi.assignee
             isMandatory: false
             jsonPath: $.searchCriteria.assignee
-          - name: svc.mobileNumber
-            isMandatory: false
-            jsonPath: $.searchCriteria.mobileNumber
           - name: addr.locality
             isMandatory: false
             jsonPath: $.searchCriteria.locality
