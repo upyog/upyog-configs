@@ -916,33 +916,58 @@ ReportDefinitions:
         source: uc
         total: false
       - name: module
-        label: module
+        label: Module
+        type: string
+        source: uc
+        total: false
+      - name: ulb
+        label: ULB
         type: string
         source: uc
         total: false
       - name: date
-        label: date
+        label: Date
         type: string
         source: uc
         total: false
     searchParams:
-      - name: State
+      - name: state
         label: State
         type: singlevaluelist
         pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=pg&moduleName=tenant&masterName=nationalInfoUser|$.MdmsRes.tenant.nationalInfoUser.*.stateCode|$.MdmsRes.tenant.nationalInfoUser.*.stateCode
         source: uc
         wrapper: true
         isMandatory: false
-        searchClause: AND data.state = $State
+        searchClause: AND data.state = $state
+      - name: ulb
+        label: ULB
+        type: singlevaluelist
+        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=pg&moduleName=tenant&masterName=nationalInfo|$.MdmsRes.tenant.nationalInfo.*.code|$.MdmsRes.tenant.nationalInfo.*.name
+        source: uc
+        wrapper: true
+        isMandatory: false
+        searchClause: AND data.ulb = $ulb
       - name: module
-        label: module
+        label: Module
         type: singlevaluelist
         pattern: 'list://FIRENOC:FIRENOC,FSM:FSM,MCOLLECT:MCOLLECT,OBPS:OBPS,PGR:PGR,PT:PT,TL:TL,WS:WS'
-        source: fsm
+        source: uc
         wrapper: true
         isMandatory: false
         searchClause: AND data.module = $module
     query: |
-        select data.state, data.module, max( data.u_date ) AS date  from (select split_part(datakey, ':','1') as date, TO_CHAR(TO_DATE(split_part(datakey, ':', '1'), 'DD-MM-YYYY'), 'yyyy-MM-dd') AS u_date, split_part(datakey, ':','2') as module, split_part(datakey, ':','3') as ward, split_part(datakey, ':','4') as ulb, split_part(datakey, ':','6') as state from nss_ingest_data)as data where data.module != 'COMMON' 
-    groupby: GROUP BY data.state ,data.module
-    orderby: ORDER BY data.state ASC
+      select data.state, data.module, data.ulb, max(data.u_date) AS date
+      from (
+        select
+          split_part(datakey, ':', 1) as date,
+          TO_CHAR(TO_DATE(split_part(datakey, ':', 1), 'DD-MM-YYYY'), 'yyyy-MM-dd') AS u_date,
+          split_part(datakey, ':', 2) as module,
+          split_part(datakey, ':', 3) as ward,
+          split_part(datakey, ':', 4) as ulb,
+          split_part(datakey, ':', 6) as state
+        from nss_ingest_data
+      ) as data
+      where data.module != 'COMMON'
+
+    groupby: GROUP BY data.state, data.module, data.ulb
+    orderby: ORDER BY data.state ASC, data.ulb ASC
