@@ -162,75 +162,94 @@ ReportDefinitions:
     version: 1.0.0
     moduleName: rainmaker-CHB
     sourceColumns:
-      - name: transactionnumber
-        label: rainmaker.CHB.transactionnumber
-        type: string
-        source: CHB
-        total: false
-      - name: tenantid
-        label: rainmaker.CHB.tenant
-        type: string
-        source: CHB
-        total: false
-      - name: totalamountpaid
-        label: rainmaker.CHB.amount
-        type: string
-        source: CHB
-        total: true
-      - name: paymentmode
-        label: rainmaker.CHB.paymentmode
-        type: string
-        source: CHB
-        total: false
-      - name: instrumentstatus
-        label: rainmaker.CHB.instrumentstatus
-        type: string
-        source: CHB
-        total: false
-      - name: paidby
-        label: rainmaker.CHB.paidby
-        type: string
-        source: CHB
-        total: false
-      - name: mobilenumber
-        label: rainmaker.CHB.mobile
-        type: string
-        source: CHB
-        total: false
-      - name: createdtime
-        label: rainmaker.CHB.createdtime
-        type: string
-        source: CHB
-        showColumn: false
+    - name: consumer_code
+      label: rainmaker.CHB.consumerCode
+      type: string
+      source: CHB
+      total: false
+    - name: refund_no
+      label: rainmaker.CHB.refundNo
+      type: string
+      source: CHB
+      total: false
+    - name: tenant_id
+      label: rainmaker.CHB.tenant
+      type: string
+      source: CHB
+      total: false
+    - name: applicant_name
+      label: rainmaker.CHB.applicantName
+      type: string
+      source: CHB
+      total: false
+    - name: refund_amount
+      label: rainmaker.CHB.refundAmount
+      type: string
+      source: CHB
+      total: true
+    - name: refund_mode
+      label: rainmaker.CHB.refundMode
+      type: string
+      source: CHB
+      total: false
+    - name: status
+      label: rainmaker.CHB.refundStatus
+      type: string
+      source: CHB
+      total: false
+    - name: refund_created_date
+      label: rainmaker.CHB.refundCreatedDate
+      type: string
+      source: CHB
+      total: false
     searchParams:
-      - name: transactionnumber
-        label: rainmaker.CHB.transactionnumber
-        type: string
-        source: CHB
-        isMandatory: false
-        searchClause: AND p.transactionnumber = $transactionnumber
-      - name: fromDate
-        label: rainmaker.CHB.fromDate
-        type: epoch
-        source: CHB
-        isMandatory: true
-        searchClause: AND p.createdtime >= $fromDate
-      - name: toDate
-        label: rainmaker.CHB.toDate
-        type: epoch
-        source: CHB
-        isMandatory: true
-        searchClause: AND p.createdtime <= $toDate
-    query: >
-      select 
-        p.transactionnumber,
-        p.tenantid,
-        p.totalamountpaid,
-        p.paymentmode,
-        p.instrumentstatus,
-        p.paidby,
-        p.mobilenumber,
-        p.createdtime
-      FROM egcl_payment p
-      WHERE p.instrumentstatus = 'REFUNDED'
-      AND 1=1
+    - name: refund_no
+      label: rainmaker.CHB.refundNo
+      type: string
+      source: CHB
+      isMandatory: false
+      searchClause: AND r.refund_no = $refund_no
+    - name: consumer_code
+      label: rainmaker.CHB.consumerCode
+      type: string
+      source: CHB
+      isMandatory: false
+      searchClause: AND r.consumer_code = $consumer_code
+    - name: refund_mode
+      label: rainmaker.CHB.refundMode
+      type: singlevaluelist
+      pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=pg&moduleName=common-masters&masterName=RefundMode|$.MdmsRes['common-masters'].RefundMode[*].code|$.MdmsRes['common-masters'].RefundMode[*].name
+      source: CHB
+      isMandatory: false
+      searchClause: AND r.refund_mode = $refund_mode
+    - name: fromDate
+      label: rainmaker.CHB.fromDate
+      type: epoch
+      source: CHB
+      isMandatory: true
+      searchClause: AND r.created_time >= $fromDate
+    - name: toDate
+      label: rainmaker.CHB.toDate
+      type: epoch
+      source: CHB
+      isMandatory: true
+      searchClause: AND r.created_time <= $toDate
+    query: |
+          SELECT
+            r.consumer_code,
+            r.refund_no,
+            r.tenant_id,
+            r.applicant_name,
+            r.refund_amount,
+            r.refund_mode,
+            r.status,
+            TO_CHAR(
+              TO_TIMESTAMP(r.created_time / 1000.0)
+              AT TIME ZONE 'Asia/Kolkata',
+              'DD-MM-YYYY HH24:MI:SS'
+            ) AS refund_created_date
+          FROM eg_rs_refund r
+          WHERE r.business_service = 'CHB.REFUND'
+          AND r.module_name = 'CHB'
+          AND 1=1
+    orderby: ORDER BY r.created_time DESC
