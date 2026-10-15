@@ -955,6 +955,18 @@ ReportDefinitions:
         wrapper: true
         isMandatory: false
         searchClause: AND data.module = $module
+      - name: fromDate
+        label: From Date
+        type: epoch
+        source: uc
+        isMandatory: false
+        searchClause: AND TO_DATE(data.u_date, 'YYYY-MM-DD') >= TO_TIMESTAMP($fromDate / 1000.0)::date
+      - name: toDate
+        label: To Date
+        type: epoch
+        source: uc
+        isMandatory: false
+        searchClause: AND TO_DATE(data.u_date, 'YYYY-MM-DD') <= TO_TIMESTAMP($toDate / 1000.0)::date
     query: |
       select data.state, data.module, data.ulb, max(data.u_date) AS date
       from (
