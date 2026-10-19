@@ -234,16 +234,28 @@
                             "value": "Payments[0].totalDue"
                         },
                         {
-                            "variable": "BOOKING_FEES",
-                            "value": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[1].amount"
+                          "variable": "BOOKING_FEES",
+                          "value": {
+                            "path": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[?(@.taxHeadCode == 'BOOKING_FEES')].amount"
+                          }
                         },
                         {
-                            "variable": "CGST",
-                            "value": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[0].amount"
+                          "variable": "SECURITY_DEPOSIT",
+                          "value": {
+                            "path": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[?(@.taxHeadCode == 'SECURITY_DEPOSIT')].amount"
+                          }
                         },
                         {
-                            "variable": "SGST",
-                            "value": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[2].amount"
+                          "variable": "CGST",
+                          "value": {
+                            "path": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[?(@.taxHeadCode == 'CGST')].amount"
+                          }
+                        },
+                        {
+                          "variable": "SGST",
+                          "value": {
+                            "path": "Payments[0].paymentDetails[0].bill.billDetails[0].billAccountDetails[?(@.taxHeadCode == 'SGST')].amount"
+                          }
                         }
                      ]
                    },
