@@ -180,11 +180,16 @@
           },
           {
             "table": {
-              "widths": ["*", "*", "*","*"],
+              "widths": ["*", "*", "*", "*", "*"],
               "body": [
                 [
                   {
                     "text": "Booking Fees",
+                    "style": "tableCell",
+                    "bold": true
+                  },
+                  {
+                    "text": "Security Deposit",
                     "style": "tableCell",
                     "bold": true
                   },
@@ -208,6 +213,10 @@
                 [
                   {
                     "text": "{{BOOKING_FEES}}",
+                    "style": "tableCell"
+                  },
+                  {
+                    "text": "{{SECURITY_DEPOSIT}}",
                     "style": "tableCell"
                   },
                   {
