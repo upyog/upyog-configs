@@ -1,0 +1,291 @@
+ServiceMaps:
+  serviceName: challan-generation
+  version: 1.0.0
+  mappings:
+    - topic: save-challan-generation
+      configKey: INDEX
+      indexes:
+        - name: challan-generation-index
+          type: general
+          id: $.Challan.id
+          isBulk: false
+          timeStampField: $.Challan.auditDetails.createdTime
+          jsonPath: $
+          customJsonMapping:
+            indexMapping:
+              Data:
+                id: id
+                tenantId: tenantId
+                challanNo: challanNo
+                businessService: businessService
+                referenceId: referenceId
+                description: description
+                applicationStatus: applicationStatus
+                challanStatus: challanStatus
+                taxPeriodFrom: taxPeriodFrom
+                taxPeriodTo: taxPeriodTo
+                # totalAmount: totalAmount  <-- REMOVED
+                challanAmount: challanAmount
+                filestoreid: filestoreid
+                accountId: accountId
+                offenceTypeName: offenceTypeName
+                offenceCategoryName: offenceCategoryName
+                offenceSubCategoryName: offenceSubCategoryName
+                # citizenName: citizenName  <-- REMOVED
+                # citizenMobileNumber: citizenMobileNumber  <-- REMOVED
+                address: address
+                additionalDetail: additionalDetail
+                createdBy: createdBy
+                lastModifiedBy: lastModifiedBy
+                createdTime: createdTime
+                lastModifiedTime: lastModifiedTime
+                citizen: citizen
+                documents: []
+            fieldMapping:
+              - inJsonPath: $.Challan.id
+                outJsonPath: $.Data.id
+              - inJsonPath: $.Challan.tenantId
+                outJsonPath: $.Data.tenantId
+              - inJsonPath: $.Challan.challanNo
+                outJsonPath: $.Data.challanNo
+              - inJsonPath: $.Challan.businessService
+                outJsonPath: $.Data.businessService
+              - inJsonPath: $.Challan.referenceId
+                outJsonPath: $.Data.referenceId
+              - inJsonPath: $.Challan.description
+                outJsonPath: $.Data.description
+              - inJsonPath: $.Challan.applicationStatus
+                outJsonPath: $.Data.applicationStatus
+              - inJsonPath: $.Challan.challanStatus
+                outJsonPath: $.Data.challanStatus
+              - inJsonPath: $.Challan.taxPeriodFrom
+                outJsonPath: $.Data.taxPeriodFrom
+              - inJsonPath: $.Challan.taxPeriodTo
+                outJsonPath: $.Data.taxPeriodTo
+              # - inJsonPath: $.Challan.totalAmount  <-- REMOVED
+              #   outJsonPath: $.Data.totalAmount
+              - inJsonPath: $.Challan.challanAmount
+                outJsonPath: $.Data.challanAmount
+              - inJsonPath: $.Challan.filestoreid
+                outJsonPath: $.Data.filestoreid
+              - inJsonPath: $.Challan.accountId
+                outJsonPath: $.Data.accountId
+              - inJsonPath: $.Challan.offenceTypeName
+                outJsonPath: $.Data.offenceTypeName
+              - inJsonPath: $.Challan.offenceCategoryName
+                outJsonPath: $.Data.offenceCategoryName
+              - inJsonPath: $.Challan.offenceSubCategoryName
+                outJsonPath: $.Data.offenceSubCategoryName
+              # - inJsonPath: $.Challan.citizenName  <-- REMOVED
+              #   outJsonPath: $.Data.citizenName
+              # - inJsonPath: $.Challan.citizenMobileNumber  <-- REMOVED
+              #   outJsonPath: $.Data.citizenMobileNumber
+              - inJsonPath: $.Challan.address
+                outJsonPath: $.Data.address
+              - inJsonPath: $.Challan.additionalDetail
+                outJsonPath: $.Data.additionalDetail
+              - inJsonPath: $.Challan.auditDetails.createdBy
+                outJsonPath: $.Data.createdBy
+              - inJsonPath: $.Challan.auditDetails.lastModifiedBy
+                outJsonPath: $.Data.lastModifiedBy
+              - inJsonPath: $.Challan.auditDetails.createdTime
+                outJsonPath: $.Data.createdTime
+              - inJsonPath: $.Challan.auditDetails.lastModifiedTime
+                outJsonPath: $.Data.lastModifiedTime
+              - inJsonPath: $.Challan.citizen
+                outJsonPath: $.Data.citizen
+              - inJsonPath: $.Challan.documents
+                outJsonPath: $.Data.documents
+
+    - topic: update-challan-generation
+      configKey: INDEX
+      indexes:
+        - name: challan-generation-index
+          type: general
+          id: $.Challan.id
+          isBulk: false
+          timeStampField: $.Challan.auditDetails.lastModifiedTime
+          jsonPath: $
+          customJsonMapping:
+            indexMapping:
+              Data:
+                id: id
+                tenantId: tenantId
+                challanNo: challanNo
+                businessService: businessService
+                referenceId: referenceId
+                description: description
+                applicationStatus: applicationStatus
+                challanStatus: challanStatus
+                taxPeriodFrom: taxPeriodFrom
+                taxPeriodTo: taxPeriodTo
+                # totalAmount: totalAmount  <-- REMOVED
+                challanAmount: challanAmount
+                filestoreid: filestoreid
+                receiptNumber: receiptNumber
+                accountId: accountId
+                offenceTypeName: offenceTypeName
+                offenceCategoryName: offenceCategoryName
+                offenceSubCategoryName: offenceSubCategoryName
+                # citizenName: citizenName  <-- REMOVED
+                # citizenMobileNumber: citizenMobileNumber  <-- REMOVED
+                address: address
+                additionalDetail: additionalDetail
+                createdBy: createdBy
+                lastModifiedBy: lastModifiedBy
+                createdTime: createdTime
+                lastModifiedTime: lastModifiedTime
+                citizen: citizen
+                documents: []
+            fieldMapping:
+              - inJsonPath: $.Challan.id
+                outJsonPath: $.Data.id
+              - inJsonPath: $.Challan.tenantId
+                outJsonPath: $.Data.tenantId
+              - inJsonPath: $.Challan.challanNo
+                outJsonPath: $.Data.challanNo
+              - inJsonPath: $.Challan.businessService
+                outJsonPath: $.Data.businessService
+              - inJsonPath: $.Challan.referenceId
+                outJsonPath: $.Data.referenceId
+              - inJsonPath: $.Challan.description
+                outJsonPath: $.Data.description
+              - inJsonPath: $.ChallAN.applicationStatus
+                outJsonPath: $.Data.applicationStatus
+              - inJsonPath: $.Challan.challanStatus
+                outJsonPath: $.Data.challanStatus
+              - inJsonPath: $.Challan.taxPeriodFrom
+                outJsonPath: $.Data.taxPeriodFrom
+              - inJsonPath: $.Challan.taxPeriodTo
+                outJsonPath: $.Data.taxPeriodTo
+              # - inJsonPath: $.Challan.totalAmount  <-- REMOVED
+              #   outJsonPath: $.Data.totalAmount
+              - inJsonPath: $.Challan.challanAmount
+                outJsonPath: $.Data.challanAmount
+              - inJsonPath: $.Challan.filestoreid
+                outJsonPath: $.Data.filestoreid
+              - inJsonPath: $.Challan.receiptNumber
+                outJsonPath: $.Data.receiptNumber
+              - inJsonPath: $.Challan.accountId
+                outJsonPath: $.Data.accountId
+              - inJsonPath: $.Challan.offenceTypeName
+                outJsonPath: $.Data.offenceTypeName
+              - inJsonPath: $.Challan.offenceCategoryName
+                outJsonPath: $.Data.offenceCategoryName
+              - inJsonPath: $.Challan.offenceSubCategoryName
+                outJsonPath: $.Data.offenceSubCategoryName
+              # - inJsonPath: $.Challan.citizenName  <-- REMOVED
+              #   outJsonPath: $.Data.citizenName
+              # - inJsonPath: $.Challan.citizenMobileNumber  <-- REMOVED
+              #   outJsonPath: $.Data.citizenMobileNumber
+              - inJsonPath: $.Challan.address
+                outJsonPath: $.Data.address
+              - inJsonPath: $.Challan.additionalDetail
+                outJsonPath: $.Data.additionalDetail
+              - inJsonPath: $.Challan.auditDetails.createdBy
+                outJsonPath: $.Data.createdBy
+              - inJsonPath: $.Challan.auditDetails.lastModifiedBy
+                outJsonPath: $.Data.lastModifiedBy
+              - inJsonPath: $.Challan.auditDetails.createdTime
+                outJsonPath: $.Data.createdTime
+              - inJsonPath: $.Challan.auditDetails.lastModifiedTime
+                outJsonPath: $.Data.lastModifiedTime
+              - inJsonPath: $.Challan.citizen
+                outJsonPath: $.Data.citizen
+              - inJsonPath: $.Challan.documents
+                outJsonPath: $.Data.documents
+
+    - topic: challan-generation-legacyIndex
+      configKey: LEGACYINDEX
+      indexes:
+        - name: challan-generation-index
+          type: general
+          id: $.Challan.id
+          isBulk: false
+          timeStampField: $.Challan.auditDetails.createdTime
+          jsonPath: $
+          customJsonMapping:
+            indexMapping:
+              Data:
+                id: id
+                tenantId: tenantId
+                challanNo: challanNo
+                businessService: businessService
+                referenceId: referenceId
+                description: description
+                applicationStatus: applicationStatus
+                challanStatus: challanStatus
+                taxPeriodFrom: taxPeriodFrom
+                taxPeriodTo: taxPeriodTo
+                # totalAmount: totalAmount  <-- REMOVED
+                challanAmount: challanAmount
+                filestoreid: filestoreid
+                accountId: accountId
+                offenceTypeName: offenceTypeName
+                offenceCategoryName: offenceCategoryName
+                offenceSubCategoryName: offenceSubCategoryName
+                # citizenName: citizenName  <-- REMOVED
+                # citizenMobileNumber: citizenMobileNumber  <-- REMOVED
+                address: address
+                additionalDetail: additionalDetail
+                createdBy: createdBy
+                lastModifiedBy: lastModifiedBy
+                createdTime: createdTime
+                lastModifiedTime: lastModifiedTime
+                citizen: citizen
+                documents: [ ]
+            fieldMapping:
+              - inJsonPath: $.Challan.id
+                outJsonPath: $.Data.id
+              - inJsonPath: $.Challan.tenantId
+                outJsonPath: $.Data.tenantId
+              - inJsonPath: $.Challan.challanNo
+                outJsonPath: $.Data.challanNo
+              - inJsonPath: $.Challan.businessService
+                outJsonPath: $.Data.businessService
+              - inJsonPath: $.Challan.referenceId
+                outJsonPath: $.Data.referenceId
+              - inJsonPath: $.Challan.description
+                outJsonPath: $.Data.description
+              - inJsonPath: $.Challan.applicationStatus
+                outJsonPath: $.Data.applicationStatus
+              - inJsonPath: $.Challan.challanStatus
+                outJsonPath: $.Data.challanStatus
+              - inJsonPath: $.Challan.taxPeriodFrom
+                outJsonPath: $.Data.taxPeriodFrom
+              - inJsonPath: $.Challan.taxPeriodTo
+                outJsonPath: $.Data.taxPeriodTo
+              # - inJsonPath: $.Challan.totalAmount  <-- REMOVED
+              #   outJsonPath: $.Data.totalAmount
+              - inJsonPath: $.Challan.challanAmount
+                outJsonPath: $.Data.challanAmount
+              - inJsonPath: $.Challan.filestoreid
+                outJsonPath: $.Data.filestoreid
+              - inJsonPath: $.Challan.accountId
+                outJsonPath: $.Data.accountId
+              - inJsonPath: $.Challan.offenceTypeName
+                outJsonPath: $.Data.offenceTypeName
+              - inJsonPath: $.Challan.offenceCategoryName
+                outJsonPath: $.Data.offenceCategoryName
+              - inJsonPath: $.Challan.offenceSubCategoryName
+                outJsonPath: $.Data.offenceSubCategoryName
+              # - inJsonPath: $.Challan.citizenName  <-- REMOVED
+              #   outJsonPath: $.Data.citizenName
+              # - inJsonPath: $.Challan.citizenMobileNumber  <-- REMOVED
+              #   outJsonPath: $.Data.citizenMobileNumber
+              - inJsonPath: $.Challan.address
+                outJsonPath: $.Data.address
+              - inJsonPath: $.Challan.additionalDetail
+                outJsonPath: $.Data.additionalDetail
+              - inJsonPath: $.Challan.auditDetails.createdBy
+                outJsonPath: $.Data.createdBy
+              - inJsonPath: $.Challan.auditDetails.lastModifiedBy
+                outJsonPath: $.Data.lastModifiedBy
+              - inJsonPath: $.Challan.auditDetails.createdTime
+                outJsonPath: $.Data.createdTime
+              - inJsonPath: $.Challan.auditDetails.lastModifiedTime
+                outJsonPath: $.Data.lastModifiedTime
+              - inJsonPath: $.Challan.citizen
+                outJsonPath: $.Data.citizen
+              - inJsonPath: $.Challan.documents
+                outJsonPath: $.Data.documents

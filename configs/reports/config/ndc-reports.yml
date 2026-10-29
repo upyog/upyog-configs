@@ -1,0 +1,1463 @@
+---
+ReportDefinitions:
+  - reportName: ApplicationDetailReport
+    decryptionPathId: NDCAPPLICATION
+    summary: Details of applicant in ndc service
+    version: 1.0.0
+    moduleName: rainmaker-ndc
+    additionalConfig:
+      print:
+        pdfPageSize: A1
+    sourceColumns:
+      - name: name
+        label: name
+        type: string
+        source: ndc
+        total: false
+      - name: mobilenumber
+        label: mobilenumber
+        type: string
+        source: ndc
+        total: false
+      - name: applicationstatus
+        label: applicationstatus
+        type: string
+        source: ndc
+        total: false
+      - name: businessservice
+        label: businessservice
+        type: string
+        source: ndc
+        total: false
+      - name: applicationno
+        label: applicationno
+        type: string
+        source: ndc
+        total: false
+      - name: employee_name
+        label: employee_name
+        type: string
+        source: ndc
+        total: false
+      - name: employee_code
+        label: employee_code
+        type: string
+        source: ndc
+        total: false
+    searchParams:
+      - name: fromDate
+        label: fromDate
+        type: epoch
+        source: ndc
+        isMandatory: true
+        searchClause: AND a.createdtime >= $fromDate
+      - name: toDate
+        label: toDate
+        type: epoch
+        source: ndc
+        isMandatory: true
+        searchClause: AND a.createdtime <= $toDate
+      - name: applicationstatus
+        label: Application status
+        type: singlevaluelist
+        pattern: list://INITIATED:INITIATED,PENDINGPAYMENT:PENDINGPAYMENT,DOCUMENTVERIFY:DOCUMENTVERIFY,APPROVED:APPROVED,
+          REJECTED:REJECTED,TL-VERIFICATION:TL-VERIFICATION,WS-SW-VERIFICATION:WS-SW-VERIFICATION
+          ,CITIZENACTIONREQUIRED-DV:CITIZENACTIONREQUIRED-DV,BPA-VERIFICATION:BPA-VERIFICATION,PENDINGAPPROVAL:PENDINGAPPROVAL,CANCELLED:CANCELLED,PT-VERIFICATION:PT-VERIFICATION,CITIZENACTIONREQUIRED:CITIZENACTIONREQUIRED
+        source: ndc
+        isMandatory: true
+        searchClause: AND LOWER(a.applicationstatus) = LOWER($applicationstatus)
+    query: |
+      -- Use CTE to force query plan, compute & use CTE later
+      WITH current_holder AS (
+         SELECT DISTINCT ON (wf.businessid)
+            wf.businessid AS applicationno,
+            u.name AS assignee_name,
+            e.code AS assignee_code,
+            UPPER(st.applicationstatus) AS current_stage
+           FROM eg_wf_processinstance_v2 wf
+           JOIN eg_wf_state_v2 st ON wf.status = st.uuid
+           LEFT JOIN eg_wf_assignee_v2 wa ON wf.id = wa.processinstanceid
+           LEFT JOIN eg_user u ON u.uuid = wa.assignee
+           LEFT JOIN eg_hrms_employee e ON e.uuid = wa.assignee
+           WHERE wf.tenantid = $tenantid
+           AND wf.businessservice = 'ndc-services'
+           ORDER BY wf.businessid, wf.lastmodifiedtime DESC
+           )
+       SELECT 
+         u.name ,
+         u.mobilenumber ,
+         a.applicationstatus ,
+         'NDC' AS businessservice ,
+         a.applicationno,        
+         ch.assignee_name AS employee_name,
+         ch.assignee_code AS employee_code
+        FROM eg_ndc_application a
+        JOIN eg_ndc_owner o   ON a.uuid = o.ndcapplicationuuid
+        JOIN eg_user u ON u.uuid = o.uuid
+        JOIN eg_ndc_details d ON d.applicationid = o.ndcapplicationuuid
+        LEFT JOIN current_holder ch ON ch.applicationno = a.applicationno
+        WHERE a.tenantid = $tenantid
+  - reportName: CollectionsReport
+    decryptionPathId: NDCAPPLICATION
+    summary: Collections
+    version: 1.0.0
+    moduleName: rainmaker-ndc
+    additionalConfig:
+      print:
+        pdfPageSize: A1
+    sourceColumns:
+      - name: applicationno
+        label: applicationno
+        type: string
+        source: ndc
+        total: false
+      - name: name
+        label: name
+        type: string
+        source: ndc
+        total: false
+      - name: mobilenumber
+        label: mobilenumber
+        type: string
+        source: ndc
+        total: false
+      - name: businessservice
+        label: businessservice
+        type: string
+        source: ndc
+        total: false
+      - name: applicationstatus
+        label: applicationstatus
+        type: string
+        source: ndc
+        total: false
+      - name: collector_code
+        label: collector_code
+        type: string
+        source: ndc
+        total: false
+      - name: cash_amount
+        label: cash_amount
+        type: string
+        source: ndc
+        total: true
+      - name: cheque_amount
+        label: cheque_amount
+        type: string
+        source: ndc
+        total: true
+      - name: card_amount
+        label: card_amount
+        type: string
+        source: ndc
+        total: true
+      - name: dd_amount
+        label: dd_amount
+        type: string
+        source: ndc
+        total: true
+      - name: neft_amount
+        label: neft_amount
+        type: string
+        source: ndc
+        total: true
+      - name: rtgs_amount
+        label: rtgs_amount
+        type: string
+        source: ndc
+        total: true
+      - name: online_amount
+        label: online_amount
+        type: string
+        source: ndc
+        total: true
+      - name: amountpaid
+        label: amountpaid
+        type: string
+        source: ndc
+        total: true
+      - name: PaymentDate
+        label: PaymentDate
+        type: string
+        source: ndc
+        total: false
+    searchParams:
+      - name: fromDate
+        label: fromDate
+        type: epoch
+        source: ndc
+        isMandatory: true
+        searchClause: AND createdtime >= $fromDate
+      - name: toDate
+        label: toDate
+        type: epoch
+        source: ndc
+        isMandatory: true
+        searchClause: AND createdtime <= $toDate
+      - name: collector_code
+        label: collector_code
+        type: string
+        source: ptr
+        isMandatory: false
+        searchClause: AND collector_code = $collector_code
+    query: >
+      -- Use CTE to force query plan, compute & use CTE later
+
+      WITH current_holder AS (
+         SELECT DISTINCT ON (wf.businessid)
+           wf.businessid AS applicationno,
+           u.name AS employee_name,
+           e.code AS assignee_code,
+           UPPER(st.applicationstatus) AS current_stage
+         FROM eg_wf_processinstance_v2 wf
+         JOIN eg_wf_state_v2 st ON wf.status = st.uuid
+         LEFT JOIN eg_wf_assignee_v2 wa ON wf.id = wa.processinstanceid
+         LEFT JOIN eg_user u ON u.uuid = wa.assignee
+         LEFT JOIN eg_hrms_employee e ON e.uuid = wa.assignee
+         WHERE wf.tenantid = $tenantid
+         AND wf.businessservice = 'ndc-services'
+        ORDER BY wf.businessid, wf.lastmodifiedtime DESC
+            ),
+        unique_transactions AS (
+           SELECT
+              p.id AS transaction_id,
+              p.createdtime,
+              pd.amountpaid,
+              CASE WHEN p.paymentmode IN ('CASH','OFFLINE_CASH') THEN pd.amountpaid ELSE 0 END AS cash_amount,
+              CASE WHEN p.paymentmode IN ('CHEQUE') THEN pd.amountpaid ELSE 0 END AS cheque_amount,
+              CASE WHEN p.paymentmode IN ('CARD','DEBIT_CARD','CREDIT_CARD','OFFLINE_CARD') THEN pd.amountpaid ELSE 0 END AS card_amount,
+              CASE WHEN p.paymentmode IN ('DD') THEN pd.amountpaid ELSE 0 END AS dd_amount,
+              CASE WHEN p.paymentmode IN ('NEFT','OFFLINE_NEFT') THEN pd.amountpaid ELSE 0 END AS neft_amount,
+              CASE WHEN p.paymentmode IN ('RTGS','OFFLINE_RTGS','NEFT_RTGS') THEN pd.amountpaid ELSE 0 END AS rtgs_amount,
+              CASE WHEN p.paymentmode = 'ONLINE' THEN pd.amountpaid ELSE 0 END AS online_amount,
+              COALESCE(emp.code, 'SELF') AS collector_code,
+              a.uuid AS ndc_id,
+              a.applicationno,
+              a.applicationstatus,
+              u_applicant.name ,
+              u_applicant.mobilenumber ,
+              ch.employee_name AS assignee_employee,
+              ch.assignee_code AS assignee_code
+             FROM egcl_paymentdetail pd
+             JOIN egcl_payment p ON pd.paymentid = p.id
+             JOIN egcl_bill bill ON bill.id = pd.billid
+             JOIN eg_ndc_application a ON bill.consumercode = a.applicationno
+             LEFT JOIN eg_ndc_owner o ON o.ndcapplicationuuid = a.uuid
+             LEFT JOIN eg_user u_applicant ON u_applicant.uuid = o.uuid
+             LEFT JOIN eg_ndc_details d ON d.applicationid = a.uuid
+             LEFT JOIN eg_user u ON u.id::text = p.createdby::text
+             LEFT JOIN eg_hrms_employee emp ON emp.uuid::text = u.uuid::text
+             LEFT JOIN current_holder ch ON ch.applicationno = a.applicationno
+             WHERE pd.businessservice = 'NDC'
+             AND p.paymentstatus != 'CANCELLED'
+             AND p.tenantid = $tenantid
+                 )
+         SELECT
+              applicationno, name, mobilenumber, 'NDC' AS businessservice, applicationstatus,
+              collector_code, cash_amount, cheque_amount,
+              card_amount, dd_amount, neft_amount, rtgs_amount, online_amount, amountpaid,
+              to_char(to_timestamp(createdtime / 1000),'DD-MM-YYYY HH24:MI:SS') AS PaymentDate
+             FROM unique_transactions
+             WHERE 1=1 
+    orderby: ORDER BY createdtime DESC
+  - reportName: SLAReport
+    decryptionPathId: NDCAPPLICATION
+    summary: SLA report for NDC service
+    version: 1.0.0
+    moduleName: rainmaker-ndc
+    additionalConfig:
+      print:
+        pdfPageSize: A1
+    sourceColumns:
+      - name: tenantid
+        label: tenantid
+        type: string
+        source: ndc
+        total: false
+      - name: ndc_application_no
+        label: Application Number
+        type: string
+        source: ndc
+        total: false
+      - name: document_verify_on
+        label: Document Verified On
+        type: string
+        source: ndc
+        total: false
+      - name: finalstatus_on
+        label: Approval / Rejection On
+        type: string
+        source: ndc
+        total: false
+      - name: final_status
+        label: Application status
+        type: string
+        source: ndc
+        total: false
+      - name: sla_status
+        label: sla status
+        type: string
+        source: ndc
+        total: false
+      - name: sla_days
+        label: SLA Days
+        type: string
+        source: ndc
+        total: false
+      - name: employee_name
+        label: employee_name
+        type: string
+        source: ndc
+        total: false
+      - name: employee_code
+        label: Employee Code / Current Holder Code
+        type: string
+        source: ndc
+        total: false
+    searchParams:
+      - name: fromDate
+        label: From Date
+        type: epoch
+        source: ndc
+        isMandatory: true
+        searchClause: AND n.createdtime >= $fromDate
+      - name: toDate
+        label: To Date
+        type: epoch
+        source: ndc
+        isMandatory: true
+        searchClause: AND n.createdtime <= $toDate
+    query: >
+      -- Use CTE to force query plan, compute & use CTE later     
+       WITH wf_detailed AS (
+         SELECT 
+           wf.businessid AS uuid,                                 
+           UPPER(st.applicationstatus) AS applicationstatus,
+           wf.createdtime,
+           wf.lastmodifiedtime,
+           wf.businessservicesla,
+           wf.tenantid,
+           wf.id AS processinstanceid
+          FROM eg_wf_processinstance_v2 wf
+          JOIN eg_wf_state_v2 st ON wf.status = st.uuid
+          WHERE wf.tenantid = $tenantid
+         AND wf.businessservice = 'ndc-services'                    
+          ),
+        status_times AS (
+             SELECT
+                uuid,
+                MAX(CASE WHEN applicationstatus = 'DOCUMENTVERIFY' THEN createdtime END) AS docverify_time,
+                MAX(CASE WHEN applicationstatus IN ('APPROVED','REJECTED') THEN lastmodifiedtime END) AS final_time
+              FROM wf_detailed
+              GROUP BY uuid
+             ),
+        latest_status AS (
+              SELECT uuid, applicationstatus
+                 FROM (
+                      SELECT uuid, applicationstatus, lastmodifiedtime,
+                         ROW_NUMBER() OVER (PARTITION BY uuid ORDER BY lastmodifiedtime DESC NULLS LAST) AS rn
+                          FROM wf_detailed
+                        ) x WHERE rn = 1
+                     ),
+        sla_data AS (
+            SELECT businessservice,businessservicesla
+            FROM eg_wf_businessservice_v2
+            WHERE businessservice = 'ndc-services'
+           ),
+        assignee_details AS (
+             SELECT DISTINCT ON (wf.businessid)
+                 wf.businessid,
+                 e.code AS employee_code,
+                 u.name AS employee_name
+              FROM eg_wf_processinstance_v2 wf
+              JOIN eg_wf_assignee_v2 wa ON wf.id = wa.processinstanceid
+              JOIN eg_hrms_employee e ON e.uuid = wa.assignee
+              JOIN eg_user u ON e.uuid = u.uuid
+               WHERE wf.tenantid = $tenantid
+               AND wf.businessservice = 'ndc-services'
+              ORDER BY wf.businessid,wf.lastmodifiedtime DESC
+               )
+         SELECT
+            split_part(n.tenantid,'.',2) AS tenantid,
+             n.applicationno AS ndc_application_no,                 
+             UPPER(ls.applicationstatus) AS final_status,
+            TO_CHAR(TO_TIMESTAMP(st.docverify_time/1000),'DD-MM-YYYY') AS document_verify_on,
+            TO_CHAR(TO_TIMESTAMP(st.final_time/1000),'DD-MM-YYYY') AS finalstatus_on,   
+            CASE
+              WHEN st.final_time IS NOT NULL AND st.docverify_time IS NOT NULL
+               THEN FLOOR((st.final_time-st.docverify_time)/86400000)
+              WHEN st.docverify_time IS NOT NULL AND st.final_time IS NULL
+               THEN FLOOR((EXTRACT(EPOCH FROM NOW())*1000-st.docverify_time)/86400000)
+             ELSE NULL
+            END AS sla_days,
+            CASE
+               WHEN st.final_time IS NOT NULL AND st.docverify_time IS NOT NULL THEN
+            CASE WHEN (st.final_time-st.docverify_time) > sla.businessservicesla THEN 'BREACHED'
+                 ELSE 'MET' END
+                WHEN st.docverify_time IS NOT NULL AND st.final_time IS NULL
+                THEN 'IN-PROGRESS'
+               ELSE 'AWAITING DOCVERIFY'
+            END AS sla_status,
+            ad.employee_name AS employee_name,
+            ad.employee_code AS employee_code
+            FROM eg_ndc_application n
+            LEFT JOIN status_times st ON n.applicationno = st.uuid
+            LEFT JOIN latest_status ls ON n.applicationno = ls.uuid
+            JOIN sla_data sla ON sla.businessservice='ndc-services'
+            LEFT JOIN assignee_details ad ON n.applicationno = ad.businessid
+            WHERE UPPER(ls.applicationstatus) NOT IN ('APPLY','INITIATED','PENDINGPAYMENT')             
+    orderby: ORDER BY n.createdtime DESC, tenantid, final_status
+  - reportName: ReceiptRegisterNDC
+    decryptionPathId: NDCAPPLICATION
+    summary: Details of collector register in ndc service
+    version: 1.0.0
+    moduleName: rainmaker-ndc
+    additionalConfig:
+      print:
+        pdfPageSize: A1
+    sourceColumns:
+      - name: receiptno
+        label: receiptno
+        type: string
+        source: ndc
+        total: false
+      - name: connectionno
+        label: connectionno
+        type: string
+        source: ndc
+        total: false
+      - name: receiptdate1
+        label: receiptdate1
+        type: string
+        source: ndc
+        total: false
+      - name: service
+        label: service
+        type: string
+        source: ndc
+        total: false
+      - name: collectorname
+        label: collectorname
+        type: string
+        source: ndc
+        total: false
+      - name: transactiondate
+        label: transactiondate
+        type: string
+        source: ndc
+        total: false
+      - name: instrumentnumber
+        label: instrumentnumber
+        type: string
+        source: ndc
+        total: false
+      - name: payername
+        label: payername
+        type: string
+        source: ndc
+        total: false
+      - name: amountpaid
+        label: amountpaid
+        type: string
+        source: ndc
+        total: false
+      - name: paymentmode
+        label: paymentmode
+        type: string
+        source: ndc
+        total: false
+      - name: paymentstatus
+        label: paymentstatus
+        type: string
+        source: ndc
+        total: false
+      - name: ownername1
+        label: ownername1
+        type: string
+        source: ndc
+        total: false
+      - name: user
+        label: user
+        type: string
+        source: ndc
+        total: false
+      - name: manualreceiptnumber
+        label: manualreceiptnumber
+        type: string
+        source: ndc
+        total: false
+      - name: manualreceiptdate
+        label: manualreceiptdate
+        type: string
+        source: ndc
+        total: false
+    searchParams:
+      - name: fromDate
+        label: fromDate
+        type: epoch
+        source: ndc
+        isMandatory: true
+        searchClause: AND pd.receiptdate >= $fromDate
+      - name: toDate
+        label: toDate
+        type: epoch
+        source: ndc
+        isMandatory: true
+        searchClause: AND pd.receiptdate <= $toDate
+      - name: receiptNumber
+        label: receiptNumber
+        type: string
+        source: ndc
+        isMandatory: false
+        searchClause: AND pd.receiptnumber like $receiptNumber
+      - name: paymentMode
+        label: paymentMode
+        type: singlevaluelist
+        pattern: list://CASH:CASH,CHEQUE:CHEQUE,DD:DD,ONLINE:ONLINE,CARD:CARD,OFFLINE_NEFT:OFFLINE
+          NEFT
+        source: ndc
+        isMandatory: false
+        searchClause: AND payment.paymentmode like $paymentMode
+    query: >
+      -- Use CTE to force query plan, compute & use CTE later
+
+      SELECT DISTINCT ON (pd.receiptnumber)
+         pd.receiptnumber AS receiptno,
+         bill.consumercode AS connectionno,
+         TO_CHAR(TO_TIMESTAMP(pd.receiptdate / 1000) AT TIME ZONE 'Asia/Kolkata','DD-MM-YYYY') AS receiptdate1,
+         'NDC' AS service,
+         usr.name AS collectorname,
+         TO_CHAR( TO_TIMESTAMP(payment.instrumentdate / 1000) AT TIME ZONE 'Asia/Kolkata','DD-MM-YYYY') AS transactiondate,
+         payment.instrumentnumber,   
+         u_applicant.name AS payername,
+         pd.amountpaid,
+         payment.paymentmode,
+         payment.paymentstatus,
+         u_applicant.name AS ownername1,
+         usr.id AS user,
+       	 pd.manualreceiptnumber,
+         pd.manualreceiptdate   
+       FROM egcl_paymentdetail pd
+      INNER JOIN egcl_bill bill ON bill.id = pd.billid AND pd.tenantid = $tenantid
+
+      INNER JOIN egcl_payment payment ON payment.id = pd.paymentid
+
+      LEFT JOIN eg_ndc_application a ON bill.consumercode = a.applicationno
+
+      LEFT JOIN eg_ndc_owner o  ON o.ndcapplicationuuid = a.uuid
+
+      LEFT JOIN eg_user u_applicant ON u_applicant.uuid = o.uuid
+
+      LEFT JOIN eg_ndc_details d ON d.applicationid = a.uuid
+
+      LEFT JOIN eg_user usr ON usr.id = payment.createdby::integer
+       WHERE
+         bill.tenantid = $tenantid
+         AND pd.businessservice = 'NDC'
+         AND payment.paymentstatus != 'CANCELLED'
+    orderby: ORDER BY pd.receiptnumber,pd.receiptdate DESC;
+  - reportName: StateApplicationDetailReport
+    decryptionPathId: STATENDCAPPLICATION
+    summary: Details of applicant in ndc service
+    version: 1.0.0
+    moduleName: rainmaker-ndc
+    additionalConfig:
+      print:
+        pdfPageSize: A1
+    sourceColumns:
+      - name: name
+        label: name
+        type: string
+        source: ndc
+        total: false
+      - name: tenantid
+        label: tenanaid
+        type: string
+        source: ndc
+        total: false
+      - name: mobilenumber
+        label: mobilenumber
+        type: string
+        source: ndc
+        total: false
+      - name: applicationstatus
+        label: applicationstatus
+        type: string
+        source: ndc
+        total: false
+      - name: businessservice
+        label: businessservice
+        type: string
+        source: ndc
+        total: false
+      - name: applicationno
+        label: applicationno
+        type: string
+        source: ndc
+        total: false
+      - name: employee_name
+        label: employee_name
+        type: string
+        source: ndc
+        total: false
+      - name: employee_code
+        label: employee_code
+        type: string
+        source: ndc
+        total: false
+    searchParams:
+      - name: fromDate
+        label: fromDate
+        type: epoch
+        source: ndc
+        isMandatory: true
+        searchClause: AND a.createdtime >= $fromDate
+      - name: toDate
+        label: toDate
+        type: epoch
+        source: ndc
+        isMandatory: true
+        searchClause: AND a.createdtime <= $toDate
+      - name: applicationstatus
+        label: Application status
+        type: singlevaluelist
+        pattern: list://INITIATED:INITIATED,PENDINGPAYMENT:PENDINGPAYMENT,DOCUMENTVERIFY:DOCUMENTVERIFY,APPROVED:APPROVED,
+          REJECTED:REJECTED,TL-VERIFICATION:TL-VERIFICATION,WS-SW-VERIFICATION:WS-SW-VERIFICATION
+          ,CITIZENACTIONREQUIRED-DV:CITIZENACTIONREQUIRED-DV,BPA-VERIFICATION:BPA-VERIFICATION,PENDINGAPPROVAL:PENDINGAPPROVAL,CANCELLED:CANCELLED,PT-VERIFICATION:PT-VERIFICATION,CITIZENACTIONREQUIRED:CITIZENACTIONREQUIRED
+        source: ndc
+        isMandatory: true
+        searchClause: AND LOWER(a.applicationstatus) = LOWER($applicationstatus)
+      - name: ulb
+        label: ulb
+        type: singlevaluelist
+        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=tenant&masterName=tenants|$.MdmsRes.tenant.tenants.*.code|$.MdmsRes.tenant.tenants.*.name
+        source: ndc
+        isMandatory: false
+        searchClause: AND a.tenantid = $ulb
+    query: |
+      -- Use CTE to force query plan, compute & use CTE later
+      WITH current_holder AS (
+         SELECT DISTINCT ON (wf.businessid)
+            wf.businessid AS applicationno,
+            u.name AS assignee_name,
+            e.code AS assignee_code,
+            wf.tenantid ,
+            UPPER(st.applicationstatus) AS current_stage
+           FROM eg_wf_processinstance_v2 wf
+           JOIN eg_wf_state_v2 st ON wf.status = st.uuid
+           LEFT JOIN eg_wf_assignee_v2 wa ON wf.id = wa.processinstanceid
+           LEFT JOIN eg_user u ON u.uuid = wa.assignee
+           LEFT JOIN eg_hrms_employee e ON e.uuid = wa.assignee
+           WHERE wf.businessservice = 'ndc-services'
+           ORDER BY wf.businessid, wf.lastmodifiedtime DESC
+           )
+       SELECT 
+         u.name ,
+         a.tenantid,
+         u.mobilenumber ,
+         a.applicationstatus ,
+         'NDC' AS businessservice ,
+         a.applicationno,        
+         ch.assignee_name AS employee_name,
+         ch.assignee_code AS employee_code
+        FROM eg_ndc_application a
+        JOIN eg_ndc_owner o   ON a.uuid = o.ndcapplicationuuid
+        JOIN eg_user u ON u.uuid = o.uuid
+        JOIN eg_ndc_details d ON d.applicationid = o.ndcapplicationuuid
+        LEFT JOIN current_holder ch ON ch.applicationno = a.applicationno
+        WHERE a.tenantid not in ('pb.testing')
+  - reportName: StateCollectionsReport
+    decryptionPathId: STATENDCAPPLICATION
+    summary: Collections
+    version: 1.0.0
+    moduleName: rainmaker-ndc
+    additionalConfig:
+      print:
+        pdfPageSize: A1
+    sourceColumns:
+      - name: tenantid
+        label: tenantid
+        type: string
+        source: ndc
+        total: false
+      - name: applicationno
+        label: applicationno
+        type: string
+        source: ndc
+        total: false
+      - name: name
+        label: name
+        type: string
+        source: ndc
+        total: false
+      - name: mobilenumber
+        label: mobilenumber
+        type: string
+        source: ndc
+        total: false
+      - name: businessservice
+        label: businessservice
+        type: string
+        source: ndc
+        total: false
+      - name: applicationstatus
+        label: applicationstatus
+        type: string
+        source: ndc
+        total: false
+      - name: collector_code
+        label: collector_code
+        type: string
+        source: ndc
+        total: false
+      - name: cash_amount
+        label: cash_amount
+        type: string
+        source: ndc
+        total: true
+      - name: cheque_amount
+        label: cheque_amount
+        type: string
+        source: ndc
+        total: true
+      - name: card_amount
+        label: card_amount
+        type: string
+        source: ndc
+        total: true
+      - name: dd_amount
+        label: dd_amount
+        type: string
+        source: ndc
+        total: true
+      - name: neft_amount
+        label: neft_amount
+        type: string
+        source: ndc
+        total: true
+      - name: rtgs_amount
+        label: rtgs_amount
+        type: string
+        source: ndc
+        total: true
+      - name: online_amount
+        label: online_amount
+        type: string
+        source: ndc
+        total: true
+      - name: amountpaid
+        label: amountpaid
+        type: string
+        source: ndc
+        total: true
+      - name: PaymentDate
+        label: PaymentDate
+        type: string
+        source: ndc
+        total: false
+    searchParams:
+      - name: fromDate
+        label: fromDate
+        type: epoch
+        source: ndc
+        isMandatory: true
+        searchClause: AND createdtime >= $fromDate
+      - name: toDate
+        label: toDate
+        type: epoch
+        source: ndc
+        isMandatory: true
+        searchClause: AND createdtime <= $toDate
+      - name: collector_code
+        label: collector_code
+        type: string
+        source: ptr
+        isMandatory: false
+        searchClause: AND collector_code = $collector_code
+      - name: ulb
+        label: ulb
+        type: singlevaluelist
+        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=tenant&masterName=tenants|$.MdmsRes.tenant.tenants.*.code|$.MdmsRes.tenant.tenants.*.name
+        source: ndc
+        isMandatory: false
+        searchClause: AND tenantid = $ulb
+    query: >
+      -- Use CTE to force query plan, compute & use CTE later
+
+      WITH current_holder AS (
+         SELECT DISTINCT ON (wf.businessid)
+           wf.businessid AS applicationno,
+           u.name AS employee_name,
+           e.code AS assignee_code,
+           UPPER(st.applicationstatus) AS current_stage
+         FROM eg_wf_processinstance_v2 wf
+         JOIN eg_wf_state_v2 st ON wf.status = st.uuid
+         LEFT JOIN eg_wf_assignee_v2 wa ON wf.id = wa.processinstanceid
+         LEFT JOIN eg_user u ON u.uuid = wa.assignee
+         LEFT JOIN eg_hrms_employee e ON e.uuid = wa.assignee
+         WHERE wf.businessservice = 'ndc-services'
+        ORDER BY wf.businessid, wf.lastmodifiedtime DESC
+            ),
+        unique_transactions AS (
+           SELECT
+              p.id AS transaction_id,
+              p.createdtime,
+              pd.amountpaid,
+              CASE WHEN p.paymentmode IN ('CASH','OFFLINE_CASH') THEN pd.amountpaid ELSE 0 END AS cash_amount,
+              CASE WHEN p.paymentmode IN ('CHEQUE') THEN pd.amountpaid ELSE 0 END AS cheque_amount,
+              CASE WHEN p.paymentmode IN ('CARD','DEBIT_CARD','CREDIT_CARD','OFFLINE_CARD') THEN pd.amountpaid ELSE 0 END AS card_amount,
+              CASE WHEN p.paymentmode IN ('DD') THEN pd.amountpaid ELSE 0 END AS dd_amount,
+              CASE WHEN p.paymentmode IN ('NEFT','OFFLINE_NEFT') THEN pd.amountpaid ELSE 0 END AS neft_amount,
+              CASE WHEN p.paymentmode IN ('RTGS','OFFLINE_RTGS','NEFT_RTGS') THEN pd.amountpaid ELSE 0 END AS rtgs_amount,
+              CASE WHEN p.paymentmode = 'ONLINE' THEN pd.amountpaid ELSE 0 END AS online_amount,
+              COALESCE(emp.code, 'SELF') AS collector_code,
+              a.uuid AS ndc_id,
+              a.applicationno,
+              a.applicationstatus,
+              u_applicant.name ,
+              u_applicant.mobilenumber ,
+              ch.employee_name AS assignee_employee,
+              ch.assignee_code AS assignee_code ,
+              split_part(p.tenantid, '.', 2) AS tenantid
+             FROM egcl_paymentdetail pd
+             JOIN egcl_payment p ON pd.paymentid = p.id
+             JOIN egcl_bill bill ON bill.id = pd.billid
+             JOIN eg_ndc_application a ON bill.consumercode = a.applicationno
+             LEFT JOIN eg_ndc_owner o ON o.ndcapplicationuuid = a.uuid
+             LEFT JOIN eg_user u_applicant ON u_applicant.uuid = o.uuid
+             LEFT JOIN eg_ndc_details d ON d.applicationid = a.uuid
+             LEFT JOIN eg_user u ON u.id::text = p.createdby::text
+             LEFT JOIN eg_hrms_employee emp ON emp.uuid::text = u.uuid::text
+             LEFT JOIN current_holder ch ON ch.applicationno = a.applicationno
+             WHERE pd.businessservice = 'NDC'
+             AND p.paymentstatus != 'CANCELLED'
+                 )
+         SELECT *
+          FROM (
+           SELECT
+              applicationno, name, mobilenumber, 'NDC' AS businessservice, applicationstatus,
+              collector_code, cash_amount, cheque_amount,tenantid,createdtime,
+              card_amount, dd_amount, neft_amount, rtgs_amount, online_amount, amountpaid,
+              to_char(to_timestamp(createdtime / 1000),'DD-MM-YYYY HH24:MI:SS') AS PaymentDate,
+              ROW_NUMBER() OVER ( PARTITION BY applicationno
+              ORDER BY createdtime DESC) AS rn
+             FROM unique_transactions
+             WHERE tenantid not in ('testing') )t
+             where rn=1
+    orderby: ORDER BY createdtime DESC
+  - reportName: StateSLAReport
+    decryptionPathId: STATENDCAPPLICATION
+    summary: SLA report for NDC service
+    version: 1.0.0
+    moduleName: rainmaker-ndc
+    additionalConfig:
+      print:
+        pdfPageSize: A1
+    sourceColumns:
+      - name: tenantid
+        label: tenantid
+        type: string
+        source: ndc
+        total: false
+      - name: ndc_application_no
+        label: Application Number
+        type: string
+        source: ndc
+        total: false
+      - name: document_verify_on
+        label: Document Verified On
+        type: string
+        source: ndc
+        total: false
+      - name: finalstatus_on
+        label: Approval / Rejection On
+        type: string
+        source: ndc
+        total: false
+      - name: final_status
+        label: Application status
+        type: string
+        source: ndc
+        total: false
+      - name: sla_status
+        label: sla status
+        type: string
+        source: ndc
+        total: false
+      - name: sla_days
+        label: SLA Days
+        type: string
+        source: ndc
+        total: false
+      - name: employee_name
+        label: employee_name
+        type: string
+        source: ndc
+        total: false
+      - name: employee_code
+        label: Employee Code / Current Holder Code
+        type: string
+        source: ndc
+        total: false
+    searchParams:
+      - name: fromDate
+        label: From Date
+        type: epoch
+        source: ndc
+        isMandatory: true
+        searchClause: AND n.createdtime >= $fromDate
+      - name: toDate
+        label: To Date
+        type: epoch
+        source: ndc
+        isMandatory: true
+        searchClause: AND n.createdtime <= $toDate
+      - name: ulb
+        label: ulb
+        type: singlevaluelist
+        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=tenant&masterName=tenants|$.MdmsRes.tenant.tenants.*.code|$.MdmsRes.tenant.tenants.*.name
+        source: ndc
+        isMandatory: false
+        searchClause: AND n.tenantid = $ulb
+    query: >
+      -- Use CTE to force query plan, compute & use CTE later     
+       WITH wf_detailed AS (
+         SELECT 
+           wf.businessid AS uuid,                                 
+           UPPER(st.applicationstatus) AS applicationstatus,
+           wf.createdtime,
+           wf.lastmodifiedtime,
+           wf.businessservicesla,
+           wf.tenantid,
+           wf.id AS processinstanceid
+          FROM eg_wf_processinstance_v2 wf
+          JOIN eg_wf_state_v2 st ON wf.status = st.uuid
+          WHERE wf.businessservice = 'ndc-services'                    
+          ),
+        status_times AS (
+             SELECT
+                uuid,
+                MAX(CASE WHEN applicationstatus = 'DOCUMENTVERIFY' THEN createdtime END) AS docverify_time,
+                MAX(CASE WHEN applicationstatus IN ('APPROVED','REJECTED') THEN lastmodifiedtime END) AS final_time
+              FROM wf_detailed
+              GROUP BY uuid
+             ),
+        latest_status AS (
+              SELECT uuid, applicationstatus
+                 FROM (
+                      SELECT uuid, applicationstatus, lastmodifiedtime,
+                         ROW_NUMBER() OVER (PARTITION BY uuid ORDER BY lastmodifiedtime DESC NULLS LAST) AS rn
+                          FROM wf_detailed
+                        ) x WHERE rn = 1
+                     ),
+        sla_data AS (
+            SELECT businessservice,businessservicesla
+            FROM eg_wf_businessservice_v2
+            WHERE businessservice = 'ndc-services'
+           ),
+        assignee_details AS (
+             SELECT DISTINCT ON (wf.businessid)
+                 wf.businessid,
+                 e.code AS employee_code,
+                 u.name AS employee_name
+              FROM eg_wf_processinstance_v2 wf
+              JOIN eg_wf_assignee_v2 wa ON wf.id = wa.processinstanceid
+              JOIN eg_hrms_employee e ON e.uuid = wa.assignee
+              JOIN eg_user u ON e.uuid = u.uuid
+               WHERE wf.businessservice = 'ndc-services'
+              ORDER BY wf.businessid,wf.lastmodifiedtime DESC
+               )
+         SELECT
+            split_part(n.tenantid,'.',2) AS tenantid,
+             n.applicationno AS ndc_application_no,                 
+             UPPER(ls.applicationstatus) AS final_status,
+            TO_CHAR(TO_TIMESTAMP(st.docverify_time/1000),'DD-MM-YYYY') AS document_verify_on,
+            TO_CHAR(TO_TIMESTAMP(st.final_time/1000),'DD-MM-YYYY') AS finalstatus_on,   
+            CASE
+              WHEN st.final_time IS NOT NULL AND st.docverify_time IS NOT NULL
+               THEN FLOOR((st.final_time-st.docverify_time)/86400000)
+              WHEN st.docverify_time IS NOT NULL AND st.final_time IS NULL
+               THEN FLOOR((EXTRACT(EPOCH FROM NOW())*1000-st.docverify_time)/86400000)
+             ELSE NULL
+            END AS sla_days,
+            CASE
+               WHEN st.final_time IS NOT NULL AND st.docverify_time IS NOT NULL THEN
+            CASE WHEN (st.final_time-st.docverify_time) > sla.businessservicesla THEN 'BREACHED'
+                 ELSE 'MET' END
+                WHEN st.docverify_time IS NOT NULL AND st.final_time IS NULL
+                THEN 'IN-PROGRESS'
+               ELSE 'AWAITING DOCVERIFY'
+            END AS sla_status,
+            ad.employee_name AS employee_name,
+            ad.employee_code AS employee_code
+            FROM eg_ndc_application n
+            LEFT JOIN status_times st ON n.applicationno = st.uuid
+            LEFT JOIN latest_status ls ON n.applicationno = ls.uuid
+            JOIN sla_data sla ON sla.businessservice='ndc-services'
+            LEFT JOIN assignee_details ad ON n.applicationno = ad.businessid
+            WHERE UPPER(ls.applicationstatus) NOT IN ('APPLY','INITIATED','PENDINGPAYMENT') and tenantid not in ('pb.testing')          
+    orderby: ORDER BY n.createdtime DESC, tenantid, final_status
+  - reportName: StateReceiptRegisterNDC
+    decryptionPathId: STATENDCAPPLICATION
+    summary: Details of collector register in ndc service
+    version: 1.0.0
+    moduleName: rainmaker-ndc
+    additionalConfig:
+      print:
+        pdfPageSize: A1
+    sourceColumns:
+      - name: tenantid
+        label: tenantid
+        type: string
+        source: ndc
+        total: false
+      - name: receiptno
+        label: receiptno
+        type: string
+        source: ndc
+        total: false
+      - name: connectionno
+        label: connectionno
+        type: string
+        source: ndc
+        total: false
+      - name: receiptdate1
+        label: receiptdate1
+        type: string
+        source: ndc
+        total: false
+      - name: service
+        label: service
+        type: string
+        source: ndc
+        total: false
+      - name: collectorname
+        label: collectorname
+        type: string
+        source: ndc
+        total: false
+      - name: transactiondate
+        label: transactiondate
+        type: string
+        source: ndc
+        total: false
+      - name: instrumentnumber
+        label: instrumentnumber
+        type: string
+        source: ndc
+        total: false
+      - name: payername
+        label: payername
+        type: string
+        source: ndc
+        total: false
+      - name: amountpaid
+        label: amountpaid
+        type: string
+        source: ndc
+        total: false
+      - name: paymentmode
+        label: paymentmode
+        type: string
+        source: ndc
+        total: false
+      - name: paymentstatus
+        label: paymentstatus
+        type: string
+        source: ndc
+        total: false
+      - name: ownername1
+        label: ownername1
+        type: string
+        source: ndc
+        total: false
+      - name: user
+        label: user
+        type: string
+        source: ndc
+        total: false
+      - name: manualreceiptnumber
+        label: manualreceiptnumber
+        type: string
+        source: ndc
+        total: false
+      - name: manualreceiptdate
+        label: manualreceiptdate
+        type: string
+        source: ndc
+        total: false
+    searchParams:
+      - name: fromDate
+        label: fromDate
+        type: epoch
+        source: ndc
+        isMandatory: true
+        searchClause: AND pd.receiptdate >= $fromDate
+      - name: toDate
+        label: toDate
+        type: epoch
+        source: ndc
+        isMandatory: true
+        searchClause: AND pd.receiptdate <= $toDate
+      - name: receiptNumber
+        label: receiptNumber
+        type: string
+        source: ndc
+        isMandatory: false
+        searchClause: AND pd.receiptnumber like $receiptNumber
+      - name: paymentMode
+        label: paymentMode
+        type: singlevaluelist
+        pattern: list://CASH:CASH,CHEQUE:CHEQUE,DD:DD,ONLINE:ONLINE,CARD:CARD,OFFLINE_NEFT:OFFLINE
+          NEFT
+        source: ndc
+        isMandatory: false
+        searchClause: AND payment.paymentmode like $paymentMode
+      - name: ulb
+        label: ulb
+        type: singlevaluelist
+        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=tenant&masterName=tenants|$.MdmsRes.tenant.tenants.*.code|$.MdmsRes.tenant.tenants.*.name
+        source: ndc
+        isMandatory: false
+        searchClause: AND bill.tenantid = $ulb
+    query: >
+      -- Use CTE to force query plan, compute & use CTE later
+
+      SELECT DISTINCT ON (pd.receiptnumber)
+         split_part(pd.tenantid, '.', 2) AS tenantid, 
+         pd.receiptnumber AS receiptno,
+         bill.consumercode AS connectionno,
+         TO_CHAR(TO_TIMESTAMP(pd.receiptdate / 1000) AT TIME ZONE 'Asia/Kolkata','DD-MM-YYYY') AS receiptdate1,
+         'NDC'  AS service,
+         usr.name AS collectorname,
+         TO_CHAR( TO_TIMESTAMP(payment.instrumentdate / 1000) AT TIME ZONE 'Asia/Kolkata','DD-MM-YYYY') AS transactiondate,
+         payment.instrumentnumber,   
+         u_applicant.name AS payername,
+         pd.amountpaid,
+         payment.paymentmode,
+         payment.paymentstatus,
+         u_applicant.name AS ownername1,
+         usr.id AS user,
+       	 pd.manualreceiptnumber,
+         pd.manualreceiptdate   
+       FROM egcl_paymentdetail pd
+      INNER JOIN egcl_bill bill ON bill.id = pd.billid 
+
+      INNER JOIN egcl_payment payment ON payment.id = pd.paymentid
+
+      LEFT JOIN eg_ndc_application a ON bill.consumercode = a.applicationno
+
+      LEFT JOIN eg_ndc_owner o  ON o.ndcapplicationuuid = a.uuid
+
+      LEFT JOIN eg_user u_applicant ON u_applicant.uuid = o.uuid
+
+      LEFT JOIN eg_ndc_details d ON d.applicationid = a.uuid
+
+      LEFT JOIN eg_user usr ON usr.id = payment.createdby::integer
+       WHERE pd.businessservice = 'NDC'
+         AND payment.paymentstatus != 'CANCELLED' 
+         and pd.tenantid not in ('pb.testing')
+    orderby: ORDER BY pd.receiptnumber, pd.receiptdate DESC;
+    
+  - reportName: OverallSummaryReport
+    summary: Details of applicant in No Due Certificate , Venue Booking, Pet service
+    version: 1.0.0
+    moduleName: rainmaker-ndc
+    additionalConfig:
+      print:
+        pdfPageSize: A1
+    sourceColumns:
+      - name: tenant_name
+        label: ULB Name
+        type: string
+        source: ndc
+        total: false
+      - name: service
+        label: Service
+        type: string
+        source: ndc
+        total: false
+      - name: application_status
+        label: Application Status
+        type: string
+        source: ndc
+        total: false
+      - name: application_count
+        label: Application Count
+        type: string
+        source: ndc
+        total: false
+    searchParams:
+      - name: fromDate
+        label: From Date
+        type: epoch
+        source: ndc
+        isMandatory: false
+        searchClause: AND createdtime >= $fromDate
+      - name: toDate
+        label: To Date
+        type: epoch
+        source: ndc
+        isMandatory: false
+        searchClause: AND createdtime <= $toDate
+      - name: service
+        label: Service
+        type: singlevaluelist
+        pattern: list://Venue Booking:Venue Booking,No Due Certificate:No Due Certficate,Pet Registration:Pet Registration,CHALLAN:Challan
+        source: ndc
+        isMandatory: true
+        searchClause: AND 1=1
+    query: |
+      WITH all_services AS (
+      
+        /* ---------------- CHB ---------------- */
+        SELECT
+          split_part(b.tenant_id, '.', 2) AS tenant_name,
+          b.tenant_id                     AS tenantid,
+          'Venue Booking'                 AS service,
+          b.booking_status                AS application_status,
+          COUNT(*)                        AS application_count,
+          MIN(b.createdtime)              AS createdtime
+        FROM eg_chb_booking_detail b
+        where 1=1
+      
+        UNION ALL
+      
+        /* ---------------- NDC ---------------- */
+        SELECT
+          split_part(a.tenantid, '.', 2) AS tenant_name,
+          a.tenantid                     AS tenantid,
+          'No Due Certificate'           AS service,
+          a.applicationstatus            AS application_status,
+          COUNT(*)                       AS application_count,
+          MIN(a.createdtime)             AS createdtime
+        FROM eg_ndc_application a
+        where 1=1
+      
+        UNION ALL
+      
+        /* ---------------- PTR ---------------- */
+        SELECT
+          split_part(r.tenantid, '.', 2) AS tenant_name,
+          r.tenantid                     AS tenantid,
+          'Pet Registration'             AS service,
+          r.status                       AS application_status,
+          COUNT(*)                       AS application_count,
+          MIN(r.createdtime)             AS createdtime
+        FROM eg_ptr_registration r
+        where 1=1
+
+         UNION ALL
+
+       /* ---------------- CHALLAN ---------------- */
+        SELECT
+          split_part(c.tenantid, '.', 2) AS tenant_name,
+          c.tenantid                     AS tenantid,
+          'CHALLAN'                      AS service,
+          c.applicationstatus            AS application_status,
+          COUNT(*)                       AS application_count,
+          MIN(c.createdtime)             AS createdtime
+          FROM eg_challan c
+          GROUP BY tenantid, tenant_name, service, application_status
+       )
+      
+      SELECT
+        tenant_name,
+        service,
+        application_status,
+        SUM(application_count)       AS application_count
+      FROM all_services
+      WHERE tenant_name not in ('testing') and service = $service
+    groupby: GROUP BY tenantid, tenant_name, service, application_status
+    orderby: ORDER BY tenant_name, service, application_status;
+      
+  - reportName: Employeewisependingreport
+    decryptionPathId: STATENDCAPPLICATION
+    summary: Details of applicant in ndc , chb, pet service
+    version: 1.0.0
+    moduleName: rainmaker-ndc
+    additionalConfig:
+      print:
+        pdfPageSize: A1
+    sourceColumns:
+      - name: tenant_name
+        label: tenant_name
+        type: string
+        source: ndc
+        total: false
+      - name: service
+        label: service
+        type: string
+        source: ndc
+        total: false
+      - name: application_status
+        label: application_status
+        type: string
+        source: ndc
+        total: false
+      - name: application_count
+        label: application_count
+        type: string
+        source: ndc
+        total: false
+      - name: pending_with_employee
+        label: pending_with_employee
+        type: string
+        source: ndc
+        total: false
+    searchParams:
+      - name: fromDate
+        label: fromDate
+        type: epoch
+        source: ndc
+        isMandatory: true
+        searchClause: AND createdtime >= $fromDate
+      - name: toDate
+        label: toDate
+        type: epoch
+        source: ndc
+        isMandatory: true
+        searchClause: AND  createdtime <= $toDate
+      - name: ulb
+        label: ulb
+        type: singlevaluelist
+        pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=tenant&masterName=tenants|$.MdmsRes.tenant.tenants.*.code|$.MdmsRes.tenant.tenants.*.name
+        source: ndc
+        isMandatory: false
+        searchClause: and tenantid =  $ulb
+      - name: service
+        label: service
+        type: singlevaluelist
+        pattern: list://NDC:No Due Certficate,PTR:Pet Registration
+        source: ndc
+        isMandatory: true
+        searchClause: AND  1=1
+    query: >
+      WITH current_holder AS (
+       SELECT DISTINCT ON (wf.businessid)
+          wf.businessid           AS applicationnumber,
+          wf.businessservice      AS service,
+          u.name                  AS assignee_employee
+        FROM eg_wf_processinstance_v2 wf
+        LEFT JOIN eg_wf_assignee_v2 wa ON wf.id = wa.processinstanceid
+        LEFT JOIN eg_user u ON u.uuid = wa.assignee
+        ORDER BY wf.businessid, wf.lastmodifiedtime DESC
+       )
+       SELECT
+          tenant_name,
+          service,
+          application_status,
+          COALESCE(assignee_employee) AS pending_with_employee,
+          COUNT(*) AS application_count,
+          MAX(createdtime) AS latest_createdtime
+       FROM (
+          /* ---------------- NDC ---------------- */
+        SELECT 
+           split_part(a.tenantid, '.', 2) AS tenant_name,
+           a.tenantid                     AS tenantid,
+           'NDC'                          AS service,
+           a.applicationstatus            AS application_status,
+           ch.assignee_employee           AS assignee_employee,
+           MAX(a.createdtime) AS createdtime
+          FROM eg_ndc_application a 
+          LEFT JOIN current_holder ch ON ch.applicationnumber = a.applicationno AND ch.service = 'ndc-services'
+      where a.applicationstatus not in ('APPROVED','INITIATED','PENDINGPAYMENT','REJECTED','CITIZENACTIONREQUIRED')
+
+      UNION ALL
+           /* ---------------- PTR ---------------- */
+      SELECT
+       split_part(r.tenantid, '.', 2) AS tenant_name,
+       r.tenantid                     AS tenantid,
+       'PTR'                          AS service,
+       r.status                       AS application_status,
+       ch.assignee_employee           AS assignee_employee,
+       r.createdtime                  AS createdtime
+       FROM eg_ptr_registration r
+       LEFT JOIN current_holder ch ON ch.applicationnumber = r.applicationnumber AND ch.service = 'ptr'
+      where r.status not in ('APPROVED','INITIATED','PENDINGPAYMENT' ,'REJECTED','CITIZENACTIONREQUIRED','RENEWED')
+       ) all_services 
+             WHERE
+      service = $service and tenant_name not in ('testing')
+    groupby: GROUP BY tenant_name, tenantid, service, application_status, assignee_employee 
+    orderby: ORDER BY tenant_name, tenantid, service, application_status, assignee_employee;
+
+  - reportName: ULB_Wise_Applicationcount
+    summary: ULB Wise Application Count of No Dues Certificate issuance,Rent and Lease Collection,Pet Registration,Advertisement & Hoardings,Garbage Collection Fee Management,Community Centre Booking,Challan Generation
+    version: 1.0.0
+    moduleName: rainmaker-ndc
+    additionalConfig:
+      print:
+        pdfPageSize: A1
+    sourceColumns:
+      - name: tenantid
+        label: tenantid
+        type: string
+        source: ndc
+        total: false
+      - name: CHB
+        label: CHB
+        type: string
+        source: ndc
+        total: true
+      - name: NDC
+        label: NDC
+        type: string
+        source: ndc
+        total: true
+      - name: Pet_Registration
+        label: Pet_Registration
+        type: string
+        source: ndc
+        total: true
+      - name: Challan
+        label: Challan
+        type: string
+        source: ndc
+        total: true
+      - name: Advertisement
+        label: Advertisement
+        type: string
+        source: ndc
+        total: true
+      - name: Garbage_Collection
+        label: Garbage_Collection
+        type: string
+        source: ndc
+        total: true
+      - name: Rent_and_Lease
+        label: Rent_and_Lease
+        type: string
+        source: ndc
+        total: true
+    query: >
+      SELECT 
+          tenantid,
+      
+          SUM(CASE WHEN service = 'CHB' THEN 1 ELSE 0 END) AS CHB,
+          SUM(CASE WHEN service = 'NDC' THEN 1 ELSE 0 END) AS NDC,
+          SUM(CASE WHEN service = 'PTR' THEN 1 ELSE 0 END) AS Pet_Registration,
+          SUM(CASE WHEN service = 'CHALLAN' THEN 1 ELSE 0 END) AS Challan,
+          SUM(CASE WHEN service = 'ADV' THEN 1 ELSE 0 END) AS Advertisement,
+          SUM(CASE WHEN service = 'GC' THEN 1 ELSE 0 END) AS Garbage_Collection,
+          SUM(CASE WHEN service = 'RL' THEN 1 ELSE 0 END) AS Rent_and_Lease 
+      
+      FROM (
+      
+          SELECT tenant_id AS tenantid, 'CHB' AS service FROM eg_chb_booking_detail
+          UNION ALL
+          SELECT tenantid, 'NDC' FROM eg_ndc_application
+          UNION ALL
+          SELECT tenantid, 'PTR' FROM eg_ptr_registration
+          UNION ALL
+          SELECT tenantid, 'CHALLAN' FROM eg_challan
+          UNION ALL
+          SELECT tenant_id, 'ADV' FROM eg_adv_booking_detail
+          UNION ALL
+          SELECT tenantid, 'GC' FROM eg_gc_connection
+          UNION ALL
+          SELECT tenant_id, 'RL' FROM eg_rl_allotment
+      
+      ) t
+      
+    groupby: GROUP BY tenantid
+    orderby: ORDER BY tenantid;
