@@ -1,0 +1,599 @@
+# egov-persister configuration for works-management-service (Action Plan).
+# Generated from one column spec; columns match db/migration/main/V20261106120000__wms_action_plan_ddl.sql.
+# Old rows are copied to *_audit tables before every update (data-change audit trail).
+serviceMaps:
+  serviceName: works-management-service
+  mappings:
+    - version: 1.0
+      description: Action Plan - create (draft / INITIATED)
+      fromTopic: save-wms-action-plan
+      isTransaction: true
+      queryMaps:
+        - query: INSERT INTO eg_wms_action_plan (id, tenantid, applicationnumber, actionplannumber, version, islatestversion, financialyear, projectid, projectname, schemecode, subschemecode, offlineapprovaldate, approvingauthority, adminsanction, technicalsanction, approvedamount, fundsource, totalcomponents, declarationaccepted, status, submitteddate, approveddate, approvedby, isactive, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: ActionPlan
+          jsonMaps:
+            - jsonPath: $.ActionPlan.id
+            - jsonPath: $.ActionPlan.tenantId
+            - jsonPath: $.ActionPlan.applicationNumber
+            - jsonPath: $.ActionPlan.actionPlanNumber
+            - jsonPath: $.ActionPlan.version
+            - jsonPath: $.ActionPlan.isLatestVersion
+            - jsonPath: $.ActionPlan.financialYear
+            - jsonPath: $.ActionPlan.projectId
+            - jsonPath: $.ActionPlan.projectName
+            - jsonPath: $.ActionPlan.schemeCode
+            - jsonPath: $.ActionPlan.subSchemeCode
+            - jsonPath: $.ActionPlan.offlineApprovalDate
+            - jsonPath: $.ActionPlan.approvingAuthority
+            - jsonPath: $.ActionPlan.adminSanction
+            - jsonPath: $.ActionPlan.technicalSanction
+            - jsonPath: $.ActionPlan.approvedAmount
+            - jsonPath: $.ActionPlan.fundSource
+            - jsonPath: $.ActionPlan.totalComponents
+            - jsonPath: $.ActionPlan.declarationAccepted
+            - jsonPath: $.ActionPlan.status
+            - jsonPath: $.ActionPlan.submittedDate
+            - jsonPath: $.ActionPlan.approvedDate
+            - jsonPath: $.ActionPlan.approvedBy
+            - jsonPath: $.ActionPlan.isActive
+            - jsonPath: $.ActionPlan.additionalDetails
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.ActionPlan.auditDetails.createdBy
+            - jsonPath: $.ActionPlan.auditDetails.createdTime
+            - jsonPath: $.ActionPlan.auditDetails.lastModifiedBy
+            - jsonPath: $.ActionPlan.auditDetails.lastModifiedTime
+
+        - query: INSERT INTO eg_wms_ap_project_detail (id, tenantid, actionplanid, purposecode, purposeother, startdate, enddate, typeofwork, workcategory, isactive, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: ActionPlan.projectDetails.*
+          jsonMaps:
+            - jsonPath: $.ActionPlan.projectDetails.*.id
+            - jsonPath: $.ActionPlan.projectDetails.*.tenantId
+            - jsonPath: $.ActionPlan.id
+            - jsonPath: $.ActionPlan.projectDetails.*.purposeCode
+            - jsonPath: $.ActionPlan.projectDetails.*.purposeOther
+            - jsonPath: $.ActionPlan.projectDetails.*.startDate
+            - jsonPath: $.ActionPlan.projectDetails.*.endDate
+            - jsonPath: $.ActionPlan.projectDetails.*.typeOfWork
+            - jsonPath: $.ActionPlan.projectDetails.*.workCategory
+            - jsonPath: $.ActionPlan.projectDetails.*.isActive
+            - jsonPath: $.ActionPlan.projectDetails.*.additionalDetails
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.ActionPlan.projectDetails.*.auditDetails.createdBy
+            - jsonPath: $.ActionPlan.projectDetails.*.auditDetails.createdTime
+            - jsonPath: $.ActionPlan.projectDetails.*.auditDetails.lastModifiedBy
+            - jsonPath: $.ActionPlan.projectDetails.*.auditDetails.lastModifiedTime
+
+        - query: INSERT INTO eg_wms_ap_location (id, tenantid, actionplanid, statecode, districtcode, mlaconstituency, mpconstituency, isactive, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: ActionPlan.locations.*
+          jsonMaps:
+            - jsonPath: $.ActionPlan.locations.*.id
+            - jsonPath: $.ActionPlan.locations.*.tenantId
+            - jsonPath: $.ActionPlan.id
+            - jsonPath: $.ActionPlan.locations.*.stateCode
+            - jsonPath: $.ActionPlan.locations.*.districtCode
+            - jsonPath: $.ActionPlan.locations.*.mlaConstituency
+            - jsonPath: $.ActionPlan.locations.*.mpConstituency
+            - jsonPath: $.ActionPlan.locations.*.isActive
+            - jsonPath: $.ActionPlan.locations.*.additionalDetails
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.ActionPlan.locations.*.auditDetails.createdBy
+            - jsonPath: $.ActionPlan.locations.*.auditDetails.createdTime
+            - jsonPath: $.ActionPlan.locations.*.auditDetails.lastModifiedBy
+            - jsonPath: $.ActionPlan.locations.*.auditDetails.lastModifiedTime
+
+        - query: INSERT INTO eg_wms_ap_recommendation (id, tenantid, actionplanid, recommendedby, recommendedbyname, isactive, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: ActionPlan.recommendations.*
+          jsonMaps:
+            - jsonPath: $.ActionPlan.recommendations.*.id
+            - jsonPath: $.ActionPlan.recommendations.*.tenantId
+            - jsonPath: $.ActionPlan.id
+            - jsonPath: $.ActionPlan.recommendations.*.recommendedBy
+            - jsonPath: $.ActionPlan.recommendations.*.recommendedByName
+            - jsonPath: $.ActionPlan.recommendations.*.isActive
+            - jsonPath: $.ActionPlan.recommendations.*.additionalDetails
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.ActionPlan.recommendations.*.auditDetails.createdBy
+            - jsonPath: $.ActionPlan.recommendations.*.auditDetails.createdTime
+            - jsonPath: $.ActionPlan.recommendations.*.auditDetails.lastModifiedBy
+            - jsonPath: $.ActionPlan.recommendations.*.auditDetails.lastModifiedTime
+
+        - query: INSERT INTO eg_wms_ap_recommendation_document (id, tenantid, recommendationid, documenttype, filestoreid, documentuid, isactive, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: ActionPlan.recommendations.*.documents.*
+          jsonMaps:
+            - jsonPath: $.ActionPlan.recommendations.*.documents.*.id
+            - jsonPath: $.ActionPlan.recommendations.*.documents.*.tenantId
+            - jsonPath: $.ActionPlan.recommendations.*.id
+            - jsonPath: $.ActionPlan.recommendations.*.documents.*.documentType
+            - jsonPath: $.ActionPlan.recommendations.*.documents.*.fileStoreId
+            - jsonPath: $.ActionPlan.recommendations.*.documents.*.documentUid
+            - jsonPath: $.ActionPlan.recommendations.*.documents.*.isActive
+            - jsonPath: $.ActionPlan.recommendations.*.documents.*.auditDetails.createdBy
+            - jsonPath: $.ActionPlan.recommendations.*.documents.*.auditDetails.createdTime
+            - jsonPath: $.ActionPlan.recommendations.*.documents.*.auditDetails.lastModifiedBy
+            - jsonPath: $.ActionPlan.recommendations.*.documents.*.auditDetails.lastModifiedTime
+
+        - query: INSERT INTO eg_wms_ap_fund_detail (id, tenantid, actionplanid, componentid, fundtype, sourcecode, fundname, amount, isactive, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: ActionPlan.fundDetails.*
+          jsonMaps:
+            - jsonPath: $.ActionPlan.fundDetails.*.id
+            - jsonPath: $.ActionPlan.fundDetails.*.tenantId
+            - jsonPath: $.ActionPlan.fundDetails.*.actionPlanId
+            - jsonPath: $.ActionPlan.fundDetails.*.componentId
+            - jsonPath: $.ActionPlan.fundDetails.*.fundType
+            - jsonPath: $.ActionPlan.fundDetails.*.sourceCode
+            - jsonPath: $.ActionPlan.fundDetails.*.fundName
+            - jsonPath: $.ActionPlan.fundDetails.*.amount
+            - jsonPath: $.ActionPlan.fundDetails.*.isActive
+            - jsonPath: $.ActionPlan.fundDetails.*.additionalDetails
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.ActionPlan.fundDetails.*.auditDetails.createdBy
+            - jsonPath: $.ActionPlan.fundDetails.*.auditDetails.createdTime
+            - jsonPath: $.ActionPlan.fundDetails.*.auditDetails.lastModifiedBy
+            - jsonPath: $.ActionPlan.fundDetails.*.auditDetails.lastModifiedTime
+
+        - query: INSERT INTO eg_wms_ap_beneficiary (id, tenantid, actionplanid, componentid, name, remark, isactive, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: ActionPlan.beneficiaries.*
+          jsonMaps:
+            - jsonPath: $.ActionPlan.beneficiaries.*.id
+            - jsonPath: $.ActionPlan.beneficiaries.*.tenantId
+            - jsonPath: $.ActionPlan.beneficiaries.*.actionPlanId
+            - jsonPath: $.ActionPlan.beneficiaries.*.componentId
+            - jsonPath: $.ActionPlan.beneficiaries.*.name
+            - jsonPath: $.ActionPlan.beneficiaries.*.remark
+            - jsonPath: $.ActionPlan.beneficiaries.*.isActive
+            - jsonPath: $.ActionPlan.beneficiaries.*.additionalDetails
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.ActionPlan.beneficiaries.*.auditDetails.createdBy
+            - jsonPath: $.ActionPlan.beneficiaries.*.auditDetails.createdTime
+            - jsonPath: $.ActionPlan.beneficiaries.*.auditDetails.lastModifiedBy
+            - jsonPath: $.ActionPlan.beneficiaries.*.auditDetails.lastModifiedTime
+
+        - query: INSERT INTO eg_wms_ap_document (id, tenantid, actionplanid, documenttype, filestoreid, documentuid, isactive, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: ActionPlan.documents.*
+          jsonMaps:
+            - jsonPath: $.ActionPlan.documents.*.id
+            - jsonPath: $.ActionPlan.documents.*.tenantId
+            - jsonPath: $.ActionPlan.id
+            - jsonPath: $.ActionPlan.documents.*.documentType
+            - jsonPath: $.ActionPlan.documents.*.fileStoreId
+            - jsonPath: $.ActionPlan.documents.*.documentUid
+            - jsonPath: $.ActionPlan.documents.*.isActive
+            - jsonPath: $.ActionPlan.documents.*.auditDetails.createdBy
+            - jsonPath: $.ActionPlan.documents.*.auditDetails.createdTime
+            - jsonPath: $.ActionPlan.documents.*.auditDetails.lastModifiedBy
+            - jsonPath: $.ActionPlan.documents.*.auditDetails.lastModifiedTime
+
+        - query: INSERT INTO eg_wms_ap_component (id, tenantid, actionplanid, componentnumber, componentname, category, subcategory, fundsource, approvedamount, status, isactive, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: ActionPlan.components.*
+          jsonMaps:
+            - jsonPath: $.ActionPlan.components.*.id
+            - jsonPath: $.ActionPlan.components.*.tenantId
+            - jsonPath: $.ActionPlan.id
+            - jsonPath: $.ActionPlan.components.*.componentNumber
+            - jsonPath: $.ActionPlan.components.*.componentName
+            - jsonPath: $.ActionPlan.components.*.category
+            - jsonPath: $.ActionPlan.components.*.subCategory
+            - jsonPath: $.ActionPlan.components.*.fundSource
+            - jsonPath: $.ActionPlan.components.*.approvedAmount
+            - jsonPath: $.ActionPlan.components.*.status
+            - jsonPath: $.ActionPlan.components.*.isActive
+            - jsonPath: $.ActionPlan.components.*.additionalDetails
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.ActionPlan.components.*.auditDetails.createdBy
+            - jsonPath: $.ActionPlan.components.*.auditDetails.createdTime
+            - jsonPath: $.ActionPlan.components.*.auditDetails.lastModifiedBy
+            - jsonPath: $.ActionPlan.components.*.auditDetails.lastModifiedTime
+
+        - query: INSERT INTO eg_wms_ap_fund_detail (id, tenantid, actionplanid, componentid, fundtype, sourcecode, fundname, amount, isactive, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: ActionPlan.components.*.fundDetails.*
+          jsonMaps:
+            - jsonPath: $.ActionPlan.components.*.fundDetails.*.id
+            - jsonPath: $.ActionPlan.components.*.fundDetails.*.tenantId
+            - jsonPath: $.ActionPlan.components.*.fundDetails.*.actionPlanId
+            - jsonPath: $.ActionPlan.components.*.fundDetails.*.componentId
+            - jsonPath: $.ActionPlan.components.*.fundDetails.*.fundType
+            - jsonPath: $.ActionPlan.components.*.fundDetails.*.sourceCode
+            - jsonPath: $.ActionPlan.components.*.fundDetails.*.fundName
+            - jsonPath: $.ActionPlan.components.*.fundDetails.*.amount
+            - jsonPath: $.ActionPlan.components.*.fundDetails.*.isActive
+            - jsonPath: $.ActionPlan.components.*.fundDetails.*.additionalDetails
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.ActionPlan.components.*.fundDetails.*.auditDetails.createdBy
+            - jsonPath: $.ActionPlan.components.*.fundDetails.*.auditDetails.createdTime
+            - jsonPath: $.ActionPlan.components.*.fundDetails.*.auditDetails.lastModifiedBy
+            - jsonPath: $.ActionPlan.components.*.fundDetails.*.auditDetails.lastModifiedTime
+
+        - query: INSERT INTO eg_wms_ap_beneficiary (id, tenantid, actionplanid, componentid, name, remark, isactive, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: ActionPlan.components.*.beneficiaries.*
+          jsonMaps:
+            - jsonPath: $.ActionPlan.components.*.beneficiaries.*.id
+            - jsonPath: $.ActionPlan.components.*.beneficiaries.*.tenantId
+            - jsonPath: $.ActionPlan.components.*.beneficiaries.*.actionPlanId
+            - jsonPath: $.ActionPlan.components.*.beneficiaries.*.componentId
+            - jsonPath: $.ActionPlan.components.*.beneficiaries.*.name
+            - jsonPath: $.ActionPlan.components.*.beneficiaries.*.remark
+            - jsonPath: $.ActionPlan.components.*.beneficiaries.*.isActive
+            - jsonPath: $.ActionPlan.components.*.beneficiaries.*.additionalDetails
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.ActionPlan.components.*.beneficiaries.*.auditDetails.createdBy
+            - jsonPath: $.ActionPlan.components.*.beneficiaries.*.auditDetails.createdTime
+            - jsonPath: $.ActionPlan.components.*.beneficiaries.*.auditDetails.lastModifiedBy
+            - jsonPath: $.ActionPlan.components.*.beneficiaries.*.auditDetails.lastModifiedTime
+
+        - query: INSERT INTO eg_wms_ap_component_document (id, tenantid, componentid, documenttype, filestoreid, documentuid, isactive, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+          basePath: ActionPlan.components.*.documents.*
+          jsonMaps:
+            - jsonPath: $.ActionPlan.components.*.documents.*.id
+            - jsonPath: $.ActionPlan.components.*.documents.*.tenantId
+            - jsonPath: $.ActionPlan.components.*.id
+            - jsonPath: $.ActionPlan.components.*.documents.*.documentType
+            - jsonPath: $.ActionPlan.components.*.documents.*.fileStoreId
+            - jsonPath: $.ActionPlan.components.*.documents.*.documentUid
+            - jsonPath: $.ActionPlan.components.*.documents.*.isActive
+            - jsonPath: $.ActionPlan.components.*.documents.*.auditDetails.createdBy
+            - jsonPath: $.ActionPlan.components.*.documents.*.auditDetails.createdTime
+            - jsonPath: $.ActionPlan.components.*.documents.*.auditDetails.lastModifiedBy
+            - jsonPath: $.ActionPlan.components.*.documents.*.auditDetails.lastModifiedTime
+
+    - version: 1.0
+      description: Action Plan - draft edit and submission (data + status)
+      fromTopic: update-wms-action-plan
+      isTransaction: true
+      queryMaps:
+        - query: INSERT INTO eg_wms_action_plan_audit SELECT * FROM eg_wms_action_plan WHERE id = ?;
+          basePath: ActionPlan
+          jsonMaps:
+            - jsonPath: $.ActionPlan.id
+
+        - query: INSERT INTO eg_wms_action_plan_audit SELECT * FROM eg_wms_action_plan WHERE tenantid = ? AND actionplannumber = ? AND id <> ? AND islatestversion = true AND ? = 'APPROVED';
+          basePath: ActionPlan
+          jsonMaps:
+            - jsonPath: $.ActionPlan.tenantId
+            - jsonPath: $.ActionPlan.actionPlanNumber
+            - jsonPath: $.ActionPlan.id
+            - jsonPath: $.ActionPlan.status
+
+        - query: UPDATE eg_wms_action_plan SET islatestversion = false, status = 'SUPERSEDED', lastmodifiedby = ?, lastmodifiedtime = ? WHERE tenantid = ? AND actionplannumber = ? AND id <> ? AND islatestversion = true AND ? = 'APPROVED';
+          basePath: ActionPlan
+          jsonMaps:
+            - jsonPath: $.ActionPlan.auditDetails.lastModifiedBy
+            - jsonPath: $.ActionPlan.auditDetails.lastModifiedTime
+            - jsonPath: $.ActionPlan.tenantId
+            - jsonPath: $.ActionPlan.actionPlanNumber
+            - jsonPath: $.ActionPlan.id
+            - jsonPath: $.ActionPlan.status
+
+        - query: UPDATE eg_wms_action_plan SET actionplannumber = ?, islatestversion = ?, financialyear = ?, projectid = ?, projectname = ?, schemecode = ?, subschemecode = ?, offlineapprovaldate = ?, approvingauthority = ?, adminsanction = ?, technicalsanction = ?, approvedamount = ?, fundsource = ?, totalcomponents = ?, declarationaccepted = ?, status = ?, submitteddate = ?, approveddate = ?, approvedby = ?, isactive = ?, additionaldetails = ?, lastmodifiedby = ?, lastmodifiedtime = ? WHERE id = ?;
+          basePath: ActionPlan
+          jsonMaps:
+            - jsonPath: $.ActionPlan.actionPlanNumber
+            - jsonPath: $.ActionPlan.isLatestVersion
+            - jsonPath: $.ActionPlan.financialYear
+            - jsonPath: $.ActionPlan.projectId
+            - jsonPath: $.ActionPlan.projectName
+            - jsonPath: $.ActionPlan.schemeCode
+            - jsonPath: $.ActionPlan.subSchemeCode
+            - jsonPath: $.ActionPlan.offlineApprovalDate
+            - jsonPath: $.ActionPlan.approvingAuthority
+            - jsonPath: $.ActionPlan.adminSanction
+            - jsonPath: $.ActionPlan.technicalSanction
+            - jsonPath: $.ActionPlan.approvedAmount
+            - jsonPath: $.ActionPlan.fundSource
+            - jsonPath: $.ActionPlan.totalComponents
+            - jsonPath: $.ActionPlan.declarationAccepted
+            - jsonPath: $.ActionPlan.status
+            - jsonPath: $.ActionPlan.submittedDate
+            - jsonPath: $.ActionPlan.approvedDate
+            - jsonPath: $.ActionPlan.approvedBy
+            - jsonPath: $.ActionPlan.isActive
+            - jsonPath: $.ActionPlan.additionalDetails
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.ActionPlan.auditDetails.lastModifiedBy
+            - jsonPath: $.ActionPlan.auditDetails.lastModifiedTime
+            - jsonPath: $.ActionPlan.id
+
+        - query: INSERT INTO eg_wms_ap_project_detail_audit SELECT * FROM eg_wms_ap_project_detail WHERE id = ?;
+          basePath: ActionPlan.projectDetails.*
+          jsonMaps:
+            - jsonPath: $.ActionPlan.projectDetails.*.id
+
+        - query: INSERT INTO eg_wms_ap_project_detail (id, tenantid, actionplanid, purposecode, purposeother, startdate, enddate, typeofwork, workcategory, isactive, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET purposecode = EXCLUDED.purposecode, purposeother = EXCLUDED.purposeother, startdate = EXCLUDED.startdate, enddate = EXCLUDED.enddate, typeofwork = EXCLUDED.typeofwork, workcategory = EXCLUDED.workcategory, isactive = EXCLUDED.isactive, additionaldetails = EXCLUDED.additionaldetails, lastmodifiedby = EXCLUDED.lastmodifiedby, lastmodifiedtime = EXCLUDED.lastmodifiedtime;
+          basePath: ActionPlan.projectDetails.*
+          jsonMaps:
+            - jsonPath: $.ActionPlan.projectDetails.*.id
+            - jsonPath: $.ActionPlan.projectDetails.*.tenantId
+            - jsonPath: $.ActionPlan.id
+            - jsonPath: $.ActionPlan.projectDetails.*.purposeCode
+            - jsonPath: $.ActionPlan.projectDetails.*.purposeOther
+            - jsonPath: $.ActionPlan.projectDetails.*.startDate
+            - jsonPath: $.ActionPlan.projectDetails.*.endDate
+            - jsonPath: $.ActionPlan.projectDetails.*.typeOfWork
+            - jsonPath: $.ActionPlan.projectDetails.*.workCategory
+            - jsonPath: $.ActionPlan.projectDetails.*.isActive
+            - jsonPath: $.ActionPlan.projectDetails.*.additionalDetails
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.ActionPlan.projectDetails.*.auditDetails.createdBy
+            - jsonPath: $.ActionPlan.projectDetails.*.auditDetails.createdTime
+            - jsonPath: $.ActionPlan.projectDetails.*.auditDetails.lastModifiedBy
+            - jsonPath: $.ActionPlan.projectDetails.*.auditDetails.lastModifiedTime
+
+        - query: INSERT INTO eg_wms_ap_location_audit SELECT * FROM eg_wms_ap_location WHERE id = ?;
+          basePath: ActionPlan.locations.*
+          jsonMaps:
+            - jsonPath: $.ActionPlan.locations.*.id
+
+        - query: INSERT INTO eg_wms_ap_location (id, tenantid, actionplanid, statecode, districtcode, mlaconstituency, mpconstituency, isactive, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET statecode = EXCLUDED.statecode, districtcode = EXCLUDED.districtcode, mlaconstituency = EXCLUDED.mlaconstituency, mpconstituency = EXCLUDED.mpconstituency, isactive = EXCLUDED.isactive, additionaldetails = EXCLUDED.additionaldetails, lastmodifiedby = EXCLUDED.lastmodifiedby, lastmodifiedtime = EXCLUDED.lastmodifiedtime;
+          basePath: ActionPlan.locations.*
+          jsonMaps:
+            - jsonPath: $.ActionPlan.locations.*.id
+            - jsonPath: $.ActionPlan.locations.*.tenantId
+            - jsonPath: $.ActionPlan.id
+            - jsonPath: $.ActionPlan.locations.*.stateCode
+            - jsonPath: $.ActionPlan.locations.*.districtCode
+            - jsonPath: $.ActionPlan.locations.*.mlaConstituency
+            - jsonPath: $.ActionPlan.locations.*.mpConstituency
+            - jsonPath: $.ActionPlan.locations.*.isActive
+            - jsonPath: $.ActionPlan.locations.*.additionalDetails
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.ActionPlan.locations.*.auditDetails.createdBy
+            - jsonPath: $.ActionPlan.locations.*.auditDetails.createdTime
+            - jsonPath: $.ActionPlan.locations.*.auditDetails.lastModifiedBy
+            - jsonPath: $.ActionPlan.locations.*.auditDetails.lastModifiedTime
+
+        - query: INSERT INTO eg_wms_ap_recommendation_audit SELECT * FROM eg_wms_ap_recommendation WHERE id = ?;
+          basePath: ActionPlan.recommendations.*
+          jsonMaps:
+            - jsonPath: $.ActionPlan.recommendations.*.id
+
+        - query: INSERT INTO eg_wms_ap_recommendation (id, tenantid, actionplanid, recommendedby, recommendedbyname, isactive, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET recommendedby = EXCLUDED.recommendedby, recommendedbyname = EXCLUDED.recommendedbyname, isactive = EXCLUDED.isactive, additionaldetails = EXCLUDED.additionaldetails, lastmodifiedby = EXCLUDED.lastmodifiedby, lastmodifiedtime = EXCLUDED.lastmodifiedtime;
+          basePath: ActionPlan.recommendations.*
+          jsonMaps:
+            - jsonPath: $.ActionPlan.recommendations.*.id
+            - jsonPath: $.ActionPlan.recommendations.*.tenantId
+            - jsonPath: $.ActionPlan.id
+            - jsonPath: $.ActionPlan.recommendations.*.recommendedBy
+            - jsonPath: $.ActionPlan.recommendations.*.recommendedByName
+            - jsonPath: $.ActionPlan.recommendations.*.isActive
+            - jsonPath: $.ActionPlan.recommendations.*.additionalDetails
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.ActionPlan.recommendations.*.auditDetails.createdBy
+            - jsonPath: $.ActionPlan.recommendations.*.auditDetails.createdTime
+            - jsonPath: $.ActionPlan.recommendations.*.auditDetails.lastModifiedBy
+            - jsonPath: $.ActionPlan.recommendations.*.auditDetails.lastModifiedTime
+
+        - query: INSERT INTO eg_wms_ap_recommendation_document_audit SELECT * FROM eg_wms_ap_recommendation_document WHERE id = ?;
+          basePath: ActionPlan.recommendations.*.documents.*
+          jsonMaps:
+            - jsonPath: $.ActionPlan.recommendations.*.documents.*.id
+
+        - query: INSERT INTO eg_wms_ap_recommendation_document (id, tenantid, recommendationid, documenttype, filestoreid, documentuid, isactive, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET documenttype = EXCLUDED.documenttype, filestoreid = EXCLUDED.filestoreid, documentuid = EXCLUDED.documentuid, isactive = EXCLUDED.isactive, lastmodifiedby = EXCLUDED.lastmodifiedby, lastmodifiedtime = EXCLUDED.lastmodifiedtime;
+          basePath: ActionPlan.recommendations.*.documents.*
+          jsonMaps:
+            - jsonPath: $.ActionPlan.recommendations.*.documents.*.id
+            - jsonPath: $.ActionPlan.recommendations.*.documents.*.tenantId
+            - jsonPath: $.ActionPlan.recommendations.*.id
+            - jsonPath: $.ActionPlan.recommendations.*.documents.*.documentType
+            - jsonPath: $.ActionPlan.recommendations.*.documents.*.fileStoreId
+            - jsonPath: $.ActionPlan.recommendations.*.documents.*.documentUid
+            - jsonPath: $.ActionPlan.recommendations.*.documents.*.isActive
+            - jsonPath: $.ActionPlan.recommendations.*.documents.*.auditDetails.createdBy
+            - jsonPath: $.ActionPlan.recommendations.*.documents.*.auditDetails.createdTime
+            - jsonPath: $.ActionPlan.recommendations.*.documents.*.auditDetails.lastModifiedBy
+            - jsonPath: $.ActionPlan.recommendations.*.documents.*.auditDetails.lastModifiedTime
+
+        - query: INSERT INTO eg_wms_ap_fund_detail_audit SELECT * FROM eg_wms_ap_fund_detail WHERE id = ?;
+          basePath: ActionPlan.fundDetails.*
+          jsonMaps:
+            - jsonPath: $.ActionPlan.fundDetails.*.id
+
+        - query: INSERT INTO eg_wms_ap_fund_detail (id, tenantid, actionplanid, componentid, fundtype, sourcecode, fundname, amount, isactive, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET fundtype = EXCLUDED.fundtype, sourcecode = EXCLUDED.sourcecode, fundname = EXCLUDED.fundname, amount = EXCLUDED.amount, isactive = EXCLUDED.isactive, additionaldetails = EXCLUDED.additionaldetails, lastmodifiedby = EXCLUDED.lastmodifiedby, lastmodifiedtime = EXCLUDED.lastmodifiedtime;
+          basePath: ActionPlan.fundDetails.*
+          jsonMaps:
+            - jsonPath: $.ActionPlan.fundDetails.*.id
+            - jsonPath: $.ActionPlan.fundDetails.*.tenantId
+            - jsonPath: $.ActionPlan.fundDetails.*.actionPlanId
+            - jsonPath: $.ActionPlan.fundDetails.*.componentId
+            - jsonPath: $.ActionPlan.fundDetails.*.fundType
+            - jsonPath: $.ActionPlan.fundDetails.*.sourceCode
+            - jsonPath: $.ActionPlan.fundDetails.*.fundName
+            - jsonPath: $.ActionPlan.fundDetails.*.amount
+            - jsonPath: $.ActionPlan.fundDetails.*.isActive
+            - jsonPath: $.ActionPlan.fundDetails.*.additionalDetails
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.ActionPlan.fundDetails.*.auditDetails.createdBy
+            - jsonPath: $.ActionPlan.fundDetails.*.auditDetails.createdTime
+            - jsonPath: $.ActionPlan.fundDetails.*.auditDetails.lastModifiedBy
+            - jsonPath: $.ActionPlan.fundDetails.*.auditDetails.lastModifiedTime
+
+        - query: INSERT INTO eg_wms_ap_beneficiary_audit SELECT * FROM eg_wms_ap_beneficiary WHERE id = ?;
+          basePath: ActionPlan.beneficiaries.*
+          jsonMaps:
+            - jsonPath: $.ActionPlan.beneficiaries.*.id
+
+        - query: INSERT INTO eg_wms_ap_beneficiary (id, tenantid, actionplanid, componentid, name, remark, isactive, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET name = EXCLUDED.name, remark = EXCLUDED.remark, isactive = EXCLUDED.isactive, additionaldetails = EXCLUDED.additionaldetails, lastmodifiedby = EXCLUDED.lastmodifiedby, lastmodifiedtime = EXCLUDED.lastmodifiedtime;
+          basePath: ActionPlan.beneficiaries.*
+          jsonMaps:
+            - jsonPath: $.ActionPlan.beneficiaries.*.id
+            - jsonPath: $.ActionPlan.beneficiaries.*.tenantId
+            - jsonPath: $.ActionPlan.beneficiaries.*.actionPlanId
+            - jsonPath: $.ActionPlan.beneficiaries.*.componentId
+            - jsonPath: $.ActionPlan.beneficiaries.*.name
+            - jsonPath: $.ActionPlan.beneficiaries.*.remark
+            - jsonPath: $.ActionPlan.beneficiaries.*.isActive
+            - jsonPath: $.ActionPlan.beneficiaries.*.additionalDetails
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.ActionPlan.beneficiaries.*.auditDetails.createdBy
+            - jsonPath: $.ActionPlan.beneficiaries.*.auditDetails.createdTime
+            - jsonPath: $.ActionPlan.beneficiaries.*.auditDetails.lastModifiedBy
+            - jsonPath: $.ActionPlan.beneficiaries.*.auditDetails.lastModifiedTime
+
+        - query: INSERT INTO eg_wms_ap_document_audit SELECT * FROM eg_wms_ap_document WHERE id = ?;
+          basePath: ActionPlan.documents.*
+          jsonMaps:
+            - jsonPath: $.ActionPlan.documents.*.id
+
+        - query: INSERT INTO eg_wms_ap_document (id, tenantid, actionplanid, documenttype, filestoreid, documentuid, isactive, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET documenttype = EXCLUDED.documenttype, filestoreid = EXCLUDED.filestoreid, documentuid = EXCLUDED.documentuid, isactive = EXCLUDED.isactive, lastmodifiedby = EXCLUDED.lastmodifiedby, lastmodifiedtime = EXCLUDED.lastmodifiedtime;
+          basePath: ActionPlan.documents.*
+          jsonMaps:
+            - jsonPath: $.ActionPlan.documents.*.id
+            - jsonPath: $.ActionPlan.documents.*.tenantId
+            - jsonPath: $.ActionPlan.id
+            - jsonPath: $.ActionPlan.documents.*.documentType
+            - jsonPath: $.ActionPlan.documents.*.fileStoreId
+            - jsonPath: $.ActionPlan.documents.*.documentUid
+            - jsonPath: $.ActionPlan.documents.*.isActive
+            - jsonPath: $.ActionPlan.documents.*.auditDetails.createdBy
+            - jsonPath: $.ActionPlan.documents.*.auditDetails.createdTime
+            - jsonPath: $.ActionPlan.documents.*.auditDetails.lastModifiedBy
+            - jsonPath: $.ActionPlan.documents.*.auditDetails.lastModifiedTime
+
+        - query: INSERT INTO eg_wms_ap_component_audit SELECT * FROM eg_wms_ap_component WHERE id = ?;
+          basePath: ActionPlan.components.*
+          jsonMaps:
+            - jsonPath: $.ActionPlan.components.*.id
+
+        - query: INSERT INTO eg_wms_ap_component (id, tenantid, actionplanid, componentnumber, componentname, category, subcategory, fundsource, approvedamount, status, isactive, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET componentnumber = EXCLUDED.componentnumber, componentname = EXCLUDED.componentname, category = EXCLUDED.category, subcategory = EXCLUDED.subcategory, fundsource = EXCLUDED.fundsource, approvedamount = EXCLUDED.approvedamount, status = EXCLUDED.status, isactive = EXCLUDED.isactive, additionaldetails = EXCLUDED.additionaldetails, lastmodifiedby = EXCLUDED.lastmodifiedby, lastmodifiedtime = EXCLUDED.lastmodifiedtime;
+          basePath: ActionPlan.components.*
+          jsonMaps:
+            - jsonPath: $.ActionPlan.components.*.id
+            - jsonPath: $.ActionPlan.components.*.tenantId
+            - jsonPath: $.ActionPlan.id
+            - jsonPath: $.ActionPlan.components.*.componentNumber
+            - jsonPath: $.ActionPlan.components.*.componentName
+            - jsonPath: $.ActionPlan.components.*.category
+            - jsonPath: $.ActionPlan.components.*.subCategory
+            - jsonPath: $.ActionPlan.components.*.fundSource
+            - jsonPath: $.ActionPlan.components.*.approvedAmount
+            - jsonPath: $.ActionPlan.components.*.status
+            - jsonPath: $.ActionPlan.components.*.isActive
+            - jsonPath: $.ActionPlan.components.*.additionalDetails
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.ActionPlan.components.*.auditDetails.createdBy
+            - jsonPath: $.ActionPlan.components.*.auditDetails.createdTime
+            - jsonPath: $.ActionPlan.components.*.auditDetails.lastModifiedBy
+            - jsonPath: $.ActionPlan.components.*.auditDetails.lastModifiedTime
+
+        - query: INSERT INTO eg_wms_ap_fund_detail_audit SELECT * FROM eg_wms_ap_fund_detail WHERE id = ?;
+          basePath: ActionPlan.components.*.fundDetails.*
+          jsonMaps:
+            - jsonPath: $.ActionPlan.components.*.fundDetails.*.id
+
+        - query: INSERT INTO eg_wms_ap_fund_detail (id, tenantid, actionplanid, componentid, fundtype, sourcecode, fundname, amount, isactive, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET fundtype = EXCLUDED.fundtype, sourcecode = EXCLUDED.sourcecode, fundname = EXCLUDED.fundname, amount = EXCLUDED.amount, isactive = EXCLUDED.isactive, additionaldetails = EXCLUDED.additionaldetails, lastmodifiedby = EXCLUDED.lastmodifiedby, lastmodifiedtime = EXCLUDED.lastmodifiedtime;
+          basePath: ActionPlan.components.*.fundDetails.*
+          jsonMaps:
+            - jsonPath: $.ActionPlan.components.*.fundDetails.*.id
+            - jsonPath: $.ActionPlan.components.*.fundDetails.*.tenantId
+            - jsonPath: $.ActionPlan.components.*.fundDetails.*.actionPlanId
+            - jsonPath: $.ActionPlan.components.*.fundDetails.*.componentId
+            - jsonPath: $.ActionPlan.components.*.fundDetails.*.fundType
+            - jsonPath: $.ActionPlan.components.*.fundDetails.*.sourceCode
+            - jsonPath: $.ActionPlan.components.*.fundDetails.*.fundName
+            - jsonPath: $.ActionPlan.components.*.fundDetails.*.amount
+            - jsonPath: $.ActionPlan.components.*.fundDetails.*.isActive
+            - jsonPath: $.ActionPlan.components.*.fundDetails.*.additionalDetails
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.ActionPlan.components.*.fundDetails.*.auditDetails.createdBy
+            - jsonPath: $.ActionPlan.components.*.fundDetails.*.auditDetails.createdTime
+            - jsonPath: $.ActionPlan.components.*.fundDetails.*.auditDetails.lastModifiedBy
+            - jsonPath: $.ActionPlan.components.*.fundDetails.*.auditDetails.lastModifiedTime
+
+        - query: INSERT INTO eg_wms_ap_beneficiary_audit SELECT * FROM eg_wms_ap_beneficiary WHERE id = ?;
+          basePath: ActionPlan.components.*.beneficiaries.*
+          jsonMaps:
+            - jsonPath: $.ActionPlan.components.*.beneficiaries.*.id
+
+        - query: INSERT INTO eg_wms_ap_beneficiary (id, tenantid, actionplanid, componentid, name, remark, isactive, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET name = EXCLUDED.name, remark = EXCLUDED.remark, isactive = EXCLUDED.isactive, additionaldetails = EXCLUDED.additionaldetails, lastmodifiedby = EXCLUDED.lastmodifiedby, lastmodifiedtime = EXCLUDED.lastmodifiedtime;
+          basePath: ActionPlan.components.*.beneficiaries.*
+          jsonMaps:
+            - jsonPath: $.ActionPlan.components.*.beneficiaries.*.id
+            - jsonPath: $.ActionPlan.components.*.beneficiaries.*.tenantId
+            - jsonPath: $.ActionPlan.components.*.beneficiaries.*.actionPlanId
+            - jsonPath: $.ActionPlan.components.*.beneficiaries.*.componentId
+            - jsonPath: $.ActionPlan.components.*.beneficiaries.*.name
+            - jsonPath: $.ActionPlan.components.*.beneficiaries.*.remark
+            - jsonPath: $.ActionPlan.components.*.beneficiaries.*.isActive
+            - jsonPath: $.ActionPlan.components.*.beneficiaries.*.additionalDetails
+              type: JSON
+              dbType: JSONB
+            - jsonPath: $.ActionPlan.components.*.beneficiaries.*.auditDetails.createdBy
+            - jsonPath: $.ActionPlan.components.*.beneficiaries.*.auditDetails.createdTime
+            - jsonPath: $.ActionPlan.components.*.beneficiaries.*.auditDetails.lastModifiedBy
+            - jsonPath: $.ActionPlan.components.*.beneficiaries.*.auditDetails.lastModifiedTime
+
+        - query: INSERT INTO eg_wms_ap_component_document_audit SELECT * FROM eg_wms_ap_component_document WHERE id = ?;
+          basePath: ActionPlan.components.*.documents.*
+          jsonMaps:
+            - jsonPath: $.ActionPlan.components.*.documents.*.id
+
+        - query: INSERT INTO eg_wms_ap_component_document (id, tenantid, componentid, documenttype, filestoreid, documentuid, isactive, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET documenttype = EXCLUDED.documenttype, filestoreid = EXCLUDED.filestoreid, documentuid = EXCLUDED.documentuid, isactive = EXCLUDED.isactive, lastmodifiedby = EXCLUDED.lastmodifiedby, lastmodifiedtime = EXCLUDED.lastmodifiedtime;
+          basePath: ActionPlan.components.*.documents.*
+          jsonMaps:
+            - jsonPath: $.ActionPlan.components.*.documents.*.id
+            - jsonPath: $.ActionPlan.components.*.documents.*.tenantId
+            - jsonPath: $.ActionPlan.components.*.id
+            - jsonPath: $.ActionPlan.components.*.documents.*.documentType
+            - jsonPath: $.ActionPlan.components.*.documents.*.fileStoreId
+            - jsonPath: $.ActionPlan.components.*.documents.*.documentUid
+            - jsonPath: $.ActionPlan.components.*.documents.*.isActive
+            - jsonPath: $.ActionPlan.components.*.documents.*.auditDetails.createdBy
+            - jsonPath: $.ActionPlan.components.*.documents.*.auditDetails.createdTime
+            - jsonPath: $.ActionPlan.components.*.documents.*.auditDetails.lastModifiedBy
+            - jsonPath: $.ActionPlan.components.*.documents.*.auditDetails.lastModifiedTime
+
+    - version: 1.0
+      description: Action Plan - status only (verify / approve / return / reject / withdraw)
+      fromTopic: update-wms-action-plan-workflow
+      isTransaction: true
+      queryMaps:
+        - query: INSERT INTO eg_wms_action_plan_audit SELECT * FROM eg_wms_action_plan WHERE id = ?;
+          basePath: ActionPlan
+          jsonMaps:
+            - jsonPath: $.ActionPlan.id
+
+        - query: INSERT INTO eg_wms_action_plan_audit SELECT * FROM eg_wms_action_plan WHERE tenantid = ? AND actionplannumber = ? AND id <> ? AND islatestversion = true AND ? = 'APPROVED';
+          basePath: ActionPlan
+          jsonMaps:
+            - jsonPath: $.ActionPlan.tenantId
+            - jsonPath: $.ActionPlan.actionPlanNumber
+            - jsonPath: $.ActionPlan.id
+            - jsonPath: $.ActionPlan.status
+
+        - query: UPDATE eg_wms_action_plan SET islatestversion = false, status = 'SUPERSEDED', lastmodifiedby = ?, lastmodifiedtime = ? WHERE tenantid = ? AND actionplannumber = ? AND id <> ? AND islatestversion = true AND ? = 'APPROVED';
+          basePath: ActionPlan
+          jsonMaps:
+            - jsonPath: $.ActionPlan.auditDetails.lastModifiedBy
+            - jsonPath: $.ActionPlan.auditDetails.lastModifiedTime
+            - jsonPath: $.ActionPlan.tenantId
+            - jsonPath: $.ActionPlan.actionPlanNumber
+            - jsonPath: $.ActionPlan.id
+            - jsonPath: $.ActionPlan.status
+
+        - query: UPDATE eg_wms_action_plan SET actionplannumber = ?, islatestversion = ?, status = ?, submitteddate = ?, approveddate = ?, approvedby = ?, lastmodifiedby = ?, lastmodifiedtime = ? WHERE id = ?;
+          basePath: ActionPlan
+          jsonMaps:
+            - jsonPath: $.ActionPlan.actionPlanNumber
+            - jsonPath: $.ActionPlan.isLatestVersion
+            - jsonPath: $.ActionPlan.status
+            - jsonPath: $.ActionPlan.submittedDate
+            - jsonPath: $.ActionPlan.approvedDate
+            - jsonPath: $.ActionPlan.approvedBy
+            - jsonPath: $.ActionPlan.auditDetails.lastModifiedBy
+            - jsonPath: $.ActionPlan.auditDetails.lastModifiedTime
+            - jsonPath: $.ActionPlan.id
