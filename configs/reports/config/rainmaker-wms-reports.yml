@@ -1,0 +1,397 @@
+ReportDefinitions:
+- reportName: WMSApprovalAuditHistory
+  summary: Approval and Audit History
+  version: 1.0.0
+  moduleName: rainmaker-wms
+  searchFilter: false
+  sorting: false
+  serialNo: false
+  sourceColumns:
+  - name: application_number
+    label: Application Number
+    type: string
+    source: WMS
+    total: false
+  - name: action_plan_id
+    label: Action Plan ID
+    type: string
+    source: WMS
+    total: false
+  - name: project_id
+    label: Project ID
+    type: string
+    source: WMS
+    total: false
+  - name: project_name
+    label: Project Name
+    type: string
+    source: WMS
+    total: false
+  - name: action
+    label: Action
+    type: string
+    source: WMS
+    total: false
+  - name: status_transition
+    label: Previous Status / New Status
+    type: string
+    source: WMS
+    total: false
+  - name: performed_by_role
+    label: Performed By / Role
+    type: string
+    source: WMS
+    total: false
+  - name: designation
+    label: Designation
+    type: string
+    source: WMS
+    total: false
+  - name: verifier_approver_name
+    label: Name of the Verifier / Approver
+    type: string
+    source: WMS
+    total: false
+  - name: date_time
+    label: Date and Time
+    type: string
+    source: WMS
+    total: false
+  - name: remarks
+    label: Remarks / Reason
+    type: string
+    source: WMS
+    total: false
+  searchParams:
+  - name: financialYear
+    label: Financial Year
+    type: singlevaluelist
+    source: WMS
+    isMandatory: true
+    searchClause: AND ap.financialyear = $financialYear
+    pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egf-master&masterName=FinancialYear|$.MdmsRes['egf-master'].FinancialYear[?(@.module
+      == 'WorksManagement' && @.active == true)].code|$.MdmsRes['egf-master'].FinancialYear[?(@.module
+      == 'WorksManagement' && @.active == true)].code
+    wrapper: false
+    stateData: true
+  - name: applicationNumber
+    label: Application Number
+    type: string
+    source: WMS
+    isMandatory: true
+    searchClause: AND ap.applicationnumber = $applicationNumber
+  - name: projectId
+    label: Project ID
+    type: singlevaluelist
+    source: WMS
+    isMandatory: false
+    searchClause: AND pd.projectid = $projectId
+    pattern: http://works-management-service:8080/works-management-service/action-plan/v1/_search?tenantId=$tenantid&limit=500&offset=0|$.ActionPlans[*].projectDetails[?(@.isActive
+      == true)].projectId|$.ActionPlans[*].projectDetails[?(@.isActive == true)].projectId
+    wrapper: true
+    stateData: false
+  - name: projectName
+    label: Project Name
+    type: string
+    source: WMS
+    isMandatory: false
+    searchClause: AND POSITION(LOWER($projectName) IN LOWER(pd.projectname)) > 0
+  query: |-
+    SELECT ap.applicationnumber AS application_number,
+           ap.actionplannumber AS action_plan_id,
+           pd.projectid AS project_id, pd.projectname AS project_name,
+           CASE
+             WHEN UPPER(w.action) IN ('INITIATE','SUBMIT') THEN 'Pending with Verifier'
+             WHEN UPPER(w.action) = 'VERIFY' THEN 'Forwarded to Approver'
+             WHEN UPPER(w.action) IN ('VERIFY_AND_APPROVE','APPROVE') THEN 'Approved by Approver'
+             WHEN UPPER(w.action) = 'REJECT' THEN 'Rejected by Approver'
+             WHEN UPPER(w.action) IN ('RETURN','SEND_BACK') THEN 'Reverted by Verifier / Approver'
+             ELSE COALESCE(NULLIF(w.action,''), 'Updated')
+           END AS action,
+           COALESCE(ps.applicationstatus, ps.state, NULLIF(w.previousstatus,''), 'START')
+              || ' / ' || COALESCE(ns.applicationstatus, ns.state, NULLIF(w.status,''), 'UNKNOWN') AS status_transition,
+           COALESCE(NULLIF(u.name,''), NULLIF(w.createdby,''), '') || ' / '
+              || COALESCE(NULLIF(actor_roles.role_names,''),
+                   CASE
+                     WHEN UPPER(w.action) IN ('INITIATE','SUBMIT') THEN 'Creator'
+                     WHEN UPPER(w.action) = 'VERIFY' THEN 'Verifier'
+                     WHEN UPPER(w.action) IN ('VERIFY_AND_APPROVE','APPROVE','REJECT') THEN 'Approver'
+                     WHEN UPPER(w.action) IN ('RETURN','SEND_BACK') THEN 'Verifier / Approver'
+                     ELSE ''
+                   END) AS performed_by_role,
+           COALESCE(NULLIF(actor_assignment.designation,''), '') AS designation,
+           CASE WHEN UPPER(w.action) IN ('VERIFY','VERIFY_AND_APPROVE','APPROVE','RETURN','SEND_BACK','REJECT')
+                THEN COALESCE(NULLIF(u.name,''), '')
+                ELSE '' END AS verifier_approver_name,
+           TO_CHAR(TO_TIMESTAMP(w.createdtime / 1000.0) AT TIME ZONE 'Asia/Kolkata',
+                   'DD/MM/YYYY HH24:MI:SS') AS date_time,
+           COALESCE(w.comment,'') AS remarks
+    FROM eg_wms_action_plan ap
+    JOIN eg_wms_ap_project_detail pd ON pd.actionplanid = ap.id
+        AND pd.tenantid = ap.tenantid AND pd.isactive = true
+    JOIN eg_wf_processinstance_v2 w ON w.businessid = ap.applicationnumber
+        AND w.tenantid = ap.tenantid AND w.businessservice = 'WMS_ACTION_PLAN'
+    LEFT JOIN eg_wf_state_v2 ps ON ps.uuid = w.previousstatus
+    LEFT JOIN eg_wf_state_v2 ns ON ns.uuid = w.status
+    LEFT JOIN eg_user u ON u.uuid::text = COALESCE(NULLIF(w.createdby,''), NULLIF(w.assigner,''))
+    LEFT JOIN LATERAL (
+        SELECT STRING_AGG(DISTINCT COALESCE(NULLIF(r.name,''), r.code), ', '
+                          ORDER BY COALESCE(NULLIF(r.name,''), r.code)) AS role_names
+        FROM eg_userrole ur
+        JOIN eg_role r ON r.id = ur.roleid
+        WHERE ur.userid = u.id
+    ) actor_roles ON true
+    LEFT JOIN LATERAL (
+        SELECT a.designation
+        FROM eg_hrms_employee e
+        JOIN eg_hrms_assignment a ON a.employeeid = e.uuid
+        WHERE e.uuid = u.uuid::text
+          AND e.tenantid = ap.tenantid
+          AND COALESCE(e.active, true) = true
+        ORDER BY COALESCE(a.iscurrentassignment, false) DESC,
+                 COALESCE(a.fromdate, 0) DESC
+        LIMIT 1
+    ) actor_assignment ON true
+    WHERE (ap.tenantid = $tenantid OR ap.tenantid LIKE $tenantid || '.%')
+  orderBy: ORDER BY w.createdtime, w.id, pd.id
+- reportName: WMSFundingSummary
+  summary: Funding-wise Summary
+  version: 1.0.0
+  moduleName: rainmaker-wms
+  searchFilter: false
+  sorting: false
+  serialNo: false
+  sourceColumns:
+  - name: ulb
+    label: ULB
+    type: string
+    source: WMS
+    total: false
+  - name: scheme
+    label: Scheme
+    type: string
+    source: WMS
+    total: false
+  - name: fund_source
+    label: Fund Source
+    type: string
+    source: WMS
+    total: false
+  - name: number_of_components
+    label: Number of Components
+    type: number
+    source: WMS
+    total: false
+  - name: total_approved_amount
+    label: Total Approved Amount (INR)
+    type: number
+    source: WMS
+    total: false
+  - name: government_grant_amount
+    label: Government Grant Amount (INR)
+    type: number
+    source: WMS
+    total: false
+  - name: osr_amount
+    label: OSR Amount (INR)
+    type: number
+    source: WMS
+    total: false
+  - name: share_of_total
+    label: Share of Total (%)
+    type: number
+    source: WMS
+    total: false
+  searchParams:
+  - name: financialYear
+    label: Financial Year
+    type: singlevaluelist
+    source: WMS
+    isMandatory: true
+    searchClause: AND ap.financialyear = $financialYear
+    pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egf-master&masterName=FinancialYear|$.MdmsRes['egf-master'].FinancialYear[?(@.module
+      == 'WorksManagement' && @.active == true)].code|$.MdmsRes['egf-master'].FinancialYear[?(@.module
+      == 'WorksManagement' && @.active == true)].code
+    wrapper: false
+    stateData: true
+  - name: actionPlanNumber
+    label: Action Plan ID
+    type: string
+    source: WMS
+    isMandatory: false
+    searchClause: AND ap.actionplannumber = $actionPlanNumber
+  - name: projectName
+    label: Project Name
+    type: string
+    source: WMS
+    isMandatory: false
+    searchClause: AND EXISTS (SELECT 1 FROM eg_wms_ap_project_detail fp WHERE fp.actionplanid
+      = ap.id AND fp.tenantid = ap.tenantid AND fp.isactive = true AND POSITION(LOWER($projectName)
+      IN LOWER(fp.projectname)) > 0)
+  - name: schemeCode
+    label: Scheme
+    type: singlevaluelist
+    source: WMS
+    isMandatory: false
+    searchClause: AND ap.schemecode = $schemeCode
+    pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=WorksManagement&masterName=Scheme|$.MdmsRes.WorksManagement.Scheme[?(@.active
+      == true)].code|$.MdmsRes.WorksManagement.Scheme[?(@.active == true)].name
+    wrapper: false
+    stateData: true
+  - name: fundSource
+    label: Fund Source
+    type: singlevaluelist
+    source: WMS
+    isMandatory: false
+    searchClause: AND ap.fundsource = $fundSource
+    pattern: list://GOVT_GRANT:Government Grant,OSR:OSR,PARTIAL:Partial
+    wrapper: false
+    stateData: false
+  query: |-
+    SELECT ap.tenantid AS ulb, ap.schemecode AS scheme, ap.fundsource AS fund_source,
+           SUM(COALESCE(cc.component_count,0)) AS number_of_components,
+           ROUND(SUM(ap.approvedamount),2) AS total_approved_amount,
+           ROUND(SUM(COALESCE(pf.government_grant_amount,0)),2) AS government_grant_amount,
+           ROUND(SUM(COALESCE(pf.osr_amount,0)),2) AS osr_amount,
+           COALESCE(ROUND(100.0 * SUM(ap.approvedamount)
+                        / NULLIF(SUM(SUM(ap.approvedamount)) OVER (),0),2),0) AS share_of_total
+    FROM eg_wms_action_plan ap
+    LEFT JOIN LATERAL (
+        SELECT COUNT(*) AS component_count
+        FROM eg_wms_ap_component c
+        JOIN eg_wms_ap_project_detail pd ON pd.id = c.projectdetailid
+          AND pd.actionplanid = c.actionplanid AND pd.tenantid = c.tenantid AND pd.isactive = true
+        WHERE c.actionplanid = ap.id AND c.tenantid = ap.tenantid AND c.isactive = true
+    ) cc ON true
+    LEFT JOIN LATERAL (
+        SELECT SUM(CASE WHEN f.fundtype = 'GOVT_GRANT' THEN f.amount ELSE 0 END) AS government_grant_amount,
+               SUM(CASE WHEN f.fundtype = 'OSR' THEN f.amount ELSE 0 END) AS osr_amount
+        FROM eg_wms_ap_fund_detail f
+        WHERE f.actionplanid = ap.id AND f.tenantid = ap.tenantid
+          AND f.componentid IS NULL AND f.isactive = true
+    ) pf ON true
+    WHERE (ap.tenantid = $tenantid OR ap.tenantid LIKE $tenantid || '.%') AND ap.isactive = true AND ap.islatestversion = true AND ap.status = 'APPROVED'
+  groupBy: GROUP BY ap.tenantid, ap.schemecode, ap.fundsource
+  orderBy: ORDER BY ap.tenantid, ap.schemecode, ap.fundsource
+- reportName: WMSComponentSummary
+  summary: Component-wise Summary
+  version: 1.0.0
+  moduleName: rainmaker-wms
+  searchFilter: false
+  sorting: false
+  serialNo: false
+  sourceColumns:
+  - name: action_plan_id
+    label: Action Plan ID
+    type: string
+    source: WMS
+    total: false
+  - name: project_id
+    label: Project ID
+    type: string
+    source: WMS
+    total: false
+  - name: project_name
+    label: Project Name
+    type: string
+    source: WMS
+    total: false
+  - name: component_name
+    label: Component Name
+    type: string
+    source: WMS
+    total: false
+  - name: category
+    label: Category
+    type: string
+    source: WMS
+    total: false
+  - name: sub_category
+    label: Sub-Category
+    type: string
+    source: WMS
+    total: false
+  - name: fund_source
+    label: Fund Source
+    type: string
+    source: WMS
+    total: false
+  - name: scheme_sub_scheme
+    label: Scheme / Sub-Scheme
+    type: string
+    source: WMS
+    total: false
+  - name: beneficiary_applicable
+    label: Beneficiary Applicable
+    type: string
+    source: WMS
+    total: false
+  - name: approved_component_amount
+    label: Approved Component Amount (INR)
+    type: number
+    source: WMS
+    total: false
+  searchParams:
+  - name: financialYear
+    label: Financial Year
+    type: singlevaluelist
+    source: WMS
+    isMandatory: true
+    searchClause: AND ap.financialyear = $financialYear
+    pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egf-master&masterName=FinancialYear|$.MdmsRes['egf-master'].FinancialYear[?(@.module
+      == 'WorksManagement' && @.active == true)].code|$.MdmsRes['egf-master'].FinancialYear[?(@.module
+      == 'WorksManagement' && @.active == true)].code
+    wrapper: false
+    stateData: true
+  - name: actionPlanNumber
+    label: Action Plan ID
+    type: string
+    source: WMS
+    isMandatory: false
+    searchClause: AND ap.actionplannumber = $actionPlanNumber
+  - name: schemeCode
+    label: Scheme
+    type: singlevaluelist
+    source: WMS
+    isMandatory: false
+    searchClause: AND ap.schemecode = $schemeCode
+    pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=WorksManagement&masterName=Scheme|$.MdmsRes.WorksManagement.Scheme[?(@.active
+      == true)].code|$.MdmsRes.WorksManagement.Scheme[?(@.active == true)].name
+    wrapper: false
+    stateData: true
+  - name: fundSource
+    label: Fund Source
+    type: singlevaluelist
+    source: WMS
+    isMandatory: false
+    searchClause: AND c.fundsource = $fundSource
+    pattern: list://GOVT_GRANT:Government Grant,OSR:OSR,PARTIAL:Partial
+    wrapper: false
+    stateData: false
+  query: |-
+    SELECT MAX(ap.actionplannumber) AS action_plan_id,
+           MAX(pd.projectid) AS project_id, MAX(pd.projectname) AS project_name,
+           CASE WHEN GROUPING(c.id)=1 THEN 'Project subtotal' ELSE MAX(c.componentname) END AS component_name,
+           CASE WHEN GROUPING(c.id)=1 THEN '' ELSE COALESCE(MAX(c.category),'') END AS category,
+           CASE WHEN GROUPING(c.id)=1 THEN '' ELSE COALESCE(MAX(c.subcategory),'') END AS sub_category,
+           CASE WHEN GROUPING(c.id)=1 THEN '' ELSE COALESCE(MAX(c.fundsource),'') END AS fund_source,
+           MAX(ap.schemecode) || CASE WHEN MAX(ap.subschemecode) IS NULL OR MAX(ap.subschemecode)=''
+                                       THEN '' ELSE ' / ' || MAX(ap.subschemecode) END AS scheme_sub_scheme,
+           CASE WHEN GROUPING(c.id)=1 THEN ''
+                WHEN MAX(b.names) IS NULL THEN 'No' ELSE 'Yes: ' || MAX(b.names) END AS beneficiary_applicable,
+           ROUND(SUM(c.approvedamount),2) AS approved_component_amount
+    FROM eg_wms_action_plan ap
+    JOIN eg_wms_ap_project_detail pd ON pd.actionplanid = ap.id
+        AND pd.tenantid = ap.tenantid AND pd.isactive = true
+    JOIN eg_wms_ap_component c ON c.projectdetailid = pd.id AND c.actionplanid = ap.id
+        AND c.tenantid = ap.tenantid AND c.isactive = true
+    LEFT JOIN LATERAL (
+        SELECT STRING_AGG(DISTINCT NULLIF(TRIM(bf.name),''), ', ' ORDER BY NULLIF(TRIM(bf.name),'')) AS names
+        FROM eg_wms_ap_beneficiary bf
+        WHERE bf.actionplanid = ap.id AND bf.componentid = c.id
+          AND bf.tenantid = ap.tenantid AND bf.isactive = true
+    ) b ON true
+    WHERE (ap.tenantid = $tenantid OR ap.tenantid LIKE $tenantid || '.%') AND ap.isactive = true AND ap.islatestversion = true AND ap.status = 'APPROVED'
+  groupBy: GROUP BY GROUPING SETS ((ap.id,pd.id,c.id),(ap.id,pd.id))
+  orderBy: ORDER BY MAX(ap.actionplannumber), MAX(pd.projectid), ap.id, pd.id, GROUPING(c.id),
+    MAX(c.componentnumber), c.id
