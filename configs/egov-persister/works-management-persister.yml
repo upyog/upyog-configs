@@ -6,7 +6,7 @@ serviceMaps:
       fromTopic: save-wms-action-plan
       isTransaction: true
       queryMaps:
-        - query: INSERT INTO eg_wms_action_plan (id, tenantid, applicationnumber, actionplannumber, version, islatestversion, financialyear, projectid, projectname, schemecode, subschemecode, offlineapprovaldate, approvingauthority, adminsanction, technicalsanction, approvedamount, fundsource, totalcomponents, declarationaccepted, status, submitteddate, approveddate, approvedby, isactive, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO eg_wms_action_plan (id, tenantid, applicationnumber, actionplannumber, version, islatestversion, financialyear, schemecode, subschemecode, offlineapprovaldate, approvingauthority, adminsanction, technicalsanction, approvedamount, fundsource, totalcomponents, declarationaccepted, status, submitteddate, approveddate, approvedby, isactive, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: ActionPlan
           jsonMaps:
             - jsonPath: $.ActionPlan.id
@@ -16,8 +16,6 @@ serviceMaps:
             - jsonPath: $.ActionPlan.version
             - jsonPath: $.ActionPlan.isLatestVersion
             - jsonPath: $.ActionPlan.financialYear
-            - jsonPath: $.ActionPlan.projectId
-            - jsonPath: $.ActionPlan.projectName
             - jsonPath: $.ActionPlan.schemeCode
             - jsonPath: $.ActionPlan.subSchemeCode
             - jsonPath: $.ActionPlan.offlineApprovalDate
@@ -41,12 +39,14 @@ serviceMaps:
             - jsonPath: $.ActionPlan.auditDetails.lastModifiedBy
             - jsonPath: $.ActionPlan.auditDetails.lastModifiedTime
 
-        - query: INSERT INTO eg_wms_ap_project_detail (id, tenantid, actionplanid, purposecode, purposeother, startdate, enddate, typeofwork, workcategory, isactive, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO eg_wms_ap_project_detail (id, tenantid, actionplanid, projectid, projectname, purposecode, purposeother, startdate, enddate, typeofwork, workcategory, isactive, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: ActionPlan.projectDetails.*
           jsonMaps:
             - jsonPath: $.ActionPlan.projectDetails.*.id
             - jsonPath: $.ActionPlan.projectDetails.*.tenantId
             - jsonPath: $.ActionPlan.id
+            - jsonPath: $.ActionPlan.projectDetails.*.projectId
+            - jsonPath: $.ActionPlan.projectDetails.*.projectName
             - jsonPath: $.ActionPlan.projectDetails.*.purposeCode
             - jsonPath: $.ActionPlan.projectDetails.*.purposeOther
             - jsonPath: $.ActionPlan.projectDetails.*.startDate
@@ -166,12 +166,13 @@ serviceMaps:
             - jsonPath: $.ActionPlan.documents.*.auditDetails.lastModifiedBy
             - jsonPath: $.ActionPlan.documents.*.auditDetails.lastModifiedTime
 
-        - query: INSERT INTO eg_wms_ap_component (id, tenantid, actionplanid, componentnumber, componentname, category, subcategory, fundsource, approvedamount, status, isactive, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO eg_wms_ap_component (id, tenantid, actionplanid, projectdetailid, componentnumber, componentname, category, subcategory, fundsource, approvedamount, status, isactive, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: ActionPlan.projectDetails.*.components.*
           jsonMaps:
             - jsonPath: $.ActionPlan.projectDetails.*.components.*.id
             - jsonPath: $.ActionPlan.projectDetails.*.components.*.tenantId
             - jsonPath: $.ActionPlan.id
+            - jsonPath: $.ActionPlan.projectDetails.*.components.*.projectDetailId
             - jsonPath: $.ActionPlan.projectDetails.*.components.*.componentNumber
             - jsonPath: $.ActionPlan.projectDetails.*.components.*.componentName
             - jsonPath: $.ActionPlan.projectDetails.*.components.*.category
@@ -269,14 +270,12 @@ serviceMaps:
             - jsonPath: $.ActionPlan.id
             - jsonPath: $.ActionPlan.status
 
-        - query: UPDATE eg_wms_action_plan SET actionplannumber = ?, islatestversion = ?, financialyear = ?, projectid = ?, projectname = ?, schemecode = ?, subschemecode = ?, offlineapprovaldate = ?, approvingauthority = ?, adminsanction = ?, technicalsanction = ?, approvedamount = ?, fundsource = ?, totalcomponents = ?, declarationaccepted = ?, status = ?, submitteddate = ?, approveddate = ?, approvedby = ?, isactive = ?, additionaldetails = ?, lastmodifiedby = ?, lastmodifiedtime = ? WHERE id = ?;
+        - query: UPDATE eg_wms_action_plan SET actionplannumber = ?, islatestversion = ?, financialyear = ?, schemecode = ?, subschemecode = ?, offlineapprovaldate = ?, approvingauthority = ?, adminsanction = ?, technicalsanction = ?, approvedamount = ?, fundsource = ?, totalcomponents = ?, declarationaccepted = ?, status = ?, submitteddate = ?, approveddate = ?, approvedby = ?, isactive = ?, additionaldetails = ?, lastmodifiedby = ?, lastmodifiedtime = ? WHERE id = ?;
           basePath: ActionPlan
           jsonMaps:
             - jsonPath: $.ActionPlan.actionPlanNumber
             - jsonPath: $.ActionPlan.isLatestVersion
             - jsonPath: $.ActionPlan.financialYear
-            - jsonPath: $.ActionPlan.projectId
-            - jsonPath: $.ActionPlan.projectName
             - jsonPath: $.ActionPlan.schemeCode
             - jsonPath: $.ActionPlan.subSchemeCode
             - jsonPath: $.ActionPlan.offlineApprovalDate
@@ -304,12 +303,14 @@ serviceMaps:
           jsonMaps:
             - jsonPath: $.ActionPlan.projectDetails.*.id
 
-        - query: INSERT INTO eg_wms_ap_project_detail (id, tenantid, actionplanid, purposecode, purposeother, startdate, enddate, typeofwork, workcategory, isactive, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET purposecode = EXCLUDED.purposecode, purposeother = EXCLUDED.purposeother, startdate = EXCLUDED.startdate, enddate = EXCLUDED.enddate, typeofwork = EXCLUDED.typeofwork, workcategory = EXCLUDED.workcategory, isactive = EXCLUDED.isactive, additionaldetails = EXCLUDED.additionaldetails, lastmodifiedby = EXCLUDED.lastmodifiedby, lastmodifiedtime = EXCLUDED.lastmodifiedtime;
+        - query: INSERT INTO eg_wms_ap_project_detail (id, tenantid, actionplanid, projectid, projectname, purposecode, purposeother, startdate, enddate, typeofwork, workcategory, isactive, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET projectid = EXCLUDED.projectid, projectname = EXCLUDED.projectname, purposecode = EXCLUDED.purposecode, purposeother = EXCLUDED.purposeother, startdate = EXCLUDED.startdate, enddate = EXCLUDED.enddate, typeofwork = EXCLUDED.typeofwork, workcategory = EXCLUDED.workcategory, isactive = EXCLUDED.isactive, additionaldetails = EXCLUDED.additionaldetails, lastmodifiedby = EXCLUDED.lastmodifiedby, lastmodifiedtime = EXCLUDED.lastmodifiedtime;
           basePath: ActionPlan.projectDetails.*
           jsonMaps:
             - jsonPath: $.ActionPlan.projectDetails.*.id
             - jsonPath: $.ActionPlan.projectDetails.*.tenantId
             - jsonPath: $.ActionPlan.id
+            - jsonPath: $.ActionPlan.projectDetails.*.projectId
+            - jsonPath: $.ActionPlan.projectDetails.*.projectName
             - jsonPath: $.ActionPlan.projectDetails.*.purposeCode
             - jsonPath: $.ActionPlan.projectDetails.*.purposeOther
             - jsonPath: $.ActionPlan.projectDetails.*.startDate
@@ -464,12 +465,13 @@ serviceMaps:
           jsonMaps:
             - jsonPath: $.ActionPlan.projectDetails.*.components.*.id
 
-        - query: INSERT INTO eg_wms_ap_component (id, tenantid, actionplanid, componentnumber, componentname, category, subcategory, fundsource, approvedamount, status, isactive, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET componentnumber = EXCLUDED.componentnumber, componentname = EXCLUDED.componentname, category = EXCLUDED.category, subcategory = EXCLUDED.subcategory, fundsource = EXCLUDED.fundsource, approvedamount = EXCLUDED.approvedamount, status = EXCLUDED.status, isactive = EXCLUDED.isactive, additionaldetails = EXCLUDED.additionaldetails, lastmodifiedby = EXCLUDED.lastmodifiedby, lastmodifiedtime = EXCLUDED.lastmodifiedtime;
+        - query: INSERT INTO eg_wms_ap_component (id, tenantid, actionplanid, projectdetailid, componentnumber, componentname, category, subcategory, fundsource, approvedamount, status, isactive, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET projectdetailid = EXCLUDED.projectdetailid, componentnumber = EXCLUDED.componentnumber, componentname = EXCLUDED.componentname, category = EXCLUDED.category, subcategory = EXCLUDED.subcategory, fundsource = EXCLUDED.fundsource, approvedamount = EXCLUDED.approvedamount, status = EXCLUDED.status, isactive = EXCLUDED.isactive, additionaldetails = EXCLUDED.additionaldetails, lastmodifiedby = EXCLUDED.lastmodifiedby, lastmodifiedtime = EXCLUDED.lastmodifiedtime;
           basePath: ActionPlan.projectDetails.*.components.*
           jsonMaps:
             - jsonPath: $.ActionPlan.projectDetails.*.components.*.id
             - jsonPath: $.ActionPlan.projectDetails.*.components.*.tenantId
             - jsonPath: $.ActionPlan.id
+            - jsonPath: $.ActionPlan.projectDetails.*.components.*.projectDetailId
             - jsonPath: $.ActionPlan.projectDetails.*.components.*.componentNumber
             - jsonPath: $.ActionPlan.projectDetails.*.components.*.componentName
             - jsonPath: $.ActionPlan.projectDetails.*.components.*.category
