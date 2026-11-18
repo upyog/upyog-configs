@@ -1,0 +1,33 @@
+ServiceMaps:
+ serviceName: Works Management Service
+ version: 1.0.0
+ mappings:
+  - topic: save-wms-action-plan
+    configKey: INDEX
+    indexes:
+    - name: wms-action-plan-v1
+      type: actionplans
+      id: $.id, $.tenantId
+      isBulk: false
+      timeStampField: $.auditDetails.lastModifiedTime
+      jsonPath: $.ActionPlan
+
+  - topic: update-wms-action-plan
+    configKey: INDEX
+    indexes:
+    - name: wms-action-plan-v1
+      type: actionplans
+      id: $.id, $.tenantId
+      isBulk: false
+      timeStampField: $.auditDetails.lastModifiedTime
+      jsonPath: $.ActionPlan
+
+  - topic: update-wms-action-plan-workflow
+    configKey: INDEX
+    indexes:
+    - name: wms-action-plan-v1
+      type: actionplans
+      id: $.id, $.tenantId
+      isBulk: false
+      timeStampField: $.auditDetails.lastModifiedTime
+      jsonPath: $.ActionPlan
