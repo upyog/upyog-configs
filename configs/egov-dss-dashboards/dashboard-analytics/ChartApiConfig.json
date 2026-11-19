@@ -11624,7 +11624,7 @@
       {
         "module": "WS",
         "dateRefField": "date",
-        "requestQueryMap": "{\"ulb\" : \"ulb\"}",
+        "requestQueryMap": "{\"state\" : \"state\", \"ulb\" : \"ulb\"}",
         "indexName": "ws-national-dashboard-*",
         "aggrQuery": "{\"aggs\":{\"Water Collections\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"intervalvalue\"},\"aggs\":{\"Water\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"connectionType.keyword\":[\"WATER.NONMETERED\",\"WATER.METERED\"]}}]}},\"aggs\":{\"Sum\":{\"sum\":{\"field\":\"todaysCollectionForConnectionType\"}}}}}},\"Sewerage Collections\":{\"date_histogram\":{\"field\":\"date\",\"calendar_interval\":\"intervalvalue\"},\"aggs\":{\"Sewerage\":{\"filter\":{\"bool\":{\"must\":[{\"terms\":{\"connectionType.keyword\":[\"SEWERAGE\"]}}]}},\"aggs\":{\"Count\":{\"sum\":{\"field\":\"todaysCollectionForConnectionType\"}}}}}}}}"
       }
