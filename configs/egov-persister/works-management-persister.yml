@@ -103,7 +103,7 @@ serviceMaps:
           jsonMaps:
             - jsonPath: $.ActionPlan.recommendations.*.documents.*.id
             - jsonPath: $.ActionPlan.recommendations.*.documents.*.tenantId
-            - jsonPath: $.ActionPlan.recommendations.*.id
+            - jsonPath: $.ActionPlan.recommendations[?({id} in @.documents[*].id)].id
             - jsonPath: $.ActionPlan.recommendations.*.documents.*.documentType
             - jsonPath: $.ActionPlan.recommendations.*.documents.*.fileStoreId
             - jsonPath: $.ActionPlan.recommendations.*.documents.*.documentUid
@@ -382,7 +382,7 @@ serviceMaps:
           jsonMaps:
             - jsonPath: $.ActionPlan.recommendations.*.documents.*.id
             - jsonPath: $.ActionPlan.recommendations.*.documents.*.tenantId
-            - jsonPath: $.ActionPlan.recommendations.*.id
+            - jsonPath: $.ActionPlan.recommendations[?({id} in @.documents[*].id)].id
             - jsonPath: $.ActionPlan.recommendations.*.documents.*.documentType
             - jsonPath: $.ActionPlan.recommendations.*.documents.*.fileStoreId
             - jsonPath: $.ActionPlan.recommendations.*.documents.*.documentUid
