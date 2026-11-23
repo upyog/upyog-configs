@@ -39,7 +39,7 @@ serviceMaps:
             - jsonPath: $.ActionPlan.auditDetails.lastModifiedBy
             - jsonPath: $.ActionPlan.auditDetails.lastModifiedTime
 
-        - query: INSERT INTO eg_wms_ap_project_detail (id, tenantid, actionplanid, projectid, projectname, purposecode, purposeother, startdate, enddate, typeofwork, workcategory, approvedamount, isactive, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        - query: INSERT INTO eg_wms_ap_project_detail (id, tenantid, actionplanid, projectid, projectname, purposecode, purposeother, startdate, enddate, typeofwork, workcategory, isactive, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
           basePath: ActionPlan.projectDetails.*
           jsonMaps:
             - jsonPath: $.ActionPlan.projectDetails.*.id
@@ -53,7 +53,6 @@ serviceMaps:
             - jsonPath: $.ActionPlan.projectDetails.*.endDate
             - jsonPath: $.ActionPlan.projectDetails.*.typeOfWork
             - jsonPath: $.ActionPlan.projectDetails.*.workCategory
-            - jsonPath: $.ActionPlan.projectDetails.*.approvedAmount
             - jsonPath: $.ActionPlan.projectDetails.*.isActive
             - jsonPath: $.ActionPlan.projectDetails.*.additionalDetails
               type: JSON
@@ -304,7 +303,7 @@ serviceMaps:
           jsonMaps:
             - jsonPath: $.ActionPlan.projectDetails.*.id
 
-        - query: INSERT INTO eg_wms_ap_project_detail (id, tenantid, actionplanid, projectid, projectname, purposecode, purposeother, startdate, enddate, typeofwork, workcategory, approvedamount, isactive, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET projectid = EXCLUDED.projectid, projectname = EXCLUDED.projectname, purposecode = EXCLUDED.purposecode, purposeother = EXCLUDED.purposeother, startdate = EXCLUDED.startdate, enddate = EXCLUDED.enddate, typeofwork = EXCLUDED.typeofwork, workcategory = EXCLUDED.workcategory, approvedamount = EXCLUDED.approvedamount, isactive = EXCLUDED.isactive, additionaldetails = EXCLUDED.additionaldetails, lastmodifiedby = EXCLUDED.lastmodifiedby, lastmodifiedtime = EXCLUDED.lastmodifiedtime;
+        - query: INSERT INTO eg_wms_ap_project_detail (id, tenantid, actionplanid, projectid, projectname, purposecode, purposeother, startdate, enddate, typeofwork, workcategory, isactive, additionaldetails, createdby, createdtime, lastmodifiedby, lastmodifiedtime) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (id) DO UPDATE SET projectid = EXCLUDED.projectid, projectname = EXCLUDED.projectname, purposecode = EXCLUDED.purposecode, purposeother = EXCLUDED.purposeother, startdate = EXCLUDED.startdate, enddate = EXCLUDED.enddate, typeofwork = EXCLUDED.typeofwork, workcategory = EXCLUDED.workcategory, isactive = EXCLUDED.isactive, additionaldetails = EXCLUDED.additionaldetails, lastmodifiedby = EXCLUDED.lastmodifiedby, lastmodifiedtime = EXCLUDED.lastmodifiedtime;
           basePath: ActionPlan.projectDetails.*
           jsonMaps:
             - jsonPath: $.ActionPlan.projectDetails.*.id
@@ -318,7 +317,6 @@ serviceMaps:
             - jsonPath: $.ActionPlan.projectDetails.*.endDate
             - jsonPath: $.ActionPlan.projectDetails.*.typeOfWork
             - jsonPath: $.ActionPlan.projectDetails.*.workCategory
-            - jsonPath: $.ActionPlan.projectDetails.*.approvedAmount
             - jsonPath: $.ActionPlan.projectDetails.*.isActive
             - jsonPath: $.ActionPlan.projectDetails.*.additionalDetails
               type: JSON
