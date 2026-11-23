@@ -250,26 +250,29 @@ ReportDefinitions:
   query: |-
     SELECT ap.tenantid AS ulb, ap.schemecode AS scheme, ap.fundsource AS fund_source,
            SUM(COALESCE(cc.component_count,0)) AS number_of_components,
-           ROUND(SUM(ap.approvedamount),2) AS total_approved_amount,
-           ROUND(SUM(COALESCE(pf.government_grant_amount,0)),2) AS government_grant_amount,
-           ROUND(SUM(COALESCE(pf.osr_amount,0)),2) AS osr_amount,
-           COALESCE(ROUND(100.0 * SUM(ap.approvedamount)
-                        / NULLIF(SUM(SUM(ap.approvedamount)) OVER (),0),2),0) AS share_of_total
+           ROUND(SUM(pd.approvedamount),2) AS total_approved_amount,
+           ROUND(SUM(COALESCE(cf.government_grant_amount,0)),2) AS government_grant_amount,
+           ROUND(SUM(COALESCE(cf.osr_amount,0)),2) AS osr_amount,
+           COALESCE(ROUND(100.0 * SUM(pd.approvedamount)
+                        / NULLIF(SUM(SUM(pd.approvedamount)) OVER (),0),2),0) AS share_of_total
     FROM eg_wms_action_plan ap
+    JOIN eg_wms_ap_project_detail pd ON pd.actionplanid = ap.id
+      AND pd.tenantid = ap.tenantid AND pd.isactive = true
     LEFT JOIN LATERAL (
         SELECT COUNT(*) AS component_count
         FROM eg_wms_ap_component c
-        JOIN eg_wms_ap_project_detail pd ON pd.id = c.projectdetailid
-          AND pd.actionplanid = c.actionplanid AND pd.tenantid = c.tenantid AND pd.isactive = true
-        WHERE c.actionplanid = ap.id AND c.tenantid = ap.tenantid AND c.isactive = true
+        WHERE c.projectdetailid = pd.id AND c.actionplanid = ap.id AND c.tenantid = ap.tenantid
+          AND c.isactive = true AND COALESCE(c.status, 'ACTIVE') <> 'INACTIVE'
     ) cc ON true
     LEFT JOIN LATERAL (
         SELECT SUM(CASE WHEN f.fundtype = 'GOVT_GRANT' THEN f.amount ELSE 0 END) AS government_grant_amount,
                SUM(CASE WHEN f.fundtype = 'OSR' THEN f.amount ELSE 0 END) AS osr_amount
         FROM eg_wms_ap_fund_detail f
-        WHERE f.actionplanid = ap.id AND f.tenantid = ap.tenantid
-          AND f.componentid IS NULL AND f.isactive = true
-    ) pf ON true
+        JOIN eg_wms_ap_component c ON c.id = f.componentid
+          AND c.projectdetailid = pd.id AND c.actionplanid = ap.id AND c.tenantid = ap.tenantid
+          AND c.isactive = true AND COALESCE(c.status, 'ACTIVE') <> 'INACTIVE'
+        WHERE f.actionplanid = ap.id AND f.tenantid = ap.tenantid AND f.isactive = true
+    ) cf ON true
     WHERE (ap.tenantid = $tenantid OR ap.tenantid LIKE $tenantid || '.%') AND ap.isactive = true AND ap.islatestversion = true AND ap.status = 'APPROVED'
   groupBy: GROUP BY ap.tenantid, ap.schemecode, ap.fundsource
   orderBy: ORDER BY ap.tenantid, ap.schemecode, ap.fundsource
