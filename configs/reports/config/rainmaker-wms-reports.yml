@@ -250,11 +250,11 @@ ReportDefinitions:
   query: |-
     SELECT ap.tenantid AS ulb, ap.schemecode AS scheme, ap.fundsource AS fund_source,
            SUM(COALESCE(cc.component_count,0)) AS number_of_components,
-           ROUND(SUM(pd.approvedamount),2) AS total_approved_amount,
+           ROUND(SUM(ap.approvedamount),2) AS total_approved_amount,
            ROUND(SUM(COALESCE(cf.government_grant_amount,0)),2) AS government_grant_amount,
            ROUND(SUM(COALESCE(cf.osr_amount,0)),2) AS osr_amount,
-           COALESCE(ROUND(100.0 * SUM(pd.approvedamount)
-                        / NULLIF(SUM(SUM(pd.approvedamount)) OVER (),0),2),0) AS share_of_total
+           COALESCE(ROUND(100.0 * SUM(ap.approvedamount)
+                        / NULLIF(SUM(SUM(ap.approvedamount)) OVER (),0),2),0) AS share_of_total
     FROM eg_wms_action_plan ap
     JOIN eg_wms_ap_project_detail pd ON pd.actionplanid = ap.id
       AND pd.tenantid = ap.tenantid AND pd.isactive = true
