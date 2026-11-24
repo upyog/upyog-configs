@@ -130,7 +130,7 @@ ReportDefinitions:
             'UNKNOWN'
         ) AS status_transition,
 
-        COALESCE(NULLIF(u.name, ''), '') AS performed_by_role,
+        NULLIF(u.name, '') AS performed_by_role,
 
         COALESCE(
             NULLIF(actor_assignment.designation, ''),
@@ -146,8 +146,8 @@ ReportDefinitions:
                 'SEND_BACK',
                 'REJECT'
             )
-            THEN COALESCE(NULLIF(u.name, ''), '')
-            ELSE ''
+            THEN NULLIF(u.name, '')
+            ELSE NULL
         END AS verifier_approver_name,
 
         TO_CHAR(
