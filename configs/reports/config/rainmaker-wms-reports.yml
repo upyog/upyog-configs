@@ -1,5 +1,6 @@
 ReportDefinitions:
 - reportName: WMSApprovalAuditHistory
+  decryptionPathId: WMSApprovalAuditHistory
   summary: Approval and Audit History
   version: 1.0.0
   moduleName: rainmaker-wms
@@ -38,7 +39,7 @@ ReportDefinitions:
     source: WMS
     total: false
   - name: performed_by_role
-    label: Performed By / Role
+    label: Performed By
     type: string
     source: WMS
     total: false
@@ -97,62 +98,109 @@ ReportDefinitions:
     isMandatory: false
     searchClause: AND POSITION(LOWER($projectName) IN LOWER(pd.projectname)) > 0
   query: |-
-    SELECT ap.applicationnumber AS application_number,
-           ap.actionplannumber AS action_plan_id,
-           pd.projectid AS project_id, pd.projectname AS project_name,
-           CASE
-             WHEN UPPER(w.action) IN ('INITIATE','SUBMIT') THEN 'Pending with Verifier'
-             WHEN UPPER(w.action) = 'VERIFY' THEN 'Forwarded to Approver'
-             WHEN UPPER(w.action) IN ('VERIFY_AND_APPROVE','APPROVE') THEN 'Approved by Approver'
-             WHEN UPPER(w.action) = 'REJECT' THEN 'Rejected by Approver'
-             WHEN UPPER(w.action) IN ('RETURN','SEND_BACK') THEN 'Reverted by Verifier / Approver'
-             ELSE COALESCE(NULLIF(w.action,''), 'Updated')
-           END AS action,
-           COALESCE(ps.applicationstatus, ps.state, NULLIF(w.previousstatus,''), 'START')
-              || ' / ' || COALESCE(ns.applicationstatus, ns.state, NULLIF(w.status,''), 'UNKNOWN') AS status_transition,
-           COALESCE(NULLIF(u.name,''), NULLIF(w.createdby,''), '') || ' / '
-              || COALESCE(NULLIF(actor_roles.role_names,''),
-                   CASE
-                     WHEN UPPER(w.action) IN ('INITIATE','SUBMIT') THEN 'Creator'
-                     WHEN UPPER(w.action) = 'VERIFY' THEN 'Verifier'
-                     WHEN UPPER(w.action) IN ('VERIFY_AND_APPROVE','APPROVE','REJECT') THEN 'Approver'
-                     WHEN UPPER(w.action) IN ('RETURN','SEND_BACK') THEN 'Verifier / Approver'
-                     ELSE ''
-                   END) AS performed_by_role,
-           COALESCE(NULLIF(actor_assignment.designation,''), '') AS designation,
-           CASE WHEN UPPER(w.action) IN ('VERIFY','VERIFY_AND_APPROVE','APPROVE','RETURN','SEND_BACK','REJECT')
-                THEN COALESCE(NULLIF(u.name,''), '')
-                ELSE '' END AS verifier_approver_name,
-           TO_CHAR(TO_TIMESTAMP(w.createdtime / 1000.0) AT TIME ZONE 'Asia/Kolkata',
-                   'DD/MM/YYYY HH24:MI:SS') AS date_time,
-           COALESCE(w.comment,'') AS remarks
+    SELECT
+        ap.applicationnumber AS application_number,
+        ap.actionplannumber AS action_plan_id,
+        pd.projectid AS project_id,
+        pd.projectname AS project_name,
+
+        CASE
+            WHEN UPPER(w.action) IN ('INITIATE', 'SUBMIT')
+                THEN 'Pending with Verifier'
+            WHEN UPPER(w.action) = 'VERIFY'
+                THEN 'Forwarded to Approver'
+            WHEN UPPER(w.action) IN ('VERIFY_AND_APPROVE', 'APPROVE')
+                THEN 'Approved by Approver'
+            WHEN UPPER(w.action) = 'REJECT'
+                THEN 'Rejected by Approver'
+            WHEN UPPER(w.action) IN ('RETURN', 'SEND_BACK')
+                THEN 'Reverted by Verifier / Approver'
+            ELSE COALESCE(NULLIF(w.action, ''), 'Updated')
+        END AS action,
+
+        COALESCE(
+            ps.applicationstatus,
+            ps.state,
+            NULLIF(w.previousstatus, ''),
+            'START'
+        ) || ' / ' || COALESCE(
+            ns.applicationstatus,
+            ns.state,
+            NULLIF(w.status, ''),
+            'UNKNOWN'
+        ) AS status_transition,
+
+        COALESCE(NULLIF(u.name, ''), '') AS performed_by_role,
+
+        COALESCE(
+            NULLIF(actor_assignment.designation, ''),
+            ''
+        ) AS designation,
+
+        CASE
+            WHEN UPPER(w.action) IN (
+                'VERIFY',
+                'VERIFY_AND_APPROVE',
+                'APPROVE',
+                'RETURN',
+                'SEND_BACK',
+                'REJECT'
+            )
+            THEN COALESCE(NULLIF(u.name, ''), '')
+            ELSE ''
+        END AS verifier_approver_name,
+
+        TO_CHAR(
+            TO_TIMESTAMP(w.createdtime / 1000.0)
+                AT TIME ZONE 'Asia/Kolkata',
+            'DD/MM/YYYY HH24:MI:SS'
+        ) AS date_time,
+
+        COALESCE(w.comment, '') AS remarks
+
     FROM eg_wms_action_plan ap
-    JOIN eg_wms_ap_project_detail pd ON pd.actionplanid = ap.id
-        AND pd.tenantid = ap.tenantid AND pd.isactive = true
-    JOIN eg_wf_processinstance_v2 w ON w.businessid = ap.applicationnumber
-        AND w.tenantid = ap.tenantid AND w.businessservice = 'WMS_ACTION_PLAN'
-    LEFT JOIN eg_wf_state_v2 ps ON ps.uuid = w.previousstatus
-    LEFT JOIN eg_wf_state_v2 ns ON ns.uuid = w.status
-    LEFT JOIN eg_user u ON u.uuid::text = COALESCE(NULLIF(w.createdby,''), NULLIF(w.assigner,''))
-    LEFT JOIN LATERAL (
-        SELECT STRING_AGG(DISTINCT COALESCE(NULLIF(r.name,''), r.code), ', '
-                          ORDER BY COALESCE(NULLIF(r.name,''), r.code)) AS role_names
-        FROM eg_userrole ur
-        JOIN eg_role r ON r.id = ur.roleid
-        WHERE ur.userid = u.id
-    ) actor_roles ON true
+
+    JOIN eg_wms_ap_project_detail pd
+        ON pd.actionplanid = ap.id
+       AND pd.tenantid = ap.tenantid
+       AND pd.isactive = true
+
+    JOIN eg_wf_processinstance_v2 w
+        ON w.businessid = ap.applicationnumber
+       AND w.tenantid = ap.tenantid
+       AND w.businessservice = 'WMS_ACTION_PLAN'
+
+    LEFT JOIN eg_wf_state_v2 ps
+        ON ps.uuid = w.previousstatus
+
+    LEFT JOIN eg_wf_state_v2 ns
+        ON ns.uuid = w.status
+
+    LEFT JOIN eg_user u
+        ON u.uuid::text = COALESCE(
+            NULLIF(w.createdby, ''),
+            NULLIF(w.assigner, '')
+        )
+
     LEFT JOIN LATERAL (
         SELECT a.designation
         FROM eg_hrms_employee e
-        JOIN eg_hrms_assignment a ON a.employeeid = e.uuid
+        JOIN eg_hrms_assignment a
+            ON a.employeeid = e.uuid
         WHERE e.uuid = u.uuid::text
           AND e.tenantid = ap.tenantid
           AND COALESCE(e.active, true) = true
-        ORDER BY COALESCE(a.iscurrentassignment, false) DESC,
-                 COALESCE(a.fromdate, 0) DESC
+        ORDER BY
+            COALESCE(a.iscurrentassignment, false) DESC,
+            COALESCE(a.fromdate, 0) DESC
         LIMIT 1
     ) actor_assignment ON true
-    WHERE (ap.tenantid = $tenantid OR ap.tenantid LIKE $tenantid || '.%')
+
+    WHERE (
+        ap.tenantid = $tenantid
+        OR ap.tenantid LIKE $tenantid || '.%'
+    )
+
   orderBy: ORDER BY w.createdtime, w.id, pd.id
 - reportName: WMSFundingSummary
   summary: Funding-wise Summary
