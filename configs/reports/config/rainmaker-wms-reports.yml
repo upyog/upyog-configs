@@ -68,7 +68,7 @@ ReportDefinitions:
     label: Financial Year
     type: singlevaluelist
     source: WMS
-    isMandatory: true
+    isMandatory: false
     searchClause: AND ap.financialyear = $financialYear
     pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egf-master&masterName=FinancialYear|$.MdmsRes['egf-master'].FinancialYear[?(@.module
       == 'WorksManagement' && @.active == true)].code|$.MdmsRes['egf-master'].FinancialYear[?(@.module
@@ -79,7 +79,7 @@ ReportDefinitions:
     label: Application Number
     type: string
     source: WMS
-    isMandatory: true
+    isMandatory: false
     searchClause: AND ap.applicationnumber = $applicationNumber
   - name: projectId
     label: Project ID
@@ -255,7 +255,7 @@ ReportDefinitions:
     label: Financial Year
     type: singlevaluelist
     source: WMS
-    isMandatory: true
+    isMandatory: false
     searchClause: AND ap.financialyear = $financialYear
     pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egf-master&masterName=FinancialYear|$.MdmsRes['egf-master'].FinancialYear[?(@.module
       == 'WorksManagement' && @.active == true)].code|$.MdmsRes['egf-master'].FinancialYear[?(@.module
@@ -387,7 +387,7 @@ ReportDefinitions:
     label: Financial Year
     type: singlevaluelist
     source: WMS
-    isMandatory: true
+    isMandatory: false
     searchClause: AND ap.financialyear = $financialYear
     pattern: http://egov-mdms-service:8080/egov-mdms-service/v1/_get?tenantId=$tenantid&moduleName=egf-master&masterName=FinancialYear|$.MdmsRes['egf-master'].FinancialYear[?(@.module
       == 'WorksManagement' && @.active == true)].code|$.MdmsRes['egf-master'].FinancialYear[?(@.module
